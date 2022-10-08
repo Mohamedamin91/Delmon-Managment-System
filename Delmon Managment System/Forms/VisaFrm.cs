@@ -34,8 +34,13 @@ namespace Delmon_Managment_System.Forms
                     btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
                 }
             }
-            label4.ForeColor = ThemeColor.SecondaryColor;
+            //label4.ForeColor = ThemeColor.SecondaryColor;
             label5.ForeColor = ThemeColor.PrimaryColor;
+        }
+
+        private void visasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

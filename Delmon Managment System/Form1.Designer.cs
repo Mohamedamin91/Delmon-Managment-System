@@ -40,13 +40,13 @@ namespace Delmon_Managment_System
             this.btnemployee = new System.Windows.Forms.Button();
             this.btnvisa = new System.Windows.Forms.Button();
             this.panelTitleBar = new System.Windows.Forms.Panel();
+            this.btnMinum = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.BTNcLOSE = new System.Windows.Forms.Button();
             this.btnCloseChildForm = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
             this.panelDesktopPanel = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.btnMinum = new System.Windows.Forms.Button();
             this.panelLogo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             this.panelTitleBar.SuspendLayout();
@@ -220,6 +220,36 @@ namespace Delmon_Managment_System
             this.panelTitleBar.TabIndex = 1;
             this.panelTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitleBar_MouseDown);
             // 
+            // btnMinum
+            // 
+            this.btnMinum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMinum.FlatAppearance.BorderSize = 0;
+            this.btnMinum.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMinum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMinum.ForeColor = System.Drawing.Color.White;
+            this.btnMinum.Location = new System.Drawing.Point(775, 3);
+            this.btnMinum.Name = "btnMinum";
+            this.btnMinum.Size = new System.Drawing.Size(43, 24);
+            this.btnMinum.TabIndex = 3;
+            this.btnMinum.Text = "O";
+            this.btnMinum.UseVisualStyleBackColor = true;
+            this.btnMinum.Click += new System.EventHandler(this.btnMinum_Click_1);
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(811, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(43, 24);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "O";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // BTNcLOSE
             // 
             this.BTNcLOSE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -280,36 +310,6 @@ namespace Delmon_Managment_System
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(811, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(43, 24);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "O";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // btnMinum
-            // 
-            this.btnMinum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMinum.FlatAppearance.BorderSize = 0;
-            this.btnMinum.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMinum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMinum.ForeColor = System.Drawing.Color.White;
-            this.btnMinum.Location = new System.Drawing.Point(775, 3);
-            this.btnMinum.Name = "btnMinum";
-            this.btnMinum.Size = new System.Drawing.Size(43, 24);
-            this.btnMinum.TabIndex = 3;
-            this.btnMinum.Text = "O";
-            this.btnMinum.UseVisualStyleBackColor = true;
-            this.btnMinum.Click += new System.EventHandler(this.btnMinum_Click_1);
             // 
             // FormMainMenu
             // 
