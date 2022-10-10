@@ -15,6 +15,8 @@ namespace Delmon_Managment_System.Forms
 {
     public partial class VisaFrm : Form
     {
+
+        SQLCONNECTION SQLCONN = new SQLCONNECTION();
         public VisaFrm()
         {
             InitializeComponent();
@@ -23,25 +25,30 @@ namespace Delmon_Managment_System.Forms
             Application.CurrentCulture = new CultureInfo("ar-SA");
             ExpiryDateHijriPicker.Format = DateTimePickerFormat.Custom;
 
-            //Application.CurrentCulture = new CultureInfo("en-US");
-            //IssueDateENPicker.Format = DateTimePickerFormat.Custom;
-            //Application.CurrentCulture = new CultureInfo("en-US");
-            //ExpiryDateENPicker.Format = DateTimePickerFormat.Custom;
-
-
-            //     IssueDateHijriPicker.CustomFormat = Application.CurrentCulture.DateTimeFormat.ShortDatePattern;
+          
         }
 
         private void VisaFrm_Load(object sender, EventArgs e)
         {
             LoadTheme();
-          //  issueHijritxt.Text = "dd/MM/yyyy .....";
+            SQLCONN.OpenConection();
 
-          //  (textBox2.Text) = ConvertDateCalendar(Convert.ToDateTime(textBox3.Text), "Gregorian", "en-US");
+            cmbCompany.ValueMember = "COMPID";
+            cmbCompany.DisplayMember = "COMPName_AR";
+            cmbCompany.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT COMPID,COMPName_AR FROM Companies");
+
+            cmbJob.ValueMember = "JobID";
+            cmbJob.DisplayMember = "JobTitleEN";
+            cmbJob.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS");
+
+            //cmbCompany.ValueMember = "COMPID";
+            //cmbCompany.DisplayMember = "COMPName_AR";
+            //cmbCompany.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT COMPID,COMPName_AR FROM Companies");
+
+            SQLCONN.CloseConnection();
 
 
-
-
+         
         }
         private void LoadTheme()
         {
@@ -68,11 +75,7 @@ namespace Delmon_Managment_System.Forms
     
         private void IssueDateHijriPicker_ValueChanged(object sender, EventArgs e)
         {
-         //   CultureInfo ci = new CultureInfo("en-US");
-
-
-           
-
+       
         }
 
         private void IssueDateENPicker_ValueChanged(object sender, EventArgs e)
@@ -148,6 +151,31 @@ namespace Delmon_Managment_System.Forms
         }
 
         private void AddBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbJob_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbCompany_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
