@@ -106,7 +106,7 @@ namespace Delmon_Managment_System.Forms
             // 
             // TotalVisastxt
             // 
-            this.TotalVisastxt.Location = new System.Drawing.Point(108, 244);
+            this.TotalVisastxt.Location = new System.Drawing.Point(103, 207);
             this.TotalVisastxt.Name = "TotalVisastxt";
             this.TotalVisastxt.Size = new System.Drawing.Size(100, 20);
             this.TotalVisastxt.TabIndex = 4;
@@ -127,11 +127,11 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(11, 244);
+            this.label5.Location = new System.Drawing.Point(15, 284);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(87, 20);
+            this.label5.Size = new System.Drawing.Size(74, 20);
             this.label5.TabIndex = 11;
-            this.label5.Text = "Total Visas";
+            this.label5.Text = "Indv.Visa";
             // 
             // panel1
             // 
@@ -245,7 +245,7 @@ namespace Delmon_Managment_System.Forms
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(339, 195);
+            this.label9.Location = new System.Drawing.Point(337, 205);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(49, 13);
             this.label9.TabIndex = 24;
@@ -253,10 +253,10 @@ namespace Delmon_Managment_System.Forms
             // 
             // RemarksTxt
             // 
-            this.RemarksTxt.Location = new System.Drawing.Point(433, 195);
+            this.RemarksTxt.Location = new System.Drawing.Point(433, 207);
             this.RemarksTxt.Multiline = true;
             this.RemarksTxt.Name = "RemarksTxt";
-            this.RemarksTxt.Size = new System.Drawing.Size(264, 86);
+            this.RemarksTxt.Size = new System.Drawing.Size(264, 74);
             this.RemarksTxt.TabIndex = 23;
             this.RemarksTxt.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -306,6 +306,8 @@ namespace Delmon_Managment_System.Forms
             this.issuhijritxt.TextChanged += new System.EventHandler(this.issuhijritxt_TextChanged);
             this.issuhijritxt.DragEnter += new System.Windows.Forms.DragEventHandler(this.issuhijritxt_DragEnter);
             this.issuhijritxt.Enter += new System.EventHandler(this.issuhijritxt_Enter);
+            this.issuhijritxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.issuhijritxt_KeyDown);
+            this.issuhijritxt.KeyUp += new System.Windows.Forms.KeyEventHandler(this.issuhijritxt_KeyUp);
             this.issuhijritxt.Leave += new System.EventHandler(this.issuhijritxt_Leave);
             this.issuhijritxt.MouseEnter += new System.EventHandler(this.issuhijritxt_MouseEnter);
             // 
@@ -427,11 +429,11 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(17, 297);
+            this.label4.Location = new System.Drawing.Point(9, 206);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(66, 18);
+            this.label4.Size = new System.Drawing.Size(81, 18);
             this.label4.TabIndex = 39;
-            this.label4.Text = "Indv.Visa";
+            this.label4.Text = "Total Visas";
             // 
             // ReceviedPicker
             // 
@@ -490,6 +492,7 @@ namespace Delmon_Managment_System.Forms
             this.Name = "VisaFrm";
             this.Text = "Visas";
             this.Load += new System.EventHandler(this.VisaFrm_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.VisaFrm_KeyUp);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);

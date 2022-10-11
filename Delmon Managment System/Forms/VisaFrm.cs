@@ -134,35 +134,7 @@ namespace Delmon_Managment_System.Forms
         private void issuhijritxt_Leave(object sender, EventArgs e)
         {
 
-            if (issuhijritxt.Text != "")
-            {
-                /*calculate issu hijir and milaidy  date**/
-
-                string a = issuhijritxt.Text.Trim();
-                DateTime b = Convert.ToDateTime(a);
-                issuhijritxt.Text = b.ToString("f");
-                IssueDateHijriPicker.Value = b.Date;
-                issuhijritxt.Text = IssueDateHijriPicker.Value.ToString("dd-MM-yyyy");
-                /*calculate expairy hiri date**/
-
-                this.ExpiryDateHijriPicker.Value = b.Date.AddYears(2);
-                ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
-                ExpiaryHijritxt.Text = ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
-              
-
-                /*calculate issu milaidy  date**/
-                IssueDateENPicker.Value = b;
-                IssueDateENPicker.Value.ToString("yyyy-MM-dd");
-                IssueDateENTxt.Text = IssueDateENPicker.Text;
-
-                /*calculate expairy milaidy date**/
-                this.ExpiryDateENPicker.Value = IssueDateENPicker.Value.AddYears(2);
-                expairENDATEtxt.Text = ExpiryDateENPicker.Text;
-
-
-            }
-
-            else { }
+       
         }
 
 
@@ -207,8 +179,7 @@ namespace Delmon_Managment_System.Forms
                 if (i < Totatvisa)
 
                 {
-                    MessageBox.Show(Totatvisa.ToString());
-                    MessageBox.Show(i.ToString());
+            
 
 
                     SQLCONN.OpenConection();
@@ -304,63 +275,12 @@ namespace Delmon_Managment_System.Forms
 
         private void issuhijritxt_MouseEnter(object sender, EventArgs e)
         {
-            if (issuhijritxt.Text != "")
-            {
-                /*calculate issu hijir and milaidy  date**/
-
-                string a = issuhijritxt.Text.Trim();
-                DateTime b = Convert.ToDateTime(a);
-                issuhijritxt.Text = b.ToString("f");
-                IssueDateHijriPicker.Value = b.Date;
-               issuhijritxt.Text = IssueDateHijriPicker.Value.ToString("dd/MM/yyyy");
-                /*calculate expairy hiri date**/
-
-                this.ExpiryDateHijriPicker.Value = b.Date.AddYears(2);
-              //  ExpiryDateHijriPicker.Value.ToString("dd/MM/yyyy");
-                ExpiaryHijritxt.Text = ExpiryDateHijriPicker.Value.ToString("dd/MM/yyyy");
-
-
-                /*calculate issu milaidy  date**/
-                IssueDateENPicker.Value = b.Date;
-                IssueDateENPicker.Value.ToString("yyyy/MM/dd");
-                IssueDateENTxt.Text = IssueDateENPicker.Text;
-
-                /*calculate expairy milaidy date**/
-                this.ExpiryDateENPicker.Value = IssueDateENPicker.Value.AddYears(2);
-                expairENDATEtxt.Text = ExpiryDateENPicker.Text;
-
-
-            }
-
-            else { }
+       
         }
 
         private void issuhijritxt_DragEnter(object sender, DragEventArgs e)
         {
-            if (issuhijritxt.Text != "")
-            {
-                /*calculate issu hijir and milaidy  date**/
-
-                string a = issuhijritxt.Text.Trim();
-                DateTime b = Convert.ToDateTime(a);
-                issuhijritxt.Text = b.ToShortDateString();
-                IssueDateENPicker.Value = b;
-                IssueDateENPicker.Value.ToString("yyyy/MM/dd");
-                IssueDateENTxt.Text = IssueDateENPicker.Text;
-
-                /*calculate expairy en date**/
-                this.ExpiryDateENPicker.Value = IssueDateENPicker.Value.AddYears(2);
-                expairENDATEtxt.Text = ExpiryDateENPicker.Text;
-
-                /*calculate expairy hiri date**/
-
-
-                this.ExpiryDateHijriPicker.Value = IssueDateHijriPicker.Value.AddYears(2);
-                ExpiryDateHijriPicker.Value.ToString("yyyy/MM/dd");
-                ExpiaryHijritxt.Text = ExpiryDateHijriPicker.Value.ToString("yyyy/MM/dd");
-            }
-
-            else { }
+        
         }
 
         private void Visanumtxt_TextChanged(object sender, EventArgs e)
@@ -418,6 +338,147 @@ namespace Delmon_Managment_System.Forms
                 MessageBox.Show("Please insert 'VISA NUMBER' first !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Visanumtxt.BackColor = Color.Red;
 
+            }
+        }
+
+        private void VisaFrm_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void issuhijritxt_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (issuhijritxt.Text != "")
+                {
+                    /*calculate issu hijir and milaidy  date**/
+
+                    string a = issuhijritxt.Text.Trim();
+                    DateTime b = Convert.ToDateTime(a);
+                    issuhijritxt.Text = b.ToString("f");
+                    IssueDateHijriPicker.Value = b.Date;
+                    issuhijritxt.Text = IssueDateHijriPicker.Value.ToString("dd-MM-yyyy");
+                    /*calculate expairy hiri date**/
+
+                    this.ExpiryDateHijriPicker.Value = b.Date.AddYears(2);
+                    ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
+                    ExpiaryHijritxt.Text = ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
+
+
+                    /*calculate issu milaidy  date**/
+                    IssueDateENPicker.Value = b;
+                    IssueDateENPicker.Value.ToString("yyyy-MM-dd");
+                    IssueDateENTxt.Text = IssueDateENPicker.Text;
+
+                    /*calculate expairy milaidy date**/
+                    this.ExpiryDateENPicker.Value = IssueDateENPicker.Value.AddYears(2);
+                    expairENDATEtxt.Text = ExpiryDateENPicker.Text;
+
+
+                }
+
+                else { }
+            }
+           else  if (e.KeyCode == Keys.Tab)
+            {
+                if (issuhijritxt.Text != "")
+                {
+                    /*calculate issu hijir and milaidy  date**/
+
+                    string a = issuhijritxt.Text.Trim();
+                    DateTime b = Convert.ToDateTime(a);
+                    issuhijritxt.Text = b.ToString("f");
+                    IssueDateHijriPicker.Value = b.Date;
+                    issuhijritxt.Text = IssueDateHijriPicker.Value.ToString("dd-MM-yyyy");
+                    /*calculate expairy hiri date**/
+
+                    this.ExpiryDateHijriPicker.Value = b.Date.AddYears(2);
+                    ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
+                    ExpiaryHijritxt.Text = ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
+
+
+                    /*calculate issu milaidy  date**/
+                    IssueDateENPicker.Value = b;
+                    IssueDateENPicker.Value.ToString("yyyy-MM-dd");
+                    IssueDateENTxt.Text = IssueDateENPicker.Text;
+
+                    /*calculate expairy milaidy date**/
+                    this.ExpiryDateENPicker.Value = IssueDateENPicker.Value.AddYears(2);
+                    expairENDATEtxt.Text = ExpiryDateENPicker.Text;
+
+
+                }
+
+                else { }
+            }
+        }
+
+        private void issuhijritxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (issuhijritxt.Text != "")
+                {
+                    /*calculate issu hijir and milaidy  date**/
+
+                    string a = issuhijritxt.Text.Trim();
+                    DateTime b = Convert.ToDateTime(a);
+                    issuhijritxt.Text = b.ToString("f");
+                    IssueDateHijriPicker.Value = b.Date;
+                    issuhijritxt.Text = IssueDateHijriPicker.Value.ToString("dd-MM-yyyy");
+                    /*calculate expairy hiri date**/
+
+                    this.ExpiryDateHijriPicker.Value = b.Date.AddYears(2);
+                    ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
+                    ExpiaryHijritxt.Text = ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
+
+
+                    /*calculate issu milaidy  date**/
+                    IssueDateENPicker.Value = b;
+                    IssueDateENPicker.Value.ToString("yyyy-MM-dd");
+                    IssueDateENTxt.Text = IssueDateENPicker.Text;
+
+                    /*calculate expairy milaidy date**/
+                    this.ExpiryDateENPicker.Value = IssueDateENPicker.Value.AddYears(2);
+                    expairENDATEtxt.Text = ExpiryDateENPicker.Text;
+
+
+                }
+
+                else { }
+            }
+            else if (e.KeyCode == Keys.Tab)
+            {
+                if (issuhijritxt.Text != "")
+                {
+                    /*calculate issu hijir and milaidy  date**/
+
+                    string a = issuhijritxt.Text.Trim();
+                    DateTime b = Convert.ToDateTime(a);
+                    issuhijritxt.Text = b.ToString("f");
+                    IssueDateHijriPicker.Value = b.Date;
+                    issuhijritxt.Text = IssueDateHijriPicker.Value.ToString("dd-MM-yyyy");
+                    /*calculate expairy hiri date**/
+
+                    this.ExpiryDateHijriPicker.Value = b.Date.AddYears(2);
+                    ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
+                    ExpiaryHijritxt.Text = ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
+
+
+                    /*calculate issu milaidy  date**/
+                    IssueDateENPicker.Value = b;
+                    IssueDateENPicker.Value.ToString("yyyy-MM-dd");
+                    IssueDateENTxt.Text = IssueDateENPicker.Text;
+
+                    /*calculate expairy milaidy date**/
+                    this.ExpiryDateENPicker.Value = IssueDateENPicker.Value.AddYears(2);
+                    expairENDATEtxt.Text = ExpiryDateENPicker.Text;
+
+
+                }
+
+                else { }
             }
         }
     }
