@@ -20,6 +20,8 @@ namespace Delmon_Managment_System.Forms
 
         SQLCONNECTION SQLCONN = new SQLCONNECTION();
         string date_str = "";
+      
+
 
 
 
@@ -55,6 +57,8 @@ namespace Delmon_Managment_System.Forms
           
 
             SQLCONN.OpenConection();
+            this.ActiveControl = Visanumtxt;
+
 
             cmbCompany.ValueMember = "COMPID";
             cmbCompany.DisplayMember = "COMPName_AR";
@@ -144,17 +148,17 @@ namespace Delmon_Managment_System.Forms
                 DateTime b = Convert.ToDateTime(a);
                 issuhijritxt.Text = b.ToString("f");
                 IssueDateHijriPicker.Value = b.Date;
-                issuhijritxt.Text = IssueDateHijriPicker.Value.ToString("dd/MM/yyyy");
+                issuhijritxt.Text = IssueDateHijriPicker.Value.ToString("dd-MM-yyyy");
                 /*calculate expairy hiri date**/
 
                 this.ExpiryDateHijriPicker.Value = b.Date.AddYears(2);
-                ExpiryDateHijriPicker.Value.ToString("dd/MM/yyyy");
-                ExpiaryHijritxt.Text = ExpiryDateHijriPicker.Value.ToString("dd/MM/yyyy");
-
+                ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
+                ExpiaryHijritxt.Text = ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
+              
 
                 /*calculate issu milaidy  date**/
-                IssueDateENPicker.Value = b.Date;
-                IssueDateENPicker.Value.ToString("yyyy/MM/dd");
+                IssueDateENPicker.Value = b;
+                IssueDateENPicker.Value.ToString("yyyy-MM-dd");
                 IssueDateENTxt.Text = IssueDateENPicker.Text;
 
                 /*calculate expairy milaidy date**/
@@ -192,15 +196,15 @@ namespace Delmon_Managment_System.Forms
             paramcomapany.Value = cmbCompany.SelectedValue;
             SqlParameter paramRecevidDate = new SqlParameter("@C3", SqlDbType.Date);
             paramRecevidDate.Value = ReceviedPicker.Value;
-            SqlParameter paramIssHIJriDate = new SqlParameter("@C4", SqlDbType.Date);
+            SqlParameter paramIssHIJriDate = new SqlParameter("@C4", SqlDbType.NVarChar);
             paramIssHIJriDate.Value = issuhijritxt.Text;
             SqlParameter paramIssueDateEN = new SqlParameter("@C5", SqlDbType.Date);
             paramIssueDateEN.Value = IssueDateENPicker.Value;
-            SqlParameter paramExpiryDateHijri = new SqlParameter("@C6", SqlDbType.Date);
-            paramExpiryDateHijri.Value = ExpiaryHijritxt.Text;
+            SqlParameter paramExpiryDateHijri = new SqlParameter("@C6", SqlDbType.NVarChar);
+            paramExpiryDateHijri.Value =ExpiaryHijritxt.Text ;
             SqlParameter paramExpiryDateEN = new SqlParameter("@C7", SqlDbType.Date);
             paramExpiryDateEN.Value = ExpiryDateENPicker.Value;
-            SqlParameter paramTotalVisas = new SqlParameter("@C8", SqlDbType.Int);
+            SqlParameter paramTotalVisas = new SqlParameter("@C8", SqlDbType.NVarChar);
             paramTotalVisas.Value = TotalVisastxt.Text;
             SqlParameter paramRemarks = new SqlParameter("@C9", SqlDbType.NVarChar);
             paramRemarks.Value = RemarksTxt.Text;
@@ -212,9 +216,9 @@ namespace Delmon_Managment_System.Forms
                 SQLCONN.OpenConection();
                 if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
-                    SQLCONN.ExecuteQueries("insert into VISAS (VisaNumber,ComapnyID,ReceviedDate,IssueDateEN,ExpiryDateEN,TotalVisas,Remarks,ExpiryDateHijri) " +
-                        " values (@C1,@C2,@C3,@C5,@C7,@C8,@C9,@C6) ",
-                        paramVisanumber ,paramcomapany,paramRecevidDate,paramIssueDateEN,paramExpiryDateEN,paramTotalVisas,paramRemarks,paramExpiryDateHijri); 
+                    SQLCONN.ExecuteQueries("insert into VISAS (VisaNumber,ComapnyID,ReceviedDate,IssueDateEN,ExpiryDateEN,TotalVisas,Remarks,ExpiryDateHijri,IssueDateHijri) " +
+                        " values (@C1,@C2,@C3,@C5,@C7,@C8,@C9,@C6,@C4) ",
+                        paramVisanumber ,paramcomapany,paramRecevidDate,paramIssueDateEN,paramExpiryDateEN,paramTotalVisas,paramRemarks,paramExpiryDateHijri,paramIssHIJriDate); 
                     SQLCONN.CloseConnection();
                     MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ClearTextBoxes();
@@ -268,33 +272,7 @@ namespace Delmon_Managment_System.Forms
         {
 
 
-            if (issuhijritxt.Text != "")
-            {
-                /*calculate issu hijir and milaidy  date**/
-
-                string a = issuhijritxt.Text.Trim();
-                DateTime b = Convert.ToDateTime(a);
-                issuhijritxt.Text = b.ToShortDateString();
-                IssueDateENPicker.Value = b;
-                IssueDateENPicker.Value.ToString("yyyy/MM/dd");
-                IssueDateENTxt.Text = IssueDateENPicker.Text;
-
-                /*calculate expairy en date**/
-                this.ExpiryDateENPicker.Value = IssueDateENPicker.Value.AddYears(2);
-                expairENDATEtxt.Text = ExpiryDateENPicker.Text;
-
-                /*calculate expairy hiri date**/
-
-
-                this.ExpiryDateHijriPicker.Value = IssueDateHijriPicker.Value.AddYears(2);
-                ExpiryDateHijriPicker.Value.ToString("yyyy/MM/dd");
-                ExpiaryHijritxt.Text = ExpiryDateHijriPicker.Value.ToString("yyyy/MM/dd");
-            }
-
-            else
-            { 
-            
-            }
+      
 
         }
 
@@ -316,11 +294,11 @@ namespace Delmon_Managment_System.Forms
                 DateTime b = Convert.ToDateTime(a);
                 issuhijritxt.Text = b.ToString("f");
                 IssueDateHijriPicker.Value = b.Date;
-                issuhijritxt.Text = IssueDateHijriPicker.Value.ToString("dd/MM/yyyy");
+               issuhijritxt.Text = IssueDateHijriPicker.Value.ToString("dd/MM/yyyy");
                 /*calculate expairy hiri date**/
 
                 this.ExpiryDateHijriPicker.Value = b.Date.AddYears(2);
-                ExpiryDateHijriPicker.Value.ToString("dd/MM/yyyy");
+              //  ExpiryDateHijriPicker.Value.ToString("dd/MM/yyyy");
                 ExpiaryHijritxt.Text = ExpiryDateHijriPicker.Value.ToString("dd/MM/yyyy");
 
 
