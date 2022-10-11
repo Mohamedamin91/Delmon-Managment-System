@@ -451,6 +451,7 @@ namespace Delmon_Managment_System.Forms
             this.btnFinish.TabIndex = 41;
             this.btnFinish.Text = "Finish";
             this.btnFinish.UseVisualStyleBackColor = true;
+            this.btnFinish.Click += new System.EventHandler(this.btnFinish_Click);
             // 
             // VisaFrm
             // 
