@@ -58,14 +58,18 @@ namespace Delmon_Managment_System.Forms
             this.cmbCompany = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cmbConsulate = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.cmbJob = new System.Windows.Forms.ComboBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.BorderIDtxt = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.INDVVIsanumtxt = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cmbJob = new System.Windows.Forms.ComboBox();
+            this.label44 = new System.Windows.Forms.Label();
+            this.cmbConsulate = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.ReceviedPicker = new System.Windows.Forms.DateTimePicker();
+            this.btnFinish = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -76,7 +80,7 @@ namespace Delmon_Managment_System.Forms
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 42);
+            this.label1.Location = new System.Drawing.Point(12, 34);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 13);
             this.label1.TabIndex = 0;
@@ -85,7 +89,7 @@ namespace Delmon_Managment_System.Forms
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(11, 82);
+            this.label25.Location = new System.Drawing.Point(11, 115);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(78, 13);
             this.label25.TabIndex = 1;
@@ -95,8 +99,10 @@ namespace Delmon_Managment_System.Forms
             // 
             this.Visanumtxt.Location = new System.Drawing.Point(99, 35);
             this.Visanumtxt.Name = "Visanumtxt";
-            this.Visanumtxt.Size = new System.Drawing.Size(130, 20);
+            this.Visanumtxt.Size = new System.Drawing.Size(134, 20);
             this.Visanumtxt.TabIndex = 3;
+            this.Visanumtxt.TextChanged += new System.EventHandler(this.Visanumtxt_TextChanged);
+            this.Visanumtxt.Leave += new System.EventHandler(this.Visanumtxt_Leave);
             // 
             // TotalVisastxt
             // 
@@ -109,7 +115,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.AddBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.AddBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AddBtn.Location = new System.Drawing.Point(996, 374);
+            this.AddBtn.Location = new System.Drawing.Point(1046, 311);
             this.AddBtn.Name = "AddBtn";
             this.AddBtn.Size = new System.Drawing.Size(75, 39);
             this.AddBtn.TabIndex = 6;
@@ -133,7 +139,7 @@ namespace Delmon_Managment_System.Forms
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1094, 22);
+            this.panel1.Size = new System.Drawing.Size(1244, 22);
             this.panel1.TabIndex = 14;
             // 
             // menuStrip1
@@ -142,7 +148,7 @@ namespace Delmon_Managment_System.Forms
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1094, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1244, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -166,23 +172,24 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(10, 430);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1072, 263);
+            this.dataGridView1.Size = new System.Drawing.Size(1030, 188);
             this.dataGridView1.TabIndex = 9;
             // 
             // IssueDateHijriPicker
             // 
             this.IssueDateHijriPicker.CustomFormat = "";
             this.IssueDateHijriPicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.IssueDateHijriPicker.Location = new System.Drawing.Point(61, 31);
+            this.IssueDateHijriPicker.Location = new System.Drawing.Point(114, 19);
             this.IssueDateHijriPicker.Name = "IssueDateHijriPicker";
             this.IssueDateHijriPicker.Size = new System.Drawing.Size(100, 20);
             this.IssueDateHijriPicker.TabIndex = 15;
+            this.IssueDateHijriPicker.Visible = false;
             this.IssueDateHijriPicker.ValueChanged += new System.EventHandler(this.IssueDateHijriPicker_ValueChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(335, 82);
+            this.label3.Location = new System.Drawing.Point(335, 118);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(81, 13);
             this.label3.TabIndex = 16;
@@ -191,24 +198,26 @@ namespace Delmon_Managment_System.Forms
             // ExpiryDateHijriPicker
             // 
             this.ExpiryDateHijriPicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.ExpiryDateHijriPicker.Location = new System.Drawing.Point(61, 62);
+            this.ExpiryDateHijriPicker.Location = new System.Drawing.Point(114, 48);
             this.ExpiryDateHijriPicker.Name = "ExpiryDateHijriPicker";
             this.ExpiryDateHijriPicker.Size = new System.Drawing.Size(100, 20);
             this.ExpiryDateHijriPicker.TabIndex = 17;
+            this.ExpiryDateHijriPicker.Visible = false;
             this.ExpiryDateHijriPicker.ValueChanged += new System.EventHandler(this.ExpiryDateHijriPicker_ValueChanged);
             // 
             // ExpiryDateENPicker
             // 
+            this.ExpiryDateENPicker.Enabled = false;
             this.ExpiryDateENPicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.ExpiryDateENPicker.Location = new System.Drawing.Point(61, 129);
+            this.ExpiryDateENPicker.Location = new System.Drawing.Point(433, 146);
             this.ExpiryDateENPicker.Name = "ExpiryDateENPicker";
-            this.ExpiryDateENPicker.Size = new System.Drawing.Size(100, 20);
+            this.ExpiryDateENPicker.Size = new System.Drawing.Size(171, 20);
             this.ExpiryDateENPicker.TabIndex = 21;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(335, 121);
+            this.label6.Location = new System.Drawing.Point(337, 153);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(79, 13);
             this.label6.TabIndex = 20;
@@ -216,17 +225,18 @@ namespace Delmon_Managment_System.Forms
             // 
             // IssueDateENPicker
             // 
+            this.IssueDateENPicker.Enabled = false;
             this.IssueDateENPicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.IssueDateENPicker.Location = new System.Drawing.Point(61, 94);
+            this.IssueDateENPicker.Location = new System.Drawing.Point(99, 147);
             this.IssueDateENPicker.Name = "IssueDateENPicker";
-            this.IssueDateENPicker.Size = new System.Drawing.Size(103, 20);
+            this.IssueDateENPicker.Size = new System.Drawing.Size(134, 20);
             this.IssueDateENPicker.TabIndex = 19;
             this.IssueDateENPicker.ValueChanged += new System.EventHandler(this.IssueDateENPicker_ValueChanged);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(13, 124);
+            this.label7.Location = new System.Drawing.Point(9, 153);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(76, 13);
             this.label7.TabIndex = 18;
@@ -235,7 +245,7 @@ namespace Delmon_Managment_System.Forms
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(335, 178);
+            this.label9.Location = new System.Drawing.Point(339, 195);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(49, 13);
             this.label9.TabIndex = 24;
@@ -243,7 +253,7 @@ namespace Delmon_Managment_System.Forms
             // 
             // RemarksTxt
             // 
-            this.RemarksTxt.Location = new System.Drawing.Point(433, 178);
+            this.RemarksTxt.Location = new System.Drawing.Point(433, 195);
             this.RemarksTxt.Multiline = true;
             this.RemarksTxt.Name = "RemarksTxt";
             this.RemarksTxt.Size = new System.Drawing.Size(264, 86);
@@ -252,18 +262,16 @@ namespace Delmon_Managment_System.Forms
             // 
             // IssueDateENTxt
             // 
-            this.IssueDateENTxt.Location = new System.Drawing.Point(99, 118);
+            this.IssueDateENTxt.Location = new System.Drawing.Point(103, 147);
             this.IssueDateENTxt.Multiline = true;
             this.IssueDateENTxt.Name = "IssueDateENTxt";
-            this.IssueDateENTxt.Size = new System.Drawing.Size(130, 21);
+            this.IssueDateENTxt.Size = new System.Drawing.Size(126, 18);
             this.IssueDateENTxt.TabIndex = 26;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.IssueDateENPicker);
             this.groupBox1.Controls.Add(this.IssueDateHijriPicker);
             this.groupBox1.Controls.Add(this.ExpiryDateHijriPicker);
-            this.groupBox1.Controls.Add(this.ExpiryDateENPicker);
             this.groupBox1.Location = new System.Drawing.Point(852, 28);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(230, 190);
@@ -274,41 +282,46 @@ namespace Delmon_Managment_System.Forms
             // 
             // ExpiaryHijritxt
             // 
-            this.ExpiaryHijritxt.Location = new System.Drawing.Point(433, 79);
+            this.ExpiaryHijritxt.Enabled = false;
+            this.ExpiaryHijritxt.Location = new System.Drawing.Point(433, 115);
             this.ExpiaryHijritxt.Multiline = true;
             this.ExpiaryHijritxt.Name = "ExpiaryHijritxt";
-            this.ExpiaryHijritxt.Size = new System.Drawing.Size(183, 20);
+            this.ExpiaryHijritxt.Size = new System.Drawing.Size(171, 20);
             this.ExpiaryHijritxt.TabIndex = 31;
             // 
             // expairENDATEtxt
             // 
-            this.expairENDATEtxt.Location = new System.Drawing.Point(433, 121);
+            this.expairENDATEtxt.Location = new System.Drawing.Point(433, 146);
             this.expairENDATEtxt.Multiline = true;
             this.expairENDATEtxt.Name = "expairENDATEtxt";
-            this.expairENDATEtxt.Size = new System.Drawing.Size(183, 21);
+            this.expairENDATEtxt.Size = new System.Drawing.Size(171, 20);
             this.expairENDATEtxt.TabIndex = 32;
             // 
             // issuhijritxt
             // 
-            this.issuhijritxt.Location = new System.Drawing.Point(99, 79);
+            this.issuhijritxt.Location = new System.Drawing.Point(99, 115);
             this.issuhijritxt.Name = "issuhijritxt";
-            this.issuhijritxt.Size = new System.Drawing.Size(130, 20);
+            this.issuhijritxt.Size = new System.Drawing.Size(134, 20);
             this.issuhijritxt.TabIndex = 33;
+            this.issuhijritxt.TextChanged += new System.EventHandler(this.issuhijritxt_TextChanged);
+            this.issuhijritxt.DragEnter += new System.Windows.Forms.DragEventHandler(this.issuhijritxt_DragEnter);
+            this.issuhijritxt.Enter += new System.EventHandler(this.issuhijritxt_Enter);
             this.issuhijritxt.Leave += new System.EventHandler(this.issuhijritxt_Leave);
+            this.issuhijritxt.MouseEnter += new System.EventHandler(this.issuhijritxt_MouseEnter);
             // 
             // cmbCompany
             // 
             this.cmbCompany.FormattingEnabled = true;
-            this.cmbCompany.Location = new System.Drawing.Point(433, 39);
+            this.cmbCompany.Location = new System.Drawing.Point(433, 34);
             this.cmbCompany.Name = "cmbCompany";
-            this.cmbCompany.Size = new System.Drawing.Size(183, 21);
+            this.cmbCompany.Size = new System.Drawing.Size(225, 21);
             this.cmbCompany.TabIndex = 34;
             this.cmbCompany.SelectedIndexChanged += new System.EventHandler(this.cmbCompany_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(335, 42);
+            this.label2.Location = new System.Drawing.Point(337, 38);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(51, 13);
             this.label2.TabIndex = 35;
@@ -319,41 +332,56 @@ namespace Delmon_Managment_System.Forms
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.BorderIDtxt);
             this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.textBox2);
+            this.groupBox2.Controls.Add(this.INDVVIsanumtxt);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.cmbJob);
-            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.label44);
             this.groupBox2.Controls.Add(this.cmbConsulate);
-            this.groupBox2.Location = new System.Drawing.Point(108, 287);
+            this.groupBox2.Location = new System.Drawing.Point(103, 297);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(908, 71);
+            this.groupBox2.Size = new System.Drawing.Size(937, 71);
             this.groupBox2.TabIndex = 36;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Indv.Visa";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
-            // label4
+            // label11
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(245, 34);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(74, 13);
-            this.label4.TabIndex = 37;
-            this.label4.Text = "Consulate City";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(708, 27);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(52, 13);
+            this.label11.TabIndex = 43;
+            this.label11.Text = "Border ID";
             // 
-            // cmbConsulate
+            // BorderIDtxt
             // 
-            this.cmbConsulate.FormattingEnabled = true;
-            this.cmbConsulate.Location = new System.Drawing.Point(325, 28);
-            this.cmbConsulate.Name = "cmbConsulate";
-            this.cmbConsulate.Size = new System.Drawing.Size(133, 21);
-            this.cmbConsulate.TabIndex = 36;
+            this.BorderIDtxt.Location = new System.Drawing.Point(766, 23);
+            this.BorderIDtxt.Name = "BorderIDtxt";
+            this.BorderIDtxt.Size = new System.Drawing.Size(136, 20);
+            this.BorderIDtxt.TabIndex = 42;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(17, 25);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(67, 13);
+            this.label10.TabIndex = 41;
+            this.label10.Text = "Visa Number";
+            // 
+            // INDVVIsanumtxt
+            // 
+            this.INDVVIsanumtxt.Enabled = false;
+            this.INDVVIsanumtxt.Location = new System.Drawing.Point(100, 22);
+            this.INDVVIsanumtxt.Name = "INDVVIsanumtxt";
+            this.INDVVIsanumtxt.Size = new System.Drawing.Size(113, 20);
+            this.INDVVIsanumtxt.TabIndex = 40;
+            this.INDVVIsanumtxt.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(506, 32);
+            this.label8.Location = new System.Drawing.Point(506, 27);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(24, 13);
             this.label8.TabIndex = 39;
@@ -362,52 +390,80 @@ namespace Delmon_Managment_System.Forms
             // cmbJob
             // 
             this.cmbJob.FormattingEnabled = true;
-            this.cmbJob.Location = new System.Drawing.Point(536, 29);
+            this.cmbJob.Location = new System.Drawing.Point(536, 23);
             this.cmbJob.Name = "cmbJob";
             this.cmbJob.Size = new System.Drawing.Size(157, 21);
             this.cmbJob.TabIndex = 38;
             this.cmbJob.SelectedIndexChanged += new System.EventHandler(this.cmbJob_SelectedIndexChanged);
             // 
-            // textBox2
+            // label44
             // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(89, 29);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(113, 20);
-            this.textBox2.TabIndex = 40;
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(232, 27);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(74, 13);
+            this.label44.TabIndex = 37;
+            this.label44.Text = "Consulate City";
+            this.label44.Click += new System.EventHandler(this.label4_Click);
             // 
-            // label10
+            // cmbConsulate
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(16, 34);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(67, 13);
-            this.label10.TabIndex = 41;
-            this.label10.Text = "Visa Number";
+            this.cmbConsulate.FormattingEnabled = true;
+            this.cmbConsulate.Location = new System.Drawing.Point(330, 22);
+            this.cmbConsulate.Name = "cmbConsulate";
+            this.cmbConsulate.Size = new System.Drawing.Size(133, 21);
+            this.cmbConsulate.TabIndex = 36;
             // 
-            // label11
+            // label12
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(708, 34);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(52, 13);
-            this.label11.TabIndex = 43;
-            this.label11.Text = "Border ID";
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(12, 76);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(73, 13);
+            this.label12.TabIndex = 38;
+            this.label12.Text = "Recived Date";
             // 
-            // BorderIDtxt
+            // label4
             // 
-            this.BorderIDtxt.Enabled = false;
-            this.BorderIDtxt.Location = new System.Drawing.Point(780, 31);
-            this.BorderIDtxt.Name = "BorderIDtxt";
-            this.BorderIDtxt.Size = new System.Drawing.Size(113, 20);
-            this.BorderIDtxt.TabIndex = 42;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(17, 297);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(66, 18);
+            this.label4.TabIndex = 39;
+            this.label4.Text = "Indv.Visa";
+            // 
+            // ReceviedPicker
+            // 
+            this.ReceviedPicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.ReceviedPicker.Location = new System.Drawing.Point(99, 70);
+            this.ReceviedPicker.Name = "ReceviedPicker";
+            this.ReceviedPicker.Size = new System.Drawing.Size(134, 20);
+            this.ReceviedPicker.TabIndex = 40;
+            // 
+            // btnFinish
+            // 
+            this.btnFinish.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnFinish.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFinish.Location = new System.Drawing.Point(1046, 579);
+            this.btnFinish.Name = "btnFinish";
+            this.btnFinish.Size = new System.Drawing.Size(75, 39);
+            this.btnFinish.TabIndex = 41;
+            this.btnFinish.Text = "Finish";
+            this.btnFinish.UseVisualStyleBackColor = true;
             // 
             // VisaFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1094, 715);
+            this.ClientSize = new System.Drawing.Size(1244, 715);
+            this.Controls.Add(this.btnFinish);
+            this.Controls.Add(this.ReceviedPicker);
+            this.Controls.Add(this.IssueDateENPicker);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.ExpiryDateENPicker);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbCompany);
@@ -478,12 +534,16 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox INDVVIsanumtxt;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cmbJob;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label44;
         private System.Windows.Forms.ComboBox cmbConsulate;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox BorderIDtxt;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DateTimePicker ReceviedPicker;
+        private System.Windows.Forms.Button btnFinish;
     }
 }

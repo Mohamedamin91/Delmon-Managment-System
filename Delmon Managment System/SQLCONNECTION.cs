@@ -7,11 +7,14 @@ using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
+using System.Windows.Forms;
 
 namespace Delmon_Managment_System
 {
-  public  class SQLCONNECTION
+   
+   public  class SQLCONNECTION
     {
+        
         string ConnectionString = "Data Source=192.168.1.8;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@";
         SqlConnection con;
         public void OpenConection()
@@ -20,19 +23,25 @@ namespace Delmon_Managment_System
             con.Open();
         }
 
+    
 
-        public void CloseConnection()
+    public void CloseConnection()
         {
             con.Close();
         }
 
 
-        public void ExecuteQueries(string Query_)
+        public void ExecuteQueries(string Query_, params SqlParameter[] parameters)
         {
             SqlCommand cmd = new SqlCommand(Query_, con);
+            foreach (SqlParameter parm in parameters)
+            {
+                cmd.Parameters.Add(parm);
+            }
             cmd.ExecuteNonQuery();
         }
-        public SqlDataReader DataReader(string Query_)
+     
+    public SqlDataReader DataReader(string Query_)
         {
             SqlCommand cmd = new SqlCommand(Query_, con);
             SqlDataReader dr = cmd.ExecuteReader();
@@ -48,10 +57,11 @@ namespace Delmon_Managment_System
             object dataum = ds.Tables[0];
             return dataum;
         }
+    
 
 
 
-    }
+}
    
 
 }
