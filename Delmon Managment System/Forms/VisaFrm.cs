@@ -11,7 +11,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using System.Data;
 
 namespace Delmon_Managment_System.Forms
 {
@@ -21,7 +20,7 @@ namespace Delmon_Managment_System.Forms
         SQLCONNECTION SQLCONN = new SQLCONNECTION();
         int Totatvisa = 0;
         int i = 0;
-        string CountryID;
+        int CountryID;
 
 
         public VisaFrm()
@@ -167,10 +166,77 @@ namespace Delmon_Managment_System.Forms
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
-           
+
             if (TotalVisastxt.Text != "")
             {
-                cmbStatus.Enabled = cmbJob.Enabled=cmbConsulate.Enabled = true;
+                cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = true;
+                SQLCONN.OpenConection();
+                SqlDataReader dr = SQLCONN.DataReader("select  VisaNumber from Visa where  VisaNumber= " + Visanumtxt.Text + "  ");
+                dr.Read();
+
+                //  CountryID = int.Parse(dr["CountryId"].ToString());
+                if (dr.HasRows)
+                {
+                    MessageBox.Show("This 'VISA NUMBER'  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = false;
+
+                }
+                else
+                {
+                    SqlParameter paramVisanumber = new SqlParameter("@C1", SqlDbType.Int);
+                    paramVisanumber.Value = Visanumtxt.Text;
+                    SqlParameter paramstatusID = new SqlParameter("@C2", SqlDbType.NVarChar);
+                    paramstatusID.Value = cmbStatus.SelectedValue;
+                    SqlParameter ParamConsulate = new SqlParameter("@C3", SqlDbType.NVarChar);
+                    ParamConsulate.Value = cmbConsulate.SelectedValue;
+                    SqlParameter paramJob = new SqlParameter("@C4", SqlDbType.NVarChar);
+                    paramJob.Value = cmbJob.SelectedValue;
+
+
+                    dr.Dispose();
+                    dr.Close();
+
+                    Totatvisa = int.Parse(TotalVisastxt.Text);
+                    if (i < Totatvisa)
+
+                    {
+
+                        dr = SQLCONN.DataReader("select  Consulates.CountryId from Countries,Consulates where Countries.CountryId = Consulates.CountryId and Consulates.ConsulateID= " + cmbConsulate.SelectedValue + "  ");
+                        dr.Read();
+                        CountryID = int.Parse(dr["CountryId"].ToString());
+                        SqlParameter paramCountryID = new SqlParameter("@C5", SqlDbType.NVarChar);
+                        paramCountryID.Value = CountryID;
+                        dr.Dispose();
+                        dr.Close();
+                        if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                        {
+                            SQLCONN.ExecuteQueries("insert into VISAJobList (VisaNumber,statusid,ConsulateID,JobID,CountryID) " +
+                                " values (@C1,@C2,@C3,@C4,@C5) ",
+                                paramVisanumber, paramstatusID, ParamConsulate, paramJob, paramCountryID);
+
+                            MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList ");
+                            i = i + 1;
+
+
+                        }
+                        else
+                        {
+
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("You have exceeded the number allowed to issue visas for Visa No: " + Visanumtxt.Text + " ", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        TotalVisastxt.Enabled = false;
+                    }
+
+
+                }
+
+                SQLCONN.CloseConnection();
             }
             else
             {
@@ -180,61 +246,7 @@ namespace Delmon_Managment_System.Forms
                 cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = false;
 
             }
-
-            SqlParameter paramVisanumber = new SqlParameter("@C1", SqlDbType.Int);
-            paramVisanumber.Value = Visanumtxt.Text;
-            SqlParameter paramstatusID = new SqlParameter("@C2", SqlDbType.NVarChar);
-            paramstatusID.Value = cmbStatus.SelectedValue;
-            SqlParameter ParamConsulate = new SqlParameter("@C3", SqlDbType.NVarChar);
-            ParamConsulate.Value = cmbConsulate.SelectedValue;
-            SqlParameter paramJob = new SqlParameter("@C4", SqlDbType.NVarChar);
-            paramJob.Value = cmbJob.SelectedValue;
          
-
-
-            if (Visanumtxt.Text != "" && TotalVisastxt.Text != "")
-            {
-                Totatvisa = int.Parse(TotalVisastxt.Text);
-                if (i < Totatvisa)
-
-                {
-
-                    SQLCONN.OpenConection();
-                    SqlDataReader dr = SQLCONN.DataReader("select  Consulates.CountryId from Countries,Consulates where Countries.CountryId = Consulates.CountryId and Consulates.ConsulateID= " + cmbConsulate.SelectedValue+"  ");
-                    dr.Read();
-                     CountryID = dr["CountryId"].ToString();
-                    MessageBox.Show(CountryID);
-                    SqlParameter paramCountryID = new SqlParameter("@C5", SqlDbType.NVarChar);
-                    paramCountryID.Value = CountryID;
-                    SQLCONN.CloseConnection();
-                    SQLCONN.OpenConection();
-                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-                    {
-                        SQLCONN.ExecuteQueries("insert into VISAJobList (VisaNumber,statusid,ConsulateID,JobID,CountryID) " +
-                            " values (@C1,@C2,@C3,@C4,@C5) ",
-                            paramVisanumber, paramstatusID, ParamConsulate,paramJob,paramCountryID);
-
-                        MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList ");
-                        SQLCONN.CloseConnection();
-                        i = i + 1;
-
-
-                    }
-                    else
-                    {
-                        SQLCONN.CloseConnection();
-
-                    }
-
-                }
-                else
-                {
-                    MessageBox.Show("You have exceeded the number allowed to issue visas for Visa No: " + Visanumtxt.Text + " ", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                }
-            }
 
 
 
@@ -320,50 +332,82 @@ namespace Delmon_Managment_System.Forms
 
         private void btnFinish_Click(object sender, EventArgs e)
         {
-            SqlParameter paramVisanumber = new SqlParameter("@C1", SqlDbType.Int);
-            paramVisanumber.Value = Visanumtxt.Text;
-            SqlParameter paramcomapany = new SqlParameter("@C2", SqlDbType.Int);
-            paramcomapany.Value = cmbCompany.SelectedValue;
-            SqlParameter paramRecevidDate = new SqlParameter("@C3", SqlDbType.Date);
-            paramRecevidDate.Value = ReceviedPicker.Value;
-            SqlParameter paramIssHIJriDate = new SqlParameter("@C4", SqlDbType.NVarChar);
-            paramIssHIJriDate.Value = issuhijritxt.Text;
-            SqlParameter paramIssueDateEN = new SqlParameter("@C5", SqlDbType.Date);
-            paramIssueDateEN.Value = IssueDateENPicker.Value;
-            SqlParameter paramExpiryDateHijri = new SqlParameter("@C6", SqlDbType.NVarChar);
-            paramExpiryDateHijri.Value = ExpiaryHijritxt.Text;
-            SqlParameter paramExpiryDateEN = new SqlParameter("@C7", SqlDbType.Date);
-            paramExpiryDateEN.Value = ExpiryDateENPicker.Value;
-            SqlParameter paramTotalVisas = new SqlParameter("@C8", SqlDbType.NVarChar);
-            paramTotalVisas.Value = TotalVisastxt.Text;
-            SqlParameter paramRemarks = new SqlParameter("@C9", SqlDbType.NVarChar);
-            paramRemarks.Value = RemarksTxt.Text;
-
             if (Visanumtxt.Text != "")
             {
                 SQLCONN.OpenConection();
-                if (DialogResult.Yes == MessageBox.Show("Do You Want to submit this info for Visa No :  "+Visanumtxt.Text+" ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                SqlDataReader dr = SQLCONN.DataReader("select  VisaNumber from Visa where  VisaNumber= " + Visanumtxt.Text + "  ");
+                dr.Read();
+                //  CountryID = int.Parse(dr["CountryId"].ToString());
+                if (dr.HasRows)
                 {
-                    SQLCONN.ExecuteQueries("insert into VISA (VisaNumber,ComapnyID,ReceviedDate,IssueDateEN,ExpiryDateEN,TotalVisas,Remarks,ExpiryDateHijri,IssueDateHijri) " +
-                        " values (@C1,@C2,@C3,@C5,@C7,@C8,@C9,@C6,@C4) ",
-                        paramVisanumber, paramcomapany, paramRecevidDate, paramIssueDateEN, paramExpiryDateEN, paramTotalVisas, paramRemarks, paramExpiryDateHijri, paramIssHIJriDate);
-                    SQLCONN.CloseConnection();
-                    MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ClearTextBoxes();
+                    MessageBox.Show("This 'VISA NUMBER'  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 }
                 else
                 {
-                    SQLCONN.CloseConnection();
-                }
+                    SqlParameter paramVisanumber = new SqlParameter("@C1", SqlDbType.Int);
+                    paramVisanumber.Value = Visanumtxt.Text;
+                    SqlParameter paramcomapany = new SqlParameter("@C2", SqlDbType.Int);
+                    paramcomapany.Value = cmbCompany.SelectedValue;
+                    SqlParameter paramRecevidDate = new SqlParameter("@C3", SqlDbType.Date);
+                    paramRecevidDate.Value = ReceviedPicker.Value;
+                    SqlParameter paramIssHIJriDate = new SqlParameter("@C4", SqlDbType.NVarChar);
+                    paramIssHIJriDate.Value = issuhijritxt.Text;
+                    SqlParameter paramIssueDateEN = new SqlParameter("@C5", SqlDbType.Date);
+                    paramIssueDateEN.Value = IssueDateENPicker.Value;
+                    SqlParameter paramExpiryDateHijri = new SqlParameter("@C6", SqlDbType.NVarChar);
+                    paramExpiryDateHijri.Value = ExpiaryHijritxt.Text;
+                    SqlParameter paramExpiryDateEN = new SqlParameter("@C7", SqlDbType.Date);
+                    paramExpiryDateEN.Value = ExpiryDateENPicker.Value;
+                    SqlParameter paramTotalVisas = new SqlParameter("@C8", SqlDbType.NVarChar);
+                    paramTotalVisas.Value = TotalVisastxt.Text;
+                    SqlParameter paramRemarks = new SqlParameter("@C9", SqlDbType.NVarChar);
+                    paramRemarks.Value = RemarksTxt.Text;
+                    dr.Dispose();
+                    dr.Close();
+                 
+                        if (DialogResult.Yes == MessageBox.Show("Do You Want to submit this info for Visa No :  " + Visanumtxt.Text + " ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                        {
+                            SQLCONN.ExecuteQueries("insert into VISA (VisaNumber,ComapnyID,ReceviedDate,IssueDateEN,ExpiryDateEN,TotalVisas,Remarks,ExpiryDateHijri,IssueDateHijri) " +
+                                " values (@C1,@C2,@C3,@C5,@C7,@C8,@C9,@C6,@C4) ",
+                                paramVisanumber, paramcomapany, paramRecevidDate, paramIssueDateEN, paramExpiryDateEN, paramTotalVisas, paramRemarks, paramExpiryDateHijri, paramIssHIJriDate);
+                            //   SQLCONN.CloseConnection();
+                            MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            ClearTextBoxes();
 
+                        }
+                        else
+                        {
+                            //  SQLCONN.CloseConnection();
+                        }
+
+                    }
+                   
+                      
+                    
+                
+                dr.Dispose();
+                dr.Close();
+                SQLCONN.CloseConnection();
             }
-            else
+            else 
             {
                 MessageBox.Show("Please insert 'VISA NUMBER' first !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Visanumtxt.BackColor = Color.Red;
 
+
             }
+
+
+
+
+
+
+
+
+
+
+
         }
 
         private void VisaFrm_KeyUp(object sender, KeyEventArgs e)
@@ -386,7 +430,7 @@ namespace Delmon_Managment_System.Forms
                     issuhijritxt.Text = IssueDateHijriPicker.Value.ToString("dd-MM-yyyy");
                     /*calculate expairy hiri date**/
 
-                    this.ExpiryDateHijriPicker.Value = b.Date.AddYears(2);
+                    this.ExpiryDateHijriPicker.Value = b.Date.AddDays(708);
                     ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
                     ExpiaryHijritxt.Text = ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
 
@@ -397,7 +441,7 @@ namespace Delmon_Managment_System.Forms
                     IssueDateENTxt.Text = IssueDateENPicker.Text;
 
                     /*calculate expairy milaidy date**/
-                    this.ExpiryDateENPicker.Value = IssueDateENPicker.Value.AddYears(2);
+                    this.ExpiryDateENPicker.Value = IssueDateENPicker.Value.AddDays(708);
                     expairENDATEtxt.Text = ExpiryDateENPicker.Text;
 
 
@@ -418,7 +462,7 @@ namespace Delmon_Managment_System.Forms
                     issuhijritxt.Text = IssueDateHijriPicker.Value.ToString("dd-MM-yyyy");
                     /*calculate expairy hiri date**/
 
-                    this.ExpiryDateHijriPicker.Value = b.Date.AddYears(2);
+                    this.ExpiryDateHijriPicker.Value = b.Date.AddDays(708);
                     ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
                     ExpiaryHijritxt.Text = ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
 
@@ -429,7 +473,7 @@ namespace Delmon_Managment_System.Forms
                     IssueDateENTxt.Text = IssueDateENPicker.Text;
 
                     /*calculate expairy milaidy date**/
-                    this.ExpiryDateENPicker.Value = IssueDateENPicker.Value.AddYears(2);
+                    this.ExpiryDateENPicker.Value = IssueDateENPicker.Value.AddDays(708);
                     expairENDATEtxt.Text = ExpiryDateENPicker.Text;
 
 
@@ -454,7 +498,7 @@ namespace Delmon_Managment_System.Forms
                     issuhijritxt.Text = IssueDateHijriPicker.Value.ToString("dd-MM-yyyy");
                     /*calculate expairy hiri date**/
 
-                    this.ExpiryDateHijriPicker.Value = b.Date.AddYears(2);
+                    this.ExpiryDateHijriPicker.Value = b.Date.AddDays(708);
                     ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
                     ExpiaryHijritxt.Text = ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
 
@@ -465,7 +509,7 @@ namespace Delmon_Managment_System.Forms
                     IssueDateENTxt.Text = IssueDateENPicker.Text;
 
                     /*calculate expairy milaidy date**/
-                    this.ExpiryDateENPicker.Value = IssueDateENPicker.Value.AddYears(2);
+                    this.ExpiryDateENPicker.Value = IssueDateENPicker.Value.AddDays(708);
                     expairENDATEtxt.Text = ExpiryDateENPicker.Text;
 
 
@@ -486,7 +530,7 @@ namespace Delmon_Managment_System.Forms
                     issuhijritxt.Text = IssueDateHijriPicker.Value.ToString("dd-MM-yyyy");
                     /*calculate expairy hiri date**/
 
-                    this.ExpiryDateHijriPicker.Value = b.Date.AddYears(2);
+                    this.ExpiryDateHijriPicker.Value = b.Date.AddDays(708);
                     ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
                     ExpiaryHijritxt.Text = ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
 
@@ -497,7 +541,7 @@ namespace Delmon_Managment_System.Forms
                     IssueDateENTxt.Text = IssueDateENPicker.Text;
 
                     /*calculate expairy milaidy date**/
-                    this.ExpiryDateENPicker.Value = IssueDateENPicker.Value.AddYears(2);
+                    this.ExpiryDateENPicker.Value = IssueDateENPicker.Value.AddDays(708);
                     expairENDATEtxt.Text = ExpiryDateENPicker.Text;
 
 

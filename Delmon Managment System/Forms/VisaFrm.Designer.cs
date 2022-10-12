@@ -415,7 +415,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.btnFinish.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnFinish.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFinish.Location = new System.Drawing.Point(714, 383);
+            this.btnFinish.Location = new System.Drawing.Point(727, 378);
             this.btnFinish.Name = "btnFinish";
             this.btnFinish.Size = new System.Drawing.Size(75, 39);
             this.btnFinish.TabIndex = 41;
