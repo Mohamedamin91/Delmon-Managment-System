@@ -21,6 +21,7 @@ namespace Delmon_Managment_System.Forms
         SQLCONNECTION SQLCONN = new SQLCONNECTION();
         int Totatvisa = 0;
         int i = 0;
+        string CountryID;
 
 
         public VisaFrm()
@@ -53,16 +54,22 @@ namespace Delmon_Managment_System.Forms
 
 
             cmbCompany.ValueMember = "COMPID";
-            cmbCompany.DisplayMember = "COMPName_AR";
-            cmbCompany.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT COMPID,COMPName_AR FROM Companies");
+            cmbCompany.DisplayMember = "COMPName_EN";
+            cmbCompany.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT COMPID,COMPName_EN FROM Companies");
 
             cmbJob.ValueMember = "JobID";
             cmbJob.DisplayMember = "JobTitleEN";
             cmbJob.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS");
 
-            cmbConsulate.ValueMember = "Countries.CountryId";
+            cmbConsulate.ValueMember = "Consulates.ConsulateID";
             cmbConsulate.DisplayMember = "ConsulateCity";
-            cmbConsulate.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select Countries.CountryId,ConsulateCity from Countries,Consulates where Countries.CountryId = Consulates.CountryId");
+            cmbConsulate.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select Consulates.ConsulateID,ConsulateCity from Countries,Consulates where Countries.CountryId = Consulates.CountryId");
+
+            cmbStatus.ValueMember = "statusid";
+            cmbStatus.DisplayMember = "status";
+            cmbStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select statusid,status from status ");
+
+
 
             SQLCONN.CloseConnection();
 
@@ -83,7 +90,7 @@ namespace Delmon_Managment_System.Forms
                 }
             }
             label4.ForeColor = ThemeColor.SecondaryColor;
-            label5.ForeColor = ThemeColor.PrimaryColor;
+          //  label5.ForeColor = ThemeColor.PrimaryColor;
         }
 
         private void visasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -131,13 +138,7 @@ namespace Delmon_Managment_System.Forms
 
         private void issuhijritxt_Leave(object sender, EventArgs e)
         {
-            //if (issuhijritxt.Text == "dd/MM/yyyy")
-            //{
-            //    issuhijritxt.Text = "";
-            //    issuhijritxt.ForeColor = Color.Black;
-            //}
-           
-
+         
         }
 
 
@@ -159,70 +160,88 @@ namespace Delmon_Managment_System.Forms
             ExpiryDateENPicker.Value = DateTime.Now;
             ReceviedPicker.Value = DateTime.Now;
             dataGridView1.DataSource = null;
+            cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = false;
             i = 0;
         }
 
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
+           
             if (TotalVisastxt.Text != "")
             {
-                groupBox2.Enabled = true;
-                SqlParameter paramVisanumber = new SqlParameter("@C1", SqlDbType.Int);
-                paramVisanumber.Value = Visanumtxt.Text;
-                SqlParameter paramborderID = new SqlParameter("@C2", SqlDbType.NVarChar);
-                paramborderID.Value = BorderIDtxt.Text;
-                SqlParameter ParamConsulate = new SqlParameter("@C3", SqlDbType.NVarChar);
-                ParamConsulate.Value = cmbConsulate.SelectedValue;
-                SqlParameter paramJob = new SqlParameter("@C4", SqlDbType.NVarChar);
-                paramJob.Value = cmbJob.SelectedValue;
-                if (Visanumtxt.Text != "" && TotalVisastxt.Text != "")
-                {
-                    Totatvisa = int.Parse(TotalVisastxt.Text);
-                    if (i < Totatvisa)
-
-                    {
-
-                        SQLCONN.OpenConection();
-                        if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-                        {
-                            SQLCONN.ExecuteQueries("insert into IndvVisa (VisaNumber,BorderID,ConsulateID,JobID) " +
-                                " values (@C1,@C2,@C3,@C4) ",
-                                paramVisanumber, paramborderID, ParamConsulate, paramJob);
-
-                            MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            BorderIDtxt.Text = "";
-                            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From IndvVisa ");
-                            SQLCONN.CloseConnection();
-                            i = i + 1;
-
-
-                        }
-                        else
-                        {
-                            SQLCONN.CloseConnection();
-
-                        }
-
-                    }
-                    else
-                    {
-                        MessageBox.Show("You have exceeded the number allowed to issue visas for Visa No: " + Visanumtxt.Text + " ", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                    }
-                }
+                cmbStatus.Enabled = cmbJob.Enabled=cmbConsulate.Enabled = true;
             }
             else
             {
                 MessageBox.Show("Please insert 'TOTAL VISA' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 TotalVisastxt.BackColor = Color.Red;
+                cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = false;
+
+            }
+
+            SqlParameter paramVisanumber = new SqlParameter("@C1", SqlDbType.Int);
+            paramVisanumber.Value = Visanumtxt.Text;
+            SqlParameter paramstatusID = new SqlParameter("@C2", SqlDbType.NVarChar);
+            paramstatusID.Value = cmbStatus.SelectedValue;
+            SqlParameter ParamConsulate = new SqlParameter("@C3", SqlDbType.NVarChar);
+            ParamConsulate.Value = cmbConsulate.SelectedValue;
+            SqlParameter paramJob = new SqlParameter("@C4", SqlDbType.NVarChar);
+            paramJob.Value = cmbJob.SelectedValue;
+         
+
+
+            if (Visanumtxt.Text != "" && TotalVisastxt.Text != "")
+            {
+                Totatvisa = int.Parse(TotalVisastxt.Text);
+                if (i < Totatvisa)
+
+                {
+
+                    SQLCONN.OpenConection();
+                    SqlDataReader dr = SQLCONN.DataReader("select  Consulates.CountryId from Countries,Consulates where Countries.CountryId = Consulates.CountryId and Consulates.ConsulateID= " + cmbConsulate.SelectedValue+"  ");
+                    dr.Read();
+                     CountryID = dr["CountryId"].ToString();
+                    MessageBox.Show(CountryID);
+                    SqlParameter paramCountryID = new SqlParameter("@C5", SqlDbType.NVarChar);
+                    paramCountryID.Value = CountryID;
+                    SQLCONN.CloseConnection();
+                    SQLCONN.OpenConection();
+                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        SQLCONN.ExecuteQueries("insert into VISAJobList (VisaNumber,statusid,ConsulateID,JobID,CountryID) " +
+                            " values (@C1,@C2,@C3,@C4,@C5) ",
+                            paramVisanumber, paramstatusID, ParamConsulate,paramJob,paramCountryID);
+
+                        MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList ");
+                        SQLCONN.CloseConnection();
+                        i = i + 1;
+
+
+                    }
+                    else
+                    {
+                        SQLCONN.CloseConnection();
+
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("You have exceeded the number allowed to issue visas for Visa No: " + Visanumtxt.Text + " ", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
             }
 
 
 
 
-       
+
+
+
         }
         private void groupBox2_Enter(object sender, EventArgs e)
         {
@@ -296,7 +315,7 @@ namespace Delmon_Managment_System.Forms
 
         private void Visanumtxt_Leave(object sender, EventArgs e)
         {
-            INDVVIsanumtxt.Text = Visanumtxt.Text;
+         
         }
 
         private void btnFinish_Click(object sender, EventArgs e)
@@ -325,7 +344,7 @@ namespace Delmon_Managment_System.Forms
                 SQLCONN.OpenConection();
                 if (DialogResult.Yes == MessageBox.Show("Do You Want to submit this info for Visa No :  "+Visanumtxt.Text+" ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
-                    SQLCONN.ExecuteQueries("insert into VISAS (VisaNumber,ComapnyID,ReceviedDate,IssueDateEN,ExpiryDateEN,TotalVisas,Remarks,ExpiryDateHijri,IssueDateHijri) " +
+                    SQLCONN.ExecuteQueries("insert into VISA (VisaNumber,ComapnyID,ReceviedDate,IssueDateEN,ExpiryDateEN,TotalVisas,Remarks,ExpiryDateHijri,IssueDateHijri) " +
                         " values (@C1,@C2,@C3,@C5,@C7,@C8,@C9,@C6,@C4) ",
                         paramVisanumber, paramcomapany, paramRecevidDate, paramIssueDateEN, paramExpiryDateEN, paramTotalVisas, paramRemarks, paramExpiryDateHijri, paramIssHIJriDate);
                     SQLCONN.CloseConnection();
@@ -491,6 +510,8 @@ namespace Delmon_Managment_System.Forms
         private void TotalVisastxt_TextChanged(object sender, EventArgs e)
         {
             TotalVisastxt.BackColor = Color.White;
+            cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = true;
+
 
         }
     }
