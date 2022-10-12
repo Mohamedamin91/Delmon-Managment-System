@@ -110,12 +110,13 @@ namespace Delmon_Managment_System.Forms
             this.TotalVisastxt.Name = "TotalVisastxt";
             this.TotalVisastxt.Size = new System.Drawing.Size(100, 20);
             this.TotalVisastxt.TabIndex = 4;
+            this.TotalVisastxt.TextChanged += new System.EventHandler(this.TotalVisastxt_TextChanged);
             // 
             // AddBtn
             // 
             this.AddBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.AddBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AddBtn.Location = new System.Drawing.Point(1046, 311);
+            this.AddBtn.Location = new System.Drawing.Point(1055, 309);
             this.AddBtn.Name = "AddBtn";
             this.AddBtn.Size = new System.Drawing.Size(75, 39);
             this.AddBtn.TabIndex = 6;
@@ -170,7 +171,7 @@ namespace Delmon_Managment_System.Forms
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(10, 430);
+            this.dataGridView1.Location = new System.Drawing.Point(19, 430);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(1030, 188);
             this.dataGridView1.TabIndex = 9;
@@ -299,10 +300,12 @@ namespace Delmon_Managment_System.Forms
             // 
             // issuhijritxt
             // 
+            this.issuhijritxt.ForeColor = System.Drawing.Color.Gray;
             this.issuhijritxt.Location = new System.Drawing.Point(99, 115);
             this.issuhijritxt.Name = "issuhijritxt";
             this.issuhijritxt.Size = new System.Drawing.Size(134, 20);
             this.issuhijritxt.TabIndex = 33;
+            this.issuhijritxt.Text = "dd/MM/yyyy";
             this.issuhijritxt.TextChanged += new System.EventHandler(this.issuhijritxt_TextChanged);
             this.issuhijritxt.DragEnter += new System.Windows.Forms.DragEventHandler(this.issuhijritxt_DragEnter);
             this.issuhijritxt.Enter += new System.EventHandler(this.issuhijritxt_Enter);
@@ -339,6 +342,7 @@ namespace Delmon_Managment_System.Forms
             this.groupBox2.Controls.Add(this.cmbJob);
             this.groupBox2.Controls.Add(this.label44);
             this.groupBox2.Controls.Add(this.cmbConsulate);
+            this.groupBox2.Enabled = false;
             this.groupBox2.Location = new System.Drawing.Point(103, 297);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(937, 71);
@@ -447,7 +451,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.btnFinish.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnFinish.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFinish.Location = new System.Drawing.Point(1046, 579);
+            this.btnFinish.Location = new System.Drawing.Point(1055, 579);
             this.btnFinish.Name = "btnFinish";
             this.btnFinish.Size = new System.Drawing.Size(75, 39);
             this.btnFinish.TabIndex = 41;

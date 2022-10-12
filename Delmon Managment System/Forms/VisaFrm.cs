@@ -23,32 +23,30 @@ namespace Delmon_Managment_System.Forms
         int i = 0;
 
 
-
-
-
-
-
         public VisaFrm()
         {
-          
+
 
             InitializeComponent();
-            
+
             Application.CurrentCulture = new CultureInfo("ar-SA");
             ExpiryDateHijriPicker.Format = DateTimePickerFormat.Custom;
-          
 
 
-          
+
 
 
 
         }
-      
+
 
         private void VisaFrm_Load(object sender, EventArgs e)
         {
             LoadTheme();
+            //issuhijritxt.Text = "dd/MM/yyyy";
+            //issuhijritxt.ForeColor = Color.Gray;
+
+       
 
             SQLCONN.OpenConection();
             this.ActiveControl = Visanumtxt;
@@ -133,8 +131,13 @@ namespace Delmon_Managment_System.Forms
 
         private void issuhijritxt_Leave(object sender, EventArgs e)
         {
+            //if (issuhijritxt.Text == "dd/MM/yyyy")
+            //{
+            //    issuhijritxt.Text = "";
+            //    issuhijritxt.ForeColor = Color.Black;
+            //}
+           
 
-       
         }
 
 
@@ -159,13 +162,12 @@ namespace Delmon_Managment_System.Forms
             i = 0;
         }
 
-       
+
         private void AddBtn_Click(object sender, EventArgs e)
         {
-            Totatvisa = int.Parse(TotalVisastxt.Text);
-           
-          
-              
+            if (TotalVisastxt.Text != "")
+            {
+                groupBox2.Enabled = true;
                 SqlParameter paramVisanumber = new SqlParameter("@C1", SqlDbType.Int);
                 paramVisanumber.Value = Visanumtxt.Text;
                 SqlParameter paramborderID = new SqlParameter("@C2", SqlDbType.NVarChar);
@@ -176,57 +178,52 @@ namespace Delmon_Managment_System.Forms
                 paramJob.Value = cmbJob.SelectedValue;
                 if (Visanumtxt.Text != "" && TotalVisastxt.Text != "")
                 {
-                if (i < Totatvisa)
+                    Totatvisa = int.Parse(TotalVisastxt.Text);
+                    if (i < Totatvisa)
 
-                {
-            
-
-
-                    SQLCONN.OpenConection();
-                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     {
-                        SQLCONN.ExecuteQueries("insert into IndvVisa (VisaNumber,BorderID,ConsulateID,JobID) " +
-                            " values (@C1,@C2,@C3,@C4) ",
-                            paramVisanumber, paramborderID, ParamConsulate, paramJob);
 
-                        MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        BorderIDtxt.Text = "";
-                        dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From IndvVisa ");
-                        SQLCONN.CloseConnection();
-                        i = i + 1;
+                        SQLCONN.OpenConection();
+                        if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                        {
+                            SQLCONN.ExecuteQueries("insert into IndvVisa (VisaNumber,BorderID,ConsulateID,JobID) " +
+                                " values (@C1,@C2,@C3,@C4) ",
+                                paramVisanumber, paramborderID, ParamConsulate, paramJob);
 
+                            MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            BorderIDtxt.Text = "";
+                            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From IndvVisa ");
+                            SQLCONN.CloseConnection();
+                            i = i + 1;
+
+
+                        }
+                        else
+                        {
+                            SQLCONN.CloseConnection();
+
+                        }
 
                     }
                     else
                     {
-                        SQLCONN.CloseConnection();
+                        MessageBox.Show("You have exceeded the number allowed to issue visas for Visa No: " + Visanumtxt.Text + " ", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                     }
-
-
-
                 }
-                else
-                {
-                    MessageBox.Show("You have exceeded the number allowed to issue visas for Visa No: "+ Visanumtxt.Text +" ", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                }
-
             }
             else
             {
-                MessageBox.Show("Please insert 'VISA NUMBER'  & 'TOTAL VISA' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                if (Visanumtxt.Text == "")
-                { Visanumtxt.BackColor = Color.Red; }
-                else { TotalVisastxt.BackColor = Color.Red; }
+                MessageBox.Show("Please insert 'TOTAL VISA' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-
-
+                TotalVisastxt.BackColor = Color.Red;
             }
-            
 
+
+
+
+       
         }
-
         private void groupBox2_Enter(object sender, EventArgs e)
         {
 
@@ -259,9 +256,13 @@ namespace Delmon_Managment_System.Forms
 
         private void issuhijritxt_Enter(object sender, EventArgs e)
         {
+            if (issuhijritxt.Text == "dd/MM/yyyy")
+            {
+                issuhijritxt.Text = "";
+                issuhijritxt.ForeColor = Color.Black;
+            }
 
 
-      
 
         }
 
@@ -271,11 +272,16 @@ namespace Delmon_Managment_System.Forms
         {
             Application.CurrentCulture = new CultureInfo("ar-SA");
             IssueDateHijriPicker.Format = DateTimePickerFormat.Custom;
+            if (issuhijritxt.Text == "dd/MM/yyyy")
+            {
+                issuhijritxt.Text = "";
+                issuhijritxt.ForeColor = Color.Black;
+            }
         }
 
         private void issuhijritxt_MouseEnter(object sender, EventArgs e)
         {
-       
+
         }
 
         private void issuhijritxt_DragEnter(object sender, DragEventArgs e)
@@ -480,6 +486,12 @@ namespace Delmon_Managment_System.Forms
 
                 else { }
             }
+        }
+
+        private void TotalVisastxt_TextChanged(object sender, EventArgs e)
+        {
+            TotalVisastxt.BackColor = Color.White;
+
         }
     }
 }
