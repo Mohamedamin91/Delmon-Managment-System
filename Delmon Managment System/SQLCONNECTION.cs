@@ -25,7 +25,7 @@ namespace Delmon_Managment_System
 
     
 
-    public void CloseConnection()
+        public void CloseConnection()
         {
             con.Close();
         }
@@ -41,7 +41,7 @@ namespace Delmon_Managment_System
             cmd.ExecuteNonQuery();
         }
      
-    public SqlDataReader DataReader(string Query_)
+        public SqlDataReader DataReader(string Query_)
         {
             SqlCommand cmd = new SqlCommand(Query_, con);
             SqlDataReader dr = cmd.ExecuteReader();

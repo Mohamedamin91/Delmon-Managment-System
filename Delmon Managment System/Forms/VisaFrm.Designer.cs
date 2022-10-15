@@ -57,6 +57,8 @@ namespace Delmon_Managment_System.Forms
             this.cmbCompany = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.cmbJob = new System.Windows.Forms.ComboBox();
@@ -66,8 +68,9 @@ namespace Delmon_Managment_System.Forms
             this.label4 = new System.Windows.Forms.Label();
             this.ReceviedPicker = new System.Windows.Forms.DateTimePicker();
             this.btnFinish = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cmbStatus = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.Remaininglbl = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -337,6 +340,24 @@ namespace Delmon_Managment_System.Forms
             this.groupBox2.TabStop = false;
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(643, 29);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(37, 13);
+            this.label5.TabIndex = 43;
+            this.label5.Text = "Status";
+            // 
+            // cmbStatus
+            // 
+            this.cmbStatus.Enabled = false;
+            this.cmbStatus.FormattingEnabled = true;
+            this.cmbStatus.Location = new System.Drawing.Point(686, 25);
+            this.cmbStatus.Name = "cmbStatus";
+            this.cmbStatus.Size = new System.Drawing.Size(129, 21);
+            this.cmbStatus.TabIndex = 42;
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -423,23 +444,40 @@ namespace Delmon_Managment_System.Forms
             this.btnFinish.UseVisualStyleBackColor = true;
             this.btnFinish.Click += new System.EventHandler(this.btnFinish_Click);
             // 
-            // label5
+            // button1
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(643, 29);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(37, 13);
-            this.label5.TabIndex = 43;
-            this.label5.Text = "Status";
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(633, 115);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 39);
+            this.button1.TabIndex = 42;
+            this.button1.Text = "Send";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // cmbStatus
+            // label11
             // 
-            this.cmbStatus.Enabled = false;
-            this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Location = new System.Drawing.Point(686, 25);
-            this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(129, 21);
-            this.cmbStatus.TabIndex = 42;
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.Black;
+            this.label11.Location = new System.Drawing.Point(12, 202);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(106, 16);
+            this.label11.TabIndex = 43;
+            this.label11.Text = "Remaining days";
+            // 
+            // Remaininglbl
+            // 
+            this.Remaininglbl.AutoSize = true;
+            this.Remaininglbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Remaininglbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.Remaininglbl.Location = new System.Drawing.Point(124, 202);
+            this.Remaininglbl.Name = "Remaininglbl";
+            this.Remaininglbl.Size = new System.Drawing.Size(12, 16);
+            this.Remaininglbl.TabIndex = 44;
+            this.Remaininglbl.Text = "!";
             // 
             // VisaFrm
             // 
@@ -447,6 +485,9 @@ namespace Delmon_Managment_System.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1033, 563);
+            this.Controls.Add(this.Remaininglbl);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnFinish);
             this.Controls.Add(this.ReceviedPicker);
             this.Controls.Add(this.IssueDateENPicker);
@@ -531,5 +572,8 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Button btnFinish;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbStatus;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label Remaininglbl;
     }
 }

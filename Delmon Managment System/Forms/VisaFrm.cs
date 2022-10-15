@@ -11,6 +11,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Net.Mail;
+using System.Net;
 
 namespace Delmon_Managment_System.Forms
 {
@@ -20,7 +22,6 @@ namespace Delmon_Managment_System.Forms
         SQLCONNECTION SQLCONN = new SQLCONNECTION();
         int Totatvisa = 0;
         int i = 0;
-        int CountryID;
 
 
         public VisaFrm()
@@ -43,9 +44,7 @@ namespace Delmon_Managment_System.Forms
         private void VisaFrm_Load(object sender, EventArgs e)
         {
             LoadTheme();
-            //issuhijritxt.Text = "dd/MM/yyyy";
-            //issuhijritxt.ForeColor = Color.Gray;
-
+         
        
 
             SQLCONN.OpenConection();
@@ -161,6 +160,7 @@ namespace Delmon_Managment_System.Forms
             dataGridView1.DataSource = null;
             cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = false;
             i = 0;
+            Remaininglbl.Text = "";
         }
 
 
@@ -200,19 +200,13 @@ namespace Delmon_Managment_System.Forms
                     if (i < Totatvisa)
 
                     {
-
-                        dr = SQLCONN.DataReader("select  Consulates.CountryId from Countries,Consulates where Countries.CountryId = Consulates.CountryId and Consulates.ConsulateID= " + cmbConsulate.SelectedValue + "  ");
-                        dr.Read();
-                        CountryID = int.Parse(dr["CountryId"].ToString());
-                        SqlParameter paramCountryID = new SqlParameter("@C5", SqlDbType.NVarChar);
-                        paramCountryID.Value = CountryID;
                         dr.Dispose();
                         dr.Close();
                         if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                         {
-                            SQLCONN.ExecuteQueries("insert into VISAJobList (VisaNumber,statusid,ConsulateID,JobID,CountryID) " +
-                                " values (@C1,@C2,@C3,@C4,@C5) ",
-                                paramVisanumber, paramstatusID, ParamConsulate, paramJob, paramCountryID);
+                            SQLCONN.ExecuteQueries("insert into VISAJobList (VisaNumber,statusid,ConsulateID,JobID) " +
+                                " values (@C1,@C2,@C3,@C4) ",
+                                paramVisanumber, paramstatusID, ParamConsulate, paramJob);
 
                             MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -337,7 +331,6 @@ namespace Delmon_Managment_System.Forms
                 SQLCONN.OpenConection();
                 SqlDataReader dr = SQLCONN.DataReader("select  VisaNumber from Visa where  VisaNumber= " + Visanumtxt.Text + "  ");
                 dr.Read();
-                //  CountryID = int.Parse(dr["CountryId"].ToString());
                 if (dr.HasRows)
                 {
                     MessageBox.Show("This 'VISA NUMBER'  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -421,10 +414,17 @@ namespace Delmon_Managment_System.Forms
             {
                 if (issuhijritxt.Text != "")
                 {
+
+
+
+
                     /*calculate issu hijir and milaidy  date**/
 
                     string a = issuhijritxt.Text.Trim();
                     DateTime b = Convert.ToDateTime(a);
+                    DateTime dtNOW =DateTime.Now;
+                    dtNOW.ToString("yyyy-MM-dd");
+
                     issuhijritxt.Text = b.ToString("f");
                     IssueDateHijriPicker.Value = b.Date;
                     issuhijritxt.Text = IssueDateHijriPicker.Value.ToString("dd-MM-yyyy");
@@ -443,6 +443,16 @@ namespace Delmon_Managment_System.Forms
                     /*calculate expairy milaidy date**/
                     this.ExpiryDateENPicker.Value = IssueDateENPicker.Value.AddDays(708);
                     expairENDATEtxt.Text = ExpiryDateENPicker.Text;
+
+
+                    /*calculate the */
+
+                     DateTime futurDate = Convert.ToDateTime(ExpiryDateENPicker.Value);
+                     var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
+
+
+
+                    Remaininglbl.Text = numberOfDays.ToString();
 
 
                 }
@@ -453,10 +463,14 @@ namespace Delmon_Managment_System.Forms
             {
                 if (issuhijritxt.Text != "")
                 {
+
                     /*calculate issu hijir and milaidy  date**/
 
                     string a = issuhijritxt.Text.Trim();
                     DateTime b = Convert.ToDateTime(a);
+                    DateTime dtNOW = DateTime.Now;
+                    dtNOW.ToString("yyyy-MM-dd");
+
                     issuhijritxt.Text = b.ToString("f");
                     IssueDateHijriPicker.Value = b.Date;
                     issuhijritxt.Text = IssueDateHijriPicker.Value.ToString("dd-MM-yyyy");
@@ -477,6 +491,14 @@ namespace Delmon_Managment_System.Forms
                     expairENDATEtxt.Text = ExpiryDateENPicker.Text;
 
 
+                    /*calculate the */
+
+                    DateTime futurDate = Convert.ToDateTime(ExpiryDateENPicker.Value);
+                    var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
+
+
+
+                    Remaininglbl.Text = numberOfDays.ToString();
                 }
 
                 else { }
@@ -489,10 +511,17 @@ namespace Delmon_Managment_System.Forms
             {
                 if (issuhijritxt.Text != "")
                 {
+
+
+
+
                     /*calculate issu hijir and milaidy  date**/
 
                     string a = issuhijritxt.Text.Trim();
                     DateTime b = Convert.ToDateTime(a);
+                    DateTime dtNOW = DateTime.Now;
+                    dtNOW.ToString("yyyy-MM-dd");
+
                     issuhijritxt.Text = b.ToString("f");
                     IssueDateHijriPicker.Value = b.Date;
                     issuhijritxt.Text = IssueDateHijriPicker.Value.ToString("dd-MM-yyyy");
@@ -511,6 +540,16 @@ namespace Delmon_Managment_System.Forms
                     /*calculate expairy milaidy date**/
                     this.ExpiryDateENPicker.Value = IssueDateENPicker.Value.AddDays(708);
                     expairENDATEtxt.Text = ExpiryDateENPicker.Text;
+
+
+                    /*calculate the */
+
+                    DateTime futurDate = Convert.ToDateTime(ExpiryDateENPicker.Value);
+                    var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
+
+
+
+                    Remaininglbl.Text = numberOfDays.ToString();
 
 
                 }
@@ -521,10 +560,14 @@ namespace Delmon_Managment_System.Forms
             {
                 if (issuhijritxt.Text != "")
                 {
+
                     /*calculate issu hijir and milaidy  date**/
 
                     string a = issuhijritxt.Text.Trim();
                     DateTime b = Convert.ToDateTime(a);
+                    DateTime dtNOW = DateTime.Now;
+                    dtNOW.ToString("yyyy-MM-dd");
+
                     issuhijritxt.Text = b.ToString("f");
                     IssueDateHijriPicker.Value = b.Date;
                     issuhijritxt.Text = IssueDateHijriPicker.Value.ToString("dd-MM-yyyy");
@@ -545,6 +588,14 @@ namespace Delmon_Managment_System.Forms
                     expairENDATEtxt.Text = ExpiryDateENPicker.Text;
 
 
+                    /*calculate the */
+
+                    DateTime futurDate = Convert.ToDateTime(ExpiryDateENPicker.Value);
+                    var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
+
+
+
+                    Remaininglbl.Text = numberOfDays.ToString();
                 }
 
                 else { }
@@ -558,7 +609,39 @@ namespace Delmon_Managment_System.Forms
 
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                MailMessage msg = new MailMessage();
+                msg.From = new MailAddress("m.amin@delmon.com.sa");
+                msg.To.Add("waleed@delmon.com.sa");
+                msg.Subject = "Test";
+                msg.Body = "Hello";
+
+                SmtpClient smt = new SmtpClient();
+                smt.Host = "mail.delmon-its.com.sa";
+                System.Net.NetworkCredential ntcd = new NetworkCredential();
+                ntcd.UserName = "dgsqlserver@delmon-its.com.sa";
+                ntcd.Password = "Ram73763@";
+                smt.Credentials = ntcd;
+                smt.EnableSsl = true;
+                smt.Port = 587;
+                smt.Send(msg);
+
+                MessageBox.Show("Your Mail is sended");
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
+
 
 
