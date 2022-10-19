@@ -1,7 +1,7 @@
 ﻿
 namespace Delmon_Managment_System.Forms
 {
-    partial class EmployeeFrm
+    partial class CandidateFrm
     {
         /// <summary>
         /// Required designer variable.

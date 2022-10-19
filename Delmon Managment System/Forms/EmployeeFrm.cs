@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Delmon_Managment_System.Forms
 {
-    public partial class EmployeeFrm : Form
+    public partial class CandidateFrm : Form
     {
-        public EmployeeFrm()
+        public CandidateFrm()
         {
             InitializeComponent();
         }

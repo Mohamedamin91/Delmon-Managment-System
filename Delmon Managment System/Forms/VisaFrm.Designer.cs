@@ -71,6 +71,8 @@ namespace Delmon_Managment_System.Forms
             this.button1 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.Remaininglbl = new System.Windows.Forms.Label();
+            this.candidatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label13 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -81,7 +83,7 @@ namespace Delmon_Managment_System.Forms
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 34);
+            this.label1.Location = new System.Drawing.Point(13, 86);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 13);
             this.label1.TabIndex = 0;
@@ -90,7 +92,7 @@ namespace Delmon_Managment_System.Forms
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(11, 115);
+            this.label25.Location = new System.Drawing.Point(12, 163);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(78, 13);
             this.label25.TabIndex = 1;
@@ -98,7 +100,7 @@ namespace Delmon_Managment_System.Forms
             // 
             // Visanumtxt
             // 
-            this.Visanumtxt.Location = new System.Drawing.Point(99, 35);
+            this.Visanumtxt.Location = new System.Drawing.Point(100, 83);
             this.Visanumtxt.Name = "Visanumtxt";
             this.Visanumtxt.Size = new System.Drawing.Size(134, 20);
             this.Visanumtxt.TabIndex = 3;
@@ -117,7 +119,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.AddBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.AddBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AddBtn.Location = new System.Drawing.Point(714, 115);
+            this.AddBtn.Location = new System.Drawing.Point(750, 188);
             this.AddBtn.Name = "AddBtn";
             this.AddBtn.Size = new System.Drawing.Size(75, 39);
             this.AddBtn.TabIndex = 6;
@@ -131,7 +133,7 @@ namespace Delmon_Managment_System.Forms
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1033, 22);
+            this.panel1.Size = new System.Drawing.Size(1133, 22);
             this.panel1.TabIndex = 14;
             // 
             // menuStrip1
@@ -140,14 +142,16 @@ namespace Delmon_Managment_System.Forms
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1033, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1133, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.visasToolStripMenuItem});
+            this.visasToolStripMenuItem,
+            this.candidatesToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.fileToolStripMenuItem.Text = "Visa";
@@ -155,14 +159,14 @@ namespace Delmon_Managment_System.Forms
             // visasToolStripMenuItem
             // 
             this.visasToolStripMenuItem.Name = "visasToolStripMenuItem";
-            this.visasToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.visasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.visasToolStripMenuItem.Text = "Visas";
             this.visasToolStripMenuItem.Click += new System.EventHandler(this.visasToolStripMenuItem_Click);
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(28, 430);
+            this.dataGridView1.Location = new System.Drawing.Point(29, 448);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(919, 188);
             this.dataGridView1.TabIndex = 9;
@@ -181,7 +185,7 @@ namespace Delmon_Managment_System.Forms
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(335, 118);
+            this.label3.Location = new System.Drawing.Point(336, 166);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(81, 13);
             this.label3.TabIndex = 16;
@@ -201,7 +205,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.ExpiryDateENPicker.Enabled = false;
             this.ExpiryDateENPicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.ExpiryDateENPicker.Location = new System.Drawing.Point(433, 146);
+            this.ExpiryDateENPicker.Location = new System.Drawing.Point(434, 194);
             this.ExpiryDateENPicker.Name = "ExpiryDateENPicker";
             this.ExpiryDateENPicker.Size = new System.Drawing.Size(171, 20);
             this.ExpiryDateENPicker.TabIndex = 21;
@@ -209,7 +213,7 @@ namespace Delmon_Managment_System.Forms
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(337, 153);
+            this.label6.Location = new System.Drawing.Point(338, 201);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(79, 13);
             this.label6.TabIndex = 20;
@@ -219,7 +223,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.IssueDateENPicker.Enabled = false;
             this.IssueDateENPicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.IssueDateENPicker.Location = new System.Drawing.Point(99, 147);
+            this.IssueDateENPicker.Location = new System.Drawing.Point(100, 195);
             this.IssueDateENPicker.Name = "IssueDateENPicker";
             this.IssueDateENPicker.Size = new System.Drawing.Size(134, 20);
             this.IssueDateENPicker.TabIndex = 19;
@@ -228,7 +232,7 @@ namespace Delmon_Managment_System.Forms
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 153);
+            this.label7.Location = new System.Drawing.Point(10, 201);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(76, 13);
             this.label7.TabIndex = 18;
@@ -237,7 +241,7 @@ namespace Delmon_Managment_System.Forms
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(337, 205);
+            this.label9.Location = new System.Drawing.Point(338, 253);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(49, 13);
             this.label9.TabIndex = 24;
@@ -245,7 +249,7 @@ namespace Delmon_Managment_System.Forms
             // 
             // RemarksTxt
             // 
-            this.RemarksTxt.Location = new System.Drawing.Point(433, 202);
+            this.RemarksTxt.Location = new System.Drawing.Point(434, 250);
             this.RemarksTxt.Multiline = true;
             this.RemarksTxt.Name = "RemarksTxt";
             this.RemarksTxt.Size = new System.Drawing.Size(305, 74);
@@ -254,7 +258,7 @@ namespace Delmon_Managment_System.Forms
             // 
             // IssueDateENTxt
             // 
-            this.IssueDateENTxt.Location = new System.Drawing.Point(103, 147);
+            this.IssueDateENTxt.Location = new System.Drawing.Point(104, 195);
             this.IssueDateENTxt.Multiline = true;
             this.IssueDateENTxt.Name = "IssueDateENTxt";
             this.IssueDateENTxt.Size = new System.Drawing.Size(126, 18);
@@ -264,7 +268,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.groupBox1.Controls.Add(this.IssueDateHijriPicker);
             this.groupBox1.Controls.Add(this.ExpiryDateHijriPicker);
-            this.groupBox1.Location = new System.Drawing.Point(852, 28);
+            this.groupBox1.Location = new System.Drawing.Point(853, 64);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(230, 190);
             this.groupBox1.TabIndex = 30;
@@ -275,7 +279,7 @@ namespace Delmon_Managment_System.Forms
             // ExpiaryHijritxt
             // 
             this.ExpiaryHijritxt.Enabled = false;
-            this.ExpiaryHijritxt.Location = new System.Drawing.Point(433, 115);
+            this.ExpiaryHijritxt.Location = new System.Drawing.Point(434, 163);
             this.ExpiaryHijritxt.Multiline = true;
             this.ExpiaryHijritxt.Name = "ExpiaryHijritxt";
             this.ExpiaryHijritxt.Size = new System.Drawing.Size(171, 20);
@@ -283,7 +287,7 @@ namespace Delmon_Managment_System.Forms
             // 
             // expairENDATEtxt
             // 
-            this.expairENDATEtxt.Location = new System.Drawing.Point(433, 146);
+            this.expairENDATEtxt.Location = new System.Drawing.Point(434, 194);
             this.expairENDATEtxt.Multiline = true;
             this.expairENDATEtxt.Name = "expairENDATEtxt";
             this.expairENDATEtxt.Size = new System.Drawing.Size(171, 20);
@@ -292,7 +296,7 @@ namespace Delmon_Managment_System.Forms
             // issuhijritxt
             // 
             this.issuhijritxt.ForeColor = System.Drawing.Color.Gray;
-            this.issuhijritxt.Location = new System.Drawing.Point(99, 115);
+            this.issuhijritxt.Location = new System.Drawing.Point(100, 163);
             this.issuhijritxt.Name = "issuhijritxt";
             this.issuhijritxt.Size = new System.Drawing.Size(134, 20);
             this.issuhijritxt.TabIndex = 33;
@@ -308,7 +312,7 @@ namespace Delmon_Managment_System.Forms
             // cmbCompany
             // 
             this.cmbCompany.FormattingEnabled = true;
-            this.cmbCompany.Location = new System.Drawing.Point(433, 34);
+            this.cmbCompany.Location = new System.Drawing.Point(434, 82);
             this.cmbCompany.Name = "cmbCompany";
             this.cmbCompany.Size = new System.Drawing.Size(305, 21);
             this.cmbCompany.TabIndex = 34;
@@ -317,7 +321,7 @@ namespace Delmon_Managment_System.Forms
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(337, 38);
+            this.label2.Location = new System.Drawing.Point(338, 86);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(51, 13);
             this.label2.TabIndex = 35;
@@ -333,7 +337,7 @@ namespace Delmon_Managment_System.Forms
             this.groupBox2.Controls.Add(this.label44);
             this.groupBox2.Controls.Add(this.cmbConsulate);
             this.groupBox2.Controls.Add(this.TotalVisastxt);
-            this.groupBox2.Location = new System.Drawing.Point(28, 300);
+            this.groupBox2.Location = new System.Drawing.Point(29, 330);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(919, 72);
             this.groupBox2.TabIndex = 36;
@@ -380,7 +384,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.cmbJob.Enabled = false;
             this.cmbJob.FormattingEnabled = true;
-            this.cmbJob.Location = new System.Drawing.Point(478, 26);
+            this.cmbJob.Location = new System.Drawing.Point(478, 30);
             this.cmbJob.Name = "cmbJob";
             this.cmbJob.Size = new System.Drawing.Size(157, 21);
             this.cmbJob.TabIndex = 38;
@@ -408,7 +412,7 @@ namespace Delmon_Managment_System.Forms
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(12, 76);
+            this.label12.Location = new System.Drawing.Point(13, 124);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(73, 13);
             this.label12.TabIndex = 38;
@@ -418,7 +422,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(25, 258);
+            this.label4.Location = new System.Drawing.Point(26, 288);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(92, 18);
             this.label4.TabIndex = 39;
@@ -427,7 +431,7 @@ namespace Delmon_Managment_System.Forms
             // ReceviedPicker
             // 
             this.ReceviedPicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.ReceviedPicker.Location = new System.Drawing.Point(99, 70);
+            this.ReceviedPicker.Location = new System.Drawing.Point(100, 118);
             this.ReceviedPicker.Name = "ReceviedPicker";
             this.ReceviedPicker.Size = new System.Drawing.Size(134, 20);
             this.ReceviedPicker.TabIndex = 40;
@@ -436,7 +440,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.btnFinish.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnFinish.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFinish.Location = new System.Drawing.Point(727, 378);
+            this.btnFinish.Location = new System.Drawing.Point(750, 403);
             this.btnFinish.Name = "btnFinish";
             this.btnFinish.Size = new System.Drawing.Size(75, 39);
             this.btnFinish.TabIndex = 41;
@@ -448,7 +452,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(633, 115);
+            this.button1.Location = new System.Drawing.Point(669, 188);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 39);
             this.button1.TabIndex = 42;
@@ -462,7 +466,7 @@ namespace Delmon_Managment_System.Forms
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.Black;
-            this.label11.Location = new System.Drawing.Point(12, 202);
+            this.label11.Location = new System.Drawing.Point(36, 426);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(106, 16);
             this.label11.TabIndex = 43;
@@ -473,18 +477,36 @@ namespace Delmon_Managment_System.Forms
             this.Remaininglbl.AutoSize = true;
             this.Remaininglbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Remaininglbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.Remaininglbl.Location = new System.Drawing.Point(124, 202);
+            this.Remaininglbl.Location = new System.Drawing.Point(204, 426);
             this.Remaininglbl.Name = "Remaininglbl";
             this.Remaininglbl.Size = new System.Drawing.Size(12, 16);
             this.Remaininglbl.TabIndex = 44;
             this.Remaininglbl.Text = "!";
+            // 
+            // candidatesToolStripMenuItem
+            // 
+            this.candidatesToolStripMenuItem.Name = "candidatesToolStripMenuItem";
+            this.candidatesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.candidatesToolStripMenuItem.Text = "Candidates";
+            this.candidatesToolStripMenuItem.Click += new System.EventHandler(this.candidatesToolStripMenuItem_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(10, 25);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(54, 25);
+            this.label13.TabIndex = 81;
+            this.label13.Text = "Visa";
             // 
             // VisaFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1033, 563);
+            this.ClientSize = new System.Drawing.Size(1133, 570);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.Remaininglbl);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.button1);
@@ -515,7 +537,6 @@ namespace Delmon_Managment_System.Forms
             this.Controls.Add(this.label1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "VisaFrm";
-            this.Text = "Visas";
             this.Load += new System.EventHandler(this.VisaFrm_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.VisaFrm_KeyUp);
             this.panel1.ResumeLayout(false);
@@ -575,5 +596,7 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label Remaininglbl;
+        private System.Windows.Forms.ToolStripMenuItem candidatesToolStripMenuItem;
+        private System.Windows.Forms.Label label13;
     }
 }

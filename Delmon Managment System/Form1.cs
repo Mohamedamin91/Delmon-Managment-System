@@ -107,7 +107,7 @@ namespace Delmon_Managment_System
 
         private void btnemployee_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.EmployeeFrm(), sender);
+            OpenChildForm(new Forms.EmployeeForm(), sender);
 
         }
 

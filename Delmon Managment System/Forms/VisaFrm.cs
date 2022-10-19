@@ -640,6 +640,16 @@ namespace Delmon_Managment_System.Forms
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void candidatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }
 
