@@ -32,6 +32,15 @@ namespace Delmon_Managment_System.Forms
 
             Application.CurrentCulture = new CultureInfo("ar-SA");
             ExpiryDateHijriPicker.Format = DateTimePickerFormat.Custom;
+            cmbStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbConsulate.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbConsulate.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbCompany.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbCompany.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbJob.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbJob.AutoCompleteSource = AutoCompleteSource.ListItems;
+
 
 
 
@@ -54,19 +63,19 @@ namespace Delmon_Managment_System.Forms
             cmbCompany.ValueMember = "COMPID";
             cmbCompany.DisplayMember = "COMPName_EN";
             cmbCompany.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT COMPID,COMPName_EN FROM Companies");
-
+         
             cmbJob.ValueMember = "JobID";
             cmbJob.DisplayMember = "JobTitleEN";
             cmbJob.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS");
-
+            
             cmbConsulate.ValueMember = "Consulates.ConsulateID";
             cmbConsulate.DisplayMember = "ConsulateCity";
             cmbConsulate.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select Consulates.ConsulateID,ConsulateCity from Countries,Consulates where Countries.CountryId = Consulates.CountryId");
-
+          
             cmbStatus.ValueMember = "statusid";
             cmbStatus.DisplayMember = "status";
-            cmbStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select statusid,status from status ");
-
+            cmbStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select statusid,status  from Visastatus where RefrenceID =1");
+          
 
 
             SQLCONN.CloseConnection();
@@ -174,7 +183,6 @@ namespace Delmon_Managment_System.Forms
                 SqlDataReader dr = SQLCONN.DataReader("select  VisaNumber from Visa where  VisaNumber= " + Visanumtxt.Text + "  ");
                 dr.Read();
 
-                //  CountryID = int.Parse(dr["CountryId"].ToString());
                 if (dr.HasRows)
                 {
                     MessageBox.Show("This 'VISA NUMBER'  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -197,36 +205,27 @@ namespace Delmon_Managment_System.Forms
                     dr.Close();
 
                     Totatvisa = int.Parse(TotalVisastxt.Text);
-                    if (i < Totatvisa)
-
+                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     {
-                        dr.Dispose();
-                        dr.Close();
-                        if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                        for (i = 0; i < Totatvisa; i++)
+
                         {
+                            dr.Dispose();
+                            dr.Close();
+
                             SQLCONN.ExecuteQueries("insert into VISAJobList (VisaNumber,statusid,ConsulateID,JobID) " +
                                 " values (@C1,@C2,@C3,@C4) ",
                                 paramVisanumber, paramstatusID, ParamConsulate, paramJob);
 
-                            MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList ");
-                            i = i + 1;
-
-
                         }
-                        else
-                        {
+                        MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        }
-
-                    }
-                    else
-                    {
-                        MessageBox.Show("You have exceeded the number allowed to issue visas for Visa No: " + Visanumtxt.Text + " ", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        TotalVisastxt.Enabled = false;
+                        dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber=" + Visanumtxt.Text + " ");
                     }
 
+
+                    TotalVisastxt.Enabled = true;
+                    
 
                 }
 
@@ -317,6 +316,9 @@ namespace Delmon_Managment_System.Forms
         private void Visanumtxt_TextChanged(object sender, EventArgs e)
         {
             Visanumtxt.BackColor = Color.White;
+            SQLCONN.OpenConection();
+            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from visa where VisaNumber LIKE '" + Visanumtxt.Text + "%'");
+            SQLCONN.CloseConnection();
         }
 
         private void Visanumtxt_Leave(object sender, EventArgs e)
@@ -366,7 +368,8 @@ namespace Delmon_Managment_System.Forms
                                 paramVisanumber, paramcomapany, paramRecevidDate, paramIssueDateEN, paramExpiryDateEN, paramTotalVisas, paramRemarks, paramExpiryDateHijri, paramIssHIJriDate);
                             //   SQLCONN.CloseConnection();
                             MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            ClearTextBoxes();
+                          dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISA where visanumber=" + Visanumtxt.Text + " ");
+
 
                         }
                         else
@@ -382,6 +385,8 @@ namespace Delmon_Managment_System.Forms
                 dr.Dispose();
                 dr.Close();
                 SQLCONN.CloseConnection();
+                ClearTextBoxes();
+
             }
             else 
             {
@@ -649,6 +654,19 @@ namespace Delmon_Managment_System.Forms
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            AddBtn.Visible = btnFinish.Visible = true;
+            btnNew.Visible = false;
+        }
+
+        private void FileNumber_TextChanged(object sender, EventArgs e)
+        {
+            SQLCONN.OpenConection();
+            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from VISAJobList where filenumber LIKE '" + FileNumber.Text + "%'");
+            SQLCONN.CloseConnection();
         }
     }
 }

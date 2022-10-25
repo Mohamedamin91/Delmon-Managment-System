@@ -23,8 +23,7 @@ namespace Delmon_Managment_System
             con.Open();
         }
 
-    
-
+   
         public void CloseConnection()
         {
             con.Close();
@@ -39,6 +38,8 @@ namespace Delmon_Managment_System
                 cmd.Parameters.Add(parm);
             }
             cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            cmd.Parameters.Clear();
         }
      
         public SqlDataReader DataReader(string Query_)
