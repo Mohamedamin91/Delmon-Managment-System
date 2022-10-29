@@ -52,10 +52,10 @@ namespace Delmon_Managment_System
 
         public object ShowDataInGridViewORCombobox(string Query_)
         {
-            SqlDataAdapter dr = new SqlDataAdapter(Query_, ConnectionString);
+            SqlDataAdapter adapt = new SqlDataAdapter(Query_, ConnectionString);
             DataSet ds = new DataSet();
-            dr.Fill(ds);
-            object dataum = ds.Tables[0];
+            adapt.Fill(ds);
+            object dataum = ds.Tables[0];   
             return dataum;
         }
     

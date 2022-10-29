@@ -66,12 +66,6 @@
     <Compile Include="Forms\EmployeeForm.Designer.cs">
       <DependentUpon>EmployeeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EmployeeFrm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\EmployeeFrm.Designer.cs">
-      <DependentUpon>EmployeeFrm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\NotificationFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,9 +109,6 @@
     <EmbeddedResource Include="Forms\EmployeeForm.resx">
       <DependentUpon>EmployeeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EmployeeFrm.resx">
-      <DependentUpon>EmployeeFrm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\NotificationFrm.resx">
       <DependentUpon>NotificationFrm.cs</DependentUpon>
     </EmbeddedResource>
@@ -156,6 +147,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Office.Interop.Outlook">
+      <Version>15.0.4797.1004</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.Windows.SDK.Contracts">
       <Version>10.0.19041.1</Version>
     </PackageReference>

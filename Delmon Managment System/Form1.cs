@@ -52,7 +52,8 @@ namespace Delmon_Managment_System
                 if (currentButton != (Button)btnSender)
                 {
                     DisableButton();
-                    Color color = SelectThemeColor();
+                 //   Color color = SelectThemeColor();
+                    Color color = Color.FromArgb(233, 43, 45);
                     currentButton = (Button)btnSender;
                     currentButton.BackColor = color;
                     currentButton.ForeColor = Color.White;

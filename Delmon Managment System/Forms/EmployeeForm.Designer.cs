@@ -30,7 +30,6 @@ namespace Delmon_Managment_System.Forms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeeForm));
-            this.label1 = new System.Windows.Forms.Label();
             this.cmbReportto = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -67,20 +66,10 @@ namespace Delmon_Managment_System.Forms
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 33);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 25);
-            this.label1.TabIndex = 107;
-            this.label1.Text = "Employee";
-            // 
             // cmbReportto
             // 
             this.cmbReportto.FormattingEnabled = true;
-            this.cmbReportto.Location = new System.Drawing.Point(128, 168);
+            this.cmbReportto.Location = new System.Drawing.Point(123, 124);
             this.cmbReportto.Name = "cmbReportto";
             this.cmbReportto.Size = new System.Drawing.Size(153, 21);
             this.cmbReportto.TabIndex = 105;
@@ -88,7 +77,7 @@ namespace Delmon_Managment_System.Forms
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(35, 171);
+            this.label13.Location = new System.Drawing.Point(30, 127);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(51, 13);
             this.label13.TabIndex = 106;
@@ -97,7 +86,7 @@ namespace Delmon_Managment_System.Forms
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(362, 132);
+            this.label11.Location = new System.Drawing.Point(357, 88);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(62, 13);
             this.label11.TabIndex = 104;
@@ -106,14 +95,14 @@ namespace Delmon_Managment_System.Forms
             // cmbDepartment
             // 
             this.cmbDepartment.FormattingEnabled = true;
-            this.cmbDepartment.Location = new System.Drawing.Point(439, 124);
+            this.cmbDepartment.Location = new System.Drawing.Point(434, 80);
             this.cmbDepartment.Name = "cmbDepartment";
             this.cmbDepartment.Size = new System.Drawing.Size(154, 21);
             this.cmbDepartment.TabIndex = 103;
             // 
             // Employeetxt
             // 
-            this.Employeetxt.Location = new System.Drawing.Point(128, 85);
+            this.Employeetxt.Location = new System.Drawing.Point(123, 41);
             this.Employeetxt.Name = "Employeetxt";
             this.Employeetxt.Size = new System.Drawing.Size(153, 20);
             this.Employeetxt.TabIndex = 102;
@@ -122,7 +111,7 @@ namespace Delmon_Managment_System.Forms
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(35, 85);
+            this.label10.Location = new System.Drawing.Point(30, 41);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(84, 13);
             this.label10.TabIndex = 101;
@@ -131,7 +120,7 @@ namespace Delmon_Managment_System.Forms
             // JoinigDatePicker
             // 
             this.JoinigDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.JoinigDatePicker.Location = new System.Drawing.Point(439, 82);
+            this.JoinigDatePicker.Location = new System.Drawing.Point(434, 38);
             this.JoinigDatePicker.Name = "JoinigDatePicker";
             this.JoinigDatePicker.Size = new System.Drawing.Size(154, 20);
             this.JoinigDatePicker.TabIndex = 100;
@@ -139,7 +128,7 @@ namespace Delmon_Managment_System.Forms
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(362, 85);
+            this.label4.Location = new System.Drawing.Point(357, 41);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(66, 13);
             this.label4.TabIndex = 99;
@@ -148,7 +137,7 @@ namespace Delmon_Managment_System.Forms
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(362, 166);
+            this.label5.Location = new System.Drawing.Point(357, 122);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(37, 13);
             this.label5.TabIndex = 85;
@@ -157,7 +146,7 @@ namespace Delmon_Managment_System.Forms
             // cmbStatus
             // 
             this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Location = new System.Drawing.Point(439, 163);
+            this.cmbStatus.Location = new System.Drawing.Point(434, 119);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(154, 21);
             this.cmbStatus.TabIndex = 84;
@@ -165,7 +154,7 @@ namespace Delmon_Managment_System.Forms
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(362, 253);
+            this.label2.Location = new System.Drawing.Point(357, 209);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(43, 13);
             this.label2.TabIndex = 95;
@@ -174,7 +163,7 @@ namespace Delmon_Managment_System.Forms
             // cmbCountry
             // 
             this.cmbCountry.FormattingEnabled = true;
-            this.cmbCountry.Location = new System.Drawing.Point(439, 250);
+            this.cmbCountry.Location = new System.Drawing.Point(434, 206);
             this.cmbCountry.Name = "cmbCountry";
             this.cmbCountry.Size = new System.Drawing.Size(154, 21);
             this.cmbCountry.TabIndex = 94;
@@ -182,7 +171,7 @@ namespace Delmon_Managment_System.Forms
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(35, 132);
+            this.label8.Location = new System.Drawing.Point(30, 88);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(24, 13);
             this.label8.TabIndex = 83;
@@ -191,7 +180,7 @@ namespace Delmon_Managment_System.Forms
             // cmbJob
             // 
             this.cmbJob.FormattingEnabled = true;
-            this.cmbJob.Location = new System.Drawing.Point(128, 124);
+            this.cmbJob.Location = new System.Drawing.Point(123, 80);
             this.cmbJob.Name = "cmbJob";
             this.cmbJob.Size = new System.Drawing.Size(153, 21);
             this.cmbJob.TabIndex = 82;
@@ -199,7 +188,7 @@ namespace Delmon_Managment_System.Forms
             // cmbReferredBy
             // 
             this.cmbReferredBy.FormattingEnabled = true;
-            this.cmbReferredBy.Location = new System.Drawing.Point(439, 209);
+            this.cmbReferredBy.Location = new System.Drawing.Point(434, 165);
             this.cmbReferredBy.Name = "cmbReferredBy";
             this.cmbReferredBy.Size = new System.Drawing.Size(154, 21);
             this.cmbReferredBy.TabIndex = 81;
@@ -207,7 +196,7 @@ namespace Delmon_Managment_System.Forms
             // BODPicker
             // 
             this.BODPicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.BODPicker.Location = new System.Drawing.Point(128, 210);
+            this.BODPicker.Location = new System.Drawing.Point(123, 166);
             this.BODPicker.Name = "BODPicker";
             this.BODPicker.Size = new System.Drawing.Size(153, 20);
             this.BODPicker.TabIndex = 97;
@@ -215,7 +204,7 @@ namespace Delmon_Managment_System.Forms
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(35, 212);
+            this.label12.Location = new System.Drawing.Point(30, 168);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(30, 13);
             this.label12.TabIndex = 96;
@@ -223,7 +212,7 @@ namespace Delmon_Managment_System.Forms
             // 
             // ExperinceYearstxt
             // 
-            this.ExperinceYearstxt.Location = new System.Drawing.Point(129, 247);
+            this.ExperinceYearstxt.Location = new System.Drawing.Point(124, 203);
             this.ExperinceYearstxt.Multiline = true;
             this.ExperinceYearstxt.Name = "ExperinceYearstxt";
             this.ExperinceYearstxt.Size = new System.Drawing.Size(55, 37);
@@ -232,7 +221,7 @@ namespace Delmon_Managment_System.Forms
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(360, 305);
+            this.label9.Location = new System.Drawing.Point(355, 261);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(49, 13);
             this.label9.TabIndex = 92;
@@ -240,7 +229,7 @@ namespace Delmon_Managment_System.Forms
             // 
             // RemarksTxt
             // 
-            this.RemarksTxt.Location = new System.Drawing.Point(437, 290);
+            this.RemarksTxt.Location = new System.Drawing.Point(432, 246);
             this.RemarksTxt.Multiline = true;
             this.RemarksTxt.Name = "RemarksTxt";
             this.RemarksTxt.Size = new System.Drawing.Size(235, 91);
@@ -249,7 +238,7 @@ namespace Delmon_Managment_System.Forms
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(26, 253);
+            this.label7.Location = new System.Drawing.Point(21, 209);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(81, 13);
             this.label7.TabIndex = 90;
@@ -269,7 +258,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.AddBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.AddBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AddBtn.Location = new System.Drawing.Point(599, 237);
+            this.AddBtn.Location = new System.Drawing.Point(594, 193);
             this.AddBtn.Name = "AddBtn";
             this.AddBtn.Size = new System.Drawing.Size(75, 39);
             this.AddBtn.TabIndex = 87;
@@ -280,7 +269,7 @@ namespace Delmon_Managment_System.Forms
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(362, 212);
+            this.label25.Location = new System.Drawing.Point(357, 168);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(60, 13);
             this.label25.TabIndex = 86;
@@ -321,7 +310,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.Updatebtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Updatebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Updatebtn.Location = new System.Drawing.Point(680, 237);
+            this.Updatebtn.Location = new System.Drawing.Point(675, 193);
             this.Updatebtn.Name = "Updatebtn";
             this.Updatebtn.Size = new System.Drawing.Size(75, 39);
             this.Updatebtn.TabIndex = 109;
@@ -333,7 +322,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.DeleteBTN.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.DeleteBTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DeleteBTN.Location = new System.Drawing.Point(761, 237);
+            this.DeleteBTN.Location = new System.Drawing.Point(756, 193);
             this.DeleteBTN.Name = "DeleteBTN";
             this.DeleteBTN.Size = new System.Drawing.Size(75, 39);
             this.DeleteBTN.TabIndex = 110;
@@ -344,7 +333,7 @@ namespace Delmon_Managment_System.Forms
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(7, 82);
+            this.pictureBox1.Location = new System.Drawing.Point(2, 38);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(22, 22);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -361,7 +350,6 @@ namespace Delmon_Managment_System.Forms
             this.Controls.Add(this.DeleteBTN);
             this.Controls.Add(this.Updatebtn);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbReportto);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label11);
@@ -387,7 +375,7 @@ namespace Delmon_Managment_System.Forms
             this.Controls.Add(this.AddBtn);
             this.Controls.Add(this.label25);
             this.Name = "EmployeeForm";
-            this.Text = "EmployeeForm";
+            this.Text = "Employee";
             this.Load += new System.EventHandler(this.EmployeeForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
@@ -399,8 +387,6 @@ namespace Delmon_Managment_System.Forms
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbReportto;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label11;
