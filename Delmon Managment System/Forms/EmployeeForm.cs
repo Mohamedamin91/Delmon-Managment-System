@@ -21,14 +21,14 @@ namespace Delmon_Managment_System.Forms
         {
      
             InitializeComponent();
-            cmbCountry.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbCountry.AutoCompleteSource = AutoCompleteSource.ListItems;
-            cmbStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
-            cmbJob.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbJob.AutoCompleteSource = AutoCompleteSource.ListItems;
-            cmbReportto.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbReportto.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //cmbCountry.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //cmbCountry.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //cmbStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //cmbStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //cmbJob.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //cmbJob.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //cmbReportto.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //cmbReportto.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
         }
@@ -46,28 +46,28 @@ namespace Delmon_Managment_System.Forms
             SQLCONN.OpenConection();
 
 
-            cmbReportto.ValueMember = "empid";
-            cmbReportto.DisplayMember = "EmpName";
-            cmbReportto.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT empid,EmpName FROM PersonalInformation");
-          
-            cmbJob.ValueMember = "JobID";
-            cmbJob.DisplayMember = "JobTitleEN";
-            cmbJob.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS ");
+            //cmbReportto.ValueMember = "empid";
+            //cmbReportto.DisplayMember = "EmpName";
+            //cmbReportto.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT empid,EmpName FROM PersonalInformation");
 
-            cmbReferredBy.ValueMember = "empid";
-            cmbReferredBy.DisplayMember = "EmpName";
-            cmbReferredBy.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT empid,EmpName FROM PersonalInformation ");
+            //cmbJob.ValueMember = "JobID";
+            //cmbJob.DisplayMember = "JobTitleEN";
+            //cmbJob.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS ");
 
-            cmbStatus.ValueMember = "statusid";
-            cmbStatus.DisplayMember = "status";
-            cmbStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select statusid,status from visastatus where RefrenceID=2  ");
-           
+            //cmbReferredBy.ValueMember = "empid";
+            //cmbReferredBy.DisplayMember = "EmpName";
+            //cmbReferredBy.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT empid,EmpName FROM PersonalInformation ");
 
-            cmbCountry.ValueMember = "CountryId";
-            cmbCountry.DisplayMember = "CountryName";
-            cmbCountry.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select CountryId,CountryName from Countries ");
-       
+            //cmbStatus.ValueMember = "statusid";
+            //cmbStatus.DisplayMember = "status";
+            //cmbStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select statusid,status from visastatus where RefrenceID=2  ");
 
+
+            //cmbCountry.ValueMember = "CountryId";
+            //cmbCountry.DisplayMember = "CountryName";
+            //cmbCountry.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select CountryId,CountryName from Countries ");
+
+            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from PersonalInformation ");
 
             SQLCONN.CloseConnection();
 
@@ -95,7 +95,10 @@ namespace Delmon_Managment_System.Forms
 
                         EMPID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
                         Employeetxt.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                        cmbJob.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+                       
+                        //cmbJob.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+                     
+                        
                         //txt_Name1.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
                         //txt_Name1.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
                         //txt_Name1.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
@@ -109,28 +112,28 @@ namespace Delmon_Managment_System.Forms
 
         private void Updatebtn_Click(object sender, EventArgs e)
         {
-            SqlParameter paramempname = new SqlParameter("@C1", SqlDbType.NVarChar);
-            paramempname.Value = Employeetxt.Text;
-            SqlParameter paramjoiningdate = new SqlParameter("@C2", SqlDbType.Date);
-            paramjoiningdate.Value = JoinigDatePicker.Value;
-            SqlParameter Paramjob  = new SqlParameter("@C3", SqlDbType.NVarChar);
-            Paramjob.Value = cmbJob.SelectedText;
-            SqlParameter paramDepartment = new SqlParameter("@C4", SqlDbType.NVarChar);
-            paramDepartment.Value = cmbDepartment.SelectedValue;
-            SqlParameter paramReportto = new SqlParameter("@C5", SqlDbType.NVarChar);
-            paramReportto.Value = cmbReportto.SelectedValue;
-            SqlParameter paramstatusID = new SqlParameter("@C6", SqlDbType.NVarChar);
-            paramstatusID.Value = cmbStatus.SelectedValue;
-            SqlParameter ParamBOD = new SqlParameter("@C7", SqlDbType.Date);
-            ParamBOD.Value = BODPicker.Value;
-            SqlParameter paramReferredby = new SqlParameter("@C8", SqlDbType.NVarChar);
-            paramReferredby.Value = cmbReferredBy.SelectedValue;
-            SqlParameter paramEXYears= new SqlParameter("@C9", SqlDbType.NVarChar);
-            paramEXYears.Value = ExperinceYearstxt.Text;
-            SqlParameter paramCountry = new SqlParameter("@C10", SqlDbType.NVarChar);
-            paramCountry.Value = cmbCountry.SelectedValue;
-            SqlParameter paramRemarks = new SqlParameter("@C12", SqlDbType.NVarChar);
-            paramRemarks.Value = RemarksTxt.Text;
+            //SqlParameter paramempname = new SqlParameter("@C1", SqlDbType.NVarChar);
+            //paramempname.Value = Employeetxt.Text;
+            //SqlParameter paramjoiningdate = new SqlParameter("@C2", SqlDbType.Date);
+            //paramjoiningdate.Value = JoinigDatePicker.Value;
+            //SqlParameter Paramjob  = new SqlParameter("@C3", SqlDbType.NVarChar);
+            //Paramjob.Value = cmbJob.SelectedText;
+            //SqlParameter paramDepartment = new SqlParameter("@C4", SqlDbType.NVarChar);
+            //paramDepartment.Value = cmbDepartment.SelectedValue;
+            //SqlParameter paramReportto = new SqlParameter("@C5", SqlDbType.NVarChar);
+            //paramReportto.Value = cmbReportto.SelectedValue;
+            //SqlParameter paramstatusID = new SqlParameter("@C6", SqlDbType.NVarChar);
+            //paramstatusID.Value = cmbStatus.SelectedValue;
+            //SqlParameter ParamBOD = new SqlParameter("@C7", SqlDbType.Date);
+            //ParamBOD.Value = BODPicker.Value;
+            //SqlParameter paramReferredby = new SqlParameter("@C8", SqlDbType.NVarChar);
+            //paramReferredby.Value = cmbReferredBy.SelectedValue;
+            //SqlParameter paramEXYears= new SqlParameter("@C9", SqlDbType.NVarChar);
+            //paramEXYears.Value = ExperinceYearstxt.Text;
+            //SqlParameter paramCountry = new SqlParameter("@C10", SqlDbType.NVarChar);
+            //paramCountry.Value = cmbCountry.SelectedValue;
+            //SqlParameter paramRemarks = new SqlParameter("@C12", SqlDbType.NVarChar);
+            //paramRemarks.Value = RemarksTxt.Text;
 
             SqlParameter paramEMPID = new SqlParameter("@id", SqlDbType.Int);
             paramEMPID.Value = EMPID;
@@ -143,14 +146,14 @@ namespace Delmon_Managment_System.Forms
                
                 if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
-                    SQLCONN.OpenConection();
-                    SQLCONN.ExecuteQueries("update Employee set EmpName=@C1,JoiningDate=@C2,jobid=@C3,DEPTID=@C4,reportto=@C5," +
-                        "statusid=@C6,bod=@C7,ReferredBy=@C8,ExperinceYears=@C9,CountryID=@C10,Remarks=@C11 where empid=@id",
-                                                   paramempname, paramjoiningdate,Paramjob,paramDepartment,paramReportto,paramstatusID,ParamBOD,paramReferredby,
-                                                paramEXYears,paramCountry, paramRemarks);
-                                    MessageBox.Show("Record Updated Successfully");
-                     dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Employee where empname = '" + Employeetxt.Text + "'");
-                    SQLCONN.CloseConnection();
+                    //SQLCONN.OpenConection();
+                    //SQLCONN.ExecuteQueries("update Employee set EmpName=@C1,JoiningDate=@C2,jobid=@C3,DEPTID=@C4,reportto=@C5," +
+                    //    "statusid=@C6,bod=@C7,ReferredBy=@C8,ExperinceYears=@C9,CountryID=@C10,Remarks=@C11 where empid=@id",
+                    //                               paramempname, paramjoiningdate,Paramjob,paramDepartment,paramReportto,paramstatusID,ParamBOD,paramReferredby,
+                    //                            paramEXYears,paramCountry, paramRemarks);
+                    //                MessageBox.Show("Record Updated Successfully");
+                    // dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Employee where empname = '" + Employeetxt.Text + "'");
+                    //SQLCONN.CloseConnection();
 
 
                 }
@@ -199,28 +202,28 @@ namespace Delmon_Managment_System.Forms
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
-            SqlParameter paramempname = new SqlParameter("@C1", SqlDbType.NVarChar);
-            paramempname.Value = Employeetxt.Text;
-            SqlParameter paramjoiningdate = new SqlParameter("@C2", SqlDbType.Date);
-            paramjoiningdate.Value = JoinigDatePicker.Value;
-            SqlParameter Paramjob = new SqlParameter("@C3", SqlDbType.NVarChar);
-            Paramjob.Value = cmbJob.SelectedText;
-            SqlParameter paramDepartment = new SqlParameter("@C4", SqlDbType.NVarChar);
-            paramDepartment.Value = cmbDepartment.SelectedValue;
-            SqlParameter paramReportto = new SqlParameter("@C5", SqlDbType.NVarChar);
-            paramReportto.Value = cmbReportto.SelectedValue;
-            SqlParameter paramstatusID = new SqlParameter("@C6", SqlDbType.NVarChar);
-            paramstatusID.Value = cmbStatus.SelectedValue;
-            SqlParameter ParamBOD = new SqlParameter("@C7", SqlDbType.Date);
-            ParamBOD.Value = BODPicker.Value;
-            SqlParameter paramReferredby = new SqlParameter("@C8", SqlDbType.NVarChar);
-            paramReferredby.Value = cmbReferredBy.SelectedValue;
-            SqlParameter paramEXYears = new SqlParameter("@C9", SqlDbType.NVarChar);
-            paramEXYears.Value = ExperinceYearstxt.Text;
-            SqlParameter paramCountry = new SqlParameter("@C10", SqlDbType.NVarChar);
-            paramCountry.Value = cmbCountry.SelectedValue;
-            SqlParameter paramRemarks = new SqlParameter("@C12", SqlDbType.NVarChar);
-            paramRemarks.Value = RemarksTxt.Text;
+            //SqlParameter paramempname = new SqlParameter("@C1", SqlDbType.NVarChar);
+            //paramempname.Value = Employeetxt.Text;
+            //SqlParameter paramjoiningdate = new SqlParameter("@C2", SqlDbType.Date);
+            //paramjoiningdate.Value = JoinigDatePicker.Value;
+            //SqlParameter Paramjob = new SqlParameter("@C3", SqlDbType.NVarChar);
+            //Paramjob.Value = cmbJob.SelectedText;
+            //SqlParameter paramDepartment = new SqlParameter("@C4", SqlDbType.NVarChar);
+            //paramDepartment.Value = cmbDepartment.SelectedValue;
+            //SqlParameter paramReportto = new SqlParameter("@C5", SqlDbType.NVarChar);
+            //paramReportto.Value = cmbReportto.SelectedValue;
+            //SqlParameter paramstatusID = new SqlParameter("@C6", SqlDbType.NVarChar);
+            //paramstatusID.Value = cmbStatus.SelectedValue;
+            //SqlParameter ParamBOD = new SqlParameter("@C7", SqlDbType.Date);
+            //ParamBOD.Value = BODPicker.Value;
+            //SqlParameter paramReferredby = new SqlParameter("@C8", SqlDbType.NVarChar);
+            //paramReferredby.Value = cmbReferredBy.SelectedValue;
+            //SqlParameter paramEXYears = new SqlParameter("@C9", SqlDbType.NVarChar);
+            //paramEXYears.Value = ExperinceYearstxt.Text;
+            //SqlParameter paramCountry = new SqlParameter("@C10", SqlDbType.NVarChar);
+            //paramCountry.Value = cmbCountry.SelectedValue;
+            //SqlParameter paramRemarks = new SqlParameter("@C12", SqlDbType.NVarChar);
+            //paramRemarks.Value = RemarksTxt.Text;
 
             SqlParameter paramEMPID = new SqlParameter("@id", SqlDbType.Int);
             paramEMPID.Value = EMPID;
@@ -233,14 +236,14 @@ namespace Delmon_Managment_System.Forms
 
                 if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
-                    SQLCONN.OpenConection();
-                    SQLCONN.ExecuteQueries("insert into Employee ( EmpName,JoiningDate,jobid,DEPTID,reportto," +
-                        "statusid,bod,ReferredBy,ExperinceYears,CountryID,Remarks) values (@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8,@C9,@C10,@C11)",
-                                                   paramempname, paramjoiningdate, Paramjob, paramDepartment, paramReportto, paramstatusID, ParamBOD, paramReferredby,
-                                                paramEXYears, paramCountry, paramRemarks);
-                    MessageBox.Show("Record saved Successfully");
-                    dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Employee ");
-                    SQLCONN.CloseConnection();
+                    //SQLCONN.OpenConection();
+                    //SQLCONN.ExecuteQueries("insert into Employee ( EmpName,JoiningDate,jobid,DEPTID,reportto," +
+                    //    "statusid,bod,ReferredBy,ExperinceYears,CountryID,Remarks) values (@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8,@C9,@C10,@C11)",
+                    //                               paramempname, paramjoiningdate, Paramjob, paramDepartment, paramReportto, paramstatusID, ParamBOD, paramReferredby,
+                    //                            paramEXYears, paramCountry, paramRemarks);
+                    //MessageBox.Show("Record saved Successfully");
+                    //dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Employee ");
+                    //SQLCONN.CloseConnection();
 
 
                 }

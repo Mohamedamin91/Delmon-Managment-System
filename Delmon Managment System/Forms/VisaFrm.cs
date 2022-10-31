@@ -26,6 +26,7 @@ namespace Delmon_Managment_System.Forms
         int i = 0;
         int VisaNumberID = 0;
         int FileNumberID = 0;
+        int TotalVisa = 0;
         string IssueDateHijri = "";
         string ExpiryDateHijri = "";
         string IssueDateEN ;
@@ -213,7 +214,7 @@ namespace Delmon_Managment_System.Forms
 
              if (TotalVisastxt.Text == "")
             {
-                MessageBox.Show("Please insert 'TOTAL VISA' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please insert 'TOTAL JOBS' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 TotalVisastxt.BackColor = Color.Red;
                 btnNew.Visible = true;
@@ -273,8 +274,45 @@ namespace Delmon_Managment_System.Forms
                     dr.Read();
                     if (dr.HasRows)
                     {
-                        MessageBox.Show("This 'VISA NUMBER'  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = false;
+                        dr.Dispose();
+                        dr.Close();
+
+                        SqlParameter paramVisanumber = new SqlParameter("@C1", SqlDbType.Int);
+                        paramVisanumber.Value = Visanumtxt.Text;
+                        SqlParameter paramstatusID = new SqlParameter("@C2", SqlDbType.NVarChar);
+                        paramstatusID.Value = cmbStatus.SelectedValue;
+                        SqlParameter ParamConsulate = new SqlParameter("@C3", SqlDbType.NVarChar);
+                        ParamConsulate.Value = cmbConsulate.SelectedValue;
+                        SqlParameter paramJob = new SqlParameter("@C4", SqlDbType.NVarChar);
+                        paramJob.Value = cmbJob.SelectedValue;
+
+
+
+                        Totatvisa = int.Parse(TotalVisastxt.Text);
+                        if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                        {
+                            for (i = 0; i < Totatvisa; i++)
+
+                            {
+                                dr.Dispose();
+                                dr.Close();
+
+                                SQLCONN.ExecuteQueries("insert into VISAJobList (VisaNumber,statusid,ConsulateID,JobID) " +
+                                    " values (@C1,@C2,@C3,@C4) ",
+                                    paramVisanumber, paramstatusID, ParamConsulate, paramJob);
+
+                            }
+                            MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber=" + Visanumtxt.Text + " ");
+                            TotalVisastxt.Text = "";
+                            cmbConsulate.Text = "Select";
+                            cmbJob.Text = "Select";
+                            cmbStatus.Text = "Select";
+                        }
+
+
+                        TotalVisastxt.Enabled = true;
                     }
                     else
                     {
@@ -310,6 +348,10 @@ namespace Delmon_Managment_System.Forms
                             MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                             dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber=" + Visanumtxt.Text + " ");
+                            TotalVisastxt.Text = "";
+                            cmbConsulate.Text = "Select";
+                            cmbJob.Text = "Select";
+                            cmbStatus.Text = "Select";
                         }
 
 
@@ -433,47 +475,6 @@ namespace Delmon_Managment_System.Forms
                 Visanumtxt.BackColor = Color.Red;
 
             }
-            else if (TotalVisastxt.Text == "")
-            {
-                MessageBox.Show("Please insert 'TOTAL VISA' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = false;
-                btnNew.Visible = true;
-
-
-            }
-            else if (cmbCompany.Text == "Select")
-            {
-                MessageBox.Show("Please Select ' Company ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                btnNew.Visible = true;
-
-
-            }
-            else if (issuhijritxt.Text == "")
-            {
-                MessageBox.Show("Please insert ' Issue hijri date ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                btnNew.Visible = true;
-
-
-            }
-            else if (cmbConsulate.Text == "Select")
-            {
-                MessageBox.Show("Please Select ' Consulate ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                btnNew.Visible = true;
-
-
-            }
-            else if (cmbJob.Text == "Select")
-            {
-                MessageBox.Show("Please Select ' Job ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                btnNew.Visible = true;
-
-
-            }
             else 
             {
 
@@ -502,41 +503,51 @@ namespace Delmon_Managment_System.Forms
                     SqlParameter paramExpiryDateEN = new SqlParameter("@C7", SqlDbType.Date);
                     paramExpiryDateEN.Value = ExpiryDateENP;
                     SqlParameter paramTotalVisas = new SqlParameter("@C8", SqlDbType.NVarChar);
-                    paramTotalVisas.Value = TotalVisastxt.Text;
+                 
                     SqlParameter paramRemarks = new SqlParameter("@C9", SqlDbType.NVarChar);
                     paramRemarks.Value = RemarksTxt.Text;
                     dr.Dispose();
                     dr.Close();
+
+                    dr = SQLCONN.DataReader("SELECT count (FileNumber)  FROM  VISAJobList WHERE VISANumber= '" + Visanumtxt.Text + "'");
+                    dr.Read();
+                    if (dr.HasRows)
+                    {
+                        TotalVisa = dr.GetInt32(0);
+                    }
+                      paramTotalVisas.Value = TotalVisa;
+                      dr.Dispose();
+                      dr.Close();
 
                     if (DialogResult.Yes == MessageBox.Show("Do You Want to submit this info for Visa No :  " + Visanumtxt.Text + " ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     {
                         SQLCONN.ExecuteQueries("insert into VISA (VisaNumber,ComapnyID,ReceviedDate,IssueDateEN,ExpiryDateEN,TotalVisas,Remarks,ExpiryDateHijri,IssueDateHijri) " +
                             " values (@C1,@C2,@C3,@C5,@C7,@C8,@C9,@C6,@C4) ",
                             paramVisanumber, paramcomapany, paramRecevidDate, paramIssueDateEN, paramExpiryDateEN, paramTotalVisas, paramRemarks, paramExpiryDateHijri, paramIssHIJriDate);
-                        //   SQLCONN.CloseConnection();
                         MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        groupBox2.Enabled = false;
                         dr.Dispose();
                         dr.Close();
                         dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISA where visanumber=" + Visanumtxt.Text + " ");
 
                         SQLCONN.CloseConnection();
-                        //  ClearTextBoxes();
                         VisaFrm_Load(sender, e);
                         TotalVisastxt.Enabled = false;
+                        AddBtn.Visible = btnFinish.Visible = DeleteBtn.Visible = Findbtn.Visible = false;
+                        btnNew.Visible = Findbtn.Visible = true;
+                        issuhijritxt.Text = ExpiaryHijritxt.Text = IssueDateENTxt.Text = expairENDATEtxt.Text = "";
 
                     }
                     else
                     {
-                        //  SQLCONN.CloseConnection();
+                        AddBtn.Visible = btnFinish.Visible = DeleteBtn.Visible = Findbtn.Visible = true;
+                        btnNew.Visible = Findbtn.Visible = false;
                     }
 
                 }
 
             }
 
-            AddBtn.Visible = btnFinish.Visible = DeleteBtn.Visible = Findbtn.Visible = false;
-            btnNew.Visible = Findbtn.Visible = true;
+          
 
 
 
@@ -1027,6 +1038,7 @@ namespace Delmon_Managment_System.Forms
         {
             ChangeEnabled(false);
             dataGridView1.DataSource = dataGridView2.DataSource = null;
+            ClearTextBoxes();
 
         }
 
@@ -1073,7 +1085,7 @@ namespace Delmon_Managment_System.Forms
 
             {
                 e.Handled = true;
-                MessageBox.Show("Charchters are not allowed " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(" this Charchter '/' was not allowed please use '-' " , "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             else
