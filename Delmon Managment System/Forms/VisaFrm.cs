@@ -26,6 +26,15 @@ namespace Delmon_Managment_System.Forms
         int i = 0;
         int VisaNumberID = 0;
         int FileNumberID = 0;
+        string IssueDateHijri = "";
+        string ExpiryDateHijri = "";
+        string IssueDateEN ;
+        string ExpiryDateENP = "";
+        CultureInfo SA = new CultureInfo("ar-SA");
+        CultureInfo US = new CultureInfo("en-US");
+
+
+
 
 
         public VisaFrm()
@@ -33,9 +42,11 @@ namespace Delmon_Managment_System.Forms
 
 
             InitializeComponent();
+          
 
-            Application.CurrentCulture = new CultureInfo("ar-SA");
-            ExpiryDateHijriPicker.Format = DateTimePickerFormat.Custom;
+
+
+
             cmbStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
             cmbConsulate.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -53,12 +64,28 @@ namespace Delmon_Managment_System.Forms
 
         }
 
+        void ChangeEnabled(bool enabled)
+        {
+            foreach (Control c in this.Controls)
+            {
+                c.Enabled = enabled;
+            }
+            Visanumtxt.Enabled = true;
+            dataGridView1.Enabled = dataGridView2.Enabled = true;
+            label1.Enabled = true;
+            this.ActiveControl = Visanumtxt;
+            btnNew.Enabled = Findbtn.Enabled = true;
+            issuhijritxt.SelectedText = "dd-MM-yyyy";
+            ExpiaryHijritxt.Enabled = IssueDateENTxt.Enabled = expairENDATEtxt.Enabled = false;
 
+
+
+        }
         private void VisaFrm_Load(object sender, EventArgs e)
         {
             LoadTheme();
-         
-       
+            //    AddBtn.Visible = DeleteBtn.Visible = btnFinish.Visible = Findbtn.Visible = true;
+            //btnNew.Visible = Findbtn.Visible = true;
 
             SQLCONN.OpenConection();
             this.ActiveControl = Visanumtxt;
@@ -101,7 +128,7 @@ namespace Delmon_Managment_System.Forms
                     btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
                 }
             }
-            label4.ForeColor = ThemeColor.SecondaryColor;
+           // label4.ForeColor = ThemeColor.SecondaryColor;
           //  label5.ForeColor = ThemeColor.PrimaryColor;
         }
 
@@ -168,23 +195,65 @@ namespace Delmon_Managment_System.Forms
             };
 
             func(Controls);
-            IssueDateENPicker.Value = DateTime.Now;
-            ExpiryDateENPicker.Value = DateTime.Now;
+            
             ReceviedPicker.Value = DateTime.Now;
             dataGridView1.DataSource = null;
             dataGridView2.DataSource = null;
             cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = false;
             i = 0;
             Remaininglbl.Text = "";
+            issuhijritxt.Text = "dd-MM-yyyy";
+
         }
 
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
 
-            if (TotalVisastxt.Text != "")
+
+             if (TotalVisastxt.Text == "")
             {
-                cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = true;
+                MessageBox.Show("Please insert 'TOTAL VISA' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                TotalVisastxt.BackColor = Color.Red;
+                btnNew.Visible = true;
+
+
+            }
+             else if (cmbCompany.Text == "Select")
+            {
+                MessageBox.Show("Please Select ' Company ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                btnNew.Visible = true;
+
+
+            }
+             else if (issuhijritxt.Text == "")
+            {
+                MessageBox.Show("Please insert ' Issue hijri date ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                btnNew.Visible = true;
+
+
+            }
+             else if (cmbConsulate.Text == "Select")
+            {
+                MessageBox.Show("Please Select ' Consulate ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                btnNew.Visible = true;
+
+
+            }
+             else if (cmbJob.Text == "Select")
+            {
+                MessageBox.Show("Please Select ' Job ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                btnNew.Visible = true;
+
+
+            }
+             else
+            {
                 SQLCONN.OpenConection();
                 SqlDataReader dr = SQLCONN.DataReader("select  VisaNumber from Visa where  VisaNumber= " + Visanumtxt.Text + "  ");
                 dr.Read();
@@ -244,32 +313,17 @@ namespace Delmon_Managment_System.Forms
                         }
 
 
-                        TotalVisastxt.Enabled = false;
+                        TotalVisastxt.Enabled = true;
 
 
                     }
 
                     SQLCONN.CloseConnection();
-                    VisaFrm_Load(sender, e);
+                   // VisaFrm_Load(sender, e);
 
                 }
-
-
-
-
-
-
-
             }
-            else
-            {
-                MessageBox.Show("Please insert 'TOTAL VISA' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                TotalVisastxt.BackColor = Color.Red;
-                cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = false;
-
-            }
-         
 
 
 
@@ -310,7 +364,11 @@ namespace Delmon_Managment_System.Forms
 
         private void issuhijritxt_Enter(object sender, EventArgs e)
         {
-            if (issuhijritxt.Text == "dd/MM/yyyy")
+
+
+            IssueDateHijri = SA.DateTimeFormat.ShortDatePattern;
+
+            if (issuhijritxt.Text == "dd-MM-yyyy")
             {
                 issuhijritxt.Text = "";
                 issuhijritxt.ForeColor = Color.Black;
@@ -324,9 +382,9 @@ namespace Delmon_Managment_System.Forms
 
         private void issuhijritxt_TextChanged(object sender, EventArgs e)
         {
-            Application.CurrentCulture = new CultureInfo("ar-SA");
-            IssueDateHijriPicker.Format = DateTimePickerFormat.Custom;
-            if (issuhijritxt.Text == "dd/MM/yyyy")
+
+             IssueDateHijri = SA.DateTimeFormat.ShortDatePattern;
+            if (issuhijritxt.Text == "dd-MM-yyyy")
             {
                 issuhijritxt.Text = "";
                 issuhijritxt.ForeColor = Color.Black;
@@ -335,6 +393,7 @@ namespace Delmon_Managment_System.Forms
 
         private void issuhijritxt_MouseEnter(object sender, EventArgs e)
         {
+
 
         }
 
@@ -366,8 +425,58 @@ namespace Delmon_Managment_System.Forms
 
         private void btnFinish_Click(object sender, EventArgs e)
         {
-            if (Visanumtxt.Text != "")
+
+
+            if (Visanumtxt.Text == "")
             {
+                MessageBox.Show("Please insert 'VISA NUMBER' first !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Visanumtxt.BackColor = Color.Red;
+
+            }
+            else if (TotalVisastxt.Text == "")
+            {
+                MessageBox.Show("Please insert 'TOTAL VISA' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = false;
+                btnNew.Visible = true;
+
+
+            }
+            else if (cmbCompany.Text == "Select")
+            {
+                MessageBox.Show("Please Select ' Company ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                btnNew.Visible = true;
+
+
+            }
+            else if (issuhijritxt.Text == "")
+            {
+                MessageBox.Show("Please insert ' Issue hijri date ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                btnNew.Visible = true;
+
+
+            }
+            else if (cmbConsulate.Text == "Select")
+            {
+                MessageBox.Show("Please Select ' Consulate ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                btnNew.Visible = true;
+
+
+            }
+            else if (cmbJob.Text == "Select")
+            {
+                MessageBox.Show("Please Select ' Job ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                btnNew.Visible = true;
+
+
+            }
+            else 
+            {
+
                 SQLCONN.OpenConection();
                 SqlDataReader dr = SQLCONN.DataReader("select  VisaNumber from Visa where  VisaNumber= " + Visanumtxt.Text + "  ");
                 dr.Read();
@@ -387,53 +496,52 @@ namespace Delmon_Managment_System.Forms
                     SqlParameter paramIssHIJriDate = new SqlParameter("@C4", SqlDbType.NVarChar);
                     paramIssHIJriDate.Value = issuhijritxt.Text;
                     SqlParameter paramIssueDateEN = new SqlParameter("@C5", SqlDbType.Date);
-                    paramIssueDateEN.Value = IssueDateENPicker.Value;
+                    paramIssueDateEN.Value = IssueDateEN;
                     SqlParameter paramExpiryDateHijri = new SqlParameter("@C6", SqlDbType.NVarChar);
                     paramExpiryDateHijri.Value = ExpiaryHijritxt.Text;
                     SqlParameter paramExpiryDateEN = new SqlParameter("@C7", SqlDbType.Date);
-                    paramExpiryDateEN.Value = ExpiryDateENPicker.Value;
+                    paramExpiryDateEN.Value = ExpiryDateENP;
                     SqlParameter paramTotalVisas = new SqlParameter("@C8", SqlDbType.NVarChar);
                     paramTotalVisas.Value = TotalVisastxt.Text;
                     SqlParameter paramRemarks = new SqlParameter("@C9", SqlDbType.NVarChar);
                     paramRemarks.Value = RemarksTxt.Text;
                     dr.Dispose();
                     dr.Close();
-                 
-                        if (DialogResult.Yes == MessageBox.Show("Do You Want to submit this info for Visa No :  " + Visanumtxt.Text + " ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-                        {
-                            SQLCONN.ExecuteQueries("insert into VISA (VisaNumber,ComapnyID,ReceviedDate,IssueDateEN,ExpiryDateEN,TotalVisas,Remarks,ExpiryDateHijri,IssueDateHijri) " +
-                                " values (@C1,@C2,@C3,@C5,@C7,@C8,@C9,@C6,@C4) ",
-                                paramVisanumber, paramcomapany, paramRecevidDate, paramIssueDateEN, paramExpiryDateEN, paramTotalVisas, paramRemarks, paramExpiryDateHijri, paramIssHIJriDate);
-                            //   SQLCONN.CloseConnection();
-                            MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                           dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISA where visanumber=" + Visanumtxt.Text + " ");
 
+                    if (DialogResult.Yes == MessageBox.Show("Do You Want to submit this info for Visa No :  " + Visanumtxt.Text + " ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        SQLCONN.ExecuteQueries("insert into VISA (VisaNumber,ComapnyID,ReceviedDate,IssueDateEN,ExpiryDateEN,TotalVisas,Remarks,ExpiryDateHijri,IssueDateHijri) " +
+                            " values (@C1,@C2,@C3,@C5,@C7,@C8,@C9,@C6,@C4) ",
+                            paramVisanumber, paramcomapany, paramRecevidDate, paramIssueDateEN, paramExpiryDateEN, paramTotalVisas, paramRemarks, paramExpiryDateHijri, paramIssHIJriDate);
+                        //   SQLCONN.CloseConnection();
+                        MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        groupBox2.Enabled = false;
+                        dr.Dispose();
+                        dr.Close();
+                        dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISA where visanumber=" + Visanumtxt.Text + " ");
 
-                        }
-                        else
-                        {
-                            //  SQLCONN.CloseConnection();
-                        }
+                        SQLCONN.CloseConnection();
+                        //  ClearTextBoxes();
+                        VisaFrm_Load(sender, e);
+                        TotalVisastxt.Enabled = false;
 
                     }
-                   
-                      
-                    
-                
-                dr.Dispose();
-                dr.Close();
-                SQLCONN.CloseConnection();
-                ClearTextBoxes();
-                VisaFrm_Load(sender, e);
-                TotalVisastxt.Enabled = false;
+                    else
+                    {
+                        //  SQLCONN.CloseConnection();
+                    }
+
+                }
 
             }
-            else 
-            {
-                MessageBox.Show("Please insert 'VISA NUMBER' first !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                Visanumtxt.BackColor = Color.Red;
 
-            }
+            AddBtn.Visible = btnFinish.Visible = DeleteBtn.Visible = Findbtn.Visible = false;
+            btnNew.Visible = Findbtn.Visible = true;
+
+
+
+
+
         }
 
         private void VisaFrm_KeyUp(object sender, KeyEventArgs e)
@@ -443,95 +551,147 @@ namespace Delmon_Managment_System.Forms
 
         private void issuhijritxt_KeyUp(object sender, KeyEventArgs e)
         {
+          
+
             if (e.KeyCode == Keys.Enter)
             {
                 if (issuhijritxt.Text != "")
                 {
 
+                     if(issuhijritxt.SelectedText.Contains("/")==true)
+
+                    {
+                        MessageBox.Show("Please type date in format : " + "dd-MM-yyyy" + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        IssueDateEN = US.DateTimeFormat.ShortDatePattern;
 
 
 
-                    /*calculate issu hijir and milaidy  date**/
+                        /*calculate issu hijir and milaidy  date**/
 
-                    string a = issuhijritxt.Text.Trim();
-                    DateTime b = Convert.ToDateTime(a);
-                    DateTime dtNOW =DateTime.Now;
-                    dtNOW.ToString("yyyy-MM-dd");
-
-                    issuhijritxt.Text = b.ToString("f");
-                    IssueDateHijriPicker.Value = b.Date;
-                    issuhijritxt.Text = IssueDateHijriPicker.Value.ToString("dd-MM-yyyy");
-                    /*calculate expairy hiri date**/
-
-                    this.ExpiryDateHijriPicker.Value = b.Date.AddDays(708);
-                    ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
-                    ExpiaryHijritxt.Text = ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
+                        string a = issuhijritxt.Text.Trim();
+                        a = issuhijritxt.Text.TrimStart();
+                        a = issuhijritxt.Text.TrimEnd();
+                        var toGegorian = DateTime.ParseExact(a, "dd-MM-yyyy", SA);
+                        DateTime b = Convert.ToDateTime(a);
 
 
-                    /*calculate issu milaidy  date**/
-                    IssueDateENPicker.Value = b;
-                    IssueDateENPicker.Value.ToString("yyyy-MM-dd");
-                    IssueDateENTxt.Text = IssueDateENPicker.Text;
+                        DateTime b2 = Convert.ToDateTime(a);
+                        DateTime dtNOW = DateTime.Now;
+                        dtNOW.ToString("yyyy-MM-dd");
 
-                    /*calculate expairy milaidy date**/
-                    this.ExpiryDateENPicker.Value = IssueDateENPicker.Value.AddDays(708);
-                    expairENDATEtxt.Text = ExpiryDateENPicker.Text;
+                        issuhijritxt.Text = b.ToString("f");
+                        IssueDateHijri = b.Date.ToString("dd-MM-yyyy");
+                        issuhijritxt.Text = IssueDateHijri.ToString();
+                        /*calculate expairy hiri date**/
 
 
-                    /*calculate the */
+                        b2 = b2.Date.AddDays(708);
+                        ExpiryDateHijri = b2.ToString("dd-MM-yyyy");
+                        ExpiaryHijritxt.Text = ExpiryDateHijri.ToString();
 
-                     DateTime futurDate = Convert.ToDateTime(ExpiryDateENPicker.Value);
-                     var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
+
+                        /*calculate issu milaidy  date**/
+                        IssueDateEN = toGegorian.ToString();
+                        IssueDateEN = toGegorian.ToString("yyyy-MM-dd");
+                        IssueDateENTxt.Text = IssueDateEN;
 
 
 
-                    Remaininglbl.Text = numberOfDays.ToString();
+
+
+                        ///*calculate expairy milaidy date**/
+                        toGegorian = toGegorian.AddDays(708);
+                        ExpiryDateENP = toGegorian.ToString("yyyy-MM-dd");
+                        expairENDATEtxt.Text = ExpiryDateENP;
+
+
+                        ///*calculate the */
+
+                        DateTime futurDate = Convert.ToDateTime(ExpiryDateENP);
+                        var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
+
+
+
+                        Remaininglbl.Text = numberOfDays.ToString();
+
+                    }
+
+
+
 
 
                 }
 
                 else { }
             }
-           else  if (e.KeyCode == Keys.Tab)
+            else if (e.KeyCode == Keys.Tab)
             {
                 if (issuhijritxt.Text != "")
                 {
 
-                    /*calculate issu hijir and milaidy  date**/
+                    if (issuhijritxt.SelectedText.Contains("/")==true)
 
-                    string a = issuhijritxt.Text.Trim();
-                    DateTime b = Convert.ToDateTime(a);
-                    DateTime dtNOW = DateTime.Now;
-                    dtNOW.ToString("yyyy-MM-dd");
+                    {
+                        MessageBox.Show("Please type date in format : " + "dd-MM-yyyy" + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
 
-                    issuhijritxt.Text = b.ToString("f");
-                    IssueDateHijriPicker.Value = b.Date;
-                    issuhijritxt.Text = IssueDateHijriPicker.Value.ToString("dd-MM-yyyy");
-                    /*calculate expairy hiri date**/
-
-                    this.ExpiryDateHijriPicker.Value = b.Date.AddDays(708);
-                    ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
-                    ExpiaryHijritxt.Text = ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
-
-
-                    /*calculate issu milaidy  date**/
-                    IssueDateENPicker.Value = b;
-                    IssueDateENPicker.Value.ToString("yyyy-MM-dd");
-                    IssueDateENTxt.Text = IssueDateENPicker.Text;
-
-                    /*calculate expairy milaidy date**/
-                    this.ExpiryDateENPicker.Value = IssueDateENPicker.Value.AddDays(708);
-                    expairENDATEtxt.Text = ExpiryDateENPicker.Text;
-
-
-                    /*calculate the */
-
-                    DateTime futurDate = Convert.ToDateTime(ExpiryDateENPicker.Value);
-                    var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
+                        IssueDateEN = US.DateTimeFormat.ShortDatePattern;
 
 
 
-                    Remaininglbl.Text = numberOfDays.ToString();
+                        /*calculate issu hijir and milaidy  date**/
+
+                        string a = issuhijritxt.Text.Trim();
+                        a = issuhijritxt.Text.TrimStart();
+                        a = issuhijritxt.Text.TrimEnd();
+                        var toGegorian = DateTime.ParseExact(a, "dd-MM-yyyy", SA);
+                        DateTime b = Convert.ToDateTime(a);
+
+
+                        DateTime b2 = Convert.ToDateTime(a);
+                        DateTime dtNOW = DateTime.Now;
+                        dtNOW.ToString("yyyy-MM-dd");
+
+                        issuhijritxt.Text = b.ToString("f");
+                        IssueDateHijri = b.Date.ToString("dd-MM-yyyy");
+                        issuhijritxt.Text = IssueDateHijri.ToString();
+                        /*calculate expairy hiri date**/
+
+
+                        b2 = b2.Date.AddDays(708);
+                        ExpiryDateHijri = b2.ToString("dd-MM-yyyy");
+                        ExpiaryHijritxt.Text = ExpiryDateHijri.ToString();
+
+
+                        /*calculate issu milaidy  date**/
+                        IssueDateEN = toGegorian.ToString();
+                        IssueDateEN = toGegorian.ToString("yyyy-MM-dd");
+                        IssueDateENTxt.Text = IssueDateEN;
+
+
+
+
+
+                        ///*calculate expairy milaidy date**/
+                        toGegorian = toGegorian.AddDays(708);
+                        ExpiryDateENP = toGegorian.ToString("yyyy-MM-dd");
+                        expairENDATEtxt.Text = ExpiryDateENP;
+
+
+                        ///*calculate the */
+
+                        DateTime futurDate = Convert.ToDateTime(ExpiryDateENP);
+                        var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
+
+
+
+                        Remaininglbl.Text = numberOfDays.ToString();
+                    }
                 }
 
                 else { }
@@ -545,46 +705,69 @@ namespace Delmon_Managment_System.Forms
                 if (issuhijritxt.Text != "")
                 {
 
+                    if (issuhijritxt.SelectedText.Contains("/")==true)
+                    {
+                        MessageBox.Show("Please type date in format : " + "dd-MM-yyyy" + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+
+
+                        IssueDateEN = US.DateTimeFormat.ShortDatePattern;
 
 
 
-                    /*calculate issu hijir and milaidy  date**/
+                        /*calculate issu hijir and milaidy  date**/
 
-                    string a = issuhijritxt.Text.Trim();
-                    DateTime b = Convert.ToDateTime(a);
-                    DateTime dtNOW = DateTime.Now;
-                    dtNOW.ToString("yyyy-MM-dd");
-
-                    issuhijritxt.Text = b.ToString("f");
-                    IssueDateHijriPicker.Value = b.Date;
-                    issuhijritxt.Text = IssueDateHijriPicker.Value.ToString("dd-MM-yyyy");
-                    /*calculate expairy hiri date**/
-
-                    this.ExpiryDateHijriPicker.Value = b.Date.AddDays(708);
-                    ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
-                    ExpiaryHijritxt.Text = ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
+                        string a = issuhijritxt.Text.Trim();
+                        a = issuhijritxt.Text.TrimStart();
+                        a = issuhijritxt.Text.TrimEnd();
+                        var toGegorian = DateTime.ParseExact(a, "dd-MM-yyyy", SA);
+                        DateTime b = Convert.ToDateTime(a);
 
 
-                    /*calculate issu milaidy  date**/
-                    IssueDateENPicker.Value = b;
-                    IssueDateENPicker.Value.ToString("yyyy-MM-dd");
-                    IssueDateENTxt.Text = IssueDateENPicker.Text;
+                        DateTime b2 = Convert.ToDateTime(a);
+                        DateTime dtNOW = DateTime.Now;
+                        dtNOW.ToString("yyyy-MM-dd");
 
-                    /*calculate expairy milaidy date**/
-                    this.ExpiryDateENPicker.Value = IssueDateENPicker.Value.AddDays(708);
-                    expairENDATEtxt.Text = ExpiryDateENPicker.Text;
+                        issuhijritxt.Text = b.ToString("f");
+                        IssueDateHijri = b.Date.ToString("dd-MM-yyyy");
+                        issuhijritxt.Text = IssueDateHijri.ToString();
+                        /*calculate expairy hiri date**/
 
 
-                    /*calculate the */
+                        b2 = b2.Date.AddDays(708);
+                        ExpiryDateHijri = b2.ToString("dd-MM-yyyy");
+                        ExpiaryHijritxt.Text = ExpiryDateHijri.ToString();
 
-                    DateTime futurDate = Convert.ToDateTime(ExpiryDateENPicker.Value);
-                    var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
+
+                        /*calculate issu milaidy  date**/
+                        IssueDateEN = toGegorian.ToString();
+                        IssueDateEN = toGegorian.ToString("yyyy-MM-dd");
+                        IssueDateENTxt.Text = IssueDateEN;
 
 
 
-                    Remaininglbl.Text = numberOfDays.ToString();
 
 
+                        ///*calculate expairy milaidy date**/
+                        toGegorian = toGegorian.AddDays(708);
+                        ExpiryDateENP = toGegorian.ToString("yyyy-MM-dd");
+                        expairENDATEtxt.Text = ExpiryDateENP;
+
+
+                        ///*calculate the */
+
+                        DateTime futurDate = Convert.ToDateTime(ExpiryDateENP);
+                        var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
+
+
+
+                        Remaininglbl.Text = numberOfDays.ToString();
+
+
+
+                    }
                 }
 
                 else { }
@@ -594,41 +777,66 @@ namespace Delmon_Managment_System.Forms
                 if (issuhijritxt.Text != "")
                 {
 
-                    /*calculate issu hijir and milaidy  date**/
+                    if (issuhijritxt.SelectedText.Contains("/")==true)
 
-                    string a = issuhijritxt.Text.Trim();
-                    DateTime b = Convert.ToDateTime(a);
-                    DateTime dtNOW = DateTime.Now;
-                    dtNOW.ToString("yyyy-MM-dd");
-
-                    issuhijritxt.Text = b.ToString("f");
-                    IssueDateHijriPicker.Value = b.Date;
-                    issuhijritxt.Text = IssueDateHijriPicker.Value.ToString("dd-MM-yyyy");
-                    /*calculate expairy hiri date**/
-
-                    this.ExpiryDateHijriPicker.Value = b.Date.AddDays(708);
-                    ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
-                    ExpiaryHijritxt.Text = ExpiryDateHijriPicker.Value.ToString("dd-MM-yyyy");
-
-
-                    /*calculate issu milaidy  date**/
-                    IssueDateENPicker.Value = b;
-                    IssueDateENPicker.Value.ToString("yyyy-MM-dd");
-                    IssueDateENTxt.Text = IssueDateENPicker.Text;
-
-                    /*calculate expairy milaidy date**/
-                    this.ExpiryDateENPicker.Value = IssueDateENPicker.Value.AddDays(708);
-                    expairENDATEtxt.Text = ExpiryDateENPicker.Text;
-
-
-                    /*calculate the */
-
-                    DateTime futurDate = Convert.ToDateTime(ExpiryDateENPicker.Value);
-                    var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
+                    {
+                        MessageBox.Show("Please type date in format : " + "dd-MM-yyyy" + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        IssueDateEN = US.DateTimeFormat.ShortDatePattern;
 
 
 
-                    Remaininglbl.Text = numberOfDays.ToString();
+                        /*calculate issu hijir and milaidy  date**/
+
+                        string a = issuhijritxt.Text.Trim();
+                        a = issuhijritxt.Text.TrimStart();
+                        a = issuhijritxt.Text.TrimEnd();
+                        var toGegorian = DateTime.ParseExact(a, "dd-MM-yyyy", SA);
+                        DateTime b = Convert.ToDateTime(a);
+
+
+                        DateTime b2 = Convert.ToDateTime(a);
+                        DateTime dtNOW = DateTime.Now;
+                        dtNOW.ToString("yyyy-MM-dd");
+
+                        issuhijritxt.Text = b.ToString("f");
+                        IssueDateHijri = b.Date.ToString("dd-MM-yyyy");
+                        issuhijritxt.Text = IssueDateHijri.ToString();
+                        /*calculate expairy hiri date**/
+
+
+                        b2 = b2.Date.AddDays(708);
+                        ExpiryDateHijri = b2.ToString("dd-MM-yyyy");
+                        ExpiaryHijritxt.Text = ExpiryDateHijri.ToString();
+
+
+                        /*calculate issu milaidy  date**/
+                        IssueDateEN = toGegorian.ToString();
+                        IssueDateEN = toGegorian.ToString("yyyy-MM-dd");
+                        IssueDateENTxt.Text = IssueDateEN;
+
+
+
+
+
+                        ///*calculate expairy milaidy date**/
+                        toGegorian = toGegorian.AddDays(708);
+                        ExpiryDateENP = toGegorian.ToString("yyyy-MM-dd");
+                        expairENDATEtxt.Text = ExpiryDateENP;
+
+
+                        ///*calculate the */
+
+                        DateTime futurDate = Convert.ToDateTime(ExpiryDateENP);
+                        var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
+
+
+
+                        Remaininglbl.Text = numberOfDays.ToString();
+
+                    }
                 }
 
                 else { }
@@ -687,10 +895,17 @@ namespace Delmon_Managment_System.Forms
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            AddBtn.Visible = btnFinish.Visible = true;
-          //  btnNew.Visible = false;
+            AddBtn.Visible  = DeleteBtn.Visible=btnFinish.Visible= true;
+            btnNew.Visible =Findbtn.Visible= false;
             ClearTextBoxes();
-           
+            VisaFrm_Load(sender, e);
+            ChangeEnabled(true);
+            Visanumtxt.BackColor = Color.White;
+            TotalVisastxt.BackColor = Color.White;
+            cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = true;
+
+
+
         }
 
         private void FileNumber_TextChanged(object sender, EventArgs e)
@@ -723,9 +938,9 @@ namespace Delmon_Managment_System.Forms
                         cmbCompany.Text = (dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
                         ReceviedPicker.Value = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[2].Value);
                         issuhijritxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString());
-                        IssueDateENPicker.Value = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
+                        IssueDateEN = (dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
                         ExpiaryHijritxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString());
-                        ExpiryDateENPicker.Value = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[6].Value);
+                        ExpiryDateENP = (dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString());
                         TotalVisastxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString());
                         RemarksTxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString());  
                     
@@ -775,24 +990,96 @@ namespace Delmon_Managment_System.Forms
             SqlParameter paramFilenumber = new SqlParameter("@C1", SqlDbType.Int);
             paramFilenumber.Value = FileNumberID;
 
-
-            if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            if (FileNumberID == 0)
             {
-                SQLCONN.OpenConection();
-                SQLCONN.ExecuteQueries("delete  VISAJobList where filenumber=@C1", paramFilenumber);
-                SQLCONN.ExecuteQueries(" declare @max int select @max = max([filenumber]) from[VISAJobList] if @max IS NULL    SET @max = 0 DBCC CHECKIDENT('[VISAJobList]', RESEED, @max)");
-                dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from VISAJobList ");
-                SQLCONN.CloseConnection();
-                MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Please select visa number first ! " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+            else 
+            {
+                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    SQLCONN.OpenConection();
+                    SQLCONN.ExecuteQueries("delete  VISAJobList where filenumber=@C1", paramFilenumber);
+                    SQLCONN.ExecuteQueries(" declare @max int select @max = max([filenumber]) from[VISAJobList] if @max IS NULL    SET @max = 0 DBCC CHECKIDENT('[VISAJobList]', RESEED, @max)");
+                    dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from VISAJobList ");
+                    SQLCONN.CloseConnection();
+                    MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
 
             }
         }
 
         private void FileNumber_TextChanged_1(object sender, EventArgs e)
         {
-            SQLCONN.OpenConection();
-            dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from VISAJobList where filenumber LIKE '" + FileNumber.Text + "%'");
-            SQLCONN.CloseConnection();
+            //SQLCONN.OpenConection();
+            //dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from VISAJobList where filenumber LIKE '" + FileNumber.Text + "%'");
+            //SQLCONN.CloseConnection();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Findbtn_Click(object sender, EventArgs e)
+        {
+            ChangeEnabled(false);
+            dataGridView1.DataSource = dataGridView2.DataSource = null;
+
+        }
+
+        private void IssueDateENTxt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TotalVisastxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+                MessageBox.Show("Charchters are not allowed " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+            else
+            {
+
+            }
+        }
+
+        private void Visanumtxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+            (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+                MessageBox.Show("Charchters are not allowed " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+            else
+            {
+
+            }
+        }
+
+        private void issuhijritxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+            ( e.KeyChar !='-'))
+
+            {
+                e.Handled = true;
+                MessageBox.Show("Charchters are not allowed " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+            else
+            {
+
+            }
         }
     }
 }

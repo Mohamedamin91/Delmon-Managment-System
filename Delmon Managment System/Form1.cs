@@ -53,7 +53,7 @@ namespace Delmon_Managment_System
                 {
                     DisableButton();
                  //   Color color = SelectThemeColor();
-                    Color color = Color.FromArgb(233, 43, 45);
+                    Color color = Color.FromArgb(178,34,34);
                     currentButton = (Button)btnSender;
                     currentButton.BackColor = color;
                     currentButton.ForeColor = Color.White;
@@ -97,8 +97,8 @@ namespace Delmon_Managment_System
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            panelTitleBar.BackColor = Color.FromArgb(233, 43, 45);
-            lblTitle.BackColor = Color.FromArgb(233, 43, 45);
+            panelTitleBar.BackColor = Color.FromArgb(178,34,34);
+            lblTitle.BackColor = Color.FromArgb(178,34,34);
         }
 
         private void btnvisa_Click(object sender, EventArgs e)
@@ -146,8 +146,8 @@ namespace Delmon_Managment_System
         {
             DisableButton();
             lblTitle.Text = "HOME";
-            panelTitleBar.BackColor = Color.FromArgb(233, 43, 45);
-            lblTitle.BackColor = Color.FromArgb(233, 43, 45);
+            panelTitleBar.BackColor = Color.FromArgb(178,34,34);
+            lblTitle.BackColor = Color.FromArgb(178,34,34);
             panelLogo.BackColor = Color.FromArgb(39, 39, 58);
             currentButton = null;
             btnCloseChildForm.Visible = false;
