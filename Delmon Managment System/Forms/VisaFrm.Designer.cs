@@ -69,6 +69,7 @@ namespace Delmon_Managment_System.Forms
             this.issuhijritxt = new System.Windows.Forms.TextBox();
             this.ReceviedPicker = new System.Windows.Forms.DateTimePicker();
             this.Findbtn = new System.Windows.Forms.Button();
+            this.issuhijritxt2 = new System.Windows.Forms.MaskedTextBox();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -106,6 +107,7 @@ namespace Delmon_Managment_System.Forms
             this.Visanumtxt.Size = new System.Drawing.Size(175, 26);
             this.Visanumtxt.TabIndex = 3;
             this.Visanumtxt.TextChanged += new System.EventHandler(this.Visanumtxt_TextChanged);
+            this.Visanumtxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Visanumtxt_KeyDown);
             this.Visanumtxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Visanumtxt_KeyPress);
             this.Visanumtxt.Leave += new System.EventHandler(this.Visanumtxt_Leave);
             // 
@@ -118,6 +120,7 @@ namespace Delmon_Managment_System.Forms
             this.TotalVisastxt.Size = new System.Drawing.Size(132, 26);
             this.TotalVisastxt.TabIndex = 4;
             this.TotalVisastxt.TextChanged += new System.EventHandler(this.TotalVisastxt_TextChanged);
+            this.TotalVisastxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TotalVisastxt_KeyDown);
             this.TotalVisastxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TotalVisastxt_KeyPress);
             // 
             // AddBtn
@@ -239,6 +242,7 @@ namespace Delmon_Managment_System.Forms
             this.RemarksTxt.Size = new System.Drawing.Size(231, 84);
             this.RemarksTxt.TabIndex = 23;
             this.RemarksTxt.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.RemarksTxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RemarksTxt_KeyDown);
             // 
             // IssueDateENTxt
             // 
@@ -251,6 +255,7 @@ namespace Delmon_Managment_System.Forms
             this.IssueDateENTxt.Size = new System.Drawing.Size(128, 24);
             this.IssueDateENTxt.TabIndex = 26;
             this.IssueDateENTxt.TextChanged += new System.EventHandler(this.IssueDateENTxt_TextChanged);
+            this.IssueDateENTxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IssueDateENTxt_KeyDown);
             // 
             // button1
             // 
@@ -275,6 +280,7 @@ namespace Delmon_Managment_System.Forms
             this.expairENDATEtxt.Name = "expairENDATEtxt";
             this.expairENDATEtxt.Size = new System.Drawing.Size(128, 24);
             this.expairENDATEtxt.TabIndex = 32;
+            this.expairENDATEtxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.expairENDATEtxt_KeyDown);
             // 
             // cmbCompany
             // 
@@ -286,6 +292,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbCompany.Size = new System.Drawing.Size(296, 28);
             this.cmbCompany.TabIndex = 34;
             this.cmbCompany.SelectedIndexChanged += new System.EventHandler(this.cmbCompany_SelectedIndexChanged);
+            this.cmbCompany.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbCompany_KeyDown);
             // 
             // label2
             // 
@@ -353,6 +360,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbJob.Size = new System.Drawing.Size(317, 28);
             this.cmbJob.TabIndex = 38;
             this.cmbJob.SelectedIndexChanged += new System.EventHandler(this.cmbJob_SelectedIndexChanged);
+            this.cmbJob.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbJob_KeyDown);
             // 
             // label44
             // 
@@ -376,6 +384,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbConsulate.Name = "cmbConsulate";
             this.cmbConsulate.Size = new System.Drawing.Size(177, 28);
             this.cmbConsulate.TabIndex = 36;
+            this.cmbConsulate.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbConsulate_KeyDown);
             // 
             // label12
             // 
@@ -490,6 +499,7 @@ namespace Delmon_Managment_System.Forms
             this.ExpiaryHijritxt.Name = "ExpiaryHijritxt";
             this.ExpiaryHijritxt.Size = new System.Drawing.Size(128, 24);
             this.ExpiaryHijritxt.TabIndex = 31;
+            this.ExpiaryHijritxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ExpiaryHijritxt_KeyDown);
             // 
             // issuhijritxt
             // 
@@ -519,6 +529,7 @@ namespace Delmon_Managment_System.Forms
             this.ReceviedPicker.Name = "ReceviedPicker";
             this.ReceviedPicker.Size = new System.Drawing.Size(128, 26);
             this.ReceviedPicker.TabIndex = 40;
+            this.ReceviedPicker.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ReceviedPicker_KeyDown);
             // 
             // Findbtn
             // 
@@ -534,12 +545,23 @@ namespace Delmon_Managment_System.Forms
             this.Findbtn.UseVisualStyleBackColor = true;
             this.Findbtn.Click += new System.EventHandler(this.Findbtn_Click);
             // 
+            // issuhijritxt2
+            // 
+            this.issuhijritxt2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.issuhijritxt2.Location = new System.Drawing.Point(315, 144);
+            this.issuhijritxt2.Mask = "00/00/0000";
+            this.issuhijritxt2.Name = "issuhijritxt2";
+            this.issuhijritxt2.Size = new System.Drawing.Size(128, 26);
+            this.issuhijritxt2.TabIndex = 87;
+            this.issuhijritxt2.ValidatingType = typeof(System.DateTime);
+            // 
             // VisaFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1710, 976);
+            this.Controls.Add(this.issuhijritxt2);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.TotalVisastxt);
@@ -635,5 +657,6 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.TextBox issuhijritxt;
         private System.Windows.Forms.DateTimePicker ReceviedPicker;
         private System.Windows.Forms.Button Findbtn;
+        private System.Windows.Forms.MaskedTextBox issuhijritxt2;
     }
 }

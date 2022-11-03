@@ -257,5 +257,105 @@ namespace Delmon_Managment_System.Forms
                 MessageBox.Show("Please Select Record to Update");
             }
         }
+
+        private void furstnametxt_KeyDown(object sender, KeyEventArgs e)
+        
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                secondnametxt.Focus();
+                e.Handled = true;
+            }
+        }
+
+        private void secondnametxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                thirdnametxt.Focus();
+                e.Handled = true;
+            }
+        }
+
+        private void EmployeeForm_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void thirdnametxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                lastnametxt.Focus();
+                e.Handled = true;
+            }
+        }
+
+        private void lastnametxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                cmbGender.Focus();
+                e.Handled = true;
+            }
+        }
+
+        private void cmbGender_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                cmbMartialStatus.Focus();
+                e.Handled = true;
+            }
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void lastnametxt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void firstnametxt_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                secondnametxt.Focus();
+                e.Handled = true;
+            }
+        }
+
+        private void secondnametxt_KeyDown_1(object sender, KeyEventArgs e)
+        {
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                thirdnametxt.Focus();
+                e.Handled = true;
+            }
+        }
+
+        private void thirdnametxt_KeyDown_1(object sender, KeyEventArgs e)
+        {
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                lastnametxt.Focus();
+                e.Handled = true;
+            }
+        }
+
+        private void lastnametxt_KeyDown_1(object sender, KeyEventArgs e)
+        {
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                cmbGender.Focus();
+                e.Handled = true;
+            }
+        }
     }
 }

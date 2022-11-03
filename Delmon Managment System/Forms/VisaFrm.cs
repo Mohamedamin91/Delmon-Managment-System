@@ -852,6 +852,11 @@ namespace Delmon_Managment_System.Forms
 
                 else { }
             }
+            if (e.KeyCode == Keys.Enter)
+            {
+                RemarksTxt.Focus();
+                e.Handled = true;
+            }
         }
 
         private void TotalVisastxt_TextChanged(object sender, EventArgs e)
@@ -1091,6 +1096,96 @@ namespace Delmon_Managment_System.Forms
             else
             {
 
+            }
+        }
+
+        private void Visanumtxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                cmbCompany.Focus();
+                e.Handled = true;
+            }
+        }
+
+        private void cmbCompany_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ReceviedPicker.Focus();
+                e.Handled = true;
+            }
+        }
+
+        private void ReceviedPicker_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                issuhijritxt.Focus();
+                e.Handled = true;
+            }
+        }
+
+        private void ExpiaryHijritxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                IssueDateENTxt.Focus();
+                e.Handled = true;
+            }
+        }
+
+        private void IssueDateENTxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                expairENDATEtxt.Focus();
+                e.Handled = true;
+            }
+        }
+
+        private void expairENDATEtxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                RemarksTxt.Focus();
+                e.Handled = true;
+            }
+        }
+
+        private void RemarksTxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                TotalVisastxt.Focus();
+                e.Handled = true;
+            }
+        }
+
+        private void TotalVisastxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                cmbConsulate.Focus();
+                e.Handled = true;
+            }
+        }
+
+        private void cmbConsulate_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                cmbJob.Focus();
+                e.Handled = true;
+            }
+        }
+
+        private void cmbJob_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                cmbStatus.Focus();
+                e.Handled = true;
             }
         }
     }
