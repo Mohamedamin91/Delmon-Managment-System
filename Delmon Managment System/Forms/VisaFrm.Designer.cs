@@ -70,10 +70,17 @@ namespace Delmon_Managment_System.Forms
             this.ReceviedPicker = new System.Windows.Forms.DateTimePicker();
             this.Findbtn = new System.Windows.Forms.Button();
             this.issuhijritxt2 = new System.Windows.Forms.MaskedTextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.VisaFileNumberID = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.cmbcandidates = new System.Windows.Forms.ComboBox();
+            this.btnAssign = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -128,7 +135,7 @@ namespace Delmon_Managment_System.Forms
             this.AddBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.AddBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AddBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddBtn.Location = new System.Drawing.Point(602, 720);
+            this.AddBtn.Location = new System.Drawing.Point(677, 926);
             this.AddBtn.Margin = new System.Windows.Forms.Padding(4);
             this.AddBtn.Name = "AddBtn";
             this.AddBtn.Size = new System.Drawing.Size(75, 34);
@@ -145,7 +152,7 @@ namespace Delmon_Managment_System.Forms
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1710, 27);
+            this.panel1.Size = new System.Drawing.Size(1855, 27);
             this.panel1.TabIndex = 14;
             // 
             // menuStrip1
@@ -156,7 +163,7 @@ namespace Delmon_Managment_System.Forms
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1710, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1855, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -195,6 +202,7 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView1.RowHeadersWidth = 123;
             this.dataGridView1.Size = new System.Drawing.Size(598, 236);
             this.dataGridView1.TabIndex = 9;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_RowHeaderMouseClick);
             // 
@@ -261,7 +269,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(2572, 434);
+            this.button1.Location = new System.Drawing.Point(2644, 475);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 48);
@@ -402,7 +410,7 @@ namespace Delmon_Managment_System.Forms
             this.btnFinish.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnFinish.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFinish.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFinish.Location = new System.Drawing.Point(854, 720);
+            this.btnFinish.Location = new System.Drawing.Point(929, 926);
             this.btnFinish.Margin = new System.Windows.Forms.Padding(4);
             this.btnFinish.Name = "btnFinish";
             this.btnFinish.Size = new System.Drawing.Size(75, 34);
@@ -441,7 +449,7 @@ namespace Delmon_Managment_System.Forms
             this.btnNew.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNew.Location = new System.Drawing.Point(350, 720);
+            this.btnNew.Location = new System.Drawing.Point(425, 926);
             this.btnNew.Margin = new System.Windows.Forms.Padding(4);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(75, 34);
@@ -461,6 +469,7 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView2.RowHeadersWidth = 123;
             this.dataGridView2.Size = new System.Drawing.Size(598, 236);
             this.dataGridView2.TabIndex = 83;
+            this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
             this.dataGridView2.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView2_RowHeaderMouseClick);
             // 
             // DeleteBtn
@@ -468,7 +477,7 @@ namespace Delmon_Managment_System.Forms
             this.DeleteBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.DeleteBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DeleteBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DeleteBtn.Location = new System.Drawing.Point(728, 720);
+            this.DeleteBtn.Location = new System.Drawing.Point(803, 926);
             this.DeleteBtn.Margin = new System.Windows.Forms.Padding(4);
             this.DeleteBtn.Name = "DeleteBtn";
             this.DeleteBtn.Size = new System.Drawing.Size(75, 34);
@@ -536,7 +545,7 @@ namespace Delmon_Managment_System.Forms
             this.Findbtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Findbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Findbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Findbtn.Location = new System.Drawing.Point(476, 720);
+            this.Findbtn.Location = new System.Drawing.Point(551, 926);
             this.Findbtn.Margin = new System.Windows.Forms.Padding(4);
             this.Findbtn.Name = "Findbtn";
             this.Findbtn.Size = new System.Drawing.Size(75, 34);
@@ -555,12 +564,85 @@ namespace Delmon_Managment_System.Forms
             this.issuhijritxt2.TabIndex = 87;
             this.issuhijritxt2.ValidatingType = typeof(System.DateTime);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnAssign);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.cmbcandidates);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.VisaFileNumberID);
+            this.groupBox1.Location = new System.Drawing.Point(623, 661);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(431, 175);
+            this.groupBox1.TabIndex = 88;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Assign Visa";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(43, 30);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(94, 20);
+            this.label4.TabIndex = 43;
+            this.label4.Text = "File Number";
+            // 
+            // VisaFileNumberID
+            // 
+            this.VisaFileNumberID.Enabled = false;
+            this.VisaFileNumberID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.VisaFileNumberID.Location = new System.Drawing.Point(173, 27);
+            this.VisaFileNumberID.Margin = new System.Windows.Forms.Padding(4);
+            this.VisaFileNumberID.Name = "VisaFileNumberID";
+            this.VisaFileNumberID.Size = new System.Drawing.Size(132, 26);
+            this.VisaFileNumberID.TabIndex = 42;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(40, 68);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(82, 20);
+            this.label13.TabIndex = 45;
+            this.label13.Text = "Candidate";
+            // 
+            // cmbcandidates
+            // 
+            this.cmbcandidates.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbcandidates.FormattingEnabled = true;
+            this.cmbcandidates.Location = new System.Drawing.Point(173, 68);
+            this.cmbcandidates.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbcandidates.Name = "cmbcandidates";
+            this.cmbcandidates.Size = new System.Drawing.Size(208, 28);
+            this.cmbcandidates.TabIndex = 44;
+            this.cmbcandidates.SelectedIndexChanged += new System.EventHandler(this.cmbcandidates_SelectedIndexChanged);
+            // 
+            // btnAssign
+            // 
+            this.btnAssign.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnAssign.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAssign.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAssign.Location = new System.Drawing.Point(173, 117);
+            this.btnAssign.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAssign.Name = "btnAssign";
+            this.btnAssign.Size = new System.Drawing.Size(75, 34);
+            this.btnAssign.TabIndex = 83;
+            this.btnAssign.Text = "Assign";
+            this.btnAssign.UseVisualStyleBackColor = true;
+            this.btnAssign.Click += new System.EventHandler(this.btnAssign_Click);
+            // 
             // VisaFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1710, 976);
+            this.ClientSize = new System.Drawing.Size(1855, 1059);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.issuhijritxt2);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label5);
@@ -610,6 +692,8 @@ namespace Delmon_Managment_System.Forms
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -658,5 +742,11 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.DateTimePicker ReceviedPicker;
         private System.Windows.Forms.Button Findbtn;
         private System.Windows.Forms.MaskedTextBox issuhijritxt2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox cmbcandidates;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox VisaFileNumberID;
+        private System.Windows.Forms.Button btnAssign;
     }
 }

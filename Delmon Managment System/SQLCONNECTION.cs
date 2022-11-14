@@ -42,11 +42,17 @@ namespace Delmon_Managment_System
             cmd.Parameters.Clear();
         }
      
-        public SqlDataReader DataReader(string Query_)
+        public SqlDataReader DataReader(string Query_, params SqlParameter[] parameters)
         {
             SqlCommand cmd = new SqlCommand(Query_, con);
+            foreach (SqlParameter parm in parameters)
+            {
+                cmd.Parameters.Add(parm);
+            }
             SqlDataReader dr = cmd.ExecuteReader();
+            cmd.Parameters.Clear();
             return dr;
+
         }
 
 

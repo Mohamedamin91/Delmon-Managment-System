@@ -29,7 +29,7 @@ namespace Delmon_Managment_System.Forms
         int TotalVisa = 0;
         string IssueDateHijri = "";
         string ExpiryDateHijri = "";
-        string IssueDateEN ;
+        string IssueDateEN;
         string ExpiryDateENP = "";
         CultureInfo SA = new CultureInfo("ar-SA");
         CultureInfo US = new CultureInfo("en-US");
@@ -43,7 +43,7 @@ namespace Delmon_Managment_System.Forms
 
 
             InitializeComponent();
-          
+
 
 
 
@@ -91,12 +91,12 @@ namespace Delmon_Managment_System.Forms
             SQLCONN.OpenConection();
             this.ActiveControl = Visanumtxt;
 
-          
+
             cmbCompany.ValueMember = "COMPID";
             cmbCompany.DisplayMember = "COMPName_EN";
             cmbCompany.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT COMPID,COMPName_EN FROM Companies");
 
-            
+
             cmbJob.ValueMember = "JobID";
             cmbJob.DisplayMember = "JobTitleEN";
             cmbJob.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS");
@@ -110,6 +110,9 @@ namespace Delmon_Managment_System.Forms
             cmbStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select statusid,status  from Visastatus where RefrenceID =1 or RefrenceID = 0 order by statusid");
 
 
+            cmbcandidates.ValueMember = "PI_ID";
+            cmbcandidates.DisplayMember = "Name";
+            cmbcandidates.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT PersonalInformation.PI_ID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[PersonalInformation] ,EmploymentHistory where PersonalInformation.PI_ID = EmploymentHistory.PI_ID and EmploymentHistory.EmploymentStatusID = 23");
 
             SQLCONN.CloseConnection();
 
@@ -129,8 +132,8 @@ namespace Delmon_Managment_System.Forms
                     btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
                 }
             }
-           // label4.ForeColor = ThemeColor.SecondaryColor;
-          //  label5.ForeColor = ThemeColor.PrimaryColor;
+            // label4.ForeColor = ThemeColor.SecondaryColor;
+            //  label5.ForeColor = ThemeColor.PrimaryColor;
         }
 
         private void visasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -178,7 +181,7 @@ namespace Delmon_Managment_System.Forms
 
         private void issuhijritxt_Leave(object sender, EventArgs e)
         {
-         
+
         }
 
 
@@ -196,7 +199,7 @@ namespace Delmon_Managment_System.Forms
             };
 
             func(Controls);
-            
+
             ReceviedPicker.Value = DateTime.Now;
             dataGridView1.DataSource = null;
             dataGridView2.DataSource = null;
@@ -212,7 +215,7 @@ namespace Delmon_Managment_System.Forms
         {
 
 
-             if (TotalVisastxt.Text == "")
+            if (TotalVisastxt.Text == "")
             {
                 MessageBox.Show("Please insert 'TOTAL JOBS' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
@@ -221,7 +224,7 @@ namespace Delmon_Managment_System.Forms
 
 
             }
-             else if (cmbCompany.Text == "Select")
+            else if (cmbCompany.Text == "Select")
             {
                 MessageBox.Show("Please Select ' Company ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
@@ -229,7 +232,7 @@ namespace Delmon_Managment_System.Forms
 
 
             }
-             else if (issuhijritxt.Text == "")
+            else if (issuhijritxt.Text == "")
             {
                 MessageBox.Show("Please insert ' Issue hijri date ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
@@ -237,7 +240,7 @@ namespace Delmon_Managment_System.Forms
 
 
             }
-             else if (cmbConsulate.Text == "Select")
+            else if (cmbConsulate.Text == "Select")
             {
                 MessageBox.Show("Please Select ' Consulate ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
@@ -245,7 +248,7 @@ namespace Delmon_Managment_System.Forms
 
 
             }
-             else if (cmbJob.Text == "Select")
+            else if (cmbJob.Text == "Select")
             {
                 MessageBox.Show("Please Select ' Job ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
@@ -253,7 +256,7 @@ namespace Delmon_Managment_System.Forms
 
 
             }
-             else
+            else
             {
                 SQLCONN.OpenConection();
                 SqlDataReader dr = SQLCONN.DataReader("select  VisaNumber from Visa where  VisaNumber= " + Visanumtxt.Text + "  ");
@@ -361,7 +364,7 @@ namespace Delmon_Managment_System.Forms
                     }
 
                     SQLCONN.CloseConnection();
-                   // VisaFrm_Load(sender, e);
+                    // VisaFrm_Load(sender, e);
 
                 }
             }
@@ -425,7 +428,7 @@ namespace Delmon_Managment_System.Forms
         private void issuhijritxt_TextChanged(object sender, EventArgs e)
         {
 
-             IssueDateHijri = SA.DateTimeFormat.ShortDatePattern;
+            IssueDateHijri = SA.DateTimeFormat.ShortDatePattern;
             if (issuhijritxt.Text == "dd-MM-yyyy")
             {
                 issuhijritxt.Text = "";
@@ -441,7 +444,7 @@ namespace Delmon_Managment_System.Forms
 
         private void issuhijritxt_DragEnter(object sender, DragEventArgs e)
         {
-        
+
         }
 
         private void Visanumtxt_TextChanged(object sender, EventArgs e)
@@ -462,7 +465,7 @@ namespace Delmon_Managment_System.Forms
 
         private void Visanumtxt_Leave(object sender, EventArgs e)
         {
-         
+
         }
 
         private void btnFinish_Click(object sender, EventArgs e)
@@ -475,7 +478,7 @@ namespace Delmon_Managment_System.Forms
                 Visanumtxt.BackColor = Color.Red;
 
             }
-            else 
+            else
             {
 
                 SQLCONN.OpenConection();
@@ -503,7 +506,7 @@ namespace Delmon_Managment_System.Forms
                     SqlParameter paramExpiryDateEN = new SqlParameter("@C7", SqlDbType.Date);
                     paramExpiryDateEN.Value = ExpiryDateENP;
                     SqlParameter paramTotalVisas = new SqlParameter("@C8", SqlDbType.NVarChar);
-                 
+
                     SqlParameter paramRemarks = new SqlParameter("@C9", SqlDbType.NVarChar);
                     paramRemarks.Value = RemarksTxt.Text;
                     dr.Dispose();
@@ -515,9 +518,9 @@ namespace Delmon_Managment_System.Forms
                     {
                         TotalVisa = dr.GetInt32(0);
                     }
-                      paramTotalVisas.Value = TotalVisa;
-                      dr.Dispose();
-                      dr.Close();
+                    paramTotalVisas.Value = TotalVisa;
+                    dr.Dispose();
+                    dr.Close();
 
                     if (DialogResult.Yes == MessageBox.Show("Do You Want to submit this info for Visa No :  " + Visanumtxt.Text + " ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     {
@@ -547,7 +550,7 @@ namespace Delmon_Managment_System.Forms
 
             }
 
-          
+
 
 
 
@@ -562,14 +565,14 @@ namespace Delmon_Managment_System.Forms
 
         private void issuhijritxt_KeyUp(object sender, KeyEventArgs e)
         {
-          
+
 
             if (e.KeyCode == Keys.Enter)
             {
                 if (issuhijritxt.Text != "")
                 {
 
-                     if(issuhijritxt.SelectedText.Contains("/")==true)
+                    if (issuhijritxt.SelectedText.Contains("/") == true)
 
                     {
                         MessageBox.Show("Please type date in format : " + "dd-MM-yyyy" + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -643,7 +646,7 @@ namespace Delmon_Managment_System.Forms
                 if (issuhijritxt.Text != "")
                 {
 
-                    if (issuhijritxt.SelectedText.Contains("/")==true)
+                    if (issuhijritxt.SelectedText.Contains("/") == true)
 
                     {
                         MessageBox.Show("Please type date in format : " + "dd-MM-yyyy" + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -716,7 +719,7 @@ namespace Delmon_Managment_System.Forms
                 if (issuhijritxt.Text != "")
                 {
 
-                    if (issuhijritxt.SelectedText.Contains("/")==true)
+                    if (issuhijritxt.SelectedText.Contains("/") == true)
                     {
                         MessageBox.Show("Please type date in format : " + "dd-MM-yyyy" + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
@@ -788,7 +791,7 @@ namespace Delmon_Managment_System.Forms
                 if (issuhijritxt.Text != "")
                 {
 
-                    if (issuhijritxt.SelectedText.Contains("/")==true)
+                    if (issuhijritxt.SelectedText.Contains("/") == true)
 
                     {
                         MessageBox.Show("Please type date in format : " + "dd-MM-yyyy" + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -911,8 +914,8 @@ namespace Delmon_Managment_System.Forms
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            AddBtn.Visible  = DeleteBtn.Visible=btnFinish.Visible= true;
-            btnNew.Visible =Findbtn.Visible= false;
+            AddBtn.Visible = DeleteBtn.Visible = btnFinish.Visible = true;
+            btnNew.Visible = Findbtn.Visible = false;
             ClearTextBoxes();
             VisaFrm_Load(sender, e);
             ChangeEnabled(true);
@@ -958,9 +961,9 @@ namespace Delmon_Managment_System.Forms
                         ExpiaryHijritxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString());
                         ExpiryDateENP = (dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString());
                         TotalVisastxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString());
-                        RemarksTxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString());  
-                    
-                      
+                        RemarksTxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString());
+
+
                         dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber=" + VisaNumberID + " ");
 
 
@@ -976,7 +979,7 @@ namespace Delmon_Managment_System.Forms
         {
 
         }
-       
+
         private void dataGridView2_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             dataGridView2.Visible = true;
@@ -992,13 +995,14 @@ namespace Delmon_Managment_System.Forms
                     {
 
                         FileNumberID = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        VisaFileNumberID.Text = FileNumberID.ToString();
 
 
                     }
                 }
             }
         }
-   
+
 
 
         private void DeleteBtn_Click(object sender, EventArgs e)
@@ -1011,7 +1015,7 @@ namespace Delmon_Managment_System.Forms
                 MessageBox.Show("Please select visa number first ! " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
-            else 
+            else
             {
                 if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
@@ -1086,11 +1090,11 @@ namespace Delmon_Managment_System.Forms
         private void issuhijritxt_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-            ( e.KeyChar !='-'))
+            (e.KeyChar != '-'))
 
             {
                 e.Handled = true;
-                MessageBox.Show(" this Charchter '/' was not allowed please use '-' " , "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(" this Charchter '/' was not allowed please use '-' ", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             else
@@ -1187,6 +1191,107 @@ namespace Delmon_Managment_System.Forms
                 cmbStatus.Focus();
                 e.Handled = true;
             }
+        }
+
+        private void cmbcandidates_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridView2.Visible = true;
+            foreach (DataGridViewRow rw in this.dataGridView2.Rows)
+            {
+                for (int i = 0; i < rw.Cells.Count; i++)
+                {
+                    if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
+                    {
+                        //   MessageBox.Show("ogg");       
+                    }
+                    else
+                    {
+
+                        FileNumberID = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        VisaFileNumberID.Text = FileNumberID.ToString();
+
+
+                    }
+                }
+            }
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridView2.Visible = true;
+            foreach (DataGridViewRow rw in this.dataGridView1.Rows)
+            {
+                for (int i = 0; i < rw.Cells.Count; i++)
+                {
+                    if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
+                    {
+                        //   MessageBox.Show("ogg");       
+                    }
+                    else
+                    {
+
+                        VisaNumberID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        cmbCompany.Text = (dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
+                        ReceviedPicker.Value = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[2].Value);
+                        issuhijritxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString());
+                        IssueDateEN = (dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
+                        ExpiaryHijritxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString());
+                        ExpiryDateENP = (dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString());
+                        TotalVisastxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString());
+                        RemarksTxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString());
+
+
+                        dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber=" + VisaNumberID + " ");
+
+
+
+
+                    }
+                }
+            }
+
+        }
+
+        private void btnAssign_Click(object sender, EventArgs e)
+        {
+            
+            SqlParameter paramPID = new SqlParameter("@C1", SqlDbType.Int);
+            paramPID.Value = cmbcandidates.SelectedValue;
+
+            SqlParameter paramFilenumber = new SqlParameter("@C2", SqlDbType.Int);
+            paramFilenumber.Value = FileNumberID;
+            MessageBox.Show(FileNumberID.ToString());
+            MessageBox.Show(cmbcandidates.SelectedValue.ToString());
+
+
+
+            if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            {
+                SQLCONN.OpenConection();
+                SQLCONN.ExecuteQueries("update  VISAJobList set PI_ID=@C1 where FileNumber=@C2",
+                                              paramPID, paramFilenumber);
+                MessageBox.Show("File Number Has been Assign Successfully   ");
+
+                
+                dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber=" + VisaNumberID + " ");
+                // ClearTextBoxes();
+                SQLCONN.CloseConnection();
+
+            }
+            else
+            {
+
+            }
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

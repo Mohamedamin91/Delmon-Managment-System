@@ -14,6 +14,11 @@ namespace Delmon_Managment_System
     public partial class FrmLogin : Form
     {
         SQLCONNECTION SQLCONN = new SQLCONNECTION();
+        public int PI_ID = 0;
+        public string UserType ;
+        public string UserName;
+        public string Email ;
+
         public FrmLogin()
         {
             InitializeComponent();
@@ -33,13 +38,29 @@ namespace Delmon_Managment_System
 
         private void loginbtn_Click(object sender, EventArgs e)
         {
+            SqlParameter paramUserName = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramUserName.Value = Usertxt.Text;
+            SqlParameter paramPassword= new SqlParameter("@C2", SqlDbType.NVarChar);
+            paramPassword.Value = passtxt.Text;
             SQLCONN.OpenConection();
-            SqlDataReader dr = SQLCONN.DataReader("select username,pass from PersonalInformation where username='" + Usertxt.Text + "'and pass='" + passtxt.Text + "'");
-            if (dr.HasRows)
+            //SqlDataReader dr = SQLCONN.DataReader("select username,pass from tblUser where UserName='" + Usertxt.Text + "'and Password='" + passtxt.Text + "'");
+           
+            SqlDataReader dr = SQLCONN.DataReader(" select [UserID],[PI_ID],UserType,[Email], UserName,Password from tblUser , tblUserType where tblUser.UserTypeID=tblUserType.UserTypeID and UserName=@C1 and Password=@C2 and IsActive=1", paramUserName,paramPassword );
+            if (dr.Read())
 
             {
-                MessageBox.Show("done!");
+                //after successful it will redirect  to next page .
+                //saving user info
+                PI_ID = int.Parse(dr["PI_ID"].ToString());
+                UserType = (dr["UserType"].ToString());
+                UserName = (dr["UserName"].ToString());
+                Email = (dr["Email"].ToString());
 
+                //saving user info
+
+                FormMainMenu mainMenu = new FormMainMenu();
+                mainMenu.Show();
+                this.Hide();
                 if (remembercheck.Checked)
                 {
                     Delmon_Managment_System.Properties.Settings.Default.UserName = Usertxt.Text;

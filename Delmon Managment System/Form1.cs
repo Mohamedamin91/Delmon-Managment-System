@@ -13,6 +13,7 @@ namespace Delmon_Managment_System
 {
     public partial class FormMainMenu : Form
     {
+        
         //Fields
         private Button currentButton;
         private Random random;
@@ -21,6 +22,7 @@ namespace Delmon_Managment_System
         public FormMainMenu()
         {
             InitializeComponent();
+           
             random = new Random();
             btnCloseChildForm.Visible = false;
             this.Text = string.Empty;
@@ -99,6 +101,7 @@ namespace Delmon_Managment_System
         {
             panelTitleBar.BackColor = Color.FromArgb(178,34,34);
             lblTitle.BackColor = Color.FromArgb(178,34,34);
+          
         }
 
         private void btnvisa_Click(object sender, EventArgs e)
@@ -195,6 +198,11 @@ namespace Delmon_Managment_System
         {
             this.WindowState = FormWindowState.Minimized;
 
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            Application.Restart();
         }
     }
 }
