@@ -1276,6 +1276,8 @@ namespace Delmon_Managment_System.Forms
                 SQLCONN.ExecuteQueries("update  VISAJobList set PI_ID=@C1 where FileNumber=@C2",
                                               paramPID, paramFilenumber);
                 MessageBox.Show("File Number Has been Assign Successfully   ");
+                VisaFileNumberID.Text = "";
+                cmbcandidates.Text = "Select";
 
                 
                 dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber=" + VisaNumberID + " ");

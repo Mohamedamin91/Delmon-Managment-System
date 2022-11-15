@@ -31,8 +31,8 @@ namespace Delmon_Managment_System
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMainMenu));
             this.panelLogo = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             this.btnNotifications = new System.Windows.Forms.Button();
             this.btnBilling = new System.Windows.Forms.Button();
             this.btnprinting = new System.Windows.Forms.Button();
@@ -46,8 +46,6 @@ namespace Delmon_Managment_System
             this.lblTitle = new System.Windows.Forms.Label();
             this.panelDesktopPanel = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.panelLogo.SuspendLayout();
             this.panelMenu.SuspendLayout();
             this.panelTitleBar.SuspendLayout();
             this.panelDesktopPanel.SuspendLayout();
@@ -56,28 +54,16 @@ namespace Delmon_Managment_System
             // 
             // panelLogo
             // 
-            this.panelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(123)))));
-            this.panelLogo.Controls.Add(this.label1);
+            this.panelLogo.BackColor = System.Drawing.Color.Firebrick;
             this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelLogo.Location = new System.Drawing.Point(0, 0);
             this.panelLogo.Name = "panelLogo";
             this.panelLogo.Size = new System.Drawing.Size(200, 80);
             this.panelLogo.TabIndex = 0;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.LightGray;
-            this.label1.Location = new System.Drawing.Point(45, 5);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "DELMON";
-            // 
             // panelMenu
             // 
-            this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.panelMenu.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panelMenu.Controls.Add(this.button2);
             this.panelMenu.Controls.Add(this.btnNotifications);
             this.panelMenu.Controls.Add(this.btnBilling);
@@ -91,12 +77,31 @@ namespace Delmon_Managment_System
             this.panelMenu.Size = new System.Drawing.Size(200, 581);
             this.panelMenu.TabIndex = 0;
             // 
+            // button2
+            // 
+            this.button2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.ForeColor = System.Drawing.Color.Navy;
+            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
+            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button2.Location = new System.Drawing.Point(0, 382);
+            this.button2.Name = "button2";
+            this.button2.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.button2.Size = new System.Drawing.Size(200, 60);
+            this.button2.TabIndex = 6;
+            this.button2.Text = "Logout";
+            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
             // btnNotifications
             // 
             this.btnNotifications.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnNotifications.FlatAppearance.BorderSize = 0;
             this.btnNotifications.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNotifications.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnNotifications.ForeColor = System.Drawing.Color.Navy;
             this.btnNotifications.Image = ((System.Drawing.Image)(resources.GetObject("btnNotifications.Image")));
             this.btnNotifications.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnNotifications.Location = new System.Drawing.Point(0, 322);
@@ -115,7 +120,7 @@ namespace Delmon_Managment_System
             this.btnBilling.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnBilling.FlatAppearance.BorderSize = 0;
             this.btnBilling.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBilling.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnBilling.ForeColor = System.Drawing.Color.Navy;
             this.btnBilling.Image = ((System.Drawing.Image)(resources.GetObject("btnBilling.Image")));
             this.btnBilling.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnBilling.Location = new System.Drawing.Point(0, 262);
@@ -134,7 +139,7 @@ namespace Delmon_Managment_System
             this.btnprinting.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnprinting.FlatAppearance.BorderSize = 0;
             this.btnprinting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnprinting.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnprinting.ForeColor = System.Drawing.Color.Navy;
             this.btnprinting.Image = ((System.Drawing.Image)(resources.GetObject("btnprinting.Image")));
             this.btnprinting.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnprinting.Location = new System.Drawing.Point(0, 202);
@@ -153,7 +158,7 @@ namespace Delmon_Managment_System
             this.btnemployee.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnemployee.FlatAppearance.BorderSize = 0;
             this.btnemployee.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnemployee.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnemployee.ForeColor = System.Drawing.Color.Navy;
             this.btnemployee.Image = ((System.Drawing.Image)(resources.GetObject("btnemployee.Image")));
             this.btnemployee.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnemployee.Location = new System.Drawing.Point(0, 142);
@@ -172,7 +177,7 @@ namespace Delmon_Managment_System
             this.btnvisa.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnvisa.FlatAppearance.BorderSize = 0;
             this.btnvisa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnvisa.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnvisa.ForeColor = System.Drawing.Color.Navy;
             this.btnvisa.Image = ((System.Drawing.Image)(resources.GetObject("btnvisa.Image")));
             this.btnvisa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnvisa.Location = new System.Drawing.Point(0, 80);
@@ -293,25 +298,6 @@ namespace Delmon_Managment_System
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // button2
-            // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.ForeColor = System.Drawing.Color.Gainsboro;
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(0, 382);
-            this.button2.Name = "button2";
-            this.button2.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.button2.Size = new System.Drawing.Size(200, 60);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Logout";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
-            // 
             // FormMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -325,8 +311,6 @@ namespace Delmon_Managment_System
             this.Text = "Main Menu";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.panelLogo.ResumeLayout(false);
-            this.panelLogo.PerformLayout();
             this.panelMenu.ResumeLayout(false);
             this.panelTitleBar.ResumeLayout(false);
             this.panelTitleBar.PerformLayout();
@@ -347,7 +331,6 @@ namespace Delmon_Managment_System
         private System.Windows.Forms.Button btnNotifications;
         private System.Windows.Forms.Panel panelTitleBar;
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panelDesktopPanel;
         private System.Windows.Forms.Button btnCloseChildForm;
         private System.Windows.Forms.PictureBox pictureBox1;

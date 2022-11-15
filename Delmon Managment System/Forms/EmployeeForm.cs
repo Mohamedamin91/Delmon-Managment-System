@@ -21,6 +21,7 @@ namespace Delmon_Managment_System.Forms
         int EMPID = 0;
         int PI_ID = 0;
         static Regex validate_emailaddress = email_validation();
+        int id_History = 0;
 
 
 
@@ -54,8 +55,8 @@ namespace Delmon_Managment_System.Forms
             };
 
             func(Controls);
-            cmbGender.Text = cmbMartialStatus.Text = "";
-        //    dataGridView1.DataSource = null;
+            cmbGender.Text = cmbPersonalStatusStatus.Text = "";
+            //    dataGridView1.DataSource = null;
 
 
 
@@ -95,9 +96,21 @@ namespace Delmon_Managment_System.Forms
             //cmbReferredBy.DisplayMember = "EmpName";
             //cmbReferredBy.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT empid,EmpName FROM PersonalInformation ");
 
-            //cmbStatus.ValueMember = "statusid";
-            //cmbStatus.DisplayMember = "status";
-            //cmbStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select statusid,status from visastatus where RefrenceID=2  ");
+            cmbPersonalStatusStatus.ValueMember = "StatusID";
+            cmbPersonalStatusStatus.DisplayMember = "StatusValue";
+            cmbPersonalStatusStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" select  StatusID , StatusValue  from StatusTBL where RefrenceID=2  ");
+
+
+            cmbEmployJobHistory.ValueMember = "JobID";
+            cmbEmployJobHistory.DisplayMember = "JobTitleEN";
+            cmbEmployJobHistory.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS");
+
+
+            cmbempdepthistory.ValueMember = "DeptName";
+            cmbempdepthistory.DisplayMember = "Dept_Type_Name";
+            cmbempdepthistory.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT [DeptName],Dept_Type_Name FROM [DelmonGroupDB].[dbo].[DEPARTMENTS], DeptTypes where DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID");
+
+
 
 
             //cmbCountry.ValueMember = "CountryId";
@@ -165,7 +178,7 @@ namespace Delmon_Managment_System.Forms
             SqlParameter paramGender = new SqlParameter("@C5", SqlDbType.NVarChar);
             paramGender.Value = cmbGender.SelectedItem;
             SqlParameter paramMartialStatus = new SqlParameter("@C6", SqlDbType.NVarChar);
-            paramMartialStatus.Value = cmbMartialStatus.SelectedItem;
+            paramMartialStatus.Value = cmbPersonalStatusStatus.SelectedItem;
 
 
             SqlParameter paramPID = new SqlParameter("@id", SqlDbType.Int);
@@ -293,7 +306,7 @@ namespace Delmon_Managment_System.Forms
                     dr.Close();
                     tabControl1.Enabled = true;
                     dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from PersonalInformation order by pi_id ");
-                //    ClearTextBoxes();
+                    //    ClearTextBoxes();
 
                 }
                 else
@@ -353,7 +366,7 @@ namespace Delmon_Managment_System.Forms
         {
             if (e.KeyCode == Keys.Enter)
             {
-                cmbMartialStatus.Focus();
+                cmbPersonalStatusStatus.Focus();
                 e.Handled = true;
             }
         }
@@ -549,7 +562,7 @@ namespace Delmon_Managment_System.Forms
                 MessageBox.Show("Record saved Successfully");
 
                 dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CandidateID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] ,[PI_ID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and PI_ID =  " + PI_ID + " ");
-               // ClearTextBoxes();
+                // ClearTextBoxes();
                 SQLCONN.CloseConnection();
 
             }
@@ -713,7 +726,7 @@ namespace Delmon_Managment_System.Forms
 
                     PI_ID = EMPID;
                     dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CandidateID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] ,[PI_ID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and PI_ID =  " + PI_ID + " ");
-                 // ClearTextBoxes();
+                    // ClearTextBoxes();
                     SQLCONN.CloseConnection();
 
                 }
@@ -765,7 +778,7 @@ namespace Delmon_Managment_System.Forms
                     MessageBox.Show("Record Updated Successfully");
                     PI_ID = EMPID;
                     dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[P_Id] ,[name],[documentValue] ,[url] ,[last_update] ,[DocumentType].Doc_Type ,[RefrenceID]FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and P_Id =  " + PI_ID + " ");
-               //    ClearTextBoxes();
+                    //    ClearTextBoxes();
                     SQLCONN.CloseConnection();
 
                 }
@@ -789,10 +802,10 @@ namespace Delmon_Managment_System.Forms
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            AddBtn.Visible  = true;
-            btnNew.Visible  = DeleteBTN.Visible = Updatebtn.Visible =false;
+            AddBtn.Visible = true;
+            btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = false;
             ClearTextBoxes();
-           // EmployeeForm_Load(sender, e);
+            // EmployeeForm_Load(sender, e);
             this.ActiveControl = firstnametxt;
 
 
@@ -800,8 +813,8 @@ namespace Delmon_Managment_System.Forms
 
         private void tabControl1_MouseClick(object sender, MouseEventArgs e)
         {
-              PI_ID = EMPID;
-          
+            PI_ID = EMPID;
+
             if (tabControl1.SelectedTab == tabControl1.TabPages[0])
             {
                 dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CandidateID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] ,[PI_ID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and PI_ID =  " + PI_ID + " ");
@@ -814,8 +827,9 @@ namespace Delmon_Managment_System.Forms
             }
             if (tabControl1.SelectedTab == tabControl1.TabPages[2])
             {
-                dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT [PI_ID],StatusTBL.StatusValue,[JOBS].JobTitleEN, DeptTypes.Dept_Type_Name,[StartDate],[EndDate] FROM[DelmonGroupDB].[dbo].[EmploymentHistory], JOBS, DEPARTMENTS, StatusTBL, DeptTypes where StatusTBL.StatusID = EmploymentHistory.EmploymentStatusID and DEPARTMENTS.DEPTID = EmploymentHistory.DeptID  and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID and JOBS.JobID = EmploymentHistory.JobID  and PI_ID =  " + PI_ID + " ");
-
+                dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("      SELECT id_History,[PI_ID],StatusTBL.StatusValue,[JOBS].JobTitleEN, DeptTypes.Dept_Type_Name,[StartDate],[EndDate]  FROM [DelmonGroupDB].[dbo].[EmploymentHistory], JOBS, DEPARTMENTS, StatusTBL, DeptTypes  where   StatusTBL.StatusID = EmploymentHistory.EmploymentStatusID and DEPARTMENTS.DeptName = EmploymentHistory.DeptID   and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID  and JOBS.JobID = EmploymentHistory.JobID  and  PI_ID =  " + PI_ID + " ");
+                cmbPersonalStatusStatus.Text = "Select";
+                cmbempdepthistory.Text = "Select";
             }
         }
 
@@ -949,8 +963,198 @@ namespace Delmon_Managment_System.Forms
                 }
             }
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnaddhitory_Click(object sender, EventArgs e)
+        {
+            SqlParameter paramStatusHistory = new SqlParameter("@C1", SqlDbType.Int);
+            paramStatusHistory.Value = cmbPersonalStatusStatus.SelectedValue;
+            SqlParameter paramJobHistory = new SqlParameter("@C2", SqlDbType.NVarChar);
+            paramJobHistory.Value = cmbEmployJobHistory.SelectedValue;
+            SqlParameter ParamtDepartmentHistory = new SqlParameter("@C3", SqlDbType.Int);
+            ParamtDepartmentHistory.Value = cmbempdepthistory.SelectedValue;
+            SqlParameter paramstartdate = new SqlParameter("@C4", SqlDbType.Date);
+            paramstartdate.Value = StartDatePicker.Value;
+            SqlParameter paramenddate = new SqlParameter("@C5", SqlDbType.Date);
+            paramenddate.Value = StartDatePicker.Value;
+
+            SqlParameter paramPID = new SqlParameter("@id", SqlDbType.Int);
+            paramPID.Value = PI_ID;
+            PI_ID = EMPID;
+
+
+            if (StartDatePicker.Checked == false)
+            {
+                DateTime enter_date = new DateTime(1900, 01, 01);
+                StartDatePicker.Value = enter_date;
+
+            }
+             if (EndDatePicker.Checked == true)
+            {
+
+                DateTime enter_date = new DateTime(1900, 01, 01);
+                EndDatePicker.Value = enter_date;
+
+
+            }
+
+
+            if (PI_ID!=0)
+            {
+                SQLCONN.OpenConection();
+              
+
+
+                 if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {    
+                       SQLCONN.ExecuteQueries("insert into EmploymentHistory (EmploymentStatusID,JobID,DeptID,StartDate,EndDate,PI_ID) values (@C1,@C2,@C3,@C4,@C5,@id)",
+                                                   paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramPID);
+                    MessageBox.Show("Record saved Successfully");
+
+                    dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT [PI_ID],StatusTBL.StatusValue,[JOBS].JobTitleEN, DeptTypes.Dept_Type_Name,[StartDate],[EndDate]  FROM [DelmonGroupDB].[dbo].[EmploymentHistory], JOBS, DEPARTMENTS, StatusTBL, DeptTypes  where   StatusTBL.StatusID = EmploymentHistory.EmploymentStatusID and DEPARTMENTS.DeptName = EmploymentHistory.DeptID   and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID  and JOBS.JobID = EmploymentHistory.JobID  and PI_ID =  " + PI_ID + " ");
+
+                }
+                else
+                {
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please Choose A Person !  ");
+                tabControl1.Enabled = false;
+            }
+            SQLCONN.CloseConnection();
+        }
+
+        private void StartDatePicker_ValueChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void btndeletehistory_Click(object sender, EventArgs e)
+        {
+            SqlParameter paramid_History = new SqlParameter("@id", SqlDbType.Int);
+            paramid_History.Value = id_History;
+
+
+
+            if (EMPID != 0)
+            {
+
+                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    SQLCONN.OpenConection();
+                    SQLCONN.ExecuteQueries("delete from [EmploymentHistory] where id_History=@id", paramid_History);
+                    SQLCONN.ExecuteQueries(" declare @max int select @max = max([id_History]) from[EmploymentHistory] if @max IS NULL SET @max = 0 DBCC CHECKIDENT('[EmploymentHistory]', RESEED, @max)");
+                    MessageBox.Show("Record Deleted Successfully");
+                    dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT id_History,[PI_ID],StatusTBL.StatusValue,[JOBS].JobTitleEN, DeptTypes.Dept_Type_Name,[StartDate],[EndDate]  FROM [DelmonGroupDB].[dbo].[EmploymentHistory], JOBS, DEPARTMENTS, StatusTBL, DeptTypes  where   StatusTBL.StatusID = EmploymentHistory.EmploymentStatusID and DEPARTMENTS.DeptName = EmploymentHistory.DeptID   and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID  and JOBS.JobID = EmploymentHistory.JobID  and PI_ID =  " + PI_ID + " ");
+
+                    SQLCONN.CloseConnection();
+                    ClearTextBoxes();
+
+
+
+                }
+                else
+                {
+
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Please Select Record to Delete");
+            }
+        }
+
+        private void dataGridView4_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            foreach (DataGridViewRow rw in this.dataGridView4.Rows)
+            {
+                for (int i = 0; i < rw.Cells.Count; i++)
+                {
+                    if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
+                    {
+                    }
+                    else
+                    {
+
+                        id_History = Convert.ToInt32(dataGridView4.Rows[e.RowIndex].Cells[0].Value.ToString());
+             
+                    }
+                }
+            }
+        }
+
+        private void btnupdatehistory_Click(object sender, EventArgs e)
+        {
+            SqlParameter paramStatusHistory = new SqlParameter("@C1", SqlDbType.Int);
+            paramStatusHistory.Value = cmbPersonalStatusStatus.SelectedValue;
+            SqlParameter paramJobHistory = new SqlParameter("@C2", SqlDbType.NVarChar);
+            paramJobHistory.Value = cmbEmployJobHistory.SelectedValue;
+            SqlParameter ParamtDepartmentHistory = new SqlParameter("@C3", SqlDbType.Int);
+            ParamtDepartmentHistory.Value = cmbempdepthistory.SelectedValue;
+            SqlParameter paramstartdate = new SqlParameter("@C4", SqlDbType.Date);
+            paramstartdate.Value = StartDatePicker.Value;
+            SqlParameter paramenddate = new SqlParameter("@C5", SqlDbType.Date);
+            paramenddate.Value = StartDatePicker.Value;
+
+            SqlParameter paramid_History = new SqlParameter("@id", SqlDbType.Int);
+            paramid_History.Value = id_History;
+            PI_ID = EMPID;
+
+
+            if (StartDatePicker.Checked == false)
+            {
+                DateTime enter_date = new DateTime(1900, 01, 01);
+                StartDatePicker.Value = enter_date;
+
+            }
+            if (EndDatePicker.Checked == true)
+            {
+
+                DateTime enter_date = new DateTime(1900, 01, 01);
+                EndDatePicker.Value = enter_date;
+
+
+            }
+
+
+            if (PI_ID != 0)
+            {
+                SQLCONN.OpenConection();
+
+
+
+                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    SQLCONN.ExecuteQueries("update  EmploymentHistory set EmploymentStatusID=@C1,JobID=@C2,DeptID=@C3,StartDate=@C4,EndDate=@C5 where  id_History =@id )",
+                                                paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramid_History);
+                    MessageBox.Show("Record saved Successfully");
+
+                    dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT id_History,[PI_ID],StatusTBL.StatusValue,[JOBS].JobTitleEN, DeptTypes.Dept_Type_Name,[StartDate],[EndDate]  FROM [DelmonGroupDB].[dbo].[EmploymentHistory], JOBS, DEPARTMENTS, StatusTBL, DeptTypes  where   StatusTBL.StatusID = EmploymentHistory.EmploymentStatusID and DEPARTMENTS.DeptName = EmploymentHistory.DeptID   and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID  and JOBS.JobID = EmploymentHistory.JobID  and PI_ID =  " + PI_ID + " ");
+
+                }
+                else
+                {
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please Choose A Person !  ");
+                tabControl1.Enabled = false;
+            }
+            SQLCONN.CloseConnection();
+        }
     }
-}
+    }
+
     
 
   
