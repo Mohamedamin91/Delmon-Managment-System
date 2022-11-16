@@ -63,7 +63,7 @@ namespace Delmon_Managment_System
             // 
             // panelMenu
             // 
-            this.panelMenu.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelMenu.BackColor = System.Drawing.Color.Snow;
             this.panelMenu.Controls.Add(this.button2);
             this.panelMenu.Controls.Add(this.btnNotifications);
             this.panelMenu.Controls.Add(this.btnBilling);

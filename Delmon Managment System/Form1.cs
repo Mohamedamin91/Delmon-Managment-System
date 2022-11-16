@@ -54,17 +54,18 @@ namespace Delmon_Managment_System
                 if (currentButton != (Button)btnSender)
                 {
                     DisableButton();
-                 //   Color color = SelectThemeColor();
-                    Color color = Color.FromArgb(178,34,34);
-                    currentButton = (Button)btnSender;
-                    currentButton.BackColor = color;
-                    currentButton.ForeColor = Color.White;
-                    currentButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                    panelTitleBar.BackColor = color;
-                    lblTitle.BackColor = color;
-                    panelLogo.BackColor = ThemeColor.ChangeColorBrightness(color, -0.3);
-                    ThemeColor.PrimaryColor = color;
-                    ThemeColor.SecondaryColor = ThemeColor.ChangeColorBrightness(color, -0.3);
+                    //   Color color = SelectThemeColor();
+                    //   Color color = Color.FromArgb(178,34,34);
+                       Color color = Color.Snow;
+                    //currentButton = (Button)btnSender;
+                    //currentButton.BackColor = color;
+                    //currentButton.ForeColor = Color.White;
+                    //currentButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    //panelTitleBar.BackColor = color;
+                    //lblTitle.BackColor = color;
+                  //  panelLogo.BackColor = ThemeColor.ChangeColorBrightness(color, -0.3);
+                  //  ThemeColor.PrimaryColor = color;
+                  //  ThemeColor.SecondaryColor = ThemeColor.ChangeColorBrightness(color, -0.3);
                     btnCloseChildForm.Visible = true;
                 }
             }
@@ -75,8 +76,9 @@ namespace Delmon_Managment_System
             {
                 if (previousBtn.GetType() == typeof(Button))
                 {
-                    previousBtn.BackColor = Color.FromArgb(53, 52, 141);
-                    previousBtn.ForeColor = Color.Gainsboro;
+                  //  previousBtn.BackColor = Color.FromArgb(53, 52, 141);
+                    previousBtn.BackColor = Color.Snow;
+                    previousBtn.ForeColor = Color.FromArgb(53, 52, 141);
                     previousBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 }
             }
