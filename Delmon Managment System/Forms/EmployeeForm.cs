@@ -129,6 +129,8 @@ namespace Delmon_Managment_System.Forms
             SQLCONN.OpenConection();
             dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from PersonalInformation where firstname LIKE '" + Employeetxt.Text + "%' or  secondname LIKE '" + Employeetxt.Text + "%' or thirdname LIKE '" + Employeetxt.Text + "%' or lastname LIKE '" + Employeetxt.Text + "%'");
             SQLCONN.CloseConnection();
+            firstnametxt.Text = secondnametxt.Text = thirdnametxt.Text = lastnametxt.Text = "";
+            cmbMartialStatus.Text = cmbGender.Text = "";
             tabControl1.Enabled = true;
         }
 

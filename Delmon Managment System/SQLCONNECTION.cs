@@ -14,7 +14,7 @@ namespace Delmon_Managment_System
    
    public  class SQLCONNECTION
     {
-        
+
         string ConnectionString = "Data Source=192.168.1.8;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@";
         SqlConnection con;
         public void OpenConection()
@@ -29,6 +29,8 @@ namespace Delmon_Managment_System
             con.Close();
         }
 
+      
+     
 
         public void ExecuteQueries(string Query_, params SqlParameter[] parameters)
         {

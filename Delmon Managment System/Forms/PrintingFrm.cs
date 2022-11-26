@@ -12,6 +12,7 @@ namespace Delmon_Managment_System.Forms
 {
     public partial class PrintingFrm : Form
     {
+        SQLCONNECTION SQLCONN = new SQLCONNECTION();
         public PrintingFrm()
         {
             InitializeComponent();
@@ -19,7 +20,7 @@ namespace Delmon_Managment_System.Forms
 
         private void PrintingFrm_Load(object sender, EventArgs e)
         {
-            LoadTheme(); 
+            //LoadTheme(); 
 
         }
         private void LoadTheme()
@@ -36,6 +37,19 @@ namespace Delmon_Managment_System.Forms
             }
             label4.ForeColor = ThemeColor.SecondaryColor;
             label5.ForeColor = ThemeColor.PrimaryColor;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void emptxt_TextChanged(object sender, EventArgs e)
+        {
+            SQLCONN.OpenConection();
+            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from PrintLog  where  UserName LIKE '%" + emptxt.Text + "%'");
+            SQLCONN.CloseConnection();
+           
         }
     }
 }

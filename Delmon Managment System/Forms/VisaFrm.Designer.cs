@@ -69,7 +69,6 @@ namespace Delmon_Managment_System.Forms
             this.issuhijritxt = new System.Windows.Forms.TextBox();
             this.ReceviedPicker = new System.Windows.Forms.DateTimePicker();
             this.Findbtn = new System.Windows.Forms.Button();
-            this.issuhijritxt2 = new System.Windows.Forms.MaskedTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnAssign = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
@@ -133,15 +132,17 @@ namespace Delmon_Managment_System.Forms
             // AddBtn
             // 
             this.AddBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.AddBtn.BackColor = System.Drawing.Color.Firebrick;
             this.AddBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AddBtn.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddBtn.Location = new System.Drawing.Point(592, 984);
+            this.AddBtn.ForeColor = System.Drawing.Color.White;
+            this.AddBtn.Location = new System.Drawing.Point(717, 802);
             this.AddBtn.Margin = new System.Windows.Forms.Padding(4);
             this.AddBtn.Name = "AddBtn";
             this.AddBtn.Size = new System.Drawing.Size(66, 36);
             this.AddBtn.TabIndex = 6;
             this.AddBtn.Text = "Add";
-            this.AddBtn.UseVisualStyleBackColor = true;
+            this.AddBtn.UseVisualStyleBackColor = false;
             this.AddBtn.Visible = false;
             this.AddBtn.Click += new System.EventHandler(this.AddBtn_Click);
             // 
@@ -270,7 +271,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(2314, 505);
+            this.button1.Location = new System.Drawing.Point(2314, 439);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(88, 51);
@@ -298,7 +299,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbCompany.Location = new System.Drawing.Point(158, 79);
             this.cmbCompany.Margin = new System.Windows.Forms.Padding(4);
             this.cmbCompany.Name = "cmbCompany";
-            this.cmbCompany.Size = new System.Drawing.Size(260, 25);
+            this.cmbCompany.Size = new System.Drawing.Size(322, 25);
             this.cmbCompany.TabIndex = 34;
             this.cmbCompany.SelectedIndexChanged += new System.EventHandler(this.cmbCompany_SelectedIndexChanged);
             this.cmbCompany.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbCompany_KeyDown);
@@ -409,15 +410,17 @@ namespace Delmon_Managment_System.Forms
             // btnFinish
             // 
             this.btnFinish.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnFinish.BackColor = System.Drawing.Color.Firebrick;
             this.btnFinish.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFinish.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFinish.Location = new System.Drawing.Point(813, 984);
+            this.btnFinish.ForeColor = System.Drawing.Color.White;
+            this.btnFinish.Location = new System.Drawing.Point(938, 802);
             this.btnFinish.Margin = new System.Windows.Forms.Padding(4);
             this.btnFinish.Name = "btnFinish";
             this.btnFinish.Size = new System.Drawing.Size(66, 36);
             this.btnFinish.TabIndex = 41;
             this.btnFinish.Text = "Finish";
-            this.btnFinish.UseVisualStyleBackColor = true;
+            this.btnFinish.UseVisualStyleBackColor = false;
             this.btnFinish.Visible = false;
             this.btnFinish.Click += new System.EventHandler(this.btnFinish_Click);
             // 
@@ -448,15 +451,17 @@ namespace Delmon_Managment_System.Forms
             // btnNew
             // 
             this.btnNew.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnNew.BackColor = System.Drawing.Color.Firebrick;
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNew.Location = new System.Drawing.Point(372, 984);
+            this.btnNew.ForeColor = System.Drawing.Color.White;
+            this.btnNew.Location = new System.Drawing.Point(497, 802);
             this.btnNew.Margin = new System.Windows.Forms.Padding(4);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(66, 36);
             this.btnNew.TabIndex = 82;
             this.btnNew.Text = "New";
-            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.UseVisualStyleBackColor = false;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // dataGridView2
@@ -464,7 +469,7 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(543, 426);
+            this.dataGridView2.Location = new System.Drawing.Point(545, 321);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersWidth = 123;
@@ -476,15 +481,17 @@ namespace Delmon_Managment_System.Forms
             // DeleteBtn
             // 
             this.DeleteBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.DeleteBtn.BackColor = System.Drawing.Color.Firebrick;
             this.DeleteBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DeleteBtn.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DeleteBtn.Location = new System.Drawing.Point(703, 984);
+            this.DeleteBtn.ForeColor = System.Drawing.Color.White;
+            this.DeleteBtn.Location = new System.Drawing.Point(828, 802);
             this.DeleteBtn.Margin = new System.Windows.Forms.Padding(4);
             this.DeleteBtn.Name = "DeleteBtn";
             this.DeleteBtn.Size = new System.Drawing.Size(66, 36);
             this.DeleteBtn.TabIndex = 84;
             this.DeleteBtn.Text = "Delete";
-            this.DeleteBtn.UseVisualStyleBackColor = true;
+            this.DeleteBtn.UseVisualStyleBackColor = false;
             this.DeleteBtn.Visible = false;
             this.DeleteBtn.Click += new System.EventHandler(this.DeleteBtn_Click);
             // 
@@ -544,26 +551,18 @@ namespace Delmon_Managment_System.Forms
             // Findbtn
             // 
             this.Findbtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.Findbtn.BackColor = System.Drawing.Color.Firebrick;
             this.Findbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Findbtn.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Findbtn.Location = new System.Drawing.Point(482, 984);
+            this.Findbtn.ForeColor = System.Drawing.Color.White;
+            this.Findbtn.Location = new System.Drawing.Point(607, 802);
             this.Findbtn.Margin = new System.Windows.Forms.Padding(4);
             this.Findbtn.Name = "Findbtn";
             this.Findbtn.Size = new System.Drawing.Size(66, 36);
             this.Findbtn.TabIndex = 86;
             this.Findbtn.Text = "Find";
-            this.Findbtn.UseVisualStyleBackColor = true;
+            this.Findbtn.UseVisualStyleBackColor = false;
             this.Findbtn.Click += new System.EventHandler(this.Findbtn_Click);
-            // 
-            // issuhijritxt2
-            // 
-            this.issuhijritxt2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.issuhijritxt2.Location = new System.Drawing.Point(276, 153);
-            this.issuhijritxt2.Mask = "00/00/0000";
-            this.issuhijritxt2.Name = "issuhijritxt2";
-            this.issuhijritxt2.Size = new System.Drawing.Size(112, 26);
-            this.issuhijritxt2.TabIndex = 87;
-            this.issuhijritxt2.ValidatingType = typeof(System.DateTime);
             // 
             // groupBox1
             // 
@@ -572,7 +571,7 @@ namespace Delmon_Managment_System.Forms
             this.groupBox1.Controls.Add(this.cmbcandidates);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.VisaFileNumberID);
-            this.groupBox1.Location = new System.Drawing.Point(545, 702);
+            this.groupBox1.Location = new System.Drawing.Point(560, 590);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(377, 186);
             this.groupBox1.TabIndex = 88;
@@ -642,9 +641,8 @@ namespace Delmon_Managment_System.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1623, 1061);
+            this.ClientSize = new System.Drawing.Size(1623, 928);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.issuhijritxt2);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.TotalVisastxt);
@@ -742,7 +740,6 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.TextBox issuhijritxt;
         private System.Windows.Forms.DateTimePicker ReceviedPicker;
         private System.Windows.Forms.Button Findbtn;
-        private System.Windows.Forms.MaskedTextBox issuhijritxt2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox cmbcandidates;

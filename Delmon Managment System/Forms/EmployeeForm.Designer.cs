@@ -30,9 +30,6 @@ namespace Delmon_Managment_System.Forms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeeForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Employeetxt = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -442,11 +439,11 @@ namespace Delmon_Managment_System.Forms
             this.tabControl1.Controls.Add(this.EmploymentHistory);
             this.tabControl1.Controls.Add(this.insurence);
             this.tabControl1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(14, 515);
+            this.tabControl1.Location = new System.Drawing.Point(14, 441);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1053, 692);
+            this.tabControl1.Size = new System.Drawing.Size(1053, 519);
             this.tabControl1.TabIndex = 135;
             this.tabControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseClick);
             // 
@@ -465,7 +462,7 @@ namespace Delmon_Managment_System.Forms
             this.tabContact.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabContact.Name = "tabContact";
             this.tabContact.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabContact.Size = new System.Drawing.Size(1045, 662);
+            this.tabContact.Size = new System.Drawing.Size(1045, 489);
             this.tabContact.TabIndex = 0;
             this.tabContact.Text = "Contact";
             this.tabContact.UseVisualStyleBackColor = true;
@@ -476,7 +473,7 @@ namespace Delmon_Managment_System.Forms
             this.btndeletecontact.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btndeletecontact.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btndeletecontact.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btndeletecontact.Location = new System.Drawing.Point(827, 73);
+            this.btndeletecontact.Location = new System.Drawing.Point(830, 12);
             this.btndeletecontact.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btndeletecontact.Name = "btndeletecontact";
             this.btndeletecontact.Size = new System.Drawing.Size(101, 42);
@@ -490,7 +487,7 @@ namespace Delmon_Managment_System.Forms
             this.btnaddcontact.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnaddcontact.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnaddcontact.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnaddcontact.Location = new System.Drawing.Point(610, 73);
+            this.btnaddcontact.Location = new System.Drawing.Point(613, 12);
             this.btnaddcontact.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnaddcontact.Name = "btnaddcontact";
             this.btnaddcontact.Size = new System.Drawing.Size(101, 42);
@@ -504,7 +501,7 @@ namespace Delmon_Managment_System.Forms
             this.btnupdatecontat.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnupdatecontat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnupdatecontat.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnupdatecontat.Location = new System.Drawing.Point(719, 73);
+            this.btnupdatecontat.Location = new System.Drawing.Point(722, 12);
             this.btnupdatecontat.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnupdatecontat.Name = "btnupdatecontat";
             this.btnupdatecontat.Size = new System.Drawing.Size(101, 42);
@@ -517,34 +514,10 @@ namespace Delmon_Managment_System.Forms
             // 
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView2.Location = new System.Drawing.Point(17, 153);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView2.Name = "dataGridView2";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView2.Size = new System.Drawing.Size(623, 299);
             this.dataGridView2.TabIndex = 132;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
@@ -572,11 +545,11 @@ namespace Delmon_Managment_System.Forms
             this.tabDoc.Controls.Add(this.cmbDocuments);
             this.tabDoc.Controls.Add(this.Doctxt);
             this.tabDoc.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabDoc.Location = new System.Drawing.Point(4, 29);
+            this.tabDoc.Location = new System.Drawing.Point(4, 26);
             this.tabDoc.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabDoc.Name = "tabDoc";
             this.tabDoc.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabDoc.Size = new System.Drawing.Size(1045, 659);
+            this.tabDoc.Size = new System.Drawing.Size(1045, 489);
             this.tabDoc.TabIndex = 1;
             this.tabDoc.Text = "Document";
             this.tabDoc.UseVisualStyleBackColor = true;
@@ -669,7 +642,7 @@ namespace Delmon_Managment_System.Forms
             this.EmploymentHistory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.EmploymentHistory.Name = "EmploymentHistory";
             this.EmploymentHistory.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.EmploymentHistory.Size = new System.Drawing.Size(1045, 662);
+            this.EmploymentHistory.Size = new System.Drawing.Size(1045, 489);
             this.EmploymentHistory.TabIndex = 2;
             this.EmploymentHistory.Text = "Employment History";
             this.EmploymentHistory.UseVisualStyleBackColor = true;
@@ -679,7 +652,7 @@ namespace Delmon_Managment_System.Forms
             this.btnaddhitory.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnaddhitory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnaddhitory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnaddhitory.Location = new System.Drawing.Point(271, 159);
+            this.btnaddhitory.Location = new System.Drawing.Point(271, 157);
             this.btnaddhitory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnaddhitory.Name = "btnaddhitory";
             this.btnaddhitory.Size = new System.Drawing.Size(87, 51);
@@ -693,7 +666,7 @@ namespace Delmon_Managment_System.Forms
             this.btnnewhistory.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnnewhistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnnewhistory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnnewhistory.Location = new System.Drawing.Point(176, 159);
+            this.btnnewhistory.Location = new System.Drawing.Point(176, 157);
             this.btnnewhistory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnnewhistory.Name = "btnnewhistory";
             this.btnnewhistory.Size = new System.Drawing.Size(87, 51);
@@ -706,7 +679,7 @@ namespace Delmon_Managment_System.Forms
             this.btndeletehistory.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btndeletehistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btndeletehistory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btndeletehistory.Location = new System.Drawing.Point(460, 159);
+            this.btndeletehistory.Location = new System.Drawing.Point(460, 157);
             this.btndeletehistory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btndeletehistory.Name = "btndeletehistory";
             this.btndeletehistory.Size = new System.Drawing.Size(87, 51);
@@ -720,7 +693,7 @@ namespace Delmon_Managment_System.Forms
             this.btnupdatehistory.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnupdatehistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnupdatehistory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnupdatehistory.Location = new System.Drawing.Point(365, 159);
+            this.btnupdatehistory.Location = new System.Drawing.Point(365, 157);
             this.btnupdatehistory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnupdatehistory.Name = "btnupdatehistory";
             this.btnupdatehistory.Size = new System.Drawing.Size(87, 51);
@@ -734,7 +707,7 @@ namespace Delmon_Managment_System.Forms
             this.EndDatePicker.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EndDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.EndDatePicker.Location = new System.Drawing.Point(355, 71);
-            this.EndDatePicker.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.EndDatePicker.Margin = new System.Windows.Forms.Padding(5);
             this.EndDatePicker.Name = "EndDatePicker";
             this.EndDatePicker.Size = new System.Drawing.Size(149, 25);
             this.EndDatePicker.TabIndex = 141;
@@ -755,7 +728,7 @@ namespace Delmon_Managment_System.Forms
             this.StartDatePicker.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StartDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.StartDatePicker.Location = new System.Drawing.Point(114, 73);
-            this.StartDatePicker.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.StartDatePicker.Margin = new System.Windows.Forms.Padding(5);
             this.StartDatePicker.Name = "StartDatePicker";
             this.StartDatePicker.Size = new System.Drawing.Size(149, 25);
             this.StartDatePicker.TabIndex = 139;
@@ -827,11 +800,11 @@ namespace Delmon_Managment_System.Forms
             // 
             // insurence
             // 
-            this.insurence.Location = new System.Drawing.Point(4, 29);
+            this.insurence.Location = new System.Drawing.Point(4, 26);
             this.insurence.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.insurence.Name = "insurence";
             this.insurence.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.insurence.Size = new System.Drawing.Size(1045, 659);
+            this.insurence.Size = new System.Drawing.Size(1045, 489);
             this.insurence.TabIndex = 3;
             this.insurence.Text = "Insurence";
             this.insurence.UseVisualStyleBackColor = true;
