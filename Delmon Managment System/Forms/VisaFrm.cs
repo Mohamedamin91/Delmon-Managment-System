@@ -76,7 +76,7 @@ namespace Delmon_Managment_System.Forms
             label1.Enabled = true;
             this.ActiveControl = Visanumtxt;
             btnNew.Enabled = Findbtn.Enabled = true;
-            issuhijritxt.SelectedText = "dd-MM-yyyy";
+            issuhijritxt.SelectedText = "yyyy-MM-dd";
             ExpiaryHijritxt.Enabled = IssueDateENTxt.Enabled = expairENDATEtxt.Enabled = false;
 
 
@@ -113,7 +113,7 @@ namespace Delmon_Managment_System.Forms
             cmbcandidates.ValueMember = "PI_ID";
             cmbcandidates.DisplayMember = "Name";
             cmbcandidates.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT PersonalInformation.PI_ID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[PersonalInformation] ,EmploymentHistory where PersonalInformation.PI_ID = EmploymentHistory.PI_ID and EmploymentHistory.EmploymentStatusID = 23");
-
+            cmbcandidates.Text = "Select";
             SQLCONN.CloseConnection();
 
 
@@ -206,7 +206,7 @@ namespace Delmon_Managment_System.Forms
             cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = false;
             i = 0;
             Remaininglbl.Text = "";
-            issuhijritxt.Text = "dd-MM-yyyy";
+            issuhijritxt.Text = "yyyy-MM-dd";
 
         }
 
@@ -413,7 +413,7 @@ namespace Delmon_Managment_System.Forms
 
             IssueDateHijri = SA.DateTimeFormat.ShortDatePattern;
 
-            if (issuhijritxt.Text == "dd-MM-yyyy")
+            if (issuhijritxt.Text == "yyyy-MM-dd")
             {
                 issuhijritxt.Text = "";
                 issuhijritxt.ForeColor = Color.Black;
@@ -429,7 +429,7 @@ namespace Delmon_Managment_System.Forms
         {
 
             IssueDateHijri = SA.DateTimeFormat.ShortDatePattern;
-            if (issuhijritxt.Text == "dd-MM-yyyy")
+            if (issuhijritxt.Text == "yyyy-MM-dd")
             {
                 issuhijritxt.Text = "";
                 issuhijritxt.ForeColor = Color.Black;
@@ -453,11 +453,11 @@ namespace Delmon_Managment_System.Forms
             SQLCONN.OpenConection();
             dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from visa where  VisaNumber LIKE '%" + Visanumtxt.Text + "%'");
             SQLCONN.CloseConnection();
-            this.dataGridView1.Columns[2].Visible = false;
-            this.dataGridView1.Columns[4].Visible = false;
-            this.dataGridView1.Columns[5].Visible = false;
-            this.dataGridView1.Columns[6].Visible = false;
-            this.dataGridView1.Columns[8].Visible = false;
+            //this.dataGridView1.Columns[2].Visible = false;
+            //this.dataGridView1.Columns[4].Visible = false;
+            //this.dataGridView1.Columns[5].Visible = false;
+            //this.dataGridView1.Columns[6].Visible = false;
+            //this.dataGridView1.Columns[8].Visible = false;
 
 
             dataGridView1.Visible = true;
@@ -577,7 +577,7 @@ namespace Delmon_Managment_System.Forms
                     if (issuhijritxt.SelectedText.Contains("/") == true)
 
                     {
-                        MessageBox.Show("Please type date in format : " + "dd-MM-yyyy" + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Please type date in format : " + "yyyy-MM-dd" + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     else
                     {
@@ -590,28 +590,28 @@ namespace Delmon_Managment_System.Forms
                         string a = issuhijritxt.Text.Trim();
                         a = issuhijritxt.Text.TrimStart();
                         a = issuhijritxt.Text.TrimEnd();
-                        DateTime toGegorian = DateTime.ParseExact(a, "dd-MM-yyyy", SA);
-                        DateTime b = DateTime.ParseExact(a, "dd-MM-yyyy", null);
+                        DateTime toGegorian = DateTime.ParseExact(a, "yyyy-MM-dd", SA);
+                        DateTime b = DateTime.ParseExact(a, "yyyy-MM-dd", null);
 
 
-                        DateTime b2 = DateTime.ParseExact(a, "dd-MM-yyyy", null);
+                        DateTime b2 = DateTime.ParseExact(a, "yyyy-MM-dd", null);
                         DateTime dtNOW = DateTime.Now;
-                        dtNOW.ToString("dd-MM-yyyy");
+                        dtNOW.ToString("yyyy-MM-dd");
 
                         issuhijritxt.Text = b.ToString("f");
-                        IssueDateHijri = b.Date.ToString("dd-MM-yyyy");
+                        IssueDateHijri = b.Date.ToString("yyyy-MM-dd");
                         issuhijritxt.Text = IssueDateHijri.ToString();
                         /*calculate expairy hiri date**/
 
 
                         b2 = b2.Date.AddDays(708);
-                        ExpiryDateHijri = b2.ToString("dd-MM-yyyy");
+                        ExpiryDateHijri = b2.ToString("yyyy-MM-dd");
                         ExpiaryHijritxt.Text = ExpiryDateHijri.ToString();
 
 
                         /*calculate issu milaidy  date**/
                         IssueDateEN = toGegorian.ToString();
-                        IssueDateEN = toGegorian.ToString("dd-MM-yyyy");
+                        IssueDateEN = toGegorian.ToString("yyyy-MM-dd");
                         IssueDateENTxt.Text = IssueDateEN;
 
 
@@ -620,13 +620,13 @@ namespace Delmon_Managment_System.Forms
 
                         ///*calculate expairy milaidy date**/
                         toGegorian = toGegorian.AddDays(708);
-                        ExpiryDateENP = toGegorian.ToString("dd-MM-yyyy");
+                        ExpiryDateENP = toGegorian.ToString("yyyy-MM-dd");
                         expairENDATEtxt.Text = ExpiryDateENP;
 
 
                         ///*calculate the */
 
-                        DateTime futurDate = DateTime.ParseExact(ExpiryDateENP, "dd-MM-yyyy", null);
+                        DateTime futurDate = DateTime.ParseExact(ExpiryDateENP, "yyyy-MM-dd", null);
                         var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
 
 
@@ -653,7 +653,7 @@ namespace Delmon_Managment_System.Forms
                     if (issuhijritxt.SelectedText.Contains("/") == true)
 
                     {
-                        MessageBox.Show("Please type date in format : " + "dd-MM-yyyy" + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Please type date in format : " + "yyyy-MM-dd" + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     else
                     {
@@ -667,28 +667,28 @@ namespace Delmon_Managment_System.Forms
                         string a = issuhijritxt.Text.Trim();
                         a = issuhijritxt.Text.TrimStart();
                         a = issuhijritxt.Text.TrimEnd();
-                        DateTime toGegorian = DateTime.ParseExact(a, "dd-MM-yyyy", SA);
-                        DateTime b = DateTime.ParseExact(a, "dd-MM-yyyy", null);
+                        DateTime toGegorian = DateTime.ParseExact(a, "yyyy-MM-dd", SA);
+                        DateTime b = DateTime.ParseExact(a, "yyyy-MM-dd", null);
 
 
-                        DateTime b2 = DateTime.ParseExact(a, "dd-MM-yyyy", null);
+                        DateTime b2 = DateTime.ParseExact(a, "yyyy-MM-dd", null);
                         DateTime dtNOW = DateTime.Now;
-                        dtNOW.ToString("dd-MM-yyyy");
+                        dtNOW.ToString("yyyy-MM-dd");
 
                         issuhijritxt.Text = b.ToString("f");
-                        IssueDateHijri = b.Date.ToString("dd-MM-yyyy");
+                        IssueDateHijri = b.Date.ToString("yyyy-MM-dd");
                         issuhijritxt.Text = IssueDateHijri.ToString();
                         /*calculate expairy hiri date**/
 
 
                         b2 = b2.Date.AddDays(708);
-                        ExpiryDateHijri = b2.ToString("dd-MM-yyyy");
+                        ExpiryDateHijri = b2.ToString("yyyy-MM-dd");
                         ExpiaryHijritxt.Text = ExpiryDateHijri.ToString();
 
 
                         /*calculate issu milaidy  date**/
                         IssueDateEN = toGegorian.ToString();
-                        IssueDateEN = toGegorian.ToString("dd-MM-yyyy");
+                        IssueDateEN = toGegorian.ToString("yyyy-MM-dd");
                         IssueDateENTxt.Text = IssueDateEN;
 
 
@@ -697,13 +697,13 @@ namespace Delmon_Managment_System.Forms
 
                         ///*calculate expairy milaidy date**/
                         toGegorian = toGegorian.AddDays(708);
-                        ExpiryDateENP = toGegorian.ToString("dd-MM-yyyy");
+                        ExpiryDateENP = toGegorian.ToString("yyyy-MM-dd");
                         expairENDATEtxt.Text = ExpiryDateENP;
 
 
                         ///*calculate the */
 
-                        DateTime futurDate = DateTime.ParseExact(ExpiryDateENP, "dd-MM-yyyy", null);
+                        DateTime futurDate = DateTime.ParseExact(ExpiryDateENP, "yyyy-MM-dd", null);
                         var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
 
 
@@ -727,7 +727,7 @@ namespace Delmon_Managment_System.Forms
 
                     if (issuhijritxt.SelectedText.Contains("/") == true)
                     {
-                        MessageBox.Show("Please type date in format : " + "dd-MM-yyyy" + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Please type date in format : " + "yyyy-MM-dd" + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     else
                     {
@@ -742,28 +742,28 @@ namespace Delmon_Managment_System.Forms
                         string a = issuhijritxt.Text.Trim();
                         a = issuhijritxt.Text.TrimStart();
                         a = issuhijritxt.Text.TrimEnd();
-                        DateTime toGegorian = DateTime.ParseExact(a, "dd-MM-yyyy", SA);
-                        DateTime b = DateTime.ParseExact(a, "dd-MM-yyyy",null);
+                        DateTime toGegorian = DateTime.ParseExact(a, "yyyy-MM-dd", SA);
+                        DateTime b = DateTime.ParseExact(a, "yyyy-MM-dd",null);
 
 
-                        DateTime b2 = DateTime.ParseExact(a, "dd-MM-yyyy", null);
+                        DateTime b2 = DateTime.ParseExact(a, "yyyy-MM-dd", null);
                         DateTime dtNOW = DateTime.Now;
-                        dtNOW.ToString("dd-MM-yyyy");
+                        dtNOW.ToString("yyyy-MM-dd");
 
                         issuhijritxt.Text = b.ToString("f");
-                        IssueDateHijri = b.Date.ToString("dd-MM-yyyy");
+                        IssueDateHijri = b.Date.ToString("yyyy-MM-dd");
                         issuhijritxt.Text = IssueDateHijri.ToString();
                         /*calculate expairy hiri date**/
 
 
                         b2 = b2.Date.AddDays(708);
-                        ExpiryDateHijri = b2.ToString("dd-MM-yyyy");
+                        ExpiryDateHijri = b2.ToString("yyyy-MM-dd");
                         ExpiaryHijritxt.Text = ExpiryDateHijri.ToString();
 
 
                         /*calculate issu milaidy  date**/
                         IssueDateEN = toGegorian.ToString();
-                        IssueDateEN = toGegorian.ToString("dd-MM-yyyy");
+                        IssueDateEN = toGegorian.ToString("yyyy-MM-dd");
                         IssueDateENTxt.Text = IssueDateEN;
 
 
@@ -772,13 +772,13 @@ namespace Delmon_Managment_System.Forms
 
                         ///*calculate expairy milaidy date**/
                         toGegorian = toGegorian.AddDays(708);
-                        ExpiryDateENP = toGegorian.ToString("dd-MM-yyyy");
+                        ExpiryDateENP = toGegorian.ToString("yyyy-MM-dd");
                         expairENDATEtxt.Text = ExpiryDateENP;
 
 
                         ///*calculate the */
 
-                        DateTime futurDate = DateTime.ParseExact(ExpiryDateENP, "dd-MM-yyyy",null);
+                        DateTime futurDate = DateTime.ParseExact(ExpiryDateENP, "yyyy-MM-dd",null);
                         var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
 
 
@@ -800,7 +800,7 @@ namespace Delmon_Managment_System.Forms
                     if (issuhijritxt.SelectedText.Contains("/") == true)
 
                     {
-                        MessageBox.Show("Please type date in format : " + "dd-MM-yyyy" + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Please type date in format : " + "yyyy-MM-dd" + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     else
                     {
@@ -813,28 +813,28 @@ namespace Delmon_Managment_System.Forms
                         string a = issuhijritxt.Text.Trim();
                         a = issuhijritxt.Text.TrimStart();
                         a = issuhijritxt.Text.TrimEnd();
-                        var toGegorian = DateTime.ParseExact(a, "dd-MM-yyyy", SA);
+                        var toGegorian = DateTime.ParseExact(a, "yyyy-MM-dd", SA);
                         DateTime b = Convert.ToDateTime(a);
 
 
                         DateTime b2 = Convert.ToDateTime(a);
                         DateTime dtNOW = DateTime.Now;
-                        dtNOW.ToString("dd-MM-yyyy");
+                        dtNOW.ToString("yyyy-MM-dd");
 
                         issuhijritxt.Text = b.ToString("f");
-                        IssueDateHijri = b.Date.ToString("dd-MM-yyyy");
+                        IssueDateHijri = b.Date.ToString("yyyy-MM-dd");
                         issuhijritxt.Text = IssueDateHijri.ToString();
                         /*calculate expairy hiri date**/
 
 
                         b2 = b2.Date.AddDays(708);
-                        ExpiryDateHijri = b2.ToString("dd-MM-yyyy");
+                        ExpiryDateHijri = b2.ToString("yyyy-MM-dd");
                         ExpiaryHijritxt.Text = ExpiryDateHijri.ToString();
 
 
                         /*calculate issu milaidy  date**/
                         IssueDateEN = toGegorian.ToString();
-                        IssueDateEN = toGegorian.ToString("dd-MM-yyyy");
+                        IssueDateEN = toGegorian.ToString("yyyy-MM-dd");
                         IssueDateENTxt.Text = IssueDateEN;
 
 
@@ -843,7 +843,7 @@ namespace Delmon_Managment_System.Forms
 
                         ///*calculate expairy milaidy date**/
                         toGegorian = toGegorian.AddDays(708);
-                        ExpiryDateENP = toGegorian.ToString("dd-MM-yyyy");
+                        ExpiryDateENP = toGegorian.ToString("yyyy-MM-dd");
                         expairENDATEtxt.Text = ExpiryDateENP;
 
 
@@ -947,37 +947,7 @@ namespace Delmon_Managment_System.Forms
 
         private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            dataGridView2.Visible = true;
-            foreach (DataGridViewRow rw in this.dataGridView1.Rows)
-            {
-                for (int i = 0; i < rw.Cells.Count; i++)
-                {
-                    if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
-                    {
-                        //   MessageBox.Show("ogg");       
-                    }
-                    else
-                    {
-
-                        VisaNumberID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-                        cmbCompany.Text = (dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
-                        ReceviedPicker.Value = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[2].Value);
-                        issuhijritxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString());
-                        IssueDateEN = (dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
-                        ExpiaryHijritxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString());
-                        ExpiryDateENP = (dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString());
-                        TotalVisastxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString());
-                        RemarksTxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString());
-
-
-                        dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber=" + VisaNumberID + " ");
-
-
-
-
-                    }
-                }
-            }
+          
 
         }
 
@@ -988,25 +958,7 @@ namespace Delmon_Managment_System.Forms
 
         private void dataGridView2_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            dataGridView2.Visible = true;
-            foreach (DataGridViewRow rw in this.dataGridView2.Rows)
-            {
-                for (int i = 0; i < rw.Cells.Count; i++)
-                {
-                    if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
-                    {
-                        //   MessageBox.Show("ogg");       
-                    }
-                    else
-                    {
-
-                        FileNumberID = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString());
-                        VisaFileNumberID.Text = FileNumberID.ToString();
-
-
-                    }
-                }
-            }
+          
         }
 
 
@@ -1206,7 +1158,6 @@ namespace Delmon_Managment_System.Forms
 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            dataGridView2.Visible = true;
             foreach (DataGridViewRow rw in this.dataGridView2.Rows)
             {
                 for (int i = 0; i < rw.Cells.Count; i++)
@@ -1219,8 +1170,10 @@ namespace Delmon_Managment_System.Forms
                     {
 
                         FileNumberID = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        cmbConsulate.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[2].Value.ToString());
+                        cmbJob.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[3].Value.ToString());
+                        cmbStatus.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[4].Value.ToString());
                         VisaFileNumberID.Text = FileNumberID.ToString();
-
 
                     }
                 }
@@ -1230,34 +1183,84 @@ namespace Delmon_Managment_System.Forms
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             dataGridView2.Visible = true;
+
+
             foreach (DataGridViewRow rw in this.dataGridView1.Rows)
             {
                 for (int i = 0; i < rw.Cells.Count; i++)
-                {
+                    {
                     if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
                     {
                         //   MessageBox.Show("ogg");       
                     }
                     else
                     {
-
-                        VisaNumberID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-                        cmbCompany.Text = (dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
-                        ReceviedPicker.Value = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[2].Value);
-                        issuhijritxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString());
-                        IssueDateEN = (dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
-                        ExpiaryHijritxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString());
-                        ExpiryDateENP = (dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString());
-                        TotalVisastxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString());
-                        RemarksTxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString());
-
-
-                        dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber=" + VisaNumberID + " ");
-
-
-
+              VisaNumberID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+              cmbCompany.SelectedValue = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
+              ReceviedPicker.Value = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[2].Value);
+             issuhijritxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString());
+             IssueDateENTxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
+             ExpiaryHijritxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString());
+             expairENDATEtxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString());
+             TotalVisastxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString());
+             RemarksTxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString());
+             dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber=" + VisaNumberID + " ");
 
                     }
+                      Visanumtxt.Text = VisaNumberID.ToString();
+
+
+                    ///*calculate the */
+
+                    string a = issuhijritxt.Text.Trim();
+                    a = issuhijritxt.Text.TrimStart();
+                    a = issuhijritxt.Text.TrimEnd();
+                    DateTime toGegorian = DateTime.ParseExact(a, "yyyy-MM-dd", SA);
+                    DateTime b = DateTime.ParseExact(a, "yyyy-MM-dd", null);
+
+
+                    DateTime b2 = DateTime.ParseExact(a, "yyyy-MM-dd", null);
+                    DateTime dtNOW = DateTime.Now;
+                    dtNOW.ToString("yyyy-MM-dd");
+
+                    issuhijritxt.Text = b.ToString("f");
+                    IssueDateHijri = b.Date.ToString("yyyy-MM-dd");
+                    issuhijritxt.Text = IssueDateHijri.ToString();
+                    /*calculate expairy hiri date**/
+
+
+                    b2 = b2.Date.AddDays(708);
+                    ExpiryDateHijri = b2.ToString("yyyy-MM-dd");
+                    ExpiaryHijritxt.Text = ExpiryDateHijri.ToString();
+
+
+                    /*calculate issu milaidy  date**/
+                    IssueDateEN = toGegorian.ToString();
+                    IssueDateEN = toGegorian.ToString("yyyy-MM-dd");
+                    IssueDateENTxt.Text = IssueDateEN;
+
+
+
+
+
+                    ///*calculate expairy milaidy date**/
+                    toGegorian = toGegorian.AddDays(708);
+                    ExpiryDateENP = toGegorian.ToString("yyyy-MM-dd");
+                    expairENDATEtxt.Text = ExpiryDateENP;
+
+
+                    ///*calculate the */
+
+                    DateTime futurDate = DateTime.ParseExact(ExpiryDateENP, "yyyy-MM-dd", null);
+                    var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
+
+
+
+                    Remaininglbl.Text = numberOfDays.ToString();
+
+                    ///*calculate the */
+
+
                 }
             }
 
@@ -1301,6 +1304,8 @@ namespace Delmon_Managment_System.Forms
         {
 
         }
+
+      
     }
 }
 
