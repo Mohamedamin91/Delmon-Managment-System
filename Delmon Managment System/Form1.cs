@@ -56,7 +56,7 @@ namespace Delmon_Managment_System
                     DisableButton();
                     //   Color color = SelectThemeColor();
                     //   Color color = Color.FromArgb(178,34,34);
-                       Color color = Color.Snow;
+                       Color color = Color.White;
                     //currentButton = (Button)btnSender;
                     //currentButton.BackColor = color;
                     //currentButton.ForeColor = Color.White;
@@ -77,7 +77,7 @@ namespace Delmon_Managment_System
                 if (previousBtn.GetType() == typeof(Button))
                 {
                   //  previousBtn.BackColor = Color.FromArgb(53, 52, 141);
-                    previousBtn.BackColor = Color.Snow;
+                    previousBtn.BackColor = Color.White;
                     previousBtn.ForeColor = Color.FromArgb(53, 52, 141);
                     previousBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 }

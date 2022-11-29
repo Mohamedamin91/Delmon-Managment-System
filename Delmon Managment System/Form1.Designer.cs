@@ -58,12 +58,12 @@ namespace Delmon_Managment_System
             this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelLogo.Location = new System.Drawing.Point(0, 0);
             this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(200, 80);
+            this.panelLogo.Size = new System.Drawing.Size(200, 49);
             this.panelLogo.TabIndex = 0;
             // 
             // panelMenu
             // 
-            this.panelMenu.BackColor = System.Drawing.Color.Snow;
+            this.panelMenu.BackColor = System.Drawing.Color.White;
             this.panelMenu.Controls.Add(this.button2);
             this.panelMenu.Controls.Add(this.btnNotifications);
             this.panelMenu.Controls.Add(this.btnBilling);
@@ -85,7 +85,7 @@ namespace Delmon_Managment_System
             this.button2.ForeColor = System.Drawing.Color.Navy;
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(0, 382);
+            this.button2.Location = new System.Drawing.Point(0, 351);
             this.button2.Name = "button2";
             this.button2.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.button2.Size = new System.Drawing.Size(200, 60);
@@ -104,7 +104,7 @@ namespace Delmon_Managment_System
             this.btnNotifications.ForeColor = System.Drawing.Color.Navy;
             this.btnNotifications.Image = ((System.Drawing.Image)(resources.GetObject("btnNotifications.Image")));
             this.btnNotifications.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNotifications.Location = new System.Drawing.Point(0, 322);
+            this.btnNotifications.Location = new System.Drawing.Point(0, 291);
             this.btnNotifications.Name = "btnNotifications";
             this.btnNotifications.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.btnNotifications.Size = new System.Drawing.Size(200, 60);
@@ -123,7 +123,7 @@ namespace Delmon_Managment_System
             this.btnBilling.ForeColor = System.Drawing.Color.Navy;
             this.btnBilling.Image = ((System.Drawing.Image)(resources.GetObject("btnBilling.Image")));
             this.btnBilling.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBilling.Location = new System.Drawing.Point(0, 262);
+            this.btnBilling.Location = new System.Drawing.Point(0, 231);
             this.btnBilling.Name = "btnBilling";
             this.btnBilling.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.btnBilling.Size = new System.Drawing.Size(200, 60);
@@ -142,7 +142,7 @@ namespace Delmon_Managment_System
             this.btnprinting.ForeColor = System.Drawing.Color.Navy;
             this.btnprinting.Image = ((System.Drawing.Image)(resources.GetObject("btnprinting.Image")));
             this.btnprinting.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnprinting.Location = new System.Drawing.Point(0, 202);
+            this.btnprinting.Location = new System.Drawing.Point(0, 171);
             this.btnprinting.Name = "btnprinting";
             this.btnprinting.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.btnprinting.Size = new System.Drawing.Size(200, 60);
@@ -161,7 +161,7 @@ namespace Delmon_Managment_System
             this.btnemployee.ForeColor = System.Drawing.Color.Navy;
             this.btnemployee.Image = ((System.Drawing.Image)(resources.GetObject("btnemployee.Image")));
             this.btnemployee.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnemployee.Location = new System.Drawing.Point(0, 142);
+            this.btnemployee.Location = new System.Drawing.Point(0, 111);
             this.btnemployee.Name = "btnemployee";
             this.btnemployee.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.btnemployee.Size = new System.Drawing.Size(200, 60);
@@ -180,7 +180,7 @@ namespace Delmon_Managment_System
             this.btnvisa.ForeColor = System.Drawing.Color.Navy;
             this.btnvisa.Image = ((System.Drawing.Image)(resources.GetObject("btnvisa.Image")));
             this.btnvisa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnvisa.Location = new System.Drawing.Point(0, 80);
+            this.btnvisa.Location = new System.Drawing.Point(0, 49);
             this.btnvisa.Name = "btnvisa";
             this.btnvisa.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.btnvisa.Size = new System.Drawing.Size(200, 62);
@@ -202,7 +202,7 @@ namespace Delmon_Managment_System
             this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitleBar.Location = new System.Drawing.Point(200, 0);
             this.panelTitleBar.Name = "panelTitleBar";
-            this.panelTitleBar.Size = new System.Drawing.Size(884, 80);
+            this.panelTitleBar.Size = new System.Drawing.Size(884, 49);
             this.panelTitleBar.TabIndex = 1;
             this.panelTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitleBar_MouseDown);
             // 
@@ -257,9 +257,9 @@ namespace Delmon_Managment_System
             this.btnCloseChildForm.FlatAppearance.BorderSize = 0;
             this.btnCloseChildForm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCloseChildForm.Image = ((System.Drawing.Image)(resources.GetObject("btnCloseChildForm.Image")));
-            this.btnCloseChildForm.Location = new System.Drawing.Point(0, 10);
+            this.btnCloseChildForm.Location = new System.Drawing.Point(17, 8);
             this.btnCloseChildForm.Name = "btnCloseChildForm";
-            this.btnCloseChildForm.Size = new System.Drawing.Size(55, 54);
+            this.btnCloseChildForm.Size = new System.Drawing.Size(40, 35);
             this.btnCloseChildForm.TabIndex = 0;
             this.btnCloseChildForm.UseVisualStyleBackColor = true;
             this.btnCloseChildForm.Click += new System.EventHandler(this.btnCloseChildForm_Click);
@@ -271,7 +271,7 @@ namespace Delmon_Managment_System
             this.lblTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(416, 26);
+            this.lblTitle.Location = new System.Drawing.Point(416, 10);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(75, 25);
             this.lblTitle.TabIndex = 0;
@@ -282,16 +282,16 @@ namespace Delmon_Managment_System
             this.panelDesktopPanel.BackColor = System.Drawing.Color.White;
             this.panelDesktopPanel.Controls.Add(this.pictureBox1);
             this.panelDesktopPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelDesktopPanel.Location = new System.Drawing.Point(200, 80);
+            this.panelDesktopPanel.Location = new System.Drawing.Point(200, 49);
             this.panelDesktopPanel.Name = "panelDesktopPanel";
-            this.panelDesktopPanel.Size = new System.Drawing.Size(884, 501);
+            this.panelDesktopPanel.Size = new System.Drawing.Size(884, 532);
             this.panelDesktopPanel.TabIndex = 2;
             this.panelDesktopPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panelDesktopPanel_Paint);
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(620, 170);
+            this.pictureBox1.Location = new System.Drawing.Point(494, 171);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(515, 379);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;

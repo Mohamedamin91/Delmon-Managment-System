@@ -98,8 +98,8 @@ namespace Delmon_Managment_System.Forms
 
 
             cmbJob.ValueMember = "JobID";
-            cmbJob.DisplayMember = "JobTitleAR";
-            cmbJob.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleAR FROM JOBS");
+            cmbJob.DisplayMember = "JobTitleEN";
+            cmbJob.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS");
 
             cmbConsulate.ValueMember = "Consulates.ConsulateID";
             cmbConsulate.DisplayMember = "ConsulateCity";
@@ -756,7 +756,7 @@ namespace Delmon_Managment_System.Forms
                         /*calculate expairy hiri date**/
 
 
-                        b2 = b2.Date.AddDays(708);
+                        b2 = b2.Date.AddDays(729);
                         ExpiryDateHijri = b2.ToString("yyyy-MM-dd");
                         ExpiaryHijritxt.Text = ExpiryDateHijri.ToString();
 
@@ -771,7 +771,7 @@ namespace Delmon_Managment_System.Forms
 
 
                         ///*calculate expairy milaidy date**/
-                        toGegorian = toGegorian.AddDays(708);
+                        toGegorian = toGegorian.AddDays(709);
                         ExpiryDateENP = toGegorian.ToString("yyyy-MM-dd");
                         expairENDATEtxt.Text = ExpiryDateENP;
 
@@ -1229,7 +1229,7 @@ namespace Delmon_Managment_System.Forms
                     /*calculate expairy hiri date**/
 
 
-                    b2 = b2.Date.AddDays(708);
+                    b2 = b2.Date.AddDays(709);
                     ExpiryDateHijri = b2.ToString("yyyy-MM-dd");
                     ExpiaryHijritxt.Text = ExpiryDateHijri.ToString();
 
@@ -1244,7 +1244,7 @@ namespace Delmon_Managment_System.Forms
 
 
                     ///*calculate expairy milaidy date**/
-                    toGegorian = toGegorian.AddDays(708);
+                    toGegorian = toGegorian.AddDays(709);
                     ExpiryDateENP = toGegorian.ToString("yyyy-MM-dd");
                     expairENDATEtxt.Text = ExpiryDateENP;
 
@@ -1254,9 +1254,18 @@ namespace Delmon_Managment_System.Forms
                     DateTime futurDate = DateTime.ParseExact(ExpiryDateENP, "yyyy-MM-dd", null);
                     var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
 
+                    if (numberOfDays <= 0)
+                    {
+                        Remaininglbl.Text = "Expired";
+
+                    }
+                    else
+                    {
+                        Remaininglbl.Text = numberOfDays.ToString();
+
+                    }
 
 
-                    Remaininglbl.Text = numberOfDays.ToString();
 
                     ///*calculate the */
 
@@ -1292,7 +1301,7 @@ namespace Delmon_Managment_System.Forms
                 dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber=" + VisaNumberID + " ");
                 // ClearTextBoxes();
                 SQLCONN.CloseConnection();
-
+                
             }
             else
             {
@@ -1305,7 +1314,56 @@ namespace Delmon_Managment_System.Forms
 
         }
 
-      
+        private void btnnewJob_Click(object sender, EventArgs e)
+        {
+            FrmJobsNew frmJobs = new FrmJobsNew();
+            this.Hide();
+            frmJobs.Show();
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+ 
+
+            SqlParameter paramRecevidDate = new SqlParameter("@C3", SqlDbType.Date);
+            paramRecevidDate.Value = ReceviedPicker.Value;
+        
+            SqlParameter paramIssHIJriDate = new SqlParameter("@C4", SqlDbType.NVarChar);
+            paramIssHIJriDate.Value = issuhijritxt.Text;
+           
+            SqlParameter paramVisaID = new SqlParameter("@id", SqlDbType.Int);
+            paramVisaID.Value = VisaNumberID;
+
+
+
+
+            if (VisaNumberID != 0)
+            {
+
+                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+
+
+                    SQLCONN.OpenConection();
+                    SQLCONN.ExecuteQueries("update visa set ReceviedDate=@C3,IssueDateHijri=@C4 where VisaNumber=@id",
+                      paramRecevidDate, paramIssHIJriDate, paramVisaID);
+                        MessageBox.Show("Record Updated Successfully");
+                    dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from visa where VisaNumber = '" + VisaNumberID + "'");
+                    SQLCONN.CloseConnection();
+
+
+                }
+                else
+                {
+
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Please Select Record to Update");
+            }
+        }
     }
 }
 

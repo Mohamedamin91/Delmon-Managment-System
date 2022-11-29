@@ -110,7 +110,9 @@ namespace Delmon_Managment_System.Forms
             cmbempdepthistory.DisplayMember = "Dept_Type_Name";
             cmbempdepthistory.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT [DeptName],Dept_Type_Name FROM [DelmonGroupDB].[dbo].[DEPARTMENTS], DeptTypes where DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID");
 
-
+            cmbissueplace.ValueMember = "Consulates.ConsulateID";
+            cmbissueplace.DisplayMember = "ConsulateCity";
+            cmbissueplace.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select Consulates.ConsulateID,ConsulateCity from Countries,Consulates where Countries.CountryId = Consulates.CountryId");
 
 
             //cmbCountry.ValueMember = "CountryId";
@@ -155,9 +157,6 @@ namespace Delmon_Managment_System.Forms
                         cmbGender.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
                         cmbMartialStatus.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
 
-                        //PI_ID = EMPID;
-                        //dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CandidateID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] ,[PI_ID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and PI_ID =  " + PI_ID + " ");
-                        //dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[P_Id] ,[name],[documentValue] ,[url] ,[last_update] ,[DocumentType].Doc_Type ,[RefrenceID]FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and P_Id =  " + PI_ID + " ");
                         AddBtn.Visible = false;
                         btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = true;
                     }
@@ -178,14 +177,15 @@ namespace Delmon_Managment_System.Forms
             SqlParameter paramlastname = new SqlParameter("@C4", SqlDbType.NVarChar);
             paramlastname.Value = lastnametxt.Text;
             SqlParameter paramGender = new SqlParameter("@C5", SqlDbType.NVarChar);
-            paramGender.Value = cmbGender.SelectedItem;
+            paramGender.Value = cmbGender.SelectedItem.ToString();
+           
             SqlParameter paramMartialStatus = new SqlParameter("@C6", SqlDbType.NVarChar);
-            paramMartialStatus.Value = cmbPersonalStatusStatus.SelectedItem;
+            paramMartialStatus.Value = cmbMartialStatus.SelectedItem.ToString();
 
 
             SqlParameter paramPID = new SqlParameter("@id", SqlDbType.Int);
             paramPID.Value = EMPID;
-
+          
 
 
 
@@ -197,8 +197,7 @@ namespace Delmon_Managment_System.Forms
 
 
                     SQLCONN.OpenConection();
-                    SQLCONN.ExecuteQueries("update PersonalInformation set firstname=@C1,secondname=@C2,thirdname=@C3,lastname=@C4,gender=@C5," +
-                        "MartialStatus=@C6 where PI_ID=@id",
+                    SQLCONN.ExecuteQueries("update PersonalInformation set firstname=@C1,secondname=@C2,thirdname=@C3,lastname=@C4,gender=@C5,MartialStatus=@C6 where PI_ID=@id",
                                                    paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramPID);
                     MessageBox.Show("Record Updated Successfully");
                     tabControl1.Enabled = true;
@@ -460,6 +459,20 @@ namespace Delmon_Managment_System.Forms
             paramRefrenceID.Value = 2;
 
 
+            /**add extra field from visa file */
+            SqlParameter paramfilenumber = new SqlParameter("@C5", SqlDbType.NVarChar);
+            paramfilenumber.Value = numbertextbox.Text;
+            SqlParameter paramnafileissueplace = new SqlParameter("@C6", SqlDbType.NVarChar);
+            paramnafileissueplace.Value = issueplacetext.Text;
+            SqlParameter paramfileissuedate = new SqlParameter("@C7", SqlDbType.Date);
+            paramfileissuedate.Value = docissueplacepicker.Value;
+            SqlParameter paramfileexpiraydate= new SqlParameter("@C8", SqlDbType.Date);
+            paramfileexpiraydate.Value = docexpirefatepicker.Value;
+           
+            /**add extra field from visa file */
+
+
+
             try
             {
 
@@ -473,7 +486,7 @@ namespace Delmon_Managment_System.Forms
                     {
                         //we already define our connection globaly. We are just calling the object of connection.
                         SQLCONN.OpenConection();
-                        SQLCONN.ExecuteQueries("insert into Documents (documentValue,name,P_Id,DocTypeID,RefrenceID)values(@C0,@C1,@C2,@C3,@C4)", paramfilename, paramnameOFfile, paramPID, paramDocType, paramRefrenceID);
+                        SQLCONN.ExecuteQueries("insert into Documents (documentValue,name,P_Id,DocTypeID,RefrenceID,Number,DocIssueplace,docissuedate,docexpiredate)values(@C0,@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8)", paramfilename, paramnameOFfile, paramPID, paramDocType, paramRefrenceID,paramfilenumber,paramnafileissueplace,paramfileissuedate,paramfileexpiraydate);
                         string path = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 10));
                         System.IO.File.Copy(opf.FileName, path + "\\Document\\" + filename);
                         dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Documents where P_Id =  " + PI_ID + " ");
@@ -768,13 +781,26 @@ namespace Delmon_Managment_System.Forms
             paramRefrenceID.Value = 2;
 
 
+            /**add extra field from visa file */
+            SqlParameter paramfilenumber = new SqlParameter("@C5", SqlDbType.NVarChar);
+            paramfilenumber.Value = numbertextbox.Text;
+            SqlParameter paramnafileissueplace = new SqlParameter("@C6", SqlDbType.NVarChar);
+            paramnafileissueplace.Value = issueplacetext.Text;
+            SqlParameter paramfileissuedate = new SqlParameter("@C7", SqlDbType.Date);
+            paramfileissuedate.Value = docissueplacepicker.Value;
+            SqlParameter paramfileexpiraydate = new SqlParameter("@C8", SqlDbType.Date);
+            paramfileexpiraydate.Value = docexpirefatepicker.Value;
+
+            /**add extra field from visa file */
+
+
             if (PI_ID != 0)
             {
                 if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
-
+                   
                     SQLCONN.OpenConection();
-                    SQLCONN.ExecuteQueries("update  Documents set documentValue=@C0,name=@C1,DocTypeID=@C3 where Doc_id = @C2", paramfilename, paramnameOFfile, paramDocType, paramPID);
+                    SQLCONN.ExecuteQueries("update  Documents set documentValue=@C0,name=@C1,DocTypeID=@C3,Number=@C5,DocIssueplace=@C6,docissuedate=@C7,docexpiredate=@C8    where Doc_id = @C2", paramfilename, paramnameOFfile, paramDocType, paramPID,paramfilenumber,paramnafileissueplace,paramfileissuedate,paramfileexpiraydate);
 
 
                     MessageBox.Show("Record Updated Successfully");
@@ -1135,7 +1161,7 @@ namespace Delmon_Managment_System.Forms
 
                 if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
-                    SQLCONN.ExecuteQueries("update  EmploymentHistory set EmploymentStatusID=@C1,JobID=@C2,DeptID=@C3,StartDate=@C4,EndDate=@C5 where  id_History =@id )",
+                    SQLCONN.ExecuteQueries("update  EmploymentHistory set EmploymentStatusID=@C1,JobID=@C2,DeptID=@C3,StartDate=@C4,EndDate=@C5 where  id_History =@id ",
                                                 paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramid_History);
                     MessageBox.Show("Record saved Successfully");
 
