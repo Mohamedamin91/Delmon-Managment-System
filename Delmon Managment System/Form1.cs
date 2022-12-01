@@ -101,8 +101,8 @@ namespace Delmon_Managment_System
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            panelTitleBar.BackColor = Color.FromArgb(178,34,34);
-            lblTitle.BackColor = Color.FromArgb(178,34,34);
+            panelTitleBar.BackColor = Color.FromArgb(235, 45, 46);
+            lblTitle.BackColor = Color.FromArgb(235, 45, 46);
           
         }
 

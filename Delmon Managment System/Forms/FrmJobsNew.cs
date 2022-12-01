@@ -153,7 +153,7 @@ namespace Delmon_Managment_System.Forms
 
 
 
-            if (jobtitleartxt.Text != "" && JobTitleENtxt.Text != "")
+            if (jobtitleartxt.Text != "" && JobTitleENtxt.Text != "" && Descriptiontxt.Text !="")
             {
                 SQLCONN.OpenConection();
                 SqlDataReader dr = SQLCONN.DataReader("select  * from jobs where " +
