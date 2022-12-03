@@ -46,12 +46,12 @@ namespace Delmon_Managment_System
             // 
             // loginbtn
             // 
-            this.loginbtn.BackColor = System.Drawing.Color.Firebrick;
+            this.loginbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(45)))), ((int)(((byte)(46)))));
             this.loginbtn.FlatAppearance.BorderSize = 0;
             this.loginbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loginbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loginbtn.ForeColor = System.Drawing.Color.White;
-            this.loginbtn.Location = new System.Drawing.Point(48, 346);
+            this.loginbtn.Location = new System.Drawing.Point(48, 335);
             this.loginbtn.Name = "loginbtn";
             this.loginbtn.Size = new System.Drawing.Size(263, 37);
             this.loginbtn.TabIndex = 0;
@@ -128,7 +128,7 @@ namespace Delmon_Managment_System
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.Red;
+            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(45)))), ((int)(((byte)(46)))));
             this.button2.Location = new System.Drawing.Point(199, 303);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(128, 26);

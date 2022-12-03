@@ -54,11 +54,16 @@ namespace Delmon_Managment_System
                 PI_ID = int.Parse(dr["PI_ID"].ToString());
                 UserType = (dr["UserType"].ToString());
                 UserName = (dr["UserName"].ToString());
-                Email = (dr["Email"].ToString());
+                Email =    (dr["Email"].ToString());
+
+                CommonClass.LoginUserName = UserName;
+                CommonClass.Usertype = UserType;
+                CommonClass.Email = Email;
+
 
                 //saving user info
-
                 FormMainMenu mainMenu = new FormMainMenu();
+                
                 mainMenu.Show();
                 this.Hide();
                 if (remembercheck.Checked)

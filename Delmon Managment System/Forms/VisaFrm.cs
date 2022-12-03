@@ -16,6 +16,8 @@ using System.Net;
 using Outlook = Microsoft.Office.Interop.Outlook;
 
 
+
+
 namespace Delmon_Managment_System.Forms
 {
     public partial class VisaFrm : Form
@@ -33,6 +35,10 @@ namespace Delmon_Managment_System.Forms
         string ExpiryDateENP = "";
         CultureInfo SA = new CultureInfo("ar-SA");
         CultureInfo US = new CultureInfo("en-US");
+        FrmLogin frmLogin = new FrmLogin();
+        System.Timers.Timer tmr = null;
+
+
 
 
 
@@ -47,7 +53,7 @@ namespace Delmon_Managment_System.Forms
 
 
 
-
+           
 
             cmbStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
@@ -85,6 +91,16 @@ namespace Delmon_Managment_System.Forms
         }
         private void VisaFrm_Load(object sender, EventArgs e)
         {
+            lblusername.Text = CommonClass.LoginUserName;
+            lblusertype.Text = CommonClass.Usertype;
+            lblemail.Text = CommonClass.Email;
+            lblPC.Text = Environment.MachineName;
+
+
+            this.timer1.Interval = 1000;
+            timer1.Start();
+
+
             LoadTheme();
             //    AddBtn.Visible = DeleteBtn.Visible = btnFinish.Visible = Findbtn.Visible = true;
             //btnNew.Visible = Findbtn.Visible = true;
@@ -295,7 +311,7 @@ namespace Delmon_Managment_System.Forms
                         SqlParameter paramJob = new SqlParameter("@C4", SqlDbType.NVarChar);
                         paramJob.Value = cmbJob.SelectedValue;
                         SqlParameter paramRequiredJob = new SqlParameter("@C5", SqlDbType.NVarChar);
-                        paramRequiredJob.Value = CmbReqierdJob;
+                        paramRequiredJob.Value = CmbReqierdJob.SelectedValue;
 
 
                         Totatvisa = int.Parse(TotalVisastxt.Text);
@@ -308,7 +324,7 @@ namespace Delmon_Managment_System.Forms
                                 dr.Close();
 
                                 SQLCONN.ExecuteQueries("insert into VISAJobList (VisaNumber,statusid,ConsulateID,JobID,RequiredJob) " +
-                                    " values (@C1,@C2,@C3,@C4) ",
+                                    " values (@C1,@C2,@C3,@C4,@C5) ",
                                     paramVisanumber, paramstatusID, ParamConsulate, paramJob,paramRequiredJob);
 
                             }
@@ -510,11 +526,11 @@ namespace Delmon_Managment_System.Forms
                     SqlParameter paramIssHIJriDate = new SqlParameter("@C4", SqlDbType.NVarChar);
                     paramIssHIJriDate.Value = issuhijritxt.Text;
                     SqlParameter paramIssueDateEN = new SqlParameter("@C5", SqlDbType.NVarChar);
-                    paramIssueDateEN.Value = IssueDateEN;
+                    paramIssueDateEN.Value = IssueDateENTxt.Text;
                     SqlParameter paramExpiryDateHijri = new SqlParameter("@C6", SqlDbType.NVarChar);
                     paramExpiryDateHijri.Value = ExpiaryHijritxt.Text;
                     SqlParameter paramExpiryDateEN = new SqlParameter("@C7", SqlDbType.NVarChar);
-                    paramExpiryDateEN.Value = ExpiryDateENP;
+                    paramExpiryDateEN.Value = expairENDATEtxt.Text;
                   
                     SqlParameter paramTotalVisas = new SqlParameter("@C8", SqlDbType.NVarChar);
 
@@ -930,9 +946,10 @@ namespace Delmon_Managment_System.Forms
             ChangeEnabled(true);
             Visanumtxt.BackColor = Color.White;
             TotalVisastxt.BackColor = Color.White;
-            cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = true;
-            TotalVisastxt.Enabled = true;
-
+             cmbCompany.Enabled= cmbcandidates.Enabled= CmbReqierdJob.Enabled= cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = true;
+            TotalVisastxt.Enabled  =RemarksTxt.Enabled= true;
+            ReceviedPicker.Enabled = true;
+         
 
 
         }
@@ -1153,6 +1170,10 @@ namespace Delmon_Managment_System.Forms
                 cmbStatus.Focus();
                 e.Handled = true;
             }
+
+            //cmbJob.ValueMember = "JobID";
+            //cmbJob.DisplayMember = "JobTitleEN";
+            //cmbJob.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS");
         }
 
         private void cmbcandidates_SelectedIndexChanged(object sender, EventArgs e)
@@ -1327,7 +1348,9 @@ namespace Delmon_Managment_System.Forms
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
- 
+            string SQuery = "update visa set ReceviedDate=@C3,IssueDateHijri=@C4  ";
+
+            string WhereClause = "where VisaNumber=@id ";
 
             SqlParameter paramRecevidDate = new SqlParameter("@C3", SqlDbType.Date);
             paramRecevidDate.Value = ReceviedPicker.Value;
@@ -1397,6 +1420,27 @@ namespace Delmon_Managment_System.Forms
                 MessageBox.Show("Please Select Record to Update");
             }
         }
+
+        private void groupBox2_Enter_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmbReqierdJob_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            //CmbReqierdJob.ValueMember = "JobID";
+            //CmbReqierdJob.DisplayMember = "JobTitleEN";
+            //CmbReqierdJob.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS");
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            this.lbldatetime.Text = DateTime.Now.ToString("dd-MMM-yyyy  hh:mm:ss tt");
+
+        }
+
+
     }
 }
 

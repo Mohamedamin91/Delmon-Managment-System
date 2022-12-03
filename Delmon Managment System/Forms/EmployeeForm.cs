@@ -74,6 +74,15 @@ namespace Delmon_Managment_System.Forms
 
         private void EmployeeForm_Load(object sender, EventArgs e)
         {
+            lblusername.Text = CommonClass.LoginUserName;
+            lblusertype.Text = CommonClass.Usertype;
+            lblemail.Text = CommonClass.Email;
+            lblPC.Text = Environment.MachineName;
+
+
+            this.timer1.Interval = 1000;
+            timer1.Start();
+
             this.ActiveControl = firstnametxt;
 
             AddBtn.Visible = DeleteBTN.Visible = Updatebtn.Visible = false;
@@ -138,30 +147,31 @@ namespace Delmon_Managment_System.Forms
 
         private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            foreach (DataGridViewRow rw in this.dataGridView1.Rows)
-            {
-                for (int i = 0; i < rw.Cells.Count; i++)
-                {
-                    if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
-                    {
-                        //   MessageBox.Show("ogg");       
-                    }
-                    else
-                    {
+            //foreach (DataGridViewRow rw in this.dataGridView1.Rows)
+            //{
+            //    for (int i = 0; i < rw.Cells.Count; i++)
+            //    {
+            //        if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
+            //        {
+            //            //   MessageBox.Show("ogg");       
+            //        }
+            //        else
+            //        {
 
-                        EMPID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-                        firstnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                        secondnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                        thirdnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                        lastnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-                        cmbGender.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-                        cmbMartialStatus.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
+            //            EMPID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+            //            firstnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+            //            secondnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+            //            thirdnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+            //            lastnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+            //            cmbGender.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+            //            cmbMartialStatus.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
 
-                        AddBtn.Visible = false;
-                        btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = true;
-                    }
-                }
-            }
+            //            AddBtn.Visible = false;
+            //            btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = true;
+            //            PI_ID = EMPID;
+            //        }
+            //    }
+            //}
 
         }
 
@@ -572,14 +582,28 @@ namespace Delmon_Managment_System.Forms
                     {
                     }
                 }
-                SQLCONN.ExecuteQueries("insert into Contacts ( ContTypeID,ContValue,RefrenceID,PI_ID) values (@C1,@C2,@C3,@C4)",
-                                               paramContactType, paramContact, paramRefrenceID, paramPID);
-                MessageBox.Show("Record saved Successfully");
+                SqlDataReader dr = SQLCONN.DataReader("select  ContValue from Contacts where  ContValue= " + Contacttxt.Text + "  ");
+                dr.Read();
 
-                dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CandidateID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] ,[PI_ID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and PI_ID =  " + PI_ID + " ");
-                // ClearTextBoxes();
-                SQLCONN.CloseConnection();
+                if (dr.HasRows)
+                {
+                    MessageBox.Show("This 'Contact Value'  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                  
+                }
+               
+                else
+                {
+                    dr.Dispose();
+                    dr.Close();
+                    SQLCONN.ExecuteQueries("insert into Contacts ( ContTypeID,ContValue,RefrenceID,PI_ID) values (@C1,@C2,@C3,@C4)",
+                                                   paramContactType, paramContact, paramRefrenceID, paramPID);
+                    MessageBox.Show("Record saved Successfully");
 
+                    dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CandidateID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] ,[PI_ID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and PI_ID =  " + PI_ID + " ");
+                    // ClearTextBoxes();
+                    SQLCONN.CloseConnection();
+
+                }
             }
             else
             {
@@ -883,7 +907,7 @@ namespace Delmon_Managment_System.Forms
                         cmbMartialStatus.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
                         AddBtn.Visible = false;
                         btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = true;
-                        //PI_ID = EMPID;
+                        PI_ID = EMPID;
                         //dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CandidateID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] ,[PI_ID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and PI_ID =  " + PI_ID + " ");
                         //dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[P_Id] ,[name],[documentValue] ,[url] ,[last_update] ,[DocumentType].Doc_Type ,[RefrenceID]FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and P_Id =  " + PI_ID + " ");
 
@@ -898,33 +922,33 @@ namespace Delmon_Managment_System.Forms
 
         private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            foreach (DataGridViewRow rw in this.dataGridView1.Rows)
-            {
-                for (int i = 0; i < rw.Cells.Count; i++)
-                {
-                    if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
-                    {
-                        //   MessageBox.Show("ogg");       
-                    }
-                    else
-                    {
+            //foreach (DataGridViewRow rw in this.dataGridView1.Rows)
+            //{
+            //    for (int i = 0; i < rw.Cells.Count; i++)
+            //    {
+            //        if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
+            //        {
+            //            //   MessageBox.Show("ogg");       
+            //        }
+            //        else
+            //        {
 
-                        EMPID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-                        firstnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                        secondnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                        thirdnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                        lastnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-                        cmbGender.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-                        cmbMartialStatus.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-                        AddBtn.Visible = false;
-                        btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = true;
-                        //PI_ID = EMPID;
-                        //dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CandidateID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] ,[PI_ID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and PI_ID =  " + PI_ID + " ");
-                        //dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[P_Id] ,[name],[documentValue] ,[url] ,[last_update] ,[DocumentType].Doc_Type ,[RefrenceID]FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and P_Id =  " + PI_ID + " ");
+            //            EMPID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+            //            firstnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+            //            secondnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+            //            thirdnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+            //            lastnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+            //            cmbGender.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+            //            cmbMartialStatus.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
+            //            AddBtn.Visible = false;
+            //            btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = true;
+            //            //PI_ID = EMPID;
+            //            //dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CandidateID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] ,[PI_ID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and PI_ID =  " + PI_ID + " ");
+            //            //dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[P_Id] ,[name],[documentValue] ,[url] ,[last_update] ,[DocumentType].Doc_Type ,[RefrenceID]FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and P_Id =  " + PI_ID + " ");
 
-                    }
-                }
-            }
+            //        }
+            //    }
+            //}
         }
 
         private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -1179,6 +1203,12 @@ namespace Delmon_Managment_System.Forms
                 tabControl1.Enabled = false;
             }
             SQLCONN.CloseConnection();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            this.lbldatetime.Text = DateTime.Now.ToString("dd-MMM-yyyy  hh:mm:ss tt");
+
         }
     }
     }
