@@ -15,8 +15,8 @@ namespace Delmon_Managment_System
    public  class SQLCONNECTION
     {
 
-      //  string ConnectionString = "Data Source=192.168.1.8;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@";
-        string ConnectionString = "Data Source=AMIN-PC;Initial Catalog=DelmonGroupDB;Persist Security Info=True;User ID=sa;password=Ram72763@";
+        string ConnectionString = "Data Source=192.168.1.8;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@";
+       // string ConnectionString = "Data Source=AMIN-PC;Initial Catalog=DelmonGroupDB;Persist Security Info=True;User ID=sa;password=Ram72763@";
 
         SqlConnection con;
         public void OpenConection()
@@ -60,19 +60,28 @@ namespace Delmon_Managment_System
         }
 
 
-        public object ShowDataInGridViewORCombobox(string Query_)
+        public object ShowDataInGridViewORCombobox(string Query_, params SqlParameter[] parameters)
         {
-            SqlDataAdapter adapt = new SqlDataAdapter(Query_, ConnectionString);
+            SqlCommand cmd = new SqlCommand(Query_, con);
+            foreach (SqlParameter parm in parameters)
+            {
+                cmd.Parameters.Add(parm);
+            }
+            SqlDataAdapter adapt = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             adapt.Fill(ds);
-            object dataum = ds.Tables[0];   
+            object dataum = ds.Tables[0];
+            cmd.Parameters.Clear();
             return dataum;
+           
+
+
         }
-    
 
 
 
-}
+
+    }
    
 
 }

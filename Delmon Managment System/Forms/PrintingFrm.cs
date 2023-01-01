@@ -47,7 +47,7 @@ namespace Delmon_Managment_System.Forms
         private void emptxt_TextChanged(object sender, EventArgs e)
         {
             SQLCONN.OpenConection();
-            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from PrintLog  where  UserName LIKE '%" + emptxt.Text + "%'");
+           // dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from PrintLog  where  UserName LIKE '%" + emptxt.Text + "%'");
             SQLCONN.CloseConnection();
            
         }

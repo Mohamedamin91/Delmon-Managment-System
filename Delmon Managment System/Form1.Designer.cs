@@ -113,6 +113,7 @@ namespace Delmon_Managment_System
             this.btnNotifications.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnNotifications.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnNotifications.UseVisualStyleBackColor = true;
+            this.btnNotifications.Visible = false;
             this.btnNotifications.Click += new System.EventHandler(this.btnNotifications_Click);
             // 
             // btnBilling
@@ -132,6 +133,7 @@ namespace Delmon_Managment_System
             this.btnBilling.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnBilling.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnBilling.UseVisualStyleBackColor = true;
+            this.btnBilling.Visible = false;
             this.btnBilling.Click += new System.EventHandler(this.btnBilling_Click);
             // 
             // btnprinting
@@ -147,7 +149,7 @@ namespace Delmon_Managment_System
             this.btnprinting.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.btnprinting.Size = new System.Drawing.Size(200, 60);
             this.btnprinting.TabIndex = 3;
-            this.btnprinting.Text = "  Printing";
+            this.btnprinting.Text = "Request Forms";
             this.btnprinting.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnprinting.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnprinting.UseVisualStyleBackColor = true;

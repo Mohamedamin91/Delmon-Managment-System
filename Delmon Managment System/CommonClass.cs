@@ -8,6 +8,7 @@ namespace Delmon_Managment_System
 {
  public static   class CommonClass
     {
+        public static int UserID { get; set; }
         public static String LoginUserName { get; set; }
         public static String Usertype { get; set; }
         public static String Email { get; set; }

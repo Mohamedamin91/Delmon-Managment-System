@@ -72,17 +72,15 @@ namespace Delmon_Managment_System.Forms
             this.VisaFileNumberID = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.CmbReqierdJob = new System.Windows.Forms.ComboBox();
-            this.label14 = new System.Windows.Forms.Label();
             this.btnnewJob = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.lblusername = new System.Windows.Forms.Label();
             this.lblemail = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblusertype = new System.Windows.Forms.Label();
-            this.lbldatetime = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblPC = new System.Windows.Forms.Label();
+            this.lbldatetime = new System.Windows.Forms.Label();
+            this.lblusertype = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -282,7 +280,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(15, 165);
+            this.label5.Location = new System.Drawing.Point(15, 138);
             this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(43, 17);
@@ -294,7 +292,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbStatus.Enabled = false;
             this.cmbStatus.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Location = new System.Drawing.Point(166, 162);
+            this.cmbStatus.Location = new System.Drawing.Point(166, 135);
             this.cmbStatus.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(207, 25);
@@ -418,10 +416,10 @@ namespace Delmon_Managment_System.Forms
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNew.ForeColor = System.Drawing.Color.Black;
-            this.btnNew.Location = new System.Drawing.Point(350, 21);
+            this.btnNew.Location = new System.Drawing.Point(350, 11);
             this.btnNew.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(63, 25);
+            this.btnNew.Size = new System.Drawing.Size(63, 33);
             this.btnNew.TabIndex = 82;
             this.btnNew.Text = "New";
             this.btnNew.UseVisualStyleBackColor = false;
@@ -519,10 +517,10 @@ namespace Delmon_Managment_System.Forms
             this.Findbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Findbtn.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Findbtn.ForeColor = System.Drawing.Color.Black;
-            this.Findbtn.Location = new System.Drawing.Point(422, 21);
+            this.Findbtn.Location = new System.Drawing.Point(420, 11);
             this.Findbtn.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Findbtn.Name = "Findbtn";
-            this.Findbtn.Size = new System.Drawing.Size(62, 25);
+            this.Findbtn.Size = new System.Drawing.Size(62, 33);
             this.Findbtn.TabIndex = 86;
             this.Findbtn.Text = "Find";
             this.Findbtn.UseVisualStyleBackColor = false;
@@ -535,10 +533,10 @@ namespace Delmon_Managment_System.Forms
             this.btnAssign.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAssign.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAssign.ForeColor = System.Drawing.Color.Black;
-            this.btnAssign.Location = new System.Drawing.Point(165, 229);
+            this.btnAssign.Location = new System.Drawing.Point(165, 200);
             this.btnAssign.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnAssign.Name = "btnAssign";
-            this.btnAssign.Size = new System.Drawing.Size(70, 33);
+            this.btnAssign.Size = new System.Drawing.Size(58, 33);
             this.btnAssign.TabIndex = 83;
             this.btnAssign.Text = "Assign";
             this.btnAssign.UseVisualStyleBackColor = false;
@@ -548,7 +546,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(15, 194);
+            this.label13.Location = new System.Drawing.Point(15, 167);
             this.label13.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(67, 17);
@@ -560,7 +558,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbcandidates.Enabled = false;
             this.cmbcandidates.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbcandidates.FormattingEnabled = true;
-            this.cmbcandidates.Location = new System.Drawing.Point(166, 194);
+            this.cmbcandidates.Location = new System.Drawing.Point(166, 167);
             this.cmbcandidates.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.cmbcandidates.Name = "cmbcandidates";
             this.cmbcandidates.Size = new System.Drawing.Size(207, 25);
@@ -623,8 +621,6 @@ namespace Delmon_Managment_System.Forms
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.CmbReqierdJob);
-            this.groupBox3.Controls.Add(this.label14);
             this.groupBox3.Controls.Add(this.btnnewJob);
             this.groupBox3.Controls.Add(this.btnAssign);
             this.groupBox3.Controls.Add(this.cmbStatus);
@@ -640,33 +636,10 @@ namespace Delmon_Managment_System.Forms
             this.groupBox3.Controls.Add(this.dataGridView2);
             this.groupBox3.Location = new System.Drawing.Point(14, 287);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1249, 289);
+            this.groupBox3.Size = new System.Drawing.Size(1249, 262);
             this.groupBox3.TabIndex = 90;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Visa JobList";
-            // 
-            // CmbReqierdJob
-            // 
-            this.CmbReqierdJob.Enabled = false;
-            this.CmbReqierdJob.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CmbReqierdJob.FormattingEnabled = true;
-            this.CmbReqierdJob.Location = new System.Drawing.Point(165, 131);
-            this.CmbReqierdJob.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.CmbReqierdJob.Name = "CmbReqierdJob";
-            this.CmbReqierdJob.Size = new System.Drawing.Size(317, 25);
-            this.CmbReqierdJob.TabIndex = 85;
-            this.CmbReqierdJob.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CmbReqierdJob_KeyDown);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(14, 131);
-            this.label14.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(86, 17);
-            this.label14.TabIndex = 86;
-            this.label14.Text = "Required Job";
             // 
             // btnnewJob
             // 
@@ -675,7 +648,7 @@ namespace Delmon_Managment_System.Forms
             this.btnnewJob.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnnewJob.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnnewJob.ForeColor = System.Drawing.Color.Black;
-            this.btnnewJob.Location = new System.Drawing.Point(493, 100);
+            this.btnnewJob.Location = new System.Drawing.Point(493, 99);
             this.btnnewJob.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnnewJob.Name = "btnnewJob";
             this.btnnewJob.Size = new System.Drawing.Size(59, 26);
@@ -739,17 +712,17 @@ namespace Delmon_Managment_System.Forms
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "User Info";
             // 
-            // lblusertype
+            // lblPC
             // 
-            this.lblusertype.AutoSize = true;
-            this.lblusertype.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblusertype.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblusertype.Location = new System.Drawing.Point(4, 65);
-            this.lblusertype.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.lblusertype.Name = "lblusertype";
-            this.lblusertype.Size = new System.Drawing.Size(64, 17);
-            this.lblusertype.TabIndex = 94;
-            this.lblusertype.Text = "UserType";
+            this.lblPC.AutoSize = true;
+            this.lblPC.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPC.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.lblPC.Location = new System.Drawing.Point(4, 89);
+            this.lblPC.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblPC.Name = "lblPC";
+            this.lblPC.Size = new System.Drawing.Size(22, 17);
+            this.lblPC.TabIndex = 97;
+            this.lblPC.Text = "Pc";
             // 
             // lbldatetime
             // 
@@ -763,21 +736,21 @@ namespace Delmon_Managment_System.Forms
             this.lbldatetime.TabIndex = 96;
             this.lbldatetime.Text = "Date&Time";
             // 
+            // lblusertype
+            // 
+            this.lblusertype.AutoSize = true;
+            this.lblusertype.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblusertype.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.lblusertype.Location = new System.Drawing.Point(4, 65);
+            this.lblusertype.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblusertype.Name = "lblusertype";
+            this.lblusertype.Size = new System.Drawing.Size(64, 17);
+            this.lblusertype.TabIndex = 94;
+            this.lblusertype.Text = "UserType";
+            // 
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // lblPC
-            // 
-            this.lblPC.AutoSize = true;
-            this.lblPC.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPC.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblPC.Location = new System.Drawing.Point(4, 89);
-            this.lblPC.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.lblPC.Name = "lblPC";
-            this.lblPC.Size = new System.Drawing.Size(22, 17);
-            this.lblPC.TabIndex = 97;
-            this.lblPC.Text = "Pc";
             // 
             // VisaFrm
             // 
@@ -857,8 +830,6 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btnnewJob;
         private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.ComboBox CmbReqierdJob;
-        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label lblusername;
         private System.Windows.Forms.Label lblemail;
         private System.Windows.Forms.GroupBox groupBox1;

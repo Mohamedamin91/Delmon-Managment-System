@@ -15,6 +15,7 @@ namespace Delmon_Managment_System
     {
         SQLCONNECTION SQLCONN = new SQLCONNECTION();
         public int PI_ID = 0;
+        public int UserID = 0;
         public string UserType ;
         public string UserName;
         public string Email ;
@@ -51,11 +52,14 @@ namespace Delmon_Managment_System
             {
                 //after successful it will redirect  to next page .
                 //saving user info
+                UserID = int.Parse(dr["UserID"].ToString());
                 PI_ID = int.Parse(dr["PI_ID"].ToString());
                 UserType = (dr["UserType"].ToString());
                 UserName = (dr["UserName"].ToString());
                 Email =    (dr["Email"].ToString());
-
+                
+                
+                CommonClass.UserID = UserID;
                 CommonClass.LoginUserName = UserName;
                 CommonClass.Usertype = UserType;
                 CommonClass.Email = Email;

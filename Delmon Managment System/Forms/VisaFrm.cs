@@ -118,10 +118,7 @@ namespace Delmon_Managment_System.Forms
             cmbJob.DisplayMember = "JobTitleEN";
             cmbJob.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS");
             
-            CmbReqierdJob.ValueMember = "JobID";
-            CmbReqierdJob.DisplayMember = "JobTitleEN";
-            CmbReqierdJob.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS");
-
+           
             cmbConsulate.ValueMember = "Consulates.ConsulateID";
             cmbConsulate.DisplayMember = "ConsulateCity";
             cmbConsulate.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select Consulates.ConsulateID,ConsulateCity from Countries,Consulates where Countries.CountryId = Consulates.CountryId");
@@ -131,15 +128,16 @@ namespace Delmon_Managment_System.Forms
             cmbStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select statusid,status  from Visastatus where RefrenceID =1 or RefrenceID = 0 order by statusid");
 
 
-            cmbcandidates.ValueMember = "PI_ID";
+            cmbcandidates.ValueMember = "CandidateID";
             cmbcandidates.DisplayMember = "Name";
-            cmbcandidates.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT PersonalInformation.PI_ID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[PersonalInformation] ,EmploymentHistory where PersonalInformation.PI_ID = EmploymentHistory.PI_ID and EmploymentHistory.EmploymentStatusID = 23");
+            cmbcandidates.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees] ,EmploymentStatus where Employees.EmployeeID = EmploymentStatus.EmployeeID and EmploymentStatus.EmploymentStatusID = 11");
             cmbcandidates.Text = "Select";
             SQLCONN.CloseConnection();
 
 
 
 
+         //   this.reportViewer1.RefreshReport();
         }
         private void LoadTheme()
         {
@@ -310,8 +308,8 @@ namespace Delmon_Managment_System.Forms
                         ParamConsulate.Value = cmbConsulate.SelectedValue;
                         SqlParameter paramJob = new SqlParameter("@C4", SqlDbType.NVarChar);
                         paramJob.Value = cmbJob.SelectedValue;
-                        SqlParameter paramRequiredJob = new SqlParameter("@C5", SqlDbType.NVarChar);
-                        paramRequiredJob.Value = CmbReqierdJob.SelectedValue;
+                        //SqlParameter paramRequiredJob = new SqlParameter("@C5", SqlDbType.NVarChar);
+                        //paramRequiredJob.Value = CmbReqierdJob.SelectedValue;
 
 
                         Totatvisa = int.Parse(TotalVisastxt.Text);
@@ -323,9 +321,9 @@ namespace Delmon_Managment_System.Forms
                                 dr.Dispose();
                                 dr.Close();
 
-                                SQLCONN.ExecuteQueries("insert into VISAJobList (VisaNumber,statusid,ConsulateID,JobID,RequiredJob) " +
+                                SQLCONN.ExecuteQueries("insert into VISAJobList (VisaNumber,statusid,ConsulateID,JobID) " +
                                     " values (@C1,@C2,@C3,@C4,@C5) ",
-                                    paramVisanumber, paramstatusID, ParamConsulate, paramJob,paramRequiredJob);
+                                    paramVisanumber, paramstatusID, ParamConsulate, paramJob);
 
                             }
                             MessageBox.Show("Jobs has been added successfully to Visa", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -337,7 +335,7 @@ namespace Delmon_Managment_System.Forms
                             cmbConsulate.Text = "Select";
                             cmbJob.Text = "Select";
                             cmbStatus.Text = "Select";
-                            CmbReqierdJob.Text = "Select";
+                          //  CmbReqierdJob.Text = "Select";
                         }
                         
 
@@ -533,9 +531,21 @@ namespace Delmon_Managment_System.Forms
                     paramExpiryDateEN.Value = expairENDATEtxt.Text;
                   
                     SqlParameter paramTotalVisas = new SqlParameter("@C8", SqlDbType.NVarChar);
-
+                    paramTotalVisas.Value = TotalVisastxt.Text;
                     SqlParameter paramRemarks = new SqlParameter("@C9", SqlDbType.NVarChar);
                     paramRemarks.Value = RemarksTxt.Text;
+
+
+                    SqlParameter paramUserID = new SqlParameter("@C10", SqlDbType.NVarChar);
+                    paramUserID.Value = CommonClass.UserID;                   
+                    SqlParameter paramDateTimeLOG = new SqlParameter("@C11", SqlDbType.NVarChar);
+                    paramDateTimeLOG.Value = lbldatetime.Text;
+
+
+
+
+
+
                     dr.Dispose();
                     dr.Close();
 
@@ -551,9 +561,9 @@ namespace Delmon_Managment_System.Forms
 
                     if (DialogResult.Yes == MessageBox.Show("Do You Want to submit this info for Visa No :  " + Visanumtxt.Text + " ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     {
-                        SQLCONN.ExecuteQueries("insert into VISA (VisaNumber,ComapnyID,ReceviedDate,IssueDateEN,ExpiryDateEN,TotalVisas,Remarks,ExpiryDateHijri,IssueDateHijri) " +
-                            " values (@C1,@C2,@C3,@C5,@C7,@C8,@C9,@C6,@C4) ",
-                            paramVisanumber, paramcomapany, paramRecevidDate, paramIssueDateEN, paramExpiryDateEN, paramTotalVisas, paramRemarks, paramExpiryDateHijri, paramIssHIJriDate);
+                        SQLCONN.ExecuteQueries("insert into VISA (VisaNumber,ComapnyID,ReceviedDate,IssueDateEN,ExpiryDateEN,TotalVisas,Remarks,ExpiryDateHijri,IssueDateHijri,UserID,DatetimeLOG) " +
+                            " values (@C1,@C2,@C3,@C5,@C7,@C8,@C9,@C6,@C4,@C10,@C11) ",
+                            paramVisanumber, paramcomapany, paramRecevidDate, paramIssueDateEN, paramExpiryDateEN, paramTotalVisas, paramRemarks, paramExpiryDateHijri, paramIssHIJriDate,paramUserID,paramDateTimeLOG);
                         MessageBox.Show("Visa has been Saved successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         dr.Dispose();
                         dr.Close();
@@ -946,7 +956,7 @@ namespace Delmon_Managment_System.Forms
             ChangeEnabled(true);
             Visanumtxt.BackColor = Color.White;
             TotalVisastxt.BackColor = Color.White;
-             cmbCompany.Enabled= cmbcandidates.Enabled= CmbReqierdJob.Enabled= cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = true;
+             cmbCompany.Enabled= cmbcandidates.Enabled=  cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = true;
             TotalVisastxt.Enabled  =RemarksTxt.Enabled= true;
             ReceviedPicker.Enabled = true;
          
@@ -1197,8 +1207,14 @@ namespace Delmon_Managment_System.Forms
                         FileNumberID = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString());
                         cmbConsulate.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[2].Value.ToString());
                         cmbJob.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[3].Value.ToString());
-                        cmbStatus.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[4].Value.ToString());
+                        cmbStatus.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[5].Value.ToString());
                         VisaFileNumberID.Text = FileNumberID.ToString();
+
+                        cmbConsulate.Enabled = cmbJob.Enabled = false;
+                        cmbStatus.Enabled =cmbcandidates.Enabled= true;
+                        btnnewJob.Enabled = false;
+                        btnUpdate.Visible = true;
+
 
                     }
                 }
@@ -1316,7 +1332,7 @@ namespace Delmon_Managment_System.Forms
             if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
                 SQLCONN.OpenConection();
-                SQLCONN.ExecuteQueries("update  VISAJobList set PI_ID=@C1 where FileNumber=@C2",
+                SQLCONN.ExecuteQueries("update  VISAJobList set CandidateID=@C1 where FileNumber=@C2",
                                               paramPID, paramFilenumber);
                 MessageBox.Show("File Number Has been Assign Successfully   ");
                 VisaFileNumberID.Text = "";
@@ -1357,6 +1373,13 @@ namespace Delmon_Managment_System.Forms
         
             SqlParameter paramIssHIJriDate = new SqlParameter("@C4", SqlDbType.NVarChar);
             paramIssHIJriDate.Value = issuhijritxt.Text;
+
+            SqlParameter paramStatus = new SqlParameter("@C5", SqlDbType.NVarChar);
+            paramStatus.Value = cmbStatus.SelectedValue;
+
+            SqlParameter paramCandidate = new SqlParameter("@C6", SqlDbType.NVarChar);
+            paramCandidate.Value = cmbcandidates.SelectedValue;
+           
            
             SqlParameter paramVisaID = new SqlParameter("@id", SqlDbType.Int);
             paramVisaID.Value = VisaNumberID;
@@ -1364,8 +1387,8 @@ namespace Delmon_Managment_System.Forms
             SqlParameter paramFileNumberID = new SqlParameter("@FileNumberid", SqlDbType.Int);
             paramFileNumberID.Value = FileNumberID;
 
-            SqlParameter paramRequiredJob = new SqlParameter("@C5", SqlDbType.NVarChar);
-            paramRequiredJob.Value = CmbReqierdJob;
+            //SqlParameter paramRequiredJob = new SqlParameter("@C5", SqlDbType.NVarChar);
+            //paramRequiredJob.Value = CmbReqierdJob;
 
             if (VisaNumberID != 0)
             {
@@ -1374,12 +1397,12 @@ namespace Delmon_Managment_System.Forms
                 {
 
 
-                    SQLCONN.OpenConection();
-                    SQLCONN.ExecuteQueries("update visa set ReceviedDate=@C3,IssueDateHijri=@C4 where VisaNumber=@id",
-                      paramRecevidDate, paramIssHIJriDate, paramVisaID);
-                    MessageBox.Show("Record Updated Successfully");
-                    dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from visa where VisaNumber = '" + VisaNumberID + "'");
-                    SQLCONN.CloseConnection();
+                    //SQLCONN.OpenConection();
+                    //SQLCONN.ExecuteQueries("update visa set ReceviedDate=@C3,IssueDateHijri=@C4 where VisaNumber=@id",
+                    //  paramRecevidDate, paramIssHIJriDate, paramVisaID);
+                    //  MessageBox.Show("Record Updated Successfully");
+                    //  dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from visa where VisaNumber = '" + VisaNumberID + "'");
+                    // SQLCONN.CloseConnection();
 
 
                 }
@@ -1395,14 +1418,15 @@ namespace Delmon_Managment_System.Forms
 
                 if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
-                    
+
+
 
 
                     SQLCONN.OpenConection();
-                    SQLCONN.ExecuteQueries("update VISAJobList set RequiredJob = @C5 where where FileNumber=@FileNumberid",
-                      paramRequiredJob, paramFileNumberID);
+                    SQLCONN.ExecuteQueries("update VISAJobList set StatusID=@C5,CandidateID=@C6 where FileNumber=@FileNumberid",
+                    paramStatus, paramCandidate, paramFileNumberID);
                     MessageBox.Show("Record Updated Successfully");
-                    dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from VISAJobList where VisaNumber = '" + VisaNumberID + "'");
+                    dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from VISAJobList where FileNumber = '" + FileNumberID + "'");
                     SQLCONN.CloseConnection();
 
 
@@ -1440,7 +1464,10 @@ namespace Delmon_Managment_System.Forms
 
         }
 
+        private void btnprint_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }
 
