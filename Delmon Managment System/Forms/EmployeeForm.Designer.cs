@@ -73,11 +73,11 @@ namespace Delmon_Managment_System.Forms
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblPC = new System.Windows.Forms.Label();
             this.EmploymentHistory = new System.Windows.Forms.TabPage();
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.btnaddhitory = new System.Windows.Forms.Button();
             this.btnnewhistory = new System.Windows.Forms.Button();
             this.btndeletehistory = new System.Windows.Forms.Button();
             this.btnupdatehistory = new System.Windows.Forms.Button();
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.tabDoc = new System.Windows.Forms.TabPage();
             this.issueplacetext = new System.Windows.Forms.TextBox();
             this.numbertextbox = new System.Windows.Forms.TextBox();
@@ -115,6 +115,10 @@ namespace Delmon_Managment_System.Forms
             this.label22 = new System.Windows.Forms.Label();
             this.cmbsalarytype = new System.Windows.Forms.ComboBox();
             this.txtvalue = new System.Windows.Forms.TextBox();
+            this.btnprtjoboffer = new System.Windows.Forms.Button();
+            this.btnprtvisareq = new System.Windows.Forms.Button();
+            this.cmbCompany = new System.Windows.Forms.ComboBox();
+            this.label23 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -227,7 +231,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(28, 79);
+            this.label1.Location = new System.Drawing.Point(22, 79);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 17);
             this.label1.TabIndex = 113;
@@ -273,6 +277,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbPersonalStatusStatus.Size = new System.Drawing.Size(179, 25);
             this.cmbPersonalStatusStatus.TabIndex = 84;
             this.cmbPersonalStatusStatus.SelectedIndexChanged += new System.EventHandler(this.cmbPersonalStatusStatus_SelectedIndexChanged);
+            this.cmbPersonalStatusStatus.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbPersonalStatusStatus_KeyDown);
             // 
             // label5
             // 
@@ -363,6 +368,7 @@ namespace Delmon_Managment_System.Forms
             this.EmployeeIDtxt.Size = new System.Drawing.Size(179, 25);
             this.EmployeeIDtxt.TabIndex = 147;
             this.EmployeeIDtxt.TextChanged += new System.EventHandler(this.EmployeeIDtxt_TextChanged);
+            this.EmployeeIDtxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EmployeeIDtxt_KeyDown);
             // 
             // IDlbl
             // 
@@ -378,7 +384,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.EndDatePicker.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EndDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.EndDatePicker.Location = new System.Drawing.Point(478, 277);
+            this.EndDatePicker.Location = new System.Drawing.Point(478, 305);
             this.EndDatePicker.Margin = new System.Windows.Forms.Padding(5);
             this.EndDatePicker.Name = "EndDatePicker";
             this.EndDatePicker.Size = new System.Drawing.Size(179, 25);
@@ -388,7 +394,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(378, 283);
+            this.label15.Location = new System.Drawing.Point(378, 303);
             this.label15.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(34, 17);
@@ -399,18 +405,19 @@ namespace Delmon_Managment_System.Forms
             // 
             this.StartDatePicker.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StartDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.StartDatePicker.Location = new System.Drawing.Point(158, 281);
+            this.StartDatePicker.Location = new System.Drawing.Point(159, 303);
             this.StartDatePicker.Margin = new System.Windows.Forms.Padding(5);
             this.StartDatePicker.Name = "StartDatePicker";
             this.StartDatePicker.Size = new System.Drawing.Size(149, 25);
             this.StartDatePicker.TabIndex = 139;
             this.StartDatePicker.ValueChanged += new System.EventHandler(this.StartDatePicker_ValueChanged);
+            this.StartDatePicker.KeyDown += new System.Windows.Forms.KeyEventHandler(this.StartDatePicker_KeyDown);
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(34, 270);
+            this.label13.Location = new System.Drawing.Point(22, 309);
             this.label13.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(39, 17);
@@ -421,17 +428,18 @@ namespace Delmon_Managment_System.Forms
             // 
             this.cmbempdepthistory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbempdepthistory.FormattingEnabled = true;
-            this.cmbempdepthistory.Location = new System.Drawing.Point(158, 236);
+            this.cmbempdepthistory.Location = new System.Drawing.Point(158, 267);
             this.cmbempdepthistory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbempdepthistory.Name = "cmbempdepthistory";
             this.cmbempdepthistory.Size = new System.Drawing.Size(178, 25);
             this.cmbempdepthistory.TabIndex = 136;
+            this.cmbempdepthistory.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbempdepthistory_KeyDown);
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(28, 236);
+            this.label12.Location = new System.Drawing.Point(22, 267);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(77, 17);
             this.label12.TabIndex = 137;
@@ -441,17 +449,18 @@ namespace Delmon_Managment_System.Forms
             // 
             this.cmbEmployJobHistory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbEmployJobHistory.FormattingEnabled = true;
-            this.cmbEmployJobHistory.Location = new System.Drawing.Point(478, 240);
+            this.cmbEmployJobHistory.Location = new System.Drawing.Point(478, 271);
             this.cmbEmployJobHistory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbEmployJobHistory.Name = "cmbEmployJobHistory";
             this.cmbEmployJobHistory.Size = new System.Drawing.Size(257, 25);
             this.cmbEmployJobHistory.TabIndex = 134;
+            this.cmbEmployJobHistory.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbEmployJobHistory_KeyDown);
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(378, 242);
+            this.label11.Location = new System.Drawing.Point(378, 273);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(29, 17);
             this.label11.TabIndex = 135;
@@ -485,6 +494,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbMartialStatus.Name = "cmbMartialStatus";
             this.cmbMartialStatus.Size = new System.Drawing.Size(179, 25);
             this.cmbMartialStatus.TabIndex = 138;
+            this.cmbMartialStatus.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbMartialStatus_KeyDown);
             // 
             // label16
             // 
@@ -590,10 +600,6 @@ namespace Delmon_Managment_System.Forms
             // 
             // EmploymentHistory
             // 
-            this.EmploymentHistory.Controls.Add(this.btnaddhitory);
-            this.EmploymentHistory.Controls.Add(this.btnnewhistory);
-            this.EmploymentHistory.Controls.Add(this.btndeletehistory);
-            this.EmploymentHistory.Controls.Add(this.btnupdatehistory);
             this.EmploymentHistory.Controls.Add(this.dataGridView4);
             this.EmploymentHistory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EmploymentHistory.Location = new System.Drawing.Point(4, 26);
@@ -606,6 +612,19 @@ namespace Delmon_Managment_System.Forms
             this.EmploymentHistory.UseVisualStyleBackColor = true;
             this.EmploymentHistory.Click += new System.EventHandler(this.EmploymentHistory_Click);
             // 
+            // dataGridView4
+            // 
+            this.dataGridView4.AllowUserToAddRows = false;
+            this.dataGridView4.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.Location = new System.Drawing.Point(9, 8);
+            this.dataGridView4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dataGridView4.Name = "dataGridView4";
+            this.dataGridView4.Size = new System.Drawing.Size(947, 328);
+            this.dataGridView4.TabIndex = 133;
+            this.dataGridView4.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellClick);
+            this.dataGridView4.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellContentClick);
+            // 
             // btnaddhitory
             // 
             this.btnaddhitory.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -613,13 +632,14 @@ namespace Delmon_Managment_System.Forms
             this.btnaddhitory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnaddhitory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnaddhitory.ForeColor = System.Drawing.Color.Black;
-            this.btnaddhitory.Location = new System.Drawing.Point(232, 26);
+            this.btnaddhitory.Location = new System.Drawing.Point(1494, 363);
             this.btnaddhitory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnaddhitory.Name = "btnaddhitory";
             this.btnaddhitory.Size = new System.Drawing.Size(90, 36);
             this.btnaddhitory.TabIndex = 140;
             this.btnaddhitory.Text = "Add";
             this.btnaddhitory.UseVisualStyleBackColor = false;
+            this.btnaddhitory.Visible = false;
             this.btnaddhitory.Click += new System.EventHandler(this.btnaddhitory_Click);
             // 
             // btnnewhistory
@@ -629,13 +649,14 @@ namespace Delmon_Managment_System.Forms
             this.btnnewhistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnnewhistory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnnewhistory.ForeColor = System.Drawing.Color.Black;
-            this.btnnewhistory.Location = new System.Drawing.Point(137, 26);
+            this.btnnewhistory.Location = new System.Drawing.Point(1399, 363);
             this.btnnewhistory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnnewhistory.Name = "btnnewhistory";
             this.btnnewhistory.Size = new System.Drawing.Size(90, 36);
             this.btnnewhistory.TabIndex = 145;
             this.btnnewhistory.Text = "New";
             this.btnnewhistory.UseVisualStyleBackColor = false;
+            this.btnnewhistory.Visible = false;
             // 
             // btndeletehistory
             // 
@@ -644,13 +665,14 @@ namespace Delmon_Managment_System.Forms
             this.btndeletehistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btndeletehistory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btndeletehistory.ForeColor = System.Drawing.Color.Black;
-            this.btndeletehistory.Location = new System.Drawing.Point(421, 26);
+            this.btndeletehistory.Location = new System.Drawing.Point(1683, 363);
             this.btndeletehistory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btndeletehistory.Name = "btndeletehistory";
             this.btndeletehistory.Size = new System.Drawing.Size(90, 36);
             this.btndeletehistory.TabIndex = 144;
             this.btndeletehistory.Text = "Delete";
             this.btndeletehistory.UseVisualStyleBackColor = false;
+            this.btndeletehistory.Visible = false;
             this.btndeletehistory.Click += new System.EventHandler(this.btndeletehistory_Click);
             // 
             // btnupdatehistory
@@ -660,27 +682,15 @@ namespace Delmon_Managment_System.Forms
             this.btnupdatehistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnupdatehistory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnupdatehistory.ForeColor = System.Drawing.Color.Black;
-            this.btnupdatehistory.Location = new System.Drawing.Point(326, 26);
+            this.btnupdatehistory.Location = new System.Drawing.Point(1588, 363);
             this.btnupdatehistory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnupdatehistory.Name = "btnupdatehistory";
             this.btnupdatehistory.Size = new System.Drawing.Size(90, 36);
             this.btnupdatehistory.TabIndex = 143;
             this.btnupdatehistory.Text = "Update";
             this.btnupdatehistory.UseVisualStyleBackColor = false;
+            this.btnupdatehistory.Visible = false;
             this.btnupdatehistory.Click += new System.EventHandler(this.btnupdatehistory_Click);
-            // 
-            // dataGridView4
-            // 
-            this.dataGridView4.AllowUserToAddRows = false;
-            this.dataGridView4.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Location = new System.Drawing.Point(9, 86);
-            this.dataGridView4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.Size = new System.Drawing.Size(826, 250);
-            this.dataGridView4.TabIndex = 133;
-            this.dataGridView4.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellClick);
-            this.dataGridView4.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellContentClick);
             // 
             // tabDoc
             // 
@@ -1160,12 +1170,75 @@ namespace Delmon_Managment_System.Forms
             this.txtvalue.Size = new System.Drawing.Size(154, 25);
             this.txtvalue.TabIndex = 139;
             // 
+            // btnprtjoboffer
+            // 
+            this.btnprtjoboffer.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnprtjoboffer.BackColor = System.Drawing.Color.White;
+            this.btnprtjoboffer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnprtjoboffer.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnprtjoboffer.ForeColor = System.Drawing.Color.Black;
+            this.btnprtjoboffer.Location = new System.Drawing.Point(534, 387);
+            this.btnprtjoboffer.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnprtjoboffer.Name = "btnprtjoboffer";
+            this.btnprtjoboffer.Size = new System.Drawing.Size(109, 43);
+            this.btnprtjoboffer.TabIndex = 148;
+            this.btnprtjoboffer.Text = "Print Job Offer";
+            this.btnprtjoboffer.UseVisualStyleBackColor = false;
+            this.btnprtjoboffer.Click += new System.EventHandler(this.btnprtjoboffer_Click);
+            // 
+            // btnprtvisareq
+            // 
+            this.btnprtvisareq.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnprtvisareq.BackColor = System.Drawing.Color.White;
+            this.btnprtvisareq.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnprtvisareq.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnprtvisareq.ForeColor = System.Drawing.Color.Black;
+            this.btnprtvisareq.Location = new System.Drawing.Point(665, 387);
+            this.btnprtvisareq.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnprtvisareq.Name = "btnprtvisareq";
+            this.btnprtvisareq.Size = new System.Drawing.Size(128, 43);
+            this.btnprtvisareq.TabIndex = 149;
+            this.btnprtvisareq.Text = "Print Visa Request";
+            this.btnprtvisareq.UseVisualStyleBackColor = false;
+            // 
+            // cmbCompany
+            // 
+            this.cmbCompany.Enabled = false;
+            this.cmbCompany.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbCompany.FormattingEnabled = true;
+            this.cmbCompany.Location = new System.Drawing.Point(159, 234);
+            this.cmbCompany.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.cmbCompany.Name = "cmbCompany";
+            this.cmbCompany.Size = new System.Drawing.Size(498, 25);
+            this.cmbCompany.TabIndex = 150;
+            this.cmbCompany.SelectionChangeCommitted += new System.EventHandler(this.cmbCompany_SelectionChangeCommitted);
+            this.cmbCompany.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbCompany_KeyDown);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(22, 237);
+            this.label23.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(63, 17);
+            this.label23.TabIndex = 151;
+            this.label23.Text = "Company";
+            // 
             // EmployeeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1884, 1038);
+            this.Controls.Add(this.cmbCompany);
+            this.Controls.Add(this.label23);
+            this.Controls.Add(this.btnaddhitory);
+            this.Controls.Add(this.btnprtvisareq);
+            this.Controls.Add(this.btnnewhistory);
+            this.Controls.Add(this.btndeletehistory);
+            this.Controls.Add(this.btnprtjoboffer);
+            this.Controls.Add(this.btnupdatehistory);
             this.Controls.Add(this.IDlbl);
             this.Controls.Add(this.EmployeeIDtxt);
             this.Controls.Add(this.groupBox1);
@@ -1242,7 +1315,6 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox cmbPersonalStatusStatus;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbGender;
         private System.Windows.Forms.TextBox firstnametxt;
@@ -1269,7 +1341,6 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Label lbldatetime;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lblPC;
-        private System.Windows.Forms.TextBox EmployeeIDtxt;
         private System.Windows.Forms.Label IDlbl;
         private System.Windows.Forms.TabPage EmploymentHistory;
         private System.Windows.Forms.Button btnaddhitory;
@@ -1314,5 +1385,11 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.ComboBox cmbsalarytype;
         private System.Windows.Forms.TextBox txtvalue;
+        private System.Windows.Forms.Button btnprtjoboffer;
+        private System.Windows.Forms.Button btnprtvisareq;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cmbCompany;
+        private System.Windows.Forms.Label label23;
+        public System.Windows.Forms.TextBox EmployeeIDtxt;
     }
 }

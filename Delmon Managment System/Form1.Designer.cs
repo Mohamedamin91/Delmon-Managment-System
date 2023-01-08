@@ -153,6 +153,7 @@ namespace Delmon_Managment_System
             this.btnprinting.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnprinting.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnprinting.UseVisualStyleBackColor = true;
+            this.btnprinting.Visible = false;
             this.btnprinting.Click += new System.EventHandler(this.btnprinting_Click);
             // 
             // btnemployee

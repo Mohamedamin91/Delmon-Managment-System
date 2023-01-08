@@ -14,7 +14,7 @@ namespace Delmon_Managment_System
     public partial class FrmLogin : Form
     {
         SQLCONNECTION SQLCONN = new SQLCONNECTION();
-        public int PI_ID = 0;
+        public int EmployeeID = 0;
         public int UserID = 0;
         public string UserType ;
         public string UserName;
@@ -46,14 +46,14 @@ namespace Delmon_Managment_System
             SQLCONN.OpenConection();
             //SqlDataReader dr = SQLCONN.DataReader("select username,pass from tblUser where UserName='" + Usertxt.Text + "'and Password='" + passtxt.Text + "'");
            
-            SqlDataReader dr = SQLCONN.DataReader(" select [UserID],[PI_ID],UserType,[Email], UserName,Password from tblUser , tblUserType where tblUser.UserTypeID=tblUserType.UserTypeID and UserName=@C1 and Password=@C2 and IsActive=1", paramUserName,paramPassword );
+            SqlDataReader dr = SQLCONN.DataReader(" select [UserID],[EmployeeID],UserType,[Email], UserName,Password from tblUser , tblUserType where tblUser.UserTypeID=tblUserType.UserTypeID and UserName=@C1 and Password=@C2 and IsActive=1", paramUserName,paramPassword );
             if (dr.Read())
 
             {
                 //after successful it will redirect  to next page .
                 //saving user info
                 UserID = int.Parse(dr["UserID"].ToString());
-                PI_ID = int.Parse(dr["PI_ID"].ToString());
+                EmployeeID = int.Parse(dr["EmployeeID"].ToString());
                 UserType = (dr["UserType"].ToString());
                 UserName = (dr["UserName"].ToString());
                 Email =    (dr["Email"].ToString());
