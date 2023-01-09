@@ -149,11 +149,10 @@ namespace Delmon_Managment_System
             this.btnprinting.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.btnprinting.Size = new System.Drawing.Size(200, 60);
             this.btnprinting.TabIndex = 3;
-            this.btnprinting.Text = "Request Forms";
+            this.btnprinting.Text = "Reports";
             this.btnprinting.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnprinting.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnprinting.UseVisualStyleBackColor = true;
-            this.btnprinting.Visible = false;
             this.btnprinting.Click += new System.EventHandler(this.btnprinting_Click);
             // 
             // btnemployee

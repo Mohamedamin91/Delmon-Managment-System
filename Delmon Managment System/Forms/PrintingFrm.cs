@@ -22,6 +22,7 @@ namespace Delmon_Managment_System.Forms
         {
             //LoadTheme(); 
 
+            this.reportViewer1.RefreshReport();
         }
         private void LoadTheme()
         {
@@ -35,8 +36,8 @@ namespace Delmon_Managment_System.Forms
                     btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
                 }
             }
-            label4.ForeColor = ThemeColor.SecondaryColor;
-            label5.ForeColor = ThemeColor.PrimaryColor;
+          //  label4.ForeColor = ThemeColor.SecondaryColor;
+          //  label5.ForeColor = ThemeColor.PrimaryColor;
         }
 
         private void label1_Click(object sender, EventArgs e)
