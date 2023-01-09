@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.Reporting.WinForms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,8 @@ namespace Delmon_Managment_System
             EmpIDRPT = CommonClass.EmployeeID;
             // TODO: This line of code loads data into the 'Delmon.DataTable1' table. You can move, or remove it, as needed.
             this.DataTable1TableAdapter.Fill(this.Delmon.DataTable1,EmpIDRPT);
+           // reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+          
             this.reportViewer1.RefreshReport();
         }
 

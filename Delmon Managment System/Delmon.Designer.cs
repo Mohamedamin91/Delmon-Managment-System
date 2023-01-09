@@ -293,11 +293,11 @@ namespace Delmon_Managment_System {
             
             private global::System.Data.DataColumn columnName;
             
-            private global::System.Data.DataColumn columnStartDate;
-            
             private global::System.Data.DataColumn columnEmployeeID;
             
             private global::System.Data.DataColumn columnNationalityName;
+            
+            private global::System.Data.DataColumn columnDate;
             
             private global::System.Data.DataColumn columnFullName;
             
@@ -392,14 +392,6 @@ namespace Delmon_Managment_System {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn StartDateColumn {
-                get {
-                    return this.columnStartDate;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataColumn EmployeeIDColumn {
                 get {
                     return this.columnEmployeeID;
@@ -411,6 +403,14 @@ namespace Delmon_Managment_System {
             public global::System.Data.DataColumn NationalityNameColumn {
                 get {
                     return this.columnNationalityName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn DateColumn {
+                get {
+                    return this.columnDate;
                 }
             }
             
@@ -459,7 +459,7 @@ namespace Delmon_Managment_System {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public DataTable1Row AddDataTable1Row(string Doc_Type, string Passport, string SalaryTypeName, string Value, string JobTitleEN, string Name, System.DateTime StartDate, int EmployeeID, string NationalityName, string FullName) {
+            public DataTable1Row AddDataTable1Row(string Doc_Type, string Passport, string SalaryTypeName, string Value, string JobTitleEN, string Name, int EmployeeID, string NationalityName, System.DateTime Date, string FullName) {
                 DataTable1Row rowDataTable1Row = ((DataTable1Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -469,9 +469,9 @@ namespace Delmon_Managment_System {
                         Value,
                         JobTitleEN,
                         Name,
-                        StartDate,
                         EmployeeID,
                         NationalityName,
+                        Date,
                         FullName};
                 rowDataTable1Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDataTable1Row);
@@ -509,9 +509,9 @@ namespace Delmon_Managment_System {
                 this.columnValue = base.Columns["Value"];
                 this.columnJobTitleEN = base.Columns["JobTitleEN"];
                 this.columnName = base.Columns["Name"];
-                this.columnStartDate = base.Columns["StartDate"];
                 this.columnEmployeeID = base.Columns["EmployeeID"];
                 this.columnNationalityName = base.Columns["NationalityName"];
+                this.columnDate = base.Columns["Date"];
                 this.columnFullName = base.Columns["FullName"];
             }
             
@@ -532,12 +532,12 @@ namespace Delmon_Managment_System {
                 base.Columns.Add(this.columnJobTitleEN);
                 this.columnName = new global::System.Data.DataColumn("Name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnName);
-                this.columnStartDate = new global::System.Data.DataColumn("StartDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnStartDate);
                 this.columnEmployeeID = new global::System.Data.DataColumn("EmployeeID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnEmployeeID);
                 this.columnNationalityName = new global::System.Data.DataColumn("NationalityName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNationalityName);
+                this.columnDate = new global::System.Data.DataColumn("Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDate);
                 this.columnFullName = new global::System.Data.DataColumn("FullName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFullName);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
@@ -807,22 +807,6 @@ namespace Delmon_Managment_System {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public System.DateTime StartDate {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableDataTable1.StartDateColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'StartDate\' in table \'DataTable1\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableDataTable1.StartDateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public int EmployeeID {
                 get {
                     return ((int)(this[this.tableDataTable1.EmployeeIDColumn]));
@@ -845,6 +829,22 @@ namespace Delmon_Managment_System {
                 }
                 set {
                     this[this.tableDataTable1.NationalityNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public System.DateTime Date {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableDataTable1.DateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Date\' in table \'DataTable1\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable1.DateColumn] = value;
                 }
             }
             
@@ -938,18 +938,6 @@ namespace Delmon_Managment_System {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsStartDateNull() {
-                return this.IsNull(this.tableDataTable1.StartDateColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetStartDateNull() {
-                this[this.tableDataTable1.StartDateColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsNationalityNameNull() {
                 return this.IsNull(this.tableDataTable1.NationalityNameColumn);
             }
@@ -958,6 +946,18 @@ namespace Delmon_Managment_System {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetNationalityNameNull() {
                 this[this.tableDataTable1.NationalityNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsDateNull() {
+                return this.IsNull(this.tableDataTable1.DateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetDateNull() {
+                this[this.tableDataTable1.DateColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1139,9 +1139,9 @@ namespace Delmon_Managment_System.DelmonTableAdapters {
             tableMapping.ColumnMappings.Add("Value", "Value");
             tableMapping.ColumnMappings.Add("JobTitleEN", "JobTitleEN");
             tableMapping.ColumnMappings.Add("Name", "Name");
-            tableMapping.ColumnMappings.Add("StartDate", "StartDate");
             tableMapping.ColumnMappings.Add("EmployeeID", "EmployeeID");
             tableMapping.ColumnMappings.Add("NationalityName", "NationalityName");
+            tableMapping.ColumnMappings.Add("Date", "Date");
             tableMapping.ColumnMappings.Add("FullName", "FullName");
             this._adapter.TableMappings.Add(tableMapping);
         }
@@ -1160,7 +1160,7 @@ namespace Delmon_Managment_System.DelmonTableAdapters {
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = @"SELECT  CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName',VISAJobList.FileNumber,DocumentType.Doc_Type,Documents.Number 'Passport' ,SalaryTypes.SalaryTypeName, SalaryDetails.Value
-,JOBS.JobTitleEN,WorkLocations.Name,Employees.StartDate,Employees.EmployeeID,Countries.NationalityName
+,JOBS.JobTitleEN,WorkLocations.Name,cast(Employees.StartDate as Date)'Date',Employees.EmployeeID,Countries.NationalityName
 from DEPARTMENTS,DeptTypes,WorkLocations,JOBS,Employees,VISAJobList,Documents,DocumentType,SalaryDetails,SalaryTypes,Countries,Consulates,Companies
 where 
  VISAJobList.EmployeeID =Employees.EmployeeID 

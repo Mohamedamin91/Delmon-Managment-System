@@ -13,7 +13,7 @@
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT  CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName',VISAJobList.FileNumber,DocumentType.Doc_Type,Documents.Number 'Passport' ,SalaryTypes.SalaryTypeName, SalaryDetails.Value
-,JOBS.JobTitleEN,WorkLocations.Name,Employees.StartDate,Employees.EmployeeID,Countries.NationalityName
+,JOBS.JobTitleEN,WorkLocations.Name,cast(Employees.StartDate as Date)'Date',Employees.EmployeeID,Countries.NationalityName
 from DEPARTMENTS,DeptTypes,WorkLocations,JOBS,Employees,VISAJobList,Documents,DocumentType,SalaryDetails,SalaryTypes,Countries,Consulates,Companies
 where 
  VISAJobList.EmployeeID =Employees.EmployeeID 
@@ -48,9 +48,9 @@ and Employees.EmployeeID = @Param1</CommandText>
               <Mapping SourceColumn="Value" DataSetColumn="Value" />
               <Mapping SourceColumn="JobTitleEN" DataSetColumn="JobTitleEN" />
               <Mapping SourceColumn="Name" DataSetColumn="Name" />
-              <Mapping SourceColumn="StartDate" DataSetColumn="StartDate" />
               <Mapping SourceColumn="EmployeeID" DataSetColumn="EmployeeID" />
               <Mapping SourceColumn="NationalityName" DataSetColumn="NationalityName" />
+              <Mapping SourceColumn="Date" DataSetColumn="Date" />
               <Mapping SourceColumn="FullName" DataSetColumn="FullName" />
             </Mappings>
             <Sources />
@@ -63,7 +63,7 @@ and Employees.EmployeeID = @Param1</CommandText>
   <xs:element name="Delmon" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="Delmon" msprop:Generator_UserDSName="Delmon">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="DataTable1" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_RowClassName="DataTable1Row">
+        <xs:element name="DataTable1" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowClassName="DataTable1Row" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="FileNumber" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnFileNumber" msprop:Generator_ColumnPropNameInRow="FileNumber" msprop:Generator_ColumnPropNameInTable="FileNumberColumn" msprop:Generator_UserColumnName="FileNumber" type="xs:int" />
@@ -109,7 +109,6 @@ and Employees.EmployeeID = @Param1</CommandText>
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="StartDate" msprop:Generator_ColumnVarNameInTable="columnStartDate" msprop:Generator_ColumnPropNameInRow="StartDate" msprop:Generator_ColumnPropNameInTable="StartDateColumn" msprop:Generator_UserColumnName="StartDate" type="xs:dateTime" minOccurs="0" />
               <xs:element name="EmployeeID" msprop:Generator_ColumnVarNameInTable="columnEmployeeID" msprop:Generator_ColumnPropNameInRow="EmployeeID" msprop:Generator_ColumnPropNameInTable="EmployeeIDColumn" msprop:Generator_UserColumnName="EmployeeID" type="xs:int" />
               <xs:element name="NationalityName" msprop:Generator_ColumnVarNameInTable="columnNationalityName" msprop:Generator_ColumnPropNameInRow="NationalityName" msprop:Generator_ColumnPropNameInTable="NationalityNameColumn" msprop:Generator_UserColumnName="NationalityName" minOccurs="0">
                 <xs:simpleType>
@@ -118,6 +117,7 @@ and Employees.EmployeeID = @Param1</CommandText>
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="Date" msprop:Generator_ColumnVarNameInTable="columnDate" msprop:Generator_ColumnPropNameInRow="Date" msprop:Generator_ColumnPropNameInTable="DateColumn" msprop:Generator_UserColumnName="Date" type="xs:dateTime" minOccurs="0" />
               <xs:element name="FullName" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnFullName" msprop:Generator_ColumnPropNameInRow="FullName" msprop:Generator_ColumnPropNameInTable="FullNameColumn" msprop:Generator_UserColumnName="FullName" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
