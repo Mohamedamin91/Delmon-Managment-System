@@ -62,6 +62,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonClass.cs" />
+    <Compile Include="Delmon.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Delmon.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +121,12 @@
     <Compile Include="FrmLogin.Designer.cs">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="JobOfferLTR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="JobOfferLTR.Designer.cs">
+      <DependentUpon>JobOfferLTR.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLCONNECTION.cs" />
@@ -147,6 +158,10 @@
     <EmbeddedResource Include="FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="JobOfferLTR.resx">
+      <DependentUpon>JobOfferLTR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JobOfferRPT.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -157,6 +172,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <EmbeddedResource Include="VisaRequest.rdlc" />
+    <None Include="Delmon.xsc">
+      <DependentUpon>Delmon.xsd</DependentUpon>
+    </None>
+    <None Include="Delmon.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Delmon.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Delmon.xss">
+      <DependentUpon>Delmon.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

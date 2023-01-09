@@ -1835,8 +1835,21 @@ namespace Delmon_Managment_System.Forms
 
         private void btnprtjoboffer_Click(object sender, EventArgs e)
         {
-         //   OfferLTR.Show();
-            this.Hide();
+            CommonClass.EmployeeID = EmployeeID;
+            if
+                (EmployeeID == 0)
+            {
+                MessageBox.Show("Please Choose Record !");
+            }
+            else 
+            {
+                var form = new JobOfferLTR();
+                form.ShowDialog();
+
+                this.Hide();
+
+            }
+          
         }
     }
     }
