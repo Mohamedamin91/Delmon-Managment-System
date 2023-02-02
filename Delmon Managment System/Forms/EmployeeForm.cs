@@ -160,7 +160,7 @@ namespace Delmon_Managment_System.Forms
 
 
 
-            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  select Employees.EmployeeID, Employees.CurrentEmpID,FirstName,SecondName,ThirdName,LastName,Gender,MartialStatus,StatusTBL.StatusValue,jobs.JobTitleEN,DeptTypes.Dept_Type_Name,Companies.COMPName_EN  from Employees,Companies,JOBS,StatusTBL,DEPARTMENTS,DeptTypes  where  Employees.DeptID = DEPARTMENTS.DeptName  and  DEPARTMENTS.DeptName  = DeptTypes.Dept_Type_ID and Employees.EmploymentStatusID = StatusTBL.StatusID  and Employees.JobID= JOBS.JobID  and Employees.COMPID = Companies.COMPID  and DEPARTMENTS.COMPID = Companies.COMPID and RecordStatus='1' order by EmployeeID desc");
+            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  select Employees.EmployeeID, Employees.CurrentEmpID,FirstName,SecondName,ThirdName,LastName,Gender,MartialStatus,StatusTBL.StatusValue,jobs.JobTitleEN,DeptTypes.Dept_Type_Name,Companies.COMPName_EN  from Employees,Companies,JOBS,StatusTBL,DEPARTMENTS,DeptTypes  where  Employees.DeptID = DEPARTMENTS.DeptName  and  DEPARTMENTS.DeptName  = DeptTypes.Dept_Type_ID and Employees.EmploymentStatusID = StatusTBL.StatusID  and Employees.JobID= JOBS.JobID  and Employees.COMPID = Companies.COMPID  and DEPARTMENTS.COMPID = Companies.COMPID  order by EmployeeID desc");
             cmbPersonalStatusStatus.Text = "Select";
             cmbempdepthistory.Text = "Select";
             EmployeeIDtxt.Enabled = false;
