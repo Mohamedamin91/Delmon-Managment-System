@@ -854,38 +854,6 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="Textbox14">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>Appointed by Head of Department:</Value>
-                      <Style>
-                        <FontWeight>Bold</FontWeight>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>1.20833in</Top>
-              <Left>0.12278in</Left>
-              <Height>0.25in</Height>
-              <Width>2.47917in</Width>
-              <ZIndex>2</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
             <Textbox Name="Textbox15">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
@@ -907,7 +875,7 @@
               <Left>0.12278in</Left>
               <Height>0.25in</Height>
               <Width>1.70313in</Width>
-              <ZIndex>3</ZIndex>
+              <ZIndex>2</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -937,7 +905,7 @@
               <Left>2.90055in</Left>
               <Height>0.25in</Height>
               <Width>2.29166in</Width>
-              <ZIndex>4</ZIndex>
+              <ZIndex>3</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -953,49 +921,19 @@
               <Left>5.23389in</Left>
               <Height>0in</Height>
               <Width>1.3827in</Width>
-              <ZIndex>5</ZIndex>
+              <ZIndex>4</ZIndex>
               <Style>
                 <Border>
                   <Style>Solid</Style>
                 </Border>
               </Style>
             </Line>
-            <Textbox Name="FullName3">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=First(Fields!FullName.Value, "DataSet1")</Value>
-                      <Style />
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>FullName</rd:DefaultName>
-              <Top>1.11469in</Top>
-              <Left>2.90055in</Left>
-              <Height>0.25in</Height>
-              <Width>2.29167in</Width>
-              <ZIndex>6</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
             <Line Name="Line2">
               <Top>1.45833in</Top>
               <Left>5.2339in</Left>
               <Height>0in</Height>
               <Width>1.3827in</Width>
-              <ZIndex>7</ZIndex>
+              <ZIndex>5</ZIndex>
               <Style>
                 <Border>
                   <Style>Solid</Style>
@@ -1007,7 +945,7 @@
               <Left>5.2339in</Left>
               <Height>0in</Height>
               <Width>1.3827in</Width>
-              <ZIndex>8</ZIndex>
+              <ZIndex>6</ZIndex>
               <Style>
                 <Border>
                   <Style>Solid</Style>
@@ -1019,7 +957,7 @@
               <Left>5.23389in</Left>
               <Height>0in</Height>
               <Width>1.3827in</Width>
-              <ZIndex>9</ZIndex>
+              <ZIndex>7</ZIndex>
               <Style>
                 <Border>
                   <Style>Solid</Style>
@@ -1044,8 +982,8 @@
               <Top>0.32603cm</Top>
               <Left>7.40269cm</Left>
               <Height>0.6cm</Height>
-              <Width>5.25919cm</Width>
-              <ZIndex>10</ZIndex>
+              <Width>5.78552cm</Width>
+              <ZIndex>8</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1074,7 +1012,69 @@
               <Top>1.57868cm</Top>
               <Left>7.40269cm</Left>
               <Height>0.6cm</Height>
-              <Width>4.85479cm</Width>
+              <Width>5.78552cm</Width>
+              <ZIndex>9</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox18">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Fields!HeadofDeparment.Value</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox18</rd:DefaultName>
+              <Top>3.06916cm</Top>
+              <Left>7.40269cm</Left>
+              <Height>0.6cm</Height>
+              <Width>5.78552cm</Width>
+              <ZIndex>10</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox14">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Appointed by Head of Department</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox4</rd:DefaultName>
+              <Top>1.20833in</Top>
+              <Left>0.12278in</Left>
+              <Height>0.25in</Height>
+              <Width>2.47917in</Width>
               <ZIndex>11</ZIndex>
               <Style>
                 <Border>
@@ -1175,10 +1175,14 @@
           <DataField>FullName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="HeadofDeparment">
+          <DataField>HeadofDeparment</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>Delmon</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\amin\Source\Repos\Delmon Managment System\Delmon Managment System\Delmon.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\amin\Source\Repos\Delmon-Managment-System\Delmon Managment System\Delmon.xsd</rd:SchemaPath>
         <rd:TableName>DataTable1</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>

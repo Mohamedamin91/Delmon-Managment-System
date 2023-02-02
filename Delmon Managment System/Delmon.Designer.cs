@@ -301,6 +301,8 @@ namespace Delmon_Managment_System {
             
             private global::System.Data.DataColumn columnFullName;
             
+            private global::System.Data.DataColumn columnHeadofDeparment;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public DataTable1DataTable() {
@@ -424,6 +426,14 @@ namespace Delmon_Managment_System {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn HeadofDeparmentColumn {
+                get {
+                    return this.columnHeadofDeparment;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -459,7 +469,7 @@ namespace Delmon_Managment_System {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public DataTable1Row AddDataTable1Row(string Doc_Type, string Passport, string SalaryTypeName, string Value, string JobTitleEN, string Name, int EmployeeID, string NationalityName, System.DateTime Date, string FullName) {
+            public DataTable1Row AddDataTable1Row(string Doc_Type, string Passport, string SalaryTypeName, string Value, string JobTitleEN, string Name, int EmployeeID, string NationalityName, System.DateTime Date, string FullName, string HeadofDeparment) {
                 DataTable1Row rowDataTable1Row = ((DataTable1Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -472,7 +482,8 @@ namespace Delmon_Managment_System {
                         EmployeeID,
                         NationalityName,
                         Date,
-                        FullName};
+                        FullName,
+                        HeadofDeparment};
                 rowDataTable1Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDataTable1Row);
                 return rowDataTable1Row;
@@ -513,6 +524,7 @@ namespace Delmon_Managment_System {
                 this.columnNationalityName = base.Columns["NationalityName"];
                 this.columnDate = base.Columns["Date"];
                 this.columnFullName = base.Columns["FullName"];
+                this.columnHeadofDeparment = base.Columns["HeadofDeparment"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -540,6 +552,8 @@ namespace Delmon_Managment_System {
                 base.Columns.Add(this.columnDate);
                 this.columnFullName = new global::System.Data.DataColumn("FullName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFullName);
+                this.columnHeadofDeparment = new global::System.Data.DataColumn("HeadofDeparment", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnHeadofDeparment);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnFileNumber}, true));
                 this.columnFileNumber.AutoIncrement = true;
@@ -558,6 +572,8 @@ namespace Delmon_Managment_System {
                 this.columnNationalityName.MaxLength = 50;
                 this.columnFullName.ReadOnly = true;
                 this.columnFullName.MaxLength = 83;
+                this.columnHeadofDeparment.ReadOnly = true;
+                this.columnHeadofDeparment.MaxLength = 83;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -866,6 +882,22 @@ namespace Delmon_Managment_System {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string HeadofDeparment {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable1.HeadofDeparmentColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'HeadofDeparment\' in table \'DataTable1\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable1.HeadofDeparmentColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsDoc_TypeNull() {
                 return this.IsNull(this.tableDataTable1.Doc_TypeColumn);
             }
@@ -970,6 +1002,18 @@ namespace Delmon_Managment_System {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetFullNameNull() {
                 this[this.tableDataTable1.FullNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsHeadofDeparmentNull() {
+                return this.IsNull(this.tableDataTable1.HeadofDeparmentColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetHeadofDeparmentNull() {
+                this[this.tableDataTable1.HeadofDeparmentColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1143,6 +1187,7 @@ namespace Delmon_Managment_System.DelmonTableAdapters {
             tableMapping.ColumnMappings.Add("NationalityName", "NationalityName");
             tableMapping.ColumnMappings.Add("Date", "Date");
             tableMapping.ColumnMappings.Add("FullName", "FullName");
+            tableMapping.ColumnMappings.Add("HeadofDeparment", "HeadofDeparment");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -1161,6 +1206,9 @@ namespace Delmon_Managment_System.DelmonTableAdapters {
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = @"SELECT  CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName',VISAJobList.FileNumber,DocumentType.Doc_Type,Documents.Number 'Passport' ,SalaryTypes.SalaryTypeName, SalaryDetails.Value
 ,JOBS.JobTitleEN,WorkLocations.Name,cast(Employees.StartDate as Date)'Date',Employees.EmployeeID,Countries.NationalityName
+, (SELECT CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  
+        FROM Employees 
+        WHERE DEPARTMENTS.DeptHeadID = Employees.EmployeeID) AS 'HeadofDeparment' 
 from DEPARTMENTS,DeptTypes,WorkLocations,JOBS,Employees,VISAJobList,Documents,DocumentType,SalaryDetails,SalaryTypes,Countries,Consulates,Companies
 where 
  VISAJobList.EmployeeID =Employees.EmployeeID 
@@ -1179,7 +1227,8 @@ and Consulates.CountryId =Countries.CountryId
 and WorkLocations.WorkID = DEPARTMENTS.WorkLoctionID
 and Employees.COMPID = Companies.COMPID
 and DEPARTMENTS.COMPID= Companies.COMPID
-and Employees.EmployeeID = @Param1";
+and Employees.EmployeeID = @Param1
+";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param1", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "EmployeeID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
