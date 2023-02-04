@@ -1200,6 +1200,7 @@ namespace Delmon_Managment_System.Forms
             this.btnprtvisareq.TabIndex = 149;
             this.btnprtvisareq.Text = "Print Visa Request";
             this.btnprtvisareq.UseVisualStyleBackColor = false;
+            this.btnprtvisareq.Click += new System.EventHandler(this.btnprtvisareq_Click);
             // 
             // cmbCompany
             // 

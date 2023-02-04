@@ -1851,6 +1851,24 @@ namespace Delmon_Managment_System.Forms
             }
           
         }
+
+        private void btnprtvisareq_Click(object sender, EventArgs e)
+        {
+            CommonClass.EmployeeID = EmployeeID;
+            if
+                (EmployeeID == 0)
+            {
+                MessageBox.Show("Please Choose Record !");
+            }
+            else
+            {
+                var form = new VisaOfferLTR();
+                form.ShowDialog();
+
+                this.Hide();
+
+            }
+        }
     }
     }
 
