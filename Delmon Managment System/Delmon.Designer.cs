@@ -2032,7 +2032,7 @@ and Consulates.CountryId =Countries.CountryId
 and WorkLocations.WorkID = DEPARTMENTS.WorkLoctionID
 and Employees.COMPID = Companies.COMPID
 and DEPARTMENTS.COMPID= Companies.COMPID
-and VISAJobList.ReservedTo=DEPARTMENTS.DEPTID
+--and VISAJobList.ReservedTo=DEPARTMENTS.DEPTID
 and Employees.EmployeeID = @Param1";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param1", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "EmployeeID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));

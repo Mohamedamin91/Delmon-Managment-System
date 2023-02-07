@@ -13,7 +13,8 @@
                   <TextRun>
                     <Value>Candidate Name:</Value>
                     <Style>
-                      <FontWeight>Bold</FontWeight>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>12pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -43,7 +44,10 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!FullName.Value, "DataSet1")</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -74,7 +78,8 @@
                   <TextRun>
                     <Value>Natiomality:</Value>
                     <Style>
-                      <FontWeight>Bold</FontWeight>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>12pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -105,7 +110,10 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!NationalityName.Value, "DataSet1")</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -136,7 +144,8 @@
                   <TextRun>
                     <Value>Passport Number:</Value>
                     <Style>
-                      <FontWeight>Bold</FontWeight>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>12pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -167,7 +176,10 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!Passport.Value, "DataSet1")</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -198,7 +210,8 @@
                   <TextRun>
                     <Value>Postion:</Value>
                     <Style>
-                      <FontWeight>Bold</FontWeight>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>12pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -229,7 +242,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!JobTitleEN.Value, "DataSet1")</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -260,7 +275,8 @@
                   <TextRun>
                     <Value>Work Location:</Value>
                     <Style>
-                      <FontWeight>Bold</FontWeight>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>12pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -291,7 +307,10 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!Name.Value, "DataSet1")</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -338,7 +357,8 @@
                                 <TextRun>
                                   <Value>=Fields!SalaryTypeName.Value</Value>
                                   <Style>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>12pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -371,7 +391,10 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!Value.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>12pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -453,7 +476,8 @@
           <Source>Embedded</Source>
           <Value>Delmonlogo</Value>
           <Sizing>FitProportional</Sizing>
-          <Left>0.21875in</Left>
+          <Top>0.01389in</Top>
+          <Left>0.11347in</Left>
           <Height>0.73958in</Height>
           <Width>0.91792in</Width>
           <Style>
@@ -471,7 +495,8 @@
                 <TextRun>
                   <Value>Delmon Company Ltd.</Value>
                   <Style>
-                    <FontSize>14pt</FontSize>
+                    <FontFamily>Arial Black</FontFamily>
+                    <FontSize>16pt</FontSize>
                     <FontWeight>Bold</FontWeight>
                   </Style>
                 </TextRun>
@@ -480,10 +505,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.01042in</Top>
-          <Left>1.13667in</Left>
-          <Height>0.25917in</Height>
-          <Width>2.4375in</Width>
+          <Top>0.01389in</Top>
+          <Left>1.05917in</Left>
+          <Height>0.3693in</Height>
+          <Width>3.14187in</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
@@ -504,6 +529,7 @@
                 <TextRun>
                   <Value>Kingdom of Saudi Arabia</Value>
                   <Style>
+                    <FontFamily>Arial Black</FontFamily>
                     <FontWeight>Bold</FontWeight>
                   </Style>
                 </TextRun>
@@ -512,8 +538,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.30083in</Top>
-          <Left>1.19222in</Left>
+          <Top>0.4943in</Top>
+          <Left>1.08694in</Left>
           <Height>0.25917in</Height>
           <Width>2.01042in</Width>
           <ZIndex>2</ZIndex>
@@ -536,25 +562,26 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>JOB OFFER LETTER </Value>
+                      <Value>JOB OFFER LETTER</Value>
                       <Style>
-                        <FontSize>16pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
+                        <FontFamily>calibri</FontFamily>
+                        <FontSize>20pt</FontSize>
                       </Style>
                     </TextRun>
                   </TextRuns>
-                  <Style />
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
               <Top>0.0925in</Top>
-              <Left>2.38083in</Left>
-              <Height>0.25917in</Height>
-              <Width>2.4375in</Width>
+              <Left>1.235in</Left>
+              <Height>0.41361in</Height>
+              <Width>3.58333in</Width>
               <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
+                <Border />
+                <BackgroundColor>LightGrey</BackgroundColor>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -570,7 +597,8 @@
                     <TextRun>
                       <Value>Date:</Value>
                       <Style>
-                        <FontWeight>Bold</FontWeight>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>11pt</FontSize>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -580,8 +608,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>0.40889in</Top>
-              <Left>0.2241in</Left>
+              <Top>0.57556in</Top>
+              <Left>0.22409in</Left>
               <Height>0.25in</Height>
               <Width>0.41667in</Width>
               <ZIndex>1</ZIndex>
@@ -604,7 +632,8 @@
                     <TextRun>
                       <Value>Candidate ID:</Value>
                       <Style>
-                        <FontWeight>Bold</FontWeight>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>11pt</FontSize>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -614,8 +643,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>0.42111in</Top>
-              <Left>2.19333in</Left>
+              <Top>0.58778in</Top>
+              <Left>2.19332in</Left>
               <Height>0.25in</Height>
               <Width>1.07986in</Width>
               <ZIndex>2</ZIndex>
@@ -638,7 +667,8 @@
                     <TextRun>
                       <Value>File #:</Value>
                       <Style>
-                        <FontWeight>Bold</FontWeight>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>11pt</FontSize>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -648,8 +678,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>0.40889in</Top>
-              <Left>4.66792in</Left>
+              <Top>0.57556in</Top>
+              <Left>4.66791in</Left>
               <Height>0.25in</Height>
               <Width>0.47222in</Width>
               <ZIndex>3</ZIndex>
@@ -672,6 +702,8 @@
                     <TextRun>
                       <Value>=Sum(Fields!FileNumber.Value, "DataSet1")</Value>
                       <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>12pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                         <Color>Maroon</Color>
                       </Style>
@@ -683,8 +715,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>FileNumber</rd:DefaultName>
-              <Top>0.39666in</Top>
-              <Left>5.18181in</Left>
+              <Top>0.56333in</Top>
+              <Left>5.1818in</Left>
               <Height>0.25in</Height>
               <Width>1in</Width>
               <ZIndex>4</ZIndex>
@@ -706,7 +738,10 @@
                   <TextRuns>
                     <TextRun>
                       <Value>=Sum(Fields!EmployeeID.Value, "DataSet1")</Value>
-                      <Style />
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>11pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
@@ -715,8 +750,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>EmployeeID</rd:DefaultName>
-              <Top>0.42111in</Top>
-              <Left>3.19285in</Left>
+              <Top>0.58778in</Top>
+              <Left>3.19284in</Left>
               <Height>0.25in</Height>
               <Width>1in</Width>
               <ZIndex>5</ZIndex>
@@ -739,6 +774,8 @@
                     <TextRun>
                       <Value>=First(Fields!Date.Value, "DataSet1")</Value>
                       <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>11pt</FontSize>
                         <Format>d MMM yyyy</Format>
                       </Style>
                     </TextRun>
@@ -749,8 +786,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Date</rd:DefaultName>
-              <Top>1.03857cm</Top>
-              <Left>1.68801cm</Left>
+              <Top>1.4619cm</Top>
+              <Left>1.68798cm</Left>
               <Height>0.6cm</Height>
               <Width>2.8175cm</Width>
               <ZIndex>6</ZIndex>
@@ -800,7 +837,7 @@
                     <TextRun>
                       <Value>Prepared by Recruitment Administrator:</Value>
                       <Style>
-                        <FontWeight>Bold</FontWeight>
+                        <FontFamily>Calibri</FontFamily>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -831,7 +868,7 @@
                     <TextRun>
                       <Value>Verified by HR Administrator:</Value>
                       <Style>
-                        <FontWeight>Bold</FontWeight>
+                        <FontFamily>Calibri</FontFamily>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -845,9 +882,7 @@
               <Width>2.47917in</Width>
               <ZIndex>1</ZIndex>
               <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
+                <Border />
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -863,7 +898,7 @@
                     <TextRun>
                       <Value>Accepted by Candidate:</Value>
                       <Style>
-                        <FontWeight>Bold</FontWeight>
+                        <FontFamily>Calibri</FontFamily>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -894,7 +929,10 @@
                   <TextRuns>
                     <TextRun>
                       <Value>=First(Fields!FullName.Value, "DataSet1")</Value>
-                      <Style />
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>11pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style />
@@ -972,7 +1010,10 @@
                   <TextRuns>
                     <TextRun>
                       <Value>Saleem Nasser</Value>
-                      <Style />
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>11pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style />
@@ -1002,7 +1043,10 @@
                   <TextRuns>
                     <TextRun>
                       <Value>Hassan Kamil</Value>
-                      <Style />
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>11pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style />
@@ -1032,7 +1076,10 @@
                   <TextRuns>
                     <TextRun>
                       <Value>=Fields!HeadofDeparment.Value</Value>
-                      <Style />
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>11pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style />
@@ -1063,7 +1110,7 @@
                     <TextRun>
                       <Value>Appointed by Head of Department</Value>
                       <Style>
-                        <FontWeight>Bold</FontWeight>
+                        <FontFamily>Calibri</FontFamily>
                       </Style>
                     </TextRun>
                   </TextRuns>
