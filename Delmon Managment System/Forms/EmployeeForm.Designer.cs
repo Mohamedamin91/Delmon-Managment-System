@@ -51,7 +51,7 @@ namespace Delmon_Managment_System.Forms
             this.thirdnametxt = new System.Windows.Forms.TextBox();
             this.lastnametxt = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.EmployeeIDtxt = new System.Windows.Forms.TextBox();
+            this.CurrentEmployeeIDtxt = new System.Windows.Forms.TextBox();
             this.IDlbl = new System.Windows.Forms.Label();
             this.EndDatePicker = new System.Windows.Forms.DateTimePicker();
             this.label15 = new System.Windows.Forms.Label();
@@ -359,16 +359,16 @@ namespace Delmon_Managment_System.Forms
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // EmployeeIDtxt
+            // CurrentEmployeeIDtxt
             // 
-            this.EmployeeIDtxt.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmployeeIDtxt.Location = new System.Drawing.Point(478, 198);
-            this.EmployeeIDtxt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.EmployeeIDtxt.Name = "EmployeeIDtxt";
-            this.EmployeeIDtxt.Size = new System.Drawing.Size(179, 25);
-            this.EmployeeIDtxt.TabIndex = 147;
-            this.EmployeeIDtxt.TextChanged += new System.EventHandler(this.EmployeeIDtxt_TextChanged);
-            this.EmployeeIDtxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EmployeeIDtxt_KeyDown);
+            this.CurrentEmployeeIDtxt.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CurrentEmployeeIDtxt.Location = new System.Drawing.Point(478, 198);
+            this.CurrentEmployeeIDtxt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.CurrentEmployeeIDtxt.Name = "CurrentEmployeeIDtxt";
+            this.CurrentEmployeeIDtxt.Size = new System.Drawing.Size(179, 25);
+            this.CurrentEmployeeIDtxt.TabIndex = 147;
+            this.CurrentEmployeeIDtxt.TextChanged += new System.EventHandler(this.EmployeeIDtxt_TextChanged);
+            this.CurrentEmployeeIDtxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EmployeeIDtxt_KeyDown);
             // 
             // IDlbl
             // 
@@ -1214,6 +1214,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbCompany.TabIndex = 150;
             this.cmbCompany.SelectionChangeCommitted += new System.EventHandler(this.cmbCompany_SelectionChangeCommitted);
             this.cmbCompany.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbCompany_KeyDown);
+            this.cmbCompany.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbCompany_KeyPress);
             // 
             // label23
             // 
@@ -1241,7 +1242,7 @@ namespace Delmon_Managment_System.Forms
             this.Controls.Add(this.btnprtjoboffer);
             this.Controls.Add(this.btnupdatehistory);
             this.Controls.Add(this.IDlbl);
-            this.Controls.Add(this.EmployeeIDtxt);
+            this.Controls.Add(this.CurrentEmployeeIDtxt);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label15);
@@ -1391,6 +1392,6 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbCompany;
         private System.Windows.Forms.Label label23;
-        public System.Windows.Forms.TextBox EmployeeIDtxt;
+        public System.Windows.Forms.TextBox CurrentEmployeeIDtxt;
     }
 }
