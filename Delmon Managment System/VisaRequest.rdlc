@@ -12,7 +12,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>Visa Number :</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -41,7 +43,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>Issue Date :</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -71,7 +75,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>Country :</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -101,7 +107,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>Visa Belong To :</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -114,9 +122,7 @@
             <Width>1.1875in</Width>
             <ZIndex>3</ZIndex>
             <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
+              <Border />
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -131,7 +137,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>Recived to Division :</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -161,7 +169,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>Category :</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -191,17 +201,22 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=Sum(Fields!VisaNumber.Value, "DataSet3")</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>14pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>VisaNumber</rd:DefaultName>
             <Top>0.10417in</Top>
             <Left>1.61931in</Left>
-            <Height>0.25in</Height>
-            <Width>2.02084in</Width>
+            <Height>0.30556in</Height>
+            <Width>4.81251in</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -221,17 +236,22 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!IssueDateEN.Value, "DataSet3")</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>14pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>IssueDateEN</rd:DefaultName>
             <Top>0.84723in</Top>
             <Left>1.61931in</Left>
-            <Height>0.25in</Height>
-            <Width>2.82292in</Width>
+            <Height>0.27776in</Height>
+            <Width>4.81251in</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
@@ -251,17 +271,22 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!NationalityName.Value, "DataSet3")</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>14pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>NationalityName</rd:DefaultName>
             <Top>1.18055in</Top>
             <Left>1.61931in</Left>
-            <Height>0.25in</Height>
-            <Width>2.82292in</Width>
+            <Height>0.31945in</Height>
+            <Width>4.81251in</Width>
             <ZIndex>8</ZIndex>
             <Style>
               <Border>
@@ -281,17 +306,22 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!DeptName.Value, "DataSet3")</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>14pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>DeptName</rd:DefaultName>
             <Top>1.5in</Top>
             <Left>1.61931in</Left>
-            <Height>0.25in</Height>
-            <Width>2.82292in</Width>
+            <Height>0.27778in</Height>
+            <Width>4.81251in</Width>
             <ZIndex>9</ZIndex>
             <Style>
               <Border>
@@ -311,17 +341,22 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!JobTitleEN.Value, "DataSet3")</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>14pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>JobTitleEN</rd:DefaultName>
-            <Top>1.80556in</Top>
+            <Top>1.81944in</Top>
             <Left>1.61931in</Left>
             <Height>0.25in</Height>
-            <Width>2.82292in</Width>
+            <Width>4.81251in</Width>
             <ZIndex>10</ZIndex>
             <Style>
               <Border>
@@ -341,17 +376,22 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!COMPName_EN.Value, "DataSet3")</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>14pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>COMPName_EN</rd:DefaultName>
             <Top>0.47917in</Top>
             <Left>1.61931in</Left>
-            <Height>0.25in</Height>
-            <Width>2.79639in</Width>
+            <Height>0.32639in</Height>
+            <Width>4.81251in</Width>
             <ZIndex>11</ZIndex>
             <Style>
               <Border>
@@ -385,7 +425,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>Candidate Name :</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -504,7 +546,10 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!FullName.Value, "DataSet3")</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>14pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -534,7 +579,10 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!Passport.Value, "DataSet3")</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>14pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -564,7 +612,10 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!AgenceName.Value, "DataSet3")</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>14pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -594,7 +645,10 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!LicenseNumber.Value, "DataSet3")</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>14pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -630,13 +684,13 @@
         </Style>
       </Rectangle>
     </ReportItems>
-    <Height>4.63541in</Height>
+    <Height>11.77394cm</Height>
     <Style />
   </Body>
-  <Width>8.3425in</Width>
+  <Width>21.18995cm</Width>
   <Page>
     <PageHeader>
-      <Height>2.16889in</Height>
+      <Height>5.50898cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -644,8 +698,9 @@
           <Source>Embedded</Source>
           <Value>Delmonlogo</Value>
           <Sizing>FitProportional</Sizing>
-          <Height>0.30208in</Height>
-          <Width>0.46875in</Width>
+          <Left>0.155in</Left>
+          <Height>0.40625in</Height>
+          <Width>0.69792in</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -661,7 +716,8 @@
                 <TextRun>
                   <Value>Delmon Company Ltd.</Value>
                   <Style>
-                    <FontSize>12pt</FontSize>
+                    <FontFamily>Arial Black</FontFamily>
+                    <FontSize>16pt</FontSize>
                     <FontWeight>Bold</FontWeight>
                   </Style>
                 </TextRun>
@@ -670,10 +726,9 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.05208in</Top>
-          <Left>0.48264in</Left>
-          <Height>0.25in</Height>
-          <Width>2.29167in</Width>
+          <Left>0.90847in</Left>
+          <Height>0.40625in</Height>
+          <Width>3.47917in</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
@@ -694,6 +749,8 @@
                 <TextRun>
                   <Value>Kingdom of Saudi Arabia</Value>
                   <Style>
+                    <FontFamily>Arial Black</FontFamily>
+                    <FontSize>9pt</FontSize>
                     <FontWeight>Bold</FontWeight>
                   </Style>
                 </TextRun>
@@ -702,9 +759,9 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.37153in</Top>
-          <Left>0.48264in</Left>
-          <Height>0.20833in</Height>
+          <Top>0.47569in</Top>
+          <Left>0.90847in</Left>
+          <Height>0.25569in</Height>
           <Width>2.29167in</Width>
           <ZIndex>2</ZIndex>
           <Style>
@@ -734,10 +791,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox3</rd:DefaultName>
-              <Top>0.59375in</Top>
+              <Top>0.51042in</Top>
               <Left>0.04167in</Left>
               <Height>0.25in</Height>
-              <Width>0.38542in</Width>
+              <Width>0.50125in</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -763,7 +820,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox3</rd:DefaultName>
-              <Top>0.59375in</Top>
+              <Top>0.51042in</Top>
               <Left>5.14063in</Left>
               <Height>0.25in</Height>
               <Width>0.51042in</Width>
@@ -787,24 +844,27 @@
                     <TextRun>
                       <Value>VISA REQUEST FORM</Value>
                       <Style>
-                        <FontSize>16pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>20pt</FontSize>
                       </Style>
                     </TextRun>
                   </TextRuns>
-                  <Style />
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>0.125in</Top>
-              <Left>2.16146in</Left>
-              <Height>0.25in</Height>
-              <Width>2.4375in</Width>
+              <Top>0.04167in</Top>
+              <Left>1.45264in</Left>
+              <Height>0.41667in</Height>
+              <Width>4.12896in</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
+                <BackgroundColor>LightGrey</BackgroundColor>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -826,8 +886,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>IssueDateEN1</rd:DefaultName>
-              <Top>0.59375in</Top>
-              <Left>0.48265in</Left>
+              <Top>0.51042in</Top>
+              <Left>0.59847in</Left>
               <Height>0.25in</Height>
               <Width>1in</Width>
               <ZIndex>3</ZIndex>
@@ -850,19 +910,23 @@
                     <TextRun>
                       <Value>=Sum(Fields!FileNumber.Value, "DataSet3")</Value>
                       <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>18pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                         <Color>Brown</Color>
                       </Style>
                     </TextRun>
                   </TextRuns>
-                  <Style />
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>FileNumber</rd:DefaultName>
-              <Top>0.59375in</Top>
-              <Left>5.72049in</Left>
-              <Height>0.25in</Height>
-              <Width>1in</Width>
+              <Top>0.38542in</Top>
+              <Left>5.65105in</Left>
+              <Height>0.375in</Height>
+              <Width>0.91618in</Width>
               <ZIndex>4</ZIndex>
               <Style>
                 <Border>
@@ -876,9 +940,9 @@
             </Textbox>
           </ReportItems>
           <KeepTogether>true</KeepTogether>
-          <Top>0.7175in</Top>
+          <Top>0.80083in</Top>
           <Left>0.155in</Left>
-          <Height>0.92708in</Height>
+          <Height>0.84375in</Height>
           <Width>6.91667in</Width>
           <ZIndex>3</ZIndex>
           <Style>
@@ -895,7 +959,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>3.55208in</Height>
+      <Height>9.02228cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -909,7 +973,9 @@
                   <TextRuns>
                     <TextRun>
                       <Value>Requested by MR: </Value>
-                      <Style />
+                      <Style>
+                        <FontFamily>calibri</FontFamily>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style />
@@ -919,11 +985,9 @@
               <Top>0.14584in</Top>
               <Left>0.15403in</Left>
               <Height>0.25in</Height>
-              <Width>1.5in</Width>
+              <Width>1.27306in</Width>
               <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
+                <Border />
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -938,7 +1002,9 @@
                   <TextRuns>
                     <TextRun>
                       <Value>Verified by MR:</Value>
-                      <Style />
+                      <Style>
+                        <FontFamily>calibri</FontFamily>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style />
@@ -947,7 +1013,9 @@
                   <TextRuns>
                     <TextRun>
                       <Value />
-                      <Style />
+                      <Style>
+                        <FontFamily>calibri</FontFamily>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style />
@@ -960,9 +1028,7 @@
               <Width>1.1875in</Width>
               <ZIndex>1</ZIndex>
               <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
+                <Border />
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -977,22 +1043,22 @@
                   <TextRuns>
                     <TextRun>
                       <Value>Authorized by MR:</Value>
-                      <Style />
+                      <Style>
+                        <FontFamily>calibri</FontFamily>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style />
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox3</rd:DefaultName>
-              <Top>1.82637in</Top>
-              <Left>0.15402in</Left>
+              <Top>1.99998in</Top>
+              <Left>0.154in</Left>
               <Height>0.25in</Height>
               <Width>1.1875in</Width>
               <ZIndex>2</ZIndex>
               <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
+                <Border />
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -1007,7 +1073,9 @@
                   <TextRuns>
                     <TextRun>
                       <Value>Prepared by MR: </Value>
-                      <Style />
+                      <Style>
+                        <FontFamily>calibri</FontFamily>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style />
@@ -1017,12 +1085,10 @@
               <Top>0.77083in</Top>
               <Left>0.15402in</Left>
               <Height>0.25in</Height>
-              <Width>1.66889in</Width>
+              <Width>1.1875in</Width>
               <ZIndex>3</ZIndex>
               <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
+                <Border />
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -1037,17 +1103,20 @@
                   <TextRuns>
                     <TextRun>
                       <Value>Ahmed Sulaiman Al-Ghunaim</Value>
-                      <Style />
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>11pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
-                    <TextAlign>Center</TextAlign>
+                    <TextAlign>Left</TextAlign>
                   </Style>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>name1</rd:DefaultName>
-              <Top>1.82637in</Top>
-              <Left>2.05903in</Left>
+              <Top>1.99999in</Top>
+              <Left>1.61931in</Left>
               <Height>0.25in</Height>
               <Width>2.17708in</Width>
               <ZIndex>4</ZIndex>
@@ -1055,6 +1124,7 @@
                 <Border>
                   <Style>None</Style>
                 </Border>
+                <BackgroundColor>LightGrey</BackgroundColor>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -1068,18 +1138,21 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Saleem Qaid Mohamed Nasser</Value>
-                      <Style />
+                      <Value>Saleem Nasser</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>11pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
-                    <TextAlign>Center</TextAlign>
+                    <TextAlign>Left</TextAlign>
                   </Style>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>name1</rd:DefaultName>
-              <Top>0.77083in</Top>
-              <Left>2.05902in</Left>
+              <Top>0.77084in</Top>
+              <Left>1.61932in</Left>
               <Height>0.25in</Height>
               <Width>2.17708in</Width>
               <ZIndex>5</ZIndex>
@@ -1087,6 +1160,7 @@
                 <Border>
                   <Style>None</Style>
                 </Border>
+                <BackgroundColor>LightGrey</BackgroundColor>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -1101,17 +1175,20 @@
                   <TextRuns>
                     <TextRun>
                       <Value>Hassan Kamil</Value>
-                      <Style />
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>11pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
-                    <TextAlign>Center</TextAlign>
+                    <TextAlign>Left</TextAlign>
                   </Style>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>name1</rd:DefaultName>
-              <Top>1.33332in</Top>
-              <Left>2.05902in</Left>
+              <Top>1.33333in</Top>
+              <Left>1.61932in</Left>
               <Height>0.25in</Height>
               <Width>2.17708in</Width>
               <ZIndex>6</ZIndex>
@@ -1119,6 +1196,7 @@
                 <Border>
                   <Style>None</Style>
                 </Border>
+                <BackgroundColor>LightGrey</BackgroundColor>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -1138,7 +1216,7 @@
               </Style>
             </Line>
             <Line Name="Line2">
-              <Top>2.07637in</Top>
+              <Top>2.24998in</Top>
               <Left>4.54166in</Left>
               <Height>0in</Height>
               <Width>1.61458in</Width>
@@ -1181,17 +1259,20 @@
                   <TextRuns>
                     <TextRun>
                       <Value>=First(Fields!HeadofDeparment.Value, "DataSet3")</Value>
-                      <Style />
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>11pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
-                    <TextAlign>Center</TextAlign>
+                    <TextAlign>Left</TextAlign>
                   </Style>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>HeadofDeparment</rd:DefaultName>
-              <Top>0.14583in</Top>
-              <Left>2.05903in</Left>
+              <Top>0.14584in</Top>
+              <Left>1.61933in</Left>
               <Height>0.25in</Height>
               <Width>2.17708in</Width>
               <ZIndex>11</ZIndex>
@@ -1199,6 +1280,7 @@
                 <Border>
                   <Style>None</Style>
                 </Border>
+                <BackgroundColor>LightGrey</BackgroundColor>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -1214,55 +1296,22 @@
                     <TextRun>
                       <Value>General Manager</Value>
                       <Style>
-                        <FontWeight>Bold</FontWeight>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>11pt</FontSize>
                       </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
-                    <TextAlign>Center</TextAlign>
+                    <TextAlign>Left</TextAlign>
                   </Style>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>name1</rd:DefaultName>
-              <Top>2.09026in</Top>
-              <Left>2.05903in</Left>
+              <Top>2.26388in</Top>
+              <Left>1.61931in</Left>
               <Height>0.25in</Height>
               <Width>2.17708in</Width>
               <ZIndex>12</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="name6">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>HR Administrator</Value>
-                      <Style>
-                        <FontWeight>Bold</FontWeight>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>name1</rd:DefaultName>
-              <Top>1.58332in</Top>
-              <Left>2.05902in</Left>
-              <Height>0.25in</Height>
-              <Width>2.17708in</Width>
-              <ZIndex>13</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1282,21 +1331,22 @@
                     <TextRun>
                       <Value>Recruitment Adminstrator</Value>
                       <Style>
-                        <FontWeight>Bold</FontWeight>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>11pt</FontSize>
                       </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
-                    <TextAlign>Center</TextAlign>
+                    <TextAlign>Left</TextAlign>
                   </Style>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>name1</rd:DefaultName>
-              <Top>1.02083in</Top>
-              <Left>2.05901in</Left>
+              <Top>1.02084in</Top>
+              <Left>1.61931in</Left>
               <Height>0.25in</Height>
               <Width>2.17708in</Width>
-              <ZIndex>14</ZIndex>
+              <ZIndex>13</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1316,19 +1366,55 @@
                     <TextRun>
                       <Value>Division Head</Value>
                       <Style>
-                        <FontWeight>Bold</FontWeight>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>11pt</FontSize>
                       </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
-                    <TextAlign>Center</TextAlign>
+                    <TextAlign>Left</TextAlign>
                   </Style>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>name1</rd:DefaultName>
-              <Top>0.39583in</Top>
-              <Left>2.05901in</Left>
+              <Top>0.39584in</Top>
+              <Left>1.61931in</Left>
               <Height>0.25in</Height>
+              <Width>2.17708in</Width>
+              <ZIndex>14</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="name6">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>HR Administrator</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>11pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>name1</rd:DefaultName>
+              <Top>1.5729in</Top>
+              <Left>1.61933in</Left>
+              <Height>0.23611in</Height>
               <Width>2.17708in</Width>
               <ZIndex>15</ZIndex>
               <Style>
@@ -1360,10 +1446,13 @@
         </Border>
       </Style>
     </PageFooter>
-    <LeftMargin>1in</LeftMargin>
-    <RightMargin>1in</RightMargin>
-    <TopMargin>1in</TopMargin>
-    <BottomMargin>1in</BottomMargin>
+    <PageHeight>29.7cm</PageHeight>
+    <PageWidth>21cm</PageWidth>
+    <LeftMargin>1cm</LeftMargin>
+    <RightMargin>1cm</RightMargin>
+    <TopMargin>1cm</TopMargin>
+    <BottomMargin>1cm</BottomMargin>
+    <ColumnSpacing>1.27cm</ColumnSpacing>
     <Style />
   </Page>
   <AutoRefresh>0</AutoRefresh>
@@ -1529,6 +1618,6 @@ RXmVM5x9Xeq16afkWoRXQ8g8Mfsl/CnwnhrDwhaedkHzpGcucdO4H6V6ppml2ujWaWtlAtvbxjCxp0FW
 RQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB//9k=</ImageData>
     </EmbeddedImage>
   </EmbeddedImages>
-  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>2cff3b99-9508-4e2f-bf2f-4f306b40515d</rd:ReportID>
 </Report>
