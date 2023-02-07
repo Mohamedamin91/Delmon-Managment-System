@@ -1844,9 +1844,9 @@ namespace Delmon_Managment_System.Forms
             else 
             {
                 var form = new JobOfferLTR();
+                this.Hide();
                 form.ShowDialog();
 
-                this.Hide();
 
             }
           
@@ -1863,9 +1863,9 @@ namespace Delmon_Managment_System.Forms
             else
             {
                 var form = new VisaOfferLTR();
+                this.Hide();
                 form.ShowDialog();
 
-                this.Hide();
 
             }
         }
