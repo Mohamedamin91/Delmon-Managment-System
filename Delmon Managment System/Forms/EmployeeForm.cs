@@ -265,6 +265,16 @@ namespace Delmon_Managment_System.Forms
             paramPID.Value = EMPID;
             SqlParameter paramEmployeeID = new SqlParameter("@CurrentEmployeeID", SqlDbType.Int);
 
+            /* for log */
+           
+            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+            paramuser.Value = lblusername.Text;
+            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+            paramdatetimeLOG.Value = lbldatetime.Text;
+            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+            parampc.Value = lblPC.Text;
+            /* for log */
+
 
 
 
@@ -324,8 +334,7 @@ namespace Delmon_Managment_System.Forms
 
                         paramEmployeeID.Value = CurrentEmployeeIDtxt.Text;
 
-                        SQLCONN.ExecuteQueries("update TestEmployee set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,DeptID=@C15,StartDate=@C16,EndDate=@C17,COMPID=@C18,CurrentEmpID=@CurrentEmployeeID  where  EmployeeID= @id", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany, paramEmployeeID);
-                                            
+                        SQLCONN.ExecuteQueries("update TestEmployee set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,DeptID=@C15,StartDate=@C16,EndDate=@C17,COMPID=@C18,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,DatetimeLog= @datetime,PC =@pc where  EmployeeID= @id ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany, paramEmployeeID,paramuser,paramdatetimeLOG,parampc);
 
 
 
