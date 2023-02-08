@@ -1143,6 +1143,8 @@ namespace Delmon_Managment_System.Forms
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex == -1) return;
+
             foreach (DataGridViewRow rw in this.dataGridView1.Rows)
             {
                 for (int i = 0; i < rw.Cells.Count; i++)
