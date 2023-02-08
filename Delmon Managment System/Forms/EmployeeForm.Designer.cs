@@ -824,7 +824,7 @@ namespace Delmon_Managment_System.Forms
             this.btnaUplodedoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnaUplodedoc.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnaUplodedoc.ForeColor = System.Drawing.Color.Black;
-            this.btnaUplodedoc.Location = new System.Drawing.Point(740, 38);
+            this.btnaUplodedoc.Location = new System.Drawing.Point(716, 62);
             this.btnaUplodedoc.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnaUplodedoc.Name = "btnaUplodedoc";
             this.btnaUplodedoc.Size = new System.Drawing.Size(99, 30);
