@@ -81,6 +81,8 @@ namespace Delmon_Managment_System.Forms
             this.lbldatetime = new System.Windows.Forms.Label();
             this.lblusertype = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label14 = new System.Windows.Forms.Label();
+            this.cmbAgency = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -295,7 +297,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbStatus.Location = new System.Drawing.Point(166, 135);
             this.cmbStatus.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(207, 25);
+            this.cmbStatus.Size = new System.Drawing.Size(316, 25);
             this.cmbStatus.TabIndex = 42;
             // 
             // label10
@@ -533,7 +535,7 @@ namespace Delmon_Managment_System.Forms
             this.btnAssign.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAssign.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAssign.ForeColor = System.Drawing.Color.Black;
-            this.btnAssign.Location = new System.Drawing.Point(165, 200);
+            this.btnAssign.Location = new System.Drawing.Point(166, 240);
             this.btnAssign.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnAssign.Name = "btnAssign";
             this.btnAssign.Size = new System.Drawing.Size(58, 33);
@@ -546,7 +548,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(15, 167);
+            this.label13.Location = new System.Drawing.Point(15, 175);
             this.label13.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(67, 17);
@@ -561,7 +563,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbcandidates.Location = new System.Drawing.Point(166, 167);
             this.cmbcandidates.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.cmbcandidates.Name = "cmbcandidates";
-            this.cmbcandidates.Size = new System.Drawing.Size(207, 25);
+            this.cmbcandidates.Size = new System.Drawing.Size(316, 25);
             this.cmbcandidates.TabIndex = 44;
             this.cmbcandidates.SelectedIndexChanged += new System.EventHandler(this.cmbcandidates_SelectedIndexChanged);
             // 
@@ -621,6 +623,8 @@ namespace Delmon_Managment_System.Forms
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label14);
+            this.groupBox3.Controls.Add(this.cmbAgency);
             this.groupBox3.Controls.Add(this.btnnewJob);
             this.groupBox3.Controls.Add(this.btnAssign);
             this.groupBox3.Controls.Add(this.cmbStatus);
@@ -636,7 +640,7 @@ namespace Delmon_Managment_System.Forms
             this.groupBox3.Controls.Add(this.dataGridView2);
             this.groupBox3.Location = new System.Drawing.Point(14, 287);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1249, 262);
+            this.groupBox3.Size = new System.Drawing.Size(1249, 298);
             this.groupBox3.TabIndex = 90;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Visa JobList";
@@ -752,6 +756,28 @@ namespace Delmon_Managment_System.Forms
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(15, 202);
+            this.label14.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(50, 17);
+            this.label14.TabIndex = 86;
+            this.label14.Text = "Agency";
+            // 
+            // cmbAgency
+            // 
+            this.cmbAgency.Enabled = false;
+            this.cmbAgency.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbAgency.FormattingEnabled = true;
+            this.cmbAgency.Location = new System.Drawing.Point(166, 202);
+            this.cmbAgency.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.cmbAgency.Name = "cmbAgency";
+            this.cmbAgency.Size = new System.Drawing.Size(316, 25);
+            this.cmbAgency.TabIndex = 85;
+            // 
             // VisaFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -837,5 +863,7 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Label lblusertype;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label lblPC;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ComboBox cmbAgency;
     }
 }
