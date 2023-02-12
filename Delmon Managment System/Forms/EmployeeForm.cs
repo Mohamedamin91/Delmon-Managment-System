@@ -327,25 +327,95 @@ namespace Delmon_Managment_System.Forms
                     {
                         SQLCONN.OpenConection();
 
-                       // MessageBox.Show(EMPID.ToString());
+                        // MessageBox.Show(EMPID.ToString());
 
-                   
-                  
+                        /**logtable */
+                        DataTable originalData = new DataTable();
+                        string connectionString = SQLCONN.ConnectionString;
+                        using (SqlConnection connection = new SqlConnection(connectionString))
+                        {
+                            connection.Open();
+                            string sql = "SELECT * FROM TestEmployee WHERE EmployeeId = @EmployeeId";
+                            SqlDataAdapter da = new SqlDataAdapter(sql, connection);
+                            da.SelectCommand.Parameters.AddWithValue("@EmployeeId", EMPID);
+                            originalData = new DataTable();
+                            da.Fill(originalData);
+                        }
 
-                        
-                       
+
+
+
 
 
 
                         paramEmployeeID.Value = CurrentEmployeeIDtxt.Text;
 
-                        SQLCONN.ExecuteQueries("update TestEmployee set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,DeptID=@C15,StartDate=@C16,EndDate=@C17,COMPID=@C18,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,DatetimeLog= @datetime,PC =@pc where  EmployeeID= @id ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany, paramEmployeeID,paramuser,paramdatetimeLOG,parampc);
+                        SQLCONN.ExecuteQueries("update TestEmployee set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,DeptID=@C15,StartDate=@C16,EndDate=@C17,COMPID=@C18,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany, paramEmployeeID,paramuser,parampc);
 
 
 
                         MessageBox.Show("Record Updated Successfully");
                        // dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT id_History,[EmployeeID],NewID,StatusTBL.StatusValue,[JOBS].JobTitleEN, DeptTypes.Dept_Type_Name,[StartDate],[EndDate],[UserID],[DatetimeLog]  FROM[DelmonGroupDB].[dbo].[EmploymentStatus], JOBS, DEPARTMENTS, StatusTBL, DeptTypes  where   StatusTBL.StatusID = EmploymentStatus.EmploymentStatusID and DEPARTMENTS.DeptName = EmploymentStatus.DeptID   and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID  and JOBS.JobID = EmploymentStatus.JobID  and  NEWID = @C14  ", paramNewID);
-                        dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Employees where  EmployeeID = '" + EMPID + "'");
+                        dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from TestEmployee where  EmployeeID = '" + EMPID + "'");
+
+
+                      
+                        using (SqlConnection connection = new SqlConnection(connectionString))
+                        {
+                            connection.Open();
+                            string sql = "SELECT * FROM TestEmployee WHERE EmployeeId = @EmployeeId";
+                            SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
+                            adapter.SelectCommand.Parameters.AddWithValue("@EmployeeId", EMPID);
+                            DataTable updatedData = new DataTable();
+                            adapter.Fill(updatedData);
+
+                            // Compare the two DataTables and find the changed columns
+                            List<string> changedColumns = new List<string>();
+                            foreach (DataColumn column in originalData.Columns)
+                            {
+                                object originalValue = originalData.Rows[0][column.ColumnName];
+                                object updatedValue = updatedData.Rows[0][column.ColumnName];
+                                if (!Equals(originalValue, updatedValue) &&( originalValue != null|| updatedData!=null))
+                                {
+                                    changedColumns.Add(column.ColumnName);
+                                }
+                            }
+
+                            // Insert the changes into the log table
+                            if (changedColumns.Count > 0)
+                            {
+                                using (SqlCommand command = new SqlCommand("INSERT INTO EmployeeLog (EmployeeId, logvalue, OldValue, NewValue,logdatetime,PCNAME,UserId) VALUES (@EmployeeId, @ColumnName, @OldValue, @NewValue,@datetime,@pc,@user)", connection))
+                                {
+                                    command.Parameters.AddWithValue("@EmployeeId", EMPID);
+                                    foreach (string columnName in changedColumns)
+                                    {
+                                        object originalValue = originalData.Rows[0][columnName];
+                                        object updatedValue = updatedData.Rows[0][columnName];
+                                        command.Parameters.Clear();
+                                        command.Parameters.AddWithValue("@EmployeeId", EMPID);
+                                        command.Parameters.AddWithValue("@ColumnName", columnName);
+                                        command.Parameters.AddWithValue("@OldValue", originalValue);
+                                        command.Parameters.AddWithValue("@NewValue", updatedValue);
+                                        command.Parameters.AddWithValue("@datetime", lbldatetime.Text);
+                                        command.Parameters.AddWithValue("@pc", lblPC.Text);
+                                        command.Parameters.AddWithValue("@user", lblusername.Text);
+                                        command.ExecuteNonQuery();
+                                    }
+                                }
+                            }
+                        }
+
+
+
+                        /**logtable*/
+
+
+
+
+
+
+
+
 
                         tabControl1.Enabled = true;
                         SQLCONN.CloseConnection();
@@ -457,7 +527,7 @@ namespace Delmon_Managment_System.Forms
                 if (firstnametxt.Text != "" && secondnametxt.Text != "" && thirdnametxt.Text != "" && lastnametxt.Text != "" && cmbPersonalStatusStatus.Text != "Select" && cmbempdepthistory.Text != "Select" && cmbEmployJobHistory.Text != "Select")
                 {
                     SQLCONN.OpenConection();
-                    SqlDataReader dr = SQLCONN.DataReader("select  * from Employees where " +
+                    SqlDataReader dr = SQLCONN.DataReader("select  * from TestEmployee where " +
                          " firstname=  @C1 and    SecondName =  @C2 and thirdname = @C3  and lastname = @C4", paramfirstname, paramsecondname, Paramthirdname, paramlastname);
                     dr.Read();
 
@@ -525,7 +595,7 @@ namespace Delmon_Managment_System.Forms
                             dr.Close();
                             paramEmployeeID.Value = EmployeeID;
                           
-                            SQLCONN.ExecuteQueries("insert into TestEmployee (EmployeeID, firstname,secondname,thirdname,lastname,Gender,MartialStatus,[pc], EmploymentStatusID,JobID,DeptID,StartDate,EndDate,COMPID,UserID,DatetimeLog,CurrentEmpID)" +
+                            SQLCONN.ExecuteQueries("insert into TestEmployee (EmployeeID, firstname,secondname,thirdname,lastname,Gender,MartialStatus,[PCNAME], EmploymentStatusID,JobID,DeptID,StartDate,EndDate,COMPID,UserID,DatetimeLog,CurrentEmpID)" +
                               " values (@EmployeeID,@C1,@C2,@C3,@C4,@C5,@C6,@pc,@C13,@C14,@C15,@C16,@C17,@C18,@C10,@C11,@CurrentEmployeeID)",
                                                          paramEmployeeID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, parampc, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany,paramUserID,paramDateTimeLOG,paramCurrentEmployeeID);
 
