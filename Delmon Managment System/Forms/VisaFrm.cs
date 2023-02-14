@@ -565,6 +565,7 @@ namespace Delmon_Managment_System.Forms
 
 
 
+
                     dr.Dispose();
                     dr.Close();
 
@@ -1022,6 +1023,13 @@ namespace Delmon_Managment_System.Forms
             SqlParameter paramFilenumber = new SqlParameter("@C1", SqlDbType.Int);
             paramFilenumber.Value = FileNumberID;
 
+            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+            paramuser.Value = lblusername.Text;
+            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+            paramdatetimeLOG.Value = lbldatetime.Text;
+            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+            parampc.Value = lblPC.Text;
+
             if (FileNumberID == 0)
             {
                 MessageBox.Show("Please select visa number first ! " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1037,6 +1045,10 @@ namespace Delmon_Managment_System.Forms
                     dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from VISAJobList ");
                     SQLCONN.CloseConnection();
                     MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                  
+                    SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (EmployeeId, logvalue ,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES (@C1, 'Visa Info' ,'#','#',@C11,@pc,@user,'Delete')", paramFilenumber, paramdatetimeLOG, parampc, paramuser);
+
+
 
                 }
 

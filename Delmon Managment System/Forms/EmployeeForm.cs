@@ -723,6 +723,13 @@ namespace Delmon_Managment_System.Forms
                 TextInfo textInfo = cultureInfo.TextInfo;
                 firstnametxt.Text = textInfo.ToTitleCase(firstnametxt.Text);
             }
+            if (e.KeyCode == Keys.Space)
+            {
+                MessageBox.Show("Please make sure to insert 'FIRST NAME' only !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                // Space key was pressed
+                // Add your code here to handle the space key press event
+            }
         }
 
         private void secondnametxt_KeyDown_1(object sender, KeyEventArgs e)
@@ -735,6 +742,13 @@ namespace Delmon_Managment_System.Forms
                 CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
                 TextInfo textInfo = cultureInfo.TextInfo;
                 secondnametxt.Text = textInfo.ToTitleCase(secondnametxt.Text);
+            }
+            if (e.KeyCode == Keys.Space)
+            {
+                MessageBox.Show("Please make sure to insert 'SECOND NAME' only !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                // Space key was pressed
+                // Add your code here to handle the space key press event
             }
         }
 
@@ -749,6 +763,13 @@ namespace Delmon_Managment_System.Forms
                 TextInfo textInfo = cultureInfo.TextInfo;
                 thirdnametxt.Text = textInfo.ToTitleCase(thirdnametxt.Text);
             }
+            if (e.KeyCode == Keys.Space)
+            {
+                MessageBox.Show("Please make sure to insert 'THIRD NAME' only !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                // Space key was pressed
+                // Add your code here to handle the space key press event
+            }
         }
 
         private void lastnametxt_KeyDown_1(object sender, KeyEventArgs e)
@@ -761,8 +782,15 @@ namespace Delmon_Managment_System.Forms
                 TextInfo textInfo = cultureInfo.TextInfo;
                 lastnametxt.Text = textInfo.ToTitleCase(lastnametxt.Text);
             }
-           
-           
+            if (e.KeyCode == Keys.Space)
+            {
+                MessageBox.Show("Please make sure to insert 'LAST NAME' only !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                // Space key was pressed
+                // Add your code here to handle the space key press event
+            }
+
+
         }
 
         private void BrowseBTN_Click(object sender, EventArgs e)
