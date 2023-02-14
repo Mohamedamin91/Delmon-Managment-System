@@ -553,6 +553,14 @@ namespace Delmon_Managment_System.Forms
                     paramDateTimeLOG.Value = lbldatetime.Text;
 
 
+                    SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+                    paramuser.Value = lblusername.Text;
+                    //SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+                    //paramdatetimeLOG.Value = lbldatetime.Text;
+                    SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+                    parampc.Value = lblPC.Text;
+
+
 
 
 
@@ -576,6 +584,10 @@ namespace Delmon_Managment_System.Forms
                             " values (@C1,@C2,@C3,@C5,@C7,@C8,@C9,@C6,@C4,@C10,@C11) ",
                             paramVisanumber, paramcomapany, paramRecevidDate, paramIssueDateEN, paramExpiryDateEN, paramTotalVisas, paramRemarks, paramExpiryDateHijri, paramIssHIJriDate,paramUserID,paramDateTimeLOG);
                         MessageBox.Show("Visa has been Saved successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                      
+                        SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (EmployeeId, logvalue ,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES (@id, 'Visa Info' ,'#','#',@C11,@pc,@user,'Insert')", paramVisanumber, paramDateTimeLOG, parampc, paramuser);
+
+
                         dr.Dispose();
                         dr.Close();
                         dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISA where visanumber=" + Visanumtxt.Text + " ");
