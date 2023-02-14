@@ -248,16 +248,16 @@ namespace Delmon_Managment_System.Forms
             paramRecordStatus.Value = "1";
 
 
-            SqlParameter paramStatusHistory = new SqlParameter("@C13", SqlDbType.Int);
+            SqlParameter paramStatusHistory = new SqlParameter("@C13", SqlDbType.NVarChar);
             paramStatusHistory.Value = cmbPersonalStatusStatus.SelectedValue;
             SqlParameter paramJobHistory = new SqlParameter("@C14", SqlDbType.NVarChar);
             paramJobHistory.Value = cmbEmployJobHistory.SelectedValue;
-            SqlParameter ParamtDepartmentHistory = new SqlParameter("@C15", SqlDbType.Int);
+            SqlParameter ParamtDepartmentHistory = new SqlParameter("@C15", SqlDbType.NVarChar);
             ParamtDepartmentHistory.Value = cmbempdepthistory.SelectedValue;
             SqlParameter paramstartdate = new SqlParameter("@C16", SqlDbType.Date);
             paramstartdate.Value = StartDatePicker.Value;
             SqlParameter paramenddate = new SqlParameter("@C17", SqlDbType.Date);
-            paramenddate.Value = StartDatePicker.Value;
+            paramenddate.Value = EndDatePicker.Value;
 
             SqlParameter paramcompany = new SqlParameter("@C18", SqlDbType.NVarChar);
             paramcompany.Value = cmbCompany.SelectedValue;
@@ -266,9 +266,9 @@ namespace Delmon_Managment_System.Forms
 
 
 
-            SqlParameter paramPID = new SqlParameter("@id", SqlDbType.Int);
+            SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
             paramPID.Value = EMPID;
-            SqlParameter paramEmployeeID = new SqlParameter("@CurrentEmployeeID", SqlDbType.Int);
+            SqlParameter paramEmployeeID = new SqlParameter("@CurrentEmployeeID", SqlDbType.NVarChar);
 
             /* for log */
            
@@ -278,6 +278,8 @@ namespace Delmon_Managment_System.Forms
             paramdatetimeLOG.Value = lbldatetime.Text;
             SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
             parampc.Value = lblPC.Text;
+            SqlParameter paramType = new SqlParameter("@type", SqlDbType.NVarChar);
+            paramType.Value = "Update";
             /* for log */
 
 
@@ -384,7 +386,7 @@ namespace Delmon_Managment_System.Forms
                             // Insert the changes into the log table
                             if (changedColumns.Count > 0)
                             {
-                                using (SqlCommand command = new SqlCommand("INSERT INTO EmployeeLog (EmployeeId, logvalue, OldValue, NewValue,logdatetime,PCNAME,UserId) VALUES (@EmployeeId, @ColumnName, @OldValue, @NewValue,@datetime,@pc,@user)", connection))
+                                using (SqlCommand command = new SqlCommand("INSERT INTO EmployeeLog (EmployeeId, logvalue, OldValue, NewValue,logdatetime,PCNAME,UserId,type) VALUES (@EmployeeId, @ColumnName, @OldValue, @NewValue,@datetime,@pc,@user,@type)", connection))
                                 {
                                     command.Parameters.AddWithValue("@EmployeeId", EMPID);
                                     foreach (string columnName in changedColumns)
@@ -399,6 +401,7 @@ namespace Delmon_Managment_System.Forms
                                         command.Parameters.AddWithValue("@datetime", lbldatetime.Text);
                                         command.Parameters.AddWithValue("@pc", lblPC.Text);
                                         command.Parameters.AddWithValue("@user", lblusername.Text);
+                                        command.Parameters.AddWithValue("@type", "Update");
                                         command.ExecuteNonQuery();
                                     }
                                 }
@@ -438,6 +441,12 @@ namespace Delmon_Managment_System.Forms
         {
             SqlParameter paramPID = new SqlParameter("@id", SqlDbType.Int);
             paramPID.Value = EMPID;
+            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+            paramuser.Value = lblusername.Text;
+            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+            paramdatetimeLOG.Value = lbldatetime.Text;
+            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+            parampc.Value = lblPC.Text;
 
 
 
@@ -447,9 +456,11 @@ namespace Delmon_Managment_System.Forms
                 if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
                     SQLCONN.OpenConection();
-                    SQLCONN.ExecuteQueries("delete from Employees where EmployeeID=@id", paramPID);
-                    SQLCONN.ExecuteQueries(" declare @max int select @max = max([EmployeeID]) from[Employees] if @max IS NULL SET @max = 0 DBCC CHECKIDENT('[Employees]', RESEED, @max)");
+                    SQLCONN.ExecuteQueries("delete from TestEmployee where EmployeeID=@id", paramPID);
+                   // SQLCONN.ExecuteQueries(" declare @max int select @max = max([EmployeeID]) from[TestEmployee] if @max IS NULL SET @max = 0 DBCC CHECKIDENT('[Employees]', RESEED, @max)");
                     MessageBox.Show("Record Deleted Successfully");
+                    SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (EmployeeId, logvalue ,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES (@id, 'Employee Info' ,'#','#',@datetime,@pc,@user,'Delete')",paramPID,paramdatetimeLOG,parampc,paramuser);
+
                     SQLCONN.CloseConnection();
                     ClearTextBoxes();
                     dataGridView1.DataSource = null;
@@ -521,6 +532,15 @@ namespace Delmon_Managment_System.Forms
 
                 SqlParameter paramCurrentEmployeeID = new SqlParameter("@CurrentEmployeeID", SqlDbType.NVarChar);
                 paramCurrentEmployeeID.Value = CurrentEmployeeIDtxt.Text;
+
+
+                /*logg*/
+                SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+                paramuser.Value = lblusername.Text;
+                SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+                paramdatetimeLOG.Value = lbldatetime.Text;
+                
+                /*logg*/
 
 
 
@@ -595,11 +615,14 @@ namespace Delmon_Managment_System.Forms
                             dr.Close();
                             paramEmployeeID.Value = EmployeeID;
                           
-                            SQLCONN.ExecuteQueries("insert into TestEmployee (EmployeeID, firstname,secondname,thirdname,lastname,Gender,MartialStatus,[PCNAME], EmploymentStatusID,JobID,DeptID,StartDate,EndDate,COMPID,UserID,DatetimeLog,CurrentEmpID)" +
-                              " values (@EmployeeID,@C1,@C2,@C3,@C4,@C5,@C6,@pc,@C13,@C14,@C15,@C16,@C17,@C18,@C10,@C11,@CurrentEmployeeID)",
-                                                         paramEmployeeID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, parampc, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany,paramUserID,paramDateTimeLOG,paramCurrentEmployeeID);
+                            SQLCONN.ExecuteQueries("insert into TestEmployee (EmployeeID, firstname,secondname,thirdname,lastname,Gender,MartialStatus,[PCNAME], EmploymentStatusID,JobID,DeptID,StartDate,EndDate,COMPID,UserID,CurrentEmpID)" +
+                              " values (@EmployeeID,@C1,@C2,@C3,@C4,@C5,@C6,@pc,@C13,@C14,@C15,@C16,@C17,@C18,@C10,@CurrentEmployeeID)",
+                                                         paramEmployeeID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, parampc, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany,paramUserID,paramCurrentEmployeeID);
 
                             MessageBox.Show("Record saved Successfully");
+                          
+                            SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (EmployeeId, logvalue ,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES (@id, 'Employee Info' ,'#','#',@datetime,@pc,@user,'Insert')", paramEmployeeID, paramdatetimeLOG, parampc, paramuser);
+
                             btnNew.Visible = true;
                             CurrentEmployeeIDtxt.Text = EmployeeID.ToString();
                             btnaddhitory.PerformClick();
