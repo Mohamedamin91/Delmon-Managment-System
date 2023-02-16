@@ -72,6 +72,9 @@ namespace Delmon_Managment_System.Forms
             this.VisaFileNumberID = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.cmbAgency = new System.Windows.Forms.ComboBox();
             this.btnnewJob = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.lblusername = new System.Windows.Forms.Label();
@@ -81,8 +84,6 @@ namespace Delmon_Managment_System.Forms
             this.lbldatetime = new System.Windows.Forms.Label();
             this.lblusertype = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label14 = new System.Windows.Forms.Label();
-            this.cmbAgency = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -623,6 +624,7 @@ namespace Delmon_Managment_System.Forms
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button2);
             this.groupBox3.Controls.Add(this.label14);
             this.groupBox3.Controls.Add(this.cmbAgency);
             this.groupBox3.Controls.Add(this.btnnewJob);
@@ -644,6 +646,44 @@ namespace Delmon_Managment_System.Forms
             this.groupBox3.TabIndex = 90;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Visa JobList";
+            // 
+            // button2
+            // 
+            this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button2.BackColor = System.Drawing.Color.White;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.Black;
+            this.button2.Location = new System.Drawing.Point(493, 202);
+            this.button2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(59, 26);
+            this.button2.TabIndex = 87;
+            this.button2.Text = "New";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(15, 202);
+            this.label14.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(50, 17);
+            this.label14.TabIndex = 86;
+            this.label14.Text = "Agency";
+            // 
+            // cmbAgency
+            // 
+            this.cmbAgency.Enabled = false;
+            this.cmbAgency.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbAgency.FormattingEnabled = true;
+            this.cmbAgency.Location = new System.Drawing.Point(166, 202);
+            this.cmbAgency.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.cmbAgency.Name = "cmbAgency";
+            this.cmbAgency.Size = new System.Drawing.Size(316, 25);
+            this.cmbAgency.TabIndex = 85;
             // 
             // btnnewJob
             // 
@@ -756,28 +796,6 @@ namespace Delmon_Managment_System.Forms
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(15, 202);
-            this.label14.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(50, 17);
-            this.label14.TabIndex = 86;
-            this.label14.Text = "Agency";
-            // 
-            // cmbAgency
-            // 
-            this.cmbAgency.Enabled = false;
-            this.cmbAgency.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbAgency.FormattingEnabled = true;
-            this.cmbAgency.Location = new System.Drawing.Point(166, 202);
-            this.cmbAgency.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.cmbAgency.Name = "cmbAgency";
-            this.cmbAgency.Size = new System.Drawing.Size(316, 25);
-            this.cmbAgency.TabIndex = 85;
-            // 
             // VisaFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -856,14 +874,15 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btnnewJob;
         private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Label lblusername;
         private System.Windows.Forms.Label lblemail;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label lbldatetime;
         private System.Windows.Forms.Label lblusertype;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Label lblPC;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox cmbAgency;
+        private System.Windows.Forms.Button button2;
+        public System.Windows.Forms.Label lblusername;
+        public System.Windows.Forms.Label lbldatetime;
+        public System.Windows.Forms.Label lblPC;
     }
 }

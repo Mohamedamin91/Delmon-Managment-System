@@ -46,6 +46,7 @@ namespace Delmon_Managment_System
             this.lblTitle = new System.Windows.Forms.Label();
             this.panelDesktopPanel = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button4 = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
             this.panelTitleBar.SuspendLayout();
             this.panelDesktopPanel.SuspendLayout();
@@ -64,6 +65,7 @@ namespace Delmon_Managment_System
             // panelMenu
             // 
             this.panelMenu.BackColor = System.Drawing.Color.White;
+            this.panelMenu.Controls.Add(this.button4);
             this.panelMenu.Controls.Add(this.button2);
             this.panelMenu.Controls.Add(this.btnNotifications);
             this.panelMenu.Controls.Add(this.btnBilling);
@@ -90,7 +92,7 @@ namespace Delmon_Managment_System
             this.button2.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 6;
-            this.button2.Text = "Logout";
+            this.button2.Text = "Setting";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button2.UseVisualStyleBackColor = true;
@@ -300,6 +302,25 @@ namespace Delmon_Managment_System
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // button4
+            // 
+            this.button4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.ForeColor = System.Drawing.Color.Navy;
+            this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
+            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button4.Location = new System.Drawing.Point(0, 411);
+            this.button4.Name = "button4";
+            this.button4.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.button4.Size = new System.Drawing.Size(200, 60);
+            this.button4.TabIndex = 8;
+            this.button4.Text = "Logout";
+            this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // FormMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -340,6 +361,7 @@ namespace Delmon_Managment_System
         private System.Windows.Forms.Button btnMinum;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button4;
     }
 }
 

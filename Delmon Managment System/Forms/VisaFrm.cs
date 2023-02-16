@@ -89,12 +89,15 @@ namespace Delmon_Managment_System.Forms
 
 
         }
+       
         private void VisaFrm_Load(object sender, EventArgs e)
         {
             lblusername.Text = CommonClass.LoginUserName;
             lblusertype.Text = CommonClass.Usertype;
             lblemail.Text = CommonClass.Email;
             lblPC.Text = Environment.MachineName;
+            
+           
 
 
             this.timer1.Interval = 1000;
@@ -586,7 +589,7 @@ namespace Delmon_Managment_System.Forms
                             paramVisanumber, paramcomapany, paramRecevidDate, paramIssueDateEN, paramExpiryDateEN, paramTotalVisas, paramRemarks, paramExpiryDateHijri, paramIssHIJriDate,paramUserID,paramDateTimeLOG);
                         MessageBox.Show("Visa has been Saved successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                       
-                        SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (EmployeeId, logvalue ,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES (@id, 'Visa Info' ,'#','#',@C11,@pc,@user,'Insert')", paramVisanumber, paramDateTimeLOG, parampc, paramuser);
+                        SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (Logvalueid, logvalue ,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES (@id, 'Visa Info' ,'#','#',@C11,@pc,@user,'Insert')", paramVisanumber, paramDateTimeLOG, parampc, paramuser);
 
 
                         dr.Dispose();
@@ -1461,14 +1464,75 @@ namespace Delmon_Managment_System.Forms
                 {
 
 
-
-
                     SQLCONN.OpenConection();
+
+
+                    /**logtable */
+                    DataTable originalData = new DataTable();
+                    string connectionString = SQLCONN.ConnectionString;
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        string sql = "SELECT * FROM VISAJobList WHERE FileNumber = @FileNumberid";
+                        SqlDataAdapter da = new SqlDataAdapter(sql, connection);
+                        da.SelectCommand.Parameters.AddWithValue("@FileNumberid", FileNumberID);
+                        originalData = new DataTable();
+                        da.Fill(originalData);
+                    }
                     SQLCONN.ExecuteQueries("update VISAJobList set StatusID=@C5,CandidateID=@C6 where FileNumber=@FileNumberid",
                     paramStatus, paramCandidate, paramFileNumberID);
                     MessageBox.Show("Record Updated Successfully");
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        string sql = "SELECT * FROM VISAJobList WHERE FileNumber = @FileNumberid";
+                        SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
+                        adapter.SelectCommand.Parameters.AddWithValue("@FileNumberid", FileNumberID);
+                        DataTable updatedData = new DataTable();
+                        adapter.Fill(updatedData);
+
+                        // Compare the two DataTables and find the changed columns
+                        List<string> changedColumns = new List<string>();
+                        foreach (DataColumn column in originalData.Columns)
+                        {
+                            object originalValue = originalData.Rows[0][column.ColumnName];
+                            object updatedValue = updatedData.Rows[0][column.ColumnName];
+                            if (!Equals(originalValue, updatedValue) && (originalValue != null || updatedData != null))
+                            {
+                                changedColumns.Add(column.ColumnName);
+                            }
+                        }
+
+                        // Insert the changes into the log table
+                        if (changedColumns.Count > 0)
+                        {
+                            using (SqlCommand command = new SqlCommand("INSERT INTO EmployeeLog (Logvalueid, logvalue, OldValue, NewValue,logdatetime,PCNAME,UserId,type) VALUES (@EmployeeId, @ColumnName, @OldValue, @NewValue,@datetime,@pc,@user,@type)", connection))
+                            {
+                                command.Parameters.AddWithValue("@FileNumberid", FileNumberID);
+                                foreach (string columnName in changedColumns)
+                                {
+                                    object originalValue = originalData.Rows[0][columnName];
+                                    object updatedValue = updatedData.Rows[0][columnName];
+                                    command.Parameters.Clear();
+                                    command.Parameters.AddWithValue("@FileNumberid", FileNumberID);
+                                    command.Parameters.AddWithValue("@ColumnName", columnName);
+                                    command.Parameters.AddWithValue("@OldValue", originalValue);
+                                    command.Parameters.AddWithValue("@NewValue", updatedValue);
+                                    command.Parameters.AddWithValue("@datetime", lbldatetime.Text);
+                                    command.Parameters.AddWithValue("@pc", lblPC.Text);
+                                    command.Parameters.AddWithValue("@user", lblusername.Text);
+                                    command.Parameters.AddWithValue("@type", "Update");
+                                    command.ExecuteNonQuery();
+                                }
+                            }
+                        }
+                    }
+
+
+
                     dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from VISAJobList where FileNumber = '" + FileNumberID + "'");
                     SQLCONN.CloseConnection();
+                    /**logtable */
 
 
                 }
@@ -1508,6 +1572,13 @@ namespace Delmon_Managment_System.Forms
         private void btnprint_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FrmAgencyNew frmAgency = new FrmAgencyNew();
+            // this.Hide();
+            frmAgency.Show();
         }
     }
 }

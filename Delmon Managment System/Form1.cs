@@ -204,7 +204,14 @@ namespace Delmon_Managment_System
 
         private void button2_Click_1(object sender, EventArgs e)
         {
+            OpenChildForm(new Forms.SettingFrm(), sender);
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
             Application.Restart();
+
         }
     }
 }

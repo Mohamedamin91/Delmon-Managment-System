@@ -18,8 +18,9 @@ namespace Delmon_Managment_System.Forms
     {
         SQLCONNECTION SQLCONN = new SQLCONNECTION();
         OpenFileDialog opf = new OpenFileDialog();
-      //  JobOfferLTR OfferLTR = new JobOfferLTR();
-         public int EMPID ;
+
+        //  JobOfferLTR OfferLTR = new JobOfferLTR();
+        public int EMPID ;
          public int EmployeeID ;
          int SalaryID = 0;
          static Regex validate_emailaddress = email_validation();
@@ -74,6 +75,7 @@ namespace Delmon_Managment_System.Forms
             return new Regex(pattern, RegexOptions.IgnoreCase);
         }
 
+      
 
 
         private void EmployeeForm_Load(object sender, EventArgs e)
@@ -81,12 +83,16 @@ namespace Delmon_Managment_System.Forms
             tabControl1.TabPages.Remove(EmploymentHistory);
 
             tabControl1.TabPages.Remove(SalaryTab);
-
+           
 
             lblusername.Text = CommonClass.LoginUserName;
             lblusertype.Text = CommonClass.Usertype;
             lblemail.Text = CommonClass.Email;
             lblPC.Text = Environment.MachineName;
+
+           
+
+
 
             firstnametxt.Enabled = secondnametxt.Enabled = thirdnametxt.Enabled = lastnametxt.Enabled = false;
             cmbMartialStatus.Enabled = cmbGender.Enabled = cmbempdepthistory.Enabled=cmbEmployJobHistory.Enabled=cmbPersonalStatusStatus.Enabled= false;
@@ -141,9 +147,9 @@ namespace Delmon_Managment_System.Forms
             cmbEmployJobHistory.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbEmployJobHistory.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-            cmbempdepthistory.ValueMember = "DeptName";
+            cmbempdepthistory.ValueMember = "DEPTID";
             cmbempdepthistory.DisplayMember = "Dept_Type_Name";
-            cmbempdepthistory.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT [DeptName],Dept_Type_Name FROM [DelmonGroupDB].[dbo].[DEPARTMENTS], DeptTypes where DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID");
+            cmbempdepthistory.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT DEPTID,[DeptName],Dept_Type_Name FROM [DelmonGroupDB].[dbo].[DEPARTMENTS], DeptTypes where DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID");
             cmbempdepthistory.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbempdepthistory.AutoCompleteSource = AutoCompleteSource.ListItems;
             
@@ -180,10 +186,8 @@ namespace Delmon_Managment_System.Forms
             SqlParameter paramEmployeenameSearch = new SqlParameter("@C1", SqlDbType.NVarChar);
             paramEmployeenameSearch.Value = Employeetxt.Text;
             SQLCONN.OpenConection();
-           // dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(
-            //    " select  Employees.EmployeeID,Employees.CurrentEmpID,FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus , StatusTBL.StatusValue, jobs.JobTitleEN,  DeptTypes.Dept_Type_Name, Companies.COMPName_EN from Employees,StatusTBL,JOBS,DeptTypes,DEPARTMENTS,Companies where ( firstname LIKE '" + Employeetxt.Text + "%' or  secondname LIKE '" + Employeetxt.Text + "%' or thirdname LIKE '" + Employeetxt.Text + "%' or lastname LIKE '" + Employeetxt.Text +" ( %'  or Employees.EmployeeID like '%"  + Employeetxt.Text + "% )'  ) and Employees.EmploymentStatusID = StatusTBL.StatusID and Employees.JobID = JOBS.JobID and Employees.DeptID = DEPARTMENTS.DEPTID  and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID and DEPARTMENTS.COMPID= Companies.COMPID ");
             dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(
-              " select  Employees.EmployeeID,Employees.CurrentEmpID,FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus , StatusTBL.StatusValue, jobs.JobTitleEN,  DeptTypes.Dept_Type_Name, Companies.COMPName_EN from Employees,StatusTBL,JOBS,DeptTypes,DEPARTMENTS,Companies where ( firstname LIKE '%' + @C1 + '%' or  secondname LIKE '%' + @C1 + '%' or thirdname LIKE '% @C1 %'  or lastname LIKE  '%' + @C1 + '%' or Employees.EmployeeID like '%' + @C1 + '%' ) and Employees.EmploymentStatusID = StatusTBL.StatusID and Employees.JobID = JOBS.JobID and Employees.DeptID = DEPARTMENTS.DEPTID  and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID and DEPARTMENTS.COMPID= Companies.COMPID ", paramEmployeenameSearch);
+              " select  visajoblist.filenumber,testemployee.EmployeeID,testemployee.CurrentEmpID,FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus , StatusTBL.StatusValue, jobs.JobTitleEN,  DeptTypes.Dept_Type_Name, Companies.COMPName_EN,startdate,enddate from testemployee,StatusTBL,JOBS,DeptTypes,DEPARTMENTS,Companies,visajoblist where ( firstname LIKE '%' + @C1 + '%' or  secondname LIKE '%' + @C1 + '%' or thirdname LIKE '% @C1 %'  or lastname LIKE  '%' + @C1 + '%' or testemployee.EmployeeID like '%' + @C1 + '%' ) and testemployee.EmploymentStatusID = StatusTBL.StatusID and testemployee.JobID = JOBS.JobID and testemployee.DeptID = DEPARTMENTS.DEPTID  and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID and DEPARTMENTS.COMPID= Companies.COMPID and visajoblist.employeeid = testemployee.employeeid ", paramEmployeenameSearch);
 
             SQLCONN.CloseConnection();
             firstnametxt.Text = secondnametxt.Text = thirdnametxt.Text = lastnametxt.Text = "";
@@ -345,14 +349,24 @@ namespace Delmon_Managment_System.Forms
                         }
 
 
-
-
-
-
-
                         paramEmployeeID.Value = CurrentEmployeeIDtxt.Text;
 
-                        SQLCONN.ExecuteQueries("update TestEmployee set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,DeptID=@C15,StartDate=@C16,EndDate=@C17,COMPID=@C18,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany, paramEmployeeID,paramuser,parampc);
+
+                        if ((int)cmbPersonalStatusStatus.SelectedValue == 25 || (int)cmbPersonalStatusStatus.SelectedValue == 26 || (int)cmbPersonalStatusStatus.SelectedValue == 27)
+                        {
+                            SQLCONN.ExecuteQueries("update TestEmployee set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,DeptID=@C15,StartDate=@C16,EndDate=@C17,COMPID=@C18,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany, paramEmployeeID, paramuser, parampc);
+
+                        }
+
+                        else 
+                        {
+                            SQLCONN.ExecuteQueries("update TestEmployee set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,DeptID=@C15,StartDate=@C16,COMPID=@C18,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramcompany, paramEmployeeID, paramuser, parampc);
+
+                        }
+
+
+
+
 
 
 
@@ -377,7 +391,7 @@ namespace Delmon_Managment_System.Forms
                             {
                                 object originalValue = originalData.Rows[0][column.ColumnName];
                                 object updatedValue = updatedData.Rows[0][column.ColumnName];
-                                if (!Equals(originalValue, updatedValue) &&( originalValue != null|| updatedData!=null))
+                                if (!Equals(originalValue, updatedValue) &&( originalValue != null || updatedData!=null))
                                 {
                                     changedColumns.Add(column.ColumnName);
                                 }
@@ -386,7 +400,7 @@ namespace Delmon_Managment_System.Forms
                             // Insert the changes into the log table
                             if (changedColumns.Count > 0)
                             {
-                                using (SqlCommand command = new SqlCommand("INSERT INTO EmployeeLog (EmployeeId, logvalue, OldValue, NewValue,logdatetime,PCNAME,UserId,type) VALUES (@EmployeeId, @ColumnName, @OldValue, @NewValue,@datetime,@pc,@user,@type)", connection))
+                                using (SqlCommand command = new SqlCommand("INSERT INTO EmployeeLog (Logvalueid, logvalue, OldValue, NewValue,logdatetime,PCNAME,UserId,type) VALUES (@EmployeeId, @ColumnName, @OldValue, @NewValue,@datetime,@pc,@user,@type)", connection))
                                 {
                                     command.Parameters.AddWithValue("@EmployeeId", EMPID);
                                     foreach (string columnName in changedColumns)
@@ -488,13 +502,13 @@ namespace Delmon_Managment_System.Forms
             try
             {
                 SqlParameter paramfirstname = new SqlParameter("@C1", SqlDbType.NVarChar);
-                paramfirstname.Value = firstnametxt.Text;
+                paramfirstname.Value = firstnametxt.Text.Trim();
                 SqlParameter paramsecondname = new SqlParameter("@C2", SqlDbType.NVarChar);
-                paramsecondname.Value = secondnametxt.Text;
+                paramsecondname.Value = secondnametxt.Text.Trim();
                 SqlParameter Paramthirdname = new SqlParameter("@C3", SqlDbType.NVarChar);
-                Paramthirdname.Value = thirdnametxt.Text;
+                Paramthirdname.Value = thirdnametxt.Text.Trim();
                 SqlParameter paramlastname = new SqlParameter("@C4", SqlDbType.NVarChar);
-                paramlastname.Value = lastnametxt.Text;
+                paramlastname.Value = lastnametxt.Text.Trim();
                 SqlParameter paramGender = new SqlParameter("@C5", SqlDbType.NVarChar);
                 paramGender.Value = cmbGender.SelectedItem;
                 SqlParameter paramMartialStatus = new SqlParameter("@C6", SqlDbType.NVarChar);
@@ -532,7 +546,7 @@ namespace Delmon_Managment_System.Forms
                 SqlParameter paramEmployeeID = new SqlParameter("@EmployeeID", SqlDbType.Int);
 
                 SqlParameter paramCurrentEmployeeID = new SqlParameter("@CurrentEmployeeID", SqlDbType.NVarChar);
-                paramCurrentEmployeeID.Value = CurrentEmployeeIDtxt.Text;
+                paramCurrentEmployeeID.Value = CurrentEmployeeIDtxt.Text.Trim();
 
 
                 /*logg*/
@@ -615,14 +629,26 @@ namespace Delmon_Managment_System.Forms
                             dr.Dispose();
                             dr.Close();
                             paramEmployeeID.Value = EmployeeID;
-                          
-                            SQLCONN.ExecuteQueries("insert into TestEmployee (EmployeeID, firstname,secondname,thirdname,lastname,Gender,MartialStatus,[PCNAME], EmploymentStatusID,JobID,DeptID,StartDate,EndDate,COMPID,UserID,CurrentEmpID)" +
-                              " values (@EmployeeID,@C1,@C2,@C3,@C4,@C5,@C6,@pc,@C13,@C14,@C15,@C16,@C17,@C18,@C10,@CurrentEmployeeID)",
-                                                         paramEmployeeID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, parampc, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany,paramUserID,paramCurrentEmployeeID);
+
+                            if ((int)cmbPersonalStatusStatus.SelectedValue == 25 || (int)cmbPersonalStatusStatus.SelectedValue == 26 || (int)cmbPersonalStatusStatus.SelectedValue == 27)
+                            {
+                                SQLCONN.ExecuteQueries("insert into TestEmployee (EmployeeID, firstname,secondname,thirdname,lastname,Gender,MartialStatus,[PCNAME], EmploymentStatusID,JobID,DeptID,StartDate,EndDate,COMPID,UserID,CurrentEmpID)" +
+                          " values (@EmployeeID,@C1,@C2,@C3,@C4,@C5,@C6,@pc,@C13,@C14,@C15,@C16,@C17,@C18,@C10,@CurrentEmployeeID)",
+                                                     paramEmployeeID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, parampc, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany, paramUserID, paramCurrentEmployeeID);
+
+                            }
+                            else
+                            {
+                                SQLCONN.ExecuteQueries("insert into TestEmployee (EmployeeID, firstname,secondname,thirdname,lastname,Gender,MartialStatus,[PCNAME], EmploymentStatusID,JobID,DeptID,StartDate,COMPID,UserID,CurrentEmpID)" +
+                          " values (@EmployeeID,@C1,@C2,@C3,@C4,@C5,@C6,@pc,@C13,@C14,@C15,@C16,@C18,@C10,@CurrentEmployeeID)",
+                                                     paramEmployeeID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, parampc, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramcompany, paramUserID, paramCurrentEmployeeID);
+
+                            }
+
 
                             MessageBox.Show("Record saved Successfully");
                           
-                            SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (EmployeeId, logvalue ,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES (@id, 'Employee Info' ,'#','#',@datetime,@pc,@user,'Insert')", paramEmployeeID, paramdatetimeLOG, parampc, paramuser);
+                            SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (Logvalueid, logvalue ,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES (@EmployeeID, 'Employee Info' ,'#','#',@datetime,@pc,@user,'Insert')", paramEmployeeID, paramdatetimeLOG, parampc, paramuser);
 
                             btnNew.Visible = true;
                             CurrentEmployeeIDtxt.Text = EmployeeID.ToString();
@@ -1205,8 +1231,13 @@ namespace Delmon_Managment_System.Forms
             btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = false;
             firstnametxt.Enabled = secondnametxt.Enabled = thirdnametxt.Enabled = lastnametxt.Enabled = true;
             cmbMartialStatus.Enabled = cmbGender.Enabled = cmbempdepthistory.Enabled = cmbEmployJobHistory.Enabled = cmbPersonalStatusStatus.Enabled = cmbCompany.Enabled= true;
-            StartDatePicker.Enabled = EndDatePicker.Enabled = true;
+            StartDatePicker.Enabled = true;
+            EndDatePicker.Enabled = false;
+            dataGridView1.DataSource = null;
+            cmbCompany.Text = cmbEmployJobHistory.Text=cmbempdepthistory.Text=cmbPersonalStatusStatus.Text= "Select";
+            StartDatePicker.Value = EndDatePicker.Value = DateTime.Now;
             ClearTextBoxes();
+
             // EmployeeForm_Load(sender, e);
             this.ActiveControl = firstnametxt;
 
@@ -1278,26 +1309,38 @@ namespace Delmon_Managment_System.Forms
                     else
                     {
 
-                        EMPID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-                        CurrentEmployeeIDtxt.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                        firstnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                        secondnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                        thirdnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-                        lastnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-                        cmbGender.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-                        cmbMartialStatus.Text = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
-                        cmbPersonalStatusStatus.Text = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
-                        cmbEmployJobHistory.Text = dataGridView1.Rows[e.RowIndex].Cells[9].Value.ToString();
-                        cmbempdepthistory.Text = dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString();
-                        cmbCompany.Text = dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString();
-                      
+                        filenumbertxt.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+                        EMPID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
+                        CurrentEmployeeIDtxt.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+                        firstnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+                        secondnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+                        thirdnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+                        lastnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
+                        cmbGender.Text = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
+                        cmbMartialStatus.Text = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
+                        cmbPersonalStatusStatus.Text = dataGridView1.Rows[e.RowIndex].Cells[9].Value.ToString();
+                        cmbEmployJobHistory.Text = dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString();
+                        cmbempdepthistory.Text = dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString();
+                        cmbCompany.Text = dataGridView1.Rows[e.RowIndex].Cells[12].Value.ToString();
+                        StartDatePicker.Value = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[13].Value.ToString());
+                        if (dataGridView1.CurrentRow.Cells["enddate"].Value == null || dataGridView1.CurrentRow.Cells["enddate"].Value == DBNull.Value || String.IsNullOrWhiteSpace(dataGridView1.CurrentRow.Cells["enddate"].Value.ToString()))
+                        {
+                            EndDatePicker.Value = DateTime.Now;
+                        }
+                        else
+                        {
+                          EndDatePicker.Value = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[14].Value.ToString());
+
+                        }
+
+
                         EmployeeID = EMPID;
                         //CurrentEmployeeIDtxt.Text = EmployeeID.ToString();
                         AddBtn.Visible = false;
                         btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = true;
                         firstnametxt.Enabled = secondnametxt.Enabled = thirdnametxt.Enabled = lastnametxt.Enabled = true;
                         cmbMartialStatus.Enabled = cmbGender.Enabled =cmbCompany.Enabled= cmbempdepthistory.Enabled = cmbEmployJobHistory.Enabled = cmbPersonalStatusStatus.Enabled = true;
-                        StartDatePicker.Enabled = EndDatePicker.Enabled = true;
+                        StartDatePicker.Enabled  = true;
                         //dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[EmployeeID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] ,[EmployeeID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and EmployeeID =  " + EmployeeID + " ");
                         //dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue] ,[url] ,[last_update] ,[DocumentType].Doc_Type ,[RefrenceID]FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =  " + EmployeeID + " ");
 
@@ -1611,21 +1654,27 @@ namespace Delmon_Managment_System.Forms
 
         private void cmbPersonalStatusStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((int)cmbPersonalStatusStatus.SelectedValue == 23)
+            if ((int)cmbPersonalStatusStatus.SelectedValue == 25|| (int)cmbPersonalStatusStatus.SelectedValue == 26|| (int)cmbPersonalStatusStatus.SelectedValue == 27)
             {
-                IDlbl.Text = "Candidate ID";
-                CurrentEmployeeIDtxt.Enabled = false;
-               // ID = ++ID ;
-             //   EmployeeIDtxt.Text = ID.ToString();
+               // IDlbl.Text = "Candidate ID";
+                // ID = ++ID ;
+                //   EmployeeIDtxt.Text = ID.ToString();
 
-               // SQLCONN.ExecuteQueries("SELECT MAX(customer_id) FROM customers C) + 1");
-
+                // SQLCONN.ExecuteQueries("SELECT MAX(customer_id) FROM customers C) + 1");
+                EndDatePicker.Enabled = true;
 
             }
-            else if ((int)cmbPersonalStatusStatus.SelectedValue == 24)
+            else 
             {
-                IDlbl.Text = "Employee ID";
-                CurrentEmployeeIDtxt.Enabled = true;
+                // Declare a nullable DateTime variable
+                DateTime? selectedDate = null;
+
+                // Set the Value property of the DateTimePicker
+                EndDatePicker.Value = selectedDate ?? DateTime.Now;
+                EndDatePicker.Enabled = false;
+             
+                //   IDlbl.Text = "Employee ID";
+               
 
 
             }
@@ -1886,7 +1935,7 @@ namespace Delmon_Managment_System.Forms
             conn.Open();
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT [DeptName],Dept_Type_Name FROM [DelmonGroupDB].[dbo].[DEPARTMENTS], DeptTypes where DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID and COMPID=@C1 ";
+            cmd.CommandText = "SELECT [DEPTID],Dept_Type_Name FROM [DelmonGroupDB].[dbo].[DEPARTMENTS], DeptTypes where DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID and COMPID=@C1 ";
            
 
             cmd.Parameters.Add(new SqlParameter("@C1", SqlDbType.Int));
@@ -1904,7 +1953,7 @@ namespace Delmon_Managment_System.Forms
             if (dt != null && dt.Rows.Count >= 0)
             {
             
-                cmbempdepthistory.ValueMember = "DeptName";
+                cmbempdepthistory.ValueMember = "DEPTID";
                 cmbempdepthistory.DisplayMember = "Dept_Type_Name";
                 cmbempdepthistory.DataSource = dt;
                 cmbempdepthistory.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -1932,7 +1981,7 @@ namespace Delmon_Managment_System.Forms
         {
             if (e.KeyCode == Keys.Enter)
             {
-                CurrentEmployeeIDtxt.Focus();
+                cmbCompany.Focus();
                 e.Handled = true;
             }
         }
@@ -1941,7 +1990,7 @@ namespace Delmon_Managment_System.Forms
         {
             if (e.KeyCode == Keys.Enter)
             {
-                cmbCompany.Focus();
+                firstnametxt.Focus();
                 e.Handled = true;
             }
         }
@@ -2020,6 +2069,11 @@ namespace Delmon_Managment_System.Forms
         }
 
         private void cmbCompany_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void filenumbertxt_TextChanged(object sender, EventArgs e)
         {
 
         }
