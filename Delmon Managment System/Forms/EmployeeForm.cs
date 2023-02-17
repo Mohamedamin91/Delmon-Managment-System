@@ -82,7 +82,7 @@ namespace Delmon_Managment_System.Forms
         {
             tabControl1.TabPages.Remove(EmploymentHistory);
 
-            tabControl1.TabPages.Remove(SalaryTab);
+            //tabControl1.TabPages.Remove(SalaryTab);
 
 
             lblusername.Text = CommonClass.LoginUserName;
@@ -1283,14 +1283,14 @@ namespace Delmon_Managment_System.Forms
 
 
                 //}
-                //if (tabControl1.SelectedTab == tabControl1.TabPages[3])
-                //{
+                if (tabControl1.SelectedTab == tabControl1.TabPages["SalaryTab"])
+                {
 
 
-                //    dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  select SalaryDetID , SalaryTypeName 'Salary Type' ,SalaryDetails.Value from SalaryDetails,SalaryTypes where SalaryDetails.SalaryTypeID = SalaryTypes.SalaryTypeID and SalaryDetails.EmployeeID = @ID ", paramEmployeeID);
-                //    this.dataGridView5.Columns["SalaryDetID"].Visible = false;
+                    dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  select SalaryDetID , SalaryTypeName 'Salary Type' ,SalaryDetails.Value from SalaryDetails,SalaryTypes where SalaryDetails.SalaryTypeID = SalaryTypes.SalaryTypeID and SalaryDetails.EmployeeID = @ID ", paramEmployeeID);
+                  //  this.dataGridView5.Columns["SalaryDetID"].Visible = false;
 
-                //}
+                }
 
 
             }
