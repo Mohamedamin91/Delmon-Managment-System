@@ -136,7 +136,7 @@ namespace Delmon_Managment_System.Forms
 
             cmbcandidates.ValueMember = "EmployeeID";
             cmbcandidates.DisplayMember = "Name";
-            cmbcandidates.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT TestEmployee.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[TestEmployee] , StatusTBL where TestEmployee.EmploymentStatusID = StatusTBL.StatusID and RefrenceID=2 and StatusTBL.StatusID = 23 order by EmployeeID");
+            cmbcandidates.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees] , StatusTBL where Employees.EmploymentStatusID = StatusTBL.StatusID and RefrenceID=2 and StatusTBL.StatusID = 23 order by EmployeeID");
             cmbcandidates.Text = "Select";
 
             cmbAgency.ValueMember = "AgencID";

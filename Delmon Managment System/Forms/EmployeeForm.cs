@@ -187,8 +187,8 @@ namespace Delmon_Managment_System.Forms
             paramEmployeenameSearch.Value = Employeetxt.Text;
             SQLCONN.OpenConection();
             dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(
-              " select  testemployee.EmployeeID,testemployee.CurrentEmpID,FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus , StatusTBL.StatusValue, jobs.JobTitleEN, DeptTypes.Dept_Type_Name, Companies.COMPName_EN,startdate,enddate from testemployee,StatusTBL,JOBS,DeptTypes,DEPARTMENTS,Companies where ( firstname LIKE '%' + @C1 + '%' or  secondname LIKE '%' + @C1 + '%' or thirdname LIKE '% @C1 %'  or lastname LIKE  '%' + @C1 + '%' or testemployee.EmployeeID like '%' + @C1 + '%' or  testemployee.CurrentEmpID like '%' + @C1 + '%' ) " +
-              " and testemployee.EmploymentStatusID = StatusTBL.StatusID and testemployee.JobID = JOBS.JobID and testemployee.DeptID = DEPARTMENTS.DEPTID  and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID and DEPARTMENTS.COMPID= Companies.COMPID  ", paramEmployeenameSearch);
+              " select  Employees.EmployeeID,Employees.CurrentEmpID,FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus , StatusTBL.StatusValue, jobs.JobTitleEN, DeptTypes.Dept_Type_Name, Companies.COMPName_EN,startdate,enddate from Employees,StatusTBL,JOBS,DeptTypes,DEPARTMENTS,Companies where ( firstname LIKE '%' + @C1 + '%' or  secondname LIKE '%' + @C1 + '%' or thirdname LIKE '% @C1 %'  or lastname LIKE  '%' + @C1 + '%' or Employees.EmployeeID like '%' + @C1 + '%' or  Employees.CurrentEmpID like '%' + @C1 + '%' ) " +
+              " and Employees.EmploymentStatusID = StatusTBL.StatusID and Employees.JobID = JOBS.JobID and Employees.DeptID = DEPARTMENTS.DEPTID  and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID and DEPARTMENTS.COMPID= Companies.COMPID  ", paramEmployeenameSearch);
 
 
 
@@ -344,7 +344,7 @@ namespace Delmon_Managment_System.Forms
                         using (SqlConnection connection = new SqlConnection(connectionString))
                         {
                             connection.Open();
-                            string sql = "SELECT * FROM TestEmployee WHERE EmployeeId = @EmployeeId";
+                            string sql = "SELECT * FROM Employees WHERE EmployeeId = @EmployeeId";
                             SqlDataAdapter da = new SqlDataAdapter(sql, connection);
                             da.SelectCommand.Parameters.AddWithValue("@EmployeeId", EMPID);
                             originalData = new DataTable();
@@ -357,13 +357,13 @@ namespace Delmon_Managment_System.Forms
 
                         if ((int)cmbPersonalStatusStatus.SelectedValue == 25 || (int)cmbPersonalStatusStatus.SelectedValue == 26 || (int)cmbPersonalStatusStatus.SelectedValue == 27)
                         {
-                            SQLCONN.ExecuteQueries("update TestEmployee set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,DeptID=@C15,StartDate=@C16,EndDate=@C17,COMPID=@C18,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany, paramEmployeeID, paramuser, parampc);
+                            SQLCONN.ExecuteQueries("update Employees set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,DeptID=@C15,StartDate=@C16,EndDate=@C17,COMPID=@C18,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany, paramEmployeeID, paramuser, parampc);
 
                         }
 
                         else
                         {
-                            SQLCONN.ExecuteQueries("update TestEmployee set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,DeptID=@C15,StartDate=@C16,COMPID=@C18,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramcompany, paramEmployeeID, paramuser, parampc);
+                            SQLCONN.ExecuteQueries("update Employees set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,DeptID=@C15,StartDate=@C16,COMPID=@C18,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramcompany, paramEmployeeID, paramuser, parampc);
 
                         }
 
@@ -375,14 +375,14 @@ namespace Delmon_Managment_System.Forms
 
                         MessageBox.Show("Record Updated Successfully");
                         // dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT id_History,[EmployeeID],NewID,StatusTBL.StatusValue,[JOBS].JobTitleEN, DeptTypes.Dept_Type_Name,[StartDate],[EndDate],[UserID],[DatetimeLog]  FROM[DelmonGroupDB].[dbo].[EmploymentStatus], JOBS, DEPARTMENTS, StatusTBL, DeptTypes  where   StatusTBL.StatusID = EmploymentStatus.EmploymentStatusID and DEPARTMENTS.DeptName = EmploymentStatus.DeptID   and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID  and JOBS.JobID = EmploymentStatus.JobID  and  NEWID = @C14  ", paramNewID);
-                        dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from TestEmployee where  EmployeeID = '" + EMPID + "'");
+                        dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Employees where  EmployeeID = '" + EMPID + "'");
 
 
 
                         using (SqlConnection connection = new SqlConnection(connectionString))
                         {
                             connection.Open();
-                            string sql = "SELECT * FROM TestEmployee WHERE EmployeeId = @EmployeeId";
+                            string sql = "SELECT * FROM Employees WHERE EmployeeId = @EmployeeId";
                             SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
                             adapter.SelectCommand.Parameters.AddWithValue("@EmployeeId", EMPID);
                             DataTable updatedData = new DataTable();
@@ -474,8 +474,8 @@ namespace Delmon_Managment_System.Forms
                 if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
                     SQLCONN.OpenConection();
-                    SQLCONN.ExecuteQueries("delete from TestEmployee where EmployeeID=@id", paramPID);
-                    // SQLCONN.ExecuteQueries(" declare @max int select @max = max([EmployeeID]) from[TestEmployee] if @max IS NULL SET @max = 0 DBCC CHECKIDENT('[Employees]', RESEED, @max)");
+                    SQLCONN.ExecuteQueries("delete from Employees where EmployeeID=@id", paramPID);
+                    // SQLCONN.ExecuteQueries(" declare @max int select @max = max([EmployeeID]) from[Employees] if @max IS NULL SET @max = 0 DBCC CHECKIDENT('[Employees]', RESEED, @max)");
                     MessageBox.Show("Record Deleted Successfully");
                     SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Employee Info',@id ,'#','#',@datetime,@pc,@user,'Delete')", paramPID, paramdatetimeLOG, parampc, paramuser);
 
@@ -565,7 +565,7 @@ namespace Delmon_Managment_System.Forms
                 if (firstnametxt.Text != "" && secondnametxt.Text != "" && thirdnametxt.Text != "" && lastnametxt.Text != "" && cmbPersonalStatusStatus.Text != "Select" && cmbempdepthistory.Text != "Select" && cmbEmployJobHistory.Text != "Select")
                 {
                     SQLCONN.OpenConection();
-                    SqlDataReader dr = SQLCONN.DataReader("select  * from TestEmployee where " +
+                    SqlDataReader dr = SQLCONN.DataReader("select  * from Employees where " +
                          " firstname=  @C1 and    SecondName =  @C2 and thirdname = @C3  and lastname = @C4", paramfirstname, paramsecondname, Paramthirdname, paramlastname);
                     dr.Read();
 
@@ -613,7 +613,7 @@ namespace Delmon_Managment_System.Forms
                         {
                             dr.Dispose();
                             dr.Close();
-                            dr = SQLCONN.DataReader("   SELECT COALESCE(MAX(EmployeeID), 0) 'ID' FROM TestEmployee  ");
+                            dr = SQLCONN.DataReader("   SELECT COALESCE(MAX(EmployeeID), 0) 'ID' FROM Employees  ");
                             if (dr.Read())
                             {
 
@@ -635,14 +635,14 @@ namespace Delmon_Managment_System.Forms
 
                             if ((int)cmbPersonalStatusStatus.SelectedValue == 25 || (int)cmbPersonalStatusStatus.SelectedValue == 26 || (int)cmbPersonalStatusStatus.SelectedValue == 27)
                             {
-                                SQLCONN.ExecuteQueries("insert into TestEmployee (EmployeeID, firstname,secondname,thirdname,lastname,Gender,MartialStatus,[PCNAME], EmploymentStatusID,JobID,DeptID,StartDate,EndDate,COMPID,UserID,CurrentEmpID)" +
+                                SQLCONN.ExecuteQueries("insert into Employees (EmployeeID, firstname,secondname,thirdname,lastname,Gender,MartialStatus,[PCNAME], EmploymentStatusID,JobID,DeptID,StartDate,EndDate,COMPID,UserID,CurrentEmpID)" +
                           " values (@EmployeeID,@C1,@C2,@C3,@C4,@C5,@C6,@pc,@C13,@C14,@C15,@C16,@C17,@C18,@C10,@CurrentEmployeeID)",
                                                      paramEmployeeID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, parampc, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany, paramUserID, paramCurrentEmployeeID);
 
                             }
                             else
                             {
-                                SQLCONN.ExecuteQueries("insert into TestEmployee (EmployeeID, firstname,secondname,thirdname,lastname,Gender,MartialStatus,[PCNAME], EmploymentStatusID,JobID,DeptID,StartDate,COMPID,UserID,CurrentEmpID)" +
+                                SQLCONN.ExecuteQueries("insert into Employees (EmployeeID, firstname,secondname,thirdname,lastname,Gender,MartialStatus,[PCNAME], EmploymentStatusID,JobID,DeptID,StartDate,COMPID,UserID,CurrentEmpID)" +
                           " values (@EmployeeID,@C1,@C2,@C3,@C4,@C5,@C6,@pc,@C13,@C14,@C15,@C16,@C18,@C10,@CurrentEmployeeID)",
                                                      paramEmployeeID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, parampc, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramcompany, paramUserID, paramCurrentEmployeeID);
 
@@ -658,7 +658,7 @@ namespace Delmon_Managment_System.Forms
                             btnaddhitory.PerformClick();
 
                             tabControl1.Enabled = true;
-                            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from TestEmployee where EmployeeID= @EmployeeID order by EmployeeID ", paramEmployeeID);
+                            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Employees where EmployeeID= @EmployeeID order by EmployeeID ", paramEmployeeID);
                             SQLCONN.CloseConnection();
 
 
@@ -2028,7 +2028,6 @@ namespace Delmon_Managment_System.Forms
         private void btnprtjoboffer_Click(object sender, EventArgs e)
         {
             CommonClass.EmployeeID = EmployeeID;
-       //     MessageBox.Show(EmployeeID.ToString());
             if
                 (EmployeeID == 0)
             {
