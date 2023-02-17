@@ -233,7 +233,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(35, 96);
+            this.label1.Location = new System.Drawing.Point(19, 96);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 17);
             this.label1.TabIndex = 113;
@@ -253,7 +253,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(35, 137);
+            this.label6.Location = new System.Drawing.Point(19, 137);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(77, 17);
             this.label6.TabIndex = 117;
@@ -285,7 +285,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(35, 215);
+            this.label5.Location = new System.Drawing.Point(19, 215);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(119, 17);
             this.label5.TabIndex = 85;
@@ -295,7 +295,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(35, 180);
+            this.label2.Location = new System.Drawing.Point(19, 180);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(51, 17);
             this.label2.TabIndex = 121;
@@ -411,7 +411,7 @@ namespace Delmon_Managment_System.Forms
             this.StartDatePicker.Location = new System.Drawing.Point(158, 318);
             this.StartDatePicker.Margin = new System.Windows.Forms.Padding(5);
             this.StartDatePicker.Name = "StartDatePicker";
-            this.StartDatePicker.Size = new System.Drawing.Size(149, 25);
+            this.StartDatePicker.Size = new System.Drawing.Size(178, 25);
             this.StartDatePicker.TabIndex = 139;
             this.StartDatePicker.ValueChanged += new System.EventHandler(this.StartDatePicker_ValueChanged);
             this.StartDatePicker.KeyDown += new System.Windows.Forms.KeyEventHandler(this.StartDatePicker_KeyDown);
@@ -420,7 +420,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(42, 324);
+            this.label13.Location = new System.Drawing.Point(26, 324);
             this.label13.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(39, 17);
@@ -442,7 +442,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(35, 284);
+            this.label12.Location = new System.Drawing.Point(19, 284);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(77, 17);
             this.label12.TabIndex = 137;
@@ -1223,7 +1223,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(35, 254);
+            this.label23.Location = new System.Drawing.Point(19, 254);
             this.label23.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(63, 17);
@@ -1234,11 +1234,11 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(33, 63);
+            this.label24.Location = new System.Drawing.Point(13, 63);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(79, 17);
+            this.label24.Size = new System.Drawing.Size(140, 17);
             this.label24.TabIndex = 152;
-            this.label24.Text = "File Number";
+            this.label24.Text = "Employee File Number";
             // 
             // filenumbertxt
             // 
