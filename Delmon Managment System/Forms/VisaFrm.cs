@@ -1068,7 +1068,7 @@ namespace Delmon_Managment_System.Forms
                 if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
                     SQLCONN.OpenConection();
-                    SQLCONN.ExecuteQueries("delete  VISAJobList where filenumber=@C1", paramFilenumber);
+                    SQLCONN.ExecuteQueries("delete from  VISAJobList where filenumber=@C1", paramFilenumber);
                     SQLCONN.ExecuteQueries(" declare @max int select @max = max([filenumber]) from[VISAJobList] if @max IS NULL    SET @max = 0 DBCC CHECKIDENT('[VISAJobList]', RESEED, @max)");
                     dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from VISAJobList ");
                     SQLCONN.CloseConnection();
@@ -1273,17 +1273,42 @@ namespace Delmon_Managment_System.Forms
                         cmbConsulate.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[2].Value.ToString());
                         cmbJob.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[3].Value.ToString());
                         cmbStatus.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[4].Value.ToString());
-                        cmbcandidates.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[5].Value.ToString());
-                        cmbAgency.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[6].Value.ToString());
+
+
+                        //  MessageBox.Show(dataGridView2.Rows[e.RowIndex].Cells[5].Value.ToString());                      
+
+
+
+                        object cell5Value = rw.Cells[5].Value;
+                        object cell6Value = rw.Cells[6].Value;
+                        if (cell5Value != null && cell5Value != DBNull.Value && !string.IsNullOrEmpty(cell5Value.ToString())
+                            )
+                        {
+                            cmbcandidates.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[5].Value.ToString());
+
+                        }
+                        else if (cell6Value != null && cell6Value != DBNull.Value && !string.IsNullOrEmpty(cell6Value.ToString()))
+                        {
+                            cmbAgency.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[6].Value.ToString());
+
+                        }
+                        else
+                        {
+
+                            cmbcandidates.SelectedValue = 0;
+                            cmbAgency.SelectedValue = 0;
+
+                        }
 
                         VisaFileNumberID.Text = FileNumberID.ToString();
 
-                        cmbConsulate.Enabled = cmbJob.Enabled = false;
-                        cmbStatus.Enabled =cmbcandidates.Enabled= cmbAgency.Enabled= true;
-                        btnnewJob.Enabled = false;
-                        btnUpdate.Visible = true;
+                            cmbConsulate.Enabled = cmbJob.Enabled = false;
+                            cmbStatus.Enabled = cmbcandidates.Enabled = cmbAgency.Enabled = true;
+                            btnnewJob.Enabled = false;
+                            btnUpdate.Visible = true;
 
 
+                        
                     }
                 }
             }
