@@ -76,7 +76,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Natiomality:</Value>
+                    <Value>Nationality:</Value>
                     <Style>
                       <FontFamily>Calibri</FontFamily>
                       <FontSize>12pt</FontSize>
@@ -337,10 +337,10 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.71243in</Width>
+                  <Width>2.09264in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.76673in</Width>
+                  <Width>4.46589in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -438,7 +438,7 @@
             <Top>2in</Top>
             <Left>0.06139in</Left>
             <Height>0.25in</Height>
-            <Width>2.47916in</Width>
+            <Width>6.55853in</Width>
             <ZIndex>10</ZIndex>
             <Style>
               <Border>

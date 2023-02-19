@@ -139,7 +139,8 @@ namespace Delmon_Managment_System.Forms
             cmbPersonalStatusStatus.ValueMember = "StatusID";
             cmbPersonalStatusStatus.DisplayMember = "StatusValue";
             cmbPersonalStatusStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" select  StatusID , StatusValue  from StatusTBL where RefrenceID=2  ");
-
+            cmbPersonalStatusStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbPersonalStatusStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             cmbEmployJobHistory.ValueMember = "JobID";
             cmbEmployJobHistory.DisplayMember = "JobTitleEN";
@@ -156,7 +157,8 @@ namespace Delmon_Managment_System.Forms
             cmbissueplace.ValueMember = "Consulates.ConsulateID";
             cmbissueplace.DisplayMember = "ConsulateCity";
             cmbissueplace.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select Consulates.ConsulateID,ConsulateCity from Countries,Consulates where Countries.CountryId = Consulates.CountryId");
-
+            cmbissueplace.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbissueplace.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             //cmbCountry.ValueMember = "CountryId";
             //cmbCountry.DisplayMember = "CountryName";
@@ -168,7 +170,8 @@ namespace Delmon_Managment_System.Forms
             cmbsalarytype.ValueMember = "SalaryTypeID";
             cmbsalarytype.DisplayMember = "SalaryTypeName";
             cmbsalarytype.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select SalaryTypeID,SalaryTypeName from SalaryTypes");
-
+            cmbsalarytype.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbsalarytype.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
             dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  select Employees.EmployeeID, Employees.CurrentEmpID,FirstName,SecondName,ThirdName,LastName,Gender,MartialStatus,StatusTBL.StatusValue,jobs.JobTitleEN,DeptTypes.Dept_Type_Name,Companies.COMPName_EN  from Employees,Companies,JOBS,StatusTBL,DEPARTMENTS,DeptTypes  where  Employees.DeptID = DEPARTMENTS.DeptName  and  DEPARTMENTS.DeptName  = DeptTypes.Dept_Type_ID and Employees.EmploymentStatusID = StatusTBL.StatusID  and Employees.JobID= JOBS.JobID  and Employees.COMPID = Companies.COMPID  and DEPARTMENTS.COMPID = Companies.COMPID  order by EmployeeID desc");
@@ -411,7 +414,7 @@ namespace Delmon_Managment_System.Forms
                                         object originalValue = originalData.Rows[0][columnName];
                                         object updatedValue = updatedData.Rows[0][columnName];
                                         command.Parameters.Clear();
-                                        command.Parameters.AddWithValue("@EmployeeId", EMPID + " " + "Employee");
+                                        command.Parameters.AddWithValue("@EmployeeId", EMPID + " - " + "Employee");
                                         command.Parameters.AddWithValue("@ColumnName", columnName);
                                         command.Parameters.AddWithValue("@OldValue", originalValue);
                                         command.Parameters.AddWithValue("@NewValue", updatedValue);
@@ -1055,34 +1058,34 @@ namespace Delmon_Managment_System.Forms
 
         private void dataGridView3_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            foreach (DataGridViewRow rw in this.dataGridView3.Rows)
-            {
-                for (int i = 0; i < rw.Cells.Count; i++)
-                {
-                    if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
-                    {
-                        //   MessageBox.Show("ogg");       
-                    }
-                    else
-                    {
+        //    foreach (DataGridViewRow rw in this.dataGridView3.Rows)
+        //    {
+        //        for (int i = 0; i < rw.Cells.Count; i++)
+        //        {
+        //            if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
+        //            {
+        //                //   MessageBox.Show("ogg");       
+        //            }
+        //            else
+        //            {
 
-                        EmployeeID = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString());
-                        Doctxt.Text = dataGridView3.Rows[e.RowIndex].Cells[2].Value.ToString();
-                        cmbDocuments.Text = dataGridView3.Rows[e.RowIndex].Cells[6].Value.ToString();
-
-
-
-                        //firstnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-
-                        //secondnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                        //thirdnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-
-                        //cmbMartialStatus.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
+        //                EmployeeID = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString());
+        //                Doctxt.Text = dataGridView3.Rows[e.RowIndex].Cells[2].Value.ToString();
+        //                cmbDocuments.Text = dataGridView3.Rows[e.RowIndex].Cells[6].Value.ToString();
 
 
-                    }
-                }
-            }
+
+        //                //firstnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+
+        //                //secondnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+        //                //thirdnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+
+        //                //cmbMartialStatus.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
+
+
+        //            }
+        //        }
+        //    }
         }
 
         private void btndeletedoc_Click(object sender, EventArgs e)
@@ -1267,7 +1270,7 @@ namespace Delmon_Managment_System.Forms
                 }
                 if (tabControl1.SelectedTab == tabControl1.TabPages[1])
                 {
-                    dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue] ,[url] ,[last_update] ,[DocumentType].Doc_Type ,[RefrenceID],[Number] ,[DocIssueplace]  ,[docissuedate]  ,[docexpiredate] FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =@ID ", paramEmployeeID);
+                    dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue]  ,[DocumentType].Doc_Type ,[RefrenceID],[Number] ,[DocIssueplace]  ,[docissuedate]  ,[docexpiredate] FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =@ID ", paramEmployeeID);
 
                 }
                 //if (tabControl1.SelectedTab == tabControl1.TabPages[2])
@@ -1411,6 +1414,8 @@ namespace Delmon_Managment_System.Forms
 
         private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+       //     dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue]  ,[DocumentType].Doc_Type ,[RefrenceID],[Number] ,[DocIssueplace]  ,[docissuedate]  ,[docexpiredate] FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =@ID ", paramEmployeeID);
+
             foreach (DataGridViewRow rw in this.dataGridView3.Rows)
             {
                 for (int i = 0; i < rw.Cells.Count; i++)
@@ -1422,24 +1427,18 @@ namespace Delmon_Managment_System.Forms
                     else
                     {
 
-                        EmployeeID = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        cmbDocuments.Text = dataGridView3.Rows[e.RowIndex].Cells[4].Value.ToString();
                         Doctxt.Text = dataGridView3.Rows[e.RowIndex].Cells[2].Value.ToString();
-                        cmbDocuments.Text = dataGridView3.Rows[e.RowIndex].Cells[6].Value.ToString();
-                        
-                        numbertextbox.Text = dataGridView3.Rows[e.RowIndex].Cells[8].Value.ToString();
-                        issueplacetext.Text = dataGridView3.Rows[e.RowIndex].Cells[9].Value.ToString();
-                        docissueplacepicker.Text = dataGridView3.Rows[e.RowIndex].Cells[10].Value.ToString();
-                        docexpirefatepicker.Text = dataGridView3.Rows[e.RowIndex].Cells[11].Value.ToString();
+                        EmployeeID = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[1].Value.ToString());
+                        int dOCID = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        numbertextbox.Text = dataGridView3.Rows[e.RowIndex].Cells[6].Value.ToString();
+                        issueplacetext.Text = dataGridView3.Rows[e.RowIndex].Cells[7].Value.ToString();
+                        docissueplacepicker.Value = Convert.ToDateTime( dataGridView3.Rows[e.RowIndex].Cells[8].Value.ToString());
+                        docexpirefatepicker.Value = Convert.ToDateTime(dataGridView3.Rows[e.RowIndex].Cells[9].Value.ToString());
 
 
 
-                        //firstnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-
-                        //secondnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                        //thirdnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-
-                        //cmbMartialStatus.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-
+         
 
                     }
                 }

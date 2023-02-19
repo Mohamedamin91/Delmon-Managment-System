@@ -31,13 +31,23 @@ namespace Delmon_Managment_System
         {
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.DataTable1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.Delmon = new Delmon_Managment_System.Delmon();
+            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.DataTable1TableAdapter = new Delmon_Managment_System.DelmonTableAdapters.DataTable1TableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.DataTable1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Delmon)).BeginInit();
             this.SuspendLayout();
+            // 
+            // DataTable1BindingSource
+            // 
+            this.DataTable1BindingSource.DataMember = "DataTable1";
+            this.DataTable1BindingSource.DataSource = this.Delmon;
+            // 
+            // Delmon
+            // 
+            this.Delmon.DataSetName = "Delmon";
+            this.Delmon.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // reportViewer1
             // 
@@ -52,16 +62,6 @@ namespace Delmon_Managment_System
             this.reportViewer1.Size = new System.Drawing.Size(1002, 544);
             this.reportViewer1.TabIndex = 0;
             this.reportViewer1.Load += new System.EventHandler(this.reportViewer1_Load);
-            // 
-            // DataTable1BindingSource
-            // 
-            this.DataTable1BindingSource.DataMember = "DataTable1";
-            this.DataTable1BindingSource.DataSource = this.Delmon;
-            // 
-            // Delmon
-            // 
-            this.Delmon.DataSetName = "Delmon";
-            this.Delmon.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // DataTable1TableAdapter
             // 
