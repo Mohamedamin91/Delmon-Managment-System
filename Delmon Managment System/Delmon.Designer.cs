@@ -2009,31 +2009,10 @@ namespace Delmon_Managment_System.DelmonTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT  CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName',VISAJobList.FileNumber,DocumentType.Doc_Type,Documents.Number 'Passport' ,SalaryTypes.SalaryTypeName, SalaryDetails.Value
-,JOBS.JobTitleEN,WorkLocations.Name,cast(Employees.StartDate as Date)'Date',Employees.EmployeeID,Countries.NationalityName
-, (SELECT CONCAT(FirstName  , ' ' , LastName)  
-        FROM Employees 
-        WHERE DEPARTMENTS.DeptHeadID = Employees.EmployeeID) AS 'HeadofDeparment' 
-from DEPARTMENTS,DeptTypes,WorkLocations,JOBS,Employees,VISAJobList,Documents,DocumentType,SalaryDetails,SalaryTypes,Countries,Consulates,Companies
-where 
- VISAJobList.EmployeeID =Employees.EmployeeID 
-and VISAJobList.ConsulateID = Consulates.ConsulateID
-and Employees.EmployeeID = Documents.CR_ID
-and Documents.DocTypeID = DocumentType.DocType_ID
-and Documents.RefrenceID = 2
-and DocumentType.DocType_ID = 1
-and Employees.EmployeeID = SalaryDetails.EmployeeID
-and SalaryDetails.SalaryTypeID = SalaryTypes.SalaryTypeID
-and Employees.JobID = JOBS.JobID
-and Employees.DeptID = DEPARTMENTS.DEPTID
-and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID
-and DEPARTMENTS.WorkLoctionID = WorkLocations.WorkID
-and Consulates.CountryId =Countries.CountryId
-and WorkLocations.WorkID = DEPARTMENTS.WorkLoctionID
-and Employees.COMPID = Companies.COMPID
-and DEPARTMENTS.COMPID= Companies.COMPID
---and VISAJobList.ReservedTo=DEPARTMENTS.DEPTID
-and Employees.EmployeeID = @Param1";
+            this._commandCollection[0].CommandText = @"  SELECT  CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName',VISAJobList.FileNumber,DocumentType.Doc_Type,Documents.Number 'Passport' ,SalaryTypes.SalaryTypeName, SalaryDetails.Value, JOBS.JobTitleEN,WorkLocations.Name,cast(Employees.StartDate as Date)'Date',Employees.EmployeeID,Countries.NationalityName, (SELECT CONCAT(FirstName, ' ', LastName)  FROM Employees  WHERE DEPARTMENTS.DeptHeadID = Employees.EmployeeID) AS 'HeadofDeparment' from DEPARTMENTS, DeptTypes, WorkLocations, JOBS, Employees, VISAJobList, Documents, DocumentType, SalaryDetails, SalaryTypes, Countries, Consulates, Companies where VISAJobList.EmployeeID = Employees.EmployeeID and VISAJobList.ConsulateID = Consulates.ConsulateID and Consulates.CountryId = Countries.CountryId and Employees.EmployeeID = Documents.CR_ID and Documents.DocTypeID = DocumentType.DocType_ID and Documents.RefrenceID = 2 and DocumentType.DocType_ID = 1 and SalaryDetails.SalaryTypeID = SalaryTypes.SalaryTypeID and Employees.EmployeeID = SalaryDetails.EmployeeID and SalaryDetails.EmployeeID = Employees.EmployeeID and Employees.JobID = JOBS.JobID and Employees.DeptID = DEPARTMENTS.DEPTID and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID and DEPARTMENTS.WorkLoctionID = WorkLocations.WorkID and Employees.COMPID = Companies.COMPID and DEPARTMENTS.COMPID = Companies.COMPID  and Employees.EmployeeID = @Param1
+ 
+
+";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param1", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "EmployeeID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }

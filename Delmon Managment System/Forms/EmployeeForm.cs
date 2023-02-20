@@ -471,6 +471,7 @@ namespace Delmon_Managment_System.Forms
 
 
 
+
             if (EMPID != 0)
             {
 
@@ -1693,8 +1694,20 @@ namespace Delmon_Managment_System.Forms
                 SqlParameter paramValue = new SqlParameter("@C2", SqlDbType.NVarChar);
 
 
-                SqlParameter paramemployee = new SqlParameter("@ID", SqlDbType.Int);
+                SqlParameter paramemployee = new SqlParameter("@ID", SqlDbType.NVarChar);
                 paramemployee.Value = EmployeeID;
+
+
+                /*logg*/
+                SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+                paramuser.Value = lblusername.Text;
+                SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+                paramdatetimeLOG.Value = lbldatetime.Text;
+                SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+                parampc.Value = lblPC.Text;
+
+                /*logg*/
+
 
                 if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
@@ -1726,38 +1739,64 @@ namespace Delmon_Managment_System.Forms
                         {
                             if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES"))
                             {
+                                CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+                                TextInfo textInfo = cultureInfo.TextInfo;
+                                txtvalue.Text = textInfo.ToTitleCase(txtvalue.Text);
                                 txtvalue.Text = txtvalue.Text + " " + "Provided By Company";
+                               
                             }
                         }
                         if ((int)cmbsalarytype.SelectedValue == 9)
                         {
-                            if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES"))
+                            if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES") || txtvalue.Text.Contains("Yes") || txtvalue.Text.Contains("YEs"))
                             {
+                                CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+                                TextInfo textInfo = cultureInfo.TextInfo;
+                                txtvalue.Text = textInfo.ToTitleCase(txtvalue.Text);
                                 txtvalue.Text = txtvalue.Text + " " + "Provided By Company";
+                               
                             }
                         }
                         if ((int)cmbsalarytype.SelectedValue == 10)
                         {
-                            if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES"))
+                            if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES") || txtvalue.Text.Contains("Yes") || txtvalue.Text.Contains("YEs"))
                             {
+                                CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+                                TextInfo textInfo = cultureInfo.TextInfo;
+                                txtvalue.Text = textInfo.ToTitleCase(txtvalue.Text);
                                 txtvalue.Text = txtvalue.Text + " " + "Provided By Company";
+                                
                             }
                         }
                         if ((int)cmbsalarytype.SelectedValue == 11)
-                        { txtvalue.Text = txtvalue.Text + " " + "Days after finish Contract Period"; }
+
+                        {
+                            CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+                            TextInfo textInfo = cultureInfo.TextInfo;
+                            txtvalue.Text = textInfo.ToTitleCase(txtvalue.Text);
+                            txtvalue.Text = txtvalue.Text + " " + "Days after finish Contract Period"; }
                         if ((int)cmbsalarytype.SelectedValue == 12)
                         {
-                            if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES"))
+                            if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES") || txtvalue.Text.Contains("Yes") || txtvalue.Text.Contains("YEs"))
                             {
+                                CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+                                TextInfo textInfo = cultureInfo.TextInfo;
+                                txtvalue.Text = textInfo.ToTitleCase(txtvalue.Text);
                                 txtvalue.Text = txtvalue.Text + " " + "Provided By Company";
+                                
                             }
                         }
+                      
 
 
                         paramValue.Value = txtvalue.Text;
                         SQLCONN.ExecuteQueries("insert into SalaryDetails ( EmployeeID,SalaryTypeID,Value) values (@ID,@C1,@C2)",
                                                        paramemployee, paramSalaryType, paramValue);
                         MessageBox.Show("Record saved Successfully");
+                        cmbsalarytype.SelectedValue = 0;
+                        txtvalue.Text = "";
+                        SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (Logvalueid, logvalue ,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES (@C1, ' Salary Info For Employee ID : '  +  @ID  ,'#','#',@datetime,@pc,@user,'Insert')", paramSalaryType,paramemployee, paramdatetimeLOG, parampc, paramuser);
+
 
                         dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  select SalaryDetID , SalaryTypeName 'Salary Type' ,SalaryDetails.Value from SalaryDetails,SalaryTypes where SalaryDetails.SalaryTypeID = SalaryTypes.SalaryTypeID and SalaryDetails.EmployeeID = @ID ", paramemployee);
                         this.dataGridView5.Columns["SalaryDetID"].Visible = false;
@@ -1778,13 +1817,19 @@ namespace Delmon_Managment_System.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SqlParameter ParamEmployee = new SqlParameter("@ID", SqlDbType.Int);
-            ParamEmployee.Value = EmployeeID;
+            SqlParameter ParamEmployee = new SqlParameter("@ID", SqlDbType.NVarChar);
+            ParamEmployee.Value =  EmployeeID ;
             SqlParameter paramSalaryType = new SqlParameter("@C1", SqlDbType.Int);
             paramSalaryType.Value = cmbsalarytype.SelectedValue;
             SqlParameter paramValue = new SqlParameter("@C2", SqlDbType.NVarChar);
             paramValue.Value = txtvalue.Text;
 
+            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+            paramuser.Value = lblusername.Text;
+            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+            paramdatetimeLOG.Value = lbldatetime.Text;
+            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+            parampc.Value = lblPC.Text;
 
 
             if (EmployeeID != 0)
@@ -1795,6 +1840,12 @@ namespace Delmon_Managment_System.Forms
                     SQLCONN.OpenConection();
                     SQLCONN.ExecuteQueries("delete from SalaryDetails where EmployeeID=@ID and SalaryDetails.Value=@C2 and SalaryDetails.SalaryTypeID=@C1 ", ParamEmployee,paramValue,paramSalaryType);
                     MessageBox.Show("Record Deleted Successfully");
+                    cmbsalarytype.SelectedValue = 0;
+                    txtvalue.Text = "";
+                  
+                    SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES (' Salary Info For Employee ID : '  +  @ID ,@C1 ,'#','#',@datetime,@pc,@user,'Delete')", ParamEmployee , paramSalaryType,paramdatetimeLOG, parampc, paramuser);
+
+
                     SQLCONN.CloseConnection();
                     EmployeeID = EMPID;
                     dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  select SalaryDetID , SalaryTypeName 'Salary Type' ,SalaryDetails.Value from SalaryDetails,SalaryTypes where SalaryDetails.SalaryTypeID = SalaryTypes.SalaryTypeID and SalaryDetails.EmployeeID = @ID ", ParamEmployee);
@@ -1820,6 +1871,15 @@ namespace Delmon_Managment_System.Forms
 
         private void dataGridView5_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if ((int)cmbsalarytype.SelectedValue == 12 || (int)cmbsalarytype.SelectedValue == 10 || (int)cmbsalarytype.SelectedValue == 9 || (int)cmbsalarytype.SelectedValue == 8 || (int)cmbsalarytype.SelectedValue == 7)
+            {
+                lblprovide.Visible = true;
+            }
+            else
+            {
+                lblprovide.Visible = false;
+
+            }
             foreach (DataGridViewRow rw in this.dataGridView5.Rows)
             {
                 for (int i = 0; i < rw.Cells.Count; i++)
@@ -1848,6 +1908,19 @@ namespace Delmon_Managment_System.Forms
 
             SqlParameter paramSalaryID = new SqlParameter("@SalaryID", SqlDbType.Int);
             paramSalaryID.Value = SalaryID;
+
+            /* for log */
+
+            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+            paramuser.Value = lblusername.Text;
+            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+            paramdatetimeLOG.Value = lbldatetime.Text;
+            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+            parampc.Value = lblPC.Text;
+            SqlParameter paramType = new SqlParameter("@type", SqlDbType.NVarChar);
+            paramType.Value = "Update";
+            /* for log */
+
 
             if (EmployeeID != 0)
             {
@@ -1886,7 +1959,7 @@ namespace Delmon_Managment_System.Forms
                     { txtvalue.Text = txtvalue.Text + " " + "Days after finish Contract Period"; }
                     if ((int)cmbsalarytype.SelectedValue == 12)
                     {
-                        if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES"))
+                        if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES")|| txtvalue.Text.Contains("Yes") || txtvalue.Text.Contains("YEs"))
                         {
                             txtvalue.Text = txtvalue.Text + " " + "Provided By Company";
                         }
@@ -1895,10 +1968,90 @@ namespace Delmon_Managment_System.Forms
 
                     paramValue.Value = txtvalue.Text;
 
+
                     SQLCONN.OpenConection();
+
+
+                    /**logtable */
+                    DataTable originalData = new DataTable();
+                    string connectionString = SQLCONN.ConnectionString;
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        string sql = " SELECT * FROM  SalaryDetails  where EmployeeID=@ID  and SalaryDetID=@SalaryID ";
+                        SqlDataAdapter da = new SqlDataAdapter(sql, connection);
+                        da.SelectCommand.Parameters.AddWithValue("@ID", paramemployee);
+                        da.SelectCommand.Parameters.AddWithValue("@SalaryID", paramSalaryID);
+                        originalData = new DataTable();
+                        da.Fill(originalData);
+                    }
+
+
+
+
+
+
                     SQLCONN.ExecuteQueries("update  SalaryDetails set SalaryTypeID=@C1,Value=@C2 where EmployeeID=@ID  and SalaryDetID=@SalaryID",
                                                    paramSalaryType, paramValue, paramemployee,paramSalaryID);
                     MessageBox.Show("Record Updated Successfully");
+                    cmbsalarytype.SelectedValue = 0;
+                    txtvalue.Text = "";
+
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        string sql = "SELECT * FROM SalaryDetails WHERE where EmployeeID=@ID  and SalaryDetID=@SalaryID ";
+                        SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
+                        adapter.SelectCommand.Parameters.AddWithValue("@ID", paramemployee);
+                        adapter.SelectCommand.Parameters.AddWithValue("@SalaryID", paramSalaryID); DataTable updatedData = new DataTable();
+                        adapter.Fill(updatedData);
+
+                        // Compare the two DataTables and find the changed columns
+                        List<string> changedColumns = new List<string>();
+                        foreach (DataColumn column in originalData.Columns)
+                        {
+                            object originalValue = originalData.Rows[0][column.ColumnName];
+                            object updatedValue = updatedData.Rows[0][column.ColumnName];
+                            if (!Equals(originalValue, updatedValue) && (originalValue != null || updatedData != null))
+                            {
+                                changedColumns.Add(column.ColumnName);
+                            }
+                        }
+
+                        // Insert the changes into the log table
+                        if (changedColumns.Count > 0)
+                        {
+                            using (SqlCommand command = new SqlCommand("INSERT INTO EmployeeLog (Logvalueid, logvalue, OldValue, NewValue,logdatetime,PCNAME,UserId,type) VALUES (@ID, @ColumnName, @OldValue, @NewValue,@datetime,@pc,@user,@type)", connection))
+                            {
+                                command.Parameters.AddWithValue("@ID", paramemployee);
+                                foreach (string columnName in changedColumns)
+                                {
+                                    object originalValue = originalData.Rows[0][columnName];
+                                    object updatedValue = updatedData.Rows[0][columnName];
+                                    command.Parameters.Clear();
+                                    command.Parameters.AddWithValue("@EmployeeId", paramemployee + " - " + "Employee -Salary");
+                                    command.Parameters.AddWithValue("@ColumnName", columnName);
+                                    command.Parameters.AddWithValue("@OldValue", originalValue);
+                                    command.Parameters.AddWithValue("@NewValue", updatedValue);
+                                    command.Parameters.AddWithValue("@datetime", lbldatetime.Text);
+                                    command.Parameters.AddWithValue("@pc", lblPC.Text);
+                                    command.Parameters.AddWithValue("@user", lblusername.Text);
+                                    command.Parameters.AddWithValue("@type", "Update");
+                                    command.ExecuteNonQuery();
+                                }
+                            }
+                        }
+                    }
+
+
+
+                    /**logtable*/
+
+
+
+
+
+
 
                     EmployeeID = EMPID;
                     dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  select SalaryDetID , SalaryTypeName 'Salary Type' ,SalaryDetails.Value from SalaryDetails,SalaryTypes where SalaryDetails.SalaryTypeID = SalaryTypes.SalaryTypeID and SalaryDetails.EmployeeID = @ID ", paramemployee);
@@ -2070,6 +2223,31 @@ namespace Delmon_Managment_System.Forms
         private void filenumbertxt_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void label25_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbsalarytype_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if ((int)cmbsalarytype.SelectedValue == 12 || (int)cmbsalarytype.SelectedValue == 10 || (int)cmbsalarytype.SelectedValue == 9 || (int)cmbsalarytype.SelectedValue == 8|| (int)cmbsalarytype.SelectedValue == 7 )
+            {
+                lblprovide.Visible = true;
+            }
+            else
+            {
+                lblprovide.Visible = false;
+
+            }
+        }
+
+        private void btnnewJob_Click(object sender, EventArgs e)
+        {
+            FrmJobsNew frmJobs = new FrmJobsNew();
+            // this.Hide();
+            frmJobs.Show();
         }
     }
     }

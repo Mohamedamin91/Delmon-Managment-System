@@ -121,6 +121,8 @@ namespace Delmon_Managment_System.Forms
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.filenumbertxt = new System.Windows.Forms.TextBox();
+            this.lblprovide = new System.Windows.Forms.Label();
+            this.btnnewJob = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -160,7 +162,7 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(796, 32);
+            this.dataGridView1.Location = new System.Drawing.Point(824, 35);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(637, 274);
@@ -582,7 +584,7 @@ namespace Delmon_Managment_System.Forms
             this.groupBox1.Controls.Add(this.lblemail);
             this.groupBox1.Controls.Add(this.lblusername);
             this.groupBox1.Controls.Add(this.lblusertype);
-            this.groupBox1.Location = new System.Drawing.Point(1445, 32);
+            this.groupBox1.Location = new System.Drawing.Point(1467, 32);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(192, 145);
             this.groupBox1.TabIndex = 145;
@@ -1055,6 +1057,7 @@ namespace Delmon_Managment_System.Forms
             // 
             // SalaryTab
             // 
+            this.SalaryTab.Controls.Add(this.lblprovide);
             this.SalaryTab.Controls.Add(this.button1);
             this.SalaryTab.Controls.Add(this.button2);
             this.SalaryTab.Controls.Add(this.button3);
@@ -1124,10 +1127,10 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView5.AllowUserToAddRows = false;
             this.dataGridView5.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView5.Location = new System.Drawing.Point(68, 123);
+            this.dataGridView5.Location = new System.Drawing.Point(52, 164);
             this.dataGridView5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView5.Name = "dataGridView5";
-            this.dataGridView5.Size = new System.Drawing.Size(667, 318);
+            this.dataGridView5.Size = new System.Drawing.Size(785, 277);
             this.dataGridView5.TabIndex = 141;
             this.dataGridView5.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView5_CellClick);
             // 
@@ -1163,6 +1166,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbsalarytype.Name = "cmbsalarytype";
             this.cmbsalarytype.Size = new System.Drawing.Size(154, 25);
             this.cmbsalarytype.TabIndex = 137;
+            this.cmbsalarytype.SelectionChangeCommitted += new System.EventHandler(this.cmbsalarytype_SelectionChangeCommitted);
             // 
             // txtvalue
             // 
@@ -1251,12 +1255,43 @@ namespace Delmon_Managment_System.Forms
             this.filenumbertxt.TabIndex = 153;
             this.filenumbertxt.TextChanged += new System.EventHandler(this.filenumbertxt_TextChanged);
             // 
+            // lblprovide
+            // 
+            this.lblprovide.AutoSize = true;
+            this.lblprovide.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblprovide.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblprovide.Location = new System.Drawing.Point(49, 131);
+            this.lblprovide.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblprovide.Name = "lblprovide";
+            this.lblprovide.Size = new System.Drawing.Size(189, 17);
+            this.lblprovide.TabIndex = 145;
+            this.lblprovide.Text = "*Provide (Yes or No) as Value";
+            this.lblprovide.Visible = false;
+            this.lblprovide.Click += new System.EventHandler(this.label25_Click);
+            // 
+            // btnnewJob
+            // 
+            this.btnnewJob.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnnewJob.BackColor = System.Drawing.Color.White;
+            this.btnnewJob.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnnewJob.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnnewJob.ForeColor = System.Drawing.Color.Black;
+            this.btnnewJob.Location = new System.Drawing.Point(770, 281);
+            this.btnnewJob.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.btnnewJob.Name = "btnnewJob";
+            this.btnnewJob.Size = new System.Drawing.Size(46, 28);
+            this.btnnewJob.TabIndex = 154;
+            this.btnnewJob.Text = "New";
+            this.btnnewJob.UseVisualStyleBackColor = false;
+            this.btnnewJob.Click += new System.EventHandler(this.btnnewJob_Click);
+            // 
             // EmployeeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1884, 1038);
+            this.Controls.Add(this.btnnewJob);
             this.Controls.Add(this.label24);
             this.Controls.Add(this.filenumbertxt);
             this.Controls.Add(this.cmbCompany);
@@ -1421,5 +1456,7 @@ namespace Delmon_Managment_System.Forms
         public System.Windows.Forms.TextBox CurrentEmployeeIDtxt;
         private System.Windows.Forms.Label label24;
         public System.Windows.Forms.TextBox filenumbertxt;
+        private System.Windows.Forms.Label lblprovide;
+        private System.Windows.Forms.Button btnnewJob;
     }
 }

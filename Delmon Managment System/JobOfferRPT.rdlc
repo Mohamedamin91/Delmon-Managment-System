@@ -701,7 +701,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=Sum(Fields!FileNumber.Value, "DataSet1")</Value>
+                      <Value>=First(Fields!FileNumber.Value, "DataSet1")</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                         <FontSize>12pt</FontSize>
@@ -738,7 +738,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=Sum(Fields!EmployeeID.Value, "DataSet1")</Value>
+                      <Value>=First(Fields!EmployeeID.Value, "DataSet1")</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                         <FontSize>11pt</FontSize>
@@ -754,7 +754,7 @@
               <Top>0.58778in</Top>
               <Left>3.19284in</Left>
               <Height>0.25in</Height>
-              <Width>1in</Width>
+              <Width>0.89473in</Width>
               <ZIndex>5</ZIndex>
               <Style>
                 <Border>
