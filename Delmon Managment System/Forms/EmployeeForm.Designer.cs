@@ -107,6 +107,7 @@ namespace Delmon_Managment_System.Forms
             this.Contacttxt = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.SalaryTab = new System.Windows.Forms.TabPage();
+            this.lblprovide = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -121,8 +122,6 @@ namespace Delmon_Managment_System.Forms
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.filenumbertxt = new System.Windows.Forms.TextBox();
-            this.lblprovide = new System.Windows.Forms.Label();
-            this.btnnewJob = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -1074,6 +1073,20 @@ namespace Delmon_Managment_System.Forms
             this.SalaryTab.Text = "Salary";
             this.SalaryTab.UseVisualStyleBackColor = true;
             // 
+            // lblprovide
+            // 
+            this.lblprovide.AutoSize = true;
+            this.lblprovide.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblprovide.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblprovide.Location = new System.Drawing.Point(49, 131);
+            this.lblprovide.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblprovide.Name = "lblprovide";
+            this.lblprovide.Size = new System.Drawing.Size(189, 17);
+            this.lblprovide.TabIndex = 145;
+            this.lblprovide.Text = "*Provide (Yes or No) as Value";
+            this.lblprovide.Visible = false;
+            this.lblprovide.Click += new System.EventHandler(this.label25_Click);
+            // 
             // button1
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -1255,43 +1268,12 @@ namespace Delmon_Managment_System.Forms
             this.filenumbertxt.TabIndex = 153;
             this.filenumbertxt.TextChanged += new System.EventHandler(this.filenumbertxt_TextChanged);
             // 
-            // lblprovide
-            // 
-            this.lblprovide.AutoSize = true;
-            this.lblprovide.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblprovide.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblprovide.Location = new System.Drawing.Point(49, 131);
-            this.lblprovide.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.lblprovide.Name = "lblprovide";
-            this.lblprovide.Size = new System.Drawing.Size(189, 17);
-            this.lblprovide.TabIndex = 145;
-            this.lblprovide.Text = "*Provide (Yes or No) as Value";
-            this.lblprovide.Visible = false;
-            this.lblprovide.Click += new System.EventHandler(this.label25_Click);
-            // 
-            // btnnewJob
-            // 
-            this.btnnewJob.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnnewJob.BackColor = System.Drawing.Color.White;
-            this.btnnewJob.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnnewJob.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnnewJob.ForeColor = System.Drawing.Color.Black;
-            this.btnnewJob.Location = new System.Drawing.Point(770, 281);
-            this.btnnewJob.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.btnnewJob.Name = "btnnewJob";
-            this.btnnewJob.Size = new System.Drawing.Size(46, 28);
-            this.btnnewJob.TabIndex = 154;
-            this.btnnewJob.Text = "New";
-            this.btnnewJob.UseVisualStyleBackColor = false;
-            this.btnnewJob.Click += new System.EventHandler(this.btnnewJob_Click);
-            // 
             // EmployeeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1884, 1038);
-            this.Controls.Add(this.btnnewJob);
             this.Controls.Add(this.label24);
             this.Controls.Add(this.filenumbertxt);
             this.Controls.Add(this.cmbCompany);
@@ -1457,6 +1439,5 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Label label24;
         public System.Windows.Forms.TextBox filenumbertxt;
         private System.Windows.Forms.Label lblprovide;
-        private System.Windows.Forms.Button btnnewJob;
     }
 }

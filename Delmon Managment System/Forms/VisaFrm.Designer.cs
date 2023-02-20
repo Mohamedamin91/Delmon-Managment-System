@@ -491,7 +491,6 @@ namespace Delmon_Managment_System.Forms
             this.issuhijritxt.Name = "issuhijritxt";
             this.issuhijritxt.Size = new System.Drawing.Size(127, 22);
             this.issuhijritxt.TabIndex = 33;
-            this.issuhijritxt.Text = "yyyy-MM-dd";
             this.issuhijritxt.TextChanged += new System.EventHandler(this.issuhijritxt_TextChanged);
             this.issuhijritxt.DragEnter += new System.Windows.Forms.DragEventHandler(this.issuhijritxt_DragEnter);
             this.issuhijritxt.Enter += new System.EventHandler(this.issuhijritxt_Enter);

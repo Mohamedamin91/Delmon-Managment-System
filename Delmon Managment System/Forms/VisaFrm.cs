@@ -1351,7 +1351,7 @@ namespace Delmon_Managment_System.Forms
             if (e.RowIndex == -1) return;
 
             dataGridView2.Visible = true;
-
+            
 
             foreach (DataGridViewRow rw in this.dataGridView1.Rows)
             {
@@ -1363,16 +1363,39 @@ namespace Delmon_Managment_System.Forms
                     }
                     else
                     {
-              VisaNumberID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-              cmbCompany.SelectedValue = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
-              ReceviedPicker.Value = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[2].Value);
-             issuhijritxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString());
-             IssueDateENTxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
-             ExpiaryHijritxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString());
-             expairENDATEtxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString());
-             TotalVisastxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString());
-             RemarksTxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString());
-             dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber=" + VisaNumberID + " ");
+                        object cell2Value = rw.Cells[2].Value;
+                        object cell3Value = rw.Cells[3].Value;
+                        object cell4Value = rw.Cells[4].Value;
+                        object cell5Value = rw.Cells[5].Value;
+                        object cell6Value = rw.Cells[6].Value;
+                        if (cell2Value != null && cell2Value != DBNull.Value && !string.IsNullOrEmpty(cell2Value.ToString()))
+                        {
+                            ReceviedPicker.Value = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[2].Value);
+                        }
+                        if (cell3Value != null && cell3Value != DBNull.Value && !string.IsNullOrEmpty(cell3Value.ToString()))
+                        {
+                            issuhijritxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString());
+                        }
+                        if (cell4Value != null && cell4Value != DBNull.Value && !string.IsNullOrEmpty(cell4Value.ToString()))
+                        {
+                            IssueDateENTxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
+                        }
+                        if (cell5Value != null && cell5Value != DBNull.Value && !string.IsNullOrEmpty(cell5Value.ToString()))
+                        {
+                            ExpiaryHijritxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString());
+                        }
+                        if (cell6Value != null && cell6Value != DBNull.Value && !string.IsNullOrEmpty(cell6Value.ToString()))
+                        {
+                            expairENDATEtxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString());
+                        }
+
+
+                        VisaNumberID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        cmbCompany.SelectedValue = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
+         
+                        TotalVisastxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString());
+                        RemarksTxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString());
+                        dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber=" + VisaNumberID + " ");
 
                     }
                       Visanumtxt.Text = VisaNumberID.ToString();
@@ -1383,54 +1406,65 @@ namespace Delmon_Managment_System.Forms
                     string a = issuhijritxt.Text.Trim();
                     a = issuhijritxt.Text.TrimStart();
                     a = issuhijritxt.Text.TrimEnd();
-                    DateTime toGegorian = DateTime.ParseExact(a, "yyyy-MM-dd", SA);
-                    DateTime b = DateTime.ParseExact(a, "yyyy-MM-dd", null);
-
-
-                    DateTime b2 = DateTime.ParseExact(a, "yyyy-MM-dd", null);
-                    DateTime dtNOW = DateTime.Now;
-                    dtNOW.ToString("yyyy-MM-dd");
-
-                    issuhijritxt.Text = b.ToString("f");
-                    IssueDateHijri = b.Date.ToString("yyyy-MM-dd");
-                    issuhijritxt.Text = IssueDateHijri.ToString();
-                    /*calculate expairy hiri date**/
-
-
-                    b2 = b2.Date.AddDays(709);
-                    ExpiryDateHijri = b2.ToString("yyyy-MM-dd");
-                    ExpiaryHijritxt.Text = ExpiryDateHijri.ToString();
-
-
-                    /*calculate issu milaidy  date**/
-                    IssueDateEN = toGegorian.ToString();
-                    IssueDateEN = toGegorian.ToString("yyyy-MM-dd");
-                    IssueDateENTxt.Text = IssueDateEN;
-
-
-
-
-
-                    ///*calculate expairy milaidy date**/
-                    toGegorian = toGegorian.AddDays(709);
-                    ExpiryDateENP = toGegorian.ToString("yyyy-MM-dd");
-                    expairENDATEtxt.Text = ExpiryDateENP;
-
-
-                    ///*calculate the */
-
-                    DateTime futurDate = DateTime.ParseExact(ExpiryDateENP, "yyyy-MM-dd", null);
-                    var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
-
-                    if (numberOfDays <= 0)
+                    DateTime toGegorian;
+                    DateTime b, b2, dtNOW;
+                  //  MessageBox.Show(a);
+                    if (a != "" && a != null)
                     {
-                        Remaininglbl.Text = "Expired";
+                         toGegorian = DateTime.ParseExact(a, "yyyy-MM-dd", SA);
+                         b = DateTime.ParseExact(a, "yyyy-MM-dd", null);
 
+
+                          b2 = DateTime.ParseExact(a, "yyyy-MM-dd", null);
+                         dtNOW = DateTime.Now;
+                        dtNOW.ToString("yyyy-MM-dd");
+
+                        issuhijritxt.Text = b.ToString("f");
+                        IssueDateHijri = b.Date.ToString("yyyy-MM-dd");
+                        issuhijritxt.Text = IssueDateHijri.ToString();
+                        /*calculate expairy hiri date**/
+
+
+                        b2 = b2.Date.AddDays(709);
+                        ExpiryDateHijri = b2.ToString("yyyy-MM-dd");
+                        ExpiaryHijritxt.Text = ExpiryDateHijri.ToString();
+
+
+                        /*calculate issu milaidy  date**/
+                        IssueDateEN = toGegorian.ToString();
+                        IssueDateEN = toGegorian.ToString("yyyy-MM-dd");
+                        IssueDateENTxt.Text = IssueDateEN;
+
+
+
+
+
+                        ///*calculate expairy milaidy date**/
+                        toGegorian = toGegorian.AddDays(709);
+                        ExpiryDateENP = toGegorian.ToString("yyyy-MM-dd");
+                        expairENDATEtxt.Text = ExpiryDateENP;
+
+
+                        ///*calculate the */
+
+                        DateTime futurDate = DateTime.ParseExact(ExpiryDateENP, "yyyy-MM-dd", null);
+                        var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
+
+                        if (numberOfDays <= 0)
+                        {
+                            Remaininglbl.Text = "Expired";
+
+                        }
+                        else
+                        {
+                            Remaininglbl.Text = numberOfDays.ToString();
+
+                        }
                     }
-                    else
+                    else 
                     {
-                        Remaininglbl.Text = numberOfDays.ToString();
-
+                         toGegorian = DateTime.Now;
+                        b = DateTime.Now; b2 = DateTime.Now; dtNOW = DateTime.Now;
                     }
 
 

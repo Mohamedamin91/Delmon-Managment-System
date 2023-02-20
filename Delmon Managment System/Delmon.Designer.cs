@@ -338,6 +338,8 @@ namespace Delmon_Managment_System {
             
             private global::System.Data.DataColumn columnHeadofDeparment;
             
+            private global::System.Data.DataColumn columnJobDescription;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public DataTable1DataTable() {
@@ -469,6 +471,14 @@ namespace Delmon_Managment_System {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn JobDescriptionColumn {
+                get {
+                    return this.columnJobDescription;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -504,7 +514,7 @@ namespace Delmon_Managment_System {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public DataTable1Row AddDataTable1Row(string Doc_Type, string Passport, string SalaryTypeName, string Value, string JobTitleEN, string Name, int EmployeeID, string NationalityName, System.DateTime Date, string FullName, string HeadofDeparment) {
+            public DataTable1Row AddDataTable1Row(string Doc_Type, string Passport, string SalaryTypeName, string Value, string JobTitleEN, string Name, int EmployeeID, string NationalityName, System.DateTime Date, string FullName, string HeadofDeparment, string JobDescription) {
                 DataTable1Row rowDataTable1Row = ((DataTable1Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -518,7 +528,8 @@ namespace Delmon_Managment_System {
                         NationalityName,
                         Date,
                         FullName,
-                        HeadofDeparment};
+                        HeadofDeparment,
+                        JobDescription};
                 rowDataTable1Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDataTable1Row);
                 return rowDataTable1Row;
@@ -560,6 +571,7 @@ namespace Delmon_Managment_System {
                 this.columnDate = base.Columns["Date"];
                 this.columnFullName = base.Columns["FullName"];
                 this.columnHeadofDeparment = base.Columns["HeadofDeparment"];
+                this.columnJobDescription = base.Columns["JobDescription"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -589,6 +601,8 @@ namespace Delmon_Managment_System {
                 base.Columns.Add(this.columnFullName);
                 this.columnHeadofDeparment = new global::System.Data.DataColumn("HeadofDeparment", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnHeadofDeparment);
+                this.columnJobDescription = new global::System.Data.DataColumn("JobDescription", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnJobDescription);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnFileNumber}, true));
                 this.columnFileNumber.AutoIncrement = true;
@@ -609,6 +623,7 @@ namespace Delmon_Managment_System {
                 this.columnFullName.MaxLength = 83;
                 this.columnHeadofDeparment.ReadOnly = true;
                 this.columnHeadofDeparment.MaxLength = 83;
+                this.columnJobDescription.MaxLength = 600;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1352,6 +1367,22 @@ namespace Delmon_Managment_System {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string JobDescription {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable1.JobDescriptionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'JobDescription\' in table \'DataTable1\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable1.JobDescriptionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsDoc_TypeNull() {
                 return this.IsNull(this.tableDataTable1.Doc_TypeColumn);
             }
@@ -1468,6 +1499,18 @@ namespace Delmon_Managment_System {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetHeadofDeparmentNull() {
                 this[this.tableDataTable1.HeadofDeparmentColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsJobDescriptionNull() {
+                return this.IsNull(this.tableDataTable1.JobDescriptionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetJobDescriptionNull() {
+                this[this.tableDataTable1.JobDescriptionColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1993,6 +2036,7 @@ namespace Delmon_Managment_System.DelmonTableAdapters {
             tableMapping.ColumnMappings.Add("Date", "Date");
             tableMapping.ColumnMappings.Add("FullName", "FullName");
             tableMapping.ColumnMappings.Add("HeadofDeparment", "HeadofDeparment");
+            tableMapping.ColumnMappings.Add("JobDescription", "JobDescription");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -2009,7 +2053,7 @@ namespace Delmon_Managment_System.DelmonTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"  SELECT  CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName',VISAJobList.FileNumber,DocumentType.Doc_Type,Documents.Number 'Passport' ,SalaryTypes.SalaryTypeName, SalaryDetails.Value, JOBS.JobTitleEN,WorkLocations.Name,cast(Employees.StartDate as Date)'Date',Employees.EmployeeID,Countries.NationalityName, (SELECT CONCAT(FirstName, ' ', LastName)  FROM Employees  WHERE DEPARTMENTS.DeptHeadID = Employees.EmployeeID) AS 'HeadofDeparment' from DEPARTMENTS, DeptTypes, WorkLocations, JOBS, Employees, VISAJobList, Documents, DocumentType, SalaryDetails, SalaryTypes, Countries, Consulates, Companies where VISAJobList.EmployeeID = Employees.EmployeeID and VISAJobList.ConsulateID = Consulates.ConsulateID and Consulates.CountryId = Countries.CountryId and Employees.EmployeeID = Documents.CR_ID and Documents.DocTypeID = DocumentType.DocType_ID and Documents.RefrenceID = 2 and DocumentType.DocType_ID = 1 and SalaryDetails.SalaryTypeID = SalaryTypes.SalaryTypeID and Employees.EmployeeID = SalaryDetails.EmployeeID and SalaryDetails.EmployeeID = Employees.EmployeeID and Employees.JobID = JOBS.JobID and Employees.DeptID = DEPARTMENTS.DEPTID and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID and DEPARTMENTS.WorkLoctionID = WorkLocations.WorkID and Employees.COMPID = Companies.COMPID and DEPARTMENTS.COMPID = Companies.COMPID  and Employees.EmployeeID = @Param1
+            this._commandCollection[0].CommandText = @"  SELECT  CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName',VISAJobList.FileNumber,DocumentType.Doc_Type,Documents.Number 'Passport' ,SalaryTypes.SalaryTypeName, SalaryDetails.Value, JOBS.JobTitleEN,WorkLocations.Name,cast(Employees.StartDate as Date)'Date',Employees.EmployeeID,Countries.NationalityName, (SELECT CONCAT(FirstName, ' ', LastName)  FROM Employees  WHERE DEPARTMENTS.DeptHeadID = Employees.EmployeeID) AS 'HeadofDeparment' ,JOBS.JobDescription 'JobDescription' from DEPARTMENTS, DeptTypes, WorkLocations, JOBS, Employees, VISAJobList, Documents, DocumentType, SalaryDetails, SalaryTypes, Countries, Consulates, Companies where VISAJobList.EmployeeID = Employees.EmployeeID and VISAJobList.ConsulateID = Consulates.ConsulateID and Consulates.CountryId = Countries.CountryId and Employees.EmployeeID = Documents.CR_ID and Documents.DocTypeID = DocumentType.DocType_ID and Documents.RefrenceID = 2 and DocumentType.DocType_ID = 1 and SalaryDetails.SalaryTypeID = SalaryTypes.SalaryTypeID and Employees.EmployeeID = SalaryDetails.EmployeeID and SalaryDetails.EmployeeID = Employees.EmployeeID and Employees.JobID = JOBS.JobID and Employees.DeptID = DEPARTMENTS.DEPTID and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID and DEPARTMENTS.WorkLoctionID = WorkLocations.WorkID and Employees.COMPID = Companies.COMPID and DEPARTMENTS.COMPID = Companies.COMPID  and Employees.EmployeeID = @Param1
  
 
 ";

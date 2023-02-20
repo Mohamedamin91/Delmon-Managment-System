@@ -1774,7 +1774,7 @@ namespace Delmon_Managment_System.Forms
                             CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
                             TextInfo textInfo = cultureInfo.TextInfo;
                             txtvalue.Text = textInfo.ToTitleCase(txtvalue.Text);
-                            txtvalue.Text = txtvalue.Text + " " + "Days after finish Contract Period"; }
+                            txtvalue.Text = txtvalue.Text + " " + "Days/Year after finish Contract Period"; }
                         if ((int)cmbsalarytype.SelectedValue == 12)
                         {
                             if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES") || txtvalue.Text.Contains("Yes") || txtvalue.Text.Contains("YEs"))
@@ -1956,7 +1956,7 @@ namespace Delmon_Managment_System.Forms
                         }
                     }
                     if ((int)cmbsalarytype.SelectedValue == 11)
-                    { txtvalue.Text = txtvalue.Text + " " + "Days after finish Contract Period"; }
+                    { txtvalue.Text = txtvalue.Text + " " + "Days/Year after finish Contract Period"; }
                     if ((int)cmbsalarytype.SelectedValue == 12)
                     {
                         if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES")|| txtvalue.Text.Contains("Yes") || txtvalue.Text.Contains("YEs"))
