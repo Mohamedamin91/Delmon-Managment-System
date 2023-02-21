@@ -111,7 +111,7 @@ namespace Delmon_Managment_System.Forms
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(155, 13);
             this.label25.TabIndex = 1;
-            this.label25.Text = "Issue Date Hijri (yyyy-MM-dd)";
+            this.label25.Text = "Issue Date Hijri (dd/MM/yyyy)";
             // 
             // Visanumtxt
             // 

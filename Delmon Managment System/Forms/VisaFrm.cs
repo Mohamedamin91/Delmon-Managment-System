@@ -1411,28 +1411,28 @@ namespace Delmon_Managment_System.Forms
                   //  MessageBox.Show(a);
                     if (a != "" && a != null)
                     {
-                         toGegorian = DateTime.ParseExact(a, "yyyy-MM-dd", SA);
-                         b = DateTime.ParseExact(a, "yyyy-MM-dd", null);
+                         toGegorian = DateTime.ParseExact(a, "dd/MM/yyyy", SA);
+                         b = DateTime.ParseExact(a, "dd/MM/yyyy", null);
 
 
-                          b2 = DateTime.ParseExact(a, "yyyy-MM-dd", null);
+                          b2 = DateTime.ParseExact(a, "dd/MM/yyyy", null);
                          dtNOW = DateTime.Now;
-                        dtNOW.ToString("yyyy-MM-dd");
+                        dtNOW.ToString("dd/MM/yyyy");
 
                         issuhijritxt.Text = b.ToString("f");
-                        IssueDateHijri = b.Date.ToString("yyyy-MM-dd");
+                        IssueDateHijri = b.Date.ToString("dd/MM/yyyy");
                         issuhijritxt.Text = IssueDateHijri.ToString();
                         /*calculate expairy hiri date**/
 
 
                         b2 = b2.Date.AddDays(709);
-                        ExpiryDateHijri = b2.ToString("yyyy-MM-dd");
+                        ExpiryDateHijri = b2.ToString("dd/MM/yyyy");
                         ExpiaryHijritxt.Text = ExpiryDateHijri.ToString();
 
 
                         /*calculate issu milaidy  date**/
                         IssueDateEN = toGegorian.ToString();
-                        IssueDateEN = toGegorian.ToString("yyyy-MM-dd");
+                        IssueDateEN = toGegorian.ToString("dd/MM/yyyy");
                         IssueDateENTxt.Text = IssueDateEN;
 
 
@@ -1441,13 +1441,13 @@ namespace Delmon_Managment_System.Forms
 
                         ///*calculate expairy milaidy date**/
                         toGegorian = toGegorian.AddDays(709);
-                        ExpiryDateENP = toGegorian.ToString("yyyy-MM-dd");
+                        ExpiryDateENP = toGegorian.ToString("dd/MM/yyyy");
                         expairENDATEtxt.Text = ExpiryDateENP;
 
 
                         ///*calculate the */
 
-                        DateTime futurDate = DateTime.ParseExact(ExpiryDateENP, "yyyy-MM-dd", null);
+                        DateTime futurDate = DateTime.ParseExact(ExpiryDateENP, "dd/MM/yyyy", null);
                         var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
 
                         if (numberOfDays <= 0)

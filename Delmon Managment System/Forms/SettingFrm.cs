@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,16 +16,27 @@ namespace Delmon_Managment_System.Forms
     {
         SQLCONNECTION SQLCONN = new SQLCONNECTION();
         int EmployeeID;
+        int agaencyid;
+        static Regex validate_emailaddress = email_validation();
+
+
 
         public SettingFrm()
         {
             InitializeComponent();
         }
+        public static Regex email_validation()
+        {
+            string pattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|"
+                + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)"
+                + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
 
+            return new Regex(pattern, RegexOptions.IgnoreCase);
+        }
         private void SettingFrm_Load(object sender, EventArgs e)
         {
             this.timer1.Interval = 1000;
-            timer1.Start(); 
+            timer1.Start();
             LoadTheme();
             lblusername.Text = CommonClass.LoginUserName;
             lblusertype.Text = CommonClass.Usertype;
@@ -46,13 +58,36 @@ namespace Delmon_Managment_System.Forms
             dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
                 (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID    ");
 
+
+            //  dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Agencies  order by AgencID " );
+
+            cmbcontact.ValueMember = "ContTypeID";
+            cmbcontact.DisplayMember = "ContType";
+            cmbcontact.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT ContTypeID ,ContType FROM ContactTypes ");
+            cmbcontact.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbcontact.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+
+
+            cmbCountry.ValueMember = "CountryId";
+            cmbCountry.DisplayMember = "CountryName";
+            cmbCountry.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT CountryId,CountryName FROM Countries");
+            cmbCountry.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbCountry.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+            //cmbCity.ValueMember = "Job_Grade_ID";
+            //cmbCity.DisplayMember = "Job_Grade_Name";
+            //cmbCity.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Job_Grade_ID,Job_Grade_Name FROM JobGrades");
+
             SQLCONN.CloseConnection();
 
 
         }
         private void LoadTheme()
         {
-           
+
         }
 
         private void Generatebtn_Click(object sender, EventArgs e)
@@ -74,13 +109,13 @@ namespace Delmon_Managment_System.Forms
 
         private void employeetxt_TextChanged(object sender, EventArgs e)
         {
-          
+
         }
 
         private void userTap_Click(object sender, EventArgs e)
         {
-           
-      
+
+
         }
 
         private void addbtn_Click(object sender, EventArgs e)
@@ -108,7 +143,7 @@ namespace Delmon_Managment_System.Forms
 
 
 
-            if ((int)cmbemployee.SelectedValue != 0  && usernametxt.Text != "" && passwordtxt.Text != "")
+            if ((int)cmbemployee.SelectedValue != 0 && usernametxt.Text != "" && passwordtxt.Text != "")
             {
                 SQLCONN.OpenConection();
                 SqlDataReader dr = SQLCONN.DataReader("select  * from tblUser  where " +
@@ -135,7 +170,7 @@ namespace Delmon_Managment_System.Forms
                                                  paramemployee, paramusername, parampassword, paramusertype, paramisActive);
 
                     }
-                    else 
+                    else
                     {
                         SQLCONN.ExecuteQueries("insert into tblUser ( [EmployeeID] ,[UserName],[Password],[UserTypeID],[IsActive]) values (@C1,@C2,@C3,@C4,0)",
                                                    paramemployee, paramusername, parampassword, paramusertype, paramisActive);
@@ -143,7 +178,7 @@ namespace Delmon_Managment_System.Forms
                     }
 
                     MessageBox.Show("Record saved Successfully");
-                    cmbusertype.Text=cmbemployee.Text="Select";
+                    cmbusertype.Text = cmbemployee.Text = "Select";
                     usernametxt.Text = passwordtxt.Text = "";
                     isactivecheck.Checked = false;
                     SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('User Info',@id ,'#','#',@datetime,@pc,@user,'Insert')", paramPID, paramdatetimeLOG, parampc, paramuser);
@@ -191,37 +226,37 @@ namespace Delmon_Managment_System.Forms
                         cmbusertype.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
                         usernametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
                         passwordtxt.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-                      
+
 
                         // Check if the clicked cell is in the IsActive column
-                      
-                            // Get the value of the cell
-                            int cellValue = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["IsActive"].Value);
 
-                            // Check or uncheck the IsActive checkbox based on the cell value
-                            if (cellValue == 1)
-                            {
-                                isactivecheck.Checked = true;
-                            }
-                            else
-                            {
-                                isactivecheck.Checked = false;
-                            }
-                        
+                        // Get the value of the cell
+                        int cellValue = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["IsActive"].Value);
+
+                        // Check or uncheck the IsActive checkbox based on the cell value
+                        if (cellValue == 1)
+                        {
+                            isactivecheck.Checked = true;
+                        }
+                        else
+                        {
+                            isactivecheck.Checked = false;
+                        }
+
 
 
 
 
 
                         EmployeeID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-                      
+
                         ////CurrentEmployeeIDtxt.Text = EmployeeID.ToString();
                         ////addbtn.Visible = false;
                         //btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = true;
                         //firstnametxt.Enabled = secondnametxt.Enabled = thirdnametxt.Enabled = lastnametxt.Enabled = true;
                         //cmbMartialStatus.Enabled = cmbGender.Enabled = cmbCompany.Enabled = cmbempdepthistory.Enabled = cmbEmployJobHistory.Enabled = cmbPersonalStatusStatus.Enabled = true;
                         //StartDatePicker.Enabled = true;
-          
+
                     }
                 }
 
@@ -259,7 +294,7 @@ namespace Delmon_Managment_System.Forms
                 if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
 
-                     if (cmbemployee.Text == "Select")
+                    if (cmbemployee.Text == "Select")
 
                     {
                         MessageBox.Show("Please Select a Job !!");
@@ -304,12 +339,12 @@ namespace Delmon_Managment_System.Forms
                         }
 
 
-                     //   paramEmployeeID.Value = CurrentEmployeeIDtxt.Text;
+                        //   paramEmployeeID.Value = CurrentEmployeeIDtxt.Text;
 
 
                         if (isactivecheck.Checked)
                         {
-                            SQLCONN.ExecuteQueries("update tblUser set employeeid =@C1,username=@C2,password=@C3,usertypeid=@C4,isActive=1 where  userid=@id  ", paramPID, paramemployee, paramusername, parampassword, paramusertype );
+                            SQLCONN.ExecuteQueries("update tblUser set employeeid =@C1,username=@C2,password=@C3,usertypeid=@C4,isActive=1 where  userid=@id  ", paramPID, paramemployee, paramusername, parampassword, paramusertype);
 
                         }
 
@@ -327,7 +362,7 @@ namespace Delmon_Managment_System.Forms
 
                         MessageBox.Show("Record Updated Successfully");
                         // dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT id_History,[EmployeeID],NewID,StatusTBL.StatusValue,[JOBS].JobTitleEN, DeptTypes.Dept_Type_Name,[StartDate],[EndDate],[UserID],[DatetimeLog]  FROM[DelmonGroupDB].[dbo].[EmploymentStatus], JOBS, DEPARTMENTS, StatusTBL, DeptTypes  where   StatusTBL.StatusID = EmploymentStatus.EmploymentStatusID and DEPARTMENTS.DeptName = EmploymentStatus.DeptID   and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID  and JOBS.JobID = EmploymentStatus.JobID  and  NEWID = @C14  ", paramNewID);
-                        dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from tblUser where    userid=@id",paramPID);
+                        dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from tblUser where    userid=@id", paramPID);
 
 
 
@@ -451,5 +486,390 @@ namespace Delmon_Managment_System.Forms
             this.lbldatetime.Text = DateTime.Now.ToString("dd-MMM-yyyy  hh:mm:ss tt");
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+            paramuser.Value = lblusername.Text;
+            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+            paramdatetimeLOG.Value = lbldatetime.Text;
+            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+            parampc.Value = lblPC.Text;
+            SqlParameter paramAgencyid = new SqlParameter("@id", SqlDbType.NVarChar);
+            paramAgencyid.Value = agaencyid;
+
+            if (agaencyid == 0)
+            {
+                MessageBox.Show("Please select Agency first ! " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+            else
+            {
+                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    SQLCONN.OpenConection();
+                    SQLCONN.ExecuteQueries("delete  Agencies where AgencID=@id", paramAgencyid);
+                    SQLCONN.ExecuteQueries("delete  Contacts where CR_ID=@id and RefrenceID=3 ", paramAgencyid);
+                    SQLCONN.ExecuteQueries(" declare @max int select @max = max([AgencID]) from [Agencies] if @max IS NULL    SET @max = 0 DBCC CHECKIDENT('[Agencies]', RESEED, @max)");
+                    SQLCONN.ExecuteQueries(" declare @max int select @max = max(Contact_ID) from[Contacts] if @max IS NULL SET @max = 0 DBCC CHECKIDENT('[Contacts]', RESEED, @max)");
+                    dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Agencies ");
+                    MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Agency + Contact Info',@id ,'#','#',@datetime,@pc,@user,'Insert')", paramAgencyid, paramdatetimeLOG, parampc, paramuser);
+                    SQLCONN.CloseConnection();
+
+
+
+                }
+
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SqlParameter paramagencyname = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramagencyname.Value = AgencyNametxt.Text;
+            SqlParameter paramlicensenumber = new SqlParameter("@C2", SqlDbType.NVarChar);
+            paramlicensenumber.Value = LicenseNumbertxt.Text;
+            SqlParameter paramcountry = new SqlParameter("@C3", SqlDbType.NVarChar);
+            paramcountry.Value = cmbCountry.SelectedValue;
+            SqlParameter paramcity = new SqlParameter("@C4", SqlDbType.NVarChar);
+            paramcity.Value = cmbCity.SelectedValue;
+
+            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+            paramuser.Value = lblusername.Text;
+            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+            paramdatetimeLOG.Value = lbldatetime.Text;
+            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+            parampc.Value = lblPC.Text;
+
+            SqlParameter paramAgencyid = new SqlParameter("@id", SqlDbType.NVarChar);
+
+            SqlParameter paramContactType = new SqlParameter("@C5", SqlDbType.Int);
+            paramContactType.Value = cmbcontact.SelectedValue;
+            SqlParameter paramContact = new SqlParameter("@C6", SqlDbType.NVarChar);
+            paramContact.Value = Contacttxt.Text;
+            SqlParameter paramRefrenceID = new SqlParameter("@C7", SqlDbType.Int);
+            paramRefrenceID.Value = 3;
+            SQLCONN.OpenConection();
+            if (checkContact.Checked == true)
+            {
+
+                if (AgencyNametxt.Text != "" && AgencyNametxt.Text != "" && LicenseNumbertxt.Text != "" && Contacttxt.Text != "")
+                {
+                    SQLCONN.OpenConection();
+                    SqlDataReader dr = SQLCONN.DataReader("select  * from Agencies  where " +
+                         " AgenceName=  @C1 and    LicenseNumber =  @C2 ", paramagencyname, paramlicensenumber);
+                    dr.Read();
+
+
+                    if (dr.HasRows)
+                    {
+                        MessageBox.Show("This 'Agency'  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
+                    dr.Dispose();
+                    SqlDataReader dr3 = SQLCONN.DataReader("select  ContValue from Contacts where  ContValue= @C6  ", paramContact);
+                    dr3.Read();
+                    if (dr3.HasRows)
+                    {
+                        MessageBox.Show("This 'Contact Value'  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
+                    if ((int)cmbcontact.SelectedValue == 2)
+                    {
+                        if (validate_emailaddress.IsMatch(Contacttxt.Text) != true)
+                        {
+                            MessageBox.Show("Invalid Email Address!", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            Contacttxt.Focus();
+                            return;
+                        }
+                        else
+                        {
+                        }
+                    }
+
+                    else if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+
+
+                        dr.Dispose();
+                        dr.Close();
+                        dr3.Dispose();
+                        dr3.Close();
+
+                        SQLCONN.ExecuteQueries("insert into Agencies (  [AgenceName] ,[LicenseNumber],[CountryID],[CityID]) values (@C1,@C2,@C3,@C4)",
+                                                       paramagencyname, paramlicensenumber, paramcountry, paramcity);
+
+                        SqlDataReader dr2 = SQLCONN.DataReader("Select max (AgencID) 'ID' from Agencies ");
+                        if (dr2.Read())
+                        {
+                            agaencyid = int.Parse(dr2["ID"].ToString());
+                            paramAgencyid.Value = agaencyid;
+                        }
+
+
+
+
+                        else { paramAgencyid.Value = 0; }
+                        dr2.Close();
+                        dr.Dispose();
+                        SQLCONN.ExecuteQueries("insert into Contacts ( ContTypeID,ContValue,RefrenceID,CR_ID) values (@C5,@C6,@C7,@id)",
+                                                 paramContactType, paramContact, paramRefrenceID, paramAgencyid);
+
+
+                        MessageBox.Show("Record saved Successfully");
+
+                        SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Agency Info',@id ,'#','#',@datetime,@pc,@user,'Insert')", paramAgencyid, paramdatetimeLOG, parampc, paramuser);
+                        SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Contact Agency Info , @id ,'#','#',@datetime,@pc,@user,'Insert')", paramContactType, paramAgencyid, paramdatetimeLOG, parampc, paramuser);
+
+
+                        dr2.Dispose();
+                        dr2.Close();
+                        dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Agencies where AgencID= @id order by AgencID ", paramAgencyid);
+                        dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =  " + agaencyid + " ");
+
+
+                        AgencyNametxt.Text = LicenseNumbertxt.Text = "";
+                        cmbCountry.SelectedValue = cmbCity.SelectedValue = 0;
+
+
+
+                    }
+                    else
+                    {
+                        dr.Dispose();
+                        dr.Close();
+                        dr3.Dispose();
+                        dr3.Close();
+
+                    }
+
+                }
+
+
+                else
+                {
+                    MessageBox.Show("Please Fill the missing fields  ");
+
+                }
+            }
+            else
+            {
+
+                if (AgencyNametxt.Text != "" && AgencyNametxt.Text != "" && LicenseNumbertxt.Text != "")
+                {
+                    SQLCONN.OpenConection();
+                    SqlDataReader dr = SQLCONN.DataReader("select  * from Agencies  where " +
+                         " AgenceName=  @C1 and    LicenseNumber =  @C2 ", paramagencyname, paramlicensenumber);
+                    dr.Read();
+
+
+                    if (dr.HasRows)
+                    {
+                        MessageBox.Show("This 'Agency'  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
+
+
+                    else if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+
+
+                        dr.Dispose();
+                        dr.Close();
+                        SQLCONN.ExecuteQueries("insert into Agencies (  [AgenceName] ,[LicenseNumber],[CountryID],[CityID]) values (@C1,@C2,@C3,@C4)",
+                                                       paramagencyname, paramlicensenumber, paramcountry, paramcity);
+                        MessageBox.Show("Record saved Successfully");
+
+                        SqlDataReader dr2 = SQLCONN.DataReader("Select max (AgencID) 'ID' from Agencies ");
+                        if (dr2.Read())
+                        {
+                            agaencyid = int.Parse(dr2["ID"].ToString());
+                            paramAgencyid.Value = agaencyid;
+                        }
+
+                        else { paramAgencyid.Value = 0; }
+                        dr2.Close();
+                        SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Agency Info',@id ,'#','#',@datetime,@pc,@user,'Insert')", paramAgencyid, paramdatetimeLOG, parampc, paramuser);
+
+
+                        dr2.Dispose();
+                        dr2.Close();
+                        dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Agencies where AgencID= @id order by AgencID ", paramAgencyid);
+
+
+                        AgencyNametxt.Text = LicenseNumbertxt.Text = "";
+                        cmbCountry.SelectedValue = cmbCity.SelectedValue = 0;
+
+
+
+                    }
+                    else
+                    {
+                        dr.Dispose();
+                        dr.Close();
+
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Please Fill the missing fields  ");
+
+                }
+
+            }
+
+
+
+
+
+
+            SQLCONN.CloseConnection();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbCountry_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            DataRow dr;
+            SqlConnection conn = new SqlConnection(@"Data Source=192.168.1.8;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@");
+
+
+            conn.Open();
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = " SELECT [ConsulateID],ConsulateCity FROM [DelmonGroupDB].[dbo].[Consulates] where  CountryId=@C1 ";
+
+
+            cmd.Parameters.Add(new SqlParameter("@C1", SqlDbType.Int));
+            cmd.Parameters["@C1"].Value = cmbCountry.SelectedValue;
+
+
+            //Creating Sql Data Adapter
+            cmd.ExecuteNonQuery();
+            DataTable dt = new DataTable();
+            SqlDataAdapter Da = new SqlDataAdapter(cmd);
+            Da.Fill(dt);
+            dr = dt.NewRow();
+
+
+            if (dt != null && dt.Rows.Count >= 0)
+            {
+
+                cmbCity.ValueMember = "ConsulateID";
+                cmbCity.DisplayMember = "ConsulateCity";
+                cmbCity.DataSource = dt;
+                cmbCity.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cmbCity.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+
+
+
+            }
+
+            conn.Close();
+        }
+
+        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            SQLCONN.OpenConection();
+            if (e.RowIndex == -1) return;
+
+            foreach (DataGridViewRow rw in this.dataGridView2.Rows)
+            {
+                for (int i = 0; i < rw.Cells.Count; i++)
+                {
+                    SqlParameter paramacounrtry = new SqlParameter("@C1", SqlDbType.NVarChar);
+
+                    if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
+                    {
+                        //   MessageBox.Show("ogg");       
+                    }
+                    else
+                    {
+
+
+
+                        agaencyid = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        AgencyNametxt.Text = dataGridView2.Rows[e.RowIndex].Cells[1].Value.ToString();
+                        LicenseNumbertxt.Text = dataGridView2.Rows[e.RowIndex].Cells[2].Value.ToString();
+                        cmbCountry.SelectedValue = dataGridView2.Rows[e.RowIndex].Cells[3].Value.ToString();
+
+                        //   cmbCity.SelectedValue = dataGridView2.Rows[e.RowIndex].Cells[4].Value.ToString();
+
+
+                    }
+                    paramacounrtry.Value = cmbCountry.SelectedValue;
+                    cmbCity.ValueMember = "ConsulateID";
+                    cmbCity.DisplayMember = "ConsulateCity";
+                    cmbCity.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT [ConsulateID],ConsulateCity FROM [DelmonGroupDB].[dbo].[Consulates] where  CountryId=@C1", paramacounrtry);
+
+                }
+
+            }
+
+            SQLCONN.CloseConnection();
+        }
+
+        private void agenciesTap_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkContact_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkContact.Checked == true)
+            {
+                groupBox2.Visible = true;
+            }
+            else
+            {
+                groupBox2.Visible = false;
+
+            }
+        }
+
+        private void AgencyNametxt_TextChanged(object sender, EventArgs e)
+        {
+            SqlParameter paramAgencyeeSearch = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramAgencyeeSearch.Value = AgencyNametxt.Text;
+            SQLCONN.OpenConection();
+            dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" select  * from  Agencies where  AgenceName like '%' + @C1 + '%'   ", paramAgencyeeSearch);
+
+
+
+            SQLCONN.CloseConnection();
+            //  firstnametxt.Text = secondnametxt.Text = thirdnametxt.Text = lastnametxt.Text = "";
+            //  cmbMartialStatus.Text = cmbGender.Text = "";
+        }
+
+        private void dataGridView2_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            SQLCONN.OpenConection();
+            if (e.RowIndex >= 0 && e.RowIndex < dataGridView2.Rows.Count && e.ColumnIndex >= 0 && e.ColumnIndex < dataGridView2.Columns.Count)
+            {
+                agaencyid = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString());
+                AgencyNametxt.Text = dataGridView2.Rows[e.RowIndex].Cells[1].Value.ToString();
+                LicenseNumbertxt.Text = dataGridView2.Rows[e.RowIndex].Cells[2].Value.ToString();
+                cmbCountry.SelectedValue = dataGridView2.Rows[e.RowIndex].Cells[3].Value.ToString();
+
+                SqlParameter paramacounrtry = new SqlParameter("@C1", SqlDbType.NVarChar);
+                paramacounrtry.Value = cmbCountry.SelectedValue;
+                cmbCity.ValueMember = "ConsulateID";
+                cmbCity.DisplayMember = "ConsulateCity";
+                cmbCity.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT [ConsulateID],ConsulateCity FROM [DelmonGroupDB].[dbo].[Consulates] where  CountryId=@C1", paramacounrtry);
+            }
+            SQLCONN.CloseConnection();
+
+        }
     }
 }
+
+    
+

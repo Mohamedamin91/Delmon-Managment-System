@@ -1903,6 +1903,7 @@ namespace Delmon_Managment_System.Forms
             SqlParameter paramSalaryType = new SqlParameter("@C1", SqlDbType.Int);
             paramSalaryType.Value = cmbsalarytype.SelectedValue;
             SqlParameter paramValue = new SqlParameter("@C2", SqlDbType.NVarChar);
+           
             SqlParameter paramemployee = new SqlParameter("@ID", SqlDbType.Int);
             paramemployee.Value = EmployeeID;
 
@@ -1980,8 +1981,8 @@ namespace Delmon_Managment_System.Forms
                         connection.Open();
                         string sql = " SELECT * FROM  SalaryDetails  where EmployeeID=@ID  and SalaryDetID=@SalaryID ";
                         SqlDataAdapter da = new SqlDataAdapter(sql, connection);
-                        da.SelectCommand.Parameters.AddWithValue("@ID", paramemployee);
-                        da.SelectCommand.Parameters.AddWithValue("@SalaryID", paramSalaryID);
+                        da.SelectCommand.Parameters.AddWithValue("@ID", EmployeeID);
+                        da.SelectCommand.Parameters.AddWithValue("@SalaryID", SalaryID);
                         originalData = new DataTable();
                         da.Fill(originalData);
                     }
@@ -1994,16 +1995,17 @@ namespace Delmon_Managment_System.Forms
                     SQLCONN.ExecuteQueries("update  SalaryDetails set SalaryTypeID=@C1,Value=@C2 where EmployeeID=@ID  and SalaryDetID=@SalaryID",
                                                    paramSalaryType, paramValue, paramemployee,paramSalaryID);
                     MessageBox.Show("Record Updated Successfully");
-                    cmbsalarytype.SelectedValue = 0;
-                    txtvalue.Text = "";
+                    
 
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {
                         connection.Open();
-                        string sql = "SELECT * FROM SalaryDetails WHERE where EmployeeID=@ID  and SalaryDetID=@SalaryID ";
+                        string sql = "SELECT * FROM SalaryDetails  where EmployeeID=@ID  and SalaryDetID=@SalaryID ";
                         SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
-                        adapter.SelectCommand.Parameters.AddWithValue("@ID", paramemployee);
-                        adapter.SelectCommand.Parameters.AddWithValue("@SalaryID", paramSalaryID); DataTable updatedData = new DataTable();
+                        adapter.SelectCommand.Parameters.AddWithValue("@ID", EmployeeID);
+                        adapter.SelectCommand.Parameters.AddWithValue("@SalaryID", SalaryID);
+
+                        DataTable updatedData = new DataTable();
                         adapter.Fill(updatedData);
 
                         // Compare the two DataTables and find the changed columns
@@ -2029,8 +2031,8 @@ namespace Delmon_Managment_System.Forms
                                     object originalValue = originalData.Rows[0][columnName];
                                     object updatedValue = updatedData.Rows[0][columnName];
                                     command.Parameters.Clear();
-                                    command.Parameters.AddWithValue("@EmployeeId", paramemployee + " - " + "Employee -Salary");
-                                    command.Parameters.AddWithValue("@ColumnName", columnName);
+                                    command.Parameters.AddWithValue("@ID",  "For EmployeeID" + "-" + EmployeeID);
+                                    command.Parameters.AddWithValue("@ColumnName", cmbsalarytype.Text );
                                     command.Parameters.AddWithValue("@OldValue", originalValue);
                                     command.Parameters.AddWithValue("@NewValue", updatedValue);
                                     command.Parameters.AddWithValue("@datetime", lbldatetime.Text);
@@ -2043,7 +2045,8 @@ namespace Delmon_Managment_System.Forms
                         }
                     }
 
-
+                    cmbsalarytype.SelectedValue = 0;
+                    txtvalue.Text = "";
 
                     /**logtable*/
 
