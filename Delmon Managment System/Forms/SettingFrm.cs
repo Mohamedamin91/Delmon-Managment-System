@@ -17,6 +17,10 @@ namespace Delmon_Managment_System.Forms
         SQLCONNECTION SQLCONN = new SQLCONNECTION();
         int EmployeeID;
         int agaencyid;
+        int jobid;
+        int departmentid;
+        double num1, num2;
+
         static Regex validate_emailaddress = email_validation();
 
 
@@ -77,9 +81,19 @@ namespace Delmon_Managment_System.Forms
             cmbCountry.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
-            //cmbCity.ValueMember = "Job_Grade_ID";
-            //cmbCity.DisplayMember = "Job_Grade_Name";
-            //cmbCity.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Job_Grade_ID,Job_Grade_Name FROM JobGrades");
+            cmbworkfield.ValueMember = "Work_Field_ID";
+            cmbworkfield.DisplayMember = "Work_Field_Name";
+            cmbworkfield.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Work_Field_ID,Work_Field_Name FROM WorkFields");
+            cmbworkfield.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbworkfield.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+            cmbjobgrade.ValueMember = "Job_Grade_ID";
+            cmbjobgrade.DisplayMember = "Job_Grade_Name";
+            cmbjobgrade.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Job_Grade_ID,Job_Grade_Name FROM JobGrades");
+            cmbjobgrade.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbjobgrade.AutoCompleteSource = AutoCompleteSource.ListItems;
+
 
             SQLCONN.CloseConnection();
 
@@ -728,10 +742,138 @@ namespace Delmon_Managment_System.Forms
 
             SQLCONN.CloseConnection();
         }
+        public void ClearTextBoxes()
+        {
+            Action<Control.ControlCollection> func = null;
+
+            func = (controls) =>
+            {
+                foreach (Control control in controls)
+                    if (control is TextBox)
+                        (control as TextBox).Clear();
+                    else
+                        func(control.Controls);
+            };
+            cmbjobgrade.SelectedIndex = cmbworkfield.SelectedIndex = -1;
+            jobtitleartxt.Text = JobTitleENtxt.Text = Descriptiontxt.Text = mintxt.Text = maxtxt.Text = "";
+        }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            SqlParameter paramjobtitleEN = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramjobtitleEN.Value = JobTitleENtxt.Text;
+            SqlParameter paramjobtitleAR = new SqlParameter("@C2", SqlDbType.NVarChar);
+            paramjobtitleAR.Value = jobtitleartxt.Text;
+            SqlParameter ParamDescription = new SqlParameter("@C3", SqlDbType.NVarChar);
+            ParamDescription.Value = Descriptiontxt.Text;
+            SqlParameter paramWorkField = new SqlParameter("@C4", SqlDbType.NVarChar);
+            paramWorkField.Value = cmbworkfield.SelectedValue;
+            SqlParameter paramJobGrade = new SqlParameter("@C5", SqlDbType.NVarChar);
+            paramJobGrade.Value = cmbjobgrade.SelectedValue;
+            SqlParameter paramminsalary = new SqlParameter("@C6", SqlDbType.NVarChar);
+            paramminsalary.Value = mintxt.Text;
+            SqlParameter parammaxsalary = new SqlParameter("@C7", SqlDbType.NVarChar);
+            parammaxsalary.Value = maxtxt.Text;
 
+            SqlParameter paramjobid = new SqlParameter("@id", SqlDbType.NVarChar);
+            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+            paramuser.Value = lblusername.Text;
+            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+            paramdatetimeLOG.Value = lbldatetime.Text;
+            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+            parampc.Value = lblPC.Text;
+
+
+
+            if (jobtitleartxt.Text != "" && JobTitleENtxt.Text != "" && Descriptiontxt.Text != "")
+            {
+                SQLCONN.OpenConection();
+                SqlDataReader dr = SQLCONN.DataReader("select  * from jobs where " +
+                     " JobTitleEN=  @C1 and    JobTitleAR =  @C2 ", paramjobtitleEN, paramjobtitleAR);
+                dr.Read();
+
+
+                if (dr.HasRows)
+                {
+                    MessageBox.Show("This 'Job'  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
+
+
+                else if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+
+
+                    dr.Dispose();
+                    dr.Close();
+
+                    if (double.TryParse(mintxt.Text, out num1) && double.TryParse(maxtxt.Text, out num2))
+                    {
+                        if (num1 > num2)
+                        {
+                            MessageBox.Show("The min salary is greater than the max salary , Please fix it.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                        }
+                        else if (num1 < num2)
+                        {
+                            SQLCONN.ExecuteQueries("insert into jobs (  [JobTitleEN] ,[JobTitleAR],[JobDescription],[Work_Field_ID],[Job_Grade_ID] ,[MinSalary],[MaxSalary]) values (@C1,@C2,@C3,@C4,@C5,@C6,@C7)",
+                                                paramjobtitleEN, paramjobtitleAR, ParamDescription, paramWorkField, paramJobGrade, paramminsalary, parammaxsalary);
+                            MessageBox.Show("Record saved Successfully");
+                            dr.Dispose();
+                            dr.Close();
+                            SqlDataReader dr2 = SQLCONN.DataReader("Select max (JobID) 'ID' from jobs ");
+                            if (dr2.Read())
+                            {
+                                agaencyid = int.Parse(dr2["ID"].ToString());
+                                paramjobid.Value = agaencyid;
+                            }
+
+
+
+
+                            else { paramjobid.Value = 0; }
+
+                            dr2.Dispose();
+                            dr2.Close();
+                            dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" select  * from  [JOBS] where  [JobID] = @id  ", paramjobid);
+
+                            SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Job Info',@id ,'#','#',@datetime,@pc,@user,'Insert')", paramjobid, paramdatetimeLOG, parampc, paramuser);
+
+
+                            dr.Dispose();
+                            dr.Close();
+                            dr2.Dispose();
+                            dr2.Close();
+                            ClearTextBoxes();
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("The two numbers are equal.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please enter valid numbers in both text boxes.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
+
+
+
+                }
+                else
+                {
+
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Please Fill the missing fields  ");
+
+            }
+            SQLCONN.CloseConnection();
         }
 
         private void cmbCountry_SelectionChangeCommitted(object sender, EventArgs e)
@@ -868,8 +1010,611 @@ namespace Delmon_Managment_System.Forms
             SQLCONN.CloseConnection();
 
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+            SqlParameter paramagencyname = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramagencyname.Value = AgencyNametxt.Text;
+            SqlParameter paramlicensenumber = new SqlParameter("@C2", SqlDbType.NVarChar);
+            paramlicensenumber.Value = LicenseNumbertxt.Text;
+            SqlParameter paramcountry = new SqlParameter("@C3", SqlDbType.NVarChar);
+            paramcountry.Value = cmbCountry.SelectedValue;
+            SqlParameter paramcity = new SqlParameter("@C4", SqlDbType.NVarChar);
+            paramcity.Value = cmbCity.SelectedValue;
+
+            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+            paramuser.Value = lblusername.Text;
+            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+            paramdatetimeLOG.Value = lbldatetime.Text;
+            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+            parampc.Value = lblPC.Text;
+
+            SqlParameter paramAgencyid = new SqlParameter("@id", SqlDbType.NVarChar);
+            paramAgencyid.Value = agaencyid;
+
+            SqlParameter paramContactType = new SqlParameter("@C5", SqlDbType.Int);
+            paramContactType.Value = cmbcontact.SelectedValue;
+            SqlParameter paramContact = new SqlParameter("@C6", SqlDbType.NVarChar);
+            paramContact.Value = Contacttxt.Text;
+            SqlParameter paramRefrenceID = new SqlParameter("@C7", SqlDbType.Int);
+            paramRefrenceID.Value = 3;
+
+
+            if (agaencyid != 0)
+            {
+
+
+                if ((AgencyNametxt.Text != "" && AgencyNametxt.Text != "" && LicenseNumbertxt.Text != "") || (Contacttxt.Text != ""))
+                {
+                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+
+
+                        SQLCONN.OpenConection();
+
+                        // MessageBox.Show(EMPID.ToString());
+
+                        /**logtable */
+                        DataTable originalData = new DataTable();
+                        string connectionString = SQLCONN.ConnectionString;
+                        using (SqlConnection connection = new SqlConnection(connectionString))
+                        {
+                            connection.Open();
+                            string sql = "SELECT * FROM [Agencies] WHERE [AgencID] = @id";
+                            SqlDataAdapter da = new SqlDataAdapter(sql, connection);
+                            da.SelectCommand.Parameters.AddWithValue("@id", agaencyid);
+                            originalData = new DataTable();
+                            da.Fill(originalData);
+                        }
+
+
+                        //   paramEmployeeID.Value = CurrentEmployeeIDtxt.Text;
+
+
+                        if (checkContact.Checked == true)
+                        {
+                            if (Contacttxt.Text != "")
+                            {
+                                SQLCONN.ExecuteQueries("update Agencies set AgenceName =@C1,LicenseNumber=@C2,CountryID=@C3,CityID=@C4  where  AgencID=@id  ", paramagencyname, paramlicensenumber, paramcountry, paramcity, paramAgencyid);
+                                SQLCONN.ExecuteQueries("update  Contacts  set ContTypeID=@C5,ContValue=@C6,RefrenceID=@C7 where CR_ID=@id", paramContactType, paramContact, paramRefrenceID, paramAgencyid);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Please Fill the missing fields  ");
+
+                            }
+
+                        }
+
+                        else
+                        {
+                            SQLCONN.ExecuteQueries("update Agencies set AgenceName =@C1,LicenseNumber=@C2,CountryID=@C3,CityID=@C4  where  AgencID=@id  ", paramagencyname, paramlicensenumber, paramcountry, paramcity, paramAgencyid);
+                        }
+
+
+
+
+
+
+
+                        MessageBox.Show("Record Updated Successfully");
+                        dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT * FROM [Agencies] WHERE [AgencID] = @id", paramAgencyid);
+
+
+
+                        using (SqlConnection connection = new SqlConnection(connectionString))
+                        {
+                            connection.Open();
+                            string sql = "SELECT * FROM [Agencies] WHERE [AgencID] = @id";
+                            SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
+                            adapter.SelectCommand.Parameters.AddWithValue("@id", agaencyid);
+                            DataTable updatedData = new DataTable();
+                            adapter.Fill(updatedData);
+
+                            // Compare the two DataTables and find the changed columns
+                            List<string> changedColumns = new List<string>();
+                            foreach (DataColumn column in originalData.Columns)
+                            {
+                                object originalValue = originalData.Rows[0][column.ColumnName];
+                                object updatedValue = updatedData.Rows[0][column.ColumnName];
+                                if (!Equals(originalValue, updatedValue) && (originalValue != null || updatedData != null))
+                                {
+                                    changedColumns.Add(column.ColumnName);
+                                }
+                            }
+
+                            // Insert the changes into the log table
+                            if (changedColumns.Count > 0)
+                            {
+                                using (SqlCommand command = new SqlCommand("INSERT INTO EmployeeLog (Logvalueid, logvalue, OldValue, NewValue,logdatetime,PCNAME,UserId,type) VALUES (@EmployeeId, @ColumnName, @OldValue, @NewValue,@datetime,@pc,@user,@type)", connection))
+                                {
+                                    command.Parameters.AddWithValue("@EmployeeId", EmployeeID);
+                                    foreach (string columnName in changedColumns)
+                                    {
+                                        object originalValue = originalData.Rows[0][columnName];
+                                        object updatedValue = updatedData.Rows[0][columnName];
+                                        command.Parameters.Clear();
+                                        command.Parameters.AddWithValue("@EmployeeId", "For Agency : " + "-" + agaencyid);
+                                        command.Parameters.AddWithValue("@ColumnName", columnName);
+                                        command.Parameters.AddWithValue("@OldValue", originalValue);
+                                        command.Parameters.AddWithValue("@NewValue", updatedValue);
+                                        command.Parameters.AddWithValue("@datetime", lbldatetime.Text);
+                                        command.Parameters.AddWithValue("@pc", lblPC.Text);
+                                        command.Parameters.AddWithValue("@user", lblusername.Text);
+                                        command.Parameters.AddWithValue("@type", "Update");
+                                        command.ExecuteNonQuery();
+                                    }
+                                }
+                            }
+                        }
+
+
+
+                        /**logtable*/
+
+
+
+
+
+
+
+
+
+                        tabControl1.Enabled = true;
+                        SQLCONN.CloseConnection();
+                    }
+
+                }
+            
+            else
+            {
+                    MessageBox.Show("Please Fill the missing fields  ");
+
+                }
+            }
+                   
+          
+                else 
+                {
+
+                MessageBox.Show("Please select Agency first ! " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+
+
+            }
+
+            SQLCONN.CloseConnection();
+            }
+
+        private void JobTitleENtxt_TextChanged(object sender, EventArgs e)
+        {
+            SqlParameter paramjOBSearch = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramjOBSearch.Value = JobTitleENtxt.Text;
+            SQLCONN.OpenConection();
+            dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" select  * from  [JOBS] where  (JobTitleEN like '%' + @C1 + '%')  OR (JobTitleAR LIKE '%' + @C1 + '%')  ", paramjOBSearch);
+
+
+
+            SQLCONN.CloseConnection();
+            //  firstnametxt.Text = secondnametxt.Text = thirdnametxt.Text = lastnametxt.Text = "";
+            //  cmbMartialStatus.Text = cmbGender.Text = "";
+        }
+
+        private void jobsTap_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1) return;
+
+            foreach (DataGridViewRow rw in this.dataGridView3.Rows)
+            {
+                for (int i = 0; i < rw.Cells.Count; i++)
+                {
+                    if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
+                    {
+                        //   MessageBox.Show("ogg");       
+                    }
+                    else
+                    {
+
+                        jobid = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        JobTitleENtxt.Text = dataGridView3.Rows[e.RowIndex].Cells[1].Value.ToString();
+                        jobtitleartxt.Text = dataGridView3.Rows[e.RowIndex].Cells[2].Value.ToString();
+                        Descriptiontxt.Text = dataGridView3.Rows[e.RowIndex].Cells[3].Value.ToString();
+                        cmbworkfield.Text = dataGridView3.Rows[e.RowIndex].Cells[4].Value.ToString();
+                        cmbjobgrade.Text = dataGridView3.Rows[e.RowIndex].Cells[5].Value.ToString();
+                        mintxt.Text = dataGridView3.Rows[e.RowIndex].Cells[6].Value.ToString();
+                        maxtxt.Text = dataGridView3.Rows[e.RowIndex].Cells[7].Value.ToString();
+
+
+                        // Check if the clicked cell is in the IsActive column
+
+                        // Get the value of the cell
+
+
+
+
+
+
+                        EmployeeID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+
+                        ////CurrentEmployeeIDtxt.Text = EmployeeID.ToString();
+                        ////addbtn.Visible = false;
+                        //btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = true;
+                        //firstnametxt.Enabled = secondnametxt.Enabled = thirdnametxt.Enabled = lastnametxt.Enabled = true;
+                        //cmbMartialStatus.Enabled = cmbGender.Enabled = cmbCompany.Enabled = cmbempdepthistory.Enabled = cmbEmployJobHistory.Enabled = cmbPersonalStatusStatus.Enabled = true;
+                        //StartDatePicker.Enabled = true;
+
+                    }
+                }
+
+            }
+
+        }
+
+        private void dataGridView3_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1) return;
+
+            foreach (DataGridViewRow rw in this.dataGridView3.Rows)
+            {
+                for (int i = 0; i < rw.Cells.Count; i++)
+                {
+                    if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
+                    {
+                        //   MessageBox.Show("ogg");       
+                    }
+                    else
+                    {
+
+                        jobid = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        JobTitleENtxt.Text = dataGridView3.Rows[e.RowIndex].Cells[1].Value.ToString();
+                        jobtitleartxt.Text = dataGridView3.Rows[e.RowIndex].Cells[2].Value.ToString();
+                        Descriptiontxt.Text = dataGridView3.Rows[e.RowIndex].Cells[3].Value.ToString();
+                        cmbworkfield.SelectedValue = dataGridView3.Rows[e.RowIndex].Cells[4].Value.ToString();
+                        cmbjobgrade.SelectedValue = dataGridView3.Rows[e.RowIndex].Cells[5].Value.ToString();
+                        mintxt.Text = dataGridView3.Rows[e.RowIndex].Cells[6].Value.ToString();
+                        maxtxt.Text = dataGridView3.Rows[e.RowIndex].Cells[7].Value.ToString();
+
+
+                        // Check if the clicked cell is in the IsActive column
+
+                        // Get the value of the cell
+
+
+
+
+
+
+                       // EmployeeID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+
+                        ////CurrentEmployeeIDtxt.Text = EmployeeID.ToString();
+                        ////addbtn.Visible = false;
+                        //btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = true;
+                        //firstnametxt.Enabled = secondnametxt.Enabled = thirdnametxt.Enabled = lastnametxt.Enabled = true;
+                        //cmbMartialStatus.Enabled = cmbGender.Enabled = cmbCompany.Enabled = cmbempdepthistory.Enabled = cmbEmployJobHistory.Enabled = cmbPersonalStatusStatus.Enabled = true;
+                        //StartDatePicker.Enabled = true;
+
+                    }
+                }
+
+            }
+
+        }
+
+        private void mintxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // suppress the key press event
+                MessageBox.Show("Please enter numbers only.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+        }
+
+        private void mintxt_Validating(object sender, CancelEventArgs e)
+        {
+           
+
+        }
+
+        private void JobTitleENtxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                jobtitleartxt.Focus();
+                e.Handled = true;
+               
+            }
+        }
+
+        private void jobtitleartxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Descriptiontxt.Focus();
+                e.Handled = true;
+
+            }
+        }
+
+        private void cmbworkfield_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                cmbjobgrade.Focus();
+                e.Handled = true;
+
+            }
+        }
+
+        private void Descriptiontxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                cmbworkfield.Focus();
+                e.Handled = true;
+
+            }
+        }
+
+        private void cmbjobgrade_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                mintxt.Focus();
+                e.Handled = true;
+
+            }
+        }
+
+        private void mintxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                maxtxt.Focus();
+                e.Handled = true;
+
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            SqlParameter paramjobid = new SqlParameter("@id", SqlDbType.NVarChar);
+            paramjobid.Value = jobid;
+            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+            paramuser.Value = lblusername.Text;
+            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+            paramdatetimeLOG.Value = lbldatetime.Text;
+            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+            parampc.Value = lblPC.Text;
+
+            if (jobid == 0)
+            {
+                MessageBox.Show("Please select  Job first ! " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+            else
+            {
+                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    SQLCONN.OpenConection();
+                    SQLCONN.ExecuteQueries("delete  JOBS where jobid=@id", paramjobid);
+                    SQLCONN.ExecuteQueries(" declare @max int select @max = max([jobid]) from [JOBS] if @max IS NULL    SET @max = 0 DBCC CHECKIDENT('[JOBS]', RESEED, @max)");
+                    dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from JOBS ");
+                    MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Job Info',@id ,'#','#',@datetime,@pc,@user,'Delete')", paramjobid, paramdatetimeLOG, parampc, paramuser);
+                    SQLCONN.CloseConnection();
+
+
+
+                }
+
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            SqlParameter paramjobtitleEN = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramjobtitleEN.Value = JobTitleENtxt.Text;
+            SqlParameter paramjobtitleAR = new SqlParameter("@C2", SqlDbType.NVarChar);
+            paramjobtitleAR.Value = jobtitleartxt.Text;
+            SqlParameter ParamDescription = new SqlParameter("@C3", SqlDbType.NVarChar);
+            ParamDescription.Value = Descriptiontxt.Text;
+            SqlParameter paramWorkField = new SqlParameter("@C4", SqlDbType.NVarChar);
+            paramWorkField.Value = cmbworkfield.SelectedValue;
+            SqlParameter paramJobGrade = new SqlParameter("@C5", SqlDbType.NVarChar);
+            paramJobGrade.Value = cmbjobgrade.SelectedValue;
+            SqlParameter paramminsalary = new SqlParameter("@C6", SqlDbType.NVarChar);
+            paramminsalary.Value = mintxt.Text;
+            SqlParameter parammaxsalary = new SqlParameter("@C7", SqlDbType.NVarChar);
+            parammaxsalary.Value = maxtxt.Text;
+
+            SqlParameter paramjobid = new SqlParameter("@id", SqlDbType.NVarChar);
+            paramjobid.Value = jobid;
+            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+            paramuser.Value = lblusername.Text;
+            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+            paramdatetimeLOG.Value = lbldatetime.Text;
+            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+            parampc.Value = lblPC.Text;
+
+            if (jobid != 0)
+            {
+
+
+                if (JobTitleENtxt.Text != "" && jobtitleartxt.Text != "" && Descriptiontxt.Text != "" && cmbworkfield.Text != "select" && cmbjobgrade.Text!="Select" && mintxt.Text !="" && maxtxt.Text!="")
+                {
+                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+
+
+                        SQLCONN.OpenConection();
+
+                        // MessageBox.Show(EMPID.ToString());
+
+                        /**logtable */
+                        DataTable originalData = new DataTable();
+                        string connectionString = SQLCONN.ConnectionString;
+                        using (SqlConnection connection = new SqlConnection(connectionString))
+                        {
+                            connection.Open();
+                            string sql = "SELECT * FROM [jobs] WHERE [jobid] = @id";
+                            SqlDataAdapter da = new SqlDataAdapter(sql, connection);
+                            da.SelectCommand.Parameters.AddWithValue("@id", jobid);
+                            originalData = new DataTable();
+                            da.Fill(originalData);
+                        }
+
+
+                        //   paramEmployeeID.Value = CurrentEmployeeIDtxt.Text;
+
+                        if (double.TryParse(mintxt.Text, out num1) && double.TryParse(maxtxt.Text, out num2))
+                        {
+                            if (num1 > num2)
+                            {
+                                MessageBox.Show("The min salary is greater than the max salary , Please fix it.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                            }
+                            else if (num1 < num2)
+                            {
+                                SQLCONN.ExecuteQueries("update jobs set [JobTitleEN] =@C1,[JobTitleAR]=@C2,[JobDescription]=@C3,[Work_Field_ID]=@C4,[Job_Grade_ID]=@C5,[MinSalary]=@C6,[MaxSalary]=@C7  where  jobid=@id  ",   paramjobtitleEN, paramjobtitleAR, ParamDescription, paramWorkField, paramJobGrade, paramminsalary, parammaxsalary,paramjobid);
+                                MessageBox.Show("Record updated Successfully");
+                              
+          
+                                dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" select  * from  [JOBS] where  [JobID] = @id  ", paramjobid);
+
+                                SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Job Info',@id ,'#','#',@datetime,@pc,@user,'Insert')", paramjobid, paramdatetimeLOG, parampc, paramuser);
+
+
+                            
+                                ClearTextBoxes();
+
+                                using (SqlConnection connection = new SqlConnection(connectionString))
+                                {
+                                    connection.Open();
+                                    string sql = "SELECT * FROM [jobs] WHERE [jobid] = @id";
+                                    SqlDataAdapter da = new SqlDataAdapter(sql, connection);
+                                    da.SelectCommand.Parameters.AddWithValue("@id", jobid);
+                                    DataTable updatedData = new DataTable();
+                                    da.Fill(updatedData);
+
+                                    // Compare the two DataTables and find the changed columns
+                                    List<string> changedColumns = new List<string>();
+                                    foreach (DataColumn column in originalData.Columns)
+                                    {
+                                        object originalValue = originalData.Rows[0][column.ColumnName];
+                                        object updatedValue = updatedData.Rows[0][column.ColumnName];
+                                        if (!Equals(originalValue, updatedValue) && (originalValue != null || updatedData != null))
+                                        {
+                                            changedColumns.Add(column.ColumnName);
+                                        }
+                                    }
+
+                                    // Insert the changes into the log table
+                                    if (changedColumns.Count > 0)
+                                    {
+                                        using (SqlCommand command = new SqlCommand("INSERT INTO EmployeeLog (Logvalueid, logvalue, OldValue, NewValue,logdatetime,PCNAME,UserId,type) VALUES (@EmployeeId, @ColumnName, @OldValue, @NewValue,@datetime,@pc,@user,@type)", connection))
+                                        {
+                                            command.Parameters.AddWithValue("@EmployeeId", EmployeeID);
+                                            foreach (string columnName in changedColumns)
+                                            {
+                                                object originalValue = originalData.Rows[0][columnName];
+                                                object updatedValue = updatedData.Rows[0][columnName];
+                                                command.Parameters.Clear();
+                                                command.Parameters.AddWithValue("@EmployeeId", "For job id : " + " " + jobid);
+                                                command.Parameters.AddWithValue("@ColumnName", columnName);
+                                                command.Parameters.AddWithValue("@OldValue", originalValue);
+                                                command.Parameters.AddWithValue("@NewValue", updatedValue);
+                                                command.Parameters.AddWithValue("@datetime", lbldatetime.Text);
+                                                command.Parameters.AddWithValue("@pc", lblPC.Text);
+                                                command.Parameters.AddWithValue("@user", lblusername.Text);
+                                                command.Parameters.AddWithValue("@type", "Update");
+                                                command.ExecuteNonQuery();
+                                            }
+                                        }
+                                    }
+                                }
+
+
+
+                                /**logtable*/
+
+
+                            }
+                            else
+                            {
+                                MessageBox.Show("The two numbers are equal.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please enter valid numbers in both text boxes.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                        }
+
+
+                           
+
+
+                        dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT * FROM [jobs] WHERE [jobid] = @id", paramjobid);
+
+
+
+
+
+
+
+
+
+
+
+                        tabControl1.Enabled = true;
+                        SQLCONN.CloseConnection();
+                    }
+
+                }
+
+                else
+                {
+                    MessageBox.Show("Please Fill the missing fields", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
+            }
+
+
+            else
+            {
+
+                MessageBox.Show("Please select Job first ! " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+
+
+            }
+
+            SQLCONN.CloseConnection();
+        }
+
+        private void maxtxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // suppress the key press event
+                MessageBox.Show("Please enter numbers only.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
     }
-}
+    }
+
+
+
+
 
     
 

@@ -103,7 +103,8 @@ namespace Delmon_Managment_System
         {
             panelTitleBar.BackColor = Color.FromArgb(235, 45, 46);
             lblTitle.BackColor = Color.FromArgb(235, 45, 46);
-          
+
+
         }
 
         private void btnvisa_Click(object sender, EventArgs e)

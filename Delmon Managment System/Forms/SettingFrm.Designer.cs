@@ -47,7 +47,6 @@ namespace Delmon_Managment_System.Forms
             this.label2 = new System.Windows.Forms.Label();
             this.addbtn = new System.Windows.Forms.Button();
             this.jobsTap = new System.Windows.Forms.TabPage();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.maxtxt = new System.Windows.Forms.TextBox();
             this.mintxt = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -92,16 +91,19 @@ namespace Delmon_Managment_System.Forms
             this.lblusername = new System.Windows.Forms.Label();
             this.lblusertype = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.userTap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.jobsTap.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.agenciesTap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -109,8 +111,8 @@ namespace Delmon_Managment_System.Forms
             this.tabControl1.Controls.Add(this.userTap);
             this.tabControl1.Controls.Add(this.jobsTap);
             this.tabControl1.Controls.Add(this.agenciesTap);
-            this.tabControl1.Controls.Add(this.notificationsTap);
             this.tabControl1.Controls.Add(this.DepartmentTap);
+            this.tabControl1.Controls.Add(this.notificationsTap);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(1, -1);
             this.tabControl1.Name = "tabControl1";
@@ -227,7 +229,7 @@ namespace Delmon_Managment_System.Forms
             this.deletebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deletebtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deletebtn.ForeColor = System.Drawing.Color.White;
-            this.deletebtn.Location = new System.Drawing.Point(242, 303);
+            this.deletebtn.Location = new System.Drawing.Point(219, 303);
             this.deletebtn.Name = "deletebtn";
             this.deletebtn.Size = new System.Drawing.Size(70, 26);
             this.deletebtn.TabIndex = 56;
@@ -242,7 +244,7 @@ namespace Delmon_Managment_System.Forms
             this.updatebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.updatebtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.updatebtn.ForeColor = System.Drawing.Color.White;
-            this.updatebtn.Location = new System.Drawing.Point(140, 303);
+            this.updatebtn.Location = new System.Drawing.Point(117, 303);
             this.updatebtn.Name = "updatebtn";
             this.updatebtn.Size = new System.Drawing.Size(70, 26);
             this.updatebtn.TabIndex = 55;
@@ -298,7 +300,7 @@ namespace Delmon_Managment_System.Forms
             this.addbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addbtn.ForeColor = System.Drawing.Color.White;
-            this.addbtn.Location = new System.Drawing.Point(30, 303);
+            this.addbtn.Location = new System.Drawing.Point(7, 303);
             this.addbtn.Name = "addbtn";
             this.addbtn.Size = new System.Drawing.Size(70, 26);
             this.addbtn.TabIndex = 44;
@@ -309,6 +311,8 @@ namespace Delmon_Managment_System.Forms
             // jobsTap
             // 
             this.jobsTap.Controls.Add(this.dataGridView3);
+            this.jobsTap.Controls.Add(this.button6);
+            this.jobsTap.Controls.Add(this.button5);
             this.jobsTap.Controls.Add(this.maxtxt);
             this.jobsTap.Controls.Add(this.mintxt);
             this.jobsTap.Controls.Add(this.label9);
@@ -331,15 +335,7 @@ namespace Delmon_Managment_System.Forms
             this.jobsTap.TabIndex = 1;
             this.jobsTap.Text = "Jobs";
             this.jobsTap.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView3
-            // 
-            this.dataGridView3.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(509, 3);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(502, 288);
-            this.dataGridView3.TabIndex = 58;
+            this.jobsTap.Click += new System.EventHandler(this.jobsTap_Click);
             // 
             // maxtxt
             // 
@@ -348,6 +344,7 @@ namespace Delmon_Managment_System.Forms
             this.maxtxt.Name = "maxtxt";
             this.maxtxt.Size = new System.Drawing.Size(121, 22);
             this.maxtxt.TabIndex = 47;
+            this.maxtxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.maxtxt_KeyPress);
             // 
             // mintxt
             // 
@@ -356,6 +353,9 @@ namespace Delmon_Managment_System.Forms
             this.mintxt.Name = "mintxt";
             this.mintxt.Size = new System.Drawing.Size(117, 22);
             this.mintxt.TabIndex = 46;
+            this.mintxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mintxt_KeyDown);
+            this.mintxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mintxt_KeyPress);
+            this.mintxt.Validating += new System.ComponentModel.CancelEventHandler(this.mintxt_Validating);
             // 
             // label9
             // 
@@ -387,6 +387,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbjobgrade.Name = "cmbjobgrade";
             this.cmbjobgrade.Size = new System.Drawing.Size(121, 24);
             this.cmbjobgrade.TabIndex = 43;
+            this.cmbjobgrade.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbjobgrade_KeyDown);
             // 
             // label11
             // 
@@ -407,6 +408,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbworkfield.Name = "cmbworkfield";
             this.cmbworkfield.Size = new System.Drawing.Size(117, 24);
             this.cmbworkfield.TabIndex = 41;
+            this.cmbworkfield.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbworkfield_KeyDown);
             // 
             // label12
             // 
@@ -427,6 +429,7 @@ namespace Delmon_Managment_System.Forms
             this.Descriptiontxt.Name = "Descriptiontxt";
             this.Descriptiontxt.Size = new System.Drawing.Size(278, 70);
             this.Descriptiontxt.TabIndex = 39;
+            this.Descriptiontxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Descriptiontxt_KeyDown);
             // 
             // jobtitleartxt
             // 
@@ -435,6 +438,7 @@ namespace Delmon_Managment_System.Forms
             this.jobtitleartxt.Name = "jobtitleartxt";
             this.jobtitleartxt.Size = new System.Drawing.Size(278, 22);
             this.jobtitleartxt.TabIndex = 38;
+            this.jobtitleartxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.jobtitleartxt_KeyDown);
             // 
             // lbl
             // 
@@ -454,6 +458,8 @@ namespace Delmon_Managment_System.Forms
             this.JobTitleENtxt.Name = "JobTitleENtxt";
             this.JobTitleENtxt.Size = new System.Drawing.Size(278, 22);
             this.JobTitleENtxt.TabIndex = 36;
+            this.JobTitleENtxt.TextChanged += new System.EventHandler(this.JobTitleENtxt_TextChanged);
+            this.JobTitleENtxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.JobTitleENtxt_KeyDown);
             // 
             // label13
             // 
@@ -484,9 +490,9 @@ namespace Delmon_Managment_System.Forms
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Location = new System.Drawing.Point(6, 335);
+            this.button4.Location = new System.Drawing.Point(7, 322);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(96, 37);
+            this.button4.Size = new System.Drawing.Size(79, 26);
             this.button4.TabIndex = 32;
             this.button4.Text = "Add";
             this.button4.UseVisualStyleBackColor = false;
@@ -632,6 +638,7 @@ namespace Delmon_Managment_System.Forms
             this.button3.TabIndex = 59;
             this.button3.Text = "Update";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // cmbCity
             // 
@@ -825,6 +832,48 @@ namespace Delmon_Managment_System.Forms
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.Firebrick;
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.ForeColor = System.Drawing.Color.White;
+            this.button5.Location = new System.Drawing.Point(113, 322);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(74, 26);
+            this.button5.TabIndex = 59;
+            this.button5.Text = "Update";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.Color.Firebrick;
+            this.button6.FlatAppearance.BorderSize = 0;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.ForeColor = System.Drawing.Color.White;
+            this.button6.Location = new System.Drawing.Point(221, 322);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(67, 26);
+            this.button6.TabIndex = 60;
+            this.button6.Text = "Delete";
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // dataGridView3
+            // 
+            this.dataGridView3.AllowUserToAddRows = false;
+            this.dataGridView3.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Location = new System.Drawing.Point(382, 7);
+            this.dataGridView3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.Size = new System.Drawing.Size(637, 274);
+            this.dataGridView3.TabIndex = 89;
+            this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick_1);
+            // 
             // SettingFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -842,7 +891,6 @@ namespace Delmon_Managment_System.Forms
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.jobsTap.ResumeLayout(false);
             this.jobsTap.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.agenciesTap.ResumeLayout(false);
             this.agenciesTap.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
@@ -851,6 +899,7 @@ namespace Delmon_Managment_System.Forms
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -895,7 +944,6 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TabPage DepartmentTap;
-        private System.Windows.Forms.DataGridView dataGridView3;
         private System.Windows.Forms.TextBox maxtxt;
         private System.Windows.Forms.TextBox mintxt;
         private System.Windows.Forms.Label label9;
@@ -919,5 +967,8 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.CheckBox checkContact;
         private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.DataGridView dataGridView3;
     }
 }
