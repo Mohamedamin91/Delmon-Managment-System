@@ -53,7 +53,7 @@ namespace Delmon_Managment_System
             SQLCONN.OpenConection();
             //SqlDataReader dr = SQLCONN.DataReader("select username,pass from tblUser where UserName='" + Usertxt.Text + "'and Password='" + passtxt.Text + "'");
            
-            SqlDataReader dr = SQLCONN.DataReader(" select [UserID],[EmployeeID],UserType,[Email], UserName,Password from tblUser , tblUserType where tblUser.UserTypeID=tblUserType.UserTypeID and UserName=@C1 and Password=@C2 and IsActive=1", paramUserName,paramPassword );
+            SqlDataReader dr = SQLCONN.DataReader(" select [UserID],[EmployeeID],UserType,[Email], UserName,Password from tblUser , tblUserType where tblUser.[UserTypeID] =tblUserType.UserTypeID and  UserName=@C1 and Password=@C2 and IsActive=1", paramUserName,paramPassword );
             if (dr.Read())
 
             {

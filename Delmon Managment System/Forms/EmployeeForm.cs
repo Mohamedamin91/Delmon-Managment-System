@@ -97,7 +97,11 @@ namespace Delmon_Managment_System.Forms
             lblemail.Text = CommonClass.Email;
             lblPC.Text = Environment.MachineName;
 
-
+            if (lblusertype.Text == "Admin")
+            {
+                DeleteBTN.Enabled = btndeletecontact.Enabled = btndeletedoc.Enabled = button1.Enabled = true;
+            }
+            
 
 
 

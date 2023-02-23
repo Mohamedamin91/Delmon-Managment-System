@@ -29,9 +29,16 @@ namespace Delmon_Managment_System
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMainMenu));
             this.panelLogo = new System.Windows.Forms.Panel();
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblPC = new System.Windows.Forms.Label();
+            this.lbldatetime = new System.Windows.Forms.Label();
+            this.lblemail = new System.Windows.Forms.Label();
+            this.lblusername = new System.Windows.Forms.Label();
+            this.lblusertype = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.btnNotifications = new System.Windows.Forms.Button();
@@ -47,7 +54,9 @@ namespace Delmon_Managment_System
             this.lblTitle = new System.Windows.Forms.Label();
             this.panelDesktopPanel = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panelMenu.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.panelTitleBar.SuspendLayout();
             this.panelDesktopPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -65,6 +74,7 @@ namespace Delmon_Managment_System
             // panelMenu
             // 
             this.panelMenu.BackColor = System.Drawing.Color.White;
+            this.panelMenu.Controls.Add(this.groupBox1);
             this.panelMenu.Controls.Add(this.button4);
             this.panelMenu.Controls.Add(this.button2);
             this.panelMenu.Controls.Add(this.btnNotifications);
@@ -76,8 +86,81 @@ namespace Delmon_Managment_System
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenu.Location = new System.Drawing.Point(0, 0);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(200, 581);
+            this.panelMenu.Size = new System.Drawing.Size(200, 760);
             this.panelMenu.TabIndex = 0;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lblPC);
+            this.groupBox1.Controls.Add(this.lbldatetime);
+            this.groupBox1.Controls.Add(this.lblemail);
+            this.groupBox1.Controls.Add(this.lblusername);
+            this.groupBox1.Controls.Add(this.lblusertype);
+            this.groupBox1.Location = new System.Drawing.Point(3, 751);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(167, 183);
+            this.groupBox1.TabIndex = 146;
+            this.groupBox1.TabStop = false;
+            // 
+            // lblPC
+            // 
+            this.lblPC.AutoSize = true;
+            this.lblPC.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPC.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.lblPC.Location = new System.Drawing.Point(2, 89);
+            this.lblPC.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblPC.Name = "lblPC";
+            this.lblPC.Size = new System.Drawing.Size(21, 15);
+            this.lblPC.TabIndex = 98;
+            this.lblPC.Text = "Pc";
+            // 
+            // lbldatetime
+            // 
+            this.lbldatetime.AutoSize = true;
+            this.lbldatetime.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbldatetime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.lbldatetime.Location = new System.Drawing.Point(2, 114);
+            this.lbldatetime.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lbldatetime.Name = "lbldatetime";
+            this.lbldatetime.Size = new System.Drawing.Size(60, 15);
+            this.lbldatetime.TabIndex = 96;
+            this.lbldatetime.Text = "Date&Time";
+            // 
+            // lblemail
+            // 
+            this.lblemail.AutoSize = true;
+            this.lblemail.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblemail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.lblemail.Location = new System.Drawing.Point(2, 40);
+            this.lblemail.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblemail.Name = "lblemail";
+            this.lblemail.Size = new System.Drawing.Size(38, 15);
+            this.lblemail.TabIndex = 95;
+            this.lblemail.Text = "Email";
+            // 
+            // lblusername
+            // 
+            this.lblusername.AutoSize = true;
+            this.lblusername.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblusername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.lblusername.Location = new System.Drawing.Point(2, 18);
+            this.lblusername.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblusername.Name = "lblusername";
+            this.lblusername.Size = new System.Drawing.Size(64, 15);
+            this.lblusername.TabIndex = 92;
+            this.lblusername.Text = "UserName";
+            // 
+            // lblusertype
+            // 
+            this.lblusertype.AutoSize = true;
+            this.lblusertype.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblusertype.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.lblusertype.Location = new System.Drawing.Point(2, 64);
+            this.lblusertype.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblusertype.Name = "lblusertype";
+            this.lblusertype.Size = new System.Drawing.Size(58, 15);
+            this.lblusertype.TabIndex = 94;
+            this.lblusertype.Text = "UserType";
             // 
             // button4
             // 
@@ -308,7 +391,7 @@ namespace Delmon_Managment_System
             this.panelDesktopPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelDesktopPanel.Location = new System.Drawing.Point(200, 49);
             this.panelDesktopPanel.Name = "panelDesktopPanel";
-            this.panelDesktopPanel.Size = new System.Drawing.Size(884, 532);
+            this.panelDesktopPanel.Size = new System.Drawing.Size(884, 711);
             this.panelDesktopPanel.TabIndex = 2;
             this.panelDesktopPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panelDesktopPanel_Paint);
             // 
@@ -322,11 +405,15 @@ namespace Delmon_Managment_System
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // FormMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1084, 581);
+            this.ClientSize = new System.Drawing.Size(1084, 760);
             this.Controls.Add(this.panelDesktopPanel);
             this.Controls.Add(this.panelTitleBar);
             this.Controls.Add(this.panelMenu);
@@ -336,6 +423,8 @@ namespace Delmon_Managment_System
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panelMenu.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.panelTitleBar.ResumeLayout(false);
             this.panelTitleBar.PerformLayout();
             this.panelDesktopPanel.ResumeLayout(false);
@@ -363,6 +452,13 @@ namespace Delmon_Managment_System
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lblPC;
+        private System.Windows.Forms.Label lbldatetime;
+        private System.Windows.Forms.Label lblemail;
+        private System.Windows.Forms.Label lblusername;
+        private System.Windows.Forms.Label lblusertype;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

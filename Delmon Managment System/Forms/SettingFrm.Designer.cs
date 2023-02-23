@@ -32,6 +32,7 @@ namespace Delmon_Managment_System.Forms
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.userTap = new System.Windows.Forms.TabPage();
+            this.btnnew = new System.Windows.Forms.Button();
             this.cmbusertype = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.cmbemployee = new System.Windows.Forms.ComboBox();
@@ -47,6 +48,10 @@ namespace Delmon_Managment_System.Forms
             this.label2 = new System.Windows.Forms.Label();
             this.addbtn = new System.Windows.Forms.Button();
             this.jobsTap = new System.Windows.Forms.TabPage();
+            this.BtnnewJob = new System.Windows.Forms.Button();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.maxtxt = new System.Windows.Forms.TextBox();
             this.mintxt = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -63,6 +68,7 @@ namespace Delmon_Managment_System.Forms
             this.label14 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.agenciesTap = new System.Windows.Forms.TabPage();
+            this.BtnnewAgaency = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label16 = new System.Windows.Forms.Label();
@@ -82,18 +88,13 @@ namespace Delmon_Managment_System.Forms
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.notificationsTap = new System.Windows.Forms.TabPage();
             this.DepartmentTap = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblPC = new System.Windows.Forms.Label();
-            this.lbldatetime = new System.Windows.Forms.Label();
-            this.lblemail = new System.Windows.Forms.Label();
-            this.lblusername = new System.Windows.Forms.Label();
-            this.lblusertype = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.cmbHeadPostion = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.cmbCompany = new System.Windows.Forms.ComboBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.cmbemployee1 = new System.Windows.Forms.ComboBox();
+            this.label24 = new System.Windows.Forms.Label();
             this.dataGridView5 = new System.Windows.Forms.DataGridView();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
@@ -102,27 +103,26 @@ namespace Delmon_Managment_System.Forms
             this.cmbworkfield1 = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
             this.button9 = new System.Windows.Forms.Button();
-            this.cmbemployee1 = new System.Windows.Forms.ComboBox();
-            this.label24 = new System.Windows.Forms.Label();
-            this.cmbCompany = new System.Windows.Forms.ComboBox();
-            this.label25 = new System.Windows.Forms.Label();
-            this.cmbHeadPostion = new System.Windows.Forms.ComboBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.btnnew = new System.Windows.Forms.Button();
-            this.BtnnewJob = new System.Windows.Forms.Button();
-            this.BtnnewAgaency = new System.Windows.Forms.Button();
+            this.notificationsTap = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblPC = new System.Windows.Forms.Label();
+            this.lbldatetime = new System.Windows.Forms.Label();
+            this.lblemail = new System.Windows.Forms.Label();
+            this.lblusername = new System.Windows.Forms.Label();
+            this.lblusertype = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.userTap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.jobsTap.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.agenciesTap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.DepartmentTap.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -166,6 +166,21 @@ namespace Delmon_Managment_System.Forms
             this.userTap.Text = "Users";
             this.userTap.UseVisualStyleBackColor = true;
             this.userTap.Click += new System.EventHandler(this.userTap_Click);
+            // 
+            // btnnew
+            // 
+            this.btnnew.BackColor = System.Drawing.Color.White;
+            this.btnnew.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.btnnew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnnew.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnnew.ForeColor = System.Drawing.Color.Firebrick;
+            this.btnnew.Location = new System.Drawing.Point(9, 304);
+            this.btnnew.Name = "btnnew";
+            this.btnnew.Size = new System.Drawing.Size(70, 26);
+            this.btnnew.TabIndex = 138;
+            this.btnnew.Text = "New";
+            this.btnnew.UseVisualStyleBackColor = false;
+            this.btnnew.Click += new System.EventHandler(this.btnnew_Click);
             // 
             // cmbusertype
             // 
@@ -363,6 +378,65 @@ namespace Delmon_Managment_System.Forms
             this.jobsTap.UseVisualStyleBackColor = true;
             this.jobsTap.Click += new System.EventHandler(this.jobsTap_Click);
             // 
+            // BtnnewJob
+            // 
+            this.BtnnewJob.BackColor = System.Drawing.Color.White;
+            this.BtnnewJob.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.BtnnewJob.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnnewJob.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnnewJob.ForeColor = System.Drawing.Color.Firebrick;
+            this.BtnnewJob.Location = new System.Drawing.Point(6, 332);
+            this.BtnnewJob.Name = "BtnnewJob";
+            this.BtnnewJob.Size = new System.Drawing.Size(70, 26);
+            this.BtnnewJob.TabIndex = 139;
+            this.BtnnewJob.Text = "New";
+            this.BtnnewJob.UseVisualStyleBackColor = false;
+            this.BtnnewJob.Click += new System.EventHandler(this.BtnnewJob_Click);
+            // 
+            // dataGridView3
+            // 
+            this.dataGridView3.AllowUserToAddRows = false;
+            this.dataGridView3.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Location = new System.Drawing.Point(382, 7);
+            this.dataGridView3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.Size = new System.Drawing.Size(637, 274);
+            this.dataGridView3.TabIndex = 89;
+            this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick_1);
+            // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.Color.White;
+            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.ForeColor = System.Drawing.Color.Firebrick;
+            this.button6.Location = new System.Drawing.Point(310, 332);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(67, 26);
+            this.button6.TabIndex = 60;
+            this.button6.Text = "Delete";
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Visible = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.White;
+            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.ForeColor = System.Drawing.Color.Firebrick;
+            this.button5.Location = new System.Drawing.Point(202, 332);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(74, 26);
+            this.button5.TabIndex = 59;
+            this.button5.Text = "Update";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Visible = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // maxtxt
             // 
             this.maxtxt.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -551,6 +625,21 @@ namespace Delmon_Managment_System.Forms
             this.agenciesTap.UseVisualStyleBackColor = true;
             this.agenciesTap.Click += new System.EventHandler(this.agenciesTap_Click);
             // 
+            // BtnnewAgaency
+            // 
+            this.BtnnewAgaency.BackColor = System.Drawing.Color.White;
+            this.BtnnewAgaency.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.BtnnewAgaency.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnnewAgaency.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnnewAgaency.ForeColor = System.Drawing.Color.Firebrick;
+            this.BtnnewAgaency.Location = new System.Drawing.Point(12, 447);
+            this.BtnnewAgaency.Name = "BtnnewAgaency";
+            this.BtnnewAgaency.Size = new System.Drawing.Size(70, 31);
+            this.BtnnewAgaency.TabIndex = 139;
+            this.BtnnewAgaency.Text = "New";
+            this.BtnnewAgaency.UseVisualStyleBackColor = false;
+            this.BtnnewAgaency.Click += new System.EventHandler(this.BtnnewAgaency_Click);
+            // 
             // dataGridView2
             // 
             this.dataGridView2.AllowUserToAddRows = false;
@@ -630,7 +719,7 @@ namespace Delmon_Managment_System.Forms
             this.checkContact.AutoSize = true;
             this.checkContact.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkContact.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.checkContact.Location = new System.Drawing.Point(6, 184);
+            this.checkContact.Location = new System.Drawing.Point(12, 189);
             this.checkContact.Name = "checkContact";
             this.checkContact.Size = new System.Drawing.Size(154, 21);
             this.checkContact.TabIndex = 136;
@@ -674,7 +763,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.cmbCity.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCity.FormattingEnabled = true;
-            this.cmbCity.Location = new System.Drawing.Point(134, 82);
+            this.cmbCity.Location = new System.Drawing.Point(140, 87);
             this.cmbCity.Name = "cmbCity";
             this.cmbCity.Size = new System.Drawing.Size(121, 25);
             this.cmbCity.TabIndex = 53;
@@ -684,7 +773,7 @@ namespace Delmon_Managment_System.Forms
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(131, 63);
+            this.label1.Location = new System.Drawing.Point(137, 68);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(32, 17);
             this.label1.TabIndex = 52;
@@ -694,7 +783,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.cmbCountry.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCountry.FormattingEnabled = true;
-            this.cmbCountry.Location = new System.Drawing.Point(6, 82);
+            this.cmbCountry.Location = new System.Drawing.Point(12, 87);
             this.cmbCountry.Name = "cmbCountry";
             this.cmbCountry.Size = new System.Drawing.Size(117, 25);
             this.cmbCountry.TabIndex = 51;
@@ -705,7 +794,7 @@ namespace Delmon_Managment_System.Forms
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(6, 63);
+            this.label6.Location = new System.Drawing.Point(12, 68);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(55, 17);
             this.label6.TabIndex = 50;
@@ -714,7 +803,7 @@ namespace Delmon_Managment_System.Forms
             // LicenseNumbertxt
             // 
             this.LicenseNumbertxt.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LicenseNumbertxt.Location = new System.Drawing.Point(6, 143);
+            this.LicenseNumbertxt.Location = new System.Drawing.Point(12, 148);
             this.LicenseNumbertxt.Name = "LicenseNumbertxt";
             this.LicenseNumbertxt.Size = new System.Drawing.Size(249, 25);
             this.LicenseNumbertxt.TabIndex = 49;
@@ -722,7 +811,7 @@ namespace Delmon_Managment_System.Forms
             // AgencyNametxt
             // 
             this.AgencyNametxt.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AgencyNametxt.Location = new System.Drawing.Point(6, 32);
+            this.AgencyNametxt.Location = new System.Drawing.Point(12, 37);
             this.AgencyNametxt.Name = "AgencyNametxt";
             this.AgencyNametxt.Size = new System.Drawing.Size(249, 25);
             this.AgencyNametxt.TabIndex = 48;
@@ -733,7 +822,7 @@ namespace Delmon_Managment_System.Forms
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(3, 124);
+            this.label7.Location = new System.Drawing.Point(9, 129);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(106, 17);
             this.label7.TabIndex = 47;
@@ -744,7 +833,7 @@ namespace Delmon_Managment_System.Forms
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(3, 13);
+            this.label8.Location = new System.Drawing.Point(9, 18);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(153, 17);
             this.label8.TabIndex = 46;
@@ -765,15 +854,6 @@ namespace Delmon_Managment_System.Forms
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // notificationsTap
-            // 
-            this.notificationsTap.Location = new System.Drawing.Point(4, 27);
-            this.notificationsTap.Name = "notificationsTap";
-            this.notificationsTap.Size = new System.Drawing.Size(1040, 496);
-            this.notificationsTap.TabIndex = 3;
-            this.notificationsTap.Text = "Notifications";
-            this.notificationsTap.UseVisualStyleBackColor = true;
             // 
             // DepartmentTap
             // 
@@ -800,127 +880,67 @@ namespace Delmon_Managment_System.Forms
             this.DepartmentTap.UseVisualStyleBackColor = true;
             this.DepartmentTap.Click += new System.EventHandler(this.DepartmentTap_Click);
             // 
-            // groupBox1
+            // cmbHeadPostion
             // 
-            this.groupBox1.Controls.Add(this.lblPC);
-            this.groupBox1.Controls.Add(this.lbldatetime);
-            this.groupBox1.Controls.Add(this.lblemail);
-            this.groupBox1.Controls.Add(this.lblusername);
-            this.groupBox1.Controls.Add(this.lblusertype);
-            this.groupBox1.Location = new System.Drawing.Point(5, 532);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1027, 58);
-            this.groupBox1.TabIndex = 146;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "User Info";
+            this.cmbHeadPostion.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbHeadPostion.FormattingEnabled = true;
+            this.cmbHeadPostion.Location = new System.Drawing.Point(12, 206);
+            this.cmbHeadPostion.Name = "cmbHeadPostion";
+            this.cmbHeadPostion.Size = new System.Drawing.Size(167, 25);
+            this.cmbHeadPostion.TabIndex = 141;
             // 
-            // lblPC
+            // label17
             // 
-            this.lblPC.AutoSize = true;
-            this.lblPC.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPC.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblPC.Location = new System.Drawing.Point(218, 21);
-            this.lblPC.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.lblPC.Name = "lblPC";
-            this.lblPC.Size = new System.Drawing.Size(24, 17);
-            this.lblPC.TabIndex = 98;
-            this.lblPC.Text = "Pc";
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.Color.Black;
+            this.label17.Location = new System.Drawing.Point(9, 187);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(87, 17);
+            this.label17.TabIndex = 140;
+            this.label17.Text = "Head Postion";
             // 
-            // lbldatetime
+            // cmbCompany
             // 
-            this.lbldatetime.AutoSize = true;
-            this.lbldatetime.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbldatetime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lbldatetime.Location = new System.Drawing.Point(421, 21);
-            this.lbldatetime.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.lbldatetime.Name = "lbldatetime";
-            this.lbldatetime.Size = new System.Drawing.Size(73, 17);
-            this.lbldatetime.TabIndex = 96;
-            this.lbldatetime.Text = "Date&Time";
+            this.cmbCompany.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbCompany.FormattingEnabled = true;
+            this.cmbCompany.Location = new System.Drawing.Point(12, 266);
+            this.cmbCompany.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.cmbCompany.Name = "cmbCompany";
+            this.cmbCompany.Size = new System.Drawing.Size(367, 25);
+            this.cmbCompany.TabIndex = 138;
             // 
-            // lblemail
+            // label25
             // 
-            this.lblemail.AutoSize = true;
-            this.lblemail.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblemail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblemail.Location = new System.Drawing.Point(301, 21);
-            this.lblemail.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.lblemail.Name = "lblemail";
-            this.lblemail.Size = new System.Drawing.Size(45, 17);
-            this.lblemail.TabIndex = 95;
-            this.lblemail.Text = "Email";
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(9, 245);
+            this.label25.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(64, 17);
+            this.label25.TabIndex = 139;
+            this.label25.Text = "Company";
             // 
-            // lblusername
+            // cmbemployee1
             // 
-            this.lblusername.AutoSize = true;
-            this.lblusername.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblusername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblusername.Location = new System.Drawing.Point(45, 21);
-            this.lblusername.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.lblusername.Name = "lblusername";
-            this.lblusername.Size = new System.Drawing.Size(78, 17);
-            this.lblusername.TabIndex = 92;
-            this.lblusername.Text = "UserName";
+            this.cmbemployee1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbemployee1.FormattingEnabled = true;
+            this.cmbemployee1.Location = new System.Drawing.Point(12, 143);
+            this.cmbemployee1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cmbemployee1.Name = "cmbemployee1";
+            this.cmbemployee1.Size = new System.Drawing.Size(257, 25);
+            this.cmbemployee1.TabIndex = 137;
             // 
-            // lblusertype
+            // label24
             // 
-            this.lblusertype.AutoSize = true;
-            this.lblusertype.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblusertype.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblusertype.Location = new System.Drawing.Point(553, 21);
-            this.lblusertype.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.lblusertype.Name = "lblusertype";
-            this.lblusertype.Size = new System.Drawing.Size(72, 17);
-            this.lblusertype.TabIndex = 94;
-            this.lblusertype.Text = "UserType";
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.Color.White;
-            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.ForeColor = System.Drawing.Color.Firebrick;
-            this.button5.Location = new System.Drawing.Point(202, 332);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(74, 26);
-            this.button5.TabIndex = 59;
-            this.button5.Text = "Update";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Visible = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button6
-            // 
-            this.button6.BackColor = System.Drawing.Color.White;
-            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.ForeColor = System.Drawing.Color.Firebrick;
-            this.button6.Location = new System.Drawing.Point(310, 332);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(67, 26);
-            this.button6.TabIndex = 60;
-            this.button6.Text = "Delete";
-            this.button6.UseVisualStyleBackColor = false;
-            this.button6.Visible = false;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // dataGridView3
-            // 
-            this.dataGridView3.AllowUserToAddRows = false;
-            this.dataGridView3.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(382, 7);
-            this.dataGridView3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(637, 274);
-            this.dataGridView3.TabIndex = 89;
-            this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick_1);
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.ForeColor = System.Drawing.Color.Black;
+            this.label24.Location = new System.Drawing.Point(9, 123);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(134, 17);
+            this.label24.TabIndex = 136;
+            this.label24.Text = "Head Of Department";
             // 
             // dataGridView5
             // 
@@ -1016,112 +1036,92 @@ namespace Delmon_Managment_System.Forms
             this.button9.UseVisualStyleBackColor = false;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
-            // cmbemployee1
+            // notificationsTap
             // 
-            this.cmbemployee1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbemployee1.FormattingEnabled = true;
-            this.cmbemployee1.Location = new System.Drawing.Point(12, 143);
-            this.cmbemployee1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.cmbemployee1.Name = "cmbemployee1";
-            this.cmbemployee1.Size = new System.Drawing.Size(257, 25);
-            this.cmbemployee1.TabIndex = 137;
+            this.notificationsTap.Location = new System.Drawing.Point(4, 26);
+            this.notificationsTap.Name = "notificationsTap";
+            this.notificationsTap.Size = new System.Drawing.Size(1040, 497);
+            this.notificationsTap.TabIndex = 3;
+            this.notificationsTap.Text = "Notifications";
+            this.notificationsTap.UseVisualStyleBackColor = true;
             // 
-            // label24
+            // groupBox1
             // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.ForeColor = System.Drawing.Color.Black;
-            this.label24.Location = new System.Drawing.Point(9, 123);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(134, 17);
-            this.label24.TabIndex = 136;
-            this.label24.Text = "Head Of Department";
+            this.groupBox1.Controls.Add(this.lblPC);
+            this.groupBox1.Controls.Add(this.lbldatetime);
+            this.groupBox1.Controls.Add(this.lblemail);
+            this.groupBox1.Controls.Add(this.lblusername);
+            this.groupBox1.Controls.Add(this.lblusertype);
+            this.groupBox1.Location = new System.Drawing.Point(5, 532);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1027, 58);
+            this.groupBox1.TabIndex = 146;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "User Info";
             // 
-            // cmbCompany
+            // lblPC
             // 
-            this.cmbCompany.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbCompany.FormattingEnabled = true;
-            this.cmbCompany.Location = new System.Drawing.Point(12, 266);
-            this.cmbCompany.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.cmbCompany.Name = "cmbCompany";
-            this.cmbCompany.Size = new System.Drawing.Size(367, 25);
-            this.cmbCompany.TabIndex = 138;
+            this.lblPC.AutoSize = true;
+            this.lblPC.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPC.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.lblPC.Location = new System.Drawing.Point(218, 21);
+            this.lblPC.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblPC.Name = "lblPC";
+            this.lblPC.Size = new System.Drawing.Size(24, 17);
+            this.lblPC.TabIndex = 98;
+            this.lblPC.Text = "Pc";
             // 
-            // label25
+            // lbldatetime
             // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(9, 245);
-            this.label25.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(64, 17);
-            this.label25.TabIndex = 139;
-            this.label25.Text = "Company";
+            this.lbldatetime.AutoSize = true;
+            this.lbldatetime.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbldatetime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.lbldatetime.Location = new System.Drawing.Point(431, 21);
+            this.lbldatetime.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lbldatetime.Name = "lbldatetime";
+            this.lbldatetime.Size = new System.Drawing.Size(73, 17);
+            this.lbldatetime.TabIndex = 96;
+            this.lbldatetime.Text = "Date&Time";
             // 
-            // cmbHeadPostion
+            // lblemail
             // 
-            this.cmbHeadPostion.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbHeadPostion.FormattingEnabled = true;
-            this.cmbHeadPostion.Location = new System.Drawing.Point(12, 206);
-            this.cmbHeadPostion.Name = "cmbHeadPostion";
-            this.cmbHeadPostion.Size = new System.Drawing.Size(167, 25);
-            this.cmbHeadPostion.TabIndex = 141;
+            this.lblemail.AutoSize = true;
+            this.lblemail.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblemail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.lblemail.Location = new System.Drawing.Point(301, 21);
+            this.lblemail.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblemail.Name = "lblemail";
+            this.lblemail.Size = new System.Drawing.Size(45, 17);
+            this.lblemail.TabIndex = 95;
+            this.lblemail.Text = "Email";
             // 
-            // label17
+            // lblusername
             // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.Color.Black;
-            this.label17.Location = new System.Drawing.Point(9, 187);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(87, 17);
-            this.label17.TabIndex = 140;
-            this.label17.Text = "Head Postion";
+            this.lblusername.AutoSize = true;
+            this.lblusername.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblusername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.lblusername.Location = new System.Drawing.Point(45, 21);
+            this.lblusername.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblusername.Name = "lblusername";
+            this.lblusername.Size = new System.Drawing.Size(78, 17);
+            this.lblusername.TabIndex = 92;
+            this.lblusername.Text = "UserName";
             // 
-            // btnnew
+            // lblusertype
             // 
-            this.btnnew.BackColor = System.Drawing.Color.White;
-            this.btnnew.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.btnnew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnnew.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnnew.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnnew.Location = new System.Drawing.Point(9, 304);
-            this.btnnew.Name = "btnnew";
-            this.btnnew.Size = new System.Drawing.Size(70, 26);
-            this.btnnew.TabIndex = 138;
-            this.btnnew.Text = "New";
-            this.btnnew.UseVisualStyleBackColor = false;
-            this.btnnew.Click += new System.EventHandler(this.btnnew_Click);
+            this.lblusertype.AutoSize = true;
+            this.lblusertype.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblusertype.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.lblusertype.Location = new System.Drawing.Point(637, 21);
+            this.lblusertype.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblusertype.Name = "lblusertype";
+            this.lblusertype.Size = new System.Drawing.Size(72, 17);
+            this.lblusertype.TabIndex = 94;
+            this.lblusertype.Text = "UserType";
             // 
-            // BtnnewJob
+            // timer1
             // 
-            this.BtnnewJob.BackColor = System.Drawing.Color.White;
-            this.BtnnewJob.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.BtnnewJob.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnnewJob.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnnewJob.ForeColor = System.Drawing.Color.Firebrick;
-            this.BtnnewJob.Location = new System.Drawing.Point(6, 332);
-            this.BtnnewJob.Name = "BtnnewJob";
-            this.BtnnewJob.Size = new System.Drawing.Size(70, 26);
-            this.BtnnewJob.TabIndex = 139;
-            this.BtnnewJob.Text = "New";
-            this.BtnnewJob.UseVisualStyleBackColor = false;
-            this.BtnnewJob.Click += new System.EventHandler(this.BtnnewJob_Click);
-            // 
-            // BtnnewAgaency
-            // 
-            this.BtnnewAgaency.BackColor = System.Drawing.Color.White;
-            this.BtnnewAgaency.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.BtnnewAgaency.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnnewAgaency.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnnewAgaency.ForeColor = System.Drawing.Color.Firebrick;
-            this.BtnnewAgaency.Location = new System.Drawing.Point(12, 447);
-            this.BtnnewAgaency.Name = "BtnnewAgaency";
-            this.BtnnewAgaency.Size = new System.Drawing.Size(70, 31);
-            this.BtnnewAgaency.TabIndex = 139;
-            this.BtnnewAgaency.Text = "New";
-            this.BtnnewAgaency.UseVisualStyleBackColor = false;
-            this.BtnnewAgaency.Click += new System.EventHandler(this.BtnnewAgaency_Click);
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // SettingFrm
             // 
@@ -1140,6 +1140,7 @@ namespace Delmon_Managment_System.Forms
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.jobsTap.ResumeLayout(false);
             this.jobsTap.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.agenciesTap.ResumeLayout(false);
             this.agenciesTap.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
@@ -1148,10 +1149,9 @@ namespace Delmon_Managment_System.Forms
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.DepartmentTap.ResumeLayout(false);
             this.DepartmentTap.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
             this.ResumeLayout(false);
 
         }
