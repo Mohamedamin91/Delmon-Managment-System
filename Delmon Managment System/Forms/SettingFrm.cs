@@ -74,9 +74,7 @@ namespace Delmon_Managment_System.Forms
             cmbusertype.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbusertype.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
-                (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID    ");
-
+          
 
             //  dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Agencies  order by AgencID " );
 
@@ -132,8 +130,17 @@ namespace Delmon_Managment_System.Forms
             cmbHeadPostion.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT DISTINCT DeptHeadPosition FROM DEPARTMENTS WHERE DeptHeadPosition IS NOT NULL ORDER BY DeptHeadPosition DESC  ");
             cmbHeadPostion.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbHeadPostion.AutoCompleteSource = AutoCompleteSource.ListItems;
+      
+            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
+              (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID    ");
 
 
+            dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox
+              (" SELECT * from jobs   ");
+
+
+            dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox
+              (" SELECT * from  Agencies   ");
 
             SQLCONN.CloseConnection();
 
@@ -196,60 +203,83 @@ namespace Delmon_Managment_System.Forms
             parampc.Value = lblPC.Text;
 
 
-
+            SqlDataReader dr, dr2;
             if ((int)cmbemployee.SelectedValue != 0 && usernametxt.Text != "" && passwordtxt.Text != "")
             {
                 SQLCONN.OpenConection();
-                SqlDataReader dr = SQLCONN.DataReader("select  * from tblUser  where " +
-                     " EmployeeID=  @C1 and  UserName =  @C2 ", paramemployee, paramusername);
+                 dr = SQLCONN.DataReader("select  * from tblUser  where " +
+                     " EmployeeID=  @C1 or username = @C2", paramemployee, paramusername);
                 dr.Read();
 
 
                 if (dr.HasRows)
                 {
-                    MessageBox.Show("This 'User'  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("This 'User'/ 'Username'  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 }
-
-
-                else if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                else 
                 {
-
-
-                    dr.Dispose();
-                    dr.Close();
-                    if (isactivecheck.Checked)
+                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     {
-                        SQLCONN.ExecuteQueries("insert into tblUser ( [EmployeeID] ,[UserName],[Password],[UserTypeID],[IsActive]) values (@C1,@C2,@C3,@C4,1)",
-                                                 paramemployee, paramusername, parampassword, paramusertype, paramisActive);
+
+
+                        dr.Dispose();
+                        dr.Close();
+                        if (isactivecheck.Checked)
+                        {
+                            dr.Dispose();
+                            dr.Close();
+                           
+                            SQLCONN.ExecuteQueries("insert into tblUser ( [EmployeeID] ,[UserName],[Password],[UserTypeID],[IsActive]) values (@C1,@C2,@C3,@C4,1)",
+                                                     paramemployee, paramusername, parampassword, paramusertype, paramisActive);
+                            MessageBox.Show("Record saved Successfully");
+                          
+                            SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('User Info',@C1 ,'#','#',@datetime,@pc,@user,'Insert')", paramemployee, paramdatetimeLOG, parampc, paramuser);
+                            btnnew.Visible = true;
+
+                        }
+                        else
+                        {
+                            dr.Dispose();
+                            dr.Close();
+                           
+
+                            
+
+                            SQLCONN.ExecuteQueries("insert into tblUser ( [EmployeeID] ,[UserName],[Password],[UserTypeID],[IsActive]) values (@C1,@C2,@C3,@C4,0)",
+                                   
+                                
+                                paramemployee, paramusername, parampassword, paramusertype, paramisActive);
+                                MessageBox.Show("Record saved Successfully");
+
+                            
+
+                            SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('User Info',@C1 ,'#','#',@datetime,@pc,@user,'Insert')", paramemployee, paramdatetimeLOG, parampc, paramuser);
+                            btnnew.Visible = true;
+
+
+                        }
+
+                        cmbusertype.Text = cmbemployee.Text = "Select";
+                        usernametxt.Text = passwordtxt.Text = "";
+                        isactivecheck.Checked = false;
+
+                        dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from tblUser where EmployeeID= @C1 order by EmployeeID ", paramemployee);
+
+
+                        dr.Dispose();
+                        dr.Close();
+
+
 
                     }
                     else
                     {
-                        SQLCONN.ExecuteQueries("insert into tblUser ( [EmployeeID] ,[UserName],[Password],[UserTypeID],[IsActive]) values (@C1,@C2,@C3,@C4,0)",
-                                                   paramemployee, paramusername, parampassword, paramusertype, paramisActive);
 
                     }
-
-                    MessageBox.Show("Record saved Successfully");
-                    cmbusertype.Text = cmbemployee.Text = "Select";
-                    usernametxt.Text = passwordtxt.Text = "";
-                    isactivecheck.Checked = false;
-                    SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('User Info',@id ,'#','#',@datetime,@pc,@user,'Insert')", paramPID, paramdatetimeLOG, parampc, paramuser);
-
-                    dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from tblUser where EmployeeID= @C1 order by EmployeeID ", paramemployee);
-
-
-                    dr.Dispose();
-                    dr.Close();
-
-
-
                 }
-                else
-                {
 
-                }
+                
 
             }
             else
@@ -262,6 +292,8 @@ namespace Delmon_Managment_System.Forms
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            addbtn.Visible = false;
+            btnnew.Visible = updatebtn.Visible = deletebtn.Visible = true;
             if (e.RowIndex == -1) return;
 
             foreach (DataGridViewRow rw in this.dataGridView1.Rows)
@@ -673,6 +705,7 @@ namespace Delmon_Managment_System.Forms
 
 
                         MessageBox.Show("Record saved Successfully");
+                        BtnnewAgaency.Visible = true;
 
                         SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Agency Info',@id ,'#','#',@datetime,@pc,@user,'Insert')", paramAgencyid, paramdatetimeLOG, parampc, paramuser);
                         SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Contact Agency Info , @id ,'#','#',@datetime,@pc,@user,'Insert')", paramContactType, paramAgencyid, paramdatetimeLOG, parampc, paramuser);
@@ -885,6 +918,8 @@ namespace Delmon_Managment_System.Forms
                             dr2.Dispose();
                             dr2.Close();
                             ClearTextBoxes();
+                            BtnnewJob.Visible = true;
+
 
                         }
                         else
@@ -1033,21 +1068,39 @@ namespace Delmon_Managment_System.Forms
 
         private void dataGridView2_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
+            button1.Visible = false;
+            BtnnewAgaency.Visible = button2.Visible = button3.Visible = true;
             SQLCONN.OpenConection();
+            cmbCity.ValueMember = "ConsulateID";
+            cmbCity.DisplayMember = "ConsulateCity";
+            cmbCity.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT [ConsulateID],ConsulateCity FROM [DelmonGroupDB].[dbo].[Consulates]   ");
+
+            if (e.RowIndex == -1) return;
+
+
             if (e.RowIndex >= 0 && e.RowIndex < dataGridView2.Rows.Count && e.ColumnIndex >= 0 && e.ColumnIndex < dataGridView2.Columns.Count)
             {
-                agaencyid = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString());
-                AgencyNametxt.Text = dataGridView2.Rows[e.RowIndex].Cells[1].Value.ToString();
-                LicenseNumbertxt.Text = dataGridView2.Rows[e.RowIndex].Cells[2].Value.ToString();
-                cmbCountry.SelectedValue = dataGridView2.Rows[e.RowIndex].Cells[3].Value.ToString();
+                DataGridViewRow row = dataGridView2.Rows[e.RowIndex];
+                if (row.Cells[0].Value != null)
+                {
+                    agaencyid = Convert.ToInt32(row.Cells[0].Value.ToString());
+                    AgencyNametxt.Text = row.Cells[1].Value?.ToString();
+                    LicenseNumbertxt.Text = row.Cells[2].Value?.ToString();
+                    if (cmbCountry != null && row.Cells[3].Value != null)
+                    {
+                        cmbCountry.SelectedValue = row.Cells[3].Value.ToString();
+                       
+                    }
+                    if (cmbCity != null && row.Cells[4].Value != null)
+                    {
+                        cmbCity.SelectedValue = row.Cells[4].Value.ToString();
 
-                SqlParameter paramacounrtry = new SqlParameter("@C1", SqlDbType.NVarChar);
-                paramacounrtry.Value = cmbCountry.SelectedValue;
-                cmbCity.ValueMember = "ConsulateID";
-                cmbCity.DisplayMember = "ConsulateCity";
-                cmbCity.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT [ConsulateID],ConsulateCity FROM [DelmonGroupDB].[dbo].[Consulates] where  CountryId=@C1", paramacounrtry);
+                    }
+                }
+              
             }
-            SQLCONN.CloseConnection();
+
+               SQLCONN.CloseConnection();
 
         }
 
@@ -1298,50 +1351,29 @@ namespace Delmon_Managment_System.Forms
 
         private void dataGridView3_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
+            button4.Visible = false;
+            btnnew.Visible = button5.Visible = button6.Visible = true;
             if (e.RowIndex == -1) return;
-
-            foreach (DataGridViewRow rw in this.dataGridView3.Rows)
+            if (e.RowIndex >= 0 && e.RowIndex < dataGridView3.Rows.Count && e.ColumnIndex >= 0 && e.ColumnIndex < dataGridView3.Columns.Count)
             {
-                for (int i = 0; i < rw.Cells.Count; i++)
+                DataGridViewRow row = dataGridView3.Rows[e.RowIndex];
+                if (row.Cells[0].Value != null)
                 {
-                    if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
+                    jobid = Convert.ToInt32(row.Cells[0].Value.ToString());
+                    JobTitleENtxt.Text = row.Cells[1].Value?.ToString();
+                    jobtitleartxt.Text = row.Cells[2].Value?.ToString();
+                    Descriptiontxt.Text = row.Cells[3].Value?.ToString();
+                    if (cmbworkfield != null && row.Cells[4].Value != null)
                     {
-                        //   MessageBox.Show("ogg");       
+                        cmbworkfield.SelectedValue = row.Cells[4].Value.ToString();
                     }
-                    else
+                    if (cmbjobgrade != null && row.Cells[5].Value != null)
                     {
-
-                        jobid = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString());
-                        JobTitleENtxt.Text = dataGridView3.Rows[e.RowIndex].Cells[1].Value.ToString();
-                        jobtitleartxt.Text = dataGridView3.Rows[e.RowIndex].Cells[2].Value.ToString();
-                        Descriptiontxt.Text = dataGridView3.Rows[e.RowIndex].Cells[3].Value.ToString();
-                        cmbworkfield.SelectedValue = dataGridView3.Rows[e.RowIndex].Cells[4].Value.ToString();
-                        cmbjobgrade.SelectedValue = dataGridView3.Rows[e.RowIndex].Cells[5].Value.ToString();
-                        mintxt.Text = dataGridView3.Rows[e.RowIndex].Cells[6].Value.ToString();
-                        maxtxt.Text = dataGridView3.Rows[e.RowIndex].Cells[7].Value.ToString();
-
-
-                        // Check if the clicked cell is in the IsActive column
-
-                        // Get the value of the cell
-
-
-
-
-
-
-                       // EmployeeID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-
-                        ////CurrentEmployeeIDtxt.Text = EmployeeID.ToString();
-                        ////addbtn.Visible = false;
-                        //btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = true;
-                        //firstnametxt.Enabled = secondnametxt.Enabled = thirdnametxt.Enabled = lastnametxt.Enabled = true;
-                        //cmbMartialStatus.Enabled = cmbGender.Enabled = cmbCompany.Enabled = cmbempdepthistory.Enabled = cmbEmployJobHistory.Enabled = cmbPersonalStatusStatus.Enabled = true;
-                        //StartDatePicker.Enabled = true;
-
+                        cmbjobgrade.SelectedValue = row.Cells[5].Value.ToString();
                     }
+                    mintxt.Text = row.Cells[6].Value?.ToString();
+                    maxtxt.Text = row.Cells[7].Value?.ToString();
                 }
-
             }
 
         }
@@ -1682,6 +1714,28 @@ namespace Delmon_Managment_System.Forms
         private void DepartmentTap_Click(object sender, EventArgs e)
         {
            
+        }
+
+        private void btnnew_Click(object sender, EventArgs e)
+        {
+            addbtn.Visible = true;
+            ClearTextBoxes();
+
+
+        }
+
+        private void BtnnewJob_Click(object sender, EventArgs e)
+        {
+            button4.Visible = true;
+            ClearTextBoxes();
+
+        }
+
+        private void BtnnewAgaency_Click(object sender, EventArgs e)
+        {
+            button1.Visible=true;
+            ClearTextBoxes();
+
         }
 
         private void maxtxt_KeyPress(object sender, KeyPressEventArgs e)

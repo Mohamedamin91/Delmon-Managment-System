@@ -539,7 +539,7 @@ namespace Delmon_Managment_System.Forms
             this.btnAssign.BackColor = System.Drawing.Color.White;
             this.btnAssign.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
             this.btnAssign.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAssign.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAssign.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAssign.ForeColor = System.Drawing.Color.Firebrick;
             this.btnAssign.Location = new System.Drawing.Point(484, 193);
             this.btnAssign.Margin = new System.Windows.Forms.Padding(4);
@@ -647,7 +647,7 @@ namespace Delmon_Managment_System.Forms
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.label44);
             this.groupBox3.Controls.Add(this.dataGridView2);
-            this.groupBox3.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(12, 269);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(1093, 279);
@@ -662,7 +662,7 @@ namespace Delmon_Managment_System.Forms
             this.button2.BackColor = System.Drawing.Color.White;
             this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.Firebrick;
             this.button2.Location = new System.Drawing.Point(484, 156);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
@@ -701,7 +701,7 @@ namespace Delmon_Managment_System.Forms
             this.btnnewJob.BackColor = System.Drawing.Color.White;
             this.btnnewJob.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
             this.btnnewJob.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnnewJob.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnnewJob.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnnewJob.ForeColor = System.Drawing.Color.Firebrick;
             this.btnnewJob.Location = new System.Drawing.Point(484, 89);
             this.btnnewJob.Margin = new System.Windows.Forms.Padding(4);
