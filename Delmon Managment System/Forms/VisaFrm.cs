@@ -55,8 +55,14 @@ namespace Delmon_Managment_System.Forms
             InitializeComponent();
 
 
+            Font newFont = new Font("Times New Roman", 12);
 
-           
+            // Loop through all controls on the form and change their font properties
+            foreach (Control control in Controls)
+            {
+                control.Font = newFont;
+            }
+
 
             cmbStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbStatus.AutoCompleteSource = AutoCompleteSource.ListItems;

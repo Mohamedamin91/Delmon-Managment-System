@@ -28,6 +28,15 @@ namespace Delmon_Managment_System.Forms
         public SettingFrm()
         {
             InitializeComponent();
+            // Define the new font
+            Font newFont = new Font("Times New Roman", 12);
+
+            // Loop through all controls on the form and change their font properties
+            foreach (Control control in Controls)
+            {
+                control.Font = newFont;
+            }
+           
         }
         public static Regex email_validation()
         {
@@ -52,6 +61,12 @@ namespace Delmon_Managment_System.Forms
             cmbemployee.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT EmployeeID ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName' from Employees   order by EmployeeID ");
             cmbemployee.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbemployee.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            cmbemployee1.ValueMember = "EmployeeID";
+            cmbemployee1.DisplayMember = "FullName";
+            cmbemployee1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT EmployeeID ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName' from Employees   order by EmployeeID ");
+            cmbemployee1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbemployee1.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             cmbusertype.ValueMember = "UserTypeID";
             cmbusertype.DisplayMember = "UserType";
@@ -86,6 +101,12 @@ namespace Delmon_Managment_System.Forms
             cmbworkfield.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Work_Field_ID,Work_Field_Name FROM WorkFields");
             cmbworkfield.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbworkfield.AutoCompleteSource = AutoCompleteSource.ListItems;
+            
+            cmbworkfield1.ValueMember = "Work_Field_ID";
+            cmbworkfield1.DisplayMember = "Work_Field_Name";
+            cmbworkfield1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Work_Field_ID,Work_Field_Name FROM WorkFields");
+            cmbworkfield1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbworkfield1.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
             cmbjobgrade.ValueMember = "Job_Grade_ID";
@@ -93,6 +114,25 @@ namespace Delmon_Managment_System.Forms
             cmbjobgrade.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Job_Grade_ID,Job_Grade_Name FROM JobGrades");
             cmbjobgrade.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbjobgrade.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            cmbCompany.ValueMember = "COMPID";
+            cmbCompany.DisplayMember = "COMPName_EN";
+            cmbCompany.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT COMPID,COMPName_EN FROM Companies");
+            cmbCompany.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbCompany.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            cmbDepartment.ValueMember = "Dept_Type_ID";
+            cmbDepartment.DisplayMember = "Dept_Type_Name";
+            cmbDepartment.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Dept_Type_ID,Dept_Type_Name FROM [DeptTypes]");
+            cmbDepartment.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbDepartment.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+       //     cmbHeadPostion.ValueMember = "[DEPTID]";
+            cmbHeadPostion.DisplayMember = "DeptHeadPosition";
+            cmbHeadPostion.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT DISTINCT DeptHeadPosition FROM DEPARTMENTS WHERE DeptHeadPosition IS NOT NULL ORDER BY DeptHeadPosition DESC  ");
+            cmbHeadPostion.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbHeadPostion.AutoCompleteSource = AutoCompleteSource.ListItems;
+
 
 
             SQLCONN.CloseConnection();
@@ -870,7 +910,7 @@ namespace Delmon_Managment_System.Forms
             }
             else
             {
-                MessageBox.Show("Please Fill the missing fields  ");
+                MessageBox.Show("Please Fill the missing fields.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             SQLCONN.CloseConnection();
@@ -1599,6 +1639,49 @@ namespace Delmon_Managment_System.Forms
             }
 
             SQLCONN.CloseConnection();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+            SqlParameter paramDEPARTMENTNAME = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramDEPARTMENTNAME.Value = cmbDepartment.SelectedValue;
+            SqlParameter paramWORLOCATION = new SqlParameter("@C2", SqlDbType.NVarChar);
+            paramWORLOCATION.Value = cmbworkfield1.SelectedValue;
+            SqlParameter paramHEADOFDEPARTMENT= new SqlParameter("@C3", SqlDbType.NVarChar);
+            paramHEADOFDEPARTMENT.Value = cmbemployee1.SelectedValue;
+            SqlParameter paramHEADPOSTION = new SqlParameter("@C4", SqlDbType.NVarChar);
+            paramHEADPOSTION.Value = cmbHeadPostion.SelectedValue;
+            SqlParameter PARAMCOMPANY = new SqlParameter("@C5", SqlDbType.NVarChar);
+            PARAMCOMPANY.Value = cmbCompany.SelectedValue;
+
+
+            SqlParameter Paramdepartmentid = new SqlParameter("@id", SqlDbType.NVarChar);
+            Paramdepartmentid.Value = departmentid;
+
+            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+            paramuser.Value = lblusername.Text;
+            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+            paramdatetimeLOG.Value = lbldatetime.Text;
+            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+            parampc.Value = lblPC.Text;
+
+            if (cmbDepartment.Text != "Select" && cmbworkfield1.Text != "Select" && cmbemployee1.Text != "Select" && cmbHeadPostion.Text != "Select" && cmbCompany.Text != "Select")
+            { }
+            else 
+            {
+                MessageBox.Show("Please Fill the missing fields.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+
+
+
+
+        }
+
+        private void DepartmentTap_Click(object sender, EventArgs e)
+        {
+           
         }
 
         private void maxtxt_KeyPress(object sender, KeyPressEventArgs e)

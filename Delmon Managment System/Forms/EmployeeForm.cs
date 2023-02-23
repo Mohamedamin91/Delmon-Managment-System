@@ -34,6 +34,13 @@ namespace Delmon_Managment_System.Forms
         {
 
             InitializeComponent();
+            Font newFont = new Font("Times New Roman", 10);
+
+            // Loop through all controls on the form and change their font properties
+            foreach (Control control in Controls)
+            {
+                control.Font = newFont;
+            }
             //cmbCountry.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             //cmbCountry.AutoCompleteSource = AutoCompleteSource.ListItems;
             //cmbStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -2251,6 +2258,36 @@ namespace Delmon_Managment_System.Forms
             FrmJobsNew frmJobs = new FrmJobsNew();
             // this.Hide();
             frmJobs.Show();
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtvalue_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbsalarytype_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SalaryTab_Click(object sender, EventArgs e)
+        {
+
         }
     }
     }
