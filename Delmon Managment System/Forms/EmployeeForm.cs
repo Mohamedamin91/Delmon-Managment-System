@@ -93,8 +93,8 @@ namespace Delmon_Managment_System.Forms
             loggedEmpolyeeID = CommonClass.EmployeeID;
 
 
-            SqlParameter paramusername = new SqlParameter("@C1", SqlDbType.NVarChar);
-            paramusername.Value = lblusername.Text.Trim();
+            SqlParameter paramloggiedemployeeid = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramloggiedemployeeid.Value = loggedEmpolyeeID;
             SQLCONN.OpenConection();
 
             if (lblusertype.Text == "Admin")
@@ -103,7 +103,18 @@ namespace Delmon_Managment_System.Forms
                 dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  select Employees.EmployeeID, Employees.CurrentEmpID,FirstName,SecondName,ThirdName,LastName,Gender,MartialStatus,StatusTBL.StatusValue,jobs.JobTitleEN,DeptTypes.Dept_Type_Name,Companies.COMPName_EN  from Employees,Companies,JOBS,StatusTBL,DEPARTMENTS,DeptTypes  where  Employees.DeptID = DEPARTMENTS.DeptName  and  DEPARTMENTS.DeptName  = DeptTypes.Dept_Type_ID and Employees.EmploymentStatusID = StatusTBL.StatusID  and Employees.JobID= JOBS.JobID  and Employees.COMPID = Companies.COMPID  and DEPARTMENTS.COMPID = Companies.COMPID  order by EmployeeID desc");
 
             }
-            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  select Employees.EmployeeID, Employees.CurrentEmpID,FirstName,SecondName,ThirdName,LastName,Gender,MartialStatus,StatusTBL.StatusValue,jobs.JobTitleEN,DeptTypes.Dept_Type_Name,Companies.COMPName_EN  from Employees,Companies,JOBS,StatusTBL,DEPARTMENTS,DeptTypes  where  Employees.DeptID = DEPARTMENTS.DeptName  and  DEPARTMENTS.DeptName  = DeptTypes.Dept_Type_ID and Employees.EmploymentStatusID = StatusTBL.StatusID  and Employees.JobID= JOBS.JobID  and Employees.COMPID = Companies.COMPID  and DEPARTMENTS.COMPID = Companies.COMPID  order by EmployeeID desc");
+            string query = "SELECT Employees.EmployeeID, Employees.CurrentEmpID, FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus, StatusTBL.StatusValue, jobs.JobTitleEN, DeptTypes.Dept_Type_Name, Companies.COMPName_EN, startdate, enddate " +
+              "FROM Employees " +
+              "INNER JOIN StatusTBL ON Employees.EmploymentStatusID = StatusTBL.StatusID " +
+              "INNER JOIN JOBS ON Employees.JobID = JOBS.JobID " +
+              "INNER JOIN DEPARTMENTS ON Employees.DeptID = DEPARTMENTS.DEPTID " +
+              "INNER JOIN DeptTypes ON DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID " +
+              "INNER JOIN Companies ON DEPARTMENTS.COMPID = Companies.COMPID " +
+              "WHERE Employees.DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = @C1) " +
+              "ORDER BY Employees.EmployeeID ASC";
+
+            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramloggiedemployeeid);
+
 
 
 
