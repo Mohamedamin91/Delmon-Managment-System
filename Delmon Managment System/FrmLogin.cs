@@ -70,6 +70,7 @@ namespace Delmon_Managment_System
                 CommonClass.LoginUserName = UserName;
                 CommonClass.Usertype = UserType;
                 CommonClass.Email = Email;
+                CommonClass.EmployeeID = EmployeeID;
 
 
                 //saving user info

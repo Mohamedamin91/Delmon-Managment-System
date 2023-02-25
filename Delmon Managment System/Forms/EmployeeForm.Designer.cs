@@ -425,7 +425,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(19, 324);
+            this.label13.Location = new System.Drawing.Point(19, 326);
             this.label13.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(39, 17);
@@ -447,7 +447,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(19, 284);
+            this.label12.Location = new System.Drawing.Point(19, 292);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(77, 17);
             this.label12.TabIndex = 137;
@@ -538,7 +538,7 @@ namespace Delmon_Managment_System.Forms
             this.lblusertype.AutoSize = true;
             this.lblusertype.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblusertype.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblusertype.Location = new System.Drawing.Point(2, 64);
+            this.lblusertype.Location = new System.Drawing.Point(2, 84);
             this.lblusertype.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblusertype.Name = "lblusertype";
             this.lblusertype.Size = new System.Drawing.Size(58, 15);
@@ -550,7 +550,7 @@ namespace Delmon_Managment_System.Forms
             this.lblusername.AutoSize = true;
             this.lblusername.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblusername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblusername.Location = new System.Drawing.Point(2, 18);
+            this.lblusername.Location = new System.Drawing.Point(2, 38);
             this.lblusername.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblusername.Name = "lblusername";
             this.lblusername.Size = new System.Drawing.Size(64, 15);
@@ -562,7 +562,7 @@ namespace Delmon_Managment_System.Forms
             this.lblemail.AutoSize = true;
             this.lblemail.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblemail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblemail.Location = new System.Drawing.Point(2, 40);
+            this.lblemail.Location = new System.Drawing.Point(2, 60);
             this.lblemail.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblemail.Name = "lblemail";
             this.lblemail.Size = new System.Drawing.Size(38, 15);
@@ -574,7 +574,7 @@ namespace Delmon_Managment_System.Forms
             this.lbldatetime.AutoSize = true;
             this.lbldatetime.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbldatetime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lbldatetime.Location = new System.Drawing.Point(2, 114);
+            this.lbldatetime.Location = new System.Drawing.Point(2, 134);
             this.lbldatetime.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lbldatetime.Name = "lbldatetime";
             this.lbldatetime.Size = new System.Drawing.Size(60, 15);
@@ -590,7 +590,7 @@ namespace Delmon_Managment_System.Forms
             this.groupBox1.Controls.Add(this.lblusertype);
             this.groupBox1.Location = new System.Drawing.Point(1467, 32);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(192, 145);
+            this.groupBox1.Size = new System.Drawing.Size(192, 184);
             this.groupBox1.TabIndex = 145;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "User Info";
@@ -600,7 +600,7 @@ namespace Delmon_Managment_System.Forms
             this.lblPC.AutoSize = true;
             this.lblPC.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPC.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblPC.Location = new System.Drawing.Point(2, 89);
+            this.lblPC.Location = new System.Drawing.Point(2, 109);
             this.lblPC.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblPC.Name = "lblPC";
             this.lblPC.Size = new System.Drawing.Size(21, 15);

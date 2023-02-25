@@ -26,6 +26,7 @@ namespace Delmon_Managment_System.Forms
         static Regex validate_emailaddress = email_validation();
         int id_History = 0;
         //  int ID = 0;
+        int loggedEmpolyeeID;
 
 
 
@@ -41,14 +42,7 @@ namespace Delmon_Managment_System.Forms
             {
                 control.Font = newFont;
             }
-            //cmbCountry.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //cmbCountry.AutoCompleteSource = AutoCompleteSource.ListItems;
-            //cmbStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //cmbStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
-            //cmbJob.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //cmbJob.AutoCompleteSource = AutoCompleteSource.ListItems;
-            //cmbReportto.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //cmbReportto.AutoCompleteSource = AutoCompleteSource.ListItems;
+           
 
 
         }
@@ -96,12 +90,21 @@ namespace Delmon_Managment_System.Forms
             lblusertype.Text = CommonClass.Usertype;
             lblemail.Text = CommonClass.Email;
             lblPC.Text = Environment.MachineName;
+            loggedEmpolyeeID = CommonClass.EmployeeID;
+
+
+            SqlParameter paramusername = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramusername.Value = lblusername.Text.Trim();
+            SQLCONN.OpenConection();
 
             if (lblusertype.Text == "Admin")
             {
                 DeleteBTN.Enabled = btndeletecontact.Enabled = btndeletedoc.Enabled = button1.Enabled = true;
+                dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  select Employees.EmployeeID, Employees.CurrentEmpID,FirstName,SecondName,ThirdName,LastName,Gender,MartialStatus,StatusTBL.StatusValue,jobs.JobTitleEN,DeptTypes.Dept_Type_Name,Companies.COMPName_EN  from Employees,Companies,JOBS,StatusTBL,DEPARTMENTS,DeptTypes  where  Employees.DeptID = DEPARTMENTS.DeptName  and  DEPARTMENTS.DeptName  = DeptTypes.Dept_Type_ID and Employees.EmploymentStatusID = StatusTBL.StatusID  and Employees.JobID= JOBS.JobID  and Employees.COMPID = Companies.COMPID  and DEPARTMENTS.COMPID = Companies.COMPID  order by EmployeeID desc");
+
             }
-            
+            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  select Employees.EmployeeID, Employees.CurrentEmpID,FirstName,SecondName,ThirdName,LastName,Gender,MartialStatus,StatusTBL.StatusValue,jobs.JobTitleEN,DeptTypes.Dept_Type_Name,Companies.COMPName_EN  from Employees,Companies,JOBS,StatusTBL,DEPARTMENTS,DeptTypes  where  Employees.DeptID = DEPARTMENTS.DeptName  and  DEPARTMENTS.DeptName  = DeptTypes.Dept_Type_ID and Employees.EmploymentStatusID = StatusTBL.StatusID  and Employees.JobID= JOBS.JobID  and Employees.COMPID = Companies.COMPID  and DEPARTMENTS.COMPID = Companies.COMPID  order by EmployeeID desc");
+
 
 
 
@@ -119,7 +122,7 @@ namespace Delmon_Managment_System.Forms
 
 
 
-            SQLCONN.OpenConection();
+           
 
             cmbCompany.ValueMember = "COMPID";
             cmbCompany.DisplayMember = "COMPName_EN";
@@ -185,7 +188,6 @@ namespace Delmon_Managment_System.Forms
             cmbsalarytype.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
-            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  select Employees.EmployeeID, Employees.CurrentEmpID,FirstName,SecondName,ThirdName,LastName,Gender,MartialStatus,StatusTBL.StatusValue,jobs.JobTitleEN,DeptTypes.Dept_Type_Name,Companies.COMPName_EN  from Employees,Companies,JOBS,StatusTBL,DEPARTMENTS,DeptTypes  where  Employees.DeptID = DEPARTMENTS.DeptName  and  DEPARTMENTS.DeptName  = DeptTypes.Dept_Type_ID and Employees.EmploymentStatusID = StatusTBL.StatusID  and Employees.JobID= JOBS.JobID  and Employees.COMPID = Companies.COMPID  and DEPARTMENTS.COMPID = Companies.COMPID  order by EmployeeID desc");
             cmbPersonalStatusStatus.Text = "Select";
             cmbempdepthistory.Text = "Select";
             CurrentEmployeeIDtxt.Enabled = true;
@@ -199,11 +201,31 @@ namespace Delmon_Managment_System.Forms
         {
             SqlParameter paramEmployeenameSearch = new SqlParameter("@C1", SqlDbType.NVarChar);
             paramEmployeenameSearch.Value = Employeetxt.Text;
-            SQLCONN.OpenConection();
-            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(
-              " select  Employees.EmployeeID,Employees.CurrentEmpID,FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus , StatusTBL.StatusValue, jobs.JobTitleEN, DeptTypes.Dept_Type_Name, Companies.COMPName_EN,startdate,enddate from Employees,StatusTBL,JOBS,DeptTypes,DEPARTMENTS,Companies where ( firstname LIKE '%' + @C1 + '%' or  secondname LIKE '%' + @C1 + '%' or thirdname LIKE '% @C1 %'  or lastname LIKE  '%' + @C1 + '%' or Employees.EmployeeID like '%' + @C1 + '%' or  Employees.CurrentEmpID like '%' + @C1 + '%' ) " +
-              " and Employees.EmploymentStatusID = StatusTBL.StatusID and Employees.JobID = JOBS.JobID and Employees.DeptID = DEPARTMENTS.DEPTID  and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID and DEPARTMENTS.COMPID= Companies.COMPID  ", paramEmployeenameSearch);
+            SqlParameter paramloggiedemployeeid = new SqlParameter("@C2", SqlDbType.NVarChar);
+            paramloggiedemployeeid.Value = loggedEmpolyeeID;
 
+            SQLCONN.OpenConection();
+            if (lblusertype.Text == "Admin")
+            {
+                dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(
+              " select  Employees.EmployeeID,Employees.CurrentEmpID,FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus , StatusTBL.StatusValue, jobs.JobTitleEN, DeptTypes.Dept_Type_Name, Companies.COMPName_EN,startdate,enddate from Employees,StatusTBL,JOBS,DeptTypes,DEPARTMENTS,Companies where ( firstname LIKE '%' + @C1 + '%' or  secondname LIKE '%' + @C1 + '%' or thirdname LIKE '% @C1 %'  or lastname LIKE  '%' + @C1 + '%' or Employees.EmployeeID like '%' + @C1 + '%' or  Employees.CurrentEmpID like '%' + @C1 + '%' ) " +
+              " and Employees.EmploymentStatusID = StatusTBL.StatusID and Employees.JobID = JOBS.JobID and Employees.DeptID = DEPARTMENTS.DEPTID  and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID and DEPARTMENTS.COMPID= Companies.COMPID order by Employees.EmployeeID ", paramEmployeenameSearch);
+            }
+
+
+            string query = "SELECT Employees.EmployeeID, Employees.CurrentEmpID, FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus, StatusTBL.StatusValue, jobs.JobTitleEN, DeptTypes.Dept_Type_Name, Companies.COMPName_EN, startdate, enddate " +
+               "FROM Employees " +
+               "INNER JOIN StatusTBL ON Employees.EmploymentStatusID = StatusTBL.StatusID " +
+               "INNER JOIN JOBS ON Employees.JobID = JOBS.JobID " +
+               "INNER JOIN DEPARTMENTS ON Employees.DeptID = DEPARTMENTS.DEPTID " +
+               "INNER JOIN DeptTypes ON DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID " +
+               "INNER JOIN Companies ON DEPARTMENTS.COMPID = Companies.COMPID " +
+               "WHERE (firstname LIKE '%' + @C1 + '%' OR secondname LIKE '%' + @C1 + '%' OR thirdname LIKE '%' + @C1 + '%' OR lastname LIKE '%' + @C1 + '%' OR Employees.EmployeeID LIKE '%' + @C1 + '%' OR Employees.CurrentEmpID LIKE '%' + @C1 + '%') " +
+               "AND Employees.DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = @C2) " +
+               "ORDER BY Employees.EmployeeID ASC";
+
+            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query,paramEmployeenameSearch,paramloggiedemployeeid);
+        
 
 
             SQLCONN.CloseConnection();
