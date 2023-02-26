@@ -16,6 +16,7 @@ namespace Delmon_Managment_System.Forms
     {
         SQLCONNECTION SQLCONN = new SQLCONNECTION();
         int EmployeeID;
+        int LoggedEmployeeID;
         int agaencyid;
         int jobid;
         int departmentid;
@@ -48,12 +49,16 @@ namespace Delmon_Managment_System.Forms
         }
         private void SettingFrm_Load(object sender, EventArgs e)
         {
+            SqlParameter paramloggedemployee = new SqlParameter("@LoggedEmployeeid", SqlDbType.NVarChar);
+            paramloggedemployee.Value = LoggedEmployeeID;
             this.timer1.Interval = 1000;
             timer1.Start();
             LoadTheme();
             lblusername.Text = CommonClass.LoginUserName;
             lblusertype.Text = CommonClass.Usertype;
             lblemail.Text = CommonClass.Email;
+            LoggedEmployeeID = CommonClass.EmployeeID;
+            lblFullname.Text = CommonClass.LoginEmployeeName;
             lblPC.Text = Environment.MachineName;
             SQLCONN.OpenConection();
             cmbemployee.ValueMember = "EmployeeID";
@@ -130,10 +135,19 @@ namespace Delmon_Managment_System.Forms
             cmbHeadPostion.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT DISTINCT DeptHeadPosition FROM DEPARTMENTS WHERE DeptHeadPosition IS NOT NULL ORDER BY DeptHeadPosition DESC  ");
             cmbHeadPostion.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbHeadPostion.AutoCompleteSource = AutoCompleteSource.ListItems;
-      
-            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
-              (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID    ");
 
+            if (lblusertype.Text == "Admin")
+            {
+               dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
+            (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID    ");
+           
+            }
+            else 
+            {
+                dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
+                  (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID and tblUser.EmployeeID=" +LoggedEmployeeID+ " ");
+
+            }
 
             dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox
               (" SELECT * from jobs   ");
@@ -1296,7 +1310,7 @@ namespace Delmon_Managment_System.Forms
 
         private void jobsTap_Click(object sender, EventArgs e)
         {
-
+           
         }
 
         private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -1736,6 +1750,77 @@ namespace Delmon_Managment_System.Forms
             button1.Visible=true;
             ClearTextBoxes();
 
+        }
+
+        private void tabControl1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (tabControl1.SelectedTab == tabControl1.TabPages[0])
+            {
+
+            }
+            if (tabControl1.SelectedTab == tabControl1.TabPages[1])
+            {
+                tabControl1.TabPages[1].Visible = false;
+                if (lblusertype.Text != "Admin")
+                {
+
+                    MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+
+                }
+                else
+                {
+                    tabControl1.TabPages[1].Visible = true;
+
+                }
+            }
+            if (tabControl1.SelectedTab == tabControl1.TabPages[2])
+            {
+                tabControl1.TabPages[2].Visible = false;
+
+                if (lblusertype.Text != "Admin")
+                {
+
+                    MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
+                else
+                {
+                    tabControl1.TabPages[2].Visible = true;
+
+                }
+            }
+            if (tabControl1.SelectedTab == tabControl1.TabPages[3])
+            {
+                tabControl1.TabPages[3].Visible = false;
+
+                if (lblusertype.Text != "Admin")
+                {
+
+                    MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    tabControl1.TabPages[3].Visible = true;
+
+                }
+            }
+            if (tabControl1.SelectedTab == tabControl1.TabPages[4])
+            {
+                tabControl1.TabPages[4].Visible = false;
+
+                if (lblusertype.Text != "Admin")
+                {
+
+                    MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
+                else
+                {
+                    tabControl1.TabPages[4].Visible = true;
+
+                }
+            }
         }
 
         private void maxtxt_KeyPress(object sender, KeyPressEventArgs e)

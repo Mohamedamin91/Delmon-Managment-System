@@ -10,6 +10,7 @@ namespace Delmon_Managment_System
     {
         public static int UserID { get; set; }
         public static String LoginUserName { get; set; }
+        public static String LoginEmployeeName { get; set; }
         public static String Usertype { get; set; }
         public static String Email { get; set; }
         public static int EmployeeID { get; set; }

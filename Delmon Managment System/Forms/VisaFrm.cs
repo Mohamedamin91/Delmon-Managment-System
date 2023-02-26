@@ -104,6 +104,7 @@ namespace Delmon_Managment_System.Forms
             lblusername.Text = CommonClass.LoginUserName;
             lblusertype.Text = CommonClass.Usertype;
             lblemail.Text = CommonClass.Email;
+            lblFullname.Text = CommonClass.LoginEmployeeName;
             lblPC.Text = Environment.MachineName;
             
            
@@ -151,12 +152,12 @@ namespace Delmon_Managment_System.Forms
             cmbcandidates.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbcandidates.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-            //cmbcandidates2.ValueMember = "EmployeeID";
-            //cmbcandidates2.DisplayMember = "Name";
-            //cmbcandidates2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees]       order by EmployeeID");
-            //cmbcandidates2.Text = "Select";
-            //cmbcandidates2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //cmbcandidates2.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbcandidates2.ValueMember = "EmployeeID";
+            cmbcandidates2.DisplayMember = "Name";
+            cmbcandidates2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees]       order by EmployeeID");
+            cmbcandidates2.Text = "Select";
+            cmbcandidates2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbcandidates2.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
 
@@ -1350,6 +1351,7 @@ namespace Delmon_Managment_System.Forms
                         {
 
                             cmbcandidates.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[5].Value.ToString());
+                            cmbcandidates2.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[5].Value.ToString());
 
                         }
                         if (cell6Value != null && cell6Value != DBNull.Value && !string.IsNullOrEmpty(cell6Value.ToString()))
@@ -1365,6 +1367,7 @@ namespace Delmon_Managment_System.Forms
                         else
                         {
                             cmbcandidates.SelectedValue = 0;
+                            cmbcandidates2.SelectedValue = 0;
                             cmbAgency.SelectedValue = 0;
                            // cmbCompany.SelectedValue = 0;
 

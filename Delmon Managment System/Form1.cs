@@ -112,6 +112,7 @@ namespace Delmon_Managment_System
             lblusername.Text = CommonClass.LoginUserName;
             lblusertype.Text = CommonClass.Usertype;
             lblemail.Text = CommonClass.Email;
+            lblFullname.Text = CommonClass.LoginEmployeeName;
             lblPC.Text = Environment.MachineName;
             this.timer1.Interval = 1000;
             timer1.Start();
@@ -229,15 +230,15 @@ namespace Delmon_Managment_System
         private void button2_Click_1(object sender, EventArgs e)
         {
             groupBox1.Visible = false;
-            if (lblusertype.Text == "Admin")
-            {
+            //if (lblusertype.Text == "Admin")
+            //{
                 OpenChildForm(new Forms.SettingFrm(), sender);
-            }
-            else 
-            {
-                MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //}
+            //else 
+            //{
+            //    MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-            }
+            //}
 
         }
 

@@ -18,7 +18,9 @@ namespace Delmon_Managment_System
         public int UserID = 0;
         public string UserType ;
         public string UserName;
-        public string Email ;
+        public string Email;
+        public string EmployeeName;
+
 
         public FrmLogin()
         {
@@ -53,7 +55,7 @@ namespace Delmon_Managment_System
             SQLCONN.OpenConection();
             //SqlDataReader dr = SQLCONN.DataReader("select username,pass from tblUser where UserName='" + Usertxt.Text + "'and Password='" + passtxt.Text + "'");
            
-            SqlDataReader dr = SQLCONN.DataReader(" select [UserID],[EmployeeID],UserType,[Email], UserName,Password from tblUser , tblUserType where tblUser.[UserTypeID] =tblUserType.UserTypeID and  UserName=@C1 and Password=@C2 and IsActive=1", paramUserName,paramPassword );
+            SqlDataReader dr = SQLCONN.DataReader(" select CONCAT(FirstName, ' ', SecondName, ' ', ThirdName, ' ', LastName) AS 'FullName',tblUser.UserID,tblUser.EmployeeID,UserType,[Email], UserName,Password from tblUser,Employees , tblUserType where tblUser.[UserTypeID] =tblUserType.UserTypeID and Employees.EmployeeID =tblUser.EmployeeID and  UserName=@C1 and Password=@C2 and IsActive=1;", paramUserName,paramPassword );
             if (dr.Read())
 
             {
@@ -63,14 +65,15 @@ namespace Delmon_Managment_System
                 EmployeeID = int.Parse(dr["EmployeeID"].ToString());
                 UserType = (dr["UserType"].ToString());
                 UserName = (dr["UserName"].ToString());
-                Email =    (dr["Email"].ToString());
-                
-                
+                Email = (dr["Email"].ToString());
+                EmployeeName = (dr["FullName"].ToString());
+
                 CommonClass.UserID = UserID;
                 CommonClass.LoginUserName = UserName;
                 CommonClass.Usertype = UserType;
                 CommonClass.Email = Email;
                 CommonClass.EmployeeID = EmployeeID;
+                CommonClass.LoginEmployeeName = EmployeeName;
 
 
                 //saving user info

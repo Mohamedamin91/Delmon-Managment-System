@@ -91,6 +91,7 @@ namespace Delmon_Managment_System.Forms
             lblemail.Text = CommonClass.Email;
             lblPC.Text = Environment.MachineName;
             loggedEmpolyeeID = CommonClass.EmployeeID;
+            lblFullname.Text = CommonClass.LoginEmployeeName;
 
 
             SqlParameter paramloggiedemployeeid = new SqlParameter("@C1", SqlDbType.NVarChar);
