@@ -34,6 +34,7 @@ namespace Delmon_Managment_System
             this.panelLogo = new System.Windows.Forms.Panel();
             this.panelMenu = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblFullname = new System.Windows.Forms.Label();
             this.lblPC = new System.Windows.Forms.Label();
             this.lbldatetime = new System.Windows.Forms.Label();
             this.lblemail = new System.Windows.Forms.Label();
@@ -55,7 +56,6 @@ namespace Delmon_Managment_System
             this.panelDesktopPanel = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.lblFullname = new System.Windows.Forms.Label();
             this.panelMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panelTitleBar.SuspendLayout();
@@ -103,6 +103,18 @@ namespace Delmon_Managment_System
             this.groupBox1.Size = new System.Drawing.Size(194, 183);
             this.groupBox1.TabIndex = 146;
             this.groupBox1.TabStop = false;
+            // 
+            // lblFullname
+            // 
+            this.lblFullname.AutoSize = true;
+            this.lblFullname.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFullname.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.lblFullname.Location = new System.Drawing.Point(2, 44);
+            this.lblFullname.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblFullname.Name = "lblFullname";
+            this.lblFullname.Size = new System.Drawing.Size(63, 15);
+            this.lblFullname.TabIndex = 99;
+            this.lblFullname.Text = "Full Name";
             // 
             // lblPC
             // 
@@ -259,7 +271,6 @@ namespace Delmon_Managment_System
             this.btnprinting.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnprinting.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnprinting.UseVisualStyleBackColor = true;
-            this.btnprinting.Visible = false;
             this.btnprinting.Click += new System.EventHandler(this.btnprinting_Click);
             // 
             // btnemployee
@@ -410,18 +421,6 @@ namespace Delmon_Managment_System
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // lblFullname
-            // 
-            this.lblFullname.AutoSize = true;
-            this.lblFullname.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFullname.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblFullname.Location = new System.Drawing.Point(2, 44);
-            this.lblFullname.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblFullname.Name = "lblFullname";
-            this.lblFullname.Size = new System.Drawing.Size(63, 15);
-            this.lblFullname.TabIndex = 99;
-            this.lblFullname.Text = "Full Name";
             // 
             // FormMainMenu
             // 

@@ -1255,7 +1255,7 @@ namespace Delmon_Managment_System.Forms
 
                     MessageBox.Show("Record Updated Successfully");
                     EmployeeID = EMPID;
-                    dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue] ,[url] ,[last_update] ,[DocumentType].Doc_Type ,[RefrenceID]FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =  " + EmployeeID + " ");
+                    dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue] ,[DocumentType].Doc_Type ,[RefrenceID]FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =  " + EmployeeID + " ");
                     //    ClearTextBoxes();
                     SQLCONN.CloseConnection();
 
@@ -1460,7 +1460,8 @@ namespace Delmon_Managment_System.Forms
 
         private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-       //     dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue]  ,[DocumentType].Doc_Type ,[RefrenceID],[Number] ,[DocIssueplace]  ,[docissuedate]  ,[docexpiredate] FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =@ID ", paramEmployeeID);
+
+            if (e.RowIndex == -1) return;
 
             foreach (DataGridViewRow rw in this.dataGridView3.Rows)
             {
@@ -1473,10 +1474,10 @@ namespace Delmon_Managment_System.Forms
                     else
                     {
 
-                        cmbDocuments.Text = dataGridView3.Rows[e.RowIndex].Cells[4].Value.ToString();
-                        Doctxt.Text = dataGridView3.Rows[e.RowIndex].Cells[2].Value.ToString();
-                        EmployeeID = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[1].Value.ToString());
                         int dOCID = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        EmployeeID = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[1].Value.ToString());
+                        Doctxt.Text = dataGridView3.Rows[e.RowIndex].Cells[2].Value.ToString();
+                        cmbDocuments.Text = dataGridView3.Rows[e.RowIndex].Cells[4].Value.ToString();
                         numbertextbox.Text = dataGridView3.Rows[e.RowIndex].Cells[6].Value.ToString();
                         issueplacetext.Text = dataGridView3.Rows[e.RowIndex].Cells[7].Value.ToString();
                         docissueplacepicker.Value = Convert.ToDateTime( dataGridView3.Rows[e.RowIndex].Cells[8].Value.ToString());
@@ -2326,6 +2327,11 @@ namespace Delmon_Managment_System.Forms
         private void SalaryTab_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void issueplacetext_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           
         }
     }
     }

@@ -39,8 +39,46 @@ namespace Delmon_Managment_System
             using (SqlConnection connection = new SqlConnection(sql.ConnectionString))
             {
                 connection.Open();
-                string query = "SELECT CONCAT(FirstName, ' ', SecondName, ' ', ThirdName, ' ', LastName) AS 'FullName',   VISAJobList.FileNumber,   DocumentType.Doc_Type, Documents.Number AS 'Passport', SalaryTypes.SalaryTypeName, SalaryDetails.Value, JOBS.JobTitleEN,WorkLocations.Name, CAST(Employees.StartDate AS Date) AS 'Date', Employees.EmployeeID, Countries.NationalityName,(SELECT CONCAT(FirstName, ' ', LastName) FROM Employees WHERE DEPARTMENTS.DeptHeadID = Employees.EmployeeID) AS 'HeadofDeparment', JOBS.JobDescription AS 'JobDescription' FROM Employees LEFT JOIN VISAJobList ON VISAJobList.EmployeeID = Employees.EmployeeID LEFT JOIN Consulates ON VISAJobList.ConsulateID = Consulates.ConsulateID LEFT JOIN Countries ON Consulates.CountryId = Countries.CountryId LEFT JOIN Documents ON Employees.EmployeeID = Documents.CR_ID AND Documents.DocTypeID = 1 AND Documents.RefrenceID = 2 LEFT JOIN DocumentType ON Documents.DocTypeID = DocumentType.DocType_ID LEFT JOIN SalaryDetails ON Employees.EmployeeID = SalaryDetails.EmployeeID LEFT JOIN SalaryTypes ON SalaryDetails.SalaryTypeID = SalaryTypes.SalaryTypeID LEFT JOIN JOBS ON Employees.JobID = JOBS.JobID LEFT JOIN DEPARTMENTS ON Employees.DeptID = DEPARTMENTS.DEPTID LEFT JOIN DeptTypes ON DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID LEFT JOIN WorkLocations ON DEPARTMENTS.WorkLoctionID = WorkLocations.WorkID LEFT JOIN Companies ON Employees.COMPID = Companies.COMPID AND DEPARTMENTS.COMPID = Companies.COMPID WHERE Employees.EmployeeID = @EmployeeID ";
-
+                string query = @"SELECT CONCAT(FirstName, ' ', SecondName, ' ', ThirdName, ' ', LastName) AS 'FullName',
+       VISAJobList.FileNumber,
+       DocumentType.Doc_Type,
+       Documents.Number AS 'Passport',
+       SalaryTypes.SalaryTypeName,
+       SalaryDetails.Value,
+       JOBS.JobTitleEN,
+       WorkLocations.Name,
+       CAST(Employees.StartDate AS Date) AS 'Date',
+       Employees.EmployeeID,
+       Countries.NationalityName,
+       (SELECT CONCAT(FirstName, ' ', LastName) FROM Employees WHERE DEPARTMENTS.DeptHeadID = Employees.EmployeeID) AS 'HeadofDeparment',
+       JOBS.JobDescription AS 'JobDescription'
+FROM Employees
+LEFT JOIN VISAJobList ON VISAJobList.EmployeeID = Employees.EmployeeID
+LEFT JOIN Consulates ON VISAJobList.ConsulateID = Consulates.ConsulateID
+LEFT JOIN Countries ON Consulates.CountryId = Countries.CountryId
+LEFT JOIN Documents ON Employees.EmployeeID = Documents.CR_ID AND Documents.DocTypeID = 1 AND Documents.RefrenceID = 2
+LEFT JOIN DocumentType ON Documents.DocTypeID = DocumentType.DocType_ID
+LEFT JOIN SalaryDetails ON Employees.EmployeeID = SalaryDetails.EmployeeID
+LEFT JOIN SalaryTypes ON SalaryDetails.SalaryTypeID = SalaryTypes.SalaryTypeID
+LEFT JOIN JOBS ON Employees.JobID = JOBS.JobID
+LEFT JOIN DEPARTMENTS ON Employees.DeptID = DEPARTMENTS.DEPTID
+LEFT JOIN DeptTypes ON DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID
+LEFT JOIN WorkLocations ON DEPARTMENTS.WorkLoctionID = WorkLocations.WorkID
+LEFT JOIN Companies ON Employees.COMPID = Companies.COMPID AND DEPARTMENTS.COMPID = Companies.COMPID
+WHERE Employees.EmployeeID = @EmployeeID
+GROUP BY CONCAT(FirstName, ' ', SecondName, ' ', ThirdName, ' ', LastName),
+         VISAJobList.FileNumber,
+         DocumentType.Doc_Type,
+         Documents.Number,
+         SalaryTypes.SalaryTypeName,
+         SalaryDetails.Value,
+         JOBS.JobTitleEN,
+         WorkLocations.Name,
+         CAST(Employees.StartDate AS Date),
+         Employees.EmployeeID,
+         Countries.NationalityName,
+		 DEPARTMENTS.DeptHeadID,
+         JOBS.JobDescription;";
                 SqlDataReader dr = sql.DataReader(query, paramEmployeeID);
                 if (dr.Read())
                 {

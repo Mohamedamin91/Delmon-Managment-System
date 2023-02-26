@@ -225,7 +225,7 @@ namespace Delmon_Managment_System.Forms
             this.Generatebtn.ForeColor = System.Drawing.Color.Navy;
             this.Generatebtn.Location = new System.Drawing.Point(279, 216);
             this.Generatebtn.Name = "Generatebtn";
-            this.Generatebtn.Size = new System.Drawing.Size(133, 26);
+            this.Generatebtn.Size = new System.Drawing.Size(169, 44);
             this.Generatebtn.TabIndex = 60;
             this.Generatebtn.Text = "Generate Password";
             this.Generatebtn.UseVisualStyleBackColor = false;

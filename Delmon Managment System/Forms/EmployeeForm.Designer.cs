@@ -71,6 +71,7 @@ namespace Delmon_Managment_System.Forms
             this.lblemail = new System.Windows.Forms.Label();
             this.lbldatetime = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblFullname = new System.Windows.Forms.Label();
             this.lblPC = new System.Windows.Forms.Label();
             this.EmploymentHistory = new System.Windows.Forms.TabPage();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
@@ -122,7 +123,6 @@ namespace Delmon_Managment_System.Forms
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.filenumbertxt = new System.Windows.Forms.TextBox();
-            this.lblFullname = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -597,6 +597,18 @@ namespace Delmon_Managment_System.Forms
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "User Info";
             // 
+            // lblFullname
+            // 
+            this.lblFullname.AutoSize = true;
+            this.lblFullname.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFullname.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.lblFullname.Location = new System.Drawing.Point(8, 57);
+            this.lblFullname.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblFullname.Name = "lblFullname";
+            this.lblFullname.Size = new System.Drawing.Size(63, 15);
+            this.lblFullname.TabIndex = 99;
+            this.lblFullname.Text = "Full Name";
+            // 
             // lblPC
             // 
             this.lblPC.AutoSize = true;
@@ -740,6 +752,7 @@ namespace Delmon_Managment_System.Forms
             this.issueplacetext.Name = "issueplacetext";
             this.issueplacetext.Size = new System.Drawing.Size(178, 22);
             this.issueplacetext.TabIndex = 148;
+            this.issueplacetext.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.issueplacetext_KeyPress);
             // 
             // numbertextbox
             // 
@@ -1300,18 +1313,6 @@ namespace Delmon_Managment_System.Forms
             this.filenumbertxt.Size = new System.Drawing.Size(179, 25);
             this.filenumbertxt.TabIndex = 153;
             this.filenumbertxt.TextChanged += new System.EventHandler(this.filenumbertxt_TextChanged);
-            // 
-            // lblFullname
-            // 
-            this.lblFullname.AutoSize = true;
-            this.lblFullname.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFullname.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblFullname.Location = new System.Drawing.Point(8, 57);
-            this.lblFullname.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblFullname.Name = "lblFullname";
-            this.lblFullname.Size = new System.Drawing.Size(63, 15);
-            this.lblFullname.TabIndex = 99;
-            this.lblFullname.Text = "Full Name";
             // 
             // EmployeeForm
             // 
