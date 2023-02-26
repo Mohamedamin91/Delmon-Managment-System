@@ -29,6 +29,8 @@ namespace Delmon_Managment_System.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.VisaReq = new System.Windows.Forms.TabPage();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
@@ -49,9 +51,14 @@ namespace Delmon_Managment_System.Forms
             this.JobReq = new System.Windows.Forms.TabPage();
             this.cmbCompany = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.dataTable3BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.delmon = new Delmon_Managment_System.Delmon();
+            this.dataTable3TableAdapter = new Delmon_Managment_System.DelmonTableAdapters.DataTable3TableAdapter();
             this.tabControl1.SuspendLayout();
             this.VisaReq.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTable3BindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.delmon)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -109,6 +116,10 @@ namespace Delmon_Managment_System.Forms
             // 
             // reportViewer1
             // 
+            reportDataSource1.Name = "DataSet1";
+            reportDataSource1.Value = this.dataTable3BindingSource;
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "Delmon_Managment_System.VisaReport.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(8, 106);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
@@ -267,12 +278,12 @@ namespace Delmon_Managment_System.Forms
             // 
             // cmbCompany
             // 
-            this.cmbCompany.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbCompany.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCompany.FormattingEnabled = true;
             this.cmbCompany.Location = new System.Drawing.Point(645, 26);
             this.cmbCompany.Margin = new System.Windows.Forms.Padding(4);
             this.cmbCompany.Name = "cmbCompany";
-            this.cmbCompany.Size = new System.Drawing.Size(322, 22);
+            this.cmbCompany.Size = new System.Drawing.Size(322, 23);
             this.cmbCompany.TabIndex = 115;
             // 
             // label2
@@ -285,6 +296,20 @@ namespace Delmon_Managment_System.Forms
             this.label2.Size = new System.Drawing.Size(58, 15);
             this.label2.TabIndex = 116;
             this.label2.Text = "Company";
+            // 
+            // dataTable3BindingSource
+            // 
+            this.dataTable3BindingSource.DataMember = "DataTable3";
+            this.dataTable3BindingSource.DataSource = this.delmon;
+            // 
+            // delmon
+            // 
+            this.delmon.DataSetName = "Delmon";
+            this.delmon.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // dataTable3TableAdapter
+            // 
+            this.dataTable3TableAdapter.ClearBeforeFill = true;
             // 
             // PrintingFrm
             // 
@@ -304,6 +329,8 @@ namespace Delmon_Managment_System.Forms
             this.VisaReq.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTable3BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.delmon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -330,5 +357,8 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Label lblusertype;
         private System.Windows.Forms.ComboBox cmbCompany;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.BindingSource dataTable3BindingSource;
+        private Delmon delmon;
+        private DelmonTableAdapters.DataTable3TableAdapter dataTable3TableAdapter;
     }
 }

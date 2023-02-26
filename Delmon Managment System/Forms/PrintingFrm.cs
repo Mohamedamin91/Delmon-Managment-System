@@ -23,6 +23,7 @@ namespace Delmon_Managment_System.Forms
 
         private void PrintingFrm_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'delmon.DataTable3' table. You can move, or remove it, as needed.
             lblusername.Text = CommonClass.LoginUserName;
             lblusertype.Text = CommonClass.Usertype;
             lblemail.Text = CommonClass.Email;
@@ -83,50 +84,43 @@ namespace Delmon_Managment_System.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string query = "  SELECT C.COMPName_EN as [Company Name],  S.Status as [Visa Status],    COUNT(*) AS [Total Visas] FROM  DelmonGroupDB.dbo.VISA V JOIN DelmonGroupDB.dbo.VISAJobList J ON V.VisaNumber = J.VISANumber  JOIN DelmonGroupDB.dbo.Companies C ON V.ComapnyID = C.COMPID   JOIN DelmonGroupDB.dbo.VisaStatus S ON J.StatusID = S.StatusID WHERE TRY_CONVERT(DATETIME, IssueDateEN, 103) BETWEEN @param1 AND @param2 and j.StatusID = @param3  and v.ComapnyID = @param4 GROUP BY  C.COMPName_EN, S.Status ORDER BY   C.COMPName_EN, S.Status;";
+            string query = "  SELECT C.COMPName_EN as [Company Name],  S.Status as [Visa Status],  COUNT(*) AS [Total Visas] FROM  DelmonGroupDB.dbo.VISA V JOIN DelmonGroupDB.dbo.VISAJobList J ON V.VisaNumber = J.VISANumber  JOIN DelmonGroupDB.dbo.Companies C ON V.ComapnyID = C.COMPID   JOIN DelmonGroupDB.dbo.VisaStatus S ON J.StatusID = S.StatusID WHERE TRY_CONVERT(DATETIME, IssueDateEN, 103) BETWEEN @param1 AND @param2 and j.StatusID = @param3  and v.ComapnyID = @param4 GROUP BY  C.COMPName_EN, S.Status ORDER BY   C.COMPName_EN, S.Status;";
 
             SQLCONN.OpenConection();
             loggedEmployee = CommonClass.EmployeeID;
 
-            SqlParameter paramDateFrom = new SqlParameter("@Param1", SqlDbType.NVarChar);
+            SqlParameter paramDateFrom = new SqlParameter("@param1", SqlDbType.NVarChar);
             paramDateFrom.Value = dtpfrom.Value;
-            SqlParameter paramDateTo = new SqlParameter("@Param2", SqlDbType.NVarChar);
+            SqlParameter paramDateTo = new SqlParameter("@param2", SqlDbType.NVarChar);
             paramDateTo.Value = dtpto.Value;
-            SqlParameter paramVisaStatus = new SqlParameter("@Param3", SqlDbType.NVarChar);
+            SqlParameter paramVisaStatus = new SqlParameter("@param3", SqlDbType.NVarChar);
             paramVisaStatus.Value = cmbStatus.SelectedValue;
-            SqlParameter paramCompany = new SqlParameter("@Param4", SqlDbType.NVarChar);
+            SqlParameter paramCompany = new SqlParameter("@param4", SqlDbType.NVarChar);
             paramCompany.Value = cmbCompany.SelectedValue;
 
-            DataTable employeeSalaryTable = new DataTable();
+            DataTable VisaReport = new DataTable();
 
             using (SqlConnection connection = new SqlConnection(SQLCONN.ConnectionString))
             {
                 connection.Open();
               
-                SqlDataReader dr = SQLCONN.DataReader(query, paramEmployeeID);
-                if (dr.Read())
-                {
-                    //  EmployeeID = int.Parse(dr["ID"].ToString());
-                    EmployeeName = (dr["FullName"].ToString());
-                }
+                
 
 
 
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@EmployeeID", EmpIDRPT); // set the employee ID parameter
+                command.Parameters.AddWithValue("@param1", dtpfrom.Value); // set the employee ID parameter
+                command.Parameters.AddWithValue("@param2", dtpto.Value); // set the employee ID parameter
+                command.Parameters.AddWithValue("@param3", cmbStatus.SelectedValue); // set the employee ID parameter
+                command.Parameters.AddWithValue("@param4", cmbCompany.SelectedValue); // set the employee ID parameter
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
-                adapter.Fill(employeeSalaryTable);
+                adapter.Fill(VisaReport);
                 connection.Close();
             }
 
-            ReportDataSource dataSource = new ReportDataSource("DataSet1", employeeSalaryTable);
+            ReportDataSource dataSource = new ReportDataSource("DataSet1", VisaReport);
             reportViewer1.LocalReport.DataSources.Clear();
             reportViewer1.LocalReport.DataSources.Add(dataSource);
-
-
-
-
-
             this.reportViewer1.RefreshReport();
             SQLCONN.CloseConnection();
 

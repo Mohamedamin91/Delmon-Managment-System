@@ -220,6 +220,7 @@
     <EmbeddedResource Include="VisaOfferLTR.resx">
       <DependentUpon>VisaOfferLTR.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="VisaReport.rdlc" />
     <EmbeddedResource Include="VisaRequest.rdlc" />
     <None Include="Delmon Managment System_TemporaryKey.pfx" />
     <None Include="Delmon.xsc">
