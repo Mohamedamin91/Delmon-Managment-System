@@ -39,9 +39,9 @@ namespace Delmon_Managment_System
             using (SqlConnection connection = new SqlConnection(sql.ConnectionString))
             {
                 connection.Open();
-                string query = "SELECT  CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName',VISAJobList.FileNumber,DocumentType.Doc_Type,Documents.Number 'Passport' ,SalaryTypes.SalaryTypeName, SalaryDetails.Value, JOBS.JobTitleEN,WorkLocations.Name,cast(Employees.StartDate as Date)'Date',Employees.EmployeeID,Countries.NationalityName, (SELECT CONCAT(FirstName, ' ', LastName)  FROM Employees  WHERE DEPARTMENTS.DeptHeadID = Employees.EmployeeID) AS 'HeadofDeparment' , JOBS.JobDescription 'JobDescription' from DEPARTMENTS, DeptTypes, WorkLocations, JOBS, Employees, VISAJobList, Documents, DocumentType, SalaryDetails, SalaryTypes, Countries, Consulates, Companies where VISAJobList.EmployeeID = Employees.EmployeeID and VISAJobList.ConsulateID = Consulates.ConsulateID and Consulates.CountryId = Countries.CountryId and Employees.EmployeeID = Documents.CR_ID and Documents.DocTypeID = DocumentType.DocType_ID and Documents.RefrenceID = 2 and DocumentType.DocType_ID = 1 and SalaryDetails.SalaryTypeID = SalaryTypes.SalaryTypeID and Employees.EmployeeID = SalaryDetails.EmployeeID and SalaryDetails.EmployeeID = Employees.EmployeeID and Employees.JobID = JOBS.JobID and Employees.DeptID = DEPARTMENTS.DEPTID and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID and DEPARTMENTS.WorkLoctionID = WorkLocations.WorkID and Employees.COMPID = Companies.COMPID and DEPARTMENTS.COMPID = Companies.COMPID  and Employees.EmployeeID = @EmployeeID "; // your SQL query here
+                string query = "SELECT CONCAT(FirstName, ' ', SecondName, ' ', ThirdName, ' ', LastName) AS 'FullName',   VISAJobList.FileNumber,   DocumentType.Doc_Type, Documents.Number AS 'Passport', SalaryTypes.SalaryTypeName, SalaryDetails.Value, JOBS.JobTitleEN,WorkLocations.Name, CAST(Employees.StartDate AS Date) AS 'Date', Employees.EmployeeID, Countries.NationalityName,(SELECT CONCAT(FirstName, ' ', LastName) FROM Employees WHERE DEPARTMENTS.DeptHeadID = Employees.EmployeeID) AS 'HeadofDeparment', JOBS.JobDescription AS 'JobDescription' FROM Employees LEFT JOIN VISAJobList ON VISAJobList.EmployeeID = Employees.EmployeeID LEFT JOIN Consulates ON VISAJobList.ConsulateID = Consulates.ConsulateID LEFT JOIN Countries ON Consulates.CountryId = Countries.CountryId LEFT JOIN Documents ON Employees.EmployeeID = Documents.CR_ID AND Documents.DocTypeID = 1 AND Documents.RefrenceID = 2 LEFT JOIN DocumentType ON Documents.DocTypeID = DocumentType.DocType_ID LEFT JOIN SalaryDetails ON Employees.EmployeeID = SalaryDetails.EmployeeID LEFT JOIN SalaryTypes ON SalaryDetails.SalaryTypeID = SalaryTypes.SalaryTypeID LEFT JOIN JOBS ON Employees.JobID = JOBS.JobID LEFT JOIN DEPARTMENTS ON Employees.DeptID = DEPARTMENTS.DEPTID LEFT JOIN DeptTypes ON DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID LEFT JOIN WorkLocations ON DEPARTMENTS.WorkLoctionID = WorkLocations.WorkID LEFT JOIN Companies ON Employees.COMPID = Companies.COMPID AND DEPARTMENTS.COMPID = Companies.COMPID WHERE Employees.EmployeeID = @EmployeeID ";
 
-                SqlDataReader dr = sql.DataReader("   SELECT  CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName',VISAJobList.FileNumber,DocumentType.Doc_Type,Documents.Number 'Passport' ,SalaryTypes.SalaryTypeName, SalaryDetails.Value, JOBS.JobTitleEN,WorkLocations.Name,cast(Employees.StartDate as Date)'Date',Employees.EmployeeID,Countries.NationalityName, (SELECT CONCAT(FirstName, ' ', LastName)  FROM Employees  WHERE DEPARTMENTS.DeptHeadID = Employees.EmployeeID) AS 'HeadofDeparment' , JOBS.JobDescription 'JobDescription' from DEPARTMENTS, DeptTypes, WorkLocations, JOBS, Employees, VISAJobList, Documents, DocumentType, SalaryDetails, SalaryTypes, Countries, Consulates, Companies where VISAJobList.EmployeeID = Employees.EmployeeID and VISAJobList.ConsulateID = Consulates.ConsulateID and Consulates.CountryId = Countries.CountryId and Employees.EmployeeID = Documents.CR_ID and Documents.DocTypeID = DocumentType.DocType_ID and Documents.RefrenceID = 2 and DocumentType.DocType_ID = 1 and SalaryDetails.SalaryTypeID = SalaryTypes.SalaryTypeID and Employees.EmployeeID = SalaryDetails.EmployeeID and SalaryDetails.EmployeeID = Employees.EmployeeID and Employees.JobID = JOBS.JobID and Employees.DeptID = DEPARTMENTS.DEPTID and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID and DEPARTMENTS.WorkLoctionID = WorkLocations.WorkID and Employees.COMPID = Companies.COMPID and DEPARTMENTS.COMPID = Companies.COMPID  and Employees.EmployeeID = @EmployeeID  ", paramEmployeeID);
+                SqlDataReader dr = sql.DataReader(query, paramEmployeeID);
                 if (dr.Read())
                 {
                     //  EmployeeID = int.Parse(dr["ID"].ToString());
@@ -86,28 +86,30 @@ namespace Delmon_Managment_System
                 "PDF", null, out mimeType, out encoding, out filenameExtension,
                 out streamIds, out warnings);
 
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress("dgsqlserver@delmon-its.com.sa");
-            mail.To.Add("Saleem@delmon.com.sa");
-            mail.Subject = "Job Offer PDF";
-            mail.Body = "Kindlly Check The Attached Job Offer for the Employee : " + EmployeeName;
-
+           
             // Attach the PDF file
             MemoryStream stream = new MemoryStream(bytes);
             Attachment attachment = new Attachment(stream, "JobOffer.pdf");
+
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress("dgsqlserver@delmon-its.com.sa");
+            mail.To.Add("m.amin@delmon.com.sa");
+            mail.Subject = "Job Offer PDF";
+            mail.Body = "Kindly Check The Attached Job Offer for the Employee : " + EmployeeName;
             mail.Attachments.Add(attachment);
+
+            // Attach the PDF file
 
             SmtpClient client = new SmtpClient();
             client.Host = "mail.delmon-its.com.sa"; // Replace with your SMTP server address
             client.Port = 587; // Replace with your SMTP server port number
             client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential("dgsqlserver@delmon-its.com.sa", "PAbx9DeBn8");
-            client.EnableSsl = true;
+            client.Credentials = new NetworkCredential("dgsqlserver@delmon-its.com.sa", "xyPWzdtY3E");
+            client.EnableSsl = false;
 
             // Send the email
             client.Send(mail);
-            MessageBox.Show("Your Mail Hase been sent succesfully ! " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+            MessageBox.Show("Your Mail Has been sent successfully!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
 
