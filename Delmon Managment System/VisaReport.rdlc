@@ -54,7 +54,7 @@
                   <Width>3.0468cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.2266cm</Width>
+                  <Width>1.43285cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -140,7 +140,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Total Visas</Value>
+                                  <Value>Total </Value>
                                   <Style>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -292,7 +292,7 @@
             <Top>0.67029cm</Top>
             <Left>1.43507cm</Left>
             <Height>2.9198cm</Height>
-            <Width>15.92633cm</Width>
+            <Width>15.13258cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -303,7 +303,7 @@
         <Height>2in</Height>
         <Style>
           <Border>
-            <Style>Solid</Style>
+            <Style>None</Style>
           </Border>
         </Style>
       </Body>
@@ -402,7 +402,7 @@
                     <Paragraph>
                       <TextRuns>
                         <TextRun>
-                          <Value>Visa Report</Value>
+                          <Value>Visa Status - Report</Value>
                           <Style>
                             <FontFamily>calibri</FontFamily>
                             <FontSize>20pt</FontSize>
@@ -464,8 +464,8 @@
               <KeepTogether>true</KeepTogether>
               <Top>1in</Top>
               <Left>0.3409in</Left>
-              <Height>0.99875in</Height>
-              <Width>6.72188in</Width>
+              <Height>1.05083in</Height>
+              <Width>6.2948in</Width>
               <ZIndex>3</ZIndex>
               <Style>
                 <Border>
@@ -484,6 +484,37 @@
           <Height>2.54cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="Textbox6">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Test </Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox6</rd:DefaultName>
+              <Top>1.38466cm</Top>
+              <Left>7.88141cm</Left>
+              <Height>0.6cm</Height>
+              <Width>4.96062cm</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
           <Style>
             <Border>
               <Style>None</Style>
