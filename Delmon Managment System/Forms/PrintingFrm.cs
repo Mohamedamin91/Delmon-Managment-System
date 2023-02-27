@@ -23,7 +23,16 @@ namespace Delmon_Managment_System.Forms
 
         private void PrintingFrm_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'delmon.DataTable3' table. You can move, or remove it, as needed.
+
+            // Set report parameters
+            ReportParameter param1 = new ReportParameter("param1", DateTime.Now.ToString("dd/MM/yyyy"));
+            reportViewer1.LocalReport.SetParameters(param1);
+            // Set report parameters
+            ReportParameter param2 = new ReportParameter("param2", DateTime.Now.ToString("dd/MM/yyyy"));
+            reportViewer1.LocalReport.SetParameters(param2);
+
+
+
             lblusername.Text = CommonClass.LoginUserName;
             lblusertype.Text = CommonClass.Usertype;
             lblemail.Text = CommonClass.Email;
@@ -84,46 +93,85 @@ namespace Delmon_Managment_System.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string query = "  SELECT C.COMPName_EN as [Company Name],  S.Status as [Visa Status],  COUNT(*) AS [Total Visas] FROM  DelmonGroupDB.dbo.VISA V JOIN DelmonGroupDB.dbo.VISAJobList J ON V.VisaNumber = J.VISANumber  JOIN DelmonGroupDB.dbo.Companies C ON V.ComapnyID = C.COMPID   JOIN DelmonGroupDB.dbo.VisaStatus S ON J.StatusID = S.StatusID WHERE TRY_CONVERT(DATETIME, IssueDateEN, 103) BETWEEN @param1 AND @param2 and j.StatusID = @param3  and v.ComapnyID = @param4 GROUP BY  C.COMPName_EN, S.Status ORDER BY   C.COMPName_EN, S.Status;";
 
-            SQLCONN.OpenConection();
-            loggedEmployee = CommonClass.EmployeeID;
+            
 
-            SqlParameter paramDateFrom = new SqlParameter("@param1", SqlDbType.NVarChar);
-            paramDateFrom.Value = dtpfrom.Value;
-            SqlParameter paramDateTo = new SqlParameter("@param2", SqlDbType.NVarChar);
-            paramDateTo.Value = dtpto.Value;
-            SqlParameter paramVisaStatus = new SqlParameter("@param3", SqlDbType.NVarChar);
-            paramVisaStatus.Value = cmbStatus.SelectedValue;
-            SqlParameter paramCompany = new SqlParameter("@param4", SqlDbType.NVarChar);
-            paramCompany.Value = cmbCompany.SelectedValue;
+           
+
+                SQLCONN.OpenConection();
+
+                loggedEmployee = CommonClass.EmployeeID;
+
+                SqlParameter paramDateFrom = new SqlParameter("@param1", SqlDbType.Date);
+                paramDateFrom.Value = dtpfrom.Value;
+                SqlParameter paramDateTo = new SqlParameter("@param2", SqlDbType.Date);
+                paramDateTo.Value = dtpto.Value;
+                SqlParameter paramVisaStatus = new SqlParameter("@param3", SqlDbType.NVarChar);
+                paramVisaStatus.Value = cmbStatus.SelectedValue;
+                SqlParameter paramCompany = new SqlParameter("@param4", SqlDbType.NVarChar);
+                paramCompany.Value = cmbCompany.SelectedValue;
 
             DataTable VisaReport = new DataTable();
 
-            using (SqlConnection connection = new SqlConnection(SQLCONN.ConnectionString))
-            {
-                connection.Open();
-              
-                
+                using (SqlConnection connection = new SqlConnection(SQLCONN.ConnectionString))
+                {
+                    connection.Open();
+                string query = "SELECT C.COMPName_EN as [CompanyName],  S.Status as [VisaStatus], COUNT(*) AS [TotalVisas] " +
+                                "FROM DelmonGroupDB.dbo.VISA V " +
+                                "JOIN DelmonGroupDB.dbo.VISAJobList J ON V.VisaNumber = J.VISANumber " +
+                                "JOIN DelmonGroupDB.dbo.Companies C ON V.ComapnyID = C.COMPID " +
+                                "JOIN DelmonGroupDB.dbo.VisaStatus S ON J.StatusID = S.StatusID " +
+                                "WHERE TRY_CONVERT(DATETIME, IssueDateEN, 103) BETWEEN @param1 AND @param2 " +
+                                "{0}" + // this is where the optional status or company filter will be added
+                                "GROUP BY C.COMPName_EN, S.Status " +
+                                "ORDER BY C.COMPName_EN, S.Status";
+
+                // add optional status or company filter based on user's selection
+                if (cmbStatus.SelectedIndex != 0 && cmbCompany.SelectedIndex == 0)
+                {
+                    query = string.Format(query, "AND j.StatusID = @param3 ");
+                }
+                else if (cmbStatus.SelectedIndex == 0 && cmbCompany.SelectedIndex != 0)
+                {
+                    query = string.Format(query, "AND v.ComapnyID = @param4 ");
+                }
+                else if (cmbStatus.SelectedIndex != 0 && cmbCompany.SelectedIndex != 0)
+                {
+                    query = string.Format(query, "AND j.StatusID = @param3 AND v.ComapnyID = @param4 ");
+                }
+                else
+                {
+                    query = string.Format(query, "");
+                }
+             
 
 
 
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@param1", dtpfrom.Value); // set the employee ID parameter
-                command.Parameters.AddWithValue("@param2", dtpto.Value); // set the employee ID parameter
-                command.Parameters.AddWithValue("@param3", cmbStatus.SelectedValue); // set the employee ID parameter
-                command.Parameters.AddWithValue("@param4", cmbCompany.SelectedValue); // set the employee ID parameter
-                SqlDataAdapter adapter = new SqlDataAdapter(command);
-                adapter.Fill(VisaReport);
-                connection.Close();
-            }
+                    command.Parameters.AddWithValue("@param1", dtpfrom.Value);
+                    command.Parameters.AddWithValue("@param2", dtpto.Value);
+                    command.Parameters.Add(paramVisaStatus); // add the parameter to the command object
+                    command.Parameters.Add(paramCompany); // add the parameter to the command object
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    adapter.Fill(VisaReport);
+                    connection.Close();
+                }
 
-            ReportDataSource dataSource = new ReportDataSource("DataSet1", VisaReport);
+                ReportDataSource dataSource = new ReportDataSource("DataSet1", VisaReport);
             reportViewer1.LocalReport.DataSources.Clear();
-            reportViewer1.LocalReport.DataSources.Add(dataSource);
+                reportViewer1.LocalReport.DataSources.Add(dataSource);
+            reportViewer1.LocalReport.SetParameters(new ReportParameter[] { new ReportParameter("param1", dtpfrom.Value.ToString("dd/MM/yyyy")) });
+            reportViewer1.LocalReport.SetParameters(new ReportParameter[] { new ReportParameter("param2", dtpto.Value.ToString("dd/MM/yyyy")) });
             this.reportViewer1.RefreshReport();
-            SQLCONN.CloseConnection();
+                SQLCONN.CloseConnection();
 
+
+            
+        }
+
+        private void reportViewer1_Load(object sender, EventArgs e)
+        {
+         
 
         }
     }

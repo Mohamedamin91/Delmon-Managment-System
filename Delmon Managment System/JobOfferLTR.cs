@@ -98,11 +98,6 @@ GROUP BY CONCAT(FirstName, ' ', SecondName, ' ', ThirdName, ' ', LastName),
             ReportDataSource dataSource = new ReportDataSource("DataSet1", employeeSalaryTable);
             reportViewer1.LocalReport.DataSources.Clear();
             reportViewer1.LocalReport.DataSources.Add(dataSource);
-
-
-
-
-
             this.reportViewer1.RefreshReport();
             sql.CloseConnection();
         }

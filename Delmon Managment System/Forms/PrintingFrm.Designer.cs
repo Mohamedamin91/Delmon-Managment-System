@@ -31,8 +31,12 @@ namespace Delmon_Managment_System.Forms
         {
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            this.dataTable3BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.delmon = new Delmon_Managment_System.Delmon();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.VisaReq = new System.Windows.Forms.TabPage();
+            this.cmbCompany = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
@@ -48,23 +52,31 @@ namespace Delmon_Managment_System.Forms
             this.lblemail = new System.Windows.Forms.Label();
             this.lblusername = new System.Windows.Forms.Label();
             this.lblusertype = new System.Windows.Forms.Label();
-            this.JobReq = new System.Windows.Forms.TabPage();
-            this.cmbCompany = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dataTable3BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.delmon = new Delmon_Managment_System.Delmon();
+            this.Emp = new System.Windows.Forms.TabPage();
             this.dataTable3TableAdapter = new Delmon_Managment_System.DelmonTableAdapters.DataTable3TableAdapter();
+            this.dataTable3BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.dataTable3BindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.delmon)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.VisaReq.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataTable3BindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.delmon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTable3BindingSource1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // dataTable3BindingSource
+            // 
+            this.dataTable3BindingSource.DataMember = "DataTable3";
+            this.dataTable3BindingSource.DataSource = this.delmon;
+            // 
+            // delmon
+            // 
+            this.delmon.DataSetName = "Delmon";
+            this.delmon.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.VisaReq);
-            this.tabControl1.Controls.Add(this.JobReq);
+            this.tabControl1.Controls.Add(this.Emp);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -92,6 +104,27 @@ namespace Delmon_Managment_System.Forms
             this.VisaReq.Text = "Visa";
             this.VisaReq.UseVisualStyleBackColor = true;
             this.VisaReq.Click += new System.EventHandler(this.VisaReq_Click);
+            // 
+            // cmbCompany
+            // 
+            this.cmbCompany.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbCompany.FormattingEnabled = true;
+            this.cmbCompany.Location = new System.Drawing.Point(645, 26);
+            this.cmbCompany.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbCompany.Name = "cmbCompany";
+            this.cmbCompany.Size = new System.Drawing.Size(322, 23);
+            this.cmbCompany.TabIndex = 115;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(579, 29);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(58, 15);
+            this.label2.TabIndex = 116;
+            this.label2.Text = "Company";
             // 
             // cmbStatus
             // 
@@ -125,6 +158,7 @@ namespace Delmon_Managment_System.Forms
             this.reportViewer1.ServerReport.BearerToken = null;
             this.reportViewer1.Size = new System.Drawing.Size(1288, 935);
             this.reportViewer1.TabIndex = 112;
+            this.reportViewer1.Load += new System.EventHandler(this.reportViewer1_Load);
             // 
             // button1
             // 
@@ -266,50 +300,24 @@ namespace Delmon_Managment_System.Forms
             this.lblusertype.TabIndex = 100;
             this.lblusertype.Text = "UserType";
             // 
-            // JobReq
+            // Emp
             // 
-            this.JobReq.Location = new System.Drawing.Point(4, 26);
-            this.JobReq.Name = "JobReq";
-            this.JobReq.Padding = new System.Windows.Forms.Padding(3);
-            this.JobReq.Size = new System.Drawing.Size(1537, 1019);
-            this.JobReq.TabIndex = 1;
-            this.JobReq.Text = "Temp";
-            this.JobReq.UseVisualStyleBackColor = true;
-            // 
-            // cmbCompany
-            // 
-            this.cmbCompany.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbCompany.FormattingEnabled = true;
-            this.cmbCompany.Location = new System.Drawing.Point(645, 26);
-            this.cmbCompany.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbCompany.Name = "cmbCompany";
-            this.cmbCompany.Size = new System.Drawing.Size(322, 23);
-            this.cmbCompany.TabIndex = 115;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(579, 29);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(58, 15);
-            this.label2.TabIndex = 116;
-            this.label2.Text = "Company";
-            // 
-            // dataTable3BindingSource
-            // 
-            this.dataTable3BindingSource.DataMember = "DataTable3";
-            this.dataTable3BindingSource.DataSource = this.delmon;
-            // 
-            // delmon
-            // 
-            this.delmon.DataSetName = "Delmon";
-            this.delmon.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.Emp.Location = new System.Drawing.Point(4, 26);
+            this.Emp.Name = "Emp";
+            this.Emp.Padding = new System.Windows.Forms.Padding(3);
+            this.Emp.Size = new System.Drawing.Size(1537, 1019);
+            this.Emp.TabIndex = 1;
+            this.Emp.Text = "Candidates";
+            this.Emp.UseVisualStyleBackColor = true;
             // 
             // dataTable3TableAdapter
             // 
             this.dataTable3TableAdapter.ClearBeforeFill = true;
+            // 
+            // dataTable3BindingSource1
+            // 
+            this.dataTable3BindingSource1.DataMember = "DataTable3";
+            this.dataTable3BindingSource1.DataSource = this.delmon;
             // 
             // PrintingFrm
             // 
@@ -324,13 +332,14 @@ namespace Delmon_Managment_System.Forms
             this.Name = "PrintingFrm";
             this.Text = "Request Forms";
             this.Load += new System.EventHandler(this.PrintingFrm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataTable3BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.delmon)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.VisaReq.ResumeLayout(false);
             this.VisaReq.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataTable3BindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.delmon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTable3BindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -339,7 +348,7 @@ namespace Delmon_Managment_System.Forms
 
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage VisaReq;
-        private System.Windows.Forms.TabPage JobReq;
+        private System.Windows.Forms.TabPage Emp;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.DateTimePicker dtpfrom;
@@ -360,5 +369,6 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.BindingSource dataTable3BindingSource;
         private Delmon delmon;
         private DelmonTableAdapters.DataTable3TableAdapter dataTable3TableAdapter;
+        private System.Windows.Forms.BindingSource dataTable3BindingSource1;
     }
 }

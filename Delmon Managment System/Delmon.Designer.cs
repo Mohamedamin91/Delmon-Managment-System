@@ -2907,50 +2907,20 @@ FROM
     JOIN DelmonGroupDB.dbo.VISAJobList J ON V.VisaNumber = J.VISANumber
     JOIN DelmonGroupDB.dbo.Companies C ON V.ComapnyID = C.COMPID
     JOIN DelmonGroupDB.dbo.VisaStatus S ON J.StatusID = S.StatusID
-WHERE 
- TRY_CONVERT(DATETIME, IssueDateEN, 103) BETWEEN @param1 AND @param2
- and j.StatusID=@param3  and v.ComapnyID=@param4
+
 GROUP BY 
     C.COMPName_EN, S.Status
 ORDER BY 
     C.COMPName_EN, S.Status;";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@param1", global::System.Data.SqlDbType.VarChar, 1024, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@param2", global::System.Data.SqlDbType.VarChar, 1024, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@param3", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "StatusID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@param4", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ComapnyID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(Delmon.DataTable3DataTable dataTable, string param1, string param2, global::System.Nullable<int> param3, global::System.Nullable<int> param4) {
+        public virtual int Fill(Delmon.DataTable3DataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((param1 == null)) {
-                throw new global::System.ArgumentNullException("param1");
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(param1));
-            }
-            if ((param2 == null)) {
-                throw new global::System.ArgumentNullException("param2");
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[1].Value = ((string)(param2));
-            }
-            if ((param3.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[2].Value = ((int)(param3.Value));
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((param4.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[3].Value = ((int)(param4.Value));
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }
@@ -2962,32 +2932,8 @@ ORDER BY
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual Delmon.DataTable3DataTable GetData(string param1, string param2, global::System.Nullable<int> param3, global::System.Nullable<int> param4) {
+        public virtual Delmon.DataTable3DataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((param1 == null)) {
-                throw new global::System.ArgumentNullException("param1");
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(param1));
-            }
-            if ((param2 == null)) {
-                throw new global::System.ArgumentNullException("param2");
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[1].Value = ((string)(param2));
-            }
-            if ((param3.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[2].Value = ((int)(param3.Value));
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((param4.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[3].Value = ((int)(param4.Value));
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
             Delmon.DataTable3DataTable dataTable = new Delmon.DataTable3DataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
