@@ -30,8 +30,7 @@ namespace Delmon_Managment_System.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            this.dataTable3BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource6 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.delmon = new Delmon_Managment_System.Delmon();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.VisaReq = new System.Windows.Forms.TabPage();
@@ -53,20 +52,24 @@ namespace Delmon_Managment_System.Forms
             this.lblusername = new System.Windows.Forms.Label();
             this.lblusertype = new System.Windows.Forms.Label();
             this.Emp = new System.Windows.Forms.TabPage();
-            this.dataTable3TableAdapter = new Delmon_Managment_System.DelmonTableAdapters.DataTable3TableAdapter();
-            this.dataTable3BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.dataTable3BindingSource)).BeginInit();
+            this.label4 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.FromDate = new System.Windows.Forms.DateTimePicker();
+            this.label7 = new System.Windows.Forms.Label();
+            this.todate = new System.Windows.Forms.DateTimePicker();
+            this.reportViewer2 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.cmbPersonalStatusStatus = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cmbcomp = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cmbcandidates2 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.delmon)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.VisaReq.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataTable3BindingSource1)).BeginInit();
+            this.Emp.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // dataTable3BindingSource
-            // 
-            this.dataTable3BindingSource.DataMember = "DataTable3";
-            this.dataTable3BindingSource.DataSource = this.delmon;
             // 
             // delmon
             // 
@@ -149,15 +152,15 @@ namespace Delmon_Managment_System.Forms
             // 
             // reportViewer1
             // 
-            reportDataSource1.Name = "DataSet1";
-            reportDataSource1.Value = this.dataTable3BindingSource;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
+            reportDataSource6.Name = "DataSet1";
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource6);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "Delmon_Managment_System.VisaReport.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(8, 106);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
             this.reportViewer1.Size = new System.Drawing.Size(1288, 935);
             this.reportViewer1.TabIndex = 112;
+            this.reportViewer1.Visible = false;
             this.reportViewer1.Load += new System.EventHandler(this.reportViewer1_Load);
             // 
             // button1
@@ -302,6 +305,18 @@ namespace Delmon_Managment_System.Forms
             // 
             // Emp
             // 
+            this.Emp.Controls.Add(this.cmbcandidates2);
+            this.Emp.Controls.Add(this.label8);
+            this.Emp.Controls.Add(this.cmbPersonalStatusStatus);
+            this.Emp.Controls.Add(this.reportViewer2);
+            this.Emp.Controls.Add(this.cmbcomp);
+            this.Emp.Controls.Add(this.label3);
+            this.Emp.Controls.Add(this.label4);
+            this.Emp.Controls.Add(this.button2);
+            this.Emp.Controls.Add(this.label6);
+            this.Emp.Controls.Add(this.FromDate);
+            this.Emp.Controls.Add(this.label7);
+            this.Emp.Controls.Add(this.todate);
             this.Emp.Location = new System.Drawing.Point(4, 26);
             this.Emp.Name = "Emp";
             this.Emp.Padding = new System.Windows.Forms.Padding(3);
@@ -310,14 +325,130 @@ namespace Delmon_Managment_System.Forms
             this.Emp.Text = "Candidates";
             this.Emp.UseVisualStyleBackColor = true;
             // 
-            // dataTable3TableAdapter
+            // label4
             // 
-            this.dataTable3TableAdapter.ClearBeforeFill = true;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(517, 38);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(98, 15);
+            this.label4.TabIndex = 123;
+            this.label4.Text = "Candidate Status";
             // 
-            // dataTable3BindingSource1
+            // button2
             // 
-            this.dataTable3BindingSource1.DataMember = "DataTable3";
-            this.dataTable3BindingSource1.DataSource = this.delmon;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(977, 68);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(78, 36);
+            this.button2.TabIndex = 121;
+            this.button2.Text = "Print";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(701, 80);
+            this.label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(24, 15);
+            this.label6.TabIndex = 119;
+            this.label6.Text = "To:";
+            // 
+            // FromDate
+            // 
+            this.FromDate.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.FromDate.Location = new System.Drawing.Point(499, 74);
+            this.FromDate.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.FromDate.Name = "FromDate";
+            this.FromDate.Size = new System.Drawing.Size(121, 22);
+            this.FromDate.TabIndex = 120;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(452, 80);
+            this.label7.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(37, 15);
+            this.label7.TabIndex = 117;
+            this.label7.Text = "From:";
+            // 
+            // todate
+            // 
+            this.todate.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.todate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.todate.Location = new System.Drawing.Point(756, 74);
+            this.todate.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.todate.Name = "todate";
+            this.todate.Size = new System.Drawing.Size(121, 22);
+            this.todate.TabIndex = 118;
+            // 
+            // reportViewer2
+            // 
+            this.reportViewer2.Location = new System.Drawing.Point(44, 123);
+            this.reportViewer2.Name = "reportViewer2";
+            this.reportViewer2.ServerReport.BearerToken = null;
+            this.reportViewer2.Size = new System.Drawing.Size(1406, 591);
+            this.reportViewer2.TabIndex = 127;
+            this.reportViewer2.Visible = false;
+            // 
+            // cmbPersonalStatusStatus
+            // 
+            this.cmbPersonalStatusStatus.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbPersonalStatusStatus.FormattingEnabled = true;
+            this.cmbPersonalStatusStatus.Location = new System.Drawing.Point(622, 35);
+            this.cmbPersonalStatusStatus.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cmbPersonalStatusStatus.Name = "cmbPersonalStatusStatus";
+            this.cmbPersonalStatusStatus.Size = new System.Drawing.Size(206, 23);
+            this.cmbPersonalStatusStatus.TabIndex = 128;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(851, 37);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(58, 15);
+            this.label3.TabIndex = 125;
+            this.label3.Text = "Company";
+            // 
+            // cmbcomp
+            // 
+            this.cmbcomp.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbcomp.FormattingEnabled = true;
+            this.cmbcomp.Location = new System.Drawing.Point(917, 34);
+            this.cmbcomp.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbcomp.Name = "cmbcomp";
+            this.cmbcomp.Size = new System.Drawing.Size(322, 23);
+            this.cmbcomp.TabIndex = 124;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(134, 43);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(94, 15);
+            this.label8.TabIndex = 129;
+            this.label8.Text = "Candidate Name";
+            // 
+            // cmbcandidates2
+            // 
+            this.cmbcandidates2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbcandidates2.FormattingEnabled = true;
+            this.cmbcandidates2.Location = new System.Drawing.Point(249, 38);
+            this.cmbcandidates2.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbcandidates2.Name = "cmbcandidates2";
+            this.cmbcandidates2.Size = new System.Drawing.Size(243, 23);
+            this.cmbcandidates2.TabIndex = 130;
             // 
             // PrintingFrm
             // 
@@ -332,14 +463,14 @@ namespace Delmon_Managment_System.Forms
             this.Name = "PrintingFrm";
             this.Text = "Request Forms";
             this.Load += new System.EventHandler(this.PrintingFrm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataTable3BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.delmon)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.VisaReq.ResumeLayout(false);
             this.VisaReq.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataTable3BindingSource1)).EndInit();
+            this.Emp.ResumeLayout(false);
+            this.Emp.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -366,9 +497,18 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Label lblusertype;
         private System.Windows.Forms.ComboBox cmbCompany;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.BindingSource dataTable3BindingSource;
         private Delmon delmon;
-        private DelmonTableAdapters.DataTable3TableAdapter dataTable3TableAdapter;
-        private System.Windows.Forms.BindingSource dataTable3BindingSource1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DateTimePicker FromDate;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.DateTimePicker todate;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer2;
+        private System.Windows.Forms.ComboBox cmbPersonalStatusStatus;
+        private System.Windows.Forms.ComboBox cmbcomp;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox cmbcandidates2;
     }
 }
