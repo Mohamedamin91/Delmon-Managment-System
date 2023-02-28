@@ -233,7 +233,7 @@ namespace Delmon_Managment_System.Forms
                "INNER JOIN DeptTypes ON DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID " +
                "INNER JOIN Companies ON DEPARTMENTS.COMPID = Companies.COMPID " +
                "WHERE (firstname LIKE '%' + @C1 + '%' OR secondname LIKE '%' + @C1 + '%' OR thirdname LIKE '%' + @C1 + '%' OR lastname LIKE '%' + @C1 + '%' OR Employees.EmployeeID LIKE '%' + @C1 + '%' OR Employees.CurrentEmpID LIKE '%' + @C1 + '%') " +
-               "AND Employees.DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = @C2) " +
+               " AND Employees.DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = @C2) " +
                "ORDER BY Employees.EmployeeID ASC";
 
             dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query,paramEmployeenameSearch,paramloggiedemployeeid);
@@ -248,33 +248,7 @@ namespace Delmon_Managment_System.Forms
 
         private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            //foreach (DataGridViewRow rw in this.dataGridView1.Rows)
-            //{
-            //    for (int i = 0; i < rw.Cells.Count; i++)
-            //    {
-            //        if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
-            //        {
-            //            //   MessageBox.Show("ogg");       
-            //        }
-            //        else
-            //        {
-
-            //            EMPID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-            //            firstnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-            //            secondnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-            //            thirdnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-            //            lastnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-            //            cmbGender.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-            //            cmbMartialStatus.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-            //            AddBtn.Visible = false;
-            //            btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = true;
-            //            EmployeeID = EMPID;
-            //            //dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[EmployeeID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] ,[EmployeeID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and EmployeeID =  " + EmployeeID + " ");
-            //            //dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue] ,[url] ,[last_update] ,[DocumentType].Doc_Type ,[RefrenceID]FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =  " + EmployeeID + " ");
-
-            //        }
-            //    }
-            //}
+            
 
         }
 

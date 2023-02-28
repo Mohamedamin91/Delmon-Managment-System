@@ -45,48 +45,100 @@ namespace Delmon_Managment_System.Forms
             loggedEmployee = CommonClass.EmployeeID;
             lblPC.Text = Environment.MachineName;
 
-            //LoadTheme(); 
             SQLCONN.OpenConection();
-            this.reportViewer1.RefreshReport();
-            cmbStatus.ValueMember = "statusid";
-            cmbStatus.DisplayMember = "status";
-            cmbStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select statusid,status  from Visastatus where RefrenceID =1 or RefrenceID = 0 order by statusid");
-            cmbStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
+            if (lblusertype.Text == "Admin")
+            {
+                //LoadTheme(); 
+
+                cmbStatus.ValueMember = "statusid";
+                cmbStatus.DisplayMember = "status";
+                cmbStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select statusid,status  from Visastatus where RefrenceID =1 or RefrenceID = 0 order by statusid");
+                cmbStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cmbStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
-            cmbPersonalStatusStatus.ValueMember = "StatusID";
-            cmbPersonalStatusStatus.DisplayMember = "StatusValue";
-            cmbPersonalStatusStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" select  StatusID , StatusValue  from StatusTBL where RefrenceID=2  ");
-            cmbPersonalStatusStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbPersonalStatusStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
+                cmbPersonalStatusStatus.ValueMember = "StatusID";
+                cmbPersonalStatusStatus.DisplayMember = "StatusValue";
+                cmbPersonalStatusStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" select  StatusID , StatusValue  from StatusTBL where RefrenceID=2  ");
+                cmbPersonalStatusStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cmbPersonalStatusStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
-            cmbCompany.ValueMember = "COMPID";
-            cmbCompany.DisplayMember = "COMPName_EN";
-            cmbCompany.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT COMPID,COMPName_EN FROM Companies");
-            cmbCompany.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbCompany.AutoCompleteSource = AutoCompleteSource.ListItems;
-         
-            
-            cmbcomp.ValueMember = "COMPID";
-            cmbcomp.DisplayMember = "COMPName_EN";
-            cmbcomp.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT COMPID,COMPName_EN FROM Companies");
-            cmbcomp.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbcomp.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-            cmbcandidates2.ValueMember = "EmployeeID";
-            cmbcandidates2.DisplayMember = "Name";
-            cmbcandidates2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees]       order by EmployeeID");
-            cmbcandidates2.Text = "Select";
-            cmbcandidates2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbcandidates2.AutoCompleteSource = AutoCompleteSource.ListItems;
+                cmbCompany.ValueMember = "COMPID";
+                cmbCompany.DisplayMember = "COMPName_EN";
+                cmbCompany.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT COMPID,COMPName_EN FROM Companies");
+                cmbCompany.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cmbCompany.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
+                cmbcomp.ValueMember = "COMPID";
+                cmbcomp.DisplayMember = "COMPName_EN";
+                cmbcomp.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT COMPID,COMPName_EN FROM Companies");
+                cmbcomp.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cmbcomp.AutoCompleteSource = AutoCompleteSource.ListItems;
 
+                cmbcandidates2.ValueMember = "EmployeeID";
+                cmbcandidates2.DisplayMember = "Name";
+                cmbcandidates2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees]       order by EmployeeID");
+                cmbcandidates2.Text = "Select";
+                cmbcandidates2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cmbcandidates2.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+
+
+
+            }
+            else
+            {
+
+                SqlParameter paramloggiedemployeeid = new SqlParameter("@C1", SqlDbType.NVarChar);
+                paramloggiedemployeeid.Value = loggedEmployee;
+                cmbStatus.ValueMember = "statusid";
+                cmbStatus.DisplayMember = "status";
+                cmbStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select statusid,status  from Visastatus where RefrenceID =1 or RefrenceID = 0 order by statusid");
+                cmbStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cmbStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+                cmbPersonalStatusStatus.ValueMember = "StatusID";
+                cmbPersonalStatusStatus.DisplayMember = "StatusValue";
+                cmbPersonalStatusStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" select  StatusID , StatusValue  from StatusTBL where RefrenceID=2  ");
+                cmbPersonalStatusStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cmbPersonalStatusStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+
+                cmbCompany.ValueMember = "Companies.COMPID";
+                cmbCompany.DisplayMember = "COMPName_EN";
+                cmbCompany.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Companies.COMPID,COMPName_EN FROM Companies,Employees where Employees.COMPID=Companies.COMPID and Employees.EmployeeID=@C1", paramloggiedemployeeid);
+                cmbCompany.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cmbCompany.AutoCompleteSource = AutoCompleteSource.ListItems;
+                cmbCompany.Enabled = false;
+
+
+                cmbcomp.ValueMember = "Companies.COMPID";
+                cmbcomp.DisplayMember = "COMPName_EN";
+                cmbcomp.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Companies.COMPID,COMPName_EN FROM Companies,Employees where Employees.COMPID=Companies.COMPID and Employees.EmployeeID=@C1", paramloggiedemployeeid);
+                cmbcomp.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cmbcomp.AutoCompleteSource = AutoCompleteSource.ListItems;
+                cmbcomp.Text = "Select";
+                cmbcomp.Enabled = false;
+
+
+                cmbcandidates2.ValueMember = "EmployeeID";
+                cmbcandidates2.DisplayMember = "Name";
+                cmbcandidates2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees],DEPARTMENTS where Employees.DeptID = DEPARTMENTS.DEPTID  " +
+                    " AND Employees.DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = @C1 )", paramloggiedemployeeid);
+                cmbcandidates2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cmbcandidates2.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+
+
+
+
+            }
             SQLCONN.CloseConnection();
-
-            this.reportViewer2.RefreshReport();
         }
         private void LoadTheme()
         {
@@ -100,8 +152,8 @@ namespace Delmon_Managment_System.Forms
                     btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
                 }
             }
-          //  label4.ForeColor = ThemeColor.SecondaryColor;
-          //  label5.ForeColor = ThemeColor.PrimaryColor;
+            //  label4.ForeColor = ThemeColor.SecondaryColor;
+            //  label5.ForeColor = ThemeColor.PrimaryColor;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -112,9 +164,9 @@ namespace Delmon_Managment_System.Forms
         private void emptxt_TextChanged(object sender, EventArgs e)
         {
             SQLCONN.OpenConection();
-           // dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from PrintLog  where  UserName LIKE '%" + emptxt.Text + "%'");
+            // dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from PrintLog  where  UserName LIKE '%" + emptxt.Text + "%'");
             SQLCONN.CloseConnection();
-           
+
         }
 
         private void VisaReq_Click(object sender, EventArgs e)
@@ -127,26 +179,26 @@ namespace Delmon_Managment_System.Forms
 
 
 
-                reportViewer1.Visible = true;
+            reportViewer1.Visible = true;
 
-                SQLCONN.OpenConection();
+            SQLCONN.OpenConection();
 
-                loggedEmployee = CommonClass.EmployeeID;
+            loggedEmployee = CommonClass.EmployeeID;
 
-                SqlParameter paramDateFrom = new SqlParameter("@param1", SqlDbType.Date);
-                paramDateFrom.Value = dtpfrom.Value;
-                SqlParameter paramDateTo = new SqlParameter("@param2", SqlDbType.Date);
-                paramDateTo.Value = dtpto.Value;
-                SqlParameter paramVisaStatus = new SqlParameter("@param3", SqlDbType.NVarChar);
-                paramVisaStatus.Value = cmbStatus.SelectedValue;
-                SqlParameter paramCompany = new SqlParameter("@param4", SqlDbType.NVarChar);
-                paramCompany.Value = cmbCompany.SelectedValue;
+            SqlParameter paramDateFrom = new SqlParameter("@param1", SqlDbType.Date);
+            paramDateFrom.Value = dtpfrom.Value;
+            SqlParameter paramDateTo = new SqlParameter("@param2", SqlDbType.Date);
+            paramDateTo.Value = dtpto.Value;
+            SqlParameter paramVisaStatus = new SqlParameter("@param3", SqlDbType.NVarChar);
+            paramVisaStatus.Value = cmbStatus.SelectedValue;
+            SqlParameter paramCompany = new SqlParameter("@param4", SqlDbType.NVarChar);
+            paramCompany.Value = cmbCompany.SelectedValue;
 
-                 DataTable VisaReport = new DataTable();
+            DataTable VisaReport = new DataTable();
 
-                using (SqlConnection connection = new SqlConnection(SQLCONN.ConnectionString))
-                {
-                    connection.Open();
+            using (SqlConnection connection = new SqlConnection(SQLCONN.ConnectionString))
+            {
+                connection.Open();
                 string query = "SELECT C.COMPName_EN as [CompanyName],  S.Status as [VisaStatus], COUNT(*) AS [TotalVisas] " +
                                 "FROM DelmonGroupDB.dbo.VISA V " +
                                 "JOIN DelmonGroupDB.dbo.VISAJobList J ON V.VisaNumber = J.VISANumber " +
@@ -156,53 +208,81 @@ namespace Delmon_Managment_System.Forms
                                 "{0}" + // this is where the optional status or company filter will be added
                                 "GROUP BY C.COMPName_EN, S.Status " +
                                 "ORDER BY C.COMPName_EN, S.Status";
+                if (lblusertype.Text == "Admin")
+                {
+                    if (cmbStatus.SelectedIndex != 0 && cmbCompany.SelectedIndex == 0)
+                    {
+                        query = string.Format(query, "AND j.StatusID = @param3 ");
+                    }
+                    else if (cmbStatus.SelectedIndex == 0 && cmbCompany.SelectedIndex != 0)
+                    {
+                        query = string.Format(query, "AND v.ComapnyID = @param4 ");
+                    }
+                    else if (cmbStatus.SelectedIndex != 0 && cmbCompany.SelectedIndex != 0)
+                    {
+                        query = string.Format(query, "AND j.StatusID = @param3 AND v.ComapnyID = @param4 ");
+                    }
 
-                // add optional status or company filter based on user's selection
-                if (cmbStatus.SelectedIndex != 0 && cmbCompany.SelectedIndex == 0)
-                {
-                    query = string.Format(query, "AND j.StatusID = @param3 ");
-                }
-                else if (cmbStatus.SelectedIndex == 0 && cmbCompany.SelectedIndex != 0)
-                {
-                    query = string.Format(query, "AND v.ComapnyID = @param4 ");
-                }
-                else if (cmbStatus.SelectedIndex != 0 && cmbCompany.SelectedIndex != 0)
-                {
-                    query = string.Format(query, "AND j.StatusID = @param3 AND v.ComapnyID = @param4 ");
+
+                    else
+                    {
+                        query = string.Format(query, "");
+                    }
                 }
                 else
                 {
-                    query = string.Format(query, "");
+                    // add optional status or company filter based on user's selection
+                    if ((int)cmbStatus.SelectedValue != 0 && (int)cmbCompany.SelectedValue == 0)
+                    {
+                        query = string.Format(query, "AND j.StatusID = @param3 ");
+                    }
+                    else if ((int)cmbStatus.SelectedValue == 0 && (int)cmbCompany.SelectedValue != 0)
+                    {
+                        query = string.Format(query, "AND v.ComapnyID = @param4 ");
+                    }
+                    else if ((int)cmbStatus.SelectedValue != 0 && (int)cmbCompany.SelectedValue != 0)
+                    {
+                        query = string.Format(query, "AND j.StatusID = @param3 AND v.ComapnyID = @param4 ");
+                    }
+
+
+
+
+
+
+
+
+
+
                 }
-             
 
 
 
                 SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@param1", dtpfrom.Value);
-                    command.Parameters.AddWithValue("@param2", dtpto.Value);
-                    command.Parameters.Add(paramVisaStatus); // add the parameter to the command object
-                    command.Parameters.Add(paramCompany); // add the parameter to the command object
-                    SqlDataAdapter adapter = new SqlDataAdapter(command);
-                    adapter.Fill(VisaReport);
-                    connection.Close();
-                }
+                command.Parameters.AddWithValue("@param1", dtpfrom.Value);
+                command.Parameters.AddWithValue("@param2", dtpto.Value);
+                command.Parameters.Add(paramVisaStatus); // add the parameter to the command object
+                command.Parameters.Add(paramCompany); // add the parameter to the command object
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                adapter.Fill(VisaReport);
+                connection.Close();
+            }
 
-                ReportDataSource dataSource = new ReportDataSource("DataSet1", VisaReport);
+            ReportDataSource dataSource = new ReportDataSource("DataSet1", VisaReport);
             reportViewer1.LocalReport.DataSources.Clear();
-                reportViewer1.LocalReport.DataSources.Add(dataSource);
+            reportViewer1.LocalReport.DataSources.Add(dataSource);
             reportViewer1.LocalReport.SetParameters(new ReportParameter[] { new ReportParameter("param1", dtpfrom.Value.ToString("dd/MM/yyyy")) });
             reportViewer1.LocalReport.SetParameters(new ReportParameter[] { new ReportParameter("param2", dtpto.Value.ToString("dd/MM/yyyy")) });
             this.reportViewer1.RefreshReport();
-                SQLCONN.CloseConnection();
+            SQLCONN.CloseConnection();
 
 
-            
+
         }
 
         private void reportViewer1_Load(object sender, EventArgs e)
         {
-         
+
 
         }
 
@@ -251,23 +331,53 @@ JOIN Companies ON Employees.COMPID = Companies.COMPID
 JOIN StatusTBL ON Employees.EmploymentStatusID = StatusTBL.StatusID
 WHERE TRY_CONVERT(DATETIME, StartDate, 103) BETWEEN @param3 AND @param4 ";
 
-                if (cmbPersonalStatusStatus.SelectedIndex != 0)
+                if (lblusertype.Text == "Admin")
                 {
-                    query += " AND Employees.EmploymentStatusID = @param5";
-                }
 
-                if (cmbCompany.SelectedIndex != 0)
+                    if (cmbPersonalStatusStatus.SelectedIndex != 0)
+                    {
+                        query += " AND Employees.EmploymentStatusID = @param5";
+                    }
+
+                    if (cmbCompany.SelectedIndex != 0)
+                    {
+                        query += " AND Employees.COMPID = @param6";
+                    }
+
+                    if (cmbcandidates2.SelectedIndex != 0)
+                    {
+                        query += " AND Employees.EmployeeID = @param7";
+                    }
+
+                    query += " GROUP BY  StatusTBL.StatusValue ,TRIM(COALESCE(CONCAT(FirstName, ' '), '') +  COALESCE(CONCAT(SecondName, ' '), '') +   COALESCE(CONCAT(ThirdName, ' '), '') +  COALESCE(Lastname, '')), StatusTBL.StatusValue,COMPName_EN";
+
+                }
+                else
                 {
-                    query += " AND Employees.COMPID = @param6";
+
+                    if ((int)cmbPersonalStatusStatus.SelectedIndex != 0)
+                    {
+                        query += " AND Employees.EmploymentStatusID = @param5";
+                    }
+
+                    if ((int)cmbCompany.SelectedValue != 0)
+                    {
+                        query += " AND Employees.COMPID = @param6";
+                    }
+
+                    if ((int)cmbcandidates2.SelectedIndex != 0)
+                    {
+                        query += " AND Employees.EmployeeID = @param7";
+                    }
+
+                    query += " GROUP BY  StatusTBL.StatusValue ,TRIM(COALESCE(CONCAT(FirstName, ' '), '') +  COALESCE(CONCAT(SecondName, ' '), '') +   COALESCE(CONCAT(ThirdName, ' '), '') +  COALESCE(Lastname, '')), StatusTBL.StatusValue,COMPName_EN";
+
+
+
+
+
+
                 }
-
-                if (cmbcandidates2.SelectedIndex != 0)
-                {
-                    query += " AND Employees.EmployeeID = @param7";
-                }
-
-                query += " GROUP BY  StatusTBL.StatusValue ,TRIM(COALESCE(CONCAT(FirstName, ' '), '') +  COALESCE(CONCAT(SecondName, ' '), '') +   COALESCE(CONCAT(ThirdName, ' '), '') +  COALESCE(Lastname, '')), StatusTBL.StatusValue,COMPName_EN";
-
                 // Create a new SqlCommand object with the query and parameters
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
@@ -296,24 +406,22 @@ WHERE TRY_CONVERT(DATETIME, StartDate, 103) BETWEEN @param3 AND @param4 ";
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //switch (tabControl1.SelectedIndex)
-            //{
-            //    case 0:
-            //        // Set the report for the first tab page
-            //        this.reportViewer1.LocalReport.ReportEmbeddedResource = "Delmon Managment System.VisaReport.rdlc";
-            //        // Refresh the report viewer
-            //        this.reportViewer1.RefreshReport();
-            //        break;
-            //    case 1:
-            //        // Set the report for the second tab page
-            //        this.reportViewer2.LocalReport.ReportEmbeddedResource = "Delmon Managment System.CandidateReport.rdlc";
-            //        // Refresh the report viewer
-            //        this.reportViewer2.RefreshReport();
-            //        break;
-            //    // Add additional cases for more tab pages and reports as needed
-            //    default:
-            //        break;
+            switch (tabControl1.SelectedIndex)
+            {
+                case 0:
+                    // Set the report for the first tab page
+                       break;
+                case 1:
+                    // Set the report for the second tab page
+
+                    cmbPersonalStatusStatus.Text = "Select";
+                    cmbcandidates2.Text = "Select";
+                    break;
+                // Add additional cases for more tab pages and reports as needed
+                default:
+                    break;
             }
         }
     }
+}
 
