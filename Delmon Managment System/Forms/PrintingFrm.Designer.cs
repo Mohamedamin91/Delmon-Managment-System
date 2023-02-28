@@ -63,6 +63,8 @@ namespace Delmon_Managment_System.Forms
             this.label7 = new System.Windows.Forms.Label();
             this.todate = new System.Windows.Forms.DateTimePicker();
             this.delmon = new Delmon_Managment_System.Delmon();
+            this.cmbtype = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.VisaReq.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -83,6 +85,8 @@ namespace Delmon_Managment_System.Forms
             // 
             // VisaReq
             // 
+            this.VisaReq.Controls.Add(this.label9);
+            this.VisaReq.Controls.Add(this.cmbtype);
             this.VisaReq.Controls.Add(this.cmbCompany);
             this.VisaReq.Controls.Add(this.label2);
             this.VisaReq.Controls.Add(this.cmbStatus);
@@ -151,7 +155,7 @@ namespace Delmon_Managment_System.Forms
             reportDataSource1.Value = null;
             this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "Delmon_Managment_System.VisaReport.rdlc";
-            this.reportViewer1.Location = new System.Drawing.Point(8, 106);
+            this.reportViewer1.Location = new System.Drawing.Point(8, 123);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
             this.reportViewer1.Size = new System.Drawing.Size(1288, 935);
@@ -452,6 +456,29 @@ namespace Delmon_Managment_System.Forms
             this.delmon.DataSetName = "Delmon";
             this.delmon.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
+            // cmbtype
+            // 
+            this.cmbtype.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbtype.FormattingEnabled = true;
+            this.cmbtype.Location = new System.Drawing.Point(1068, 26);
+            this.cmbtype.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbtype.Name = "cmbtype";
+            this.cmbtype.Size = new System.Drawing.Size(87, 23);
+            this.cmbtype.TabIndex = 131;
+            this.cmbtype.Visible = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(987, 29);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(73, 15);
+            this.label9.TabIndex = 132;
+            this.label9.Text = "Report Type";
+            this.label9.Visible = false;
+            // 
             // PrintingFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -512,5 +539,7 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cmbcandidates2;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer2;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox cmbtype;
     }
 }

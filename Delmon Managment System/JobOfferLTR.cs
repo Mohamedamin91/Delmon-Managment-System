@@ -30,6 +30,7 @@ namespace Delmon_Managment_System
         {
             sql.OpenConection();
             EmpIDRPT = CommonClass.EmployeeID;
+            EmployeeName = CommonClass.LoginEmployeeName;
 
             SqlParameter paramEmployeeID = new SqlParameter("@EmployeeID", SqlDbType.NVarChar);
             paramEmployeeID.Value = EmpIDRPT;
@@ -125,19 +126,19 @@ GROUP BY CONCAT(FirstName, ' ', SecondName, ' ', ThirdName, ' ', LastName),
             Attachment attachment = new Attachment(stream, "JobOffer.pdf");
 
             MailMessage mail = new MailMessage();
-            mail.From = new MailAddress("dgsqlserver@delmon-its.com.sa");
+            mail.From = new MailAddress("recruiting@delmon.sa");
             mail.To.Add("m.amin@delmon.com.sa");
             mail.Subject = "Job Offer PDF";
-            mail.Body = "Kindly Check The Attached Job Offer for the Employee : " + EmployeeName;
+            mail.Body = "Dear sir   Kindly Check The Attached Job Offer for the Employee : " + EmployeeName +", This Email hase been sent to you by: " + EmployeeName;
             mail.Attachments.Add(attachment);
 
             // Attach the PDF file
 
             SmtpClient client = new SmtpClient();
-            client.Host = "mail.delmon-its.com.sa"; // Replace with your SMTP server address
+            client.Host = "mail.delmon.sa"; // Replace with your SMTP server address
             client.Port = 587; // Replace with your SMTP server port number
             client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential("dgsqlserver@delmon-its.com.sa", "xyPWzdtY3E");
+            client.Credentials = new NetworkCredential("recruiting@delmon.sa", "s6#0pf85L");
             client.EnableSsl = false;
 
             // Send the email
