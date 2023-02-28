@@ -93,6 +93,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonClass.cs" />
+    <Compile Include="Delmon.cs">
+      <DependentUpon>Delmon.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Delmon.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -174,6 +177,7 @@
     <Compile Include="VisaOfferLTR.Designer.cs">
       <DependentUpon>VisaOfferLTR.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CandidateReport.rdlc" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

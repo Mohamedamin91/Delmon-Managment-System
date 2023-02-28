@@ -57,5 +57,16 @@ namespace Delmon_Managment_System.Properties {
                 return ((string)(this["DelmonGroupDBConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=AMIN-PC;Initial Catalog=DelmonGroupDB;Persist Security Info=True;User" +
+            " ID=sa;Password=Ram72763@")]
+        public string DelmonGroupDBConnectionString1 {
+            get {
+                return ((string)(this["DelmonGroupDBConnectionString1"]));
+            }
+        }
     }
 }
