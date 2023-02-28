@@ -327,7 +327,7 @@ namespace Delmon_Managment_System.Forms
             this.reportViewer2.Location = new System.Drawing.Point(56, 139);
             this.reportViewer2.Name = "reportViewer2";
             this.reportViewer2.ServerReport.BearerToken = null;
-            this.reportViewer2.Size = new System.Drawing.Size(1461, 533);
+            this.reportViewer2.Size = new System.Drawing.Size(1461, 624);
             this.reportViewer2.TabIndex = 131;
             this.reportViewer2.Visible = false;
             // 

@@ -244,7 +244,7 @@ namespace Delmon_Managment_System.Forms
 COALESCE(CONCAT(SecondName, ' '), '') +
 COALESCE(CONCAT(ThirdName, ' '), '') +
 COALESCE(Lastname, '')) [FullName],
-       StatusTBL.StatusValue,
+       StatusTBL.StatusValue,COMPName_EN,
        COUNT(*) AS Total
 FROM Employees
 JOIN Companies ON Employees.COMPID = Companies.COMPID
@@ -266,7 +266,7 @@ WHERE TRY_CONVERT(DATETIME, StartDate, 103) BETWEEN @param3 AND @param4 ";
                     query += " AND Employees.EmployeeID = @param7";
                 }
 
-                query += " GROUP BY  StatusTBL.StatusValue ,TRIM(COALESCE(CONCAT(FirstName, ' '), '') +  COALESCE(CONCAT(SecondName, ' '), '') +   COALESCE(CONCAT(ThirdName, ' '), '') +  COALESCE(Lastname, '')), StatusTBL.StatusValue";
+                query += " GROUP BY  StatusTBL.StatusValue ,TRIM(COALESCE(CONCAT(FirstName, ' '), '') +  COALESCE(CONCAT(SecondName, ' '), '') +   COALESCE(CONCAT(ThirdName, ' '), '') +  COALESCE(Lastname, '')), StatusTBL.StatusValue,COMPName_EN";
 
                 // Create a new SqlCommand object with the query and parameters
                 using (SqlCommand command = new SqlCommand(query, connection))
