@@ -127,10 +127,11 @@ GROUP BY CONCAT(FirstName, ' ', SecondName, ' ', ThirdName, ' ', LastName),
 
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress("recruiting@delmon.sa");
-            mail.To.Add("m.amin@delmon.com.sa");
-            mail.Subject = "Job Offer PDF";
-            mail.Body = "Dear sir   Kindly Check The Attached Job Offer for the Employee : " + EmployeeName +", This Email hase been sent to you by: " + EmployeeName;
-            mail.Attachments.Add(attachment);
+            mail.To.Add("saleem@delmon.com.sa");
+            mail.Subject = "Job Offer ";
+            mail.Body = "Dear sir,\nKindly Check The Attached Job Offer for the Employee : " + EmployeeName.ToUpper() + "\nThis Email has been sent to you by: "  + EmployeeName  ;
+   
+               mail.Attachments.Add(attachment);
 
             // Attach the PDF file
 
@@ -147,33 +148,6 @@ GROUP BY CONCAT(FirstName, ' ', SecondName, ' ', ThirdName, ' ', LastName),
 
 
 
-            //try
-            //{
-
-            //    MailMessage msg = new MailMessage();
-            //    msg.From = new MailAddress("dgsqlserver@delmon-its.com.sa");
-            //    msg.To.Add("m.amin@delmon.com.sa");
-            //    msg.Subject = "Test";
-            //    msg.Body = "Hello";
-
-            //    SmtpClient smt = new SmtpClient();
-            //    smt.Host = "mail.delmon-its.com.sa";
-            //    System.Net.NetworkCredential ntcd = new NetworkCredential();
-            //    ntcd.UserName = "dgsqlserver@delmon-its.com.sa";
-            //    ntcd.Password = "PAbx9DeBn8";
-            //    smt.Credentials = ntcd;
-            //    smt.EnableSsl = false;
-            //    smt.Port = 587;
-            //    smt.Send(msg);
-
-            //    MessageBox.Show("Your Mail was sended");
-
-            //}
-            //catch (Exception ex)
-            //{
-
-            //    MessageBox.Show(ex.Message);
-            //}
         }
     }
 }
