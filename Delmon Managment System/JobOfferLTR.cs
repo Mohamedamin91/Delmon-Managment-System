@@ -19,7 +19,7 @@ namespace Delmon_Managment_System
     public partial class JobOfferLTR : Form
     {
         int EmpIDRPT;
-        string EmployeeName;
+        string CandidateName, EmployeeName;
         SQLCONNECTION sql=new SQLCONNECTION();
         public JobOfferLTR()
         { 
@@ -84,7 +84,7 @@ GROUP BY CONCAT(FirstName, ' ', SecondName, ' ', ThirdName, ' ', LastName),
                 if (dr.Read())
                 {
                     //  EmployeeID = int.Parse(dr["ID"].ToString());
-                      EmployeeName = (dr["FullName"].ToString());
+                    CandidateName = (dr["FullName"].ToString());
                 }
 
 
@@ -129,7 +129,7 @@ GROUP BY CONCAT(FirstName, ' ', SecondName, ' ', ThirdName, ' ', LastName),
             mail.From = new MailAddress("recruiting@delmon.sa");
             mail.To.Add("saleem@delmon.com.sa");
             mail.Subject = "Job Offer ";
-            mail.Body = "Dear sir,\nKindly Check The Attached Job Offer for the Employee : " + EmployeeName.ToUpper() + "\nThis Email has been sent to you by: "  + EmployeeName  ;
+            mail.Body = "Dear sir,\nKindly Check The Attached Job Offer for the Candidate : " + CandidateName + "\nThis Email has been sent to you by: "  + EmployeeName  ;
    
                mail.Attachments.Add(attachment);
 

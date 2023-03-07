@@ -123,6 +123,9 @@ namespace Delmon_Managment_System.Forms
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.filenumbertxt = new System.Windows.Forms.TextBox();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.label25 = new System.Windows.Forms.Label();
+            this.cmbnationality = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -180,7 +183,7 @@ namespace Delmon_Managment_System.Forms
             this.AddBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AddBtn.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddBtn.ForeColor = System.Drawing.Color.Firebrick;
-            this.AddBtn.Location = new System.Drawing.Point(234, 416);
+            this.AddBtn.Location = new System.Drawing.Point(319, 416);
             this.AddBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.AddBtn.Name = "AddBtn";
             this.AddBtn.Size = new System.Drawing.Size(76, 43);
@@ -197,7 +200,7 @@ namespace Delmon_Managment_System.Forms
             this.Updatebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Updatebtn.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Updatebtn.ForeColor = System.Drawing.Color.Firebrick;
-            this.Updatebtn.Location = new System.Drawing.Point(329, 416);
+            this.Updatebtn.Location = new System.Drawing.Point(414, 416);
             this.Updatebtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Updatebtn.Name = "Updatebtn";
             this.Updatebtn.Size = new System.Drawing.Size(76, 43);
@@ -215,7 +218,7 @@ namespace Delmon_Managment_System.Forms
             this.DeleteBTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DeleteBTN.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DeleteBTN.ForeColor = System.Drawing.Color.Firebrick;
-            this.DeleteBTN.Location = new System.Drawing.Point(423, 416);
+            this.DeleteBTN.Location = new System.Drawing.Point(508, 416);
             this.DeleteBTN.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DeleteBTN.Name = "DeleteBTN";
             this.DeleteBTN.Size = new System.Drawing.Size(76, 43);
@@ -279,19 +282,20 @@ namespace Delmon_Managment_System.Forms
             // 
             this.cmbPersonalStatusStatus.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbPersonalStatusStatus.FormattingEnabled = true;
-            this.cmbPersonalStatusStatus.Location = new System.Drawing.Point(169, 214);
+            this.cmbPersonalStatusStatus.Location = new System.Drawing.Point(520, 218);
             this.cmbPersonalStatusStatus.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbPersonalStatusStatus.Name = "cmbPersonalStatusStatus";
-            this.cmbPersonalStatusStatus.Size = new System.Drawing.Size(179, 25);
+            this.cmbPersonalStatusStatus.Size = new System.Drawing.Size(228, 25);
             this.cmbPersonalStatusStatus.TabIndex = 84;
             this.cmbPersonalStatusStatus.SelectedIndexChanged += new System.EventHandler(this.cmbPersonalStatusStatus_SelectedIndexChanged);
             this.cmbPersonalStatusStatus.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbPersonalStatusStatus_KeyDown);
+            this.cmbPersonalStatusStatus.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbPersonalStatusStatus_KeyPress);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(19, 215);
+            this.label5.Location = new System.Drawing.Point(378, 221);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(119, 17);
             this.label5.TabIndex = 85;
@@ -301,7 +305,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(19, 180);
+            this.label2.Location = new System.Drawing.Point(412, 180);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(51, 17);
             this.label2.TabIndex = 121;
@@ -314,7 +318,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbGender.Items.AddRange(new object[] {
             "Male",
             "Female"});
-            this.cmbGender.Location = new System.Drawing.Point(168, 176);
+            this.cmbGender.Location = new System.Drawing.Point(520, 180);
             this.cmbGender.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbGender.Name = "cmbGender";
             this.cmbGender.Size = new System.Drawing.Size(179, 25);
@@ -464,6 +468,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbEmployJobHistory.Size = new System.Drawing.Size(257, 25);
             this.cmbEmployJobHistory.TabIndex = 134;
             this.cmbEmployJobHistory.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbEmployJobHistory_KeyDown);
+            this.cmbEmployJobHistory.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbEmployJobHistory_KeyPress);
             // 
             // label11
             // 
@@ -483,7 +488,7 @@ namespace Delmon_Managment_System.Forms
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNew.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnNew.Location = new System.Drawing.Point(140, 416);
+            this.btnNew.Location = new System.Drawing.Point(121, 416);
             this.btnNew.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(76, 43);
@@ -499,10 +504,10 @@ namespace Delmon_Managment_System.Forms
             this.cmbMartialStatus.Items.AddRange(new object[] {
             "Single",
             "Marriage"});
-            this.cmbMartialStatus.Location = new System.Drawing.Point(520, 180);
+            this.cmbMartialStatus.Location = new System.Drawing.Point(169, 215);
             this.cmbMartialStatus.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbMartialStatus.Name = "cmbMartialStatus";
-            this.cmbMartialStatus.Size = new System.Drawing.Size(228, 25);
+            this.cmbMartialStatus.Size = new System.Drawing.Size(179, 25);
             this.cmbMartialStatus.TabIndex = 138;
             this.cmbMartialStatus.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbMartialStatus_KeyDown);
             // 
@@ -510,7 +515,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(407, 182);
+            this.label16.Location = new System.Drawing.Point(19, 218);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(88, 17);
             this.label16.TabIndex = 139;
@@ -1242,7 +1247,7 @@ namespace Delmon_Managment_System.Forms
             this.btnprtjoboffer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnprtjoboffer.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnprtjoboffer.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnprtjoboffer.Location = new System.Drawing.Point(530, 416);
+            this.btnprtjoboffer.Location = new System.Drawing.Point(615, 416);
             this.btnprtjoboffer.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnprtjoboffer.Name = "btnprtjoboffer";
             this.btnprtjoboffer.Size = new System.Drawing.Size(109, 43);
@@ -1259,7 +1264,7 @@ namespace Delmon_Managment_System.Forms
             this.btnprtvisareq.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnprtvisareq.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnprtvisareq.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnprtvisareq.Location = new System.Drawing.Point(661, 416);
+            this.btnprtvisareq.Location = new System.Drawing.Point(746, 416);
             this.btnprtvisareq.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnprtvisareq.Name = "btnprtvisareq";
             this.btnprtvisareq.Size = new System.Drawing.Size(149, 43);
@@ -1314,12 +1319,56 @@ namespace Delmon_Managment_System.Forms
             this.filenumbertxt.TabIndex = 153;
             this.filenumbertxt.TextChanged += new System.EventHandler(this.filenumbertxt_TextChanged);
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnCancel.BackColor = System.Drawing.Color.White;
+            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.ForeColor = System.Drawing.Color.Firebrick;
+            this.btnCancel.Location = new System.Drawing.Point(215, 416);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(76, 43);
+            this.btnCancel.TabIndex = 154;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(19, 180);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(70, 17);
+            this.label25.TabIndex = 155;
+            this.label25.Text = "Nationality";
+            // 
+            // cmbnationality
+            // 
+            this.cmbnationality.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbnationality.FormattingEnabled = true;
+            this.cmbnationality.Items.AddRange(new object[] {
+            "Male",
+            "Female"});
+            this.cmbnationality.Location = new System.Drawing.Point(169, 175);
+            this.cmbnationality.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cmbnationality.Name = "cmbnationality";
+            this.cmbnationality.Size = new System.Drawing.Size(179, 25);
+            this.cmbnationality.TabIndex = 156;
+            this.cmbnationality.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbnationality_KeyDown);
+            // 
             // EmployeeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1884, 1038);
+            this.Controls.Add(this.cmbnationality);
+            this.Controls.Add(this.label25);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.label24);
             this.Controls.Add(this.filenumbertxt);
             this.Controls.Add(this.cmbCompany);
@@ -1486,5 +1535,8 @@ namespace Delmon_Managment_System.Forms
         public System.Windows.Forms.TextBox filenumbertxt;
         private System.Windows.Forms.Label lblprovide;
         public System.Windows.Forms.Label lblFullname;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.ComboBox cmbnationality;
     }
 }

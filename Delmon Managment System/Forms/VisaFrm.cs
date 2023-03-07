@@ -53,6 +53,8 @@ namespace Delmon_Managment_System.Forms
 
 
             InitializeComponent();
+            cmbJob.KeyDown += new KeyEventHandler(cmbJob_KeyDown);
+
 
 
             Font newFont = new Font("Times New Roman", 12);
@@ -70,8 +72,8 @@ namespace Delmon_Managment_System.Forms
             cmbConsulate.AutoCompleteSource = AutoCompleteSource.ListItems;
             cmbCompany.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbCompany.AutoCompleteSource = AutoCompleteSource.ListItems;
-            cmbJob.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbJob.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //cmbJob.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //cmbJob.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
 
@@ -131,8 +133,8 @@ namespace Delmon_Managment_System.Forms
             cmbJob.ValueMember = "JobID";
             cmbJob.DisplayMember = "JobTitleEN";
             cmbJob.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS");
-            cmbJob.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbJob.AutoCompleteSource = AutoCompleteSource.ListItems;
+           // cmbJob.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+           // cmbJob.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             cmbConsulate.ValueMember = "Consulates.ConsulateID";
             cmbConsulate.DisplayMember = "ConsulateCity";
@@ -1300,6 +1302,15 @@ namespace Delmon_Managment_System.Forms
             {
                 cmbStatus.Focus();
                 e.Handled = true;
+
+                e.SuppressKeyPress = true;
+                cmbJob.SelectionStart = cmbJob.Text.Length; // set the selection start to the end of the text
+                cmbJob.SelectionLength = 0; // clear the selection length
+                if (cmbJob.Items.Contains(cmbJob.Text))
+                {
+                    cmbJob.SelectedItem = cmbJob.Text;
+                }
+
             }
 
             //cmbJob.ValueMember = "JobID";
