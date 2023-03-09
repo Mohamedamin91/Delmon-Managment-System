@@ -74,6 +74,13 @@ namespace Delmon_Managment_System.Forms
             this.lblFullname = new System.Windows.Forms.Label();
             this.lblPC = new System.Windows.Forms.Label();
             this.EmploymentHistory = new System.Windows.Forms.TabPage();
+            this.label28 = new System.Windows.Forms.Label();
+            this.richhistoryvalue = new System.Windows.Forms.RichTextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.dtphistorydate = new System.Windows.Forms.DateTimePicker();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.btnaddhitory = new System.Windows.Forms.Button();
             this.btnnewhistory = new System.Windows.Forms.Button();
@@ -528,7 +535,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbissueplace.Items.AddRange(new object[] {
             "Male",
             "Female"});
-            this.cmbissueplace.Location = new System.Drawing.Point(1665, 75);
+            this.cmbissueplace.Location = new System.Drawing.Point(1683, 49);
             this.cmbissueplace.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbissueplace.Name = "cmbissueplace";
             this.cmbissueplace.Size = new System.Drawing.Size(179, 25);
@@ -628,6 +635,13 @@ namespace Delmon_Managment_System.Forms
             // 
             // EmploymentHistory
             // 
+            this.EmploymentHistory.Controls.Add(this.label28);
+            this.EmploymentHistory.Controls.Add(this.richhistoryvalue);
+            this.EmploymentHistory.Controls.Add(this.label27);
+            this.EmploymentHistory.Controls.Add(this.dtphistorydate);
+            this.EmploymentHistory.Controls.Add(this.button4);
+            this.EmploymentHistory.Controls.Add(this.button5);
+            this.EmploymentHistory.Controls.Add(this.button6);
             this.EmploymentHistory.Controls.Add(this.dataGridView4);
             this.EmploymentHistory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EmploymentHistory.Location = new System.Drawing.Point(4, 24);
@@ -640,15 +654,107 @@ namespace Delmon_Managment_System.Forms
             this.EmploymentHistory.UseVisualStyleBackColor = true;
             this.EmploymentHistory.Click += new System.EventHandler(this.EmploymentHistory_Click);
             // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.ForeColor = System.Drawing.Color.Black;
+            this.label28.Location = new System.Drawing.Point(30, 74);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(36, 15);
+            this.label28.TabIndex = 148;
+            this.label28.Text = "Value";
+            // 
+            // richhistoryvalue
+            // 
+            this.richhistoryvalue.Location = new System.Drawing.Point(103, 69);
+            this.richhistoryvalue.Name = "richhistoryvalue";
+            this.richhistoryvalue.Size = new System.Drawing.Size(344, 106);
+            this.richhistoryvalue.TabIndex = 147;
+            this.richhistoryvalue.Text = "";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.ForeColor = System.Drawing.Color.Black;
+            this.label27.Location = new System.Drawing.Point(30, 34);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(32, 15);
+            this.label27.TabIndex = 146;
+            this.label27.Text = "Date";
+            // 
+            // dtphistorydate
+            // 
+            this.dtphistorydate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtphistorydate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtphistorydate.Location = new System.Drawing.Point(103, 26);
+            this.dtphistorydate.Margin = new System.Windows.Forms.Padding(5);
+            this.dtphistorydate.Name = "dtphistorydate";
+            this.dtphistorydate.Size = new System.Drawing.Size(178, 25);
+            this.dtphistorydate.TabIndex = 143;
+            // 
+            // button4
+            // 
+            this.button4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button4.BackColor = System.Drawing.SystemColors.Window;
+            this.button4.Enabled = false;
+            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.ForeColor = System.Drawing.Color.Firebrick;
+            this.button4.Location = new System.Drawing.Point(682, 24);
+            this.button4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 34);
+            this.button4.TabIndex = 142;
+            this.button4.Text = "Delete";
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button5
+            // 
+            this.button5.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button5.BackColor = System.Drawing.SystemColors.Window;
+            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.ForeColor = System.Drawing.Color.Firebrick;
+            this.button5.Location = new System.Drawing.Point(573, 24);
+            this.button5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 34);
+            this.button5.TabIndex = 141;
+            this.button5.Text = "Update";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click_1);
+            // 
+            // button6
+            // 
+            this.button6.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button6.BackColor = System.Drawing.SystemColors.Window;
+            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.ForeColor = System.Drawing.Color.Firebrick;
+            this.button6.Location = new System.Drawing.Point(465, 24);
+            this.button6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 34);
+            this.button6.TabIndex = 140;
+            this.button6.Text = "Add";
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // dataGridView4
             // 
             this.dataGridView4.AllowUserToAddRows = false;
             this.dataGridView4.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Location = new System.Drawing.Point(9, 8);
+            this.dataGridView4.Location = new System.Drawing.Point(103, 200);
             this.dataGridView4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.Size = new System.Drawing.Size(947, 328);
+            this.dataGridView4.Size = new System.Drawing.Size(654, 242);
             this.dataGridView4.TabIndex = 133;
             this.dataGridView4.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellClick);
             this.dataGridView4.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellContentClick);
@@ -1426,6 +1532,7 @@ namespace Delmon_Managment_System.Forms
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.EmploymentHistory.ResumeLayout(false);
+            this.EmploymentHistory.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.tabDoc.ResumeLayout(false);
             this.tabDoc.PerformLayout();
@@ -1538,5 +1645,12 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.ComboBox cmbnationality;
+        private System.Windows.Forms.DateTimePicker dtphistorydate;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.RichTextBox richhistoryvalue;
     }
 }

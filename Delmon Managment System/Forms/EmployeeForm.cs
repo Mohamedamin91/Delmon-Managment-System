@@ -27,6 +27,7 @@ namespace Delmon_Managment_System.Forms
         int id_History = 0;
         //  int ID = 0;
         int loggedEmpolyeeID;
+        int dOCID;
 
 
 
@@ -85,7 +86,7 @@ namespace Delmon_Managment_System.Forms
 
         private void EmployeeForm_Load(object sender, EventArgs e)
         {
-            tabControl1.TabPages.Remove(EmploymentHistory);
+           // tabControl1.TabPages.Remove(EmploymentHistory);
 
             //tabControl1.TabPages.Remove(SalaryTab);
 
@@ -104,7 +105,7 @@ namespace Delmon_Managment_System.Forms
 
             if (lblusertype.Text == "Admin")
             {
-                DeleteBTN.Enabled = btndeletecontact.Enabled = btndeletedoc.Enabled = button1.Enabled = true;
+                DeleteBTN.Enabled = btndeletecontact.Enabled = btndeletedoc.Enabled = button1.Enabled = button4.Enabled=true;
                 dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"
 select Employees.EmployeeID, Employees.CurrentEmpID,FirstName,SecondName,ThirdName,LastName,Gender,MartialStatus,StatusTBL.StatusValue,jobs.JobTitleEN,DeptTypes.Dept_Type_Name,Companies.COMPName_EN,startdate, enddate,NationalityName 
 from  Countries,Employees,Companies,JOBS,StatusTBL,DEPARTMENTS,DeptTypes  where Countries.CountryId = Employees.NationalityID and
@@ -1159,22 +1160,22 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
 
         private void btndeletedoc_Click(object sender, EventArgs e)
         {
-            SqlParameter paramPID = new SqlParameter("@ID", SqlDbType.Int);
-            paramPID.Value = EmployeeID;
+            SqlParameter paramDoc = new SqlParameter("@ID", SqlDbType.Int);
+            paramDoc.Value = dOCID;
             if (EmployeeID != 0)
             {
 
                 if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
                     SQLCONN.OpenConection();
-                    SQLCONN.ExecuteQueries("delete from Documents where Doc_id=@ID", paramPID);
+                    SQLCONN.ExecuteQueries("delete from Documents where Doc_id=@ID", paramDoc);
                     SQLCONN.ExecuteQueries(" declare @max int select @max = max(CR_ID) from[Documents] if @max IS NULL SET @max = 0 DBCC CHECKIDENT('[Documents]', RESEED, @max)");
                     MessageBox.Show("Record Deleted Successfully");
                     SQLCONN.CloseConnection();
                     ClearTextBoxes();
                     cmbDocuments.Text = "Select";
                     EmployeeID = EMPID;
-                    dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue] ,[url] ,[last_update] ,[DocumentType].Doc_Type ,[RefrenceID]FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =  " + EmployeeID + " ");
+                    dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue] ,[DocumentType].Doc_Type ,[RefrenceID]FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =  " + EmployeeID + " ");
 
 
                 }
@@ -1208,7 +1209,8 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                 {
 
                     SQLCONN.OpenConection();
-                    SQLCONN.ExecuteQueries("update  Contacts set ContTypeID=@C1,ContValue=@C2 where Contact_ID=@C4",
+
+            SQLCONN.ExecuteQueries("update  Contacts set ContTypeID=@C1,ContValue=@C2 where Contact_ID=@C4",
                                                    paramContactType, paramContact, paramPID);
                     MessageBox.Show("Record Updated Successfully");
 
@@ -1342,20 +1344,18 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                     dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue]  ,[DocumentType].Doc_Type ,[RefrenceID],[Number] ,[DocIssueplace]  ,[docissuedate]  ,[docexpiredate] FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =@ID ", paramEmployeeID);
 
                 }
-                //if (tabControl1.SelectedTab == tabControl1.TabPages[2])
-                //{
+                if (tabControl1.SelectedTab == tabControl1.TabPages[2])
+                {
 
-                //    paramEmployeeID.Value = EmployeeID;
+                      paramEmployeeID.Value = EmployeeID;
 
-
-                //    cmbPersonalStatusStatus.Text = "Select";
-                //    cmbempdepthistory.Text = "Select";
-                //    dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT [EmployeeID],StatusTBL.StatusValue,[JOBS].JobTitleEN, DeptTypes.Dept_Type_Name,Companies.COMPName_EN,[StartDate],[EndDate],[UserID],[DatetimeLog]   FROM [DelmonGroupDB].[dbo].[Employees], JOBS, DEPARTMENTS, StatusTBL, DeptTypes,Companies  where StatusTBL.StatusID = Employees.EmploymentStatusID  and DEPARTMENTS.DeptName = Employees.DeptID     and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID  and JOBS.JobID = Employees.JobID   AND Employees.COMPID = Companies.COMPID AND RecordStatus=0  and Employees.EmployeeID=@ID", paramEmployeeID);
-
+                   
+                   
+                    dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from employeehistory");
 
 
 
-                //}
+                }
                 if (tabControl1.SelectedTab == tabControl1.TabPages["SalaryTab"])
                 {
 
@@ -1460,6 +1460,7 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex == -1) return;
             foreach (DataGridViewRow rw in this.dataGridView2.Rows)
             {
                 for (int i = 0; i < rw.Cells.Count; i++)
@@ -1502,7 +1503,7 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                     else
                     {
 
-                        int dOCID = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString());
+                         dOCID = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString());
                         EmployeeID = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[1].Value.ToString());
                         Doctxt.Text = dataGridView3.Rows[e.RowIndex].Cells[2].Value.ToString();
                         cmbDocuments.Text = dataGridView3.Rows[e.RowIndex].Cells[4].Value.ToString();
@@ -1659,6 +1660,7 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
 
         private void dataGridView4_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex == -1) return;
             foreach (DataGridViewRow rw in this.dataGridView4.Rows)
             {
                 for (int i = 0; i < rw.Cells.Count; i++)
@@ -1670,7 +1672,10 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                     {
 
                         id_History = Convert.ToInt32(dataGridView4.Rows[e.RowIndex].Cells[0].Value.ToString());
-                        //  ID = Convert.ToInt32(dataGridView4.Rows[e.RowIndex].Cells[7].Value.ToString());
+                        dtphistorydate.Value = Convert.ToDateTime(dataGridView4.Rows[e.RowIndex].Cells[1].Value);
+                        //EmployeeID = Convert.ToInt32(dataGridView4.Rows[e.RowIndex].Cells[2].Value.ToString());
+                        richhistoryvalue.Text = (dataGridView4.Rows[e.RowIndex].Cells[3].Value.ToString());
+
                     }
                 }
             }
@@ -2422,6 +2427,131 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                 e.Handled = true;
                 // Perform some action here, such as selecting the current value
             }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            SqlParameter paramPID = new SqlParameter("@C1", SqlDbType.Int);
+            paramPID.Value = EmployeeID;
+            SqlParameter paramHistoryValue = new SqlParameter("@C2", SqlDbType.NVarChar);
+            paramHistoryValue.Value = richhistoryvalue.Text;
+            SqlParameter paramDateHistory = new SqlParameter("@C3", SqlDbType.Date);
+            paramDateHistory.Value = dtphistorydate.Value;
+
+
+
+
+            if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            {
+
+                SQLCONN.OpenConection();
+               SqlDataReader dr = SQLCONN.DataReader("select  EmployeeID,HistoryValue,HistoryDate from EmployeeHistory where  EmployeeID= @C1 and HistoryValue=@C2 and HistoryDate=@C3  ", paramPID,paramHistoryValue, paramDateHistory);
+                dr.Read();
+
+            
+                if (dr.HasRows)
+                {
+                    MessageBox.Show("The 'Value' For This Employee  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
+
+                else
+                {
+                    dr.Dispose();
+                    dr.Close();
+                    SQLCONN.ExecuteQueries("insert into EmployeeHistory ( EmployeeID,HistoryValue,HistoryDate) values (@C1,@C2,@C3) ",
+                                                  paramPID, paramHistoryValue, paramDateHistory);
+                    MessageBox.Show("Record saved Successfully");
+                    dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  * FROM [DelmonGroupDB].[dbo].[EmployeeHistory] where EmployeeID =  " + EmployeeID + " ");
+                    ClearTextBoxes();
+                    SQLCONN.CloseConnection();
+
+                }
+            }
+            else
+            {
+
+            }
+        }
+
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            SqlParameter paramid_History = new SqlParameter("@C0", SqlDbType.Int);
+            paramid_History.Value = id_History;
+            SqlParameter paramPID = new SqlParameter("@C1", SqlDbType.Int);
+            paramPID.Value = EmployeeID;
+            SqlParameter paramHistoryValue = new SqlParameter("@C2", SqlDbType.NVarChar);
+            paramHistoryValue.Value = richhistoryvalue.Text;
+            SqlParameter paramDateHistory = new SqlParameter("@C3", SqlDbType.Date);
+            paramDateHistory.Value = dtphistorydate.Value;
+            SQLCONN.OpenConection();
+
+            if (EmployeeID != 0)
+            {
+                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+
+                 
+                    //     SQLCONN.ExecuteQueries("update  Contacts set ContTypeID=@C1,ContValue=@C2 where Contact_ID=@C4",
+
+                    SQLCONN.ExecuteQueries("update  EmployeeHistory set EmployeeID=@C1 ,HistoryValue=@C2,HistoryDate=@C3 where HistoryID=@C0",
+                                                  paramPID, paramHistoryValue, paramDateHistory, paramid_History);
+                    MessageBox.Show("Record Updated Successfully");
+
+                    dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  * FROM [DelmonGroupDB].[dbo].[EmployeeHistory] where EmployeeID =  " + EmployeeID + " ");
+                    ClearTextBoxes();
+                
+
+                }
+                else
+                {
+
+                }
+
+
+            }
+            else
+            {
+                MessageBox.Show("Please Select Record to Update");
+            }
+            SQLCONN.CloseConnection();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            // SQLCONN.ExecuteQueries("update  EmployeeHistory set EmployeeID=@C1 ,HistoryValue=@C2,HistoryDate=@C3 where HistoryID=@C0",
+
+
+            SqlParameter paramid_History = new SqlParameter("@C0", SqlDbType.Int);
+            paramid_History.Value = id_History;
+            if (id_History != 0)
+            {
+
+                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    SQLCONN.OpenConection();
+                    SQLCONN.ExecuteQueries("delete from EmployeeHistory where HistoryID=@C0", paramid_History);
+                    SQLCONN.ExecuteQueries(" declare @max int select @max = max(HistoryID) from[EmployeeHistory] if @max IS NULL SET @max = 0 DBCC CHECKIDENT('[EmployeeHistory]', RESEED, @max)");
+                    MessageBox.Show("Record Deleted Successfully");
+                    SQLCONN.CloseConnection();
+                    dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  * FROM [DelmonGroupDB].[dbo].[EmployeeHistory] where EmployeeID =  " + EmployeeID + " ");
+                    richhistoryvalue.Text = "";
+                    ClearTextBoxes();
+
+
+
+                }
+                else
+                {
+
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Please Select Record to Delete");
+            }
+
         }
     }
 }
