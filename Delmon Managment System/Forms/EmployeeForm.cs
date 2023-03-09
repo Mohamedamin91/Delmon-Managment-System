@@ -236,22 +236,30 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
             if (lblusertype.Text == "Admin")
             {
                 dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(
-              " select  Employees.EmployeeID,Employees.CurrentEmpID,FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus , StatusTBL.StatusValue, jobs.JobTitleEN, DeptTypes.Dept_Type_Name, Companies.COMPName_EN,startdate,enddate,NationalityName from Countries,Employees,StatusTBL,JOBS,DeptTypes,DEPARTMENTS,Companies where ( firstname LIKE '%' + @C1 + '%' or  secondname LIKE '%' + @C1 + '%' or thirdname LIKE '% @C1 %'  or lastname LIKE  '%' + @C1 + '%' or Employees.EmployeeID like '%' + @C1 + '%' or  Employees.CurrentEmpID like '%' + @C1 + '%' ) " +
-              " and Employees.EmploymentStatusID = StatusTBL.StatusID and Employees.JobID = JOBS.JobID and Employees.DeptID = DEPARTMENTS.DEPTID  and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID and DEPARTMENTS.COMPID= Companies.COMPID and Countries.CountryId = Employees.NationalityID order by Employees.EmployeeID ", paramEmployeenameSearch);
+      "SELECT Employees.EmployeeID, Employees.CurrentEmpID, FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus, StatusTBL.StatusValue, jobs.JobTitleEN, DeptTypes.Dept_Type_Name, Companies.COMPName_EN, startdate, enddate, NationalityName " +
+      "FROM Countries, Employees, StatusTBL, JOBS, DeptTypes, DEPARTMENTS, Companies " +
+      "WHERE ((REPLACE(firstname, ' ', '') + REPLACE(secondname, ' ', '') + REPLACE(thirdname, ' ', '') + REPLACE(lastname, ' ', '')) LIKE '%' + REPLACE(@C1, ' ', '') + '%' " +
+      "OR Employees.EmployeeID LIKE '%' + REPLACE(@C1, ' ', '') + '%' " +
+      "OR Employees.CurrentEmpID LIKE '%' + REPLACE(@C1, ' ', '') + '%') " +
+      "AND Employees.EmploymentStatusID = StatusTBL.StatusID AND Employees.JobID = JOBS.JobID AND Employees.DeptID = DEPARTMENTS.DEPTID AND DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID AND DEPARTMENTS.COMPID = Companies.COMPID AND Countries.CountryId = Employees.NationalityID " +
+      "ORDER BY Employees.EmployeeID ", paramEmployeenameSearch);
+
             }
             else
             {
 
-                string query = "SELECT Employees.EmployeeID, Employees.CurrentEmpID, FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus, StatusTBL.StatusValue, jobs.JobTitleEN, DeptTypes.Dept_Type_Name, Companies.COMPName_EN, startdate, enddate,NationalityName " +
-                   "FROM Employees " +
+                string query = "SELECT Employees.EmployeeID, Employees.CurrentEmpID, FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus, StatusTBL.StatusValue, jobs.JobTitleEN, DeptTypes.Dept_Type_Name, Companies.COMPName_EN, startdate, enddate, NationalityName " +
+                   "FROM Countries, Employees " +
                    "INNER JOIN StatusTBL ON Employees.EmploymentStatusID = StatusTBL.StatusID " +
                    "INNER JOIN JOBS ON Employees.JobID = JOBS.JobID " +
                    "INNER JOIN DEPARTMENTS ON Employees.DeptID = DEPARTMENTS.DEPTID " +
                    "INNER JOIN DeptTypes ON DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID " +
                    "INNER JOIN Companies ON DEPARTMENTS.COMPID = Companies.COMPID " +
-                   "INNER JOIN Countries ON Countries.CountryId = Employees.NationalityID " +
-                   "WHERE (firstname LIKE '%' + @C1 + '%' OR secondname LIKE '%' + @C1 + '%' OR thirdname LIKE '%' + @C1 + '%' OR lastname LIKE '%' + @C1 + '%' OR Employees.EmployeeID LIKE '%' + @C1 + '%' OR Employees.CurrentEmpID LIKE '%' + @C1 + '%') " +
-                   " AND Employees.DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = @C2) " +
+                   "WHERE (REPLACE(CONCAT_WS(' ', firstname, secondname, thirdname, lastname), ' ', '') LIKE '%' + REPLACE(@C1, ' ', '') + '%' " +
+                   "OR Employees.EmployeeID LIKE '%' + REPLACE(@C1, ' ', '') + '%' " +
+                   "OR Employees.CurrentEmpID LIKE '%' + REPLACE(@C1, ' ', '') + '%') " +
+                   "AND Employees.DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = @C2) " +
+                   "AND Countries.CountryId = Employees.NationalityID " +
                    "ORDER BY Employees.EmployeeID ASC";
 
                 dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramEmployeenameSearch, paramloggiedemployeeid);
