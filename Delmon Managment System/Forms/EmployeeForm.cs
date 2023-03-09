@@ -951,6 +951,8 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                         dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Documents where CR_ID =  " + EmployeeID + " ");
                         SQLCONN.CloseConnection();
                         MessageBox.Show("Document Saved.");
+                        ClearTextBoxes();
+                        cmbDocuments.Text = "Select";
                     }
                     else
                     {
@@ -1128,34 +1130,7 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
 
         private void dataGridView3_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            //    foreach (DataGridViewRow rw in this.dataGridView3.Rows)
-            //    {
-            //        for (int i = 0; i < rw.Cells.Count; i++)
-            //        {
-            //            if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
-            //            {
-            //                //   MessageBox.Show("ogg");       
-            //            }
-            //            else
-            //            {
-
-            //                EmployeeID = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString());
-            //                Doctxt.Text = dataGridView3.Rows[e.RowIndex].Cells[2].Value.ToString();
-            //                cmbDocuments.Text = dataGridView3.Rows[e.RowIndex].Cells[6].Value.ToString();
-
-
-
-            //                //firstnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-
-            //                //secondnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-            //                //thirdnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-
-            //                //cmbMartialStatus.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-
-
-            //            }
-            //        }
-            //    }
+        
         }
 
         private void btndeletedoc_Click(object sender, EventArgs e)
@@ -1243,6 +1218,8 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
             string filename = System.IO.Path.GetFileName(opf.FileName);
             string nameOFfile = opf.SafeFileName;
 
+            SqlParameter paramDoc = new SqlParameter("@ID", SqlDbType.Int);
+            paramDoc.Value = dOCID;
 
             SqlParameter paramfilename = new SqlParameter("@C0", SqlDbType.NVarChar);
             paramfilename.Value = "\\Document\\" + filename;
@@ -1275,7 +1252,7 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                 {
 
                     SQLCONN.OpenConection();
-                    SQLCONN.ExecuteQueries("update  Documents set documentValue=@C0,name=@C1,DocTypeID=@C3,Number=@C5,DocIssueplace=@C6,docissuedate=@C7,docexpiredate=@C8    where Doc_id = @C2", paramfilename, paramnameOFfile, paramDocType, paramPID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate);
+                    SQLCONN.ExecuteQueries("update  Documents set documentValue=@C0,name=@C1,DocTypeID=@C3,Number=@C5,DocIssueplace=@C6,docissuedate=@C7,docexpiredate=@C8,CR_ID=@C2  where Doc_id = @ID ", paramfilename, paramnameOFfile, paramDocType, paramPID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate,paramDoc);
 
 
                     MessageBox.Show("Record Updated Successfully");
