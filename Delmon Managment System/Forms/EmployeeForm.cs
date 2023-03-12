@@ -1806,7 +1806,7 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                                 CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
                                 TextInfo textInfo = cultureInfo.TextInfo;
                                 txtvalue.Text = textInfo.ToTitleCase(txtvalue.Text);
-                                txtvalue.Text = txtvalue.Text + " " + "Provided By Company";
+                                txtvalue.Text =   "Provided By Company";
 
                             }
                         }
@@ -1817,7 +1817,7 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                                 CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
                                 TextInfo textInfo = cultureInfo.TextInfo;
                                 txtvalue.Text = textInfo.ToTitleCase(txtvalue.Text);
-                                txtvalue.Text = txtvalue.Text + " " + "Provided By Company";
+                                txtvalue.Text = "Provided By Company";
 
                             }
                         }
@@ -1828,7 +1828,7 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                                 CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
                                 TextInfo textInfo = cultureInfo.TextInfo;
                                 txtvalue.Text = textInfo.ToTitleCase(txtvalue.Text);
-                                txtvalue.Text = txtvalue.Text + " " + "Provided By Company";
+                                txtvalue.Text =  "Provided By Company";
 
                             }
                         }
@@ -1847,7 +1847,7 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                                 CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
                                 TextInfo textInfo = cultureInfo.TextInfo;
                                 txtvalue.Text = textInfo.ToTitleCase(txtvalue.Text);
-                                txtvalue.Text = txtvalue.Text + " " + "Provided By Company";
+                                txtvalue.Text =   "Provided By Company";
 
                             }
                         }
@@ -2005,21 +2005,21 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                     {
                         if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES"))
                         {
-                            txtvalue.Text = txtvalue.Text + " " + "Provided By Company";
+                            txtvalue.Text =  "Provided By Company";
                         }
                     }
                     if ((int)cmbsalarytype.SelectedValue == 9)
                     {
                         if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES"))
                         {
-                            txtvalue.Text = txtvalue.Text + " " + "Provided By Company";
+                            txtvalue.Text =  "Provided By Company";
                         }
                     }
                     if ((int)cmbsalarytype.SelectedValue == 10)
                     {
                         if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES"))
                         {
-                            txtvalue.Text = txtvalue.Text + " " + "Provided By Company";
+                            txtvalue.Text =  "Provided By Company";
                         }
                     }
                     if ((int)cmbsalarytype.SelectedValue == 11)
@@ -2028,7 +2028,7 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                     {
                         if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES") || txtvalue.Text.Contains("Yes") || txtvalue.Text.Contains("YEs"))
                         {
-                            txtvalue.Text = txtvalue.Text + " " + "Provided By Company";
+                            txtvalue.Text =  "Provided By Company";
                         }
                     }
 

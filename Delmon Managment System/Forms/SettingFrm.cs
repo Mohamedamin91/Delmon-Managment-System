@@ -143,6 +143,7 @@ namespace Delmon_Managment_System.Forms
            
             }
             else 
+
             {
                 dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
                   (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID and tblUser.EmployeeID=" +LoggedEmployeeID+ " ");
@@ -1793,17 +1794,18 @@ namespace Delmon_Managment_System.Forms
             if (tabControl1.SelectedTab == tabControl1.TabPages[3])
             {
                 tabControl1.TabPages[3].Visible = false;
+                MessageBox.Show("Comming Soon  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                if (lblusertype.Text != "Admin")
-                {
+                //if (lblusertype.Text != "Admin")
+                //{
 
-                    MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                else
-                {
-                    tabControl1.TabPages[3].Visible = true;
+                //    MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //}
+                //else
+                //{
+                //    tabControl1.TabPages[3].Visible = true;
 
-                }
+                //}
             }
             if (tabControl1.SelectedTab == tabControl1.TabPages[4])
             {

@@ -56,7 +56,7 @@ namespace Delmon_Managment_System
 FROM Employees
 LEFT JOIN VISAJobList ON VISAJobList.EmployeeID = Employees.EmployeeID
 LEFT JOIN Consulates ON VISAJobList.ConsulateID = Consulates.ConsulateID
-LEFT JOIN Countries ON Consulates.CountryId = Countries.CountryId
+LEFT JOIN Countries ON Employees.NationalityID = Countries.CountryId
 LEFT JOIN Documents ON Employees.EmployeeID = Documents.CR_ID AND Documents.DocTypeID = 1 AND Documents.RefrenceID = 2
 LEFT JOIN DocumentType ON Documents.DocTypeID = DocumentType.DocType_ID
 LEFT JOIN SalaryDetails ON Employees.EmployeeID = SalaryDetails.EmployeeID
