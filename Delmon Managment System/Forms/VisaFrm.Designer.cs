@@ -746,6 +746,8 @@ namespace Delmon_Managment_System.Forms
             this.cmbAgency.Name = "cmbAgency";
             this.cmbAgency.Size = new System.Drawing.Size(277, 22);
             this.cmbAgency.TabIndex = 85;
+            this.cmbAgency.SelectedIndexChanged += new System.EventHandler(this.cmbAgency_SelectedIndexChanged);
+            this.cmbAgency.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbAgency_KeyDown);
             // 
             // btnnewJob
             // 

@@ -179,7 +179,7 @@ namespace Delmon_Managment_System.Forms
 
             cmbAgency.ValueMember = "AgencID";
             cmbAgency.DisplayMember = "AgenceName";
-            cmbAgency.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select AgencID,AgenceName  from Agencies order by AgencID ");
+            cmbAgency.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select AgencID,AgenceName  from Agencies /*order by AgencID*/ ");
             cmbAgency.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbAgency.AutoCompleteSource = AutoCompleteSource.ListItems;
 
@@ -1316,11 +1316,16 @@ namespace Delmon_Managment_System.Forms
                 e.Handled = true;
 
                 e.SuppressKeyPress = true;
-                cmbJob.SelectionStart = cmbJob.Text.Length; // set the selection start to the end of the text
-                cmbJob.SelectionLength = 0; // clear the selection length
-                if (cmbJob.Items.Contains(cmbJob.Text))
+                string searchText = cmbJob.Text.Trim();
+                if (!string.IsNullOrEmpty(searchText))
                 {
-                    cmbJob.SelectedItem = cmbJob.Text;
+                    var selectedItem = cmbJob.Items.Cast<object>()
+                                          .FirstOrDefault(item => item.ToString().Equals(searchText, StringComparison.OrdinalIgnoreCase));
+                    if (selectedItem != null)
+                    {
+                        cmbJob.SelectedItem = selectedItem;
+                        // Perform your search operation here
+                    }
                 }
 
             }
@@ -1769,8 +1774,40 @@ namespace Delmon_Managment_System.Forms
         {
 
         }
+
+        private void cmbAgency_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+
+                string searchText = cmbAgency.Text.Trim();
+
+                if (!string.IsNullOrEmpty(searchText))
+                {
+                    foreach (var item in cmbAgency.Items)
+                    {
+                        if (item.ToString().Equals(searchText, StringComparison.OrdinalIgnoreCase))
+                        {
+                            cmbAgency.SelectedItem = item;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void cmbAgency_TextChanged(object sender, EventArgs e)
+        {
+        }
+        private void cmbAgency_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
+
 
 
 

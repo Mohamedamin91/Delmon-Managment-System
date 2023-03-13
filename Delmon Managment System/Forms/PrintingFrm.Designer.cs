@@ -32,6 +32,8 @@ namespace Delmon_Managment_System.Forms
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.VisaReq = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cmbtype = new System.Windows.Forms.ComboBox();
             this.cmbCompany = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
@@ -63,8 +65,6 @@ namespace Delmon_Managment_System.Forms
             this.label7 = new System.Windows.Forms.Label();
             this.todate = new System.Windows.Forms.DateTimePicker();
             this.delmon = new Delmon_Managment_System.Delmon();
-            this.cmbtype = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.VisaReq.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -107,6 +107,29 @@ namespace Delmon_Managment_System.Forms
             this.VisaReq.UseVisualStyleBackColor = true;
             this.VisaReq.Click += new System.EventHandler(this.VisaReq_Click);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(1096, 29);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(73, 15);
+            this.label9.TabIndex = 132;
+            this.label9.Text = "Report Type";
+            this.label9.Visible = false;
+            // 
+            // cmbtype
+            // 
+            this.cmbtype.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbtype.FormattingEnabled = true;
+            this.cmbtype.Location = new System.Drawing.Point(1177, 26);
+            this.cmbtype.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbtype.Name = "cmbtype";
+            this.cmbtype.Size = new System.Drawing.Size(87, 23);
+            this.cmbtype.TabIndex = 131;
+            this.cmbtype.Visible = false;
+            // 
             // cmbCompany
             // 
             this.cmbCompany.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -114,7 +137,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbCompany.Location = new System.Drawing.Point(645, 26);
             this.cmbCompany.Margin = new System.Windows.Forms.Padding(4);
             this.cmbCompany.Name = "cmbCompany";
-            this.cmbCompany.Size = new System.Drawing.Size(322, 23);
+            this.cmbCompany.Size = new System.Drawing.Size(386, 23);
             this.cmbCompany.TabIndex = 115;
             // 
             // label2
@@ -455,29 +478,6 @@ namespace Delmon_Managment_System.Forms
             // 
             this.delmon.DataSetName = "Delmon";
             this.delmon.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // cmbtype
-            // 
-            this.cmbtype.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbtype.FormattingEnabled = true;
-            this.cmbtype.Location = new System.Drawing.Point(1068, 26);
-            this.cmbtype.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbtype.Name = "cmbtype";
-            this.cmbtype.Size = new System.Drawing.Size(87, 23);
-            this.cmbtype.TabIndex = 131;
-            this.cmbtype.Visible = false;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(987, 29);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(73, 15);
-            this.label9.TabIndex = 132;
-            this.label9.Text = "Report Type";
-            this.label9.Visible = false;
             // 
             // PrintingFrm
             // 

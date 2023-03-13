@@ -235,14 +235,27 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
             SQLCONN.OpenConection();
             if (lblusertype.Text == "Admin")
             {
-                dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(
-      "SELECT Employees.EmployeeID, Employees.CurrentEmpID, FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus, StatusTBL.StatusValue, jobs.JobTitleEN, DeptTypes.Dept_Type_Name, Companies.COMPName_EN, startdate, enddate, NationalityName " +
-      "FROM Countries, Employees, StatusTBL, JOBS, DeptTypes, DEPARTMENTS, Companies " +
-      "WHERE ((REPLACE(firstname, ' ', '') + REPLACE(secondname, ' ', '') + REPLACE(thirdname, ' ', '') + REPLACE(lastname, ' ', '')) LIKE '%' + REPLACE(@C1, ' ', '') + '%' " +
-      "OR Employees.EmployeeID LIKE '%' + REPLACE(@C1, ' ', '') + '%' " +
-      "OR Employees.CurrentEmpID LIKE '%' + REPLACE(@C1, ' ', '') + '%') " +
-      "AND Employees.EmploymentStatusID = StatusTBL.StatusID AND Employees.JobID = JOBS.JobID AND Employees.DeptID = DEPARTMENTS.DEPTID AND DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID AND DEPARTMENTS.COMPID = Companies.COMPID AND Countries.CountryId = Employees.NationalityID " +
-      "ORDER BY Employees.EmployeeID ", paramEmployeenameSearch);
+                string query = @"SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus, s.StatusValue, j.JobTitleEN, dt.Dept_Type_Name, c.COMPName_EN, e.startdate, e.enddate, cn.NationalityName 
+FROM Employees e
+INNER JOIN StatusTBL s ON e.EmploymentStatusID = s.StatusID
+INNER JOIN JOBS j ON e.JobID = j.JobID
+INNER JOIN DEPARTMENTS d ON e.DeptID = d.DEPTID
+INNER JOIN DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
+INNER JOIN Companies c ON d.COMPID = c.COMPID
+INNER JOIN Countries cn ON e.NationalityID = cn.CountryId
+WHERE (e.EmployeeID LIKE '%' + REPLACE(@C1, ' ', '') + '%' 
+       OR e.CurrentEmpID LIKE '%' + REPLACE(@C1, ' ', '') + '%' 
+       OR REPLACE(e.FirstName, ' ', '') + REPLACE(e.SecondName, ' ', '') + REPLACE(e.ThirdName, ' ', '') + REPLACE(e.LastName, ' ', '') LIKE '%' + REPLACE(@C1, ' ', '') + '%'
+       OR e.FirstName LIKE '%' + @C1 + '%'
+       OR e.SecondName LIKE '%' + @C1 + '%'
+       OR e.ThirdName LIKE '%' + @C1 + '%'
+       OR e.LastName LIKE '%' + @C1 + '%'
+      )
+ORDER BY e.EmployeeID";
+                dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramEmployeenameSearch);
+
+
+
 
             }
             else
@@ -2259,13 +2272,17 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                 StartDatePicker.Focus();
                 e.Handled = true;
                 e.SuppressKeyPress = true;
-                cmbEmployJobHistory.SelectionStart = cmbEmployJobHistory.Text.Length; // set the selection start to the end of the text
-                cmbEmployJobHistory.SelectionLength = 0; // clear the selection length
-                if (cmbEmployJobHistory.Items.Contains(cmbEmployJobHistory.Text))
+                string searchText = cmbEmployJobHistory.Text.Trim();
+                if (!string.IsNullOrEmpty(searchText))
                 {
-                    cmbEmployJobHistory.SelectedItem = cmbEmployJobHistory.Text;
+                    var selectedItem = cmbEmployJobHistory.Items.Cast<object>()
+                                          .FirstOrDefault(item => item.ToString().Equals(searchText, StringComparison.OrdinalIgnoreCase));
+                    if (selectedItem != null)
+                    {
+                        cmbEmployJobHistory.SelectedItem = selectedItem;
+                        // Perform your search operation here
+                    }
                 }
-
             }
         }
 
