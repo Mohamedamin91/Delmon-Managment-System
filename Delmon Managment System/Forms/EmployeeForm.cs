@@ -1349,7 +1349,7 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
 
                    
                    
-                    dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from employeehistory");
+                    dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from employeehistory where employeeid=@ID", paramEmployeeID);
 
 
 

@@ -669,7 +669,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.richhistoryvalue.Location = new System.Drawing.Point(103, 69);
             this.richhistoryvalue.Name = "richhistoryvalue";
-            this.richhistoryvalue.Size = new System.Drawing.Size(344, 106);
+            this.richhistoryvalue.Size = new System.Drawing.Size(465, 106);
             this.richhistoryvalue.TabIndex = 147;
             this.richhistoryvalue.Text = "";
             // 
@@ -703,7 +703,7 @@ namespace Delmon_Managment_System.Forms
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.ForeColor = System.Drawing.Color.Firebrick;
-            this.button4.Location = new System.Drawing.Point(682, 24);
+            this.button4.Location = new System.Drawing.Point(808, 24);
             this.button4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 34);
@@ -720,7 +720,7 @@ namespace Delmon_Managment_System.Forms
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button5.ForeColor = System.Drawing.Color.Firebrick;
-            this.button5.Location = new System.Drawing.Point(573, 24);
+            this.button5.Location = new System.Drawing.Point(699, 24);
             this.button5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 34);
@@ -737,7 +737,7 @@ namespace Delmon_Managment_System.Forms
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button6.ForeColor = System.Drawing.Color.Firebrick;
-            this.button6.Location = new System.Drawing.Point(465, 24);
+            this.button6.Location = new System.Drawing.Point(591, 24);
             this.button6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 34);
@@ -754,7 +754,7 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView4.Location = new System.Drawing.Point(103, 200);
             this.dataGridView4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.Size = new System.Drawing.Size(654, 242);
+            this.dataGridView4.Size = new System.Drawing.Size(780, 242);
             this.dataGridView4.TabIndex = 133;
             this.dataGridView4.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellClick);
             this.dataGridView4.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellContentClick);
