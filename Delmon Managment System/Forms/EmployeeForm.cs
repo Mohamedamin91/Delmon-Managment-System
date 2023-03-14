@@ -1510,7 +1510,7 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                         docissueplacepicker.Value = Convert.ToDateTime(dataGridView3.Rows[e.RowIndex].Cells[8].Value.ToString());
                         docexpirefatepicker.Value = Convert.ToDateTime(dataGridView3.Rows[e.RowIndex].Cells[9].Value.ToString());
 
-
+                        CommonClass.DocPath = Doctxt.Text;
 
 
 
@@ -2554,6 +2554,13 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                 MessageBox.Show("Please Select Record to Delete");
             }
 
+        }
+
+        private void btnshowDoc_Click(object sender, EventArgs e)
+        {
+            var form = new FrmShowDoc();
+            // this.Hide();
+            form.ShowDialog();
         }
     }
 }

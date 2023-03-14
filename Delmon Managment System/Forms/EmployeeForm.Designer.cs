@@ -133,6 +133,7 @@ namespace Delmon_Managment_System.Forms
             this.btnCancel = new System.Windows.Forms.Button();
             this.label25 = new System.Windows.Forms.Label();
             this.cmbnationality = new System.Windows.Forms.ComboBox();
+            this.btnshowDoc = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -828,6 +829,7 @@ namespace Delmon_Managment_System.Forms
             // 
             // tabDoc
             // 
+            this.tabDoc.Controls.Add(this.btnshowDoc);
             this.tabDoc.Controls.Add(this.issueplacetext);
             this.tabDoc.Controls.Add(this.numbertextbox);
             this.tabDoc.Controls.Add(this.Doctxt);
@@ -969,7 +971,7 @@ namespace Delmon_Managment_System.Forms
             this.btnaUplodedoc.Location = new System.Drawing.Point(716, 63);
             this.btnaUplodedoc.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnaUplodedoc.Name = "btnaUplodedoc";
-            this.btnaUplodedoc.Size = new System.Drawing.Size(99, 30);
+            this.btnaUplodedoc.Size = new System.Drawing.Size(75, 28);
             this.btnaUplodedoc.TabIndex = 137;
             this.btnaUplodedoc.Text = "Uplode";
             this.btnaUplodedoc.UseVisualStyleBackColor = false;
@@ -1466,6 +1468,23 @@ namespace Delmon_Managment_System.Forms
             this.cmbnationality.TabIndex = 156;
             this.cmbnationality.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbnationality_KeyDown);
             // 
+            // btnshowDoc
+            // 
+            this.btnshowDoc.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnshowDoc.BackColor = System.Drawing.SystemColors.Window;
+            this.btnshowDoc.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.btnshowDoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnshowDoc.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnshowDoc.ForeColor = System.Drawing.Color.Firebrick;
+            this.btnshowDoc.Location = new System.Drawing.Point(797, 63);
+            this.btnshowDoc.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnshowDoc.Name = "btnshowDoc";
+            this.btnshowDoc.Size = new System.Drawing.Size(75, 28);
+            this.btnshowDoc.TabIndex = 149;
+            this.btnshowDoc.Text = "Show Doc";
+            this.btnshowDoc.UseVisualStyleBackColor = false;
+            this.btnshowDoc.Click += new System.EventHandler(this.btnshowDoc_Click);
+            // 
             // EmployeeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -1598,7 +1617,6 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.TabPage tabDoc;
         private System.Windows.Forms.TextBox issueplacetext;
         private System.Windows.Forms.TextBox numbertextbox;
-        private System.Windows.Forms.TextBox Doctxt;
         private System.Windows.Forms.DateTimePicker docissueplacepicker;
         private System.Windows.Forms.DateTimePicker docexpirefatepicker;
         private System.Windows.Forms.Label label20;
@@ -1652,5 +1670,7 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.RichTextBox richhistoryvalue;
+        private System.Windows.Forms.Button btnshowDoc;
+        public System.Windows.Forms.TextBox Doctxt;
     }
 }

@@ -13,6 +13,7 @@ namespace Delmon_Managment_System
         public static String LoginEmployeeName { get; set; }
         public static String Usertype { get; set; }
         public static String Email { get; set; }
+        public static String DocPath { get; set; }
         public static int EmployeeID { get; set; }
 
 
