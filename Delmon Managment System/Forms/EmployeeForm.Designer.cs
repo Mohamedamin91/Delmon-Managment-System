@@ -87,6 +87,7 @@ namespace Delmon_Managment_System.Forms
             this.btndeletehistory = new System.Windows.Forms.Button();
             this.btnupdatehistory = new System.Windows.Forms.Button();
             this.tabDoc = new System.Windows.Forms.TabPage();
+            this.btnshowDoc = new System.Windows.Forms.Button();
             this.issueplacetext = new System.Windows.Forms.TextBox();
             this.numbertextbox = new System.Windows.Forms.TextBox();
             this.Doctxt = new System.Windows.Forms.TextBox();
@@ -133,7 +134,7 @@ namespace Delmon_Managment_System.Forms
             this.btnCancel = new System.Windows.Forms.Button();
             this.label25 = new System.Windows.Forms.Label();
             this.cmbnationality = new System.Windows.Forms.ComboBox();
-            this.btnshowDoc = new System.Windows.Forms.Button();
+            this.btnnewJob = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -405,22 +406,24 @@ namespace Delmon_Managment_System.Forms
             this.EndDatePicker.Enabled = false;
             this.EndDatePicker.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EndDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.EndDatePicker.Location = new System.Drawing.Point(507, 324);
+            this.EndDatePicker.Location = new System.Drawing.Point(438, 324);
             this.EndDatePicker.Margin = new System.Windows.Forms.Padding(5);
             this.EndDatePicker.Name = "EndDatePicker";
             this.EndDatePicker.Size = new System.Drawing.Size(179, 25);
             this.EndDatePicker.TabIndex = 141;
+            this.EndDatePicker.Visible = false;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(431, 324);
+            this.label15.Location = new System.Drawing.Point(394, 324);
             this.label15.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(34, 17);
             this.label15.TabIndex = 140;
             this.label15.Text = "End ";
+            this.label15.Visible = false;
             // 
             // StartDatePicker
             // 
@@ -441,9 +444,9 @@ namespace Delmon_Managment_System.Forms
             this.label13.Location = new System.Drawing.Point(19, 326);
             this.label13.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(39, 17);
+            this.label13.Size = new System.Drawing.Size(35, 17);
             this.label13.TabIndex = 138;
-            this.label13.Text = "Start ";
+            this.label13.Text = "Date";
             // 
             // cmbempdepthistory
             // 
@@ -470,7 +473,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.cmbEmployJobHistory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbEmployJobHistory.FormattingEnabled = true;
-            this.cmbEmployJobHistory.Location = new System.Drawing.Point(507, 284);
+            this.cmbEmployJobHistory.Location = new System.Drawing.Point(438, 284);
             this.cmbEmployJobHistory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbEmployJobHistory.Name = "cmbEmployJobHistory";
             this.cmbEmployJobHistory.Size = new System.Drawing.Size(257, 25);
@@ -482,7 +485,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(431, 287);
+            this.label11.Location = new System.Drawing.Point(394, 287);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(29, 17);
             this.label11.TabIndex = 135;
@@ -857,6 +860,23 @@ namespace Delmon_Managment_System.Forms
             this.tabDoc.Text = "Document";
             this.tabDoc.UseVisualStyleBackColor = true;
             this.tabDoc.Click += new System.EventHandler(this.tabDoc_Click);
+            // 
+            // btnshowDoc
+            // 
+            this.btnshowDoc.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnshowDoc.BackColor = System.Drawing.SystemColors.Window;
+            this.btnshowDoc.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.btnshowDoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnshowDoc.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnshowDoc.ForeColor = System.Drawing.Color.Firebrick;
+            this.btnshowDoc.Location = new System.Drawing.Point(797, 63);
+            this.btnshowDoc.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnshowDoc.Name = "btnshowDoc";
+            this.btnshowDoc.Size = new System.Drawing.Size(75, 28);
+            this.btnshowDoc.TabIndex = 149;
+            this.btnshowDoc.Text = "Show Doc";
+            this.btnshowDoc.UseVisualStyleBackColor = false;
+            this.btnshowDoc.Click += new System.EventHandler(this.btnshowDoc_Click);
             // 
             // issueplacetext
             // 
@@ -1468,22 +1488,22 @@ namespace Delmon_Managment_System.Forms
             this.cmbnationality.TabIndex = 156;
             this.cmbnationality.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbnationality_KeyDown);
             // 
-            // btnshowDoc
+            // btnnewJob
             // 
-            this.btnshowDoc.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnshowDoc.BackColor = System.Drawing.SystemColors.Window;
-            this.btnshowDoc.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.btnshowDoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnshowDoc.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnshowDoc.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnshowDoc.Location = new System.Drawing.Point(797, 63);
-            this.btnshowDoc.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnshowDoc.Name = "btnshowDoc";
-            this.btnshowDoc.Size = new System.Drawing.Size(75, 28);
-            this.btnshowDoc.TabIndex = 149;
-            this.btnshowDoc.Text = "Show Doc";
-            this.btnshowDoc.UseVisualStyleBackColor = false;
-            this.btnshowDoc.Click += new System.EventHandler(this.btnshowDoc_Click);
+            this.btnnewJob.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnnewJob.BackColor = System.Drawing.Color.White;
+            this.btnnewJob.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.btnnewJob.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnnewJob.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnnewJob.ForeColor = System.Drawing.Color.Firebrick;
+            this.btnnewJob.Location = new System.Drawing.Point(807, 309);
+            this.btnnewJob.Margin = new System.Windows.Forms.Padding(4);
+            this.btnnewJob.Name = "btnnewJob";
+            this.btnnewJob.Size = new System.Drawing.Size(51, 32);
+            this.btnnewJob.TabIndex = 157;
+            this.btnnewJob.Text = "New";
+            this.btnnewJob.UseVisualStyleBackColor = false;
+            this.btnnewJob.Click += new System.EventHandler(this.btnnewJob_Click_1);
             // 
             // EmployeeForm
             // 
@@ -1491,6 +1511,7 @@ namespace Delmon_Managment_System.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1884, 1038);
+            this.Controls.Add(this.btnnewJob);
             this.Controls.Add(this.cmbnationality);
             this.Controls.Add(this.label25);
             this.Controls.Add(this.btnCancel);
@@ -1672,5 +1693,6 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.RichTextBox richhistoryvalue;
         private System.Windows.Forms.Button btnshowDoc;
         public System.Windows.Forms.TextBox Doctxt;
+        private System.Windows.Forms.Button btnnewJob;
     }
 }

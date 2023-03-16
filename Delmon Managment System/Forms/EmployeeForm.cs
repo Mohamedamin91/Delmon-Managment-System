@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
-
+using System.IO;
 
 namespace Delmon_Managment_System.Forms
 {
@@ -923,68 +923,54 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
 
         private void UplodeBTN_Click(object sender, EventArgs e)
         {
-            string filename = System.IO.Path.GetFileName(opf.FileName);
-            string nameOFfile = opf.SafeFileName;
+            string filename = Path.GetFileName(opf.FileName);
 
-
-            SqlParameter paramfilename = new SqlParameter("@C0", SqlDbType.NVarChar);
-            paramfilename.Value = "\\Document\\" + filename;
-            SqlParameter paramnameOFfile = new SqlParameter("@C1", SqlDbType.NVarChar);
-            paramnameOFfile.Value = nameOFfile;
-            SqlParameter paramPID = new SqlParameter("@C2", SqlDbType.Int);
-            paramPID.Value = EmployeeID;
-            SqlParameter paramDocType = new SqlParameter("@C3", SqlDbType.Int);
-            paramDocType.Value = cmbDocuments.SelectedValue;
-            SqlParameter paramRefrenceID = new SqlParameter("@C4", SqlDbType.Int);
-            paramRefrenceID.Value = 2;
-
-
-            /**add extra field from visa file */
-            SqlParameter paramfilenumber = new SqlParameter("@C5", SqlDbType.NVarChar);
-            paramfilenumber.Value = numbertextbox.Text;
-            SqlParameter paramnafileissueplace = new SqlParameter("@C6", SqlDbType.NVarChar);
-            paramnafileissueplace.Value = issueplacetext.Text;
-            SqlParameter paramfileissuedate = new SqlParameter("@C7", SqlDbType.Date);
-            paramfileissuedate.Value = docissueplacepicker.Value;
-            SqlParameter paramfileexpiraydate = new SqlParameter("@C8", SqlDbType.Date);
-            paramfileexpiraydate.Value = docexpirefatepicker.Value;
-
-            /**add extra field from visa file */
-
-
-
-            try
+            if (filename == null || Doctxt.Text == string.Empty)
             {
-
-                if (filename == null || Doctxt.Text == string.Empty)
-                {
-                    MessageBox.Show("Please select a valid document.");
-                }
-                else
-                {
-                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-                    {
-                        //we already define our connection globaly. We are just calling the object of connection.
-                        SQLCONN.OpenConection();
-                        SQLCONN.ExecuteQueries("insert into Documents (documentValue,name,CR_ID,DocTypeID,RefrenceID,Number,DocIssueplace,docissuedate,docexpiredate)values(@C0,@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8)", paramfilename, paramnameOFfile, paramPID, paramDocType, paramRefrenceID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate);
-                        string path = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 10));
-                        System.IO.File.Copy(opf.FileName, path + "\\Document\\" + filename);
-                        dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Documents where CR_ID =  " + EmployeeID + " ");
-                        SQLCONN.CloseConnection();
-                        MessageBox.Show("Document Saved.");
-                        ClearTextBoxes();
-                        cmbDocuments.Text = "Select";
-                    }
-                    else
-                    {
-                    }
-                }
-
+                MessageBox.Show("Please select a valid document.");
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
+                // Create the documents folder if it doesn't exist
+                string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                string documentFolder = Path.Combine(documentsPath, "Documents");
+                Directory.CreateDirectory(documentFolder);
+
+                // Copy the file to the documents folder
+                string filePath = Path.Combine(documentFolder, filename);
+                System.IO.File.Copy(opf.FileName, filePath, true);
+
+                // Execute the query to insert the document into the database
+                SqlParameter paramfilename = new SqlParameter("@C0", SqlDbType.NVarChar);
+                paramfilename.Value = "\\Document\\" + filename;
+                SqlParameter paramnameOFfile = new SqlParameter("@C1", SqlDbType.NVarChar);
+                paramnameOFfile.Value = Doctxt.Text;
+                SqlParameter paramPID = new SqlParameter("@C2", SqlDbType.Int);
+                paramPID.Value = EmployeeID;
+                SqlParameter paramDocType = new SqlParameter("@C3", SqlDbType.Int);
+                paramDocType.Value = cmbDocuments.SelectedValue;
+                SqlParameter paramRefrenceID = new SqlParameter("@C4", SqlDbType.Int);
+                paramRefrenceID.Value = 2;
+
+                // Add extra fields for visa file
+                SqlParameter paramfilenumber = new SqlParameter("@C5", SqlDbType.NVarChar);
+                paramfilenumber.Value = numbertextbox.Text;
+                SqlParameter paramnafileissueplace = new SqlParameter("@C6", SqlDbType.NVarChar);
+                paramnafileissueplace.Value = issueplacetext.Text;
+                SqlParameter paramfileissuedate = new SqlParameter("@C7", SqlDbType.Date);
+                paramfileissuedate.Value = docissueplacepicker.Value;
+                SqlParameter paramfileexpiraydate = new SqlParameter("@C8", SqlDbType.Date);
+                paramfileexpiraydate.Value = docexpirefatepicker.Value;
+
+                SQLCONN.OpenConection();
+                SQLCONN.ExecuteQueries("insert into Documents (documentValue,name,CR_ID,DocTypeID,RefrenceID,Number,DocIssueplace,docissuedate,docexpiredate)values(@C0,@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8)", paramfilename, paramnameOFfile, paramPID, paramDocType, paramRefrenceID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate);
+                dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Documents where CR_ID =  " + EmployeeID + " ");
+                SQLCONN.CloseConnection();
+                MessageBox.Show("Document Saved.");
+                ClearTextBoxes();
+                cmbDocuments.Text = "Select";
             }
+
         }
 
         private void tabDoc_Click(object sender, EventArgs e)
@@ -994,38 +980,45 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
 
         private void button5_Click(object sender, EventArgs e)
         {
+            button5.Click -= button5_Click;
 
-
-
-
-            //To where your opendialog box get starting location. My initial directory location is desktop.
-            opf.InitialDirectory = "C://Desktop";
-            //Your opendialog box title name.
-            opf.Title = "Select file to be upload.";
-            //which type file format you want to upload in database. just add them.
-            opf.Filter = "Select Valid Document(*.pdf; *.doc; *.xlsx; *.html)|*.pdf; *.docx; *.xlsx; *.html";
-            //FilterIndex property represents the index of the filter currently selected in the file dialog box.
-            opf.FilterIndex = 1;
             try
             {
                 if (opf.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     if (opf.CheckFileExists)
                     {
-                        string path = System.IO.Path.GetFullPath(opf.FileName);
-                        Doctxt.Text = path;
+                        // Create the documents folder if it doesn't exist
+                        string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                        string documentFolder = Path.Combine(documentsPath, "Documents");
+                        Directory.CreateDirectory(documentFolder);
+
+                        // Copy the file to the documents folder
+                        string filePath = Path.Combine(documentFolder, Path.GetFileName(opf.FileName));
+                        System.IO.File.Copy(opf.FileName, filePath, true);
+
+                        // Update the text box with the path of the uploaded file
+                        Doctxt.Text = filePath;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Please Upload document.");
+                    MessageBox.Show("Please upload a document.");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("An error occurred while uploading the document: " + ex.Message);
             }
+
+            button5.Click += button5_Click;
+
+
+
+
         }
+
+
 
         private void btnaddcontact_Click(object sender, EventArgs e)
         {
@@ -1098,6 +1091,8 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                     SQLCONN.ExecuteQueries("delete from Contacts where Contact_ID=@ID", paramPID);
                     SQLCONN.ExecuteQueries(" declare @max int select @max = max(Contact_ID) from[Contacts] if @max IS NULL SET @max = 0 DBCC CHECKIDENT('[Contacts]', RESEED, @max)");
                     MessageBox.Show("Record Deleted Successfully");
+                    
+
                     SQLCONN.CloseConnection();
                     EmployeeID = EMPID;
                     dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =  " + EmployeeID + " ");
@@ -1156,35 +1151,63 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
 
         private void btndeletedoc_Click(object sender, EventArgs e)
         {
+            string filePath = "";
             SqlParameter paramDoc = new SqlParameter("@ID", SqlDbType.Int);
             paramDoc.Value = dOCID;
             if (EmployeeID != 0)
             {
-
                 if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
                     SQLCONN.OpenConection();
+
+                    // Get the file path from the database before deleting the record
+
+                    SqlDataReader dr = SQLCONN.DataReader("SELECT documentValue FROM Documents WHERE Doc_id = " + dOCID);
+                    if (dr.Read())
+                    {
+                        filePath = (dr["documentValue"].ToString());
+                    }
+                    dr.Dispose();
+                    dr.Close();
+
                     SQLCONN.ExecuteQueries("delete from Documents where Doc_id=@ID", paramDoc);
                     SQLCONN.ExecuteQueries(" declare @max int select @max = max(CR_ID) from[Documents] if @max IS NULL SET @max = 0 DBCC CHECKIDENT('[Documents]', RESEED, @max)");
                     MessageBox.Show("Record Deleted Successfully");
+
+                    // Delete the file from disk
+                    string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    string documentFolder = Path.Combine(documentsPath, "Documents");
+
+                    string fileName = Path.GetFileName(filePath);
+                     filePath = Path.Combine(documentFolder, fileName);
+
+                    if (File.Exists(filePath))
+                    {
+                        File.Delete(filePath);
+                        Console.WriteLine("File deleted successfully.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("File does not exist.");
+                    }
+
                     SQLCONN.CloseConnection();
                     ClearTextBoxes();
                     cmbDocuments.Text = "Select";
                     EmployeeID = EMPID;
                     dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue] ,[DocumentType].Doc_Type ,[RefrenceID]FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =  " + EmployeeID + " ");
-
-
                 }
                 else
                 {
-
+                    // Do nothing
                 }
-
             }
             else
             {
                 MessageBox.Show("Please Select Record to Delete");
             }
+
+
         }
 
         private void btnupdatecontat_Click(object sender, EventArgs e)
@@ -1339,7 +1362,12 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                 }
                 if (tabControl1.SelectedTab == tabControl1.TabPages[1])
                 {
+
+
+
                     dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue]  ,[DocumentType].Doc_Type ,[RefrenceID],[Number] ,[DocIssueplace]  ,[docissuedate]  ,[docexpiredate] FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =@ID ", paramEmployeeID);
+                   
+
 
                 }
                 if (tabControl1.SelectedTab == tabControl1.TabPages[2])
@@ -1501,7 +1529,7 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                     else
                     {
 
-                         dOCID = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        dOCID = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString());
                         EmployeeID = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[1].Value.ToString());
                         Doctxt.Text = dataGridView3.Rows[e.RowIndex].Cells[2].Value.ToString();
                         cmbDocuments.Text = dataGridView3.Rows[e.RowIndex].Cells[4].Value.ToString();
@@ -1510,7 +1538,7 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                         docissueplacepicker.Value = Convert.ToDateTime(dataGridView3.Rows[e.RowIndex].Cells[8].Value.ToString());
                         docexpirefatepicker.Value = Convert.ToDateTime(dataGridView3.Rows[e.RowIndex].Cells[9].Value.ToString());
 
-                        CommonClass.DocPath = Doctxt.Text;
+                        CommonClass.DocPath = dataGridView3.Rows[e.RowIndex].Cells[3].Value.ToString();
 
 
 
@@ -2159,6 +2187,7 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
         {
             DataRow dr;
             SqlConnection conn = new SqlConnection(@"Data Source=192.168.1.8;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@");
+           // SqlConnection conn = new SqlConnection(@"Data Source=AMIN-PC;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@");
 
 
             conn.Open();
@@ -2561,6 +2590,13 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
             var form = new FrmShowDoc();
             // this.Hide();
             form.ShowDialog();
+        }
+
+        private void btnnewJob_Click_1(object sender, EventArgs e)
+        {
+            FrmJobsNew frmJobs = new FrmJobsNew();
+            // this.Hide();
+            frmJobs.Show();
         }
     }
 }

@@ -200,8 +200,11 @@ namespace Delmon_Managment_System.Forms
             }
             SQLCONN.CloseConnection();
         }
-      
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

@@ -24,17 +24,21 @@ namespace Delmon_Managment_System.Forms
         private void FrmShowDoc_Load(object sender, EventArgs e)
         {
             string fileName = CommonClass.DocPath;
+            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string documentFolder = Path.Combine(documentsPath, "Documents");
 
-            string relativePath = @"Document\" + fileName;
-            string currentDirectory = Directory.GetCurrentDirectory();
-            string rootDirectory = Directory.GetParent(Directory.GetParent(currentDirectory).FullName).FullName;
-            string absolutePath = Path.Combine(rootDirectory, relativePath);
+            // Get the actual file name from the full path
+            string[] fileNameParts = fileName.Split('\\');
+            string actualFileName = fileNameParts[fileNameParts.Length - 1];
+
+            // Combine the document folder and actual file name
+            string filePath = Path.Combine(documentFolder, actualFileName);
 
             try
             {
-                if (File.Exists(absolutePath))
+                if (File.Exists(filePath))
                 {
-                    DocWebBrowser.Navigate(absolutePath);
+                    DocWebBrowser.Navigate(filePath);
                 }
                 else
                 {
@@ -45,6 +49,10 @@ namespace Delmon_Managment_System.Forms
             {
                 MessageBox.Show("An error occurred: " + ex.Message);
             }
+
+
+
+
 
 
 

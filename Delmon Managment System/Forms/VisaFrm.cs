@@ -1396,8 +1396,8 @@ namespace Delmon_Managment_System.Forms
                         }
                         else
                         {
-                            cmbcandidates.SelectedValue = 0;
-                            cmbcandidates2.SelectedValue = 0;
+                            cmbcandidates.Text = "Select";
+                            cmbcandidates2.Text = "Select";
                             cmbAgency.SelectedValue = 0;
                             cmbReservedTo.SelectedValue = 0;
 
@@ -1631,6 +1631,8 @@ namespace Delmon_Managment_System.Forms
             paramAgency.Value = cmbAgency.SelectedValue;
             SqlParameter paramCandidate = new SqlParameter("@C8", SqlDbType.NVarChar);
             paramCandidate.Value = cmbcandidates.SelectedValue;
+            SqlParameter paramCandidate2 = new SqlParameter("@C9", SqlDbType.NVarChar);
+            paramCandidate2.Value = cmbcandidates2.SelectedValue;
 
             paramReservedTo.Value = cmbReservedTo.SelectedValue;
 
@@ -1666,9 +1668,22 @@ namespace Delmon_Managment_System.Forms
                         originalData = new DataTable();
                         da.Fill(originalData);
                     }
-                    SQLCONN.ExecuteQueries("update VISAJobList set StatusID=@C4,[EmployeeID]=@C8,AgencyID=@C7 ,[ConsulateID] = @C5,[JobID] = @C6 ,ReservedTo=@CompReservedTo where FileNumber=@FileNumberid",
-                    paramstatusID, paramCandidate,paramAgency,ParamConsulate,paramJob, paramReservedTo, paramFileNumberID);
-                    MessageBox.Show("Record Updated Successfully");
+                    MessageBox.Show(cmbcandidates.SelectedIndex.ToString() );
+                    if ((int)cmbcandidates.SelectedIndex == -1)
+                    {
+
+                        SQLCONN.ExecuteQueries("update VISAJobList set StatusID=@C4,[EmployeeID]=@C9,AgencyID=@C7 ,[ConsulateID] = @C5,[JobID] = @C6 ,ReservedTo=@CompReservedTo where FileNumber=@FileNumberid",
+                       paramstatusID, paramCandidate2, paramAgency, ParamConsulate, paramJob, paramReservedTo, paramFileNumberID);
+
+                    }
+                    else
+                    {
+                        SQLCONN.ExecuteQueries("update VISAJobList set StatusID=@C4,[EmployeeID]=@C8,AgencyID=@C7 ,[ConsulateID] = @C5,[JobID] = @C6 ,ReservedTo=@CompReservedTo where FileNumber=@FileNumberid",
+                     paramstatusID, paramCandidate, paramAgency, ParamConsulate, paramJob, paramReservedTo, paramFileNumberID);
+
+                    }
+
+                       MessageBox.Show("Record Updated Successfully");
 
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {
@@ -1805,6 +1820,9 @@ namespace Delmon_Managment_System.Forms
         {
 
         }
+
+      
+        
     }
 }
 
