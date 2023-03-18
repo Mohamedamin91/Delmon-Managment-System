@@ -1668,7 +1668,6 @@ namespace Delmon_Managment_System.Forms
                         originalData = new DataTable();
                         da.Fill(originalData);
                     }
-                    MessageBox.Show(cmbcandidates.SelectedIndex.ToString() );
                     if ((int)cmbcandidates.SelectedIndex == -1)
                     {
 

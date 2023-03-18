@@ -33,22 +33,10 @@ namespace Delmon_Managment_System.Forms
 
             // Combine the document folder and actual file name
             string filePath = Path.Combine(documentFolder, actualFileName);
+             DocWebBrowser.Navigate(filePath);
 
-            try
-            {
-                if (File.Exists(filePath))
-                {
-                    DocWebBrowser.Navigate(filePath);
-                }
-                else
-                {
-                    MessageBox.Show("File not found.");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred: " + ex.Message);
-            }
+
+         
 
 
 

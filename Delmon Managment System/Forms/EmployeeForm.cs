@@ -282,8 +282,37 @@ ORDER BY e.EmployeeID";
             SQLCONN.CloseConnection();
             firstnametxt.Text = secondnametxt.Text = thirdnametxt.Text = lastnametxt.Text = "";
             cmbMartialStatus.Text = cmbGender.Text = "";
+            ClearAllControls();
             tabControl1.Enabled = true;
         }
+        private void ClearAllControls()
+        {
+            // Loop through each tab page
+            foreach (TabPage tabPage in tabControl1.TabPages)
+            {
+                // Loop through each control on the tab page
+                foreach (Control control in tabPage.Controls)
+                {
+                    // Clear the control if it's a text box, combo box, or data grid view
+                    if (control is TextBox textBox)
+                    {
+                        textBox.Clear();
+                    }
+                    else if (control is ComboBox comboBox)
+                    {
+                        comboBox.SelectedIndex = -1;
+                        comboBox.Text = "";
+                    }
+                    else if (control is DataGridView dataGridView)
+                    {
+                        dataGridView.DataSource = null;
+                        dataGridView.Rows.Clear();
+                        dataGridView.Columns.Clear();
+                    }
+                }
+            }
+        }
+
 
         private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -967,8 +996,12 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                 dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Documents where CR_ID =  " + EmployeeID + " ");
                 SQLCONN.CloseConnection();
                 MessageBox.Show("Document Saved.");
-                ClearTextBoxes();
                 cmbDocuments.Text = "Select";
+                Doctxt.Text = "";
+                numbertextbox.Text = "";
+                issueplacetext.Text = "";
+                docissueplacepicker.Value = DateTime.Now;
+                docexpirefatepicker.Value = DateTime.Now;
             }
 
         }
@@ -1066,7 +1099,8 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                     MessageBox.Show("Record saved Successfully");
 
                     dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =  " + EmployeeID + " ");
-                    // ClearTextBoxes();
+                    Contacttxt.Text = "";
+                    cmbcontact.Text = "Select";
                     SQLCONN.CloseConnection();
 
                 }
@@ -1096,7 +1130,7 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                     SQLCONN.CloseConnection();
                     EmployeeID = EMPID;
                     dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =  " + EmployeeID + " ");
-                    ClearTextBoxes();
+                    Contacttxt.Text = "";
                     cmbcontact.Text = "Select";
                     //    ClearTextBoxes();
 
@@ -1192,8 +1226,12 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                     }
 
                     SQLCONN.CloseConnection();
-                    ClearTextBoxes();
                     cmbDocuments.Text = "Select";
+                    Doctxt.Text = "";
+                    numbertextbox.Text = "";
+                    issueplacetext.Text = "";
+                    docissueplacepicker.Value = DateTime.Now;
+                    docexpirefatepicker.Value = DateTime.Now; cmbDocuments.Text = "Select";
                     EmployeeID = EMPID;
                     dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue] ,[DocumentType].Doc_Type ,[RefrenceID]FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =  " + EmployeeID + " ");
                 }
@@ -1236,6 +1274,8 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                     EmployeeID = EMPID;
                     dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID]  FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =  " + EmployeeID + " ");
                     // ClearTextBoxes();
+                    Contacttxt.Text = "";
+                    cmbcontact.Text = "Select";
                     SQLCONN.CloseConnection();
 
                 }
@@ -1304,6 +1344,12 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                     dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue] ,[DocumentType].Doc_Type ,[RefrenceID]FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =  " + EmployeeID + " ");
                     //    ClearTextBoxes();
                     SQLCONN.CloseConnection();
+                    cmbDocuments.Text = "Select";
+                    Doctxt.Text = "";
+                    numbertextbox.Text = "";
+                    issueplacetext.Text = "";
+                    docissueplacepicker.Value = DateTime.Now;
+                    docexpirefatepicker.Value = DateTime.Now;
 
                 }
                 else
@@ -1448,6 +1494,13 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                         }
 
                         cmbnationality.Text = dataGridView1.Rows[e.RowIndex].Cells[14].Value.ToString();
+
+
+
+
+
+
+
 
 
 
@@ -1907,6 +1960,8 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                         dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  select SalaryDetID , SalaryTypeName 'Salary Type' ,SalaryDetails.Value from SalaryDetails,SalaryTypes where SalaryDetails.SalaryTypeID = SalaryTypes.SalaryTypeID and SalaryDetails.EmployeeID = @ID ", paramemployee);
                         this.dataGridView5.Columns["SalaryDetID"].Visible = false;
                         // ClearTextBoxes();
+                        cmbsalarytype.Text = "Select";
+                        txtvalue.Text = "";
                         SQLCONN.CloseConnection();
 
                     }
@@ -1957,10 +2012,8 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                     EmployeeID = EMPID;
                     dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  select SalaryDetID , SalaryTypeName 'Salary Type' ,SalaryDetails.Value from SalaryDetails,SalaryTypes where SalaryDetails.SalaryTypeID = SalaryTypes.SalaryTypeID and SalaryDetails.EmployeeID = @ID ", ParamEmployee);
                     this.dataGridView5.Columns["SalaryDetID"].Visible = false;
-                    ClearTextBoxes();
                     cmbsalarytype.Text = "Select";
-                    //    ClearTextBoxes();
-
+                    txtvalue.Text = "";
 
 
                 }
@@ -2102,7 +2155,7 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                     SQLCONN.ExecuteQueries("update  SalaryDetails set SalaryTypeID=@C1,Value=@C2 where EmployeeID=@ID  and SalaryDetID=@SalaryID",
                                                    paramSalaryType, paramValue, paramemployee, paramSalaryID);
                     MessageBox.Show("Record Updated Successfully");
-
+                    
 
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {
@@ -2168,6 +2221,8 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                     this.dataGridView5.Columns["SalaryDetID"].Visible = false;
                     // ClearTextBoxes();
                     SQLCONN.CloseConnection();
+                    cmbsalarytype.Text = "Select";
+                    txtvalue.Text = "";
 
                 }
                 else
@@ -2494,8 +2549,9 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                                                   paramPID, paramHistoryValue, paramDateHistory);
                     MessageBox.Show("Record saved Successfully");
                     dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  * FROM [DelmonGroupDB].[dbo].[EmployeeHistory] where EmployeeID =  " + EmployeeID + " ");
-                    ClearTextBoxes();
                     SQLCONN.CloseConnection();
+                    richhistoryvalue.Text = "";
+                    dtphistorydate.Value = DateTime.Now;
 
                 }
             }
@@ -2530,8 +2586,8 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                     MessageBox.Show("Record Updated Successfully");
 
                     dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  * FROM [DelmonGroupDB].[dbo].[EmployeeHistory] where EmployeeID =  " + EmployeeID + " ");
-                    ClearTextBoxes();
-                
+                    richhistoryvalue.Text = "";
+                    dtphistorydate.Value = DateTime.Now;
 
                 }
                 else
@@ -2567,8 +2623,8 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                     SQLCONN.CloseConnection();
                     dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  * FROM [DelmonGroupDB].[dbo].[EmployeeHistory] where EmployeeID =  " + EmployeeID + " ");
                     richhistoryvalue.Text = "";
-                    ClearTextBoxes();
-
+                    richhistoryvalue.Text = "";
+                    dtphistorydate.Value = DateTime.Now;
 
 
                 }
@@ -2587,9 +2643,48 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
 
         private void btnshowDoc_Click(object sender, EventArgs e)
         {
+            string fileName = CommonClass.DocPath;
+            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string documentFolder = Path.Combine(documentsPath, "Documents");
+
+            // Get the actual file name from the full path
+            string[] fileNameParts = fileName.Split('\\');
+            string actualFileName = fileNameParts[fileNameParts.Length - 1];
+
+            // Combine the document folder and actual file name
+            string filePath = Path.Combine(documentFolder, actualFileName);
+
+
             var form = new FrmShowDoc();
             // this.Hide();
-            form.ShowDialog();
+
+            try
+            {
+                if (fileName==string.Empty)
+                {
+                    MessageBox.Show(" The path 'document value' maybe incorrect or empty ,Kindly  Delete it and add it Again  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
+                else { 
+                if (File.Exists(filePath))
+                {
+
+                    form.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("File not found.");
+                }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+
+
+
+
         }
 
         private void btnnewJob_Click_1(object sender, EventArgs e)
