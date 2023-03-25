@@ -484,7 +484,10 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!NationalityName.Value, "DataSet1")</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -511,7 +514,7 @@
         <Top>0.19792in</Top>
         <Left>0.12278in</Left>
         <Height>4.79515in</Height>
-        <Width>6.78327in</Width>
+        <Width>7.81563in</Width>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -639,7 +642,7 @@
               <Top>0.0925in</Top>
               <Left>0.22632in</Left>
               <Height>0.41361in</Height>
-              <Width>5.95548in</Width>
+              <Width>7.41381in</Width>
               <Style>
                 <Border />
                 <BackgroundColor>LightGrey</BackgroundColor>
@@ -659,7 +662,7 @@
                       <Value>Date:</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
-                        <FontSize>11pt</FontSize>
+                        <FontSize>12pt</FontSize>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -672,7 +675,7 @@
               <Top>0.57556in</Top>
               <Left>0.22409in</Left>
               <Height>0.25in</Height>
-              <Width>0.41667in</Width>
+              <Width>0.52778in</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -694,7 +697,7 @@
                       <Value>Candidate ID:</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
-                        <FontSize>11pt</FontSize>
+                        <FontSize>12pt</FontSize>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -704,8 +707,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>0.58778in</Top>
-              <Left>2.19332in</Left>
+              <Top>0.57556in</Top>
+              <Left>2.69332in</Left>
               <Height>0.25in</Height>
               <Width>1.07986in</Width>
               <ZIndex>2</ZIndex>
@@ -729,7 +732,7 @@
                       <Value>File #:</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
-                        <FontSize>11pt</FontSize>
+                        <FontSize>12pt</FontSize>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -740,7 +743,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
               <Top>0.57556in</Top>
-              <Left>4.66791in</Left>
+              <Left>5.91791in</Left>
               <Height>0.25in</Height>
               <Width>0.47222in</Width>
               <ZIndex>3</ZIndex>
@@ -776,8 +779,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>FileNumber</rd:DefaultName>
-              <Top>0.56333in</Top>
-              <Left>5.1818in</Left>
+              <Top>0.57556in</Top>
+              <Left>6.5568in</Left>
               <Height>0.25in</Height>
               <Width>1in</Width>
               <ZIndex>4</ZIndex>
@@ -801,7 +804,7 @@
                       <Value>=First(Fields!EmployeeID.Value, "DataSet1")</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
-                        <FontSize>11pt</FontSize>
+                        <FontSize>12pt</FontSize>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -811,8 +814,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>EmployeeID</rd:DefaultName>
-              <Top>0.58778in</Top>
-              <Left>3.19284in</Left>
+              <Top>0.57556in</Top>
+              <Left>3.94284in</Left>
               <Height>0.25in</Height>
               <Width>0.89473in</Width>
               <ZIndex>5</ZIndex>
@@ -836,7 +839,7 @@
                       <Value>=First(Fields!Date.Value, "DataSet1")</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
-                        <FontSize>11pt</FontSize>
+                        <FontSize>12pt</FontSize>
                         <Format>d MMM yyyy</Format>
                       </Style>
                     </TextRun>
@@ -847,8 +850,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Date</rd:DefaultName>
-              <Top>1.4619cm</Top>
-              <Left>1.68798cm</Left>
+              <Top>1.46192cm</Top>
+              <Left>2.01559cm</Left>
               <Height>0.6cm</Height>
               <Width>2.8175cm</Width>
               <ZIndex>6</ZIndex>
@@ -864,10 +867,10 @@
             </Textbox>
           </ReportItems>
           <KeepTogether>true</KeepTogether>
-          <Top>1.11469in</Top>
+          <Top>0.98969in</Top>
           <Left>0.12278in</Left>
           <Height>0.99875in</Height>
-          <Width>6.72188in</Width>
+          <Width>7.81563in</Width>
           <ZIndex>3</ZIndex>
           <Style>
             <Border>

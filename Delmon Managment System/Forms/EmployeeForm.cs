@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.DirectoryServices.AccountManagement;
+using System.Security.Principal;
+using System.Net;
 
 namespace Delmon_Managment_System.Forms
 {
@@ -39,8 +42,8 @@ namespace Delmon_Managment_System.Forms
             Font newFont = new Font("Times New Roman", 10);
             cmbEmployJobHistory.KeyDown += new KeyEventHandler(cmbEmployJobHistory_KeyDown);
             cmbCompany.KeyDown += new KeyEventHandler(cmbCompany_KeyDown);
-             cmbPersonalStatusStatus.KeyDown += new KeyEventHandler(cmbPersonalStatusStatus_KeyDown);
-          //  cmbPersonalStatusStatus.KeyPress += cmbPersonalStatusStatus_KeyPress;
+            cmbPersonalStatusStatus.KeyDown += new KeyEventHandler(cmbPersonalStatusStatus_KeyDown);
+            //  cmbPersonalStatusStatus.KeyPress += cmbPersonalStatusStatus_KeyPress;
 
             // Loop through all controls on the form and change their font properties
             foreach (Control control in Controls)
@@ -51,6 +54,7 @@ namespace Delmon_Managment_System.Forms
 
 
         }
+
 
         public void ClearTextBoxes()
         {
@@ -83,10 +87,19 @@ namespace Delmon_Managment_System.Forms
 
 
 
-
         private void EmployeeForm_Load(object sender, EventArgs e)
         {
-           // tabControl1.TabPages.Remove(EmploymentHistory);
+
+
+
+
+
+
+
+
+
+
+            // tabControl1.TabPages.Remove(EmploymentHistory);
 
             //tabControl1.TabPages.Remove(SalaryTab);
 
@@ -105,7 +118,7 @@ namespace Delmon_Managment_System.Forms
 
             if (lblusertype.Text == "Admin")
             {
-                DeleteBTN.Enabled = btndeletecontact.Enabled = btndeletedoc.Enabled = button1.Enabled = button4.Enabled=true;
+                DeleteBTN.Enabled = btndeletecontact.Enabled = btndeletedoc.Enabled = button1.Enabled = button4.Enabled = true;
                 dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"
 select Employees.EmployeeID, Employees.CurrentEmpID,FirstName,SecondName,ThirdName,LastName,Gender,MartialStatus,StatusTBL.StatusValue,jobs.JobTitleEN,DeptTypes.Dept_Type_Name,Companies.COMPName_EN,startdate, enddate,NationalityName 
 from  Countries,Employees,Companies,JOBS,StatusTBL,DEPARTMENTS,DeptTypes  where Countries.CountryId = Employees.NationalityID and
@@ -176,14 +189,14 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
             cmbPersonalStatusStatus.ValueMember = "StatusID";
             cmbPersonalStatusStatus.DisplayMember = "StatusValue";
             cmbPersonalStatusStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" select  StatusID , StatusValue  from StatusTBL where RefrenceID=2  ");
-           cmbPersonalStatusStatus.AutoCompleteMode = AutoCompleteMode.Suggest  ;
+            cmbPersonalStatusStatus.AutoCompleteMode = AutoCompleteMode.Suggest;
             cmbPersonalStatusStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             cmbEmployJobHistory.ValueMember = "JobID";
             cmbEmployJobHistory.DisplayMember = "JobTitleEN";
             cmbEmployJobHistory.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS");
-       //     cmbEmployJobHistory.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-       //     cmbEmployJobHistory.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //     cmbEmployJobHistory.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //     cmbEmployJobHistory.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             cmbempdepthistory.ValueMember = "DEPTID";
             cmbempdepthistory.DisplayMember = "Dept_Type_Name";
@@ -952,57 +965,79 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
 
         private void UplodeBTN_Click(object sender, EventArgs e)
         {
-            string filename = Path.GetFileName(opf.FileName);
+            //string filename = Path.GetFileName(opf.FileName);
 
-            if (filename == null || Doctxt.Text == string.Empty)
+            //if (filename == null || Doctxt.Text == string.Empty)
+            //{
+            //    MessageBox.Show("Please select a valid document.");
+            //}
+            //else
+            //{
+            // Create the documents folder if it doesn't exist
+            //string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            //string documentFolder = Path.Combine(documentsPath, "HR SW Documents");
+            //////Directory.CreateDirectory(documentFolder);
+
+            //// Copy the file to the documents folder
+            //string filePath = Path.Combine(documentFolder, filename);
+            //System.IO.File.Copy(opf.FileName, filePath, true);
+
+            //// Execute the query to insert the document into the database
+            //SqlParameter paramfilename = new SqlParameter("@C0", SqlDbType.NVarChar);
+            //paramfilename.Value = @"\\192.168.1.8\HR SW Documents\" + filename;
+            //SqlParameter paramnameOFfile = new SqlParameter("@C1", SqlDbType.NVarChar);
+            //paramnameOFfile.Value = Doctxt.Text;
+            SqlParameter paramPID = new SqlParameter("@C2", SqlDbType.Int);
+            paramPID.Value = EmployeeID;
+            SqlParameter paramDocType = new SqlParameter("@C3", SqlDbType.Int);
+            paramDocType.Value = cmbDocuments.SelectedValue;
+            SqlParameter paramRefrenceID = new SqlParameter("@C4", SqlDbType.Int);
+            paramRefrenceID.Value = 2;
+
+            // Add extra fields for visa file
+            SqlParameter paramfilenumber = new SqlParameter("@C5", SqlDbType.NVarChar);
+            paramfilenumber.Value = numbertextbox.Text;
+            SqlParameter paramnafileissueplace = new SqlParameter("@C6", SqlDbType.NVarChar);
+            paramnafileissueplace.Value = issueplacetext.Text;
+            SqlParameter paramfileissuedate = new SqlParameter("@C7", SqlDbType.Date);
+            paramfileissuedate.Value = docissueplacepicker.Value;
+            SqlParameter paramfileexpiraydate = new SqlParameter("@C8", SqlDbType.Date);
+            paramfileexpiraydate.Value = docexpirefatepicker.Value;
+            if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
-                MessageBox.Show("Please select a valid document.");
+                if (cmbDocuments.Text == "Select")
+                {
+                    MessageBox.Show("Please Select Document Type  . !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
+                if (numbertextbox.Text == "")
+                {
+                    MessageBox.Show("Please insert Document  Number. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
+                if (issueplacetext.Text == "")
+                {
+                    MessageBox.Show("Please insert Document Issue Place. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
+                else
+                {
+
+                    SQLCONN.OpenConection();
+                    //* With Doc  SQLCONN.ExecuteQueries("insert into Documents (documentValue,name,CR_ID,DocTypeID,RefrenceID,Number,DocIssueplace,docissuedate,docexpiredate)values(@C0,@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8)", paramfilename, paramnameOFfile, paramPID, paramDocType, paramRefrenceID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate);
+                    SQLCONN.ExecuteQueries("insert into Documents (CR_ID,DocTypeID,RefrenceID,Number,DocIssueplace,docissuedate,docexpiredate)values(@C2,@C3,@C4,@C5,@C6,@C7,@C8)", paramPID, paramDocType, paramRefrenceID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate);
+                    dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Documents where CR_ID =  " + EmployeeID + " ");
+                    SQLCONN.CloseConnection();
+                    MessageBox.Show("Document Saved.");
+                    cmbDocuments.Text = "Select";
+                    Doctxt.Text = "";
+                    numbertextbox.Text = "";
+                    issueplacetext.Text = "";
+                    docissueplacepicker.Value = DateTime.Now;
+                    docexpirefatepicker.Value = DateTime.Now;
+                }
             }
-            else
-            {
-                // Create the documents folder if it doesn't exist
-                string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                string documentFolder = Path.Combine(documentsPath, "Documents");
-                Directory.CreateDirectory(documentFolder);
-
-                // Copy the file to the documents folder
-                string filePath = Path.Combine(documentFolder, filename);
-                System.IO.File.Copy(opf.FileName, filePath, true);
-
-                // Execute the query to insert the document into the database
-                SqlParameter paramfilename = new SqlParameter("@C0", SqlDbType.NVarChar);
-                paramfilename.Value = "\\Document\\" + filename;
-                SqlParameter paramnameOFfile = new SqlParameter("@C1", SqlDbType.NVarChar);
-                paramnameOFfile.Value = Doctxt.Text;
-                SqlParameter paramPID = new SqlParameter("@C2", SqlDbType.Int);
-                paramPID.Value = EmployeeID;
-                SqlParameter paramDocType = new SqlParameter("@C3", SqlDbType.Int);
-                paramDocType.Value = cmbDocuments.SelectedValue;
-                SqlParameter paramRefrenceID = new SqlParameter("@C4", SqlDbType.Int);
-                paramRefrenceID.Value = 2;
-
-                // Add extra fields for visa file
-                SqlParameter paramfilenumber = new SqlParameter("@C5", SqlDbType.NVarChar);
-                paramfilenumber.Value = numbertextbox.Text;
-                SqlParameter paramnafileissueplace = new SqlParameter("@C6", SqlDbType.NVarChar);
-                paramnafileissueplace.Value = issueplacetext.Text;
-                SqlParameter paramfileissuedate = new SqlParameter("@C7", SqlDbType.Date);
-                paramfileissuedate.Value = docissueplacepicker.Value;
-                SqlParameter paramfileexpiraydate = new SqlParameter("@C8", SqlDbType.Date);
-                paramfileexpiraydate.Value = docexpirefatepicker.Value;
-
-                SQLCONN.OpenConection();
-                SQLCONN.ExecuteQueries("insert into Documents (documentValue,name,CR_ID,DocTypeID,RefrenceID,Number,DocIssueplace,docissuedate,docexpiredate)values(@C0,@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8)", paramfilename, paramnameOFfile, paramPID, paramDocType, paramRefrenceID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate);
-                dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Documents where CR_ID =  " + EmployeeID + " ");
-                SQLCONN.CloseConnection();
-                MessageBox.Show("Document Saved.");
-                cmbDocuments.Text = "Select";
-                Doctxt.Text = "";
-                numbertextbox.Text = "";
-                issueplacetext.Text = "";
-                docissueplacepicker.Value = DateTime.Now;
-                docexpirefatepicker.Value = DateTime.Now;
-            }
+    
 
         }
 
@@ -1013,44 +1048,43 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
 
         private void button5_Click(object sender, EventArgs e)
         {
-            button5.Click -= button5_Click;
+            //// Show the OpenFileDialog to allow the user to select a file
+            //OpenFileDialog openFileDialog = new OpenFileDialog();
+            //if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+            //string filePath = openFileDialog.FileName;
 
-            try
-            {
-                if (opf.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    if (opf.CheckFileExists)
-                    {
-                        // Create the documents folder if it doesn't exist
-                        string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                        string documentFolder = Path.Combine(documentsPath, "Documents");
-                        Directory.CreateDirectory(documentFolder);
+            //// Create a new instance of the FileInfo class to get information about the file
+            //FileInfo fileInfo = new FileInfo(filePath);
 
-                        // Copy the file to the documents folder
-                        string filePath = Path.Combine(documentFolder, Path.GetFileName(opf.FileName));
-                        System.IO.File.Copy(opf.FileName, filePath, true);
+            //// Impersonate the hrswusr user to access the shared folder
+            //string domain = "delmongroup";
+            //string username = "hrswusr";
+            //string password = "Hr@soft321";
+            //Impersonator.Impersonate(username, domain, password);
+            //try
+            //{
+            //    // Upload the file to the shared folder using the File.Copy method
+            //    string shareFolder = @"\\192.168.1.8\HR SW Documents\";
+            //    string fileName = fileInfo.Name;
+            //    string targetPath = Path.Combine(shareFolder, fileName);
+            //    File.Copy(filePath, targetPath, true);
+            //}
+            //finally
+            //{
+            //    // Stop impersonating the user
+            //    Impersonator.StopImpersonation();
+            //}
 
-                        // Update the text box with the path of the uploaded file
-                        Doctxt.Text = filePath;
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Please upload a document.");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred while uploading the document: " + ex.Message);
-            }
 
-            button5.Click += button5_Click;
+            MessageBox.Show("Comming soon !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+
+
 
 
 
 
         }
-
 
 
         private void btnaddcontact_Click(object sender, EventArgs e)
@@ -1109,6 +1143,7 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
             {
 
             }
+
 
         }
 
@@ -1205,12 +1240,12 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                     dr.Close();
 
                     SQLCONN.ExecuteQueries("delete from Documents where Doc_id=@ID", paramDoc);
-                    SQLCONN.ExecuteQueries(" declare @max int select @max = max(CR_ID) from[Documents] if @max IS NULL SET @max = 0 DBCC CHECKIDENT('[Documents]', RESEED, @max)");
+                    SQLCONN.ExecuteQueries(" declare @max int select @max = max(Doc_id) from[Documents] if @max IS NULL SET @max = 0 DBCC CHECKIDENT('[Documents]', RESEED, @max)");
                     MessageBox.Show("Record Deleted Successfully");
 
                     // Delete the file from disk
-                    string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                    string documentFolder = Path.Combine(documentsPath, "Documents");
+                    string documentsPath = @"\\192.168.1.8\HR SW Documents\";
+                    string documentFolder = Path.Combine(documentsPath, "HR SW Documents");
 
                     string fileName = Path.GetFileName(filePath);
                      filePath = Path.Combine(documentFolder, fileName);
@@ -1299,16 +1334,16 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
 
         private void btnupdatedoc_Click(object sender, EventArgs e)
         {
-            string filename = System.IO.Path.GetFileName(opf.FileName);
-            string nameOFfile = opf.SafeFileName;
+            //string filename = System.IO.Path.GetFileName(opf.FileName);
+            //string nameOFfile = opf.SafeFileName;
 
             SqlParameter paramDoc = new SqlParameter("@ID", SqlDbType.Int);
             paramDoc.Value = dOCID;
 
-            SqlParameter paramfilename = new SqlParameter("@C0", SqlDbType.NVarChar);
-            paramfilename.Value = "\\Document\\" + filename;
-            SqlParameter paramnameOFfile = new SqlParameter("@C1", SqlDbType.NVarChar);
-            paramnameOFfile.Value = nameOFfile;
+            //SqlParameter paramfilename = new SqlParameter("@C0", SqlDbType.NVarChar);
+            //paramfilename.Value = @"\\192.168.1.8\HR SW Documents\" + filename;
+            //SqlParameter paramnameOFfile = new SqlParameter("@C1", SqlDbType.NVarChar);
+            //paramnameOFfile.Value = nameOFfile;
             SqlParameter paramPID = new SqlParameter("@C2", SqlDbType.Int);
             paramPID.Value = EmployeeID;
             SqlParameter paramDocType = new SqlParameter("@C3", SqlDbType.Int);
@@ -1332,25 +1367,44 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
 
             if (EmployeeID != 0)
             {
+             
                 if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
+                    if (cmbDocuments.Text == "Select")
+                    {
+                        MessageBox.Show("Please Select Document Type  . !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                    SQLCONN.OpenConection();
-                    SQLCONN.ExecuteQueries("update  Documents set documentValue=@C0,name=@C1,DocTypeID=@C3,Number=@C5,DocIssueplace=@C6,docissuedate=@C7,docexpiredate=@C8,CR_ID=@C2  where Doc_id = @ID ", paramfilename, paramnameOFfile, paramDocType, paramPID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate,paramDoc);
+                    }
+                    if (numbertextbox.Text == "")
+                    {
+                        MessageBox.Show("Please insert Document  Number. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
+                    if (issueplacetext.Text == "")
+                    {
+                        MessageBox.Show("Please insert Document Issue Place. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
+                    else
+                    {
+                        SQLCONN.OpenConection();
+                        // with text      SQLCONN.ExecuteQueries("update  Documents set documentValue=@C0,name=@C1,DocTypeID=@C3,Number=@C5,DocIssueplace=@C6,docissuedate=@C7,docexpiredate=@C8,CR_ID=@C2  where Doc_id = @ID ", paramfilename, paramnameOFfile, paramDocType, paramPID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate, paramDoc);
+                        SQLCONN.ExecuteQueries("update  Documents set DocTypeID=@C3,Number=@C5,DocIssueplace=@C6,docissuedate=@C7,docexpiredate=@C8,CR_ID=@C2  where Doc_id = @ID ", paramDocType, paramPID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate, paramDoc);
 
 
-                    MessageBox.Show("Record Updated Successfully");
-                    EmployeeID = EMPID;
-                    dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue] ,[DocumentType].Doc_Type ,[RefrenceID]FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =  " + EmployeeID + " ");
-                    //    ClearTextBoxes();
-                    SQLCONN.CloseConnection();
-                    cmbDocuments.Text = "Select";
-                    Doctxt.Text = "";
-                    numbertextbox.Text = "";
-                    issueplacetext.Text = "";
-                    docissueplacepicker.Value = DateTime.Now;
-                    docexpirefatepicker.Value = DateTime.Now;
+                        MessageBox.Show("Record Updated Successfully");
+                        EmployeeID = EMPID;
+                        dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue]  ,[DocumentType].Doc_Type ,[RefrenceID],[Number] ,[DocIssueplace]  ,[docissuedate]  ,[docexpiredate] FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =  " + EmployeeID + " ");
 
+                        //    ClearTextBoxes();
+                        SQLCONN.CloseConnection();
+                        cmbDocuments.Text = "Select";
+                        Doctxt.Text = "";
+                        numbertextbox.Text = "";
+                        issueplacetext.Text = "";
+                        docissueplacepicker.Value = DateTime.Now;
+                        docexpirefatepicker.Value = DateTime.Now;
+                    }
                 }
                 else
                 {
@@ -2643,44 +2697,46 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
 
         private void btnshowDoc_Click(object sender, EventArgs e)
         {
-            string fileName = CommonClass.DocPath;
-            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string documentFolder = Path.Combine(documentsPath, "Documents");
+            MessageBox.Show("Coming soon !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-            // Get the actual file name from the full path
-            string[] fileNameParts = fileName.Split('\\');
-            string actualFileName = fileNameParts[fileNameParts.Length - 1];
+            //string fileName = CommonClass.DocPath;
+            //string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            //string documentFolder = Path.Combine(documentsPath, "Documents");
 
-            // Combine the document folder and actual file name
-            string filePath = Path.Combine(documentFolder, actualFileName);
+            //// Get the actual file name from the full path
+            //string[] fileNameParts = fileName.Split('\\');
+            //string actualFileName = fileNameParts[fileNameParts.Length - 1];
+
+            //// Combine the document folder and actual file name
+            //string filePath = Path.Combine(documentFolder, actualFileName);
 
 
-            var form = new FrmShowDoc();
-            // this.Hide();
+            //var form = new FrmShowDoc();
+            //// this.Hide();
 
-            try
-            {
-                if (fileName==string.Empty)
-                {
-                    MessageBox.Show(" The path 'document value' maybe incorrect or empty ,Kindly  Delete it and add it Again  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //try
+            //{
+            //    if (fileName==string.Empty)
+            //    {
+            //        MessageBox.Show(" The path 'document value' maybe incorrect or empty ,Kindly  Delete it and add it Again  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                }
-                else { 
-                if (File.Exists(filePath))
-                {
+            //    }
+            //    else { 
+            //    if (File.Exists(filePath))
+            //    {
 
-                    form.ShowDialog();
-                }
-                else
-                {
-                    MessageBox.Show("File not found.");
-                }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred: " + ex.Message);
-            }
+            //        form.ShowDialog();
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("File not found.");
+            //    }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("An error occurred: " + ex.Message);
+            //}
 
 
 

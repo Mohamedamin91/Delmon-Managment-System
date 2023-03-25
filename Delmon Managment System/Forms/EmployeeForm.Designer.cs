@@ -802,7 +802,7 @@ namespace Delmon_Managment_System.Forms
             this.btnshowDoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnshowDoc.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnshowDoc.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnshowDoc.Location = new System.Drawing.Point(797, 32);
+            this.btnshowDoc.Location = new System.Drawing.Point(778, 58);
             this.btnshowDoc.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnshowDoc.Name = "btnshowDoc";
             this.btnshowDoc.Size = new System.Drawing.Size(75, 28);
@@ -830,6 +830,7 @@ namespace Delmon_Managment_System.Forms
             // 
             // Doctxt
             // 
+            this.Doctxt.Enabled = false;
             this.Doctxt.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Doctxt.Location = new System.Drawing.Point(181, 62);
             this.Doctxt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -921,7 +922,7 @@ namespace Delmon_Managment_System.Forms
             this.btnaUplodedoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnaUplodedoc.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnaUplodedoc.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnaUplodedoc.Location = new System.Drawing.Point(716, 32);
+            this.btnaUplodedoc.Location = new System.Drawing.Point(697, 58);
             this.btnaUplodedoc.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnaUplodedoc.Name = "btnaUplodedoc";
             this.btnaUplodedoc.Size = new System.Drawing.Size(75, 28);

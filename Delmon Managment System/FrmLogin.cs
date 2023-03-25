@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,8 @@ namespace Delmon_Managment_System
         public string UserName;
         public string Email;
         public string EmployeeName;
+        string latestVersionNumber = GetLatestVersionNumber(@"\\MyPC\ShareFolder\version.txt");
+
 
 
         public FrmLogin()
@@ -97,14 +100,42 @@ namespace Delmon_Managment_System
             }
             SQLCONN.CloseConnection();
         }
+        public static string GetLatestVersionNumber(string filePath)
+        {
+            try
+            {
+                using (StreamReader sr = new StreamReader(filePath))
+                {
+                    string line = sr.ReadLine();
+                    return line.Trim();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+            }
+
+            return "";
+        }
+
 
         private void FrmLogin_Load(object sender, EventArgs e)
-        {
+        { //**check version/
+            //if (latestVersionNumber != "" && latestVersionNumber != Application.ProductVersion)
+            //{
+            //    DialogResult dialogResult = MessageBox.Show("An update is available. Please download and install the latest version :)", "Update Available", MessageBoxButtons.YesNo);
+            //    if (dialogResult == DialogResult.Yes)
+            //    {
+            //        // Download the latest version of the application and install it
+            //    }
+            //    // Notify user that an update is available
+            //    // Provide a download link to the latest version of the application
+            //}
+            //***check version/
             if (Properties.Settings.Default.UserName != string.Empty)
             {
                 Usertxt.Text = Properties.Settings.Default.UserName;
                 passtxt.Text = Properties.Settings.Default.Password;
-
             }
         }
     }

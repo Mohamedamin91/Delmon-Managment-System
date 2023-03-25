@@ -79,7 +79,9 @@ GROUP BY CONCAT(FirstName, ' ', SecondName, ' ', ThirdName, ' ', LastName),
          Employees.EmployeeID,
          Countries.NationalityName,
 		 DEPARTMENTS.DeptHeadID,
-         JOBS.JobDescription;";
+         JOBS.JobDescription
+ORDER BY SalaryTypes.SalaryTypeName asc;";
+
                 SqlDataReader dr = sql.DataReader(query, paramEmployeeID);
                 if (dr.Read())
                 {
