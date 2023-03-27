@@ -31,6 +31,9 @@ namespace Delmon_Managment_System.Forms
         //  int ID = 0;
         int loggedEmpolyeeID;
         int dOCID;
+        string textFilePath;
+        string destinationFilePath;
+        string fileName;
 
 
 
@@ -111,7 +114,6 @@ namespace Delmon_Managment_System.Forms
             loggedEmpolyeeID = CommonClass.EmployeeID;
             lblFullname.Text = CommonClass.LoginEmployeeName;
 
-
             SqlParameter paramloggiedemployeeid = new SqlParameter("@C1", SqlDbType.NVarChar);
             paramloggiedemployeeid.Value = loggedEmpolyeeID;
             SQLCONN.OpenConection();
@@ -137,6 +139,7 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                   "INNER JOIN Countries ON Countries.CountryId = Employees.NationalityID " +
                   "WHERE Employees.DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = @C1) " +
                   "ORDER BY Employees.EmployeeID ASC";
+               //    Doctxt.Visible = false;
 
                 dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramloggiedemployeeid);
             }
@@ -965,82 +968,82 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
 
         private void UplodeBTN_Click(object sender, EventArgs e)
         {
-            //string filename = Path.GetFileName(opf.FileName);
+            
 
-            //if (filename == null || Doctxt.Text == string.Empty)
-            //{
-            //    MessageBox.Show("Please select a valid document.");
-            //}
-            //else
-            //{
-            // Create the documents folder if it doesn't exist
-            //string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            //string documentFolder = Path.Combine(documentsPath, "HR SW Documents");
-            //////Directory.CreateDirectory(documentFolder);
-
-            //// Copy the file to the documents folder
-            //string filePath = Path.Combine(documentFolder, filename);
-            //System.IO.File.Copy(opf.FileName, filePath, true);
-
-            //// Execute the query to insert the document into the database
-            //SqlParameter paramfilename = new SqlParameter("@C0", SqlDbType.NVarChar);
-            //paramfilename.Value = @"\\192.168.1.8\HR SW Documents\" + filename;
-            //SqlParameter paramnameOFfile = new SqlParameter("@C1", SqlDbType.NVarChar);
-            //paramnameOFfile.Value = Doctxt.Text;
-            SqlParameter paramPID = new SqlParameter("@C2", SqlDbType.Int);
-            paramPID.Value = EmployeeID;
-            SqlParameter paramDocType = new SqlParameter("@C3", SqlDbType.Int);
-            paramDocType.Value = cmbDocuments.SelectedValue;
-            SqlParameter paramRefrenceID = new SqlParameter("@C4", SqlDbType.Int);
-            paramRefrenceID.Value = 2;
-
-            // Add extra fields for visa file
-            SqlParameter paramfilenumber = new SqlParameter("@C5", SqlDbType.NVarChar);
-            paramfilenumber.Value = numbertextbox.Text;
-            SqlParameter paramnafileissueplace = new SqlParameter("@C6", SqlDbType.NVarChar);
-            paramnafileissueplace.Value = issueplacetext.Text;
-            SqlParameter paramfileissuedate = new SqlParameter("@C7", SqlDbType.Date);
-            paramfileissuedate.Value = docissueplacepicker.Value;
-            SqlParameter paramfileexpiraydate = new SqlParameter("@C8", SqlDbType.Date);
-            paramfileexpiraydate.Value = docexpirefatepicker.Value;
-            if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            if (fileName == null || destinationFilePath == string.Empty)
             {
-                if (cmbDocuments.Text == "Select")
-                {
-                    MessageBox.Show("Please Select Document Type  . !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                }
-                if (numbertextbox.Text == "")
-                {
-                    MessageBox.Show("Please insert Document  Number. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                }
-                if (issueplacetext.Text == "")
-                {
-                    MessageBox.Show("Please insert Document Issue Place. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                }
-                else
-                {
-
-                    SQLCONN.OpenConection();
-                    //* With Doc  SQLCONN.ExecuteQueries("insert into Documents (documentValue,name,CR_ID,DocTypeID,RefrenceID,Number,DocIssueplace,docissuedate,docexpiredate)values(@C0,@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8)", paramfilename, paramnameOFfile, paramPID, paramDocType, paramRefrenceID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate);
-                    SQLCONN.ExecuteQueries("insert into Documents (CR_ID,DocTypeID,RefrenceID,Number,DocIssueplace,docissuedate,docexpiredate)values(@C2,@C3,@C4,@C5,@C6,@C7,@C8)", paramPID, paramDocType, paramRefrenceID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate);
-                    dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Documents where CR_ID =  " + EmployeeID + " ");
-                    SQLCONN.CloseConnection();
-                    MessageBox.Show("Document Saved.");
-                    cmbDocuments.Text = "Select";
-                    Doctxt.Text = "";
-                    numbertextbox.Text = "";
-                    issueplacetext.Text = "";
-                    docissueplacepicker.Value = DateTime.Now;
-                    docexpirefatepicker.Value = DateTime.Now;
-                }
+                MessageBox.Show("Please select a valid document.");
             }
-    
+            else
+            {
+                //Create the documents folder if it doesn't exist
+                //string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                //string documentFolder = Path.Combine(documentsPath, "HR SW Documents");
+                //////Directory.CreateDirectory(documentFolder);
 
+                //// Copy the file to the documents folder
+                //string filePath = Path.Combine(documentFolder, filename);
+                //System.IO.File.Copy(opf.FileName, filePath, true);
+
+                // Execute the query to insert the document into the database
+                SqlParameter paramfilename = new SqlParameter("@C0", SqlDbType.NVarChar);
+                paramfilename.Value = fileName;
+                SqlParameter paramnameOFfile = new SqlParameter("@C1", SqlDbType.NVarChar);
+                paramnameOFfile.Value = destinationFilePath;
+                SqlParameter paramPID = new SqlParameter("@C2", SqlDbType.Int);
+                paramPID.Value = EmployeeID;
+                SqlParameter paramDocType = new SqlParameter("@C3", SqlDbType.Int);
+                paramDocType.Value = cmbDocuments.SelectedValue;
+                SqlParameter paramRefrenceID = new SqlParameter("@C4", SqlDbType.Int);
+                paramRefrenceID.Value = 2;
+
+                // Add extra fields for visa file
+                SqlParameter paramfilenumber = new SqlParameter("@C5", SqlDbType.NVarChar);
+                paramfilenumber.Value = numbertextbox.Text;
+                SqlParameter paramnafileissueplace = new SqlParameter("@C6", SqlDbType.NVarChar);
+                paramnafileissueplace.Value = issueplacetext.Text;
+                SqlParameter paramfileissuedate = new SqlParameter("@C7", SqlDbType.Date);
+                paramfileissuedate.Value = docissueplacepicker.Value;
+                SqlParameter paramfileexpiraydate = new SqlParameter("@C8", SqlDbType.Date);
+                paramfileexpiraydate.Value = docexpirefatepicker.Value;
+                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    if (cmbDocuments.Text == "Select")
+                    {
+                        MessageBox.Show("Please Select Document Type  . !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
+                    if (numbertextbox.Text == "")
+                    {
+                        MessageBox.Show("Please insert Document  Number. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
+                    if (issueplacetext.Text == "")
+                    {
+                        MessageBox.Show("Please insert Document Issue Place. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
+                    else
+                    {
+
+                        SQLCONN.OpenConection();
+                        SQLCONN.ExecuteQueries("insert into Documents (name,documentValue,CR_ID,DocTypeID,RefrenceID,Number,DocIssueplace,docissuedate,docexpiredate)values(@C0,@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8)", paramfilename, paramnameOFfile, paramPID, paramDocType, paramRefrenceID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate);
+                        // SQLCONN.ExecuteQueries("insert into Documents (CR_ID,DocTypeID,RefrenceID,Number,DocIssueplace,docissuedate,docexpiredate)values(@C2,@C3,@C4,@C5,@C6,@C7,@C8)", paramPID, paramDocType, paramRefrenceID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate);
+                        dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Documents where CR_ID =  " + EmployeeID + " ");
+                        SQLCONN.CloseConnection();
+                        MessageBox.Show("Document Saved.");
+                        cmbDocuments.Text = "Select";
+                        Doctxt.Text = "";
+                        numbertextbox.Text = "";
+                        issueplacetext.Text = "";
+                        docissueplacepicker.Value = DateTime.Now;
+                        docexpirefatepicker.Value = DateTime.Now;
+                    }
+                }
+
+
+            }
         }
-
         private void tabDoc_Click(object sender, EventArgs e)
         {
 
@@ -1048,35 +1051,37 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //// Show the OpenFileDialog to allow the user to select a file
-            //OpenFileDialog openFileDialog = new OpenFileDialog();
-            //if (openFileDialog.ShowDialog() != DialogResult.OK) return;
-            //string filePath = openFileDialog.FileName;
+           
+                string directoryPath = @"\\192.168.1.8\HR SW Documents\";
+                string variable = cmbCompany.Text;
 
-            //// Create a new instance of the FileInfo class to get information about the file
-            //FileInfo fileInfo = new FileInfo(filePath);
+                // Get all subfolder names in the directory
+                string[] subfolderNames = Directory.GetDirectories(directoryPath)
+                                                    .Select(Path.GetFileName)
+                                                    .ToArray();
+                // Check if the variable matches any of the subfolder names
+                if (subfolderNames.Contains(variable))
+                {
+                    // Open file dialog to select a text file to insert into the subfolder
+                    OpenFileDialog openFileDialog = new OpenFileDialog();
+                  //  openFileDialog.Filter = "Text Files (*.txt)|*.txt";
+                    openFileDialog.Title = "Select a text file to insert into the subfolder";
 
-            //// Impersonate the hrswusr user to access the shared folder
-            //string domain = "delmongroup";
-            //string username = "hrswusr";
-            //string password = "Hr@soft321";
-            //Impersonator.Impersonate(username, domain, password);
-            //try
-            //{
-            //    // Upload the file to the shared folder using the File.Copy method
-            //    string shareFolder = @"\\192.168.1.8\HR SW Documents\";
-            //    string fileName = fileInfo.Name;
-            //    string targetPath = Path.Combine(shareFolder, fileName);
-            //    File.Copy(filePath, targetPath, true);
-            //}
-            //finally
-            //{
-            //    // Stop impersonating the user
-            //    Impersonator.StopImpersonation();
-            //}
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        // Insert the selected text file into the matching subfolder
+                        string subfolderPath = Path.Combine(directoryPath, variable);
+                         textFilePath = openFileDialog.FileName;
+                         fileName = Path.GetFileName(textFilePath);
+                        destinationFilePath = Path.Combine(subfolderPath, fileName);
 
+                        File.Copy(textFilePath, destinationFilePath);
+                        Doctxt.Text = textFilePath;
+                       // MessageBox.Show(" Uploded Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            MessageBox.Show("Comming soon !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+
 
 
 
@@ -1244,11 +1249,8 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                     MessageBox.Show("Record Deleted Successfully");
 
                     // Delete the file from disk
-                    string documentsPath = @"\\192.168.1.8\HR SW Documents\";
-                    string documentFolder = Path.Combine(documentsPath, "HR SW Documents");
-
-                    string fileName = Path.GetFileName(filePath);
-                     filePath = Path.Combine(documentFolder, fileName);
+                    
+                     filePath = Path.Combine(filePath);
 
                     if (File.Exists(filePath))
                     {
@@ -1334,16 +1336,15 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
 
         private void btnupdatedoc_Click(object sender, EventArgs e)
         {
-            //string filename = System.IO.Path.GetFileName(opf.FileName);
-            //string nameOFfile = opf.SafeFileName;
+            
 
             SqlParameter paramDoc = new SqlParameter("@ID", SqlDbType.Int);
             paramDoc.Value = dOCID;
 
-            //SqlParameter paramfilename = new SqlParameter("@C0", SqlDbType.NVarChar);
-            //paramfilename.Value = @"\\192.168.1.8\HR SW Documents\" + filename;
-            //SqlParameter paramnameOFfile = new SqlParameter("@C1", SqlDbType.NVarChar);
-            //paramnameOFfile.Value = nameOFfile;
+            SqlParameter paramfilename = new SqlParameter("@C0", SqlDbType.NVarChar);
+            paramfilename.Value = fileName;
+            SqlParameter paramnameOFfile = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramnameOFfile.Value = destinationFilePath;
             SqlParameter paramPID = new SqlParameter("@C2", SqlDbType.Int);
             paramPID.Value = EmployeeID;
             SqlParameter paramDocType = new SqlParameter("@C3", SqlDbType.Int);
@@ -1388,8 +1389,8 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                     else
                     {
                         SQLCONN.OpenConection();
-                        // with text      SQLCONN.ExecuteQueries("update  Documents set documentValue=@C0,name=@C1,DocTypeID=@C3,Number=@C5,DocIssueplace=@C6,docissuedate=@C7,docexpiredate=@C8,CR_ID=@C2  where Doc_id = @ID ", paramfilename, paramnameOFfile, paramDocType, paramPID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate, paramDoc);
-                        SQLCONN.ExecuteQueries("update  Documents set DocTypeID=@C3,Number=@C5,DocIssueplace=@C6,docissuedate=@C7,docexpiredate=@C8,CR_ID=@C2  where Doc_id = @ID ", paramDocType, paramPID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate, paramDoc);
+                          SQLCONN.ExecuteQueries("update  Documents set documentValue=@C1,name=@C0,DocTypeID=@C3,Number=@C5,DocIssueplace=@C6,docissuedate=@C7,docexpiredate=@C8,CR_ID=@C2  where Doc_id = @ID ", paramfilename, paramnameOFfile, paramDocType, paramPID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate, paramDoc);
+                      //  SQLCONN.ExecuteQueries("update  Documents set DocTypeID=@C3,Number=@C5,DocIssueplace=@C6,docissuedate=@C7,docexpiredate=@C8,CR_ID=@C2  where Doc_id = @ID ", paramDocType, paramPID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate, paramDoc);
 
 
                         MessageBox.Show("Record Updated Successfully");
@@ -1464,9 +1465,11 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                 {
 
 
-
-                    dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue]  ,[DocumentType].Doc_Type ,[RefrenceID],[Number] ,[DocIssueplace]  ,[docissuedate]  ,[docexpiredate] FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =@ID ", paramEmployeeID);
                    
+
+                 dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue]  ,[DocumentType].Doc_Type ,[RefrenceID],[Number] ,[DocIssueplace]  ,[docissuedate]  ,[docexpiredate] FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =@ID ", paramEmployeeID);
+                   
+
 
 
                 }
@@ -1638,7 +1641,7 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
 
                         dOCID = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString());
                         EmployeeID = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[1].Value.ToString());
-                        Doctxt.Text = dataGridView3.Rows[e.RowIndex].Cells[2].Value.ToString();
+                        Doctxt.Text = dataGridView3.Rows[e.RowIndex].Cells[2].Value.ToString(); 
                         cmbDocuments.Text = dataGridView3.Rows[e.RowIndex].Cells[4].Value.ToString();
                         numbertextbox.Text = dataGridView3.Rows[e.RowIndex].Cells[6].Value.ToString();
                         issueplacetext.Text = dataGridView3.Rows[e.RowIndex].Cells[7].Value.ToString();
@@ -1648,7 +1651,7 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                         CommonClass.DocPath = dataGridView3.Rows[e.RowIndex].Cells[3].Value.ToString();
 
 
-
+                       
                     }
                 }
             }
@@ -2697,46 +2700,46 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
 
         private void btnshowDoc_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Coming soon !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-            //string fileName = CommonClass.DocPath;
-            //string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            //string documentFolder = Path.Combine(documentsPath, "Documents");
+            string fileName = CommonClass.DocPath;
+            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string documentFolder = Path.Combine(documentsPath, "Documents");
 
-            //// Get the actual file name from the full path
-            //string[] fileNameParts = fileName.Split('\\');
-            //string actualFileName = fileNameParts[fileNameParts.Length - 1];
+            // Get the actual file name from the full path
+            string[] fileNameParts = fileName.Split('\\');
+            string actualFileName = fileNameParts[fileNameParts.Length - 1];
 
-            //// Combine the document folder and actual file name
-            //string filePath = Path.Combine(documentFolder, actualFileName);
+            // Combine the document folder and actual file name
+            string filePath = Path.Combine(documentFolder, actualFileName);
 
 
-            //var form = new FrmShowDoc();
-            //// this.Hide();
+            var form = new FrmShowDoc();
+            // this.Hide();
 
-            //try
-            //{
-            //    if (fileName==string.Empty)
-            //    {
-            //        MessageBox.Show(" The path 'document value' maybe incorrect or empty ,Kindly  Delete it and add it Again  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            try
+            {
+                if (fileName == string.Empty)
+                {
+                    MessageBox.Show(" The path 'document value' maybe incorrect or empty ,Kindly  Delete it and add it Again  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-            //    }
-            //    else { 
-            //    if (File.Exists(filePath))
-            //    {
+                }
+                else
+                {
+                    if (File.Exists(filePath))
+                    {
 
-            //        form.ShowDialog();
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("File not found.");
-            //    }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("An error occurred: " + ex.Message);
-            //}
+                        form.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBox.Show("File not found.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
 
 
 
@@ -2748,6 +2751,21 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
             FrmJobsNew frmJobs = new FrmJobsNew();
             // this.Hide();
             frmJobs.Show();
+        }
+
+        private void dataGridView3_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (lblusertype.Text != "Admin")
+            {
+                if (e.ColumnIndex == 3) // Check if the cell is in the column you want to encrypt
+                {
+                    // string originalText = e.Value.ToString();
+                    string encryptedText = "##Encrypted##";
+                    // Use your own encryption method here
+                    e.Value = encryptedText;
+                }
+
+            }
         }
     }
 }

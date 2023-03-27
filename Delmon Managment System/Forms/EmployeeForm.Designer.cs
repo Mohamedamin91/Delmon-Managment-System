@@ -830,12 +830,11 @@ namespace Delmon_Managment_System.Forms
             // 
             // Doctxt
             // 
-            this.Doctxt.Enabled = false;
             this.Doctxt.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Doctxt.Location = new System.Drawing.Point(181, 62);
             this.Doctxt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Doctxt.Name = "Doctxt";
-            this.Doctxt.Size = new System.Drawing.Size(510, 22);
+            this.Doctxt.Size = new System.Drawing.Size(390, 22);
             this.Doctxt.TabIndex = 131;
             // 
             // docissueplacepicker
@@ -969,6 +968,7 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView3.Size = new System.Drawing.Size(510, 141);
             this.dataGridView3.TabIndex = 134;
             this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick);
+            this.dataGridView3.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView3_CellFormatting);
             this.dataGridView3.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView3_RowHeaderMouseClick);
             // 
             // label7

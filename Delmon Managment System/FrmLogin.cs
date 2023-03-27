@@ -17,6 +17,8 @@ namespace Delmon_Managment_System
         SQLCONNECTION SQLCONN = new SQLCONNECTION();
         public int EmployeeID = 0;
         public int UserID = 0;
+        public int DeptID = 0;
+        public string CompName;
         public string UserType ;
         public string UserName;
         public string Email;
@@ -58,7 +60,7 @@ namespace Delmon_Managment_System
             SQLCONN.OpenConection();
             //SqlDataReader dr = SQLCONN.DataReader("select username,pass from tblUser where UserName='" + Usertxt.Text + "'and Password='" + passtxt.Text + "'");
            
-            SqlDataReader dr = SQLCONN.DataReader(" select CONCAT(FirstName, ' ', SecondName, ' ', ThirdName, ' ', LastName) AS 'FullName',tblUser.UserID,tblUser.EmployeeID,UserType,[Email], UserName,Password from tblUser,Employees , tblUserType where tblUser.[UserTypeID] =tblUserType.UserTypeID and Employees.EmployeeID =tblUser.EmployeeID and  UserName=@C1 and Password=@C2 and IsActive=1;", paramUserName,paramPassword );
+            SqlDataReader dr = SQLCONN.DataReader(" select CONCAT(FirstName, ' ', SecondName, ' ', ThirdName, ' ', LastName) AS 'FullName',COMPName_EN,DeptID,tblUser.UserID,tblUser.EmployeeID,UserType,[Email], UserName,Password from tblUser,Employees ,[Companies], tblUserType where tblUser.[UserTypeID] =tblUserType.UserTypeID and Employees.EmployeeID =tblUser.EmployeeID and [Companies].COMPID= Employees.COMPID and  UserName=@C1 and Password=@C2 and IsActive=1;", paramUserName,paramPassword );
             if (dr.Read())
 
             {
@@ -66,6 +68,9 @@ namespace Delmon_Managment_System
                 //saving user info
                 UserID = int.Parse(dr["UserID"].ToString());
                 EmployeeID = int.Parse(dr["EmployeeID"].ToString());
+                CompName = (dr["COMPName_EN"].ToString());
+                DeptID = int.Parse(dr["DeptID"].ToString());
+
                 UserType = (dr["UserType"].ToString());
                 UserName = (dr["UserName"].ToString());
                 Email = (dr["Email"].ToString());
@@ -77,6 +82,8 @@ namespace Delmon_Managment_System
                 CommonClass.Email = Email;
                 CommonClass.EmployeeID = EmployeeID;
                 CommonClass.LoginEmployeeName = EmployeeName;
+                CommonClass.CompName = CompName;
+                CommonClass.DeptID = DeptID;
 
 
                 //saving user info
