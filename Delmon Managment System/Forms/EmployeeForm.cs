@@ -2088,15 +2088,15 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
 
         private void dataGridView5_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if ((int)cmbsalarytype.SelectedValue == 12 || (int)cmbsalarytype.SelectedValue == 10 || (int)cmbsalarytype.SelectedValue == 9 || (int)cmbsalarytype.SelectedValue == 8 || (int)cmbsalarytype.SelectedValue == 7)
-            {
-                lblprovide.Visible = true;
-            }
-            else
-            {
-                lblprovide.Visible = false;
+            //if ((int)cmbsalarytype.SelectedValue == 12 || (int)cmbsalarytype.SelectedValue == 10 || (int)cmbsalarytype.SelectedValue == 9 || (int)cmbsalarytype.SelectedValue == 8 || (int)cmbsalarytype.SelectedValue == 7)
+            //{
+            //    lblprovide.Visible = true;
+            //}
+            //else
+            //{
+            //    lblprovide.Visible = false;
 
-            }
+            //}
             foreach (DataGridViewRow rw in this.dataGridView5.Rows)
             {
                 for (int i = 0; i < rw.Cells.Count; i++)
