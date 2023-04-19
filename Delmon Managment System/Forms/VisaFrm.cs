@@ -144,8 +144,8 @@ namespace Delmon_Managment_System.Forms
             cmbJob.ValueMember = "JobID";
             cmbJob.DisplayMember = "JobTitleEN";
             cmbJob.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS");
-            // cmbJob.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            // cmbJob.AutoCompleteSource = AutoCompleteSource.ListItems;
+             cmbJob.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+             cmbJob.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             cmbConsulate.ValueMember = "Consulates.ConsulateID";
             cmbConsulate.DisplayMember = "ConsulateCity";
@@ -443,7 +443,11 @@ namespace Delmon_Managment_System.Forms
 
                             }
                             MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            // Enable button 2 after button 1 is clicked
+                            btnFinish.Enabled = true;
 
+                            // Show a message to the user if necessary
+                            MessageBox.Show("Please click Finish Button after clicking Add Button", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber=" + Visanumtxt.Text + " ");
                             TotalVisastxt.Text = "";
                             cmbConsulate.Text = "Select";

@@ -198,8 +198,8 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
             cmbEmployJobHistory.ValueMember = "JobID";
             cmbEmployJobHistory.DisplayMember = "JobTitleEN";
             cmbEmployJobHistory.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS");
-            //     cmbEmployJobHistory.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //     cmbEmployJobHistory.AutoCompleteSource = AutoCompleteSource.ListItems;
+                 cmbEmployJobHistory.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                 cmbEmployJobHistory.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             cmbempdepthistory.ValueMember = "DEPTID";
             cmbempdepthistory.DisplayMember = "Dept_Type_Name";
@@ -968,81 +968,91 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
 
         private void UplodeBTN_Click(object sender, EventArgs e)
         {
-            
-
-            if (fileName == null || destinationFilePath == string.Empty)
+            if (EMPID != 0)
             {
-                MessageBox.Show("Please select a valid document.");
+                if (fileName == null || destinationFilePath == string.Empty)
+                {
+                    MessageBox.Show("Please select a valid document.");
+                }
+                else
+                {
+                    //Create the documents folder if it doesn't exist
+                    //string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    //string documentFolder = Path.Combine(documentsPath, "HR SW Documents");
+                    //////Directory.CreateDirectory(documentFolder);
+
+                    //// Copy the file to the documents folder
+                    //string filePath = Path.Combine(documentFolder, filename);
+                    //System.IO.File.Copy(opf.FileName, filePath, true);
+
+                    // Execute the query to insert the document into the database
+                    SqlParameter paramfilename = new SqlParameter("@C0", SqlDbType.NVarChar);
+                    paramfilename.Value = fileName;
+                    SqlParameter paramnameOFfile = new SqlParameter("@C1", SqlDbType.NVarChar);
+                    paramnameOFfile.Value = destinationFilePath;
+                    SqlParameter paramPID = new SqlParameter("@C2", SqlDbType.Int);
+                    paramPID.Value = EmployeeID;
+                    SqlParameter paramDocType = new SqlParameter("@C3", SqlDbType.Int);
+                    paramDocType.Value = cmbDocuments.SelectedValue;
+                    SqlParameter paramRefrenceID = new SqlParameter("@C4", SqlDbType.Int);
+                    paramRefrenceID.Value = 2;
+
+                    // Add extra fields for visa file
+                    SqlParameter paramfilenumber = new SqlParameter("@C5", SqlDbType.NVarChar);
+                    paramfilenumber.Value = numbertextbox.Text;
+                    SqlParameter paramnafileissueplace = new SqlParameter("@C6", SqlDbType.NVarChar);
+                    paramnafileissueplace.Value = issueplacetext.Text;
+                    SqlParameter paramfileissuedate = new SqlParameter("@C7", SqlDbType.Date);
+                    paramfileissuedate.Value = docissueplacepicker.Value;
+                    SqlParameter paramfileexpiraydate = new SqlParameter("@C8", SqlDbType.Date);
+                    paramfileexpiraydate.Value = docexpirefatepicker.Value;
+                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        if (cmbDocuments.Text == "Select")
+                        {
+                            MessageBox.Show("Please Select Document Type  . !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                        }
+                        if (numbertextbox.Text == "")
+                        {
+                            MessageBox.Show("Please insert Document  Number. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                        }
+                        if (issueplacetext.Text == "")
+                        {
+                            MessageBox.Show("Please insert Document Issue Place. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                        }
+                        else
+                        {
+
+                            SQLCONN.OpenConection();
+                            SQLCONN.ExecuteQueries("insert into Documents (name,documentValue,CR_ID,DocTypeID,RefrenceID,Number,DocIssueplace,docissuedate,docexpiredate)values(@C0,@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8)", paramfilename, paramnameOFfile, paramPID, paramDocType, paramRefrenceID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate);
+                            // SQLCONN.ExecuteQueries("insert into Documents (CR_ID,DocTypeID,RefrenceID,Number,DocIssueplace,docissuedate,docexpiredate)values(@C2,@C3,@C4,@C5,@C6,@C7,@C8)", paramPID, paramDocType, paramRefrenceID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate);
+                            dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Documents where CR_ID =  " + EmployeeID + " ");
+                            SQLCONN.CloseConnection();
+                            MessageBox.Show("Document Saved.");
+                            cmbDocuments.Text = "Select";
+                            Doctxt.Text = "";
+                            numbertextbox.Text = "";
+                            issueplacetext.Text = "";
+                            docissueplacepicker.Value = DateTime.Now;
+                            docexpirefatepicker.Value = DateTime.Now;
+                        }
+                    }
+
+
+                }
             }
             else
             {
-                //Create the documents folder if it doesn't exist
-                //string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                //string documentFolder = Path.Combine(documentsPath, "HR SW Documents");
-                //////Directory.CreateDirectory(documentFolder);
-
-                //// Copy the file to the documents folder
-                //string filePath = Path.Combine(documentFolder, filename);
-                //System.IO.File.Copy(opf.FileName, filePath, true);
-
-                // Execute the query to insert the document into the database
-                SqlParameter paramfilename = new SqlParameter("@C0", SqlDbType.NVarChar);
-                paramfilename.Value = fileName;
-                SqlParameter paramnameOFfile = new SqlParameter("@C1", SqlDbType.NVarChar);
-                paramnameOFfile.Value = destinationFilePath;
-                SqlParameter paramPID = new SqlParameter("@C2", SqlDbType.Int);
-                paramPID.Value = EmployeeID;
-                SqlParameter paramDocType = new SqlParameter("@C3", SqlDbType.Int);
-                paramDocType.Value = cmbDocuments.SelectedValue;
-                SqlParameter paramRefrenceID = new SqlParameter("@C4", SqlDbType.Int);
-                paramRefrenceID.Value = 2;
-
-                // Add extra fields for visa file
-                SqlParameter paramfilenumber = new SqlParameter("@C5", SqlDbType.NVarChar);
-                paramfilenumber.Value = numbertextbox.Text;
-                SqlParameter paramnafileissueplace = new SqlParameter("@C6", SqlDbType.NVarChar);
-                paramnafileissueplace.Value = issueplacetext.Text;
-                SqlParameter paramfileissuedate = new SqlParameter("@C7", SqlDbType.Date);
-                paramfileissuedate.Value = docissueplacepicker.Value;
-                SqlParameter paramfileexpiraydate = new SqlParameter("@C8", SqlDbType.Date);
-                paramfileexpiraydate.Value = docexpirefatepicker.Value;
-                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-                {
-                    if (cmbDocuments.Text == "Select")
-                    {
-                        MessageBox.Show("Please Select Document Type  . !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                    }
-                    if (numbertextbox.Text == "")
-                    {
-                        MessageBox.Show("Please insert Document  Number. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                    }
-                    if (issueplacetext.Text == "")
-                    {
-                        MessageBox.Show("Please insert Document Issue Place. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                    }
-                    else
-                    {
-
-                        SQLCONN.OpenConection();
-                        SQLCONN.ExecuteQueries("insert into Documents (name,documentValue,CR_ID,DocTypeID,RefrenceID,Number,DocIssueplace,docissuedate,docexpiredate)values(@C0,@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8)", paramfilename, paramnameOFfile, paramPID, paramDocType, paramRefrenceID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate);
-                        // SQLCONN.ExecuteQueries("insert into Documents (CR_ID,DocTypeID,RefrenceID,Number,DocIssueplace,docissuedate,docexpiredate)values(@C2,@C3,@C4,@C5,@C6,@C7,@C8)", paramPID, paramDocType, paramRefrenceID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate);
-                        dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Documents where CR_ID =  " + EmployeeID + " ");
-                        SQLCONN.CloseConnection();
-                        MessageBox.Show("Document Saved.");
-                        cmbDocuments.Text = "Select";
-                        Doctxt.Text = "";
-                        numbertextbox.Text = "";
-                        issueplacetext.Text = "";
-                        docissueplacepicker.Value = DateTime.Now;
-                        docexpirefatepicker.Value = DateTime.Now;
-                    }
-                }
-
+                MessageBox.Show("Please Select Record !");
 
             }
+
+
+
+
         }
         private void tabDoc_Click(object sender, EventArgs e)
         {
@@ -1103,49 +1113,57 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
             SqlParameter paramPID = new SqlParameter("@C4", SqlDbType.Int);
             paramPID.Value = EmployeeID;
 
-
-            if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            if (EMPID != 0)
             {
-
-                SQLCONN.OpenConection();
-                if ((int)cmbcontact.SelectedValue == 2)
+                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
-                    if (validate_emailaddress.IsMatch(Contacttxt.Text) != true)
+
+                    SQLCONN.OpenConection();
+                    if ((int)cmbcontact.SelectedValue == 2)
                     {
-                        MessageBox.Show("Invalid Email Address!", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        Contacttxt.Focus();
-                        return;
+                        if (validate_emailaddress.IsMatch(Contacttxt.Text) != true)
+                        {
+                            MessageBox.Show("Invalid Email Address!", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            Contacttxt.Focus();
+                            return;
+                        }
+                        else
+                        {
+                        }
                     }
+                    SqlDataReader dr = SQLCONN.DataReader("select  ContValue from Contacts where  ContValue= @C2  ", paramContact);
+                    dr.Read();
+
+                    if (dr.HasRows)
+                    {
+                        MessageBox.Show("This 'Contact Value'  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
+
                     else
                     {
+                        dr.Dispose();
+                        dr.Close();
+                        SQLCONN.ExecuteQueries("insert into Contacts ( ContTypeID,ContValue,RefrenceID,CR_ID) values (@C1,@C2,@C3,@C4)",
+                                                       paramContactType, paramContact, paramRefrenceID, paramPID);
+                        MessageBox.Show("Record saved Successfully");
+
+                        dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =  " + EmployeeID + " ");
+                        Contacttxt.Text = "";
+                        cmbcontact.Text = "Select";
+                        SQLCONN.CloseConnection();
+
                     }
                 }
-                SqlDataReader dr = SQLCONN.DataReader("select  ContValue from Contacts where  ContValue= @C2  ", paramContact);
-                dr.Read();
-
-                if (dr.HasRows)
-                {
-                    MessageBox.Show("This 'Contact Value'  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                }
-
                 else
                 {
-                    dr.Dispose();
-                    dr.Close();
-                    SQLCONN.ExecuteQueries("insert into Contacts ( ContTypeID,ContValue,RefrenceID,CR_ID) values (@C1,@C2,@C3,@C4)",
-                                                   paramContactType, paramContact, paramRefrenceID, paramPID);
-                    MessageBox.Show("Record saved Successfully");
-
-                    dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =  " + EmployeeID + " ");
-                    Contacttxt.Text = "";
-                    cmbcontact.Text = "Select";
-                    SQLCONN.CloseConnection();
 
                 }
+
             }
-            else
+            else 
             {
+                MessageBox.Show("Please Select Record !");
 
             }
 
@@ -2153,6 +2171,13 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
             paramType.Value = "Update";
             /* for log */
 
+            string userInput = txtvalue.Text;
+            if (decimal.TryParse(userInput, out decimal inputValue)) // Try to parse input as decimal
+            {
+                string formattedValue = inputValue.ToString("N2"); // Format decimal as string with 2 decimal places and thousands separator
+                txtvalue.Text = formattedValue; // Set the second text box to the formatted value
+            }
+
 
             if (EmployeeID != 0)
             {
@@ -2596,40 +2621,48 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
             paramDateHistory.Value = dtphistorydate.Value;
 
 
-
-
-            if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            if (EmployeeID != 0)
             {
-
-                SQLCONN.OpenConection();
-               SqlDataReader dr = SQLCONN.DataReader("select  EmployeeID,HistoryValue,HistoryDate from EmployeeHistory where  EmployeeID= @C1 and HistoryValue=@C2 and HistoryDate=@C3  ", paramPID,paramHistoryValue, paramDateHistory);
-                dr.Read();
-
-            
-                if (dr.HasRows)
+                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
-                    MessageBox.Show("The 'Value' For This Employee  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
+                    SQLCONN.OpenConection();
+                    SqlDataReader dr = SQLCONN.DataReader("select  EmployeeID,HistoryValue,HistoryDate from EmployeeHistory where  EmployeeID= @C1 and HistoryValue=@C2 and HistoryDate=@C3  ", paramPID, paramHistoryValue, paramDateHistory);
+                    dr.Read();
+
+
+                    if (dr.HasRows)
+                    {
+                        MessageBox.Show("The 'Value' For This Employee  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
+
+                    else
+                    {
+                        dr.Dispose();
+                        dr.Close();
+                        SQLCONN.ExecuteQueries("insert into EmployeeHistory ( EmployeeID,HistoryValue,HistoryDate) values (@C1,@C2,@C3) ",
+                                                      paramPID, paramHistoryValue, paramDateHistory);
+                        MessageBox.Show("Record saved Successfully");
+                        dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  * FROM [DelmonGroupDB].[dbo].[EmployeeHistory] where EmployeeID =  " + EmployeeID + " ");
+                        SQLCONN.CloseConnection();
+                        richhistoryvalue.Text = "";
+                        dtphistorydate.Value = DateTime.Now;
+
+                    }
                 }
-
                 else
                 {
-                    dr.Dispose();
-                    dr.Close();
-                    SQLCONN.ExecuteQueries("insert into EmployeeHistory ( EmployeeID,HistoryValue,HistoryDate) values (@C1,@C2,@C3) ",
-                                                  paramPID, paramHistoryValue, paramDateHistory);
-                    MessageBox.Show("Record saved Successfully");
-                    dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  * FROM [DelmonGroupDB].[dbo].[EmployeeHistory] where EmployeeID =  " + EmployeeID + " ");
-                    SQLCONN.CloseConnection();
-                    richhistoryvalue.Text = "";
-                    dtphistorydate.Value = DateTime.Now;
 
                 }
             }
-            else
+            else 
             {
+                MessageBox.Show("Please Select Record to Update");
 
             }
+
+
         }
 
         private void button5_Click_1(object sender, EventArgs e)

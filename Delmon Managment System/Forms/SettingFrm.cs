@@ -1810,6 +1810,7 @@ namespace Delmon_Managment_System.Forms
             if (tabControl1.SelectedTab == tabControl1.TabPages[4])
             {
                 tabControl1.TabPages[4].Visible = false;
+                MessageBox.Show("Comming Soon  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 if (lblusertype.Text != "Admin")
                 {
