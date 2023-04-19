@@ -105,11 +105,11 @@ namespace Delmon_Managment_System.Forms
             //cmbworkfield.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             //cmbworkfield.AutoCompleteSource = AutoCompleteSource.ListItems;
             
-            cmbworkfield1.ValueMember = "Work_Field_ID";
-            cmbworkfield1.DisplayMember = "Work_Field_Name";
-            cmbworkfield1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Work_Field_ID,Work_Field_Name FROM WorkFields");
-            cmbworkfield1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbworkfield1.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //cmbworkfield1.ValueMember = "Work_Field_ID";
+            //cmbworkfield1.DisplayMember = "Work_Field_Name";
+            //cmbworkfield1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Work_Field_ID,Work_Field_Name FROM WorkFields");
+            //cmbworkfield1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //cmbworkfield1.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
             //cmbjobgrade.ValueMember = "Job_Grade_ID";
@@ -130,11 +130,11 @@ namespace Delmon_Managment_System.Forms
             cmbDepartment.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbDepartment.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-       //     cmbHeadPostion.ValueMember = "[DEPTID]";
-            cmbHeadPostion.DisplayMember = "DeptHeadPosition";
-            cmbHeadPostion.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT DISTINCT DeptHeadPosition FROM DEPARTMENTS WHERE DeptHeadPosition IS NOT NULL ORDER BY DeptHeadPosition DESC  ");
-            cmbHeadPostion.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbHeadPostion.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //cmbHeadPostion.ValueMember = "[DEPTID]";
+            //cmbHeadPostion.DisplayMember = "DeptHeadPosition";
+            //cmbHeadPostion.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT DISTINCT DeptHeadPosition FROM DEPARTMENTS WHERE DeptHeadPosition IS NOT NULL ORDER BY DeptHeadPosition DESC  ");
+            //cmbHeadPostion.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //cmbHeadPostion.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             if (lblusertype.Text == "Admin")
             {
