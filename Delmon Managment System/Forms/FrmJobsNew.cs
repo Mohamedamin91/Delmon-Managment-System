@@ -28,19 +28,19 @@ namespace Delmon_Managment_System.Forms
 
         private void FrmJobsNew_Load(object sender, EventArgs e)
         {
-            SQLCONN.OpenConection();
+            //SQLCONN.OpenConection();
 
 
-            cmbworkfield.ValueMember = "Work_Field_ID";
-            cmbworkfield.DisplayMember = "Work_Field_Name";
-            cmbworkfield.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Work_Field_ID,Work_Field_Name FROM WorkFields");
+            ////cmbworkfield.ValueMember = "Work_Field_ID";
+            ////cmbworkfield.DisplayMember = "Work_Field_Name";
+            ////cmbworkfield.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Work_Field_ID,Work_Field_Name FROM WorkFields");
 
 
-            cmbjobgrade.ValueMember = "Job_Grade_ID";
-            cmbjobgrade.DisplayMember = "Job_Grade_Name";
-            cmbjobgrade.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Job_Grade_ID,Job_Grade_Name FROM JobGrades");
+            ////cmbjobgrade.ValueMember = "Job_Grade_ID";
+            ////cmbjobgrade.DisplayMember = "Job_Grade_Name";
+            ////cmbjobgrade.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Job_Grade_ID,Job_Grade_Name FROM JobGrades");
 
-            SQLCONN.CloseConnection();
+            //SQLCONN.CloseConnection();
 
         }
 
@@ -72,7 +72,7 @@ namespace Delmon_Managment_System.Forms
         {
             if (e.KeyCode == Keys.Enter)
             {
-                cmbworkfield.Focus();
+              //  cmbworkfield.Focus();
                 e.Handled = true;
                 CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
                 TextInfo textInfo = cultureInfo.TextInfo;
@@ -84,11 +84,11 @@ namespace Delmon_Managment_System.Forms
         {
             if (e.KeyCode == Keys.Enter)
             {
-                cmbjobgrade.Focus();
+              //  cmbjobgrade.Focus();
                 e.Handled = true;
                 CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
                 TextInfo textInfo = cultureInfo.TextInfo;
-                cmbworkfield.Text = textInfo.ToTitleCase(cmbworkfield.Text);
+              //  cmbworkfield.Text = textInfo.ToTitleCase(cmbworkfield.Text);
             }
         }
 
@@ -100,7 +100,7 @@ namespace Delmon_Managment_System.Forms
                 e.Handled = true;
                 CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
                 TextInfo textInfo = cultureInfo.TextInfo;
-                cmbjobgrade.Text = textInfo.ToTitleCase(cmbjobgrade.Text);
+                //cmbjobgrade.Text = textInfo.ToTitleCase(cmbjobgrade.Text);
             }
         }
 
@@ -127,7 +127,7 @@ namespace Delmon_Managment_System.Forms
                     else
                         func(control.Controls);
             };
-            cmbjobgrade.SelectedIndex = cmbworkfield.SelectedIndex = -1;
+        //    cmbjobgrade.SelectedIndex = cmbworkfield.SelectedIndex = -1;
             jobtitleartxt.Text = JobTitleENtxt.Text = Descriptiontxt.Text = mintxt.Text = maxtxt.Text = "";
         }
 
@@ -139,10 +139,10 @@ namespace Delmon_Managment_System.Forms
             paramjobtitleAR.Value = jobtitleartxt.Text;
             SqlParameter ParamDescription = new SqlParameter("@C3", SqlDbType.NVarChar);
             ParamDescription.Value = Descriptiontxt.Text;
-            SqlParameter paramWorkField = new SqlParameter("@C4", SqlDbType.NVarChar);
-            paramWorkField.Value = cmbworkfield.SelectedValue;
-            SqlParameter paramJobGrade = new SqlParameter("@C5", SqlDbType.NVarChar);
-            paramJobGrade.Value = cmbjobgrade.SelectedValue;
+            //SqlParameter paramWorkField = new SqlParameter("@C4", SqlDbType.NVarChar);
+            //paramWorkField.Value = cmbworkfield.SelectedValue;
+            //SqlParameter paramJobGrade = new SqlParameter("@C5", SqlDbType.NVarChar);
+            //paramJobGrade.Value = cmbjobgrade.SelectedValue;
             SqlParameter paramminsalary = new SqlParameter("@C6", SqlDbType.NVarChar);
             paramminsalary.Value = mintxt.Text;
             SqlParameter parammaxsalary = new SqlParameter("@C7", SqlDbType.NVarChar);
@@ -174,8 +174,8 @@ namespace Delmon_Managment_System.Forms
 
                     dr.Dispose();
                     dr.Close();
-                    SQLCONN.ExecuteQueries("insert into jobs (  [JobTitleEN] ,[JobTitleAR],[JobDescription],[Work_Field_ID],[Job_Grade_ID] ,[MinSalary],[MaxSalary]) values (@C1,@C2,@C3,@C4,@C5,@C6,@C7)",
-                                                   paramjobtitleEN, paramjobtitleAR, ParamDescription, paramWorkField, paramJobGrade, paramminsalary, parammaxsalary);
+                    SQLCONN.ExecuteQueries("insert into jobs (  [JobTitleEN] ,[JobTitleAR],[JobDescription],[MinSalary],[MaxSalary]) values (@C1,@C2,@C3,@C6,@C7)",
+                                                   paramjobtitleEN, paramjobtitleAR, ParamDescription, paramminsalary, parammaxsalary);
                     MessageBox.Show("Record saved Successfully");
                     //dr = SQLCONN.DataReader("SELECT PI_ID FROM PersonalInformation WHERE PI_ID = (SELECT MAX(PI_ID) FROM PersonalInformation)");
                     //dr.Read();

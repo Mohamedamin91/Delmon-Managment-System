@@ -136,7 +136,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Recived to :</Value>
+                    <Value>Reserved to :</Value>
                     <Style>
                       <FontFamily>Calibri</FontFamily>
                     </Style>
@@ -684,15 +684,14 @@
         </Style>
       </Rectangle>
     </ReportItems>
-    <Height>10.99781cm</Height>
+    <Height>10.91844cm</Height>
     <Style />
   </Body>
   <Width>21.18995cm</Width>
   <Page>
     <PageHeader>
-      <Height>5.50898cm</Height>
+      <Height>6.96419cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
-      <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
         <Image Name="Image1">
           <Source>Embedded</Source>
@@ -856,7 +855,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
               <Top>0.04167in</Top>
-              <Left>1.45264in</Left>
+              <Left>1.46653in</Left>
               <Height>0.41667in</Height>
               <Width>4.12896in</Width>
               <ZIndex>2</ZIndex>

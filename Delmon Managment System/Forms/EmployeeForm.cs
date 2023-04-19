@@ -1296,6 +1296,13 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
             SqlParameter paramPID = new SqlParameter("@C4", SqlDbType.Int);
             paramPID.Value = EmployeeID;
 
+            string userInput = txtvalue.Text;
+            if (decimal.TryParse(userInput, out decimal inputValue)) // Try to parse input as decimal
+            {
+                string formattedValue = inputValue.ToString("N2"); // Format decimal as string with 2 decimal places and thousands separator
+                txtvalue.Text = formattedValue; // Set the second text box to the formatted value
+            }
+
 
             if (EmployeeID != 0)
             {
@@ -1922,6 +1929,13 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                 parampc.Value = lblPC.Text;
 
                 /*logg*/
+
+                string userInput = txtvalue.Text;
+                if (decimal.TryParse(userInput, out decimal inputValue)) // Try to parse input as decimal
+                {
+                    string formattedValue = inputValue.ToString("N2"); // Format decimal as string with 2 decimal places and thousands separator
+                    txtvalue.Text = formattedValue; // Set the second text box to the formatted value
+                }
 
 
                 if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))

@@ -38,10 +38,6 @@ namespace Delmon_Managment_System.Forms
             this.addbtn = new System.Windows.Forms.Button();
             this.jobtitleartxt = new System.Windows.Forms.TextBox();
             this.Descriptiontxt = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cmbworkfield = new System.Windows.Forms.ComboBox();
-            this.cmbjobgrade = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.mintxt = new System.Windows.Forms.TextBox();
@@ -109,7 +105,7 @@ namespace Delmon_Managment_System.Forms
             this.addbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addbtn.ForeColor = System.Drawing.Color.White;
-            this.addbtn.Location = new System.Drawing.Point(12, 373);
+            this.addbtn.Location = new System.Drawing.Point(12, 319);
             this.addbtn.Name = "addbtn";
             this.addbtn.Size = new System.Drawing.Size(278, 37);
             this.addbtn.TabIndex = 11;
@@ -136,54 +132,12 @@ namespace Delmon_Managment_System.Forms
             this.Descriptiontxt.TabIndex = 23;
             this.Descriptiontxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Descriptiontxt_KeyDown);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(9, 246);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(73, 16);
-            this.label4.TabIndex = 24;
-            this.label4.Text = "Work Field";
-            // 
-            // cmbworkfield
-            // 
-            this.cmbworkfield.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbworkfield.FormattingEnabled = true;
-            this.cmbworkfield.Location = new System.Drawing.Point(12, 265);
-            this.cmbworkfield.Name = "cmbworkfield";
-            this.cmbworkfield.Size = new System.Drawing.Size(117, 24);
-            this.cmbworkfield.TabIndex = 25;
-            this.cmbworkfield.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbworkfield_KeyDown);
-            // 
-            // cmbjobgrade
-            // 
-            this.cmbjobgrade.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbjobgrade.FormattingEnabled = true;
-            this.cmbjobgrade.Location = new System.Drawing.Point(169, 265);
-            this.cmbjobgrade.Name = "cmbjobgrade";
-            this.cmbjobgrade.Size = new System.Drawing.Size(121, 24);
-            this.cmbjobgrade.TabIndex = 27;
-            this.cmbjobgrade.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbjobgrade_KeyDown);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(166, 246);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(72, 16);
-            this.label5.TabIndex = 26;
-            this.label5.Text = "Job Grade";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(9, 301);
+            this.label6.Location = new System.Drawing.Point(9, 257);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(71, 16);
             this.label6.TabIndex = 29;
@@ -194,7 +148,7 @@ namespace Delmon_Managment_System.Forms
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(166, 301);
+            this.label7.Location = new System.Drawing.Point(166, 257);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(75, 16);
             this.label7.TabIndex = 28;
@@ -203,7 +157,7 @@ namespace Delmon_Managment_System.Forms
             // mintxt
             // 
             this.mintxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mintxt.Location = new System.Drawing.Point(12, 320);
+            this.mintxt.Location = new System.Drawing.Point(12, 276);
             this.mintxt.Name = "mintxt";
             this.mintxt.Size = new System.Drawing.Size(117, 22);
             this.mintxt.TabIndex = 30;
@@ -212,7 +166,7 @@ namespace Delmon_Managment_System.Forms
             // maxtxt
             // 
             this.maxtxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.maxtxt.Location = new System.Drawing.Point(169, 320);
+            this.maxtxt.Location = new System.Drawing.Point(169, 276);
             this.maxtxt.Name = "maxtxt";
             this.maxtxt.Size = new System.Drawing.Size(121, 22);
             this.maxtxt.TabIndex = 31;
@@ -222,15 +176,11 @@ namespace Delmon_Managment_System.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(304, 418);
+            this.ClientSize = new System.Drawing.Size(304, 366);
             this.Controls.Add(this.maxtxt);
             this.Controls.Add(this.mintxt);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.cmbjobgrade);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.cmbworkfield);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.Descriptiontxt);
             this.Controls.Add(this.jobtitleartxt);
             this.Controls.Add(this.lbl);
@@ -260,10 +210,6 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Button addbtn;
         private System.Windows.Forms.TextBox jobtitleartxt;
         private System.Windows.Forms.TextBox Descriptiontxt;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox cmbworkfield;
-        private System.Windows.Forms.ComboBox cmbjobgrade;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox mintxt;

@@ -41,7 +41,7 @@ namespace Delmon_Managment_System
             {
                 connection.Open();
                 string query = @"SELECT CONCAT(FirstName, ' ', SecondName, ' ', ThirdName, ' ', LastName) AS 'FullName',
-       VISAJobList.FileNumber,
+       VISAJobList.FileNumber, SalaryTypes.SalaryTypeID,
        DocumentType.Doc_Type,
        Documents.Number AS 'Passport',
        SalaryTypes.SalaryTypeName,
@@ -79,8 +79,8 @@ GROUP BY CONCAT(FirstName, ' ', SecondName, ' ', ThirdName, ' ', LastName),
          Employees.EmployeeID,
          Countries.NationalityName,
 		 DEPARTMENTS.DeptHeadID,
-         JOBS.JobDescription
-ORDER BY SalaryTypes.SalaryTypeName asc;";
+         JOBS.JobDescription,SalaryTypes.SalaryTypeID
+ORDER BY SalaryTypes.SalaryTypeID asc;";
 
                 SqlDataReader dr = sql.DataReader(query, paramEmployeeID);
                 if (dr.Read())

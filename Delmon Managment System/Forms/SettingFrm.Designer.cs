@@ -56,10 +56,6 @@ namespace Delmon_Managment_System.Forms
             this.mintxt = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.cmbjobgrade = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.cmbworkfield = new System.Windows.Forms.ComboBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.Descriptiontxt = new System.Windows.Forms.TextBox();
             this.jobtitleartxt = new System.Windows.Forms.TextBox();
             this.lbl = new System.Windows.Forms.Label();
@@ -359,10 +355,6 @@ namespace Delmon_Managment_System.Forms
             this.jobsTap.Controls.Add(this.mintxt);
             this.jobsTap.Controls.Add(this.label9);
             this.jobsTap.Controls.Add(this.label10);
-            this.jobsTap.Controls.Add(this.cmbjobgrade);
-            this.jobsTap.Controls.Add(this.label11);
-            this.jobsTap.Controls.Add(this.cmbworkfield);
-            this.jobsTap.Controls.Add(this.label12);
             this.jobsTap.Controls.Add(this.Descriptiontxt);
             this.jobsTap.Controls.Add(this.jobtitleartxt);
             this.jobsTap.Controls.Add(this.lbl);
@@ -442,7 +434,7 @@ namespace Delmon_Managment_System.Forms
             // maxtxt
             // 
             this.maxtxt.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.maxtxt.Location = new System.Drawing.Point(163, 282);
+            this.maxtxt.Location = new System.Drawing.Point(163, 233);
             this.maxtxt.Name = "maxtxt";
             this.maxtxt.Size = new System.Drawing.Size(121, 22);
             this.maxtxt.TabIndex = 47;
@@ -451,7 +443,7 @@ namespace Delmon_Managment_System.Forms
             // mintxt
             // 
             this.mintxt.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mintxt.Location = new System.Drawing.Point(6, 282);
+            this.mintxt.Location = new System.Drawing.Point(6, 233);
             this.mintxt.Name = "mintxt";
             this.mintxt.Size = new System.Drawing.Size(117, 22);
             this.mintxt.TabIndex = 46;
@@ -464,7 +456,7 @@ namespace Delmon_Managment_System.Forms
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Black;
-            this.label9.Location = new System.Drawing.Point(3, 263);
+            this.label9.Location = new System.Drawing.Point(3, 214);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(72, 17);
             this.label9.TabIndex = 45;
@@ -475,53 +467,11 @@ namespace Delmon_Managment_System.Forms
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(160, 263);
+            this.label10.Location = new System.Drawing.Point(160, 214);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(76, 17);
             this.label10.TabIndex = 44;
             this.label10.Text = "Max Salary";
-            // 
-            // cmbjobgrade
-            // 
-            this.cmbjobgrade.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbjobgrade.FormattingEnabled = true;
-            this.cmbjobgrade.Location = new System.Drawing.Point(163, 227);
-            this.cmbjobgrade.Name = "cmbjobgrade";
-            this.cmbjobgrade.Size = new System.Drawing.Size(121, 23);
-            this.cmbjobgrade.TabIndex = 43;
-            this.cmbjobgrade.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbjobgrade_KeyDown);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.Black;
-            this.label11.Location = new System.Drawing.Point(160, 208);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(68, 17);
-            this.label11.TabIndex = 42;
-            this.label11.Text = "Job Grade";
-            // 
-            // cmbworkfield
-            // 
-            this.cmbworkfield.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbworkfield.FormattingEnabled = true;
-            this.cmbworkfield.Location = new System.Drawing.Point(6, 227);
-            this.cmbworkfield.Name = "cmbworkfield";
-            this.cmbworkfield.Size = new System.Drawing.Size(117, 23);
-            this.cmbworkfield.TabIndex = 41;
-            this.cmbworkfield.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbworkfield_KeyDown);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.Black;
-            this.label12.Location = new System.Drawing.Point(3, 208);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(72, 17);
-            this.label12.TabIndex = 40;
-            this.label12.Text = "Work Field";
             // 
             // Descriptiontxt
             // 
@@ -1215,10 +1165,6 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.TextBox mintxt;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox cmbjobgrade;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox cmbworkfield;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox Descriptiontxt;
         private System.Windows.Forms.TextBox jobtitleartxt;
         private System.Windows.Forms.Label lbl;

@@ -99,11 +99,11 @@ namespace Delmon_Managment_System.Forms
             cmbCountry.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
-            cmbworkfield.ValueMember = "Work_Field_ID";
-            cmbworkfield.DisplayMember = "Work_Field_Name";
-            cmbworkfield.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Work_Field_ID,Work_Field_Name FROM WorkFields");
-            cmbworkfield.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbworkfield.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //cmbworkfield.ValueMember = "Work_Field_ID";
+            //cmbworkfield.DisplayMember = "Work_Field_Name";
+            //cmbworkfield.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Work_Field_ID,Work_Field_Name FROM WorkFields");
+            //cmbworkfield.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //cmbworkfield.AutoCompleteSource = AutoCompleteSource.ListItems;
             
             cmbworkfield1.ValueMember = "Work_Field_ID";
             cmbworkfield1.DisplayMember = "Work_Field_Name";
@@ -112,11 +112,11 @@ namespace Delmon_Managment_System.Forms
             cmbworkfield1.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
-            cmbjobgrade.ValueMember = "Job_Grade_ID";
-            cmbjobgrade.DisplayMember = "Job_Grade_Name";
-            cmbjobgrade.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Job_Grade_ID,Job_Grade_Name FROM JobGrades");
-            cmbjobgrade.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbjobgrade.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //cmbjobgrade.ValueMember = "Job_Grade_ID";
+            //cmbjobgrade.DisplayMember = "Job_Grade_Name";
+            //cmbjobgrade.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Job_Grade_ID,Job_Grade_Name FROM JobGrades");
+            //cmbjobgrade.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //cmbjobgrade.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             cmbCompany.ValueMember = "COMPID";
             cmbCompany.DisplayMember = "COMPName_EN";
@@ -842,7 +842,7 @@ namespace Delmon_Managment_System.Forms
                     else
                         func(control.Controls);
             };
-            cmbjobgrade.SelectedIndex = cmbworkfield.SelectedIndex = -1;
+        //    cmbjobgrade.SelectedIndex = cmbworkfield.SelectedIndex = -1;
             jobtitleartxt.Text = JobTitleENtxt.Text = Descriptiontxt.Text = mintxt.Text = maxtxt.Text = "";
         }
 
@@ -854,10 +854,10 @@ namespace Delmon_Managment_System.Forms
             paramjobtitleAR.Value = jobtitleartxt.Text;
             SqlParameter ParamDescription = new SqlParameter("@C3", SqlDbType.NVarChar);
             ParamDescription.Value = Descriptiontxt.Text;
-            SqlParameter paramWorkField = new SqlParameter("@C4", SqlDbType.NVarChar);
-            paramWorkField.Value = cmbworkfield.SelectedValue;
-            SqlParameter paramJobGrade = new SqlParameter("@C5", SqlDbType.NVarChar);
-            paramJobGrade.Value = cmbjobgrade.SelectedValue;
+            //SqlParameter paramWorkField = new SqlParameter("@C4", SqlDbType.NVarChar);
+            //paramWorkField.Value = cmbworkfield.SelectedValue;
+            //SqlParameter paramJobGrade = new SqlParameter("@C5", SqlDbType.NVarChar);
+            //paramJobGrade.Value = cmbjobgrade.SelectedValue;
             SqlParameter paramminsalary = new SqlParameter("@C6", SqlDbType.NVarChar);
             paramminsalary.Value = mintxt.Text;
             SqlParameter parammaxsalary = new SqlParameter("@C7", SqlDbType.NVarChar);
@@ -904,8 +904,8 @@ namespace Delmon_Managment_System.Forms
                         }
                         else if (num1 < num2)
                         {
-                            SQLCONN.ExecuteQueries("insert into jobs (  [JobTitleEN] ,[JobTitleAR],[JobDescription],[Work_Field_ID],[Job_Grade_ID] ,[MinSalary],[MaxSalary]) values (@C1,@C2,@C3,@C4,@C5,@C6,@C7)",
-                                                paramjobtitleEN, paramjobtitleAR, ParamDescription, paramWorkField, paramJobGrade, paramminsalary, parammaxsalary);
+                            SQLCONN.ExecuteQueries("insert into jobs (  [JobTitleEN] ,[JobTitleAR],[JobDescription],[MinSalary],[MaxSalary]) values (@C1,@C2,@C3,@C6,@C7)",
+                                                paramjobtitleEN, paramjobtitleAR, ParamDescription , paramminsalary, parammaxsalary);
                             MessageBox.Show("Record saved Successfully");
                             dr.Dispose();
                             dr.Close();
@@ -1333,9 +1333,9 @@ namespace Delmon_Managment_System.Forms
                         JobTitleENtxt.Text = dataGridView3.Rows[e.RowIndex].Cells[1].Value.ToString();
                         jobtitleartxt.Text = dataGridView3.Rows[e.RowIndex].Cells[2].Value.ToString();
                         Descriptiontxt.Text = dataGridView3.Rows[e.RowIndex].Cells[3].Value.ToString();
-                        cmbworkfield.Text = dataGridView3.Rows[e.RowIndex].Cells[4].Value.ToString();
-                        cmbjobgrade.Text = dataGridView3.Rows[e.RowIndex].Cells[5].Value.ToString();
-                        mintxt.Text = dataGridView3.Rows[e.RowIndex].Cells[6].Value.ToString();
+                        //cmbworkfield.Text = dataGridView3.Rows[e.RowIndex].Cells[4].Value.ToString();
+                        //cmbjobgrade.Text = dataGridView3.Rows[e.RowIndex].Cells[5].Value.ToString();
+                        //mintxt.Text = dataGridView3.Rows[e.RowIndex].Cells[6].Value.ToString();
                         maxtxt.Text = dataGridView3.Rows[e.RowIndex].Cells[7].Value.ToString();
 
 
@@ -1378,14 +1378,14 @@ namespace Delmon_Managment_System.Forms
                     JobTitleENtxt.Text = row.Cells[1].Value?.ToString();
                     jobtitleartxt.Text = row.Cells[2].Value?.ToString();
                     Descriptiontxt.Text = row.Cells[3].Value?.ToString();
-                    if (cmbworkfield != null && row.Cells[4].Value != null)
-                    {
-                        cmbworkfield.SelectedValue = row.Cells[4].Value.ToString();
-                    }
-                    if (cmbjobgrade != null && row.Cells[5].Value != null)
-                    {
-                        cmbjobgrade.SelectedValue = row.Cells[5].Value.ToString();
-                    }
+                    //if (cmbworkfield != null && row.Cells[4].Value != null)
+                    //{
+                    //    cmbworkfield.SelectedValue = row.Cells[4].Value.ToString();
+                    //}
+                    //if (cmbjobgrade != null && row.Cells[5].Value != null)
+                    //{
+                    //    cmbjobgrade.SelectedValue = row.Cells[5].Value.ToString();
+                    //}
                     mintxt.Text = row.Cells[6].Value?.ToString();
                     maxtxt.Text = row.Cells[7].Value?.ToString();
                 }
@@ -1433,7 +1433,7 @@ namespace Delmon_Managment_System.Forms
         {
             if (e.KeyCode == Keys.Enter)
             {
-                cmbjobgrade.Focus();
+             //   cmbjobgrade.Focus();
                 e.Handled = true;
 
             }
@@ -1443,7 +1443,7 @@ namespace Delmon_Managment_System.Forms
         {
             if (e.KeyCode == Keys.Enter)
             {
-                cmbworkfield.Focus();
+               // cmbworkfield.Focus();
                 e.Handled = true;
 
             }
@@ -1513,10 +1513,10 @@ namespace Delmon_Managment_System.Forms
             paramjobtitleAR.Value = jobtitleartxt.Text;
             SqlParameter ParamDescription = new SqlParameter("@C3", SqlDbType.NVarChar);
             ParamDescription.Value = Descriptiontxt.Text;
-            SqlParameter paramWorkField = new SqlParameter("@C4", SqlDbType.NVarChar);
-            paramWorkField.Value = cmbworkfield.SelectedValue;
-            SqlParameter paramJobGrade = new SqlParameter("@C5", SqlDbType.NVarChar);
-            paramJobGrade.Value = cmbjobgrade.SelectedValue;
+            //SqlParameter paramWorkField = new SqlParameter("@C4", SqlDbType.NVarChar);
+            //paramWorkField.Value = cmbworkfield.SelectedValue;
+            //SqlParameter paramJobGrade = new SqlParameter("@C5", SqlDbType.NVarChar);
+            //paramJobGrade.Value = cmbjobgrade.SelectedValue;
             SqlParameter paramminsalary = new SqlParameter("@C6", SqlDbType.NVarChar);
             paramminsalary.Value = mintxt.Text;
             SqlParameter parammaxsalary = new SqlParameter("@C7", SqlDbType.NVarChar);
@@ -1535,7 +1535,7 @@ namespace Delmon_Managment_System.Forms
             {
 
 
-                if (JobTitleENtxt.Text != "" && jobtitleartxt.Text != "" && Descriptiontxt.Text != "" && cmbworkfield.Text != "select" && cmbjobgrade.Text!="Select" && mintxt.Text !="" && maxtxt.Text!="")
+                if (JobTitleENtxt.Text != "" && jobtitleartxt.Text != "" && Descriptiontxt.Text != ""  && mintxt.Text !="" && maxtxt.Text!="")
                 {
                     if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     {
@@ -1570,7 +1570,7 @@ namespace Delmon_Managment_System.Forms
                             }
                             else if (num1 < num2)
                             {
-                                SQLCONN.ExecuteQueries("update jobs set [JobTitleEN] =@C1,[JobTitleAR]=@C2,[JobDescription]=@C3,[Work_Field_ID]=@C4,[Job_Grade_ID]=@C5,[MinSalary]=@C6,[MaxSalary]=@C7  where  jobid=@id  ",   paramjobtitleEN, paramjobtitleAR, ParamDescription, paramWorkField, paramJobGrade, paramminsalary, parammaxsalary,paramjobid);
+                                SQLCONN.ExecuteQueries("update jobs set [JobTitleEN] =@C1,[JobTitleAR]=@C2,[JobDescription]=@C3,[MinSalary]=@C6,[MaxSalary]=@C7  where  jobid=@id  ",   paramjobtitleEN, paramjobtitleAR, ParamDescription, paramminsalary, parammaxsalary,paramjobid);
                                 MessageBox.Show("Record updated Successfully");
                               
           
