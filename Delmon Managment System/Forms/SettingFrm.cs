@@ -104,12 +104,12 @@ namespace Delmon_Managment_System.Forms
             //cmbworkfield.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Work_Field_ID,Work_Field_Name FROM WorkFields");
             //cmbworkfield.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             //cmbworkfield.AutoCompleteSource = AutoCompleteSource.ListItems;
-            
-            //cmbworkfield1.ValueMember = "Work_Field_ID";
-            //cmbworkfield1.DisplayMember = "Work_Field_Name";
-            //cmbworkfield1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Work_Field_ID,Work_Field_Name FROM WorkFields");
-            //cmbworkfield1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //cmbworkfield1.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            cmbworkfield1.ValueMember = "WorkID";
+            cmbworkfield1.DisplayMember = "Name";
+            cmbworkfield1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT WorkID,Name FROM [WorkLocations]");
+            cmbworkfield1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbworkfield1.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
             //cmbjobgrade.ValueMember = "Job_Grade_ID";
@@ -1697,8 +1697,8 @@ namespace Delmon_Managment_System.Forms
             paramWORLOCATION.Value = cmbworkfield1.SelectedValue;
             SqlParameter paramHEADOFDEPARTMENT= new SqlParameter("@C3", SqlDbType.NVarChar);
             paramHEADOFDEPARTMENT.Value = cmbemployee1.SelectedValue;
-            SqlParameter paramHEADPOSTION = new SqlParameter("@C4", SqlDbType.NVarChar);
-            paramHEADPOSTION.Value = cmbHeadPostion.SelectedValue;
+            //SqlParameter paramHEADPOSTION = new SqlParameter("@C4", SqlDbType.NVarChar);
+            //paramHEADPOSTION.Value = cmbHeadPostion.SelectedValue;
             SqlParameter PARAMCOMPANY = new SqlParameter("@C5", SqlDbType.NVarChar);
             PARAMCOMPANY.Value = cmbCompany.SelectedValue;
 
@@ -1713,7 +1713,7 @@ namespace Delmon_Managment_System.Forms
             SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
             parampc.Value = lblPC.Text;
 
-            if (cmbDepartment.Text != "Select" && cmbworkfield1.Text != "Select" && cmbemployee1.Text != "Select" && cmbHeadPostion.Text != "Select" && cmbCompany.Text != "Select")
+            if (cmbDepartment.Text != "Select" && cmbworkfield1.Text != "Select" && cmbemployee1.Text != "Select"  && cmbCompany.Text != "Select")
             { }
             else 
             {
@@ -1794,18 +1794,18 @@ namespace Delmon_Managment_System.Forms
             if (tabControl1.SelectedTab == tabControl1.TabPages[3])
             {
                 tabControl1.TabPages[3].Visible = false;
-                MessageBox.Show("Comming Soon  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                // MessageBox.Show("Comming Soon  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                //if (lblusertype.Text != "Admin")
-                //{
+                if (lblusertype.Text != "Admin")
+                {
 
-                //    MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                //}
-                //else
-                //{
-                //    tabControl1.TabPages[3].Visible = true;
+                    MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    tabControl1.TabPages[3].Visible = true;
 
-                //}
+                }
             }
             if (tabControl1.SelectedTab == tabControl1.TabPages[4])
             {
@@ -1824,6 +1824,11 @@ namespace Delmon_Managment_System.Forms
 
                 }
             }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void maxtxt_KeyPress(object sender, KeyPressEventArgs e)

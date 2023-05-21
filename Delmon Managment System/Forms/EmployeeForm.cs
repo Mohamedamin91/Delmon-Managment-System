@@ -594,7 +594,13 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                 if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
                     SQLCONN.OpenConection();
+
                     SQLCONN.ExecuteQueries("delete from Employees where EmployeeID=@id", paramPID);
+                    SQLCONN.ExecuteQueries("delete from EmployeeHistory where EmployeeID=@id", paramPID);
+                    SQLCONN.ExecuteQueries("delete from Documents where RefrenceID=2 and CR_ID=@id ", paramPID);
+                    SQLCONN.ExecuteQueries("delete from Contacts where RefrenceID=2 and CR_ID=@id ", paramPID);
+                    SQLCONN.ExecuteQueries("delete from SalaryDetails where EmployeeID=@id ", paramPID);
+
                     // SQLCONN.ExecuteQueries(" declare @max int select @max = max([EmployeeID]) from[Employees] if @max IS NULL SET @max = 0 DBCC CHECKIDENT('[Employees]', RESEED, @max)");
                     MessageBox.Show("Record Deleted Successfully");
                     SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Employee Info',@id ,'#','#',@datetime,@pc,@user,'Delete')", paramPID, paramdatetimeLOG, parampc, paramuser);

@@ -85,8 +85,6 @@ namespace Delmon_Managment_System.Forms
             this.label8 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.DepartmentTap = new System.Windows.Forms.TabPage();
-            this.cmbHeadPostion = new System.Windows.Forms.ComboBox();
-            this.label17 = new System.Windows.Forms.Label();
             this.cmbCompany = new System.Windows.Forms.ComboBox();
             this.label25 = new System.Windows.Forms.Label();
             this.cmbemployee1 = new System.Windows.Forms.ComboBox();
@@ -809,8 +807,6 @@ namespace Delmon_Managment_System.Forms
             // 
             // DepartmentTap
             // 
-            this.DepartmentTap.Controls.Add(this.cmbHeadPostion);
-            this.DepartmentTap.Controls.Add(this.label17);
             this.DepartmentTap.Controls.Add(this.cmbCompany);
             this.DepartmentTap.Controls.Add(this.label25);
             this.DepartmentTap.Controls.Add(this.cmbemployee1);
@@ -832,41 +828,21 @@ namespace Delmon_Managment_System.Forms
             this.DepartmentTap.UseVisualStyleBackColor = true;
             this.DepartmentTap.Click += new System.EventHandler(this.DepartmentTap_Click);
             // 
-            // cmbHeadPostion
-            // 
-            this.cmbHeadPostion.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbHeadPostion.FormattingEnabled = true;
-            this.cmbHeadPostion.Location = new System.Drawing.Point(12, 206);
-            this.cmbHeadPostion.Name = "cmbHeadPostion";
-            this.cmbHeadPostion.Size = new System.Drawing.Size(167, 25);
-            this.cmbHeadPostion.TabIndex = 141;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.Color.Black;
-            this.label17.Location = new System.Drawing.Point(9, 187);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(87, 17);
-            this.label17.TabIndex = 140;
-            this.label17.Text = "Head Postion";
-            // 
             // cmbCompany
             // 
             this.cmbCompany.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCompany.FormattingEnabled = true;
-            this.cmbCompany.Location = new System.Drawing.Point(12, 266);
+            this.cmbCompany.Location = new System.Drawing.Point(12, 204);
             this.cmbCompany.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.cmbCompany.Name = "cmbCompany";
-            this.cmbCompany.Size = new System.Drawing.Size(367, 25);
+            this.cmbCompany.Size = new System.Drawing.Size(276, 25);
             this.cmbCompany.TabIndex = 138;
             // 
             // label25
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(9, 245);
+            this.label25.Location = new System.Drawing.Point(9, 183);
             this.label25.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(64, 17);
@@ -912,12 +888,13 @@ namespace Delmon_Managment_System.Forms
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button7.ForeColor = System.Drawing.Color.White;
-            this.button7.Location = new System.Drawing.Point(222, 376);
+            this.button7.Location = new System.Drawing.Point(114, 434);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(67, 26);
             this.button7.TabIndex = 106;
             this.button7.Text = "Delete";
             this.button7.UseVisualStyleBackColor = false;
+            this.button7.Visible = false;
             // 
             // button8
             // 
@@ -926,12 +903,13 @@ namespace Delmon_Managment_System.Forms
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button8.ForeColor = System.Drawing.Color.White;
-            this.button8.Location = new System.Drawing.Point(114, 376);
+            this.button8.Location = new System.Drawing.Point(22, 382);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(74, 26);
             this.button8.TabIndex = 105;
             this.button8.Text = "Update";
             this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // cmbDepartment
             // 
@@ -939,7 +917,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbDepartment.FormattingEnabled = true;
             this.cmbDepartment.Location = new System.Drawing.Point(12, 38);
             this.cmbDepartment.Name = "cmbDepartment";
-            this.cmbDepartment.Size = new System.Drawing.Size(121, 25);
+            this.cmbDepartment.Size = new System.Drawing.Size(257, 25);
             this.cmbDepartment.TabIndex = 100;
             // 
             // label19
@@ -959,7 +937,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbworkfield1.FormattingEnabled = true;
             this.cmbworkfield1.Location = new System.Drawing.Point(12, 89);
             this.cmbworkfield1.Name = "cmbworkfield1";
-            this.cmbworkfield1.Size = new System.Drawing.Size(117, 25);
+            this.cmbworkfield1.Size = new System.Drawing.Size(257, 25);
             this.cmbworkfield1.TabIndex = 98;
             // 
             // label20
@@ -969,9 +947,9 @@ namespace Delmon_Managment_System.Forms
             this.label20.ForeColor = System.Drawing.Color.Black;
             this.label20.Location = new System.Drawing.Point(9, 70);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(72, 17);
+            this.label20.Size = new System.Drawing.Size(95, 17);
             this.label20.TabIndex = 97;
-            this.label20.Text = "Work Field";
+            this.label20.Text = "Work Location";
             // 
             // button9
             // 
@@ -980,12 +958,13 @@ namespace Delmon_Managment_System.Forms
             this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button9.ForeColor = System.Drawing.Color.White;
-            this.button9.Location = new System.Drawing.Point(8, 376);
+            this.button9.Location = new System.Drawing.Point(17, 434);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(79, 26);
             this.button9.TabIndex = 90;
             this.button9.Text = "Add";
             this.button9.UseVisualStyleBackColor = false;
+            this.button9.Visible = false;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // notificationsTap
@@ -1195,8 +1174,6 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.ComboBox cmbCompany;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.ComboBox cmbHeadPostion;
-        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Button btnnew;
         private System.Windows.Forms.Button BtnnewJob;
         private System.Windows.Forms.Button BtnnewAgaency;
