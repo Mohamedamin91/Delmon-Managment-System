@@ -912,7 +912,7 @@ namespace Delmon_Managment_System.Forms
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button7.ForeColor = System.Drawing.Color.White;
-            this.button7.Location = new System.Drawing.Point(226, 318);
+            this.button7.Location = new System.Drawing.Point(222, 376);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(67, 26);
             this.button7.TabIndex = 106;
@@ -926,7 +926,7 @@ namespace Delmon_Managment_System.Forms
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button8.ForeColor = System.Drawing.Color.White;
-            this.button8.Location = new System.Drawing.Point(118, 318);
+            this.button8.Location = new System.Drawing.Point(114, 376);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(74, 26);
             this.button8.TabIndex = 105;
@@ -980,7 +980,7 @@ namespace Delmon_Managment_System.Forms
             this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button9.ForeColor = System.Drawing.Color.White;
-            this.button9.Location = new System.Drawing.Point(12, 318);
+            this.button9.Location = new System.Drawing.Point(8, 376);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(79, 26);
             this.button9.TabIndex = 90;

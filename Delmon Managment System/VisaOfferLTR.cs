@@ -59,10 +59,21 @@ namespace Delmon_Managment_System
     Agencies.AgenceName,
     Agencies.LicenseNumber,
     Documents.Number AS 'Passport',
-    (SELECT CONCAT(FirstName, ' ',SecondName , ' ' , ThirdName , ' ', LastName) FROM Employees WHERE Employees.EmployeeID = Companies1.General_Manager) AS 'GeneralManager',
-    (SELECT CONCAT(FirstName, ' ', LastName) FROM DEPARTMENTS 
-     JOIN Employees ON DEPARTMENTS.DeptHeadID = Employees.EmployeeID
-     WHERE DEPARTMENTS.COMPID = Companies1.COMPID) AS 'DivisionHead'
+    (
+        SELECT TOP 1 CONCAT(FirstName, ' ', LastName)
+        FROM DEPARTMENTS 
+        JOIN Employees ON DEPARTMENTS.DeptHeadID = Employees.EmployeeID
+        WHERE DEPARTMENTS.COMPID = Companies1.COMPID
+        ORDER BY DEPARTMENTS.DEPTID -- Replace with the actual column name
+    ) AS 'DivisionHead',
+
+	( SELECT TOP 1 CONCAT(FirstName, ' ', SecondName, ' ', ThirdName, ' ', LastName)
+         FROM Employees  
+        JOIN Companies ON Employees.EmployeeID = Companies1.General_Manager
+        WHERE DEPARTMENTS.COMPID = Companies1.COMPID
+    ) AS 'GeneralManager'
+	
+    
 FROM 
     Employees
     JOIN VISAJobList ON VISAJobList.EmployeeID = Employees.EmployeeID
@@ -80,7 +91,7 @@ FROM
     JOIN Countries ON Consulates.CountryId = Countries.CountryId
     JOIN Agencies ON VISAJobList.AgencyID = Agencies.AgencID
 WHERE 
-    Employees.EmployeeID = @EmployeeID;";
+  Employees.EmployeeID = @EmployeeID;";
 
                 //SqlDataReader dr = sql.DataReader(query, paramEmployeeID);
                 //if (dr.Read())
