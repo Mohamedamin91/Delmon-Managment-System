@@ -94,8 +94,6 @@ namespace Delmon_Managment_System.Forms
             this.button8 = new System.Windows.Forms.Button();
             this.cmbDepartment = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.cmbworkfield1 = new System.Windows.Forms.ComboBox();
-            this.label20 = new System.Windows.Forms.Label();
             this.button9 = new System.Windows.Forms.Button();
             this.notificationsTap = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -816,8 +814,6 @@ namespace Delmon_Managment_System.Forms
             this.DepartmentTap.Controls.Add(this.button8);
             this.DepartmentTap.Controls.Add(this.cmbDepartment);
             this.DepartmentTap.Controls.Add(this.label19);
-            this.DepartmentTap.Controls.Add(this.cmbworkfield1);
-            this.DepartmentTap.Controls.Add(this.label20);
             this.DepartmentTap.Controls.Add(this.button9);
             this.DepartmentTap.Location = new System.Drawing.Point(4, 26);
             this.DepartmentTap.Name = "DepartmentTap";
@@ -832,17 +828,18 @@ namespace Delmon_Managment_System.Forms
             // 
             this.cmbCompany.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCompany.FormattingEnabled = true;
-            this.cmbCompany.Location = new System.Drawing.Point(12, 204);
+            this.cmbCompany.Location = new System.Drawing.Point(22, 52);
             this.cmbCompany.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.cmbCompany.Name = "cmbCompany";
             this.cmbCompany.Size = new System.Drawing.Size(276, 25);
             this.cmbCompany.TabIndex = 138;
+            this.cmbCompany.SelectionChangeCommitted += new System.EventHandler(this.cmbCompany_SelectionChangeCommitted);
             // 
             // label25
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(9, 183);
+            this.label25.Location = new System.Drawing.Point(19, 31);
             this.label25.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(64, 17);
@@ -853,10 +850,10 @@ namespace Delmon_Managment_System.Forms
             // 
             this.cmbemployee1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbemployee1.FormattingEnabled = true;
-            this.cmbemployee1.Location = new System.Drawing.Point(12, 143);
+            this.cmbemployee1.Location = new System.Drawing.Point(22, 173);
             this.cmbemployee1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbemployee1.Name = "cmbemployee1";
-            this.cmbemployee1.Size = new System.Drawing.Size(257, 25);
+            this.cmbemployee1.Size = new System.Drawing.Size(276, 25);
             this.cmbemployee1.TabIndex = 137;
             // 
             // label24
@@ -864,7 +861,7 @@ namespace Delmon_Managment_System.Forms
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label24.ForeColor = System.Drawing.Color.Black;
-            this.label24.Location = new System.Drawing.Point(9, 123);
+            this.label24.Location = new System.Drawing.Point(19, 152);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(134, 17);
             this.label24.TabIndex = 136;
@@ -903,7 +900,7 @@ namespace Delmon_Managment_System.Forms
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button8.ForeColor = System.Drawing.Color.White;
-            this.button8.Location = new System.Drawing.Point(22, 382);
+            this.button8.Location = new System.Drawing.Point(17, 255);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(74, 26);
             this.button8.TabIndex = 105;
@@ -915,9 +912,9 @@ namespace Delmon_Managment_System.Forms
             // 
             this.cmbDepartment.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbDepartment.FormattingEnabled = true;
-            this.cmbDepartment.Location = new System.Drawing.Point(12, 38);
+            this.cmbDepartment.Location = new System.Drawing.Point(22, 109);
             this.cmbDepartment.Name = "cmbDepartment";
-            this.cmbDepartment.Size = new System.Drawing.Size(257, 25);
+            this.cmbDepartment.Size = new System.Drawing.Size(276, 25);
             this.cmbDepartment.TabIndex = 100;
             // 
             // label19
@@ -925,31 +922,11 @@ namespace Delmon_Managment_System.Forms
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.ForeColor = System.Drawing.Color.Black;
-            this.label19.Location = new System.Drawing.Point(9, 19);
+            this.label19.Location = new System.Drawing.Point(19, 90);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(85, 17);
             this.label19.TabIndex = 99;
             this.label19.Text = "Depart name";
-            // 
-            // cmbworkfield1
-            // 
-            this.cmbworkfield1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbworkfield1.FormattingEnabled = true;
-            this.cmbworkfield1.Location = new System.Drawing.Point(12, 89);
-            this.cmbworkfield1.Name = "cmbworkfield1";
-            this.cmbworkfield1.Size = new System.Drawing.Size(257, 25);
-            this.cmbworkfield1.TabIndex = 98;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.ForeColor = System.Drawing.Color.Black;
-            this.label20.Location = new System.Drawing.Point(9, 70);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(95, 17);
-            this.label20.TabIndex = 97;
-            this.label20.Text = "Work Location";
             // 
             // button9
             // 
@@ -1167,8 +1144,6 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.ComboBox cmbDepartment;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.ComboBox cmbworkfield1;
-        private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.ComboBox cmbemployee1;
         private System.Windows.Forms.Label label24;

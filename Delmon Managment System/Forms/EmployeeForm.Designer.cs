@@ -1343,7 +1343,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbCompany.Location = new System.Drawing.Point(169, 251);
             this.cmbCompany.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.cmbCompany.Name = "cmbCompany";
-            this.cmbCompany.Size = new System.Drawing.Size(498, 25);
+            this.cmbCompany.Size = new System.Drawing.Size(579, 25);
             this.cmbCompany.TabIndex = 150;
             this.cmbCompany.SelectionChangeCommitted += new System.EventHandler(this.cmbCompany_SelectionChangeCommitted);
             this.cmbCompany.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbCompany_KeyDown);

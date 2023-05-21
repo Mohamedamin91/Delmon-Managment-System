@@ -37,7 +37,7 @@ namespace Delmon_Managment_System.Forms
             {
                 control.Font = newFont;
             }
-           
+
         }
         public static Regex email_validation()
         {
@@ -79,7 +79,7 @@ namespace Delmon_Managment_System.Forms
             cmbusertype.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbusertype.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-          
+
 
             //  dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Agencies  order by AgencID " );
 
@@ -105,11 +105,11 @@ namespace Delmon_Managment_System.Forms
             //cmbworkfield.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             //cmbworkfield.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-            cmbworkfield1.ValueMember = "WorkID";
-            cmbworkfield1.DisplayMember = "Name";
-            cmbworkfield1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT WorkID,Name FROM [WorkLocations]");
-            cmbworkfield1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbworkfield1.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //cmbworkfield1.ValueMember = "WorkID";
+            //cmbworkfield1.DisplayMember = "Name";
+            //cmbworkfield1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT WorkID,Name FROM [WorkLocations]");
+            //cmbworkfield1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //cmbworkfield1.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
             //cmbjobgrade.ValueMember = "Job_Grade_ID";
@@ -124,11 +124,11 @@ namespace Delmon_Managment_System.Forms
             cmbCompany.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbCompany.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-            cmbDepartment.ValueMember = "Dept_Type_ID";
-            cmbDepartment.DisplayMember = "Dept_Type_Name";
-            cmbDepartment.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Dept_Type_ID,Dept_Type_Name FROM [DeptTypes]");
-            cmbDepartment.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbDepartment.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //cmbDepartment.ValueMember = "Dept_Type_ID";
+            //cmbDepartment.DisplayMember = "Dept_Type_Name";
+            //cmbDepartment.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Dept_Type_ID,Dept_Type_Name FROM [DeptTypes]");
+            //cmbDepartment.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //cmbDepartment.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             //cmbHeadPostion.ValueMember = "[DEPTID]";
             //cmbHeadPostion.DisplayMember = "DeptHeadPosition";
@@ -138,15 +138,15 @@ namespace Delmon_Managment_System.Forms
 
             if (lblusertype.Text == "Admin")
             {
-               dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
-            (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID    ");
-           
+                dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
+             (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID    ");
+
             }
-            else 
+            else
 
             {
                 dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
-                  (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID and tblUser.EmployeeID=" +LoggedEmployeeID+ " ");
+                  (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID and tblUser.EmployeeID=" + LoggedEmployeeID + " ");
 
             }
 
@@ -222,8 +222,8 @@ namespace Delmon_Managment_System.Forms
             if ((int)cmbemployee.SelectedValue != 0 && usernametxt.Text != "" && passwordtxt.Text != "")
             {
                 SQLCONN.OpenConection();
-                 dr = SQLCONN.DataReader("select  * from tblUser  where " +
-                     " EmployeeID=  @C1 or username = @C2", paramemployee, paramusername);
+                dr = SQLCONN.DataReader("select  * from tblUser  where " +
+                    " EmployeeID=  @C1 or username = @C2", paramemployee, paramusername);
                 dr.Read();
 
 
@@ -232,7 +232,7 @@ namespace Delmon_Managment_System.Forms
                     MessageBox.Show("This 'User'/ 'Username'  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 }
-                else 
+                else
                 {
                     if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     {
@@ -244,11 +244,11 @@ namespace Delmon_Managment_System.Forms
                         {
                             dr.Dispose();
                             dr.Close();
-                           
+
                             SQLCONN.ExecuteQueries("insert into tblUser ( [EmployeeID] ,[UserName],[Password],[UserTypeID],[IsActive]) values (@C1,@C2,@C3,@C4,1)",
                                                      paramemployee, paramusername, parampassword, paramusertype, paramisActive);
                             MessageBox.Show("Record saved Successfully");
-                          
+
                             SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('User Info',@C1 ,'#','#',@datetime,@pc,@user,'Insert')", paramemployee, paramdatetimeLOG, parampc, paramuser);
                             btnnew.Visible = true;
 
@@ -257,17 +257,17 @@ namespace Delmon_Managment_System.Forms
                         {
                             dr.Dispose();
                             dr.Close();
-                           
 
-                            
+
+
 
                             SQLCONN.ExecuteQueries("insert into tblUser ( [EmployeeID] ,[UserName],[Password],[UserTypeID],[IsActive]) values (@C1,@C2,@C3,@C4,0)",
-                                   
-                                
-                                paramemployee, paramusername, parampassword, paramusertype, paramisActive);
-                                MessageBox.Show("Record saved Successfully");
 
-                            
+
+                                paramemployee, paramusername, parampassword, paramusertype, paramisActive);
+                            MessageBox.Show("Record saved Successfully");
+
+
 
                             SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('User Info',@C1 ,'#','#',@datetime,@pc,@user,'Insert')", paramemployee, paramdatetimeLOG, parampc, paramuser);
                             btnnew.Visible = true;
@@ -294,7 +294,7 @@ namespace Delmon_Managment_System.Forms
                     }
                 }
 
-                
+
 
             }
             else
@@ -377,8 +377,6 @@ namespace Delmon_Managment_System.Forms
             paramusertype.Value = cmbusertype.SelectedValue;
             SqlParameter paramisActive = new SqlParameter("@C5", SqlDbType.NVarChar);
             paramisActive.Value = isactivecheck.Checked;
-
-
             SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
             paramPID.Value = EmployeeID;
             SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
@@ -842,7 +840,7 @@ namespace Delmon_Managment_System.Forms
                     else
                         func(control.Controls);
             };
-        //    cmbjobgrade.SelectedIndex = cmbworkfield.SelectedIndex = -1;
+            //    cmbjobgrade.SelectedIndex = cmbworkfield.SelectedIndex = -1;
             jobtitleartxt.Text = JobTitleENtxt.Text = Descriptiontxt.Text = mintxt.Text = maxtxt.Text = "";
         }
 
@@ -905,7 +903,7 @@ namespace Delmon_Managment_System.Forms
                         else if (num1 < num2)
                         {
                             SQLCONN.ExecuteQueries("insert into jobs (  [JobTitleEN] ,[JobTitleAR],[JobDescription],[MinSalary],[MaxSalary]) values (@C1,@C2,@C3,@C6,@C7)",
-                                                paramjobtitleEN, paramjobtitleAR, ParamDescription , paramminsalary, parammaxsalary);
+                                                paramjobtitleEN, paramjobtitleAR, ParamDescription, paramminsalary, parammaxsalary);
                             MessageBox.Show("Record saved Successfully");
                             dr.Dispose();
                             dr.Close();
@@ -1104,7 +1102,7 @@ namespace Delmon_Managment_System.Forms
                     if (cmbCountry != null && row.Cells[3].Value != null)
                     {
                         cmbCountry.SelectedValue = row.Cells[3].Value.ToString();
-                       
+
                     }
                     if (cmbCity != null && row.Cells[4].Value != null)
                     {
@@ -1112,10 +1110,10 @@ namespace Delmon_Managment_System.Forms
 
                     }
                 }
-              
+
             }
 
-               SQLCONN.CloseConnection();
+            SQLCONN.CloseConnection();
 
         }
 
@@ -1200,12 +1198,6 @@ namespace Delmon_Managment_System.Forms
                             SQLCONN.ExecuteQueries("update Agencies set AgenceName =@C1,LicenseNumber=@C2,CountryID=@C3,CityID=@C4  where  AgencID=@id  ", paramagencyname, paramlicensenumber, paramcountry, paramcity, paramAgencyid);
                         }
 
-
-
-
-
-
-
                         MessageBox.Show("Record Updated Successfully");
                         dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT * FROM [Agencies] WHERE [AgencID] = @id", paramAgencyid);
 
@@ -1274,17 +1266,17 @@ namespace Delmon_Managment_System.Forms
                     }
 
                 }
-            
-            else
-            {
+
+                else
+                {
                     MessageBox.Show("Please Fill the missing fields  ");
 
                 }
             }
-                   
-          
-                else 
-                {
+
+
+            else
+            {
 
                 MessageBox.Show("Please select Agency first ! " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
@@ -1293,7 +1285,7 @@ namespace Delmon_Managment_System.Forms
             }
 
             SQLCONN.CloseConnection();
-            }
+        }
 
         private void JobTitleENtxt_TextChanged(object sender, EventArgs e)
         {
@@ -1311,7 +1303,7 @@ namespace Delmon_Managment_System.Forms
 
         private void jobsTap_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -1405,7 +1397,7 @@ namespace Delmon_Managment_System.Forms
 
         private void mintxt_Validating(object sender, CancelEventArgs e)
         {
-           
+
 
         }
 
@@ -1415,7 +1407,7 @@ namespace Delmon_Managment_System.Forms
             {
                 jobtitleartxt.Focus();
                 e.Handled = true;
-               
+
             }
         }
 
@@ -1433,7 +1425,7 @@ namespace Delmon_Managment_System.Forms
         {
             if (e.KeyCode == Keys.Enter)
             {
-             //   cmbjobgrade.Focus();
+                //   cmbjobgrade.Focus();
                 e.Handled = true;
 
             }
@@ -1443,7 +1435,7 @@ namespace Delmon_Managment_System.Forms
         {
             if (e.KeyCode == Keys.Enter)
             {
-               // cmbworkfield.Focus();
+                // cmbworkfield.Focus();
                 e.Handled = true;
 
             }
@@ -1535,7 +1527,7 @@ namespace Delmon_Managment_System.Forms
             {
 
 
-                if (JobTitleENtxt.Text != "" && jobtitleartxt.Text != "" && Descriptiontxt.Text != ""  && mintxt.Text !="" && maxtxt.Text!="")
+                if (JobTitleENtxt.Text != "" && jobtitleartxt.Text != "" && Descriptiontxt.Text != "" && mintxt.Text != "" && maxtxt.Text != "")
                 {
                     if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     {
@@ -1570,16 +1562,16 @@ namespace Delmon_Managment_System.Forms
                             }
                             else if (num1 < num2)
                             {
-                                SQLCONN.ExecuteQueries("update jobs set [JobTitleEN] =@C1,[JobTitleAR]=@C2,[JobDescription]=@C3,[MinSalary]=@C6,[MaxSalary]=@C7  where  jobid=@id  ",   paramjobtitleEN, paramjobtitleAR, ParamDescription, paramminsalary, parammaxsalary,paramjobid);
+                                SQLCONN.ExecuteQueries("update jobs set [JobTitleEN] =@C1,[JobTitleAR]=@C2,[JobDescription]=@C3,[MinSalary]=@C6,[MaxSalary]=@C7  where  jobid=@id  ", paramjobtitleEN, paramjobtitleAR, ParamDescription, paramminsalary, parammaxsalary, paramjobid);
                                 MessageBox.Show("Record updated Successfully");
-                              
-          
+
+
                                 dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" select  * from  [JOBS] where  [JobID] = @id  ", paramjobid);
 
                                 SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Job Info',@id ,'#','#',@datetime,@pc,@user,'Insert')", paramjobid, paramdatetimeLOG, parampc, paramuser);
 
 
-                            
+
                                 ClearTextBoxes();
 
                                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -1647,7 +1639,7 @@ namespace Delmon_Managment_System.Forms
                         }
 
 
-                           
+
 
 
                         dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT * FROM [jobs] WHERE [jobid] = @id", paramjobid);
@@ -1693,9 +1685,7 @@ namespace Delmon_Managment_System.Forms
 
             SqlParameter paramDEPARTMENTNAME = new SqlParameter("@C1", SqlDbType.NVarChar);
             paramDEPARTMENTNAME.Value = cmbDepartment.SelectedValue;
-            SqlParameter paramWORLOCATION = new SqlParameter("@C2", SqlDbType.NVarChar);
-            paramWORLOCATION.Value = cmbworkfield1.SelectedValue;
-            SqlParameter paramHEADOFDEPARTMENT= new SqlParameter("@C3", SqlDbType.NVarChar);
+            SqlParameter paramHEADOFDEPARTMENT = new SqlParameter("@C3", SqlDbType.NVarChar);
             paramHEADOFDEPARTMENT.Value = cmbemployee1.SelectedValue;
             //SqlParameter paramHEADPOSTION = new SqlParameter("@C4", SqlDbType.NVarChar);
             //paramHEADPOSTION.Value = cmbHeadPostion.SelectedValue;
@@ -1713,9 +1703,9 @@ namespace Delmon_Managment_System.Forms
             SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
             parampc.Value = lblPC.Text;
 
-            if (cmbDepartment.Text != "Select" && cmbworkfield1.Text != "Select" && cmbemployee1.Text != "Select"  && cmbCompany.Text != "Select")
+            if (cmbDepartment.Text != "Select" && cmbemployee1.Text != "Select" && cmbCompany.Text != "Select")
             { }
-            else 
+            else
             {
                 MessageBox.Show("Please Fill the missing fields.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
@@ -1728,7 +1718,7 @@ namespace Delmon_Managment_System.Forms
 
         private void DepartmentTap_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void btnnew_Click(object sender, EventArgs e)
@@ -1748,7 +1738,7 @@ namespace Delmon_Managment_System.Forms
 
         private void BtnnewAgaency_Click(object sender, EventArgs e)
         {
-            button1.Visible=true;
+            button1.Visible = true;
             ClearTextBoxes();
 
         }
@@ -1828,7 +1818,84 @@ namespace Delmon_Managment_System.Forms
 
         private void button8_Click(object sender, EventArgs e)
         {
+            SqlParameter paramHeadepartment = new SqlParameter("@C0", SqlDbType.NVarChar);
+            paramHeadepartment.Value = cmbemployee1.SelectedValue;
+            SqlParameter paramDepartment = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramDepartment.Value = cmbDepartment.SelectedValue;
+           
+            SQLCONN.OpenConection();
 
+            if ((int)cmbemployee1.SelectedValue != 0)
+            {
+                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+
+
+                    //     SQLCONN.ExecuteQueries("update  Contacts set ContTypeID=@C1,ContValue=@C2 where Contact_ID=@C4",
+
+                    SQLCONN.ExecuteQueries("update  DEPARTMENTS set DeptHeadID=@C0  where DEPTID=@C1",
+                                                  paramHeadepartment, paramDepartment );
+                    MessageBox.Show("Record Updated Successfully");
+
+                    dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  * FROM [DelmonGroupDB].[dbo].[DEPARTMENTS] where DEPTID =  " + cmbDepartment.SelectedValue + " ");
+
+                }
+                else
+                {
+
+                }
+
+
+            }
+            else
+            {
+                MessageBox.Show("Please Select Record to Update");
+            }
+            SQLCONN.CloseConnection();
+
+        }
+
+        private void cmbCompany_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            DataRow dr;
+            SqlConnection conn = new SqlConnection(@"Data Source=192.168.1.8;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@");
+            // SqlConnection conn = new SqlConnection(@"Data Source=AMIN-PC;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@");
+
+
+            conn.Open();
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "SELECT [DEPTID],Dept_Type_Name FROM [DelmonGroupDB].[dbo].[DEPARTMENTS], DeptTypes where DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID and COMPID=@C1 ";
+
+
+            cmd.Parameters.Add(new SqlParameter("@C1", SqlDbType.Int));
+            cmd.Parameters["@C1"].Value = cmbCompany.SelectedValue;
+
+
+            //Creating Sql Data Adapter
+            cmd.ExecuteNonQuery();
+            DataTable dt = new DataTable();
+            SqlDataAdapter Da = new SqlDataAdapter(cmd);
+            Da.Fill(dt);
+            dr = dt.NewRow();
+
+
+            if (dt != null && dt.Rows.Count >= 0)
+            {
+
+                cmbDepartment.ValueMember = "DEPTID";
+                cmbDepartment.DisplayMember = "Dept_Type_Name";
+                cmbDepartment.DataSource = dt;
+                cmbDepartment.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cmbDepartment.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+
+
+
+            }
+
+            conn.Close();
         }
 
         private void maxtxt_KeyPress(object sender, KeyPressEventArgs e)
