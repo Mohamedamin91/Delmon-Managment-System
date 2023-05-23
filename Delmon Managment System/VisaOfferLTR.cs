@@ -88,7 +88,7 @@ FROM
     JOIN (SELECT COMPID, General_Manager AS EmployeeID FROM Companies) DepartmentGM ON DepartmentGM.COMPID = DEPARTMENTS.COMPID
     JOIN DeptTypes ON DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID
     JOIN WorkLocations ON DEPARTMENTS.WorkLoctionID = WorkLocations.WorkID
-    JOIN Countries ON Consulates.CountryId = Countries.CountryId
+    JOIN Countries ON Employees.NationalityID = Countries.CountryId
     JOIN Agencies ON VISAJobList.AgencyID = Agencies.AgencID
 WHERE 
   Employees.EmployeeID = @EmployeeID;";

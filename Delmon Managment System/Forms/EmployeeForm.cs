@@ -14,6 +14,7 @@ using System.IO;
 using System.DirectoryServices.AccountManagement;
 using System.Security.Principal;
 using System.Net;
+using System.Diagnostics;
 
 namespace Delmon_Managment_System.Forms
 {
@@ -2754,39 +2755,19 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
         private void btnshowDoc_Click(object sender, EventArgs e)
         {
 
-            string fileName = CommonClass.DocPath;
-            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string documentFolder = Path.Combine(documentsPath, "Documents");
-
-            // Get the actual file name from the full path
-            string[] fileNameParts = fileName.Split('\\');
-            string actualFileName = fileNameParts[fileNameParts.Length - 1];
-
-            // Combine the document folder and actual file name
-            string filePath = Path.Combine(documentFolder, actualFileName);
-
-
-            var form = new FrmShowDoc();
-            // this.Hide();
-
+             string fileName = CommonClass.DocPath;
+       
             try
             {
-                if (fileName == string.Empty)
-                {
-                    MessageBox.Show(" The path 'document value' maybe incorrect or empty ,Kindly  Delete it and add it Again  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
+                if (File.Exists(fileName))
+                {
+                    // Open the PDF document using the default PDF viewer application
+                    Process.Start(fileName);
                 }
                 else
                 {
-                    if (File.Exists(filePath))
-                    {
-
-                        form.ShowDialog();
-                    }
-                    else
-                    {
-                        MessageBox.Show("File not found.");
-                    }
+                    MessageBox.Show("File not found.");
                 }
             }
             catch (Exception ex)

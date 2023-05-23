@@ -855,6 +855,8 @@ namespace Delmon_Managment_System.Forms
             this.cmbemployee1.Name = "cmbemployee1";
             this.cmbemployee1.Size = new System.Drawing.Size(276, 25);
             this.cmbemployee1.TabIndex = 137;
+            this.cmbemployee1.SelectedIndexChanged += new System.EventHandler(this.cmbemployee1_SelectedIndexChanged);
+            this.cmbemployee1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbemployee1_KeyDown);
             // 
             // label24
             // 

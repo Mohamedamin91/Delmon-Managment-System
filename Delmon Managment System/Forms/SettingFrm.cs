@@ -72,6 +72,8 @@ namespace Delmon_Managment_System.Forms
             cmbemployee1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT EmployeeID ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName' from Employees   order by EmployeeID ");
             cmbemployee1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbemployee1.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbemployee1.KeyDown += cmbemployee1_KeyDown;
+
 
             cmbusertype.ValueMember = "UserTypeID";
             cmbusertype.DisplayMember = "UserType";
@@ -1896,6 +1898,22 @@ namespace Delmon_Managment_System.Forms
             }
 
             conn.Close();
+        }
+        private void cmbemployee1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          
+        }
+
+        private void cmbemployee1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // Handle the Enter key press
+                // Here, you can write the code to perform the desired action
+                // when the user presses Enter on a selected item.
+                // For example, you can retrieve the selected item using cmbemployee1.SelectedItem
+                // and process it accordingly.
+            }
         }
 
         private void maxtxt_KeyPress(object sender, KeyPressEventArgs e)
