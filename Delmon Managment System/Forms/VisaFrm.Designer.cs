@@ -71,6 +71,8 @@ namespace Delmon_Managment_System.Forms
             this.label4 = new System.Windows.Forms.Label();
             this.VisaFileNumberID = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtsponserID = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.cmbReservedTo = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -89,8 +91,8 @@ namespace Delmon_Managment_System.Forms
             this.lbldatetime = new System.Windows.Forms.Label();
             this.lblusertype = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label17 = new System.Windows.Forms.Label();
-            this.txtsponserID = new System.Windows.Forms.TextBox();
+            this.txtCRNumber = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -604,6 +606,8 @@ namespace Delmon_Managment_System.Forms
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label18);
+            this.groupBox2.Controls.Add(this.txtCRNumber);
             this.groupBox2.Controls.Add(this.txtsponserID);
             this.groupBox2.Controls.Add(this.label17);
             this.groupBox2.Controls.Add(this.RemarksTxt);
@@ -637,6 +641,28 @@ namespace Delmon_Managment_System.Forms
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Visa Info";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter_1);
+            // 
+            // txtsponserID
+            // 
+            this.txtsponserID.Enabled = false;
+            this.txtsponserID.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtsponserID.Location = new System.Drawing.Point(185, 69);
+            this.txtsponserID.Margin = new System.Windows.Forms.Padding(4);
+            this.txtsponserID.Multiline = true;
+            this.txtsponserID.Name = "txtsponserID";
+            this.txtsponserID.Size = new System.Drawing.Size(112, 23);
+            this.txtsponserID.TabIndex = 88;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(6, 77);
+            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(67, 15);
+            this.label17.TabIndex = 87;
+            this.label17.Text = "Sponser ID";
             // 
             // cmbReservedTo
             // 
@@ -880,27 +906,27 @@ namespace Delmon_Managment_System.Forms
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // label17
+            // txtCRNumber
             // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(6, 77);
-            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(67, 15);
-            this.label17.TabIndex = 87;
-            this.label17.Text = "Sponser ID";
+            this.txtCRNumber.Enabled = false;
+            this.txtCRNumber.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCRNumber.Location = new System.Drawing.Point(423, 73);
+            this.txtCRNumber.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCRNumber.Multiline = true;
+            this.txtCRNumber.Name = "txtCRNumber";
+            this.txtCRNumber.Size = new System.Drawing.Size(112, 23);
+            this.txtCRNumber.TabIndex = 89;
             // 
-            // txtsponserID
+            // label18
             // 
-            this.txtsponserID.Enabled = false;
-            this.txtsponserID.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtsponserID.Location = new System.Drawing.Point(185, 69);
-            this.txtsponserID.Margin = new System.Windows.Forms.Padding(4);
-            this.txtsponserID.Multiline = true;
-            this.txtsponserID.Name = "txtsponserID";
-            this.txtsponserID.Size = new System.Drawing.Size(227, 23);
-            this.txtsponserID.TabIndex = 88;
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(320, 77);
+            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(68, 15);
+            this.label18.TabIndex = 90;
+            this.label18.Text = "CR Number";
             // 
             // VisaFrm
             // 
@@ -997,5 +1023,7 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox txtsponserID;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox txtCRNumber;
     }
 }

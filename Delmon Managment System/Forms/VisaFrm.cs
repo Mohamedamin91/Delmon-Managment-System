@@ -1078,7 +1078,7 @@ namespace Delmon_Managment_System.Forms
             Visanumtxt.BackColor = Color.White;
             TotalVisastxt.BackColor = Color.White;
             cmbReservedTo.Enabled = cmbCompany.Enabled = cmbcandidates.Enabled = cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = cmbAgency.Enabled = true;
-            txtsponserID.Enabled= TotalVisastxt.Enabled = RemarksTxt.Enabled = true;
+           txtCRNumber.Enabled= txtsponserID.Enabled= TotalVisastxt.Enabled = RemarksTxt.Enabled = true;
             ReceviedPicker.Enabled = true;
             // set the hint text for the TextBox control
             Visanumtxt.Focus();
@@ -1820,11 +1820,12 @@ namespace Delmon_Managment_System.Forms
         private void cmbCompany_SelectionChangeCommitted(object sender, EventArgs e)
         {
 
-            SQLCONN.OpenConection();
-          SqlDataReader  dr = SQLCONN.DataReader("SELECT ID_Number FROM [DelmonGroupDB].[dbo].[Companies] where  COMPID="+cmbCompany.SelectedValue +" ");
+          SQLCONN.OpenConection();
+          SqlDataReader  dr = SQLCONN.DataReader("SELECT ID_Number,CRNumber FROM [DelmonGroupDB].[dbo].[Companies] where  COMPID=" + cmbCompany.SelectedValue +" ");
             if (dr.Read())
             {
                 txtsponserID.Text = dr["ID_Number"].ToString();
+                txtCRNumber.Text = dr["CRNumber"].ToString();
             }
             SQLCONN.CloseConnection();   
         }

@@ -482,9 +482,39 @@ ORDER BY e.EmployeeID";
                         }
 
 
+                        /* Update visa status **/
+                        if ((int)cmbPersonalStatusStatus.SelectedValue == 24)
+                        {
+                            SqlDataReader dr = SQLCONN.DataReader("SELECT FileNumber,VISANumber FROM [DelmonGroupDB].[dbo].[VISAJobList] where StatusID !=6 and EmployeeID=" + EMPID + " ");
+                            if (dr.Read())
+                            {
+                                string Visanumber = dr["VISANumber"].ToString();
+                                string filenumber = dr["FileNumber"].ToString();
+                                if (DialogResult.Yes == MessageBox.Show("Visa:" + Visanumber + " Status will upated Automatically to 'USED', Do You Want to perform this operation?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                                {
+                                    dr.Dispose();
+                                    dr.Close();
+                                    SQLCONN.ExecuteQueries("update VISAJobList set StatusID =6 where  FileNumber= " + filenumber + " and VISANumber= " + Visanumber + " ");
+
+                                }
+                                dr.Dispose();
+                                dr.Close();
+
+                            }
+                            dr.Dispose();
+                            dr.Close();
+                        }
+                        /* Update visa status **/
 
 
 
+
+
+
+
+
+
+                       
 
 
                         MessageBox.Show("Record Updated Successfully");
