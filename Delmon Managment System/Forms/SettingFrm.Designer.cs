@@ -206,6 +206,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbemployee.Name = "cmbemployee";
             this.cmbemployee.Size = new System.Drawing.Size(257, 25);
             this.cmbemployee.TabIndex = 135;
+            this.cmbemployee.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbemployee_KeyDown);
             // 
             // Generatebtn
             // 

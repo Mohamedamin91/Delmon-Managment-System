@@ -93,7 +93,7 @@ namespace Delmon_Managment_System.Forms
 
         private void EmployeeForm_Load(object sender, EventArgs e)
         {
-
+            
 
 
 
@@ -2454,23 +2454,24 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
 
         private void cmbEmployJobHistory_KeyDown(object sender, KeyEventArgs e)
         {
+           
             if (e.KeyCode == Keys.Enter)
             {
-                StartDatePicker.Focus();
+                // Handle the Enter key press
+                var selectedItem = cmbEmployJobHistory.SelectedItem as DataRowView;
+
+                if (selectedItem != null)
+                {
+                    // Access the selected item's properties
+                    var JobID = selectedItem["JobID"].ToString();
+                    var JobTitleEN = selectedItem["JobTitleEN"].ToString();
+                }
+
+                // Prevent the ComboBox from processing the Enter key
                 e.Handled = true;
                 e.SuppressKeyPress = true;
-                string searchText = cmbEmployJobHistory.Text.Trim();
-                if (!string.IsNullOrEmpty(searchText))
-                {
-                    var selectedItem = cmbEmployJobHistory.Items.Cast<object>()
-                                          .FirstOrDefault(item => item.ToString().Equals(searchText, StringComparison.OrdinalIgnoreCase));
-                    if (selectedItem != null)
-                    {
-                        cmbEmployJobHistory.SelectedItem = selectedItem;
-                        // Perform your search operation here
-                    }
-                }
             }
+
         }
 
         private void StartDatePicker_KeyDown(object sender, KeyEventArgs e)
@@ -2480,6 +2481,7 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                 EndDatePicker.Focus();
                 e.Handled = true;
             }
+
         }
 
         private void btnprtjoboffer_Click(object sender, EventArgs e)
@@ -2607,6 +2609,7 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
         private void cmbEmployJobHistory_KeyPress(object sender, KeyPressEventArgs e)
         {
           
+
         }
 
         private void cmbPersonalStatusStatus_KeyPress(object sender, KeyPressEventArgs e)
@@ -2799,6 +2802,27 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                     e.Value = encryptedText;
                 }
 
+            }
+        }
+
+        private void cmbEmployJobHistory_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // Handle the Enter key press
+                var selectedItem = cmbEmployJobHistory.SelectedItem as DataRowView;
+
+                if (selectedItem != null)
+                {
+                    // Access the selected item's properties
+                    var JobID = selectedItem["JobID"].ToString();
+                    var JobTitleEN = selectedItem["JobTitleEN"].ToString();
+
+                    // Use the selected item for further processing or display
+                }
+
+                // Prevent the ComboBox from processing the Enter key
+                e.IsInputKey = true;
             }
         }
     }

@@ -480,6 +480,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbEmployJobHistory.TabIndex = 134;
             this.cmbEmployJobHistory.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbEmployJobHistory_KeyDown);
             this.cmbEmployJobHistory.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbEmployJobHistory_KeyPress);
+            this.cmbEmployJobHistory.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.cmbEmployJobHistory_PreviewKeyDown);
             // 
             // label11
             // 

@@ -1909,10 +1909,36 @@ namespace Delmon_Managment_System.Forms
             if (e.KeyCode == Keys.Enter)
             {
                 // Handle the Enter key press
-                // Here, you can write the code to perform the desired action
-                // when the user presses Enter on a selected item.
-                // For example, you can retrieve the selected item using cmbemployee1.SelectedItem
-                // and process it accordingly.
+                var selectedItem = cmbemployee1.SelectedItem as DataRowView;
+
+                if (selectedItem != null)
+                {
+                    // Access the selected item's properties
+                    var employeeID = selectedItem["EmployeeID"].ToString();
+                    var fullName = selectedItem["FullName"].ToString();
+
+                    // Use the selected item for further processing or display
+                    // For example:
+                }
+            }
+        }
+
+        private void cmbemployee_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // Handle the Enter key press
+                var selectedItem = cmbemployee.SelectedItem as DataRowView;
+
+                if (selectedItem != null)
+                {
+                    // Access the selected item's properties
+                    var employeeID = selectedItem["EmployeeID"].ToString();
+                    var fullName = selectedItem["FullName"].ToString();
+
+                    // Use the selected item for further processing or display
+                    // For example:
+                }
             }
         }
 

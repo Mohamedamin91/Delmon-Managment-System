@@ -89,6 +89,8 @@ namespace Delmon_Managment_System.Forms
             this.lbldatetime = new System.Windows.Forms.Label();
             this.lblusertype = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label17 = new System.Windows.Forms.Label();
+            this.txtsponserID = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -111,7 +113,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(6, 125);
+            this.label25.Location = new System.Drawing.Point(6, 129);
             this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(174, 15);
@@ -135,7 +137,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.TotalVisastxt.Enabled = false;
             this.TotalVisastxt.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TotalVisastxt.Location = new System.Drawing.Point(185, 236);
+            this.TotalVisastxt.Location = new System.Drawing.Point(185, 245);
             this.TotalVisastxt.Margin = new System.Windows.Forms.Padding(4);
             this.TotalVisastxt.Name = "TotalVisastxt";
             this.TotalVisastxt.Size = new System.Drawing.Size(116, 20);
@@ -179,7 +181,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(319, 122);
+            this.label3.Location = new System.Drawing.Point(319, 126);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(93, 15);
@@ -191,7 +193,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(6, 152);
+            this.label7.Location = new System.Drawing.Point(6, 158);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(83, 15);
@@ -202,7 +204,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(7, 180);
+            this.label9.Location = new System.Drawing.Point(6, 196);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(52, 15);
@@ -213,7 +215,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.RemarksTxt.Enabled = false;
             this.RemarksTxt.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RemarksTxt.Location = new System.Drawing.Point(186, 175);
+            this.RemarksTxt.Location = new System.Drawing.Point(185, 184);
             this.RemarksTxt.Margin = new System.Windows.Forms.Padding(4);
             this.RemarksTxt.Multiline = true;
             this.RemarksTxt.Name = "RemarksTxt";
@@ -226,7 +228,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.IssueDateENTxt.Enabled = false;
             this.IssueDateENTxt.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IssueDateENTxt.Location = new System.Drawing.Point(185, 147);
+            this.IssueDateENTxt.Location = new System.Drawing.Point(185, 153);
             this.IssueDateENTxt.Margin = new System.Windows.Forms.Padding(4);
             this.IssueDateENTxt.Multiline = true;
             this.IssueDateENTxt.Name = "IssueDateENTxt";
@@ -252,7 +254,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.expairENDATEtxt.Enabled = false;
             this.expairENDATEtxt.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.expairENDATEtxt.Location = new System.Drawing.Point(423, 147);
+            this.expairENDATEtxt.Location = new System.Drawing.Point(423, 153);
             this.expairENDATEtxt.Margin = new System.Windows.Forms.Padding(4);
             this.expairENDATEtxt.Multiline = true;
             this.expairENDATEtxt.Name = "expairENDATEtxt";
@@ -271,6 +273,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbCompany.Size = new System.Drawing.Size(322, 22);
             this.cmbCompany.TabIndex = 34;
             this.cmbCompany.SelectedIndexChanged += new System.EventHandler(this.cmbCompany_SelectedIndexChanged);
+            this.cmbCompany.SelectionChangeCommitted += new System.EventHandler(this.cmbCompany_SelectionChangeCommitted);
             this.cmbCompany.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbCompany_KeyDown);
             // 
             // label2
@@ -310,7 +313,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(5, 238);
+            this.label10.Location = new System.Drawing.Point(1, 245);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(62, 15);
@@ -369,7 +372,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(6, 96);
+            this.label12.Location = new System.Drawing.Point(7, 103);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(78, 15);
@@ -411,7 +414,7 @@ namespace Delmon_Managment_System.Forms
             this.Remaininglbl.AutoSize = true;
             this.Remaininglbl.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Remaininglbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.Remaininglbl.Location = new System.Drawing.Point(438, 100);
+            this.Remaininglbl.Location = new System.Drawing.Point(451, 100);
             this.Remaininglbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Remaininglbl.Name = "Remaininglbl";
             this.Remaininglbl.Size = new System.Drawing.Size(11, 14);
@@ -470,7 +473,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(319, 149);
+            this.label6.Location = new System.Drawing.Point(319, 155);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(87, 15);
@@ -481,7 +484,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.ExpiaryHijritxt.Enabled = false;
             this.ExpiaryHijritxt.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExpiaryHijritxt.Location = new System.Drawing.Point(423, 118);
+            this.ExpiaryHijritxt.Location = new System.Drawing.Point(423, 122);
             this.ExpiaryHijritxt.Margin = new System.Windows.Forms.Padding(4);
             this.ExpiaryHijritxt.Multiline = true;
             this.ExpiaryHijritxt.Name = "ExpiaryHijritxt";
@@ -493,7 +496,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.issuhijritxt.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.issuhijritxt.ForeColor = System.Drawing.Color.Black;
-            this.issuhijritxt.Location = new System.Drawing.Point(185, 120);
+            this.issuhijritxt.Location = new System.Drawing.Point(185, 124);
             this.issuhijritxt.Margin = new System.Windows.Forms.Padding(4);
             this.issuhijritxt.Name = "issuhijritxt";
             this.issuhijritxt.Size = new System.Drawing.Size(112, 20);
@@ -512,7 +515,7 @@ namespace Delmon_Managment_System.Forms
             this.ReceviedPicker.Enabled = false;
             this.ReceviedPicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ReceviedPicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.ReceviedPicker.Location = new System.Drawing.Point(185, 93);
+            this.ReceviedPicker.Location = new System.Drawing.Point(185, 96);
             this.ReceviedPicker.Margin = new System.Windows.Forms.Padding(4);
             this.ReceviedPicker.Name = "ReceviedPicker";
             this.ReceviedPicker.Size = new System.Drawing.Size(112, 22);
@@ -601,6 +604,8 @@ namespace Delmon_Managment_System.Forms
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtsponserID);
+            this.groupBox2.Controls.Add(this.label17);
             this.groupBox2.Controls.Add(this.RemarksTxt);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.label10);
@@ -875,6 +880,28 @@ namespace Delmon_Managment_System.Forms
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(6, 77);
+            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(67, 15);
+            this.label17.TabIndex = 87;
+            this.label17.Text = "Sponser ID";
+            // 
+            // txtsponserID
+            // 
+            this.txtsponserID.Enabled = false;
+            this.txtsponserID.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtsponserID.Location = new System.Drawing.Point(185, 69);
+            this.txtsponserID.Margin = new System.Windows.Forms.Padding(4);
+            this.txtsponserID.Multiline = true;
+            this.txtsponserID.Name = "txtsponserID";
+            this.txtsponserID.Size = new System.Drawing.Size(227, 23);
+            this.txtsponserID.TabIndex = 88;
+            // 
             // VisaFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -968,5 +995,7 @@ namespace Delmon_Managment_System.Forms
         public System.Windows.Forms.Label lblFullname;
         private System.Windows.Forms.ComboBox cmbReservedTo;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox txtsponserID;
+        private System.Windows.Forms.Label label17;
     }
 }

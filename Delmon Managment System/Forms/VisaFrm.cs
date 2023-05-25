@@ -49,6 +49,7 @@ namespace Delmon_Managment_System.Forms
 
 
 
+
         public VisaFrm()
         {
 
@@ -103,6 +104,10 @@ namespace Delmon_Managment_System.Forms
 
         private void VisaFrm_Load(object sender, EventArgs e)
         {
+
+            string query = "SELECT COMPID,COMPName_EN FROM Companies";
+
+
             lblusername.Text = CommonClass.LoginUserName;
             lblusertype.Text = CommonClass.Usertype;
             lblemail.Text = CommonClass.Email;
@@ -110,13 +115,10 @@ namespace Delmon_Managment_System.Forms
             lblPC.Text = Environment.MachineName;
 
 
-
-
             this.timer1.Interval = 1000;
             timer1.Start();
 
 
-            LoadTheme();
             //    AddBtn.Visible = DeleteBtn.Visible = btnFinish.Visible = Findbtn.Visible = true;
             //btnNew.Visible = Findbtn.Visible = true;
 
@@ -124,28 +126,24 @@ namespace Delmon_Managment_System.Forms
             this.ActiveControl = Visanumtxt;
 
 
+
             cmbCompany.ValueMember = "COMPID";
             cmbCompany.DisplayMember = "COMPName_EN";
-            cmbCompany.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT COMPID,COMPName_EN FROM Companies");
+            cmbCompany.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query);
             cmbCompany.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbCompany.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             cmbReservedTo.ValueMember = "COMPID";
             cmbReservedTo.DisplayMember = "COMPName_EN";
-            cmbReservedTo.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT COMPID,COMPName_EN FROM Companies");
+            cmbReservedTo.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query);
             cmbReservedTo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbReservedTo.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-
-
-
-
 
             cmbJob.ValueMember = "JobID";
             cmbJob.DisplayMember = "JobTitleEN";
             cmbJob.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS");
-             cmbJob.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-             cmbJob.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbJob.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbJob.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             cmbConsulate.ValueMember = "Consulates.ConsulateID";
             cmbConsulate.DisplayMember = "ConsulateCity";
@@ -172,16 +170,18 @@ namespace Delmon_Managment_System.Forms
             cmbcandidates2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbcandidates2.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-
-
-
-
-
             cmbAgency.ValueMember = "AgencID";
             cmbAgency.DisplayMember = "AgenceName";
             cmbAgency.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select AgencID,AgenceName  from Agencies /*order by AgencID*/ ");
             cmbAgency.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbAgency.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+
+
+
+
+
 
 
 
@@ -1078,7 +1078,7 @@ namespace Delmon_Managment_System.Forms
             Visanumtxt.BackColor = Color.White;
             TotalVisastxt.BackColor = Color.White;
             cmbReservedTo.Enabled = cmbCompany.Enabled = cmbcandidates.Enabled = cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = cmbAgency.Enabled = true;
-            TotalVisastxt.Enabled = RemarksTxt.Enabled = true;
+            txtsponserID.Enabled= TotalVisastxt.Enabled = RemarksTxt.Enabled = true;
             ReceviedPicker.Enabled = true;
             // set the hint text for the TextBox control
             Visanumtxt.Focus();
@@ -1316,27 +1316,20 @@ namespace Delmon_Managment_System.Forms
         {
             if (e.KeyCode == Keys.Enter)
             {
-                cmbStatus.Focus();
-                e.Handled = true;
+                // Handle the Enter key press
+                var selectedItem = cmbJob.SelectedItem as DataRowView;
 
-                e.SuppressKeyPress = true;
-                string searchText = cmbJob.Text.Trim();
-                if (!string.IsNullOrEmpty(searchText))
+                if (selectedItem != null)
                 {
-                    var selectedItem = cmbJob.Items.Cast<object>()
-                                          .FirstOrDefault(item => item.ToString().Equals(searchText, StringComparison.OrdinalIgnoreCase));
-                    if (selectedItem != null)
-                    {
-                        cmbJob.SelectedItem = selectedItem;
-                        // Perform your search operation here
-                    }
+                  
+                    // Access the selected item's properties
+                    var JobID = selectedItem["JobID"].ToString();
+                    var JobTitleEN = selectedItem["JobTitleEN"].ToString();
+
+                    // Use the selected item for further processing or display
+                    // For example:
                 }
-
-            }
-
-            //cmbJob.ValueMember = "JobID";
-            //cmbJob.DisplayMember = "JobTitleEN";
-            //cmbJob.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS");
+            }    
         }
 
         private void cmbcandidates_SelectedIndexChanged(object sender, EventArgs e)
@@ -1824,8 +1817,17 @@ namespace Delmon_Managment_System.Forms
 
         }
 
-      
-        
+        private void cmbCompany_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+
+            SQLCONN.OpenConection();
+          SqlDataReader  dr = SQLCONN.DataReader("SELECT ID_Number FROM [DelmonGroupDB].[dbo].[Companies] where  COMPID="+cmbCompany.SelectedValue +" ");
+            if (dr.Read())
+            {
+                txtsponserID.Text = dr["ID_Number"].ToString();
+            }
+            SQLCONN.CloseConnection();   
+        }
     }
 }
 
