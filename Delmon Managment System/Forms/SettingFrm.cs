@@ -19,6 +19,7 @@ namespace Delmon_Managment_System.Forms
         int LoggedEmployeeID;
         int agaencyid;
         int jobid;
+        int CompID;
         int departmentid;
         double num1, num2;
 
@@ -74,6 +75,13 @@ namespace Delmon_Managment_System.Forms
             cmbemployee1.AutoCompleteSource = AutoCompleteSource.ListItems;
             cmbemployee1.KeyDown += cmbemployee1_KeyDown;
 
+            cmbemployee2.ValueMember = "EmployeeID";
+            cmbemployee2.DisplayMember = "FullName";
+            cmbemployee2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT EmployeeID ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName' from Employees   order by EmployeeID ");
+            cmbemployee2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbemployee2.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbemployee2.KeyDown += cmbemployee1_KeyDown;
+
 
             cmbusertype.ValueMember = "UserTypeID";
             cmbusertype.DisplayMember = "UserType";
@@ -107,11 +115,11 @@ namespace Delmon_Managment_System.Forms
             //cmbworkfield.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             //cmbworkfield.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-            //cmbworkfield1.ValueMember = "WorkID";
-            //cmbworkfield1.DisplayMember = "Name";
-            //cmbworkfield1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT WorkID,Name FROM [WorkLocations]");
-            //cmbworkfield1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //cmbworkfield1.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbworkfield.ValueMember = "WorkID";
+            cmbworkfield.DisplayMember = "Name";
+            cmbworkfield.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT WorkID,Name FROM [WorkLocations]");
+            cmbworkfield.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbworkfield.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
             //cmbjobgrade.ValueMember = "Job_Grade_ID";
@@ -1295,9 +1303,6 @@ namespace Delmon_Managment_System.Forms
             paramjOBSearch.Value = JobTitleENtxt.Text;
             SQLCONN.OpenConection();
             dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" select  * from  [JOBS] where  (JobTitleEN like '%' + @C1 + '%')  OR (JobTitleAR LIKE '%' + @C1 + '%')  ", paramjOBSearch);
-
-
-
             SQLCONN.CloseConnection();
             //  firstnametxt.Text = secondnametxt.Text = thirdnametxt.Text = lastnametxt.Text = "";
             //  cmbMartialStatus.Text = cmbGender.Text = "";
@@ -1801,21 +1806,28 @@ namespace Delmon_Managment_System.Forms
             }
             if (tabControl1.SelectedTab == tabControl1.TabPages[4])
             {
-                tabControl1.TabPages[4].Visible = false;
+                //tabControl1.TabPages[4].Visible = false;
+                //MessageBox.Show("Comming Soon  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                //if (lblusertype.Text != "Admin")
+                //{
+
+                //    MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                //}
+                //else
+                //{
+                //    tabControl1.TabPages[4].Visible = true;
+
+                //}
+            }
+            if (tabControl1.SelectedTab == tabControl1.TabPages[5])
+            {
                 MessageBox.Show("Comming Soon  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                if (lblusertype.Text != "Admin")
-                {
-
-                    MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                }
-                else
-                {
-                    tabControl1.TabPages[4].Visible = true;
-
-                }
             }
+
+
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -1939,6 +1951,376 @@ namespace Delmon_Managment_System.Forms
                     // Use the selected item for further processing or display
                     // For example:
                 }
+            }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            button13.Visible = true;
+            ClearTextBoxes();
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            SqlParameter paramcompEn = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramcompEn.Value = txtcompnameEN.Text;
+            SqlParameter paramcompAR = new SqlParameter("@C2", SqlDbType.NVarChar);
+            paramcompAR.Value = txtcompnameAR.Text;
+            SqlParameter ParamCR = new SqlParameter("@C3", SqlDbType.NVarChar);
+            ParamCR.Value = txtCR.Text;
+            SqlParameter paramSponser = new SqlParameter("@C4", SqlDbType.NVarChar);
+            paramSponser.Value = txtSponser.Text;
+            SqlParameter paramVat = new SqlParameter("@C5", SqlDbType.NVarChar);
+            paramVat.Value = txtVat.Text;
+            //SqlParameter paramWorkLocation = new SqlParameter("@C6", SqlDbType.NVarChar);
+            //paramWorkLocation.Value = cmbworkfield.SelectedValue;
+            SqlParameter paramHD = new SqlParameter("@C7", SqlDbType.NVarChar);
+            paramHD.Value = txtHD.Text;
+            SqlParameter paramAD = new SqlParameter("@C8", SqlDbType.NVarChar);
+            paramAD.Value = txtAD.Text;
+            SqlParameter paramGeneralManager = new SqlParameter("@C9", SqlDbType.NVarChar);
+            paramGeneralManager.Value = cmbemployee2.SelectedValue;
+
+        
+            SqlParameter paramCompid = new SqlParameter("@id", SqlDbType.NVarChar);
+            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+            paramuser.Value = lblusername.Text;
+            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+            paramdatetimeLOG.Value = lbldatetime.Text;
+            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+            parampc.Value = lblPC.Text;
+
+            SQLCONN.OpenConection();
+            // Retrieve the last comp ID from the table
+            SqlDataReader dr = SQLCONN.DataReader("SELECT TOP 1 COMPID FROM Companies ORDER BY COMPID DESC");
+            if (dr.Read())
+            {
+                CompID = int.Parse(dr["COMPID"].ToString());
+                CompID = CompID + 1000;
+            }
+            paramCompid.Value = CompID;
+            dr.Dispose();
+            dr.Close();
+            SQLCONN.ExecuteQueries("insert into Companies (COMPID,COMPName_EN,COMPName_AR,CRNumber,ID_Number,VAT_NO,EstablishedHD,EstablishedAD,General_Manager)" +
+                " values (@id,@C1,@C2,@C3,@C4,@C5,@C7,@C8,@C9) ",paramCompid,paramcompEn,paramcompAR,ParamCR,paramSponser,paramVat,paramHD,paramAD,paramGeneralManager);
+
+
+            MessageBox.Show("Record saved Successfully");
+            dr.Dispose();
+            dr.Close();
+            SqlDataReader dr2 = SQLCONN.DataReader("Select max (COMPID) 'ID' from Companies ");
+            if (dr2.Read())
+            {
+                CompID = int.Parse(dr2["ID"].ToString());
+                paramCompid.Value = CompID;
+            }
+
+
+
+
+            else { paramCompid.Value = 0; }
+
+            dr2.Dispose();
+            dr2.Close();
+            dataGridView6.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" select  * from  [Companies] where  [COMPID] = @id  ", paramCompid);
+
+            SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Company Info',@id ,'#','#',@datetime,@pc,@user,'Insert')", paramCompid, paramdatetimeLOG, parampc, paramuser);
+
+
+            dr.Dispose();
+            dr.Close();
+            dr2.Dispose();
+            dr2.Close();
+            ClearTextBoxes();
+            BtnnewJob.Visible = true;
+
+
+            SQLCONN.CloseConnection();
+
+
+
+
+
+        }
+
+        private void txtCR_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // suppress the key press event
+                MessageBox.Show("Please enter numbers only.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void txtSponser_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // suppress the key press event
+                MessageBox.Show("Please enter numbers only.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void txtVat_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void txtVat_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // suppress the key press event
+                MessageBox.Show("Please enter numbers only.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void txtcompnameEN_TextChanged(object sender, EventArgs e)
+        {
+            string query = @"SELECT  Companies.COMPID
+      ,[CRNumber]
+      ,[ID_Number]
+      ,[COMPName_EN]
+      ,[COMPName_AR]
+      ,[VAT_NO]
+      ,[EstablishedHD]
+      ,[EstablishedAD]
+      ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'General_Manager'
+  FROM [DelmonGroupDB].[dbo].[Companies],Employees  where  Employees.COMPID=Companies.COMPID and (COMPName_EN like '%' + @C1 + '%')  OR (COMPName_AR LIKE '%' + @C1 + '%')";
+            SqlParameter paramCompSearch = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramCompSearch.Value = txtcompnameEN.Text;
+            SQLCONN.OpenConection();
+            dataGridView6.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramCompSearch);
+            SQLCONN.CloseConnection();
+
+        }
+
+        private void dataGridView6_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            button13.Visible = false;
+            button10.Visible = button12.Visible = button11.Visible = true;
+
+            if (e.RowIndex == -1) return;
+
+            if (e.RowIndex >= 0 && e.RowIndex < dataGridView6.Rows.Count && e.ColumnIndex >= 0 && e.ColumnIndex < dataGridView6.Columns.Count)
+            {
+                DataGridViewRow row = dataGridView6.Rows[e.RowIndex];
+
+                if (row.Cells[0].Value != null)
+                {
+                    CompID = Convert.ToInt32(row.Cells[0].Value.ToString());
+
+                    txtCR.Text = row.Cells[1].Value?.ToString();
+                    txtSponser.Text = row.Cells[2].Value?.ToString();
+                    txtcompnameEN.Text = row.Cells[3].Value?.ToString();
+                    txtcompnameAR.Text = row.Cells[4].Value?.ToString();
+                    txtVat.Text = row.Cells[5].Value?.ToString();
+                    txtHD.Text = row.Cells[6].Value?.ToString();
+                    txtAD.Text = row.Cells[7].Value?.ToString();
+                    cmbemployee2.Text = row.Cells[8].Value?.ToString();
+                }
+            }
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            SqlParameter paramcompEn = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramcompEn.Value = txtcompnameEN.Text;
+            SqlParameter paramcompAR = new SqlParameter("@C2", SqlDbType.NVarChar);
+            paramcompAR.Value = txtcompnameAR.Text;
+            SqlParameter ParamCR = new SqlParameter("@C3", SqlDbType.NVarChar);
+            ParamCR.Value = txtCR.Text;
+            SqlParameter paramSponser = new SqlParameter("@C4", SqlDbType.NVarChar);
+            paramSponser.Value = txtSponser.Text;
+            SqlParameter paramVat = new SqlParameter("@C5", SqlDbType.NVarChar);
+            paramVat.Value = txtVat.Text;
+            //SqlParameter paramWorkLocation = new SqlParameter("@C6", SqlDbType.NVarChar);
+            //paramWorkLocation.Value = cmbworkfield.SelectedValue;
+            SqlParameter paramHD = new SqlParameter("@C7", SqlDbType.NVarChar);
+            paramHD.Value = txtHD.Text;
+            SqlParameter paramAD = new SqlParameter("@C8", SqlDbType.NVarChar);
+            paramAD.Value = txtAD.Text;
+            SqlParameter paramGeneralManager = new SqlParameter("@C9", SqlDbType.NVarChar);
+            paramGeneralManager.Value = cmbemployee2.SelectedValue;
+
+
+            SqlParameter paramCompid = new SqlParameter("@id", SqlDbType.NVarChar);
+            paramCompid.Value = CompID;
+
+            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+            paramuser.Value = lblusername.Text;
+            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+            paramdatetimeLOG.Value = lbldatetime.Text;
+            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+            parampc.Value = lblPC.Text;
+
+            if (CompID != 0)
+            {
+
+
+                if (txtcompnameEN.Text != "" && txtcompnameAR.Text != "" && txtCR.Text != "" && txtVat.Text != "" && txtSponser.Text != "")
+                {
+                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+
+
+                        SQLCONN.OpenConection();
+
+                        // MessageBox.Show(EMPID.ToString());
+
+                        /**logtable */
+                        DataTable originalData = new DataTable();
+                        string connectionString = SQLCONN.ConnectionString;
+                        using (SqlConnection connection = new SqlConnection(connectionString))
+                        {
+                            connection.Open();
+                            string sql = "SELECT * FROM [Companies] WHERE [COMPID] = @id";
+                            SqlDataAdapter da = new SqlDataAdapter(sql, connection);
+                            da.SelectCommand.Parameters.AddWithValue("@id", CompID);
+                            originalData = new DataTable();
+                            da.Fill(originalData);
+                        }
+
+
+                        //   paramEmployeeID.Value = CurrentEmployeeIDtxt.Text;
+
+
+
+
+
+
+                        SQLCONN.ExecuteQueries("update Companies set [COMPName_EN] =@C1,[COMPName_AR]=@C2,[CRNumber]=@C3,[ID_Number]=@C4,[VAT_NO]=@C5,[EstablishedHD]=@C7,[EstablishedAD]=@C8, [General_Manager]=@C9 where  COMPID=@id  ", paramcompEn, paramcompAR, ParamCR, paramSponser, paramVat, paramHD, paramAD, paramGeneralManager, paramCompid);
+                        MessageBox.Show("Record updated Successfully");
+
+
+                        dataGridView6.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT * FROM [Companies] where  [COMPID] = @id  ", paramCompid);
+
+                        SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (logvalue,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Job Info',@id ,'#','#',@datetime,@pc,@user,'Insert')", paramCompid, paramdatetimeLOG, parampc, paramuser);
+
+
+
+                        ClearTextBoxes();
+
+                        using (SqlConnection connection = new SqlConnection(connectionString))
+                        {
+                            connection.Open();
+                            string sql = "SELECT * FROM [Companies] WHERE [COMPID] = @id";
+                            SqlDataAdapter da = new SqlDataAdapter(sql, connection);
+                            da.SelectCommand.Parameters.AddWithValue("@id", CompID);
+                            DataTable updatedData = new DataTable();
+                            da.Fill(updatedData);
+
+                            // Compare the two DataTables and find the changed columns
+                            List<string> changedColumns = new List<string>();
+                            foreach (DataColumn column in originalData.Columns)
+                            {
+                                object originalValue = originalData.Rows[0][column.ColumnName];
+                                object updatedValue = updatedData.Rows[0][column.ColumnName];
+                                if (!Equals(originalValue, updatedValue) && (originalValue != null || updatedData != null))
+                                {
+                                    changedColumns.Add(column.ColumnName);
+                                }
+                            }
+
+                            // Insert the changes into the log table
+                            if (changedColumns.Count > 0)
+                            {
+                                using (SqlCommand command = new SqlCommand("INSERT INTO EmployeeLog (Logvalueid, logvalue, OldValue, NewValue,logdatetime,PCNAME,UserId,type) VALUES (@EmployeeId, @ColumnName, @OldValue, @NewValue,@datetime,@pc,@user,@type)", connection))
+                                {
+                                    command.Parameters.AddWithValue("@EmployeeId", EmployeeID);
+                                    foreach (string columnName in changedColumns)
+                                    {
+                                        object originalValue = originalData.Rows[0][columnName];
+                                        object updatedValue = updatedData.Rows[0][columnName];
+                                        command.Parameters.Clear();
+                                        command.Parameters.AddWithValue("@EmployeeId", "For Company id : " + " " + CompID);
+                                        command.Parameters.AddWithValue("@ColumnName", columnName);
+                                        command.Parameters.AddWithValue("@OldValue", originalValue);
+                                        command.Parameters.AddWithValue("@NewValue", updatedValue);
+                                        command.Parameters.AddWithValue("@datetime", lbldatetime.Text);
+                                        command.Parameters.AddWithValue("@pc", lblPC.Text);
+                                        command.Parameters.AddWithValue("@user", lblusername.Text);
+                                        command.Parameters.AddWithValue("@type", "Update");
+                                        command.ExecuteNonQuery();
+                                    }
+                                }
+                            }
+                        }
+
+
+
+                        /**logtable*/
+
+
+                        dataGridView6.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT * FROM [Companies] WHERE [COMPID]  = @id", paramCompid);
+
+
+
+                       tabControl1.Enabled = true;
+                        SQLCONN.CloseConnection();
+                    }
+
+                }
+
+                else
+                {
+                    MessageBox.Show("Please Fill the missing fields", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
+            }
+
+
+            else
+            {
+
+                MessageBox.Show("Please select Job first ! " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+
+
+            }
+
+            SQLCONN.CloseConnection();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            SqlParameter paramCompid = new SqlParameter("@id", SqlDbType.NVarChar);
+            paramCompid.Value = CompID;
+            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+            paramuser.Value = lblusername.Text;
+            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+            paramdatetimeLOG.Value = lbldatetime.Text;
+            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+            parampc.Value = lblPC.Text;
+
+            if (CompID == 0)
+            {
+                MessageBox.Show("Please select Company first ! " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+            else
+            {
+                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    SQLCONN.OpenConection();
+                    SQLCONN.ExecuteQueries("Delete FROM [Companies] WHERE [COMPID] = @id", paramCompid);
+                 //   SQLCONN.ExecuteQueries(" declare @max int select @max = max([jobid]) from [JOBS] if @max IS NULL    SET @max = 0 DBCC CHECKIDENT('[JOBS]', RESEED, @max)");
+                    dataGridView6.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Companies ");
+                    MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Company Info',@id ,'#','#',@datetime,@pc,@user,'Delete')", paramCompid, paramdatetimeLOG, parampc, paramuser);
+                    SQLCONN.CloseConnection();
+                    ClearTextBoxes();
+                    txtcompnameEN.Text = txtcompnameAR.Text =  txtCR.Text = txtVat.Text = txtSponser.Text = txtAD.Text=txtHD.Text="";
+
+                    cmbemployee2.Text = "Select";
+
+
+
+
+
+                }
+
             }
         }
 
