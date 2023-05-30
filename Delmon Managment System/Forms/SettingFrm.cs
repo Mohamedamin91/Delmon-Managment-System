@@ -20,7 +20,7 @@ namespace Delmon_Managment_System.Forms
         int agaencyid;
         int jobid;
         int CompID;
-        int departmentid;
+        int DeptID;
         double num1, num2;
 
         static Regex validate_emailaddress = email_validation();
@@ -68,12 +68,12 @@ namespace Delmon_Managment_System.Forms
             cmbemployee.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbemployee.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-            cmbemployee1.ValueMember = "EmployeeID";
-            cmbemployee1.DisplayMember = "FullName";
-            cmbemployee1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT EmployeeID ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName' from Employees   order by EmployeeID ");
-            cmbemployee1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbemployee1.AutoCompleteSource = AutoCompleteSource.ListItems;
-            cmbemployee1.KeyDown += cmbemployee1_KeyDown;
+            //cmbemployee13633.ValueMember = "EmployeeID";
+            //cmbemployee13633.DisplayMember = "FullName";
+            //cmbemployee13633.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT EmployeeID ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName' from Employees   order by EmployeeID ");
+            //cmbemployee13633.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //cmbemployee13633.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //cmbemployee13633.KeyDown += cmbemployee1_KeyDown;
 
             cmbemployee2.ValueMember = "EmployeeID";
             cmbemployee2.DisplayMember = "FullName";
@@ -81,6 +81,17 @@ namespace Delmon_Managment_System.Forms
             cmbemployee2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbemployee2.AutoCompleteSource = AutoCompleteSource.ListItems;
             cmbemployee2.KeyDown += cmbemployee1_KeyDown;
+
+
+            cmbemployee1.ValueMember = "EmployeeID";
+            cmbemployee1.DisplayMember = "FullName";
+            cmbemployee1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT EmployeeID ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName' from Employees   order by EmployeeID ");
+            cmbemployee1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbemployee1.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbemployee1.KeyDown += cmbemployee1_KeyDown;
+
+
+
 
 
             cmbusertype.ValueMember = "UserTypeID";
@@ -91,7 +102,6 @@ namespace Delmon_Managment_System.Forms
 
 
 
-            //  dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Agencies  order by AgencID " );
 
             cmbcontact.ValueMember = "ContTypeID";
             cmbcontact.DisplayMember = "ContType";
@@ -134,11 +144,20 @@ namespace Delmon_Managment_System.Forms
             cmbCompany.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbCompany.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-            //cmbDepartment.ValueMember = "Dept_Type_ID";
-            //cmbDepartment.DisplayMember = "Dept_Type_Name";
-            //cmbDepartment.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Dept_Type_ID,Dept_Type_Name FROM [DeptTypes]");
-            //cmbDepartment.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //cmbDepartment.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //cmbDepartment654.ValueMember = "Dept_Type_ID";
+            //cmbDepartment654.DisplayMember = "Dept_Type_Name";
+            //cmbDepartment654.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Dept_Type_ID,Dept_Type_Name FROM [DeptTypes]");
+            //cmbDepartment654.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //cmbDepartment654.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            cmbDepartment.ValueMember = "Dept_Type_ID";
+            cmbDepartment.DisplayMember = "Dept_Type_Name";
+            cmbDepartment.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Dept_Type_ID,Dept_Type_Name FROM [DeptTypes]");
+            cmbDepartment.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbDepartment.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+
 
             //cmbHeadPostion.ValueMember = "[DEPTID]";
             //cmbHeadPostion.DisplayMember = "DeptHeadPosition";
@@ -1691,17 +1710,17 @@ namespace Delmon_Managment_System.Forms
         {
 
             SqlParameter paramDEPARTMENTNAME = new SqlParameter("@C1", SqlDbType.NVarChar);
-            paramDEPARTMENTNAME.Value = cmbDepartment.SelectedValue;
+            paramDEPARTMENTNAME.Value = cmbDepartment654.SelectedValue;
             SqlParameter paramHEADOFDEPARTMENT = new SqlParameter("@C3", SqlDbType.NVarChar);
-            paramHEADOFDEPARTMENT.Value = cmbemployee1.SelectedValue;
+            paramHEADOFDEPARTMENT.Value = cmbemployee13633.SelectedValue;
             //SqlParameter paramHEADPOSTION = new SqlParameter("@C4", SqlDbType.NVarChar);
             //paramHEADPOSTION.Value = cmbHeadPostion.SelectedValue;
             SqlParameter PARAMCOMPANY = new SqlParameter("@C5", SqlDbType.NVarChar);
             PARAMCOMPANY.Value = cmbCompany.SelectedValue;
 
 
-            SqlParameter Paramdepartmentid = new SqlParameter("@id", SqlDbType.NVarChar);
-            Paramdepartmentid.Value = departmentid;
+            //SqlParameter Paramdepartmentid = new SqlParameter("@id", SqlDbType.NVarChar);
+            //Paramdepartmentid.Value = departmentid;
 
             SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
             paramuser.Value = lblusername.Text;
@@ -1710,7 +1729,7 @@ namespace Delmon_Managment_System.Forms
             SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
             parampc.Value = lblPC.Text;
 
-            if (cmbDepartment.Text != "Select" && cmbemployee1.Text != "Select" && cmbCompany.Text != "Select")
+            if (cmbDepartment654.Text != "Select" && cmbemployee13633.Text != "Select" && cmbCompany.Text != "Select")
             { }
             else
             {
@@ -1833,13 +1852,13 @@ namespace Delmon_Managment_System.Forms
         private void button8_Click(object sender, EventArgs e)
         {
             SqlParameter paramHeadepartment = new SqlParameter("@C0", SqlDbType.NVarChar);
-            paramHeadepartment.Value = cmbemployee1.SelectedValue;
+            paramHeadepartment.Value = cmbemployee13633.SelectedValue;
             SqlParameter paramDepartment = new SqlParameter("@C1", SqlDbType.NVarChar);
-            paramDepartment.Value = cmbDepartment.SelectedValue;
+            paramDepartment.Value = cmbDepartment654.SelectedValue;
            
             SQLCONN.OpenConection();
 
-            if ((int)cmbemployee1.SelectedValue != 0)
+            if ((int)cmbemployee13633.SelectedValue != 0)
             {
                 if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
@@ -1851,7 +1870,7 @@ namespace Delmon_Managment_System.Forms
                                                   paramHeadepartment, paramDepartment );
                     MessageBox.Show("Record Updated Successfully");
 
-                    dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  * FROM [DelmonGroupDB].[dbo].[DEPARTMENTS] where DEPTID =  " + cmbDepartment.SelectedValue + " ");
+                    dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  * FROM [DelmonGroupDB].[dbo].[DEPARTMENTS] where DEPTID =  " + cmbDepartment654.SelectedValue + " ");
 
                 }
                 else
@@ -1897,11 +1916,11 @@ namespace Delmon_Managment_System.Forms
             if (dt != null && dt.Rows.Count >= 0)
             {
 
-                cmbDepartment.ValueMember = "DEPTID";
-                cmbDepartment.DisplayMember = "Dept_Type_Name";
-                cmbDepartment.DataSource = dt;
-                cmbDepartment.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                cmbDepartment.AutoCompleteSource = AutoCompleteSource.ListItems;
+                cmbDepartment654.ValueMember = "DEPTID";
+                cmbDepartment654.DisplayMember = "Dept_Type_Name";
+                cmbDepartment654.DataSource = dt;
+                cmbDepartment654.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cmbDepartment654.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
 
@@ -1921,7 +1940,7 @@ namespace Delmon_Managment_System.Forms
             if (e.KeyCode == Keys.Enter)
             {
                 // Handle the Enter key press
-                var selectedItem = cmbemployee1.SelectedItem as DataRowView;
+                var selectedItem = cmbemployee13633.SelectedItem as DataRowView;
 
                 if (selectedItem != null)
                 {
@@ -1972,9 +1991,7 @@ namespace Delmon_Managment_System.Forms
             paramSponser.Value = txtSponser.Text;
             SqlParameter paramVat = new SqlParameter("@C5", SqlDbType.NVarChar);
             paramVat.Value = txtVat.Text;
-            //SqlParameter paramWorkLocation = new SqlParameter("@C6", SqlDbType.NVarChar);
-            //paramWorkLocation.Value = cmbworkfield.SelectedValue;
-            SqlParameter paramHD = new SqlParameter("@C7", SqlDbType.NVarChar);
+              SqlParameter paramHD = new SqlParameter("@C7", SqlDbType.NVarChar);
             paramHD.Value = txtHD.Text;
             SqlParameter paramAD = new SqlParameter("@C8", SqlDbType.NVarChar);
             paramAD.Value = txtAD.Text;
@@ -2032,7 +2049,7 @@ namespace Delmon_Managment_System.Forms
             dr2.Dispose();
             dr2.Close();
             ClearTextBoxes();
-            BtnnewJob.Visible = true;
+            button10.Visible = true;
 
 
             SQLCONN.CloseConnection();
@@ -2077,21 +2094,31 @@ namespace Delmon_Managment_System.Forms
 
         private void txtcompnameEN_TextChanged(object sender, EventArgs e)
         {
-            string query = @"SELECT  Companies.COMPID
-      ,[CRNumber]
-      ,[ID_Number]
-      ,[COMPName_EN]
-      ,[COMPName_AR]
-      ,[VAT_NO]
-      ,[EstablishedHD]
-      ,[EstablishedAD]
-      ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'General_Manager'
-  FROM [DelmonGroupDB].[dbo].[Companies],Employees  where  Employees.COMPID=Companies.COMPID and (COMPName_EN like '%' + @C1 + '%')  OR (COMPName_AR LIKE '%' + @C1 + '%')";
+            string query = @"
+    SELECT TOP 1 Companies.COMPID
+        ,[CRNumber]
+        ,[ID_Number]
+        ,[COMPName_EN]
+        ,[COMPName_AR]
+        ,[VAT_NO]
+        ,[EstablishedHD]
+        ,[EstablishedAD]
+        ,CONCAT(FirstName, ' ', SecondName, ' ', ThirdName, ' ', LastName) AS 'General_Manager'
+    FROM [DelmonGroupDB].[dbo].[Companies]
+    JOIN Employees ON Employees.COMPID = Companies.COMPID
+    WHERE (COMPName_EN LIKE '%' + @C1 + '%')
+        OR (COMPName_AR LIKE '%' + @C1 + '%')
+";
+
             SqlParameter paramCompSearch = new SqlParameter("@C1", SqlDbType.NVarChar);
             paramCompSearch.Value = txtcompnameEN.Text;
+
             SQLCONN.OpenConection();
             dataGridView6.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramCompSearch);
             SQLCONN.CloseConnection();
+
+
+
 
         }
 
@@ -2118,8 +2145,13 @@ namespace Delmon_Managment_System.Forms
                     txtHD.Text = row.Cells[6].Value?.ToString();
                     txtAD.Text = row.Cells[7].Value?.ToString();
                     cmbemployee2.Text = row.Cells[8].Value?.ToString();
+                    dataGridView7.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select  * from  [DEPARTMENTS] where CompID=" + CompID + " ");
+
                 }
+
             }
+
+
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -2195,7 +2227,7 @@ namespace Delmon_Managment_System.Forms
 
                         dataGridView6.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT * FROM [Companies] where  [COMPID] = @id  ", paramCompid);
 
-                        SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (logvalue,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Job Info',@id ,'#','#',@datetime,@pc,@user,'Insert')", paramCompid, paramdatetimeLOG, parampc, paramuser);
+                        SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (logvalue,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Company Info',@id ,'#','#',@datetime,@pc,@user,'Insert')", paramCompid, paramdatetimeLOG, parampc, paramuser);
 
 
 
@@ -2273,7 +2305,7 @@ namespace Delmon_Managment_System.Forms
             else
             {
 
-                MessageBox.Show("Please select Job first ! " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select Company first ! " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
 
 
@@ -2322,6 +2354,299 @@ namespace Delmon_Managment_System.Forms
                 }
 
             }
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            button17.Visible = true;
+            ClearTextBoxes();
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            if (CompID ==0 )
+            {
+                MessageBox.Show("Please Select Company First.", "Invalid Operation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+            else 
+            {
+                SqlParameter paramDeptName = new SqlParameter("@C1", SqlDbType.NVarChar);
+                paramDeptName.Value = cmbDepartment.SelectedValue;
+                SqlParameter paramWorkLocation = new SqlParameter("@C2", SqlDbType.NVarChar);
+                paramWorkLocation.Value = cmbworkfield.SelectedValue;
+                SqlParameter paramDeptHead = new SqlParameter("@C3", SqlDbType.NVarChar);
+                paramDeptHead.Value = cmbemployee1.SelectedValue;   
+
+                SqlParameter paramCompid = new SqlParameter("@id", SqlDbType.NVarChar);
+                paramCompid.Value = CompID;
+                SqlParameter paramDeptID = new SqlParameter("@DeptID", SqlDbType.NVarChar);
+
+                SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+                paramuser.Value = lblusername.Text;
+                SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+                paramdatetimeLOG.Value = lbldatetime.Text;
+                SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+                parampc.Value = lblPC.Text;
+                
+
+                SQLCONN.OpenConection();
+                // Retrieve the last comp ID from the table
+                SqlDataReader dr = SQLCONN.DataReader("SELECT TOP 1 DEPTID FROM DEPARTMENTS where COMPID=@id ORDER BY DEPTID DESC",paramCompid);
+                if (dr.Read())
+                {
+                    DeptID = int.Parse(dr["DEPTID"].ToString());
+                    DeptID = DeptID + 1;
+                }
+                else
+                {
+                    DeptID = CompID + 101;
+                }
+                paramDeptID.Value = DeptID;
+                dr.Dispose();
+                dr.Close();
+                SQLCONN.ExecuteQueries("insert into DEPARTMENTS (DEPTID,DeptName,WorkLoctionID,DeptHeadID,COMPID)" +
+              " values (@DeptID,@C1,@C2,@C3,@id) ", paramDeptID,paramDeptName,paramWorkLocation,paramDeptHead, paramCompid);
+
+                MessageBox.Show("Record saved Successfully");
+                dr.Dispose();
+                dr.Close();
+               
+
+
+               
+                dataGridView7.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" select  * from  [DEPARTMENTS] where  [DEPTID] = "+DeptID+"  ");
+
+                SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (logvalue,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Department Info',@DeptID ,'#','#',@datetime,@pc,@user,'Insert')", paramDeptID, paramdatetimeLOG, parampc, paramuser);
+
+
+                dr.Dispose();
+                dr.Close();
+               
+                ClearTextBoxes();
+                button14.Visible = true;
+
+                SQLCONN.CloseConnection();
+
+
+
+
+            }
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            SqlParameter paramDeptID = new SqlParameter("@id", SqlDbType.NVarChar);
+            paramDeptID.Value = DeptID;
+            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+            paramuser.Value = lblusername.Text;
+            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+            paramdatetimeLOG.Value = lbldatetime.Text;
+            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+            parampc.Value = lblPC.Text;
+
+            if (DeptID == 0)
+            {
+                MessageBox.Show("Please select Company first ! " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+            else
+            {
+                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    SQLCONN.OpenConection();
+                    SQLCONN.ExecuteQueries("Delete FROM [DEPARTMENTS] WHERE [DEPTID] = @id", paramDeptID);
+                    //   SQLCONN.ExecuteQueries(" declare @max int select @max = max([jobid]) from [JOBS] if @max IS NULL    SET @max = 0 DBCC CHECKIDENT('[JOBS]', RESEED, @max)");
+                    dataGridView7.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT * FROM [DEPARTMENTS] WHERE [DEPTID]  = @id", paramDeptID);
+                    MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Department Info',@id ,'#','#',@datetime,@pc,@user,'Delete')", paramDeptID, paramdatetimeLOG, parampc, paramuser);
+                    SQLCONN.CloseConnection();
+                    ClearTextBoxes();
+                    txtcompnameEN.Text = txtcompnameAR.Text = txtCR.Text = txtVat.Text = txtSponser.Text = txtAD.Text = txtHD.Text = "";
+
+                    cmbemployee2.Text = "Select";
+
+
+
+
+
+                }
+
+            }
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+
+            SqlParameter paramDeptName = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramDeptName.Value = cmbDepartment.SelectedValue;
+            SqlParameter paramWorkLocation = new SqlParameter("@C2", SqlDbType.NVarChar);
+            paramWorkLocation.Value = cmbworkfield.SelectedValue;
+            SqlParameter paramDeptHead = new SqlParameter("@C3", SqlDbType.NVarChar);
+            paramDeptHead.Value = cmbemployee1.SelectedValue;
+
+            SqlParameter paramCompid = new SqlParameter("@id2", SqlDbType.NVarChar);
+            paramCompid.Value = CompID;
+            SqlParameter paramDeptID = new SqlParameter("@id", SqlDbType.NVarChar);
+            paramDeptID.Value = DeptID;
+            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+            paramuser.Value = lblusername.Text;
+            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+            paramdatetimeLOG.Value = lbldatetime.Text;
+            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+            parampc.Value = lblPC.Text;
+
+
+
+            if (DeptID != 0 && CompID!=0)
+            {
+
+
+                
+                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+
+
+                        SQLCONN.OpenConection();
+
+                        // MessageBox.Show(EMPID.ToString());
+
+                        /**logtable */
+                        DataTable originalData = new DataTable();
+                        string connectionString = SQLCONN.ConnectionString;
+                        using (SqlConnection connection = new SqlConnection(connectionString))
+                        {
+                            connection.Open();
+                            string sql = "SELECT * FROM [DEPARTMENTS] WHERE [DEPTID] = @id";
+                            SqlDataAdapter da = new SqlDataAdapter(sql, connection);
+                            da.SelectCommand.Parameters.AddWithValue("@id", DeptID);
+                            originalData = new DataTable();
+                            da.Fill(originalData);
+                        }
+
+
+                        //   paramEmployeeID.Value = CurrentEmployeeIDtxt.Text;
+
+
+
+
+
+
+                        SQLCONN.ExecuteQueries("update DEPARTMENTS set [DeptName] =@C1,[WorkLoctionID]=@C2,[DeptHeadID]=@C3,[COMPID]=@id2 where  DEPTID=@id  ", paramDeptName, paramWorkLocation, paramDeptHead, paramCompid, paramDeptID);
+                        MessageBox.Show("Record updated Successfully");
+
+
+                        dataGridView7.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT * FROM [DEPARTMENTS] where  [DEPTID] = @id  ", paramDeptID);
+
+                        SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (logvalue,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Department Info',@id ,'#','#',@datetime,@pc,@user,'Insert')", paramDeptID, paramdatetimeLOG, parampc, paramuser);
+
+
+
+                        ClearTextBoxes();
+
+                        using (SqlConnection connection = new SqlConnection(connectionString))
+                        {
+                            connection.Open();
+                            string sql = "SELECT * FROM [DEPARTMENTS] WHERE [DEPTID] = @id";
+                            SqlDataAdapter da = new SqlDataAdapter(sql, connection);
+                            da.SelectCommand.Parameters.AddWithValue("@id", DeptID);
+                            DataTable updatedData = new DataTable();
+                            da.Fill(updatedData);
+
+                            // Compare the two DataTables and find the changed columns
+                            List<string> changedColumns = new List<string>();
+                            foreach (DataColumn column in originalData.Columns)
+                            {
+                                object originalValue = originalData.Rows[0][column.ColumnName];
+                                object updatedValue = updatedData.Rows[0][column.ColumnName];
+                                if (!Equals(originalValue, updatedValue) && (originalValue != null || updatedData != null))
+                                {
+                                    changedColumns.Add(column.ColumnName);
+                                }
+                            }
+
+                            // Insert the changes into the log table
+                            if (changedColumns.Count > 0)
+                            {
+                                using (SqlCommand command = new SqlCommand("INSERT INTO EmployeeLog (Logvalueid, logvalue, OldValue, NewValue,logdatetime,PCNAME,UserId,type) VALUES (@EmployeeId, @ColumnName, @OldValue, @NewValue,@datetime,@pc,@user,@type)", connection))
+                                {
+                                    command.Parameters.AddWithValue("@EmployeeId", EmployeeID);
+                                    foreach (string columnName in changedColumns)
+                                    {
+                                        object originalValue = originalData.Rows[0][columnName];
+                                        object updatedValue = updatedData.Rows[0][columnName];
+                                        command.Parameters.Clear();
+                                        command.Parameters.AddWithValue("@EmployeeId", "For Department id : " + " " + DeptID);
+                                        command.Parameters.AddWithValue("@ColumnName", columnName);
+                                        command.Parameters.AddWithValue("@OldValue", originalValue);
+                                        command.Parameters.AddWithValue("@NewValue", updatedValue);
+                                        command.Parameters.AddWithValue("@datetime", lbldatetime.Text);
+                                        command.Parameters.AddWithValue("@pc", lblPC.Text);
+                                        command.Parameters.AddWithValue("@user", lblusername.Text);
+                                        command.Parameters.AddWithValue("@type", "Update");
+                                        command.ExecuteNonQuery();
+                                    }
+                                }
+                            }
+                        }
+
+
+
+                    /**logtable*/
+
+
+                      dataGridView7.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT * FROM [DEPARTMENTS] WHERE [DEPTID]  = @id", paramDeptID);
+
+
+
+                    tabControl1.Enabled = true;
+                        SQLCONN.CloseConnection();
+                    }
+
+                
+
+                
+            }
+
+
+            else
+            {
+
+                MessageBox.Show("Please select Department first ! " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+
+
+            }
+
+            SQLCONN.CloseConnection();
+        }
+
+        private void dataGridView7_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            button17.Visible = false;
+            button14.Visible = button15.Visible = button16.Visible = true;
+
+            if (e.RowIndex == -1) return;
+
+            if (e.RowIndex >= 0 && e.RowIndex < dataGridView7.Rows.Count && e.ColumnIndex >= 0 && e.ColumnIndex < dataGridView7.Columns.Count)
+            {
+                DataGridViewRow row = dataGridView7.Rows[e.RowIndex];
+
+                if (row.Cells[0].Value != null)
+                {
+                    DeptID = Convert.ToInt32(row.Cells[0].Value.ToString());
+                    cmbDepartment.SelectedValue = row.Cells[1].Value?.ToString();
+                    cmbworkfield.SelectedValue = row.Cells[2].Value?.ToString();
+                    cmbemployee1.SelectedValue = row.Cells[3].Value?.ToString();
+                    
+
+                }
+
+            }
+
         }
 
         private void maxtxt_KeyPress(object sender, KeyPressEventArgs e)

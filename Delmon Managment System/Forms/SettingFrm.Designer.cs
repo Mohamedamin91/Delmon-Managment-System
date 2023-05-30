@@ -87,14 +87,49 @@ namespace Delmon_Managment_System.Forms
             this.DepartmentTap = new System.Windows.Forms.TabPage();
             this.cmbCompany = new System.Windows.Forms.ComboBox();
             this.label25 = new System.Windows.Forms.Label();
-            this.cmbemployee1 = new System.Windows.Forms.ComboBox();
+            this.cmbemployee13633 = new System.Windows.Forms.ComboBox();
             this.label24 = new System.Windows.Forms.Label();
             this.dataGridView5 = new System.Windows.Forms.DataGridView();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
-            this.cmbDepartment = new System.Windows.Forms.ComboBox();
+            this.cmbDepartment654 = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
             this.button9 = new System.Windows.Forms.Button();
+            this.Companiestap = new System.Windows.Forms.TabPage();
+            this.dataGridView7 = new System.Windows.Forms.DataGridView();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.button14 = new System.Windows.Forms.Button();
+            this.button15 = new System.Windows.Forms.Button();
+            this.button16 = new System.Windows.Forms.Button();
+            this.button17 = new System.Windows.Forms.Button();
+            this.cmbemployee1 = new System.Windows.Forms.ComboBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.cmbworkfield = new System.Windows.Forms.ComboBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.cmbDepartment = new System.Windows.Forms.ComboBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cmbemployee2 = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtcompnameEN = new System.Windows.Forms.TextBox();
+            this.txtVat = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.button12 = new System.Windows.Forms.Button();
+            this.txtcompnameAR = new System.Windows.Forms.TextBox();
+            this.button13 = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
+            this.txtCR = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txtSponser = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.txtHD = new System.Windows.Forms.TextBox();
+            this.txtAD = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.dataGridView6 = new System.Windows.Forms.DataGridView();
             this.notificationsTap = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblFullname = new System.Windows.Forms.Label();
@@ -104,40 +139,6 @@ namespace Delmon_Managment_System.Forms
             this.lblusername = new System.Windows.Forms.Label();
             this.lblusertype = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.Companiestap = new System.Windows.Forms.TabPage();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txtcompnameEN = new System.Windows.Forms.TextBox();
-            this.txtcompnameAR = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.txtCR = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.txtSponser = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.txtVat = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.txtAD = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.txtHD = new System.Windows.Forms.TextBox();
-            this.label23 = new System.Windows.Forms.Label();
-            this.cmbemployee2 = new System.Windows.Forms.ComboBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
-            this.dataGridView6 = new System.Windows.Forms.DataGridView();
-            this.cmbworkfield = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label27 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label28 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
-            this.button16 = new System.Windows.Forms.Button();
-            this.button17 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.userTap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -149,11 +150,12 @@ namespace Delmon_Managment_System.Forms
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.DepartmentTap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.Companiestap.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).BeginInit();
-            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).BeginInit();
             this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -194,7 +196,7 @@ namespace Delmon_Managment_System.Forms
             this.userTap.Location = new System.Drawing.Point(4, 26);
             this.userTap.Name = "userTap";
             this.userTap.Padding = new System.Windows.Forms.Padding(3);
-            this.userTap.Size = new System.Drawing.Size(1274, 604);
+            this.userTap.Size = new System.Drawing.Size(1274, 597);
             this.userTap.TabIndex = 0;
             this.userTap.Text = "Users";
             this.userTap.UseVisualStyleBackColor = true;
@@ -847,18 +849,18 @@ namespace Delmon_Managment_System.Forms
             // 
             this.DepartmentTap.Controls.Add(this.cmbCompany);
             this.DepartmentTap.Controls.Add(this.label25);
-            this.DepartmentTap.Controls.Add(this.cmbemployee1);
+            this.DepartmentTap.Controls.Add(this.cmbemployee13633);
             this.DepartmentTap.Controls.Add(this.label24);
             this.DepartmentTap.Controls.Add(this.dataGridView5);
             this.DepartmentTap.Controls.Add(this.button7);
             this.DepartmentTap.Controls.Add(this.button8);
-            this.DepartmentTap.Controls.Add(this.cmbDepartment);
+            this.DepartmentTap.Controls.Add(this.cmbDepartment654);
             this.DepartmentTap.Controls.Add(this.label19);
             this.DepartmentTap.Controls.Add(this.button9);
             this.DepartmentTap.Location = new System.Drawing.Point(4, 26);
             this.DepartmentTap.Name = "DepartmentTap";
             this.DepartmentTap.Padding = new System.Windows.Forms.Padding(3);
-            this.DepartmentTap.Size = new System.Drawing.Size(1274, 604);
+            this.DepartmentTap.Size = new System.Drawing.Size(1274, 597);
             this.DepartmentTap.TabIndex = 4;
             this.DepartmentTap.Text = "Department";
             this.DepartmentTap.UseVisualStyleBackColor = true;
@@ -886,17 +888,17 @@ namespace Delmon_Managment_System.Forms
             this.label25.TabIndex = 139;
             this.label25.Text = "Company";
             // 
-            // cmbemployee1
+            // cmbemployee13633
             // 
-            this.cmbemployee1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbemployee1.FormattingEnabled = true;
-            this.cmbemployee1.Location = new System.Drawing.Point(22, 173);
-            this.cmbemployee1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.cmbemployee1.Name = "cmbemployee1";
-            this.cmbemployee1.Size = new System.Drawing.Size(276, 25);
-            this.cmbemployee1.TabIndex = 137;
-            this.cmbemployee1.SelectedIndexChanged += new System.EventHandler(this.cmbemployee1_SelectedIndexChanged);
-            this.cmbemployee1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbemployee1_KeyDown);
+            this.cmbemployee13633.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbemployee13633.FormattingEnabled = true;
+            this.cmbemployee13633.Location = new System.Drawing.Point(22, 173);
+            this.cmbemployee13633.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cmbemployee13633.Name = "cmbemployee13633";
+            this.cmbemployee13633.Size = new System.Drawing.Size(276, 25);
+            this.cmbemployee13633.TabIndex = 137;
+            this.cmbemployee13633.SelectedIndexChanged += new System.EventHandler(this.cmbemployee1_SelectedIndexChanged);
+            this.cmbemployee13633.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbemployee1_KeyDown);
             // 
             // label24
             // 
@@ -950,14 +952,14 @@ namespace Delmon_Managment_System.Forms
             this.button8.UseVisualStyleBackColor = false;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
-            // cmbDepartment
+            // cmbDepartment654
             // 
-            this.cmbDepartment.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbDepartment.FormattingEnabled = true;
-            this.cmbDepartment.Location = new System.Drawing.Point(22, 109);
-            this.cmbDepartment.Name = "cmbDepartment";
-            this.cmbDepartment.Size = new System.Drawing.Size(276, 25);
-            this.cmbDepartment.TabIndex = 100;
+            this.cmbDepartment654.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbDepartment654.FormattingEnabled = true;
+            this.cmbDepartment654.Location = new System.Drawing.Point(22, 109);
+            this.cmbDepartment654.Name = "cmbDepartment654";
+            this.cmbDepartment654.Size = new System.Drawing.Size(276, 25);
+            this.cmbDepartment654.TabIndex = 100;
             // 
             // label19
             // 
@@ -986,11 +988,442 @@ namespace Delmon_Managment_System.Forms
             this.button9.Visible = false;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
+            // Companiestap
+            // 
+            this.Companiestap.Controls.Add(this.dataGridView7);
+            this.Companiestap.Controls.Add(this.groupBox4);
+            this.Companiestap.Controls.Add(this.groupBox3);
+            this.Companiestap.Controls.Add(this.dataGridView6);
+            this.Companiestap.Location = new System.Drawing.Point(4, 26);
+            this.Companiestap.Name = "Companiestap";
+            this.Companiestap.Padding = new System.Windows.Forms.Padding(3);
+            this.Companiestap.Size = new System.Drawing.Size(1274, 597);
+            this.Companiestap.TabIndex = 5;
+            this.Companiestap.Text = "Companies";
+            this.Companiestap.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView7
+            // 
+            this.dataGridView7.AllowUserToAddRows = false;
+            this.dataGridView7.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView7.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView7.Location = new System.Drawing.Point(440, 395);
+            this.dataGridView7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dataGridView7.Name = "dataGridView7";
+            this.dataGridView7.Size = new System.Drawing.Size(614, 193);
+            this.dataGridView7.TabIndex = 171;
+            this.dataGridView7.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView7_CellClick);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.button14);
+            this.groupBox4.Controls.Add(this.button15);
+            this.groupBox4.Controls.Add(this.button16);
+            this.groupBox4.Controls.Add(this.button17);
+            this.groupBox4.Controls.Add(this.cmbemployee1);
+            this.groupBox4.Controls.Add(this.label21);
+            this.groupBox4.Controls.Add(this.cmbworkfield);
+            this.groupBox4.Controls.Add(this.label27);
+            this.groupBox4.Controls.Add(this.label28);
+            this.groupBox4.Controls.Add(this.cmbDepartment);
+            this.groupBox4.Location = new System.Drawing.Point(6, 386);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(410, 212);
+            this.groupBox4.TabIndex = 170;
+            this.groupBox4.TabStop = false;
+            // 
+            // button14
+            // 
+            this.button14.BackColor = System.Drawing.Color.White;
+            this.button14.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button14.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button14.ForeColor = System.Drawing.Color.Firebrick;
+            this.button14.Location = new System.Drawing.Point(16, 175);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(70, 31);
+            this.button14.TabIndex = 172;
+            this.button14.Text = "New";
+            this.button14.UseVisualStyleBackColor = false;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
+            // 
+            // button15
+            // 
+            this.button15.BackColor = System.Drawing.Color.White;
+            this.button15.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button15.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button15.ForeColor = System.Drawing.Color.Firebrick;
+            this.button15.Location = new System.Drawing.Point(258, 175);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(70, 31);
+            this.button15.TabIndex = 171;
+            this.button15.Text = "Delete";
+            this.button15.UseVisualStyleBackColor = false;
+            this.button15.Visible = false;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
+            // button16
+            // 
+            this.button16.BackColor = System.Drawing.Color.White;
+            this.button16.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button16.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button16.ForeColor = System.Drawing.Color.Firebrick;
+            this.button16.Location = new System.Drawing.Point(176, 175);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(73, 31);
+            this.button16.TabIndex = 170;
+            this.button16.Text = "Update";
+            this.button16.UseVisualStyleBackColor = false;
+            this.button16.Visible = false;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
+            // 
+            // button17
+            // 
+            this.button17.BackColor = System.Drawing.Color.White;
+            this.button17.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button17.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button17.ForeColor = System.Drawing.Color.Firebrick;
+            this.button17.Location = new System.Drawing.Point(92, 175);
+            this.button17.Name = "button17";
+            this.button17.Size = new System.Drawing.Size(78, 31);
+            this.button17.TabIndex = 169;
+            this.button17.Text = "Add";
+            this.button17.UseVisualStyleBackColor = false;
+            this.button17.Visible = false;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
+            // 
+            // cmbemployee1
+            // 
+            this.cmbemployee1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbemployee1.FormattingEnabled = true;
+            this.cmbemployee1.Location = new System.Drawing.Point(21, 140);
+            this.cmbemployee1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cmbemployee1.Name = "cmbemployee1";
+            this.cmbemployee1.Size = new System.Drawing.Size(276, 25);
+            this.cmbemployee1.TabIndex = 168;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ForeColor = System.Drawing.Color.Black;
+            this.label21.Location = new System.Drawing.Point(18, 71);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(86, 15);
+            this.label21.TabIndex = 150;
+            this.label21.Text = "Work Location";
+            // 
+            // cmbworkfield
+            // 
+            this.cmbworkfield.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbworkfield.FormattingEnabled = true;
+            this.cmbworkfield.Location = new System.Drawing.Point(21, 90);
+            this.cmbworkfield.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cmbworkfield.Name = "cmbworkfield";
+            this.cmbworkfield.Size = new System.Drawing.Size(276, 25);
+            this.cmbworkfield.TabIndex = 164;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.ForeColor = System.Drawing.Color.Black;
+            this.label27.Location = new System.Drawing.Point(18, 119);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(134, 17);
+            this.label27.TabIndex = 167;
+            this.label27.Text = "Head Of Department";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.ForeColor = System.Drawing.Color.Black;
+            this.label28.Location = new System.Drawing.Point(18, 19);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(85, 17);
+            this.label28.TabIndex = 165;
+            this.label28.Text = "Depart name";
+            // 
+            // cmbDepartment
+            // 
+            this.cmbDepartment.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbDepartment.FormattingEnabled = true;
+            this.cmbDepartment.Location = new System.Drawing.Point(21, 38);
+            this.cmbDepartment.Name = "cmbDepartment";
+            this.cmbDepartment.Size = new System.Drawing.Size(276, 25);
+            this.cmbDepartment.TabIndex = 166;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.cmbemployee2);
+            this.groupBox3.Controls.Add(this.label11);
+            this.groupBox3.Controls.Add(this.txtcompnameEN);
+            this.groupBox3.Controls.Add(this.txtVat);
+            this.groupBox3.Controls.Add(this.label20);
+            this.groupBox3.Controls.Add(this.button11);
+            this.groupBox3.Controls.Add(this.button10);
+            this.groupBox3.Controls.Add(this.label12);
+            this.groupBox3.Controls.Add(this.button12);
+            this.groupBox3.Controls.Add(this.txtcompnameAR);
+            this.groupBox3.Controls.Add(this.button13);
+            this.groupBox3.Controls.Add(this.label17);
+            this.groupBox3.Controls.Add(this.txtCR);
+            this.groupBox3.Controls.Add(this.label18);
+            this.groupBox3.Controls.Add(this.txtSponser);
+            this.groupBox3.Controls.Add(this.label23);
+            this.groupBox3.Controls.Add(this.label26);
+            this.groupBox3.Controls.Add(this.txtHD);
+            this.groupBox3.Controls.Add(this.txtAD);
+            this.groupBox3.Controls.Add(this.label22);
+            this.groupBox3.Location = new System.Drawing.Point(7, 7);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(409, 373);
+            this.groupBox3.TabIndex = 169;
+            this.groupBox3.TabStop = false;
+            // 
+            // cmbemployee2
+            // 
+            this.cmbemployee2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbemployee2.FormattingEnabled = true;
+            this.cmbemployee2.Location = new System.Drawing.Point(19, 296);
+            this.cmbemployee2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cmbemployee2.Name = "cmbemployee2";
+            this.cmbemployee2.Size = new System.Drawing.Size(262, 25);
+            this.cmbemployee2.TabIndex = 157;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(17, 21);
+            this.label11.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(137, 17);
+            this.label11.TabIndex = 140;
+            this.label11.Text = "Company Name - EN";
+            // 
+            // txtcompnameEN
+            // 
+            this.txtcompnameEN.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtcompnameEN.Location = new System.Drawing.Point(22, 41);
+            this.txtcompnameEN.Name = "txtcompnameEN";
+            this.txtcompnameEN.Size = new System.Drawing.Size(259, 22);
+            this.txtcompnameEN.TabIndex = 141;
+            this.txtcompnameEN.TextChanged += new System.EventHandler(this.txtcompnameEN_TextChanged);
+            // 
+            // txtVat
+            // 
+            this.txtVat.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtVat.Location = new System.Drawing.Point(22, 198);
+            this.txtVat.Name = "txtVat";
+            this.txtVat.Size = new System.Drawing.Size(259, 22);
+            this.txtVat.TabIndex = 149;
+            this.txtVat.TextChanged += new System.EventHandler(this.txtVat_TextChanged);
+            this.txtVat.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtVat_KeyPress);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(22, 178);
+            this.label20.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(55, 17);
+            this.label20.TabIndex = 148;
+            this.label20.Text = "Vat-NO";
+            // 
+            // button11
+            // 
+            this.button11.BackColor = System.Drawing.Color.White;
+            this.button11.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button11.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button11.ForeColor = System.Drawing.Color.Firebrick;
+            this.button11.Location = new System.Drawing.Point(257, 328);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(58, 31);
+            this.button11.TabIndex = 160;
+            this.button11.Text = "Delete";
+            this.button11.UseVisualStyleBackColor = false;
+            this.button11.Visible = false;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // button10
+            // 
+            this.button10.BackColor = System.Drawing.Color.White;
+            this.button10.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button10.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button10.ForeColor = System.Drawing.Color.Firebrick;
+            this.button10.Location = new System.Drawing.Point(15, 328);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(58, 31);
+            this.button10.TabIndex = 161;
+            this.button10.Text = "New";
+            this.button10.UseVisualStyleBackColor = false;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(17, 75);
+            this.label12.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(137, 17);
+            this.label12.TabIndex = 142;
+            this.label12.Text = "Company Name - AR";
+            // 
+            // button12
+            // 
+            this.button12.BackColor = System.Drawing.Color.White;
+            this.button12.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button12.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button12.ForeColor = System.Drawing.Color.Firebrick;
+            this.button12.Location = new System.Drawing.Point(175, 328);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(61, 31);
+            this.button12.TabIndex = 159;
+            this.button12.Text = "Update";
+            this.button12.UseVisualStyleBackColor = false;
+            this.button12.Visible = false;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
+            // txtcompnameAR
+            // 
+            this.txtcompnameAR.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtcompnameAR.Location = new System.Drawing.Point(22, 95);
+            this.txtcompnameAR.Name = "txtcompnameAR";
+            this.txtcompnameAR.Size = new System.Drawing.Size(259, 22);
+            this.txtcompnameAR.TabIndex = 143;
+            // 
+            // button13
+            // 
+            this.button13.BackColor = System.Drawing.Color.White;
+            this.button13.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button13.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button13.ForeColor = System.Drawing.Color.Firebrick;
+            this.button13.Location = new System.Drawing.Point(91, 328);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(66, 31);
+            this.button13.TabIndex = 158;
+            this.button13.Text = "Add";
+            this.button13.UseVisualStyleBackColor = false;
+            this.button13.Visible = false;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(22, 129);
+            this.label17.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(81, 17);
+            this.label17.TabIndex = 144;
+            this.label17.Text = "CR-Number";
+            // 
+            // txtCR
+            // 
+            this.txtCR.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCR.Location = new System.Drawing.Point(22, 149);
+            this.txtCR.Name = "txtCR";
+            this.txtCR.Size = new System.Drawing.Size(124, 22);
+            this.txtCR.TabIndex = 145;
+            this.txtCR.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCR_KeyPress);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(146, 129);
+            this.label18.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(76, 17);
+            this.label18.TabIndex = 146;
+            this.label18.Text = "Sponser-ID";
+            // 
+            // txtSponser
+            // 
+            this.txtSponser.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSponser.Location = new System.Drawing.Point(152, 149);
+            this.txtSponser.Name = "txtSponser";
+            this.txtSponser.Size = new System.Drawing.Size(129, 22);
+            this.txtSponser.TabIndex = 147;
+            this.txtSponser.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSponser_KeyPress);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(21, 227);
+            this.label23.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(100, 17);
+            this.label23.TabIndex = 152;
+            this.label23.Text = "Established HD";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.ForeColor = System.Drawing.Color.Black;
+            this.label26.Location = new System.Drawing.Point(17, 277);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(98, 15);
+            this.label26.TabIndex = 156;
+            this.label26.Text = "General Manager";
+            // 
+            // txtHD
+            // 
+            this.txtHD.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtHD.Location = new System.Drawing.Point(19, 247);
+            this.txtHD.Name = "txtHD";
+            this.txtHD.Size = new System.Drawing.Size(127, 22);
+            this.txtHD.TabIndex = 153;
+            // 
+            // txtAD
+            // 
+            this.txtAD.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAD.Location = new System.Drawing.Point(152, 247);
+            this.txtAD.Name = "txtAD";
+            this.txtAD.Size = new System.Drawing.Size(129, 22);
+            this.txtAD.TabIndex = 155;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(162, 227);
+            this.label22.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(99, 17);
+            this.label22.TabIndex = 154;
+            this.label22.Text = "Established AD";
+            // 
+            // dataGridView6
+            // 
+            this.dataGridView6.AllowUserToAddRows = false;
+            this.dataGridView6.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView6.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView6.Location = new System.Drawing.Point(440, 18);
+            this.dataGridView6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dataGridView6.Name = "dataGridView6";
+            this.dataGridView6.Size = new System.Drawing.Size(614, 320);
+            this.dataGridView6.TabIndex = 163;
+            this.dataGridView6.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView6_CellClick);
+            // 
             // notificationsTap
             // 
             this.notificationsTap.Location = new System.Drawing.Point(4, 26);
             this.notificationsTap.Name = "notificationsTap";
-            this.notificationsTap.Size = new System.Drawing.Size(1274, 604);
+            this.notificationsTap.Size = new System.Drawing.Size(1274, 597);
             this.notificationsTap.TabIndex = 3;
             this.notificationsTap.Text = "Notifications";
             this.notificationsTap.UseVisualStyleBackColor = true;
@@ -1086,420 +1519,6 @@ namespace Delmon_Managment_System.Forms
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // Companiestap
-            // 
-            this.Companiestap.Controls.Add(this.groupBox4);
-            this.Companiestap.Controls.Add(this.groupBox3);
-            this.Companiestap.Controls.Add(this.dataGridView6);
-            this.Companiestap.Location = new System.Drawing.Point(4, 26);
-            this.Companiestap.Name = "Companiestap";
-            this.Companiestap.Padding = new System.Windows.Forms.Padding(3);
-            this.Companiestap.Size = new System.Drawing.Size(1274, 597);
-            this.Companiestap.TabIndex = 5;
-            this.Companiestap.Text = "Companies";
-            this.Companiestap.UseVisualStyleBackColor = true;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(17, 21);
-            this.label11.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(137, 17);
-            this.label11.TabIndex = 140;
-            this.label11.Text = "Company Name - EN";
-            // 
-            // txtcompnameEN
-            // 
-            this.txtcompnameEN.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtcompnameEN.Location = new System.Drawing.Point(22, 41);
-            this.txtcompnameEN.Name = "txtcompnameEN";
-            this.txtcompnameEN.Size = new System.Drawing.Size(259, 22);
-            this.txtcompnameEN.TabIndex = 141;
-            this.txtcompnameEN.TextChanged += new System.EventHandler(this.txtcompnameEN_TextChanged);
-            // 
-            // txtcompnameAR
-            // 
-            this.txtcompnameAR.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtcompnameAR.Location = new System.Drawing.Point(22, 95);
-            this.txtcompnameAR.Name = "txtcompnameAR";
-            this.txtcompnameAR.Size = new System.Drawing.Size(259, 22);
-            this.txtcompnameAR.TabIndex = 143;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(17, 75);
-            this.label12.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(137, 17);
-            this.label12.TabIndex = 142;
-            this.label12.Text = "Company Name - AR";
-            // 
-            // txtCR
-            // 
-            this.txtCR.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCR.Location = new System.Drawing.Point(22, 149);
-            this.txtCR.Name = "txtCR";
-            this.txtCR.Size = new System.Drawing.Size(124, 22);
-            this.txtCR.TabIndex = 145;
-            this.txtCR.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCR_KeyPress);
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(22, 129);
-            this.label17.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(81, 17);
-            this.label17.TabIndex = 144;
-            this.label17.Text = "CR-Number";
-            // 
-            // txtSponser
-            // 
-            this.txtSponser.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSponser.Location = new System.Drawing.Point(152, 149);
-            this.txtSponser.Name = "txtSponser";
-            this.txtSponser.Size = new System.Drawing.Size(129, 22);
-            this.txtSponser.TabIndex = 147;
-            this.txtSponser.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSponser_KeyPress);
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(146, 129);
-            this.label18.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(76, 17);
-            this.label18.TabIndex = 146;
-            this.label18.Text = "Sponser-ID";
-            // 
-            // txtVat
-            // 
-            this.txtVat.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtVat.Location = new System.Drawing.Point(22, 198);
-            this.txtVat.Name = "txtVat";
-            this.txtVat.Size = new System.Drawing.Size(259, 22);
-            this.txtVat.TabIndex = 149;
-            this.txtVat.TextChanged += new System.EventHandler(this.txtVat_TextChanged);
-            this.txtVat.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtVat_KeyPress);
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(22, 178);
-            this.label20.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(55, 17);
-            this.label20.TabIndex = 148;
-            this.label20.Text = "Vat-NO";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.ForeColor = System.Drawing.Color.Black;
-            this.label21.Location = new System.Drawing.Point(18, 71);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(86, 15);
-            this.label21.TabIndex = 150;
-            this.label21.Text = "Work Location";
-            // 
-            // txtAD
-            // 
-            this.txtAD.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAD.Location = new System.Drawing.Point(152, 247);
-            this.txtAD.Name = "txtAD";
-            this.txtAD.Size = new System.Drawing.Size(129, 22);
-            this.txtAD.TabIndex = 155;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(162, 227);
-            this.label22.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(99, 17);
-            this.label22.TabIndex = 154;
-            this.label22.Text = "Established AD";
-            // 
-            // txtHD
-            // 
-            this.txtHD.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHD.Location = new System.Drawing.Point(19, 247);
-            this.txtHD.Name = "txtHD";
-            this.txtHD.Size = new System.Drawing.Size(127, 22);
-            this.txtHD.TabIndex = 153;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(21, 227);
-            this.label23.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(100, 17);
-            this.label23.TabIndex = 152;
-            this.label23.Text = "Established HD";
-            // 
-            // cmbemployee2
-            // 
-            this.cmbemployee2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbemployee2.FormattingEnabled = true;
-            this.cmbemployee2.Location = new System.Drawing.Point(19, 296);
-            this.cmbemployee2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.cmbemployee2.Name = "cmbemployee2";
-            this.cmbemployee2.Size = new System.Drawing.Size(262, 25);
-            this.cmbemployee2.TabIndex = 157;
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.ForeColor = System.Drawing.Color.Black;
-            this.label26.Location = new System.Drawing.Point(17, 277);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(98, 15);
-            this.label26.TabIndex = 156;
-            this.label26.Text = "General Manager";
-            // 
-            // button10
-            // 
-            this.button10.BackColor = System.Drawing.Color.White;
-            this.button10.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button10.ForeColor = System.Drawing.Color.Firebrick;
-            this.button10.Location = new System.Drawing.Point(15, 328);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(58, 31);
-            this.button10.TabIndex = 161;
-            this.button10.Text = "New";
-            this.button10.UseVisualStyleBackColor = false;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
-            // 
-            // button11
-            // 
-            this.button11.BackColor = System.Drawing.Color.White;
-            this.button11.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button11.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button11.ForeColor = System.Drawing.Color.Firebrick;
-            this.button11.Location = new System.Drawing.Point(257, 328);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(58, 31);
-            this.button11.TabIndex = 160;
-            this.button11.Text = "Delete";
-            this.button11.UseVisualStyleBackColor = false;
-            this.button11.Visible = false;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
-            // 
-            // button12
-            // 
-            this.button12.BackColor = System.Drawing.Color.White;
-            this.button12.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button12.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button12.ForeColor = System.Drawing.Color.Firebrick;
-            this.button12.Location = new System.Drawing.Point(175, 328);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(61, 31);
-            this.button12.TabIndex = 159;
-            this.button12.Text = "Update";
-            this.button12.UseVisualStyleBackColor = false;
-            this.button12.Visible = false;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
-            // 
-            // button13
-            // 
-            this.button13.BackColor = System.Drawing.Color.White;
-            this.button13.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button13.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button13.ForeColor = System.Drawing.Color.Firebrick;
-            this.button13.Location = new System.Drawing.Point(91, 328);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(66, 31);
-            this.button13.TabIndex = 158;
-            this.button13.Text = "Add";
-            this.button13.UseVisualStyleBackColor = false;
-            this.button13.Visible = false;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
-            // 
-            // dataGridView6
-            // 
-            this.dataGridView6.AllowUserToAddRows = false;
-            this.dataGridView6.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView6.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView6.Location = new System.Drawing.Point(440, 18);
-            this.dataGridView6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.dataGridView6.Name = "dataGridView6";
-            this.dataGridView6.Size = new System.Drawing.Size(614, 320);
-            this.dataGridView6.TabIndex = 163;
-            this.dataGridView6.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView6_CellClick);
-            // 
-            // cmbworkfield
-            // 
-            this.cmbworkfield.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbworkfield.FormattingEnabled = true;
-            this.cmbworkfield.Location = new System.Drawing.Point(21, 90);
-            this.cmbworkfield.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.cmbworkfield.Name = "cmbworkfield";
-            this.cmbworkfield.Size = new System.Drawing.Size(276, 25);
-            this.cmbworkfield.TabIndex = 164;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(21, 140);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(276, 25);
-            this.comboBox1.TabIndex = 168;
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.ForeColor = System.Drawing.Color.Black;
-            this.label27.Location = new System.Drawing.Point(18, 119);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(134, 17);
-            this.label27.TabIndex = 167;
-            this.label27.Text = "Head Of Department";
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(21, 38);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(276, 25);
-            this.comboBox2.TabIndex = 166;
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.ForeColor = System.Drawing.Color.Black;
-            this.label28.Location = new System.Drawing.Point(18, 19);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(85, 17);
-            this.label28.TabIndex = 165;
-            this.label28.Text = "Depart name";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.cmbemployee2);
-            this.groupBox3.Controls.Add(this.label11);
-            this.groupBox3.Controls.Add(this.txtcompnameEN);
-            this.groupBox3.Controls.Add(this.txtVat);
-            this.groupBox3.Controls.Add(this.label20);
-            this.groupBox3.Controls.Add(this.button11);
-            this.groupBox3.Controls.Add(this.button10);
-            this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Controls.Add(this.button12);
-            this.groupBox3.Controls.Add(this.txtcompnameAR);
-            this.groupBox3.Controls.Add(this.button13);
-            this.groupBox3.Controls.Add(this.label17);
-            this.groupBox3.Controls.Add(this.txtCR);
-            this.groupBox3.Controls.Add(this.label18);
-            this.groupBox3.Controls.Add(this.txtSponser);
-            this.groupBox3.Controls.Add(this.label23);
-            this.groupBox3.Controls.Add(this.label26);
-            this.groupBox3.Controls.Add(this.txtHD);
-            this.groupBox3.Controls.Add(this.txtAD);
-            this.groupBox3.Controls.Add(this.label22);
-            this.groupBox3.Location = new System.Drawing.Point(7, 7);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(409, 373);
-            this.groupBox3.TabIndex = 169;
-            this.groupBox3.TabStop = false;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.button14);
-            this.groupBox4.Controls.Add(this.button15);
-            this.groupBox4.Controls.Add(this.button16);
-            this.groupBox4.Controls.Add(this.button17);
-            this.groupBox4.Controls.Add(this.comboBox1);
-            this.groupBox4.Controls.Add(this.label21);
-            this.groupBox4.Controls.Add(this.cmbworkfield);
-            this.groupBox4.Controls.Add(this.label27);
-            this.groupBox4.Controls.Add(this.label28);
-            this.groupBox4.Controls.Add(this.comboBox2);
-            this.groupBox4.Location = new System.Drawing.Point(6, 386);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(410, 212);
-            this.groupBox4.TabIndex = 170;
-            this.groupBox4.TabStop = false;
-            // 
-            // button14
-            // 
-            this.button14.BackColor = System.Drawing.Color.White;
-            this.button14.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button14.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button14.ForeColor = System.Drawing.Color.Firebrick;
-            this.button14.Location = new System.Drawing.Point(16, 175);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(70, 31);
-            this.button14.TabIndex = 172;
-            this.button14.Text = "New";
-            this.button14.UseVisualStyleBackColor = false;
-            // 
-            // button15
-            // 
-            this.button15.BackColor = System.Drawing.Color.White;
-            this.button15.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button15.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button15.ForeColor = System.Drawing.Color.Firebrick;
-            this.button15.Location = new System.Drawing.Point(258, 175);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(70, 31);
-            this.button15.TabIndex = 171;
-            this.button15.Text = "Delete";
-            this.button15.UseVisualStyleBackColor = false;
-            this.button15.Visible = false;
-            // 
-            // button16
-            // 
-            this.button16.BackColor = System.Drawing.Color.White;
-            this.button16.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button16.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button16.ForeColor = System.Drawing.Color.Firebrick;
-            this.button16.Location = new System.Drawing.Point(176, 175);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(73, 31);
-            this.button16.TabIndex = 170;
-            this.button16.Text = "Update";
-            this.button16.UseVisualStyleBackColor = false;
-            this.button16.Visible = false;
-            // 
-            // button17
-            // 
-            this.button17.BackColor = System.Drawing.Color.White;
-            this.button17.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button17.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button17.ForeColor = System.Drawing.Color.Firebrick;
-            this.button17.Location = new System.Drawing.Point(92, 175);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(78, 31);
-            this.button17.TabIndex = 169;
-            this.button17.Text = "Add";
-            this.button17.UseVisualStyleBackColor = false;
-            this.button17.Visible = false;
-            // 
             // SettingFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1527,14 +1546,15 @@ namespace Delmon_Managment_System.Forms
             this.DepartmentTap.ResumeLayout(false);
             this.DepartmentTap.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.Companiestap.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1604,10 +1624,10 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.DataGridView dataGridView5;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.ComboBox cmbDepartment;
+        private System.Windows.Forms.ComboBox cmbDepartment654;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.ComboBox cmbemployee1;
+        private System.Windows.Forms.ComboBox cmbemployee13633;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.ComboBox cmbCompany;
         private System.Windows.Forms.Label label25;
@@ -1639,9 +1659,9 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.DataGridView dataGridView6;
         private System.Windows.Forms.ComboBox cmbworkfield;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbemployee1;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cmbDepartment;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button button14;
@@ -1649,5 +1669,6 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.DataGridView dataGridView7;
     }
 }
