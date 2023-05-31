@@ -43,7 +43,7 @@ namespace Delmon_Managment_System.Forms
         {
 
             InitializeComponent();
-            Font newFont = new Font("Times New Roman", 10);
+          //  Font newFont = new Font("Times New Roman", 10);
             cmbEmployJobHistory.KeyDown += new KeyEventHandler(cmbEmployJobHistory_KeyDown);
             cmbCompany.KeyDown += new KeyEventHandler(cmbCompany_KeyDown);
             cmbPersonalStatusStatus.KeyDown += new KeyEventHandler(cmbPersonalStatusStatus_KeyDown);
@@ -52,7 +52,7 @@ namespace Delmon_Managment_System.Forms
             // Loop through all controls on the form and change their font properties
             foreach (Control control in Controls)
             {
-                control.Font = newFont;
+           //     control.Font = newFont;
             }
 
 
@@ -2854,6 +2854,21 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                 // Prevent the ComboBox from processing the Enter key
                 e.IsInputKey = true;
             }
+        }
+
+        private void label24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

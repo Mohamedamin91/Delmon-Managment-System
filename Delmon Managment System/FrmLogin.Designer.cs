@@ -49,11 +49,11 @@ namespace Delmon_Managment_System
             this.loginbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(45)))), ((int)(((byte)(46)))));
             this.loginbtn.FlatAppearance.BorderSize = 0;
             this.loginbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.loginbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loginbtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.loginbtn.ForeColor = System.Drawing.Color.White;
-            this.loginbtn.Location = new System.Drawing.Point(48, 335);
+            this.loginbtn.Location = new System.Drawing.Point(48, 349);
             this.loginbtn.Name = "loginbtn";
-            this.loginbtn.Size = new System.Drawing.Size(263, 37);
+            this.loginbtn.Size = new System.Drawing.Size(255, 37);
             this.loginbtn.TabIndex = 0;
             this.loginbtn.Text = "Login";
             this.loginbtn.UseVisualStyleBackColor = false;
@@ -62,11 +62,11 @@ namespace Delmon_Managment_System
             // remembercheck
             // 
             this.remembercheck.AutoSize = true;
-            this.remembercheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.remembercheck.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.remembercheck.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.remembercheck.Location = new System.Drawing.Point(48, 303);
+            this.remembercheck.Location = new System.Drawing.Point(48, 307);
             this.remembercheck.Name = "remembercheck";
-            this.remembercheck.Size = new System.Drawing.Size(119, 21);
+            this.remembercheck.Size = new System.Drawing.Size(133, 21);
             this.remembercheck.TabIndex = 1;
             this.remembercheck.Text = "Remember me";
             this.remembercheck.UseVisualStyleBackColor = true;
@@ -75,51 +75,51 @@ namespace Delmon_Managment_System
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.label1.Location = new System.Drawing.Point(113, 123);
+            this.label1.Location = new System.Drawing.Point(80, 122);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(197, 24);
+            this.label1.Size = new System.Drawing.Size(169, 17);
             this.label1.TabIndex = 2;
             this.label1.Text = "Login to Your Account";
             // 
             // Usertxt
             // 
-            this.Usertxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Usertxt.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.Usertxt.Location = new System.Drawing.Point(48, 221);
             this.Usertxt.Name = "Usertxt";
-            this.Usertxt.Size = new System.Drawing.Size(263, 27);
+            this.Usertxt.Size = new System.Drawing.Size(255, 25);
             this.Usertxt.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.label2.ForeColor = System.Drawing.SystemColors.GrayText;
             this.label2.Location = new System.Drawing.Point(45, 202);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 16);
+            this.label2.Size = new System.Drawing.Size(83, 17);
             this.label2.TabIndex = 4;
             this.label2.Text = "Username";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.label3.ForeColor = System.Drawing.SystemColors.GrayText;
             this.label3.Location = new System.Drawing.Point(48, 251);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(68, 16);
+            this.label3.Size = new System.Drawing.Size(80, 17);
             this.label3.TabIndex = 6;
             this.label3.Text = "Password";
             // 
             // passtxt
             // 
-            this.passtxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passtxt.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.passtxt.Location = new System.Drawing.Point(48, 270);
             this.passtxt.Name = "passtxt";
             this.passtxt.PasswordChar = '*';
-            this.passtxt.Size = new System.Drawing.Size(263, 27);
+            this.passtxt.Size = new System.Drawing.Size(255, 25);
             this.passtxt.TabIndex = 5;
             // 
             // button2
@@ -127,11 +127,11 @@ namespace Delmon_Managment_System
             this.button2.BackColor = System.Drawing.Color.White;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(45)))), ((int)(((byte)(46)))));
-            this.button2.Location = new System.Drawing.Point(199, 303);
+            this.button2.Location = new System.Drawing.Point(187, 303);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(128, 26);
+            this.button2.Size = new System.Drawing.Size(152, 26);
             this.button2.TabIndex = 7;
             this.button2.Text = "Forgot password?";
             this.button2.UseVisualStyleBackColor = false;
@@ -149,20 +149,20 @@ namespace Delmon_Managment_System
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.label4.ForeColor = System.Drawing.SystemColors.GrayText;
             this.label4.Location = new System.Drawing.Point(45, 153);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(42, 16);
+            this.label4.Size = new System.Drawing.Size(48, 17);
             this.label4.TabIndex = 10;
             this.label4.Text = "Email";
             // 
             // Emailtxt
             // 
-            this.Emailtxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Emailtxt.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.Emailtxt.Location = new System.Drawing.Point(48, 172);
             this.Emailtxt.Name = "Emailtxt";
-            this.Emailtxt.Size = new System.Drawing.Size(263, 27);
+            this.Emailtxt.Size = new System.Drawing.Size(255, 25);
             this.Emailtxt.TabIndex = 9;
             // 
             // FrmLogin

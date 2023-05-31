@@ -181,6 +181,7 @@ namespace Delmon_Managment_System
             this.button4.Dock = System.Windows.Forms.DockStyle.Top;
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.button4.ForeColor = System.Drawing.Color.Navy;
             this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
             this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -200,6 +201,7 @@ namespace Delmon_Managment_System
             this.button2.Dock = System.Windows.Forms.DockStyle.Top;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.button2.ForeColor = System.Drawing.Color.Navy;
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -219,6 +221,7 @@ namespace Delmon_Managment_System
             this.btnNotifications.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnNotifications.FlatAppearance.BorderSize = 0;
             this.btnNotifications.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNotifications.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnNotifications.ForeColor = System.Drawing.Color.Navy;
             this.btnNotifications.Image = ((System.Drawing.Image)(resources.GetObject("btnNotifications.Image")));
             this.btnNotifications.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -239,6 +242,7 @@ namespace Delmon_Managment_System
             this.btnBilling.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnBilling.FlatAppearance.BorderSize = 0;
             this.btnBilling.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBilling.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnBilling.ForeColor = System.Drawing.Color.Navy;
             this.btnBilling.Image = ((System.Drawing.Image)(resources.GetObject("btnBilling.Image")));
             this.btnBilling.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -259,6 +263,7 @@ namespace Delmon_Managment_System
             this.btnprinting.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnprinting.FlatAppearance.BorderSize = 0;
             this.btnprinting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnprinting.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnprinting.ForeColor = System.Drawing.Color.Navy;
             this.btnprinting.Image = ((System.Drawing.Image)(resources.GetObject("btnprinting.Image")));
             this.btnprinting.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -278,6 +283,7 @@ namespace Delmon_Managment_System
             this.btnemployee.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnemployee.FlatAppearance.BorderSize = 0;
             this.btnemployee.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnemployee.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnemployee.ForeColor = System.Drawing.Color.Navy;
             this.btnemployee.Image = ((System.Drawing.Image)(resources.GetObject("btnemployee.Image")));
             this.btnemployee.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -297,6 +303,7 @@ namespace Delmon_Managment_System
             this.btnvisa.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnvisa.FlatAppearance.BorderSize = 0;
             this.btnvisa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnvisa.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnvisa.ForeColor = System.Drawing.Color.Navy;
             this.btnvisa.Image = ((System.Drawing.Image)(resources.GetObject("btnvisa.Image")));
             this.btnvisa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -389,11 +396,11 @@ namespace Delmon_Managment_System
             this.lblTitle.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblTitle.AutoSize = true;
             this.lblTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.lblTitle.ForeColor = System.Drawing.Color.White;
             this.lblTitle.Location = new System.Drawing.Point(268, 10);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(75, 25);
+            this.lblTitle.Size = new System.Drawing.Size(53, 17);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "HOME";
             // 
