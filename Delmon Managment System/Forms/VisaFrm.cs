@@ -59,12 +59,12 @@ namespace Delmon_Managment_System.Forms
 
 
 
-            Font newFont = new Font("Times New Roman", 12);
+          //  Font newFont = new Font("Times New Roman", 12);
 
             // Loop through all controls on the form and change their font properties
             foreach (Control control in Controls)
             {
-                control.Font = newFont;
+          //      control.Font = newFont;
             }
 
 

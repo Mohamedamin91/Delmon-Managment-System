@@ -85,7 +85,7 @@ namespace Delmon_Managment_System
                   //  previousBtn.BackColor = Color.FromArgb(53, 52, 141);
                     previousBtn.BackColor = Color.White;
                     previousBtn.ForeColor = Color.FromArgb(53, 52, 141);
-                    previousBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                 //   previousBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 }
             }
         }
