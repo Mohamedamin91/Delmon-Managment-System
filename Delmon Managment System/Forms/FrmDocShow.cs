@@ -45,6 +45,15 @@ namespace Delmon_Managment_System.Forms
             cmbdoc.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT DocType_ID,Doc_Type FROM [DocumentType] where DocType_ID = 0 or DocType_ID = 5 or DocType_ID = 6 or DocType_ID = 7 or DocType_ID = 8 or DocType_ID = 9 order by DocType_ID asc ");
             cmbdoc.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbdoc.AutoCompleteSource = AutoCompleteSource.ListItems;
+            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT [Doc_id]
+      ,[CR_ID]
+      ,[DocTypeID]
+      ,[name]    
+      ,[docissuedate]
+      ,[docexpiredate]
+      ,[documentValue]
+  FROM [DelmonGroupDB].[dbo].[Documents]
+  where RefrenceID=4 and CR_ID= " + CompIDDoc+" ");
 
 
             SQLCONN.CloseConnection();
@@ -97,7 +106,7 @@ namespace Delmon_Managment_System.Forms
                 {
                   
                     SqlParameter paramfilename = new SqlParameter("@C0", SqlDbType.NVarChar);
-                    string newFileName = Shortname + " - " + cmbdoc.Text + " - " + CRNUMBER + " - " + docexpirefatepicker.Text;
+                    //string newFileName = Shortname + " - " + cmbdoc.Text + " - " + CRNUMBER + " - " + docexpirefatepicker.Text;
 
                     paramfilename.Value = fileName;
 
@@ -129,9 +138,15 @@ namespace Delmon_Managment_System.Forms
                             SQLCONN.OpenConection();
                             SQLCONN.ExecuteQueries("insert into Documents (name,documentValue,CR_ID,DocTypeID,RefrenceID,[docissuedate],[docexpiredate])values(@C0,@C1,@C2,@C3,@C4,@C7,@C8)", paramfilename, paramnameOFfile, paramPID, paramDocType, paramRefrenceID,paramfileissuedate,paramfileexpiraydate);
 
-                           /**/
-                            
-                          
+                            /**/
+                            SqlDataReader dr = SQLCONN.DataReader("select max(Doc_id) from Documents" );
+                            //if (dr.Read())
+                            //{
+                            //    DocID =Convert.ToInt32( dr["Doc_id"].ToString());
+                            //    CommonClass.DOCID = DocID;
+
+                            //}
+
                             /**/
 
 
@@ -157,91 +172,59 @@ namespace Delmon_Managment_System.Forms
             }
         }
 
-        private void cmbdoc_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-          
-
-
-            DataRow dr;
-           SqlConnection conn = new SqlConnection(@"Data Source=192.168.1.8;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@");
-         //  SqlConnection conn = new SqlConnection(@"Data Source=AMIN-PC;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@");
-
-
-            conn.Open();
-            SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "select Doc_id,name from Documents where  CR_ID=@C1 and RefrenceID=@C2 and DocTypeID=@C3";
-
-
-            cmd.Parameters.Add(new SqlParameter("@C3", SqlDbType.Int));
-            cmd.Parameters["@C3"].Value = cmbdoc.SelectedValue;
-            cmd.Parameters.Add(new SqlParameter("@C2", SqlDbType.Int));
-            cmd.Parameters["@C2"].Value = 4;
-            cmd.Parameters.Add(new SqlParameter("@C1", SqlDbType.Int));
-            cmd.Parameters["@C1"].Value = CompIDDoc;
-
-
-            //Creating Sql Data Adapter
-            cmd.ExecuteNonQuery();
-            DataTable dt = new DataTable();
-            SqlDataAdapter Da = new SqlDataAdapter(cmd);
-            Da.Fill(dt);
-            dr = dt.NewRow();
-
-
-            if (dt != null && dt.Rows.Count >= 0)
-            {
-
-                cmbFile.ValueMember = "Doc_id";
-                cmbFile.DisplayMember = "name";
-                cmbFile.DataSource = dt;
-                cmbFile.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                cmbFile.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-
-
-
-
-            }
-            else { }
-
-            conn.Close();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        }
-
         private void cmbFile_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            
+
+            //SqlParameter paramDOCID = new SqlParameter("@C0", SqlDbType.Int);
+            //paramDOCID.Value = cmbFile.SelectedValue;
+
             SqlParameter paramPID = new SqlParameter("@C1", SqlDbType.Int);
             paramPID.Value = CompIDDoc;
             SqlParameter paramRefrenceID = new SqlParameter("@C2", SqlDbType.Int);
             paramRefrenceID.Value = 4;
-            SqlParameter paramFILEName = new SqlParameter("@C3", SqlDbType.NVarChar);
-            paramFILEName.Value = cmbFile.Text;
+            //SqlParameter paramFILEName = new SqlParameter("@C3", SqlDbType.NVarChar);
+            //paramFILEName.Value = cmbFile.SelectedText;
 
             SQLCONN.OpenConection();
-            SqlDataReader dr = SQLCONN.DataReader("select documentValue from Documents where  CR_ID=@C1 and RefrenceID=@C2 and name=@C3", paramPID, paramRefrenceID, paramFILEName);
+            SqlDataReader dr = SQLCONN.DataReader("select documentValue from Documents where Doc_id=@C0 and CR_ID=@C1 and RefrenceID=@C2 and name=@C3", paramPID, paramRefrenceID);
             if (dr.Read())
             {
                 txtpath.Text = dr["documentValue"].ToString();
-                CommonClass.DocCompPath = txtpath.Text;
+                
             }
+            CommonClass.DocCompPath = txtpath.Text;
             SQLCONN.CloseConnection();
+           
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1) return;
+
+            foreach (DataGridViewRow rw in this.dataGridView1.Rows)
+            {
+                for (int i = 0; i < rw.Cells.Count; i++)
+                {
+                    if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
+                    {
+                        //   MessageBox.Show("ogg");       
+                    }
+                    else
+                    {
+
+                        DocID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        CompIDDoc = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
+                        cmbdoc.SelectedValue = Convert.ToInt32( dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString());
+                        txtFilename.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+                        docissueplacepicker.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+                        docexpirefatepicker.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+                        txtpath.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
+                        CommonClass.DocCompPath = txtpath.Text;
+                    }
+                }
+
+            }
+
         }
 
         private void btnshow_Click(object sender, EventArgs e)
@@ -265,6 +248,9 @@ namespace Delmon_Managment_System.Forms
             {
                 MessageBox.Show("An error occurred: " + ex.Message);
             }
+
+
+           
         }
     }
 }

@@ -123,10 +123,16 @@ namespace Delmon_Managment_System.Forms
             {
                 DeleteBTN.Enabled = btndeletecontact.Enabled = btndeletedoc.Enabled = button1.Enabled = button4.Enabled = true;
                 dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"
-select Employees.EmployeeID, Employees.CurrentEmpID,FirstName,SecondName,ThirdName,LastName,Gender,MartialStatus,StatusTBL.StatusValue,jobs.JobTitleEN,DeptTypes.Dept_Type_Name,Companies.COMPName_EN,startdate, enddate,NationalityName 
-from  Countries,Employees,Companies,JOBS,StatusTBL,DEPARTMENTS,DeptTypes  where Countries.CountryId = Employees.NationalityID and
-Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.Dept_Type_ID and Employees.EmploymentStatusID = StatusTBL.StatusID  and Employees.JobID= JOBS.JobID  and Employees.COMPID = Companies.COMPID  and DEPARTMENTS.COMPID = Companies.COMPID  order by EmployeeID desc");
-
+SELECT Employees.EmployeeID, Employees.CurrentEmpID, FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus, StatusTBL.StatusValue, jobs.JobTitleEN, DeptTypes.Dept_Type_Name, Companies.COMPName_EN, startdate, enddate, NationalityName 
+FROM Employees
+JOIN Countries ON Countries.CountryId = Employees.NationalityID
+JOIN DEPARTMENTS ON Employees.DeptID = DEPARTMENTS.DEPTID
+JOIN DeptTypes ON DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID
+JOIN StatusTBL ON Employees.EmploymentStatusID = StatusTBL.StatusID
+JOIN JOBS ON Employees.JobID = JOBS.JobID
+JOIN Companies ON Employees.COMPID = Companies.COMPID AND DEPARTMENTS.COMPID = Companies.COMPID
+ORDER BY EmployeeID DESC;
+");
             }
             else
             {
@@ -252,7 +258,7 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
             SQLCONN.OpenConection();
             if (lblusertype.Text == "Admin")
             {
-                string query = @"SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus, s.StatusValue, j.JobTitleEN, dt.Dept_Type_Name, c.COMPName_EN, e.startdate, e.enddate, cn.NationalityName 
+                string query = @"SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus, s.StatusValue, j.JobTitleEN, dt.Dept_Type_Name, c.COMPName_EN, e.startdate, e.enddate, cn.NationalityName,v.FileNumber,v.VISANumber
 FROM Employees e
 INNER JOIN StatusTBL s ON e.EmploymentStatusID = s.StatusID
 INNER JOIN JOBS j ON e.JobID = j.JobID
@@ -260,6 +266,7 @@ INNER JOIN DEPARTMENTS d ON e.DeptID = d.DEPTID
 INNER JOIN DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
 INNER JOIN Companies c ON d.COMPID = c.COMPID
 INNER JOIN Countries cn ON e.NationalityID = cn.CountryId
+INNER JOIN VISAJobList v  ON e.EmployeeID = v.EmployeeID
 WHERE (e.EmployeeID LIKE '%' + REPLACE(@C1, ' ', '') + '%' 
        OR e.CurrentEmpID LIKE '%' + REPLACE(@C1, ' ', '') + '%' 
        OR REPLACE(e.FirstName, ' ', '') + REPLACE(e.SecondName, ' ', '') + REPLACE(e.ThirdName, ' ', '') + REPLACE(e.LastName, ' ', '') LIKE '%' + REPLACE(@C1, ' ', '') + '%'
@@ -1613,6 +1620,8 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                         }
 
                         cmbnationality.Text = dataGridView1.Rows[e.RowIndex].Cells[14].Value.ToString();
+                        txtFileNumber.Text = dataGridView1.Rows[e.RowIndex].Cells[15].Value.ToString();
+                        txtvisanumber.Text = dataGridView1.Rows[e.RowIndex].Cells[16].Value.ToString();
 
 
 
