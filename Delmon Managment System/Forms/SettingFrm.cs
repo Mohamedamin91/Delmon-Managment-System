@@ -1998,7 +1998,11 @@ namespace Delmon_Managment_System.Forms
             SqlParameter paramGeneralManager = new SqlParameter("@C9", SqlDbType.NVarChar);
             paramGeneralManager.Value = cmbemployee2.SelectedValue;
 
-        
+            SqlParameter paramShortName = new SqlParameter("@C10", SqlDbType.NVarChar);
+            paramShortName.Value = txtshort.Text;
+
+
+
             SqlParameter paramCompid = new SqlParameter("@id", SqlDbType.NVarChar);
             SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
             paramuser.Value = lblusername.Text;
@@ -2008,51 +2012,58 @@ namespace Delmon_Managment_System.Forms
             parampc.Value = lblPC.Text;
 
             SQLCONN.OpenConection();
-            // Retrieve the last comp ID from the table
-            SqlDataReader dr = SQLCONN.DataReader("SELECT TOP 1 COMPID FROM Companies ORDER BY COMPID DESC");
-            if (dr.Read())
+            if (txtcompnameEN.Text == "" || txtcompnameAR.Text == "" || txtCR.Text == "" || txtVat.Text == "")
             {
-                CompID = int.Parse(dr["COMPID"].ToString());
-                CompID = CompID + 1000;
+                MessageBox.Show("Please Fill Missing Fields.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
             }
-            paramCompid.Value = CompID;
-            dr.Dispose();
-            dr.Close();
-            SQLCONN.ExecuteQueries("insert into Companies (COMPID,COMPName_EN,COMPName_AR,CRNumber,ID_Number,VAT_NO,EstablishedHD,EstablishedAD,General_Manager)" +
-                " values (@id,@C1,@C2,@C3,@C4,@C5,@C7,@C8,@C9) ",paramCompid,paramcompEn,paramcompAR,ParamCR,paramSponser,paramVat,paramHD,paramAD,paramGeneralManager);
-
-
-            MessageBox.Show("Record saved Successfully");
-            dr.Dispose();
-            dr.Close();
-            SqlDataReader dr2 = SQLCONN.DataReader("Select max (COMPID) 'ID' from Companies ");
-            if (dr2.Read())
-            {
-                CompID = int.Parse(dr2["ID"].ToString());
+            else {
+                // Retrieve the last comp ID from the table
+                SqlDataReader dr = SQLCONN.DataReader("SELECT TOP 1 COMPID FROM Companies ORDER BY COMPID DESC");
+                if (dr.Read())
+                {
+                    CompID = int.Parse(dr["COMPID"].ToString());
+                    CompID = CompID + 1000;
+                }
                 paramCompid.Value = CompID;
+                dr.Dispose();
+                dr.Close();
+                SQLCONN.ExecuteQueries("insert into Companies (COMPID,COMPName_EN,COMPName_AR,CRNumber,ID_Number,VAT_NO,EstablishedHD,EstablishedAD,General_Manager,ShortCompName)" +
+                    " values (@id,@C1,@C2,@C3,@C4,@C5,@C7,@C8,@C9,@C10) ", paramCompid, paramcompEn, paramcompAR, ParamCR, paramSponser, paramVat, paramHD, paramAD, paramGeneralManager,paramShortName);
+
+
+                MessageBox.Show("Record saved Successfully");
+                dr.Dispose();
+                dr.Close();
+                SqlDataReader dr2 = SQLCONN.DataReader("Select max (COMPID) 'ID' from Companies ");
+                if (dr2.Read())
+                {
+                    CompID = int.Parse(dr2["ID"].ToString());
+                    paramCompid.Value = CompID;
+                }
+
+
+
+
+                else { paramCompid.Value = 0; }
+
+                dr2.Dispose();
+                dr2.Close();
+                dataGridView6.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" select  * from  [Companies] where  [COMPID] = @id  ", paramCompid);
+
+                SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Company Info',@id ,'#','#',@datetime,@pc,@user,'Insert')", paramCompid, paramdatetimeLOG, parampc, paramuser);
+
+
+                dr.Dispose();
+                dr.Close();
+                dr2.Dispose();
+                dr2.Close();
+                ClearTextBoxes();
+                button10.Visible = true;
+
+
+                SQLCONN.CloseConnection();
             }
-
-
-
-
-            else { paramCompid.Value = 0; }
-
-            dr2.Dispose();
-            dr2.Close();
-            dataGridView6.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" select  * from  [Companies] where  [COMPID] = @id  ", paramCompid);
-
-            SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Company Info',@id ,'#','#',@datetime,@pc,@user,'Insert')", paramCompid, paramdatetimeLOG, parampc, paramuser);
-
-
-            dr.Dispose();
-            dr.Close();
-            dr2.Dispose();
-            dr2.Close();
-            ClearTextBoxes();
-            button10.Visible = true;
-
-
-            SQLCONN.CloseConnection();
 
 
 
@@ -2094,18 +2105,23 @@ namespace Delmon_Managment_System.Forms
 
         private void txtcompnameEN_TextChanged(object sender, EventArgs e)
         {
-            string query = @"SELECT DISTINCT Companies.COMPID
-    ,[CRNumber]
-    ,[ID_Number]
-    ,[COMPName_EN]
-    ,[COMPName_AR]
-    ,[VAT_NO]
-    ,[EstablishedHD]
-    ,[EstablishedAD]
-    ,CONCAT(FirstName, ' ', SecondName, ' ', ThirdName, ' ', LastName) AS 'General_Manager'
+            string query = @"
+   SELECT DISTINCT Companies.COMPID,
+       [CRNumber],
+       [ID_Number],
+       [COMPName_EN],
+       [COMPName_AR],
+       [ShortCompName],
+       [VAT_NO],
+       [EstablishedHD],
+       [EstablishedAD],
+       CONCAT(FirstName, ' ', SecondName, ' ', ThirdName, ' ', LastName) AS 'General_Manager'
 FROM [DelmonGroupDB].[dbo].[Companies]
 JOIN Employees ON Employees.EmployeeID = Companies.General_Manager
-WHERE (COMPName_EN LIKE '%' + @C1 + '%') Or (COMPName_AR LIKE '%' + @C1 + '%')  ";
+WHERE (COMPName_EN LIKE '%' + @C1 + '%')
+   OR (COMPName_AR LIKE '%' + @C1 + '%')
+   AND Companies.General_Manager IN (SELECT EmployeeID FROM Employees)
+";
 
             SqlParameter paramCompSearch = new SqlParameter("@C1", SqlDbType.NVarChar);
             paramCompSearch.Value = txtcompnameEN.Text;
@@ -2118,12 +2134,13 @@ WHERE (COMPName_EN LIKE '%' + @C1 + '%') Or (COMPName_AR LIKE '%' + @C1 + '%')  
 
 
 
+
         }
 
         private void dataGridView6_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             button13.Visible = false;
-            button10.Visible = button12.Visible = button11.Visible = true;
+            button10.Visible = button12.Visible = button11.Visible = button9.Visible = true;
 
             if (e.RowIndex == -1) return;
 
@@ -2134,23 +2151,25 @@ WHERE (COMPName_EN LIKE '%' + @C1 + '%') Or (COMPName_AR LIKE '%' + @C1 + '%')  
                 if (row.Cells[0].Value != null)
                 {
                     CompID = Convert.ToInt32(row.Cells[0].Value.ToString());
-
+                    CommonClass.CompanyId= Convert.ToInt32(row.Cells[0].Value.ToString());
                     txtCR.Text = row.Cells[1].Value?.ToString();
+                    CommonClass.CRNmber = txtCR.Text;
                     txtSponser.Text = row.Cells[2].Value?.ToString();
                     txtcompnameEN.Text = row.Cells[3].Value?.ToString();
+                    CommonClass.CompName= txtcompnameEN.Text;
                     txtcompnameAR.Text = row.Cells[4].Value?.ToString();
-                    txtVat.Text = row.Cells[5].Value?.ToString();
-                    txtHD.Text = row.Cells[6].Value?.ToString();
-                    txtAD.Text = row.Cells[7].Value?.ToString();
-                    cmbemployee2.Text = row.Cells[8].Value?.ToString();
-                    dataGridView7.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select  * from  [DEPARTMENTS] where CompID=" + CompID + " ");
+                    txtshort.Text = row.Cells[5].Value?.ToString();
+                    CommonClass.ShortName = txtshort.Text;
+                    txtVat.Text = row.Cells[6].Value?.ToString();
+                    txtHD.Text = row.Cells[7].Value?.ToString();
+                    txtAD.Text = row.Cells[8].Value?.ToString();
+                    cmbemployee2.Text = row.Cells[9].Value?.ToString();
 
+                    dataGridView7.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT * FROM [DEPARTMENTS] WHERE CompID=" + CompID);
                 }
-
             }
-
-
         }
+
 
         private void button12_Click(object sender, EventArgs e)
         {
@@ -2659,6 +2678,18 @@ WHERE (COMPName_EN LIKE '%' + @C1 + '%') Or (COMPName_AR LIKE '%' + @C1 + '%')  
             FrmNewWorkLoc frmNewWork = new FrmNewWorkLoc();
             // this.Hide();
             frmNewWork.Show();
+        }
+
+        private void button9_Click_1(object sender, EventArgs e)
+        {
+            FrmDocShow frmDocShow   = new FrmDocShow();
+            // this.Hide();
+            frmDocShow.Show();
+        }
+
+        private void Companiestap_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void maxtxt_KeyPress(object sender, KeyPressEventArgs e)

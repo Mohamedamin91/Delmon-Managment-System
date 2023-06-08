@@ -139,50 +139,66 @@ namespace Delmon_Managment_System.Forms
             cmbReservedTo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbReservedTo.AutoCompleteSource = AutoCompleteSource.ListItems;
 
+            string query2 = "SELECT JobID, JobTitleEN FROM JOBS";
+
             cmbJob.ValueMember = "JobID";
             cmbJob.DisplayMember = "JobTitleEN";
-            cmbJob.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS");
+            cmbJob.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query2);
             cmbJob.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbJob.AutoCompleteSource = AutoCompleteSource.ListItems;
 
+            string query3 = "select Consulates.ConsulateID,ConsulateCity from Countries,Consulates where Countries.CountryId = Consulates.CountryId";
+
             cmbConsulate.ValueMember = "Consulates.ConsulateID";
             cmbConsulate.DisplayMember = "ConsulateCity";
-            cmbConsulate.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select Consulates.ConsulateID,ConsulateCity from Countries,Consulates where Countries.CountryId = Consulates.CountryId");
+            cmbConsulate.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query3);
             cmbConsulate.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbConsulate.AutoCompleteSource = AutoCompleteSource.ListItems;
 
+            string query4 = "select statusid,status  from Visastatus where RefrenceID =1 or RefrenceID = 0 order by statusid";
+
             cmbStatus.ValueMember = "statusid";
             cmbStatus.DisplayMember = "status";
-            cmbStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select statusid,status  from Visastatus where RefrenceID =1 or RefrenceID = 0 order by statusid");
+            cmbStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query4);
             cmbStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-            cmbcandidates.ValueMember = "EmployeeID";
-            cmbcandidates.DisplayMember = "Name";
-            cmbcandidates.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees] , StatusTBL where Employees.EmploymentStatusID = StatusTBL.StatusID and RefrenceID=2 and StatusTBL.StatusID = 23 order by EmployeeID");
-            cmbcandidates.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbcandidates.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //cmbcandidates.ValueMember = "EmployeeID";
+            //cmbcandidates.DisplayMember = "Name";
+            //cmbcandidates.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees] , StatusTBL where Employees.EmploymentStatusID = StatusTBL.StatusID and RefrenceID=2 and StatusTBL.StatusID = 23 order by EmployeeID");
+            //cmbcandidates.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //cmbcandidates.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-            cmbcandidates2.ValueMember = "EmployeeID";
+            //cmbcandidates2.ValueMember = "EmployeeID";
+            //cmbcandidates2.DisplayMember = "Name";
+            //cmbcandidates2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees]       order by EmployeeID");
+            //cmbcandidates2.Text = "Select";
+            //cmbcandidates2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //cmbcandidates2.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+            string query5 = @"SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', ''), COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name
+                 FROM [DelmonGroupDB].[dbo].[Employees]
+                 LEFT JOIN StatusTBL ON Employees.EmploymentStatusID = StatusTBL.StatusID
+                 WHERE RefrenceID = 2 AND StatusTBL.StatusID = 23
+                 ORDER BY EmployeeID";
+            cmbcandidates.DisplayMember = "Name";
+            cmbcandidates.ValueMember = "EmployeeID";
             cmbcandidates2.DisplayMember = "Name";
-            cmbcandidates2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees]       order by EmployeeID");
-            cmbcandidates2.Text = "Select";
-            cmbcandidates2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbcandidates2.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbcandidates2.ValueMember = "EmployeeID";
+            cmbcandidates.DataSource = cmbcandidates2.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query5);
+
+
+
+
+
+
 
             cmbAgency.ValueMember = "AgencID";
             cmbAgency.DisplayMember = "AgenceName";
             cmbAgency.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select AgencID,AgenceName  from Agencies /*order by AgencID*/ ");
             cmbAgency.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbAgency.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-
-
-
-
-
-
-
 
 
 
@@ -550,7 +566,20 @@ namespace Delmon_Managment_System.Forms
         {
             Visanumtxt.BackColor = Color.White;
             SQLCONN.OpenConection();
-            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from visa where  VisaNumber LIKE '%" + Visanumtxt.Text + "%'");
+            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT  [VisaNumber]
+      ,[ComapnyID]
+      ,[ReceviedDate]
+      ,[IssueDateHijri]
+      ,[IssueDateEN]
+      ,[ExpiryDateHijri]
+      ,[ExpiryDateEN]
+      ,[TotalVisas]
+      ,[Remarks]
+      ,[UserID]
+      ,[DatetimeLOG]
+      ,[CRNumber]
+      ,[ID_Number]
+       FROM [DelmonGroupDB].[dbo].[VISA], [Companies] where Companies.COMPID=VISA.ComapnyID and VisaNumber LIKE '%" + Visanumtxt.Text + "%'");
             SQLCONN.CloseConnection();
             //this.dataGridView1.Columns[2].Visible = false;
             //this.dataGridView1.Columns[4].Visible = false;
@@ -1465,10 +1494,16 @@ namespace Delmon_Managment_System.Forms
          
                         TotalVisastxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString());
                         RemarksTxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString());
+                        txtCRNumber.Text = (dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString());
+                        txtsponserID.Text = (dataGridView1.Rows[e.RowIndex].Cells[12].Value.ToString());
+
                         dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber=" + VisaNumberID + " ");
 
                     }
                       Visanumtxt.Text = VisaNumberID.ToString();
+
+                 
+
 
 
                     ///*calculate the */
