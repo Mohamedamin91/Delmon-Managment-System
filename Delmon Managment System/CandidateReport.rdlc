@@ -33,6 +33,10 @@
           <DataField>COMPName_EN</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="Date">
+          <DataField>Date</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>Delmon</rd:DataSetName>
@@ -55,13 +59,13 @@
                   <Width>6.20417cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.92333cm</Width>
+                  <Width>3.59251cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>4.10302cm</Width>
+                  <Width>8.19546cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.38875cm</Width>
+                  <Width>2.5cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -79,6 +83,8 @@
                                 <TextRun>
                                   <Value>Full Name</Value>
                                   <Style>
+                                    <FontFamily>Arial Rounded MT Bold, 11.25pt</FontFamily>
+                                    <FontSize>12pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -113,6 +119,8 @@
                                 <TextRun>
                                   <Value>Status </Value>
                                   <Style>
+                                    <FontFamily>Arial Rounded MT Bold, 11.25pt</FontFamily>
+                                    <FontSize>12pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -147,6 +155,8 @@
                                 <TextRun>
                                   <Value>Company</Value>
                                   <Style>
+                                    <FontFamily>Arial Rounded MT Bold, 11.25pt</FontFamily>
+                                    <FontSize>12pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -172,15 +182,17 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox10">
+                        <Textbox Name="Textbox20">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Total</Value>
+                                  <Value>Date</Value>
                                   <Style>
+                                    <FontFamily>Arial Rounded MT Bold, 11.25pt</FontFamily>
+                                    <FontSize>12pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -190,7 +202,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox10</rd:DefaultName>
+                          <rd:DefaultName>Textbox20</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -219,7 +231,10 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!FullName.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Arial Rounded MT Bold</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -251,7 +266,10 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!StatusValue.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Arial Rounded MT Bold</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -283,7 +301,10 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!COMPName_EN.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Arial Rounded MT Bold</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -307,15 +328,18 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Total">
+                        <Textbox Name="Date">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Total.Value</Value>
-                                  <Style />
+                                  <Value>=Fields!Date.Value</Value>
+                                  <Style>
+                                    <FontFamily>Arial Rounded MT Bold</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -323,7 +347,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Total</rd:DefaultName>
+                          <rd:DefaultName>Date</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -361,9 +385,9 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
             <Top>0.97897cm</Top>
-            <Left>0.2606cm</Left>
+            <Left>1.91164cm</Left>
             <Height>1.2cm</Height>
-            <Width>14.61927cm</Width>
+            <Width>20.49213cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -374,7 +398,7 @@
         <Height>2in</Height>
         <Style />
       </Body>
-      <Width>6.5in</Width>
+      <Width>9.32219in</Width>
       <Page>
         <PageHeader>
           <Height>5.92348cm</Height>
@@ -472,8 +496,8 @@
                         <TextRun>
                           <Value>Candidates Status - Report</Value>
                           <Style>
-                            <FontFamily>calibri</FontFamily>
-                            <FontSize>20pt</FontSize>
+                            <FontFamily>Arial Rounded MT Bold</FontFamily>
+                            <FontSize>18pt</FontSize>
                           </Style>
                         </TextRun>
                       </TextRuns>
@@ -483,8 +507,8 @@
                     </Paragraph>
                   </Paragraphs>
                   <rd:DefaultName>Textbox1</rd:DefaultName>
-                  <Top>0.0925in</Top>
-                  <Left>0.22632in</Left>
+                  <Top>0.10628in</Top>
+                  <Left>0.77244in</Left>
                   <Height>0.41361in</Height>
                   <Width>5.95548in</Width>
                   <Style>
@@ -504,7 +528,9 @@
                       <TextRuns>
                         <TextRun>
                           <Value>= " Date range: " &amp; Format(Parameters!param3.Value, "dd/MM/yyyy") &amp; "  To  " &amp; Format(Parameters!param4.Value, "dd/MM/yyyy")</Value>
-                          <Style />
+                          <Style>
+                            <FontFamily>Arial Rounded MT Bold</FontFamily>
+                          </Style>
                         </TextRun>
                       </TextRuns>
                       <Style>
@@ -514,14 +540,12 @@
                   </Paragraphs>
                   <rd:DefaultName>Textbox5</rd:DefaultName>
                   <Top>1.49692cm</Top>
-                  <Left>3.31136cm</Left>
-                  <Height>0.6cm</Height>
+                  <Left>3.56975cm</Left>
+                  <Height>0.78521cm</Height>
                   <Width>10.4375cm</Width>
                   <ZIndex>1</ZIndex>
                   <Style>
-                    <Border>
-                      <Style>None</Style>
-                    </Border>
+                    <Border />
                     <PaddingLeft>2pt</PaddingLeft>
                     <PaddingRight>2pt</PaddingRight>
                     <PaddingTop>2pt</PaddingTop>
@@ -530,10 +554,10 @@
                 </Textbox>
               </ReportItems>
               <KeepTogether>true</KeepTogether>
-              <Top>1in</Top>
-              <Left>0.1026in</Left>
+              <Top>1.02777in</Top>
+              <Left>0.87504in</Left>
               <Height>1.05083in</Height>
-              <Width>6.2948in</Width>
+              <Width>7.63465in</Width>
               <ZIndex>3</ZIndex>
               <Style>
                 <Border>
@@ -549,7 +573,7 @@
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>2.54cm</Height>
+          <Height>2.59292cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <Style>

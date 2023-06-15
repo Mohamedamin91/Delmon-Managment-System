@@ -163,30 +163,30 @@ namespace Delmon_Managment_System.Forms
             cmbStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-            //cmbcandidates.ValueMember = "EmployeeID";
-            //cmbcandidates.DisplayMember = "Name";
-            //cmbcandidates.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees] , StatusTBL where Employees.EmploymentStatusID = StatusTBL.StatusID and RefrenceID=2 and StatusTBL.StatusID = 23 order by EmployeeID");
-            //cmbcandidates.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //cmbcandidates.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-            //cmbcandidates2.ValueMember = "EmployeeID";
-            //cmbcandidates2.DisplayMember = "Name";
-            //cmbcandidates2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees]       order by EmployeeID");
-            //cmbcandidates2.Text = "Select";
-            //cmbcandidates2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //cmbcandidates2.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-
-            string query5 = @"SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', ''), COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name
-                 FROM [DelmonGroupDB].[dbo].[Employees]
-                 LEFT JOIN StatusTBL ON Employees.EmploymentStatusID = StatusTBL.StatusID
-                 WHERE RefrenceID = 2 AND StatusTBL.StatusID = 23
-                 ORDER BY EmployeeID";
-            cmbcandidates.DisplayMember = "Name";
             cmbcandidates.ValueMember = "EmployeeID";
-            cmbcandidates2.DisplayMember = "Name";
+            cmbcandidates.DisplayMember = "Name";
+            cmbcandidates.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees] , StatusTBL where Employees.EmploymentStatusID = StatusTBL.StatusID and RefrenceID=2 and StatusTBL.StatusID = 23 order by EmployeeID");
+            cmbcandidates.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbcandidates.AutoCompleteSource = AutoCompleteSource.ListItems;
+
             cmbcandidates2.ValueMember = "EmployeeID";
-            cmbcandidates.DataSource = cmbcandidates2.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query5);
+            cmbcandidates2.DisplayMember = "Name";
+            cmbcandidates2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees]       order by EmployeeID");
+            cmbcandidates2.Text = "Select";
+            cmbcandidates2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbcandidates2.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+            //string query5 = @"SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', ''), COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name
+            //     FROM [DelmonGroupDB].[dbo].[Employees]
+            //     LEFT JOIN StatusTBL ON Employees.EmploymentStatusID = StatusTBL.StatusID
+            //     WHERE RefrenceID = 2 AND StatusTBL.StatusID = 23
+            //     ORDER BY EmployeeID";
+            //cmbcandidates.DisplayMember = "Name";
+            //cmbcandidates.ValueMember = "EmployeeID";
+            //cmbcandidates2.DisplayMember = "Name";
+            //cmbcandidates2.ValueMember = "EmployeeID";
+            //cmbcandidates.DataSource = cmbcandidates2.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query5);
 
 
 

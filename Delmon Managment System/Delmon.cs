@@ -7,9 +7,12 @@
     }
 }
 
-namespace Delmon_Managment_System.DelmonTableAdapters {
-    
-    
+namespace Delmon_Managment_System.DelmonTableAdapters
+{
+    partial class StatusTBLTableAdapter
+    {
+    }
+
     public partial class DataTable3TableAdapter {
     }
 }

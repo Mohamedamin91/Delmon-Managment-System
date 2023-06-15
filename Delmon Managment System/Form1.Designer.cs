@@ -98,6 +98,7 @@ namespace Delmon_Managment_System
             this.groupBox1.Controls.Add(this.lblemail);
             this.groupBox1.Controls.Add(this.lblusername);
             this.groupBox1.Controls.Add(this.lblusertype);
+            this.groupBox1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.groupBox1.Location = new System.Drawing.Point(3, 748);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(194, 183);

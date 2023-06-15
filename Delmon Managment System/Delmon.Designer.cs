@@ -1303,6 +1303,8 @@ namespace Delmon_Managment_System {
             
             private global::System.Data.DataColumn columnTotalVisas;
             
+            private global::System.Data.DataColumn columnReservedTo;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public DataTable3DataTable() {
@@ -1362,6 +1364,14 @@ namespace Delmon_Managment_System {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ReservedToColumn {
+                get {
+                    return this.columnReservedTo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1397,12 +1407,13 @@ namespace Delmon_Managment_System {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public DataTable3Row AddDataTable3Row(string CompanyName, string VisaStatus, int TotalVisas) {
+            public DataTable3Row AddDataTable3Row(string CompanyName, string VisaStatus, int TotalVisas, string ReservedTo) {
                 DataTable3Row rowDataTable3Row = ((DataTable3Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         CompanyName,
                         VisaStatus,
-                        TotalVisas};
+                        TotalVisas,
+                        ReservedTo};
                 rowDataTable3Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDataTable3Row);
                 return rowDataTable3Row;
@@ -1428,6 +1439,7 @@ namespace Delmon_Managment_System {
                 this.columnCompanyName = base.Columns["CompanyName"];
                 this.columnVisaStatus = base.Columns["VisaStatus"];
                 this.columnTotalVisas = base.Columns["TotalVisas"];
+                this.columnReservedTo = base.Columns["ReservedTo"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1439,9 +1451,12 @@ namespace Delmon_Managment_System {
                 base.Columns.Add(this.columnVisaStatus);
                 this.columnTotalVisas = new global::System.Data.DataColumn("TotalVisas", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTotalVisas);
+                this.columnReservedTo = new global::System.Data.DataColumn("ReservedTo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnReservedTo);
                 this.columnCompanyName.MaxLength = 100;
                 this.columnVisaStatus.MaxLength = 50;
                 this.columnTotalVisas.ReadOnly = true;
+                this.columnReservedTo.MaxLength = 100;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1862,6 +1877,8 @@ namespace Delmon_Managment_System {
             
             private global::System.Data.DataColumn columnCOMPName_EN;
             
+            private global::System.Data.DataColumn columnDate;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public StatusTBLDataTable() {
@@ -1929,6 +1946,14 @@ namespace Delmon_Managment_System {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn DateColumn {
+                get {
+                    return this.columnDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1964,13 +1989,14 @@ namespace Delmon_Managment_System {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public StatusTBLRow AddStatusTBLRow(string FullName, string StatusValue, int Total, string COMPName_EN) {
+            public StatusTBLRow AddStatusTBLRow(string FullName, string StatusValue, int Total, string COMPName_EN, string Date) {
                 StatusTBLRow rowStatusTBLRow = ((StatusTBLRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         FullName,
                         StatusValue,
                         Total,
-                        COMPName_EN};
+                        COMPName_EN,
+                        Date};
                 rowStatusTBLRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowStatusTBLRow);
                 return rowStatusTBLRow;
@@ -1997,6 +2023,7 @@ namespace Delmon_Managment_System {
                 this.columnStatusValue = base.Columns["StatusValue"];
                 this.columnTotal = base.Columns["Total"];
                 this.columnCOMPName_EN = base.Columns["COMPName_EN"];
+                this.columnDate = base.Columns["Date"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2010,11 +2037,15 @@ namespace Delmon_Managment_System {
                 base.Columns.Add(this.columnTotal);
                 this.columnCOMPName_EN = new global::System.Data.DataColumn("COMPName_EN", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCOMPName_EN);
+                this.columnDate = new global::System.Data.DataColumn("Date", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDate);
                 this.columnFullName.ReadOnly = true;
                 this.columnFullName.MaxLength = 83;
                 this.columnStatusValue.MaxLength = 50;
                 this.columnTotal.ReadOnly = true;
                 this.columnCOMPName_EN.MaxLength = 100;
+                this.columnDate.ReadOnly = true;
+                this.columnDate.MaxLength = 10;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2895,6 +2926,22 @@ namespace Delmon_Managment_System {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string ReservedTo {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable3.ReservedToColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ReservedTo\' in table \'DataTable3\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable3.ReservedToColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsCompanyNameNull() {
                 return this.IsNull(this.tableDataTable3.CompanyNameColumn);
             }
@@ -2927,6 +2974,18 @@ namespace Delmon_Managment_System {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetTotalVisasNull() {
                 this[this.tableDataTable3.TotalVisasColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsReservedToNull() {
+                return this.IsNull(this.tableDataTable3.ReservedToColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetReservedToNull() {
+                this[this.tableDataTable3.ReservedToColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -3109,6 +3168,22 @@ namespace Delmon_Managment_System {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Date {
+                get {
+                    try {
+                        return ((string)(this[this.tableStatusTBL.DateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Date\' in table \'StatusTBL\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableStatusTBL.DateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsFullNameNull() {
                 return this.IsNull(this.tableStatusTBL.FullNameColumn);
             }
@@ -3153,6 +3228,18 @@ namespace Delmon_Managment_System {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetCOMPName_ENNull() {
                 this[this.tableStatusTBL.COMPName_ENColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsDateNull() {
+                return this.IsNull(this.tableStatusTBL.DateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetDateNull() {
+                this[this.tableStatusTBL.DateColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -3861,6 +3948,7 @@ namespace Delmon_Managment_System.DelmonTableAdapters {
             tableMapping.ColumnMappings.Add("CompanyName", "CompanyName");
             tableMapping.ColumnMappings.Add("VisaStatus", "VisaStatus");
             tableMapping.ColumnMappings.Add("TotalVisas", "TotalVisas");
+            tableMapping.ColumnMappings.Add("ReservedTo", "ReservedTo");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -3877,29 +3965,35 @@ namespace Delmon_Managment_System.DelmonTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT 
-    C.COMPName_EN as [CompanyName],
-    S.Status as [VisaStatus],
-    COUNT(*) AS [TotalVisas]
-FROM 
-    DelmonGroupDB.dbo.VISA V
-    JOIN DelmonGroupDB.dbo.VISAJobList J ON V.VisaNumber = J.VISANumber
-    JOIN DelmonGroupDB.dbo.Companies C ON V.ComapnyID = C.COMPID
-    JOIN DelmonGroupDB.dbo.VisaStatus S ON J.StatusID = S.StatusID
+            this._commandCollection[0].CommandText = @"SELECT C.COMPName_EN as [CompanyName], CO.COMPName_EN as [ReservedTo], S.Status as [VisaStatus], COUNT(*) AS [TotalVisas] FROM DelmonGroupDB.dbo.VISA V JOIN DelmonGroupDB.dbo.VISAJobList J ON V.VisaNumber = J.VISANumber JOIN DelmonGroupDB.dbo.Companies C ON V.ComapnyID = C.COMPID JOIN DelmonGroupDB.dbo.Companies CO ON J.ReservedTo = CO.COMPID JOIN DelmonGroupDB.dbo.VisaStatus S ON J.StatusID = S.StatusID AND S.RefrenceID = 1 JOIN DelmonGroupDB.dbo.Employees E ON E.EmployeeID = J.EmployeeID WHERE TRY_CONVERT(DATETIME, IssueDateEN, 103) BETWEEN @param1 AND @param2
 
 GROUP BY 
-    C.COMPName_EN, S.Status
+    C.COMPName_EN, S.Status,CO.COMPName_EN
 ORDER BY 
-    C.COMPName_EN, S.Status;";
+    C.COMPName_EN, S.Status,CO.COMPName_EN;";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@param1", global::System.Data.SqlDbType.VarChar, 1024, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@param2", global::System.Data.SqlDbType.VarChar, 1024, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(Delmon.DataTable3DataTable dataTable) {
+        public virtual int Fill(Delmon.DataTable3DataTable dataTable, string param1, string param2) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((param1 == null)) {
+                throw new global::System.ArgumentNullException("param1");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(param1));
+            }
+            if ((param2 == null)) {
+                throw new global::System.ArgumentNullException("param2");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((string)(param2));
+            }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }
@@ -3911,8 +4005,20 @@ ORDER BY
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual Delmon.DataTable3DataTable GetData() {
+        public virtual Delmon.DataTable3DataTable GetData(string param1, string param2) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((param1 == null)) {
+                throw new global::System.ArgumentNullException("param1");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(param1));
+            }
+            if ((param2 == null)) {
+                throw new global::System.ArgumentNullException("param2");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((string)(param2));
+            }
             Delmon.DataTable3DataTable dataTable = new Delmon.DataTable3DataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -4280,6 +4386,7 @@ GROUP BY RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(SecondName +
             tableMapping.ColumnMappings.Add("StatusValue", "StatusValue");
             tableMapping.ColumnMappings.Add("Total", "Total");
             tableMapping.ColumnMappings.Add("COMPName_EN", "COMPName_EN");
+            tableMapping.ColumnMappings.Add("Date", "Date");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -4300,16 +4407,16 @@ GROUP BY RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(SecondName +
 COALESCE(CONCAT(SecondName, ' '), '') +
 COALESCE(CONCAT(ThirdName, ' '), '') +
 COALESCE(Lastname, '')) [FullName],
-       StatusTBL.StatusValue,COMPName_EN,
+       StatusTBL.StatusValue,COMPName_EN,    CONVERT(NVARCHAR(10), StartDate, 103) AS [Date] ,
        COUNT(*) AS Total
 FROM Employees
 JOIN Companies ON Employees.COMPID = Companies.COMPID
 JOIN StatusTBL ON Employees.EmploymentStatusID = StatusTBL.StatusID
-WHERE TRY_CONVERT(DATETIME, StartDate, 103) BETWEEN @param3 AND @param4
+WHERE TRY_CONVERT(DATE, StartDate, 103) BETWEEN @param3 AND @param4
 GROUP BY TRIM(COALESCE(CONCAT(FirstName, ' '), '') +
          COALESCE(CONCAT(SecondName, ' '), '') +
          COALESCE(CONCAT(ThirdName, ' '), '') +
-         COALESCE(Lastname, '')), StatusTBL.StatusValue,COMPName_EN";
+         COALESCE(Lastname, '')), StatusTBL.StatusValue,COMPName_EN,StartDate";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@param3", global::System.Data.SqlDbType.VarChar, 1024, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@param4", global::System.Data.SqlDbType.VarChar, 1024, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
