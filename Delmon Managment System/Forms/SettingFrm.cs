@@ -39,7 +39,17 @@ namespace Delmon_Managment_System.Forms
             //    control.Font = newFont;
             //}
 
+
+
+
+
+
+
+
         }
+
+   
+
         public static Regex email_validation()
         {
             string pattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|"
@@ -48,7 +58,11 @@ namespace Delmon_Managment_System.Forms
 
             return new Regex(pattern, RegexOptions.IgnoreCase);
         }
-        private void SettingFrm_Load(object sender, EventArgs e)
+
+
+        // Method to populate the ComboBox
+      
+        public void SettingFrm_Load(object sender, EventArgs e)
         {
             SqlParameter paramloggedemployee = new SqlParameter("@LoggedEmployeeid", SqlDbType.NVarChar);
             paramloggedemployee.Value = LoggedEmployeeID;
@@ -155,6 +169,9 @@ namespace Delmon_Managment_System.Forms
             cmbDepartment.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Dept_Type_ID,Dept_Type_Name FROM [DeptTypes]");
             cmbDepartment.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbDepartment.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+           
 
 
 
@@ -2120,6 +2137,8 @@ FROM [DelmonGroupDB].[dbo].[Companies]
 JOIN Employees ON Employees.EmployeeID = Companies.General_Manager
 WHERE (COMPName_EN LIKE '%' + @C1 + '%')
    OR (COMPName_AR LIKE '%' + @C1 + '%')
+   OR (CRNumber LIKE '%' + @C1 + '%')
+   OR (ID_Number LIKE '%' + @C1 + '%')
    AND Companies.General_Manager IN (SELECT EmployeeID FROM Employees)
 ";
 
@@ -2192,6 +2211,9 @@ WHERE (COMPName_EN LIKE '%' + @C1 + '%')
             SqlParameter paramGeneralManager = new SqlParameter("@C9", SqlDbType.NVarChar);
             paramGeneralManager.Value = cmbemployee2.SelectedValue;
 
+            SqlParameter paramShortName= new SqlParameter("@C10", SqlDbType.NVarChar);
+            paramShortName.Value = txtshort.Text;
+
 
             SqlParameter paramCompid = new SqlParameter("@id", SqlDbType.NVarChar);
             paramCompid.Value = CompID;
@@ -2238,7 +2260,7 @@ WHERE (COMPName_EN LIKE '%' + @C1 + '%')
 
 
 
-                        SQLCONN.ExecuteQueries("update Companies set [COMPName_EN] =@C1,[COMPName_AR]=@C2,[CRNumber]=@C3,[ID_Number]=@C4,[VAT_NO]=@C5,[EstablishedHD]=@C7,[EstablishedAD]=@C8, [General_Manager]=@C9 where  COMPID=@id  ", paramcompEn, paramcompAR, ParamCR, paramSponser, paramVat, paramHD, paramAD, paramGeneralManager, paramCompid);
+                        SQLCONN.ExecuteQueries("update Companies set [COMPName_EN] =@C1,[COMPName_AR]=@C2,[CRNumber]=@C3,[ID_Number]=@C4,[VAT_NO]=@C5,[EstablishedHD]=@C7,[EstablishedAD]=@C8, [General_Manager]=@C9,[ShortCompName]=@C10 where  COMPID=@id  ", paramcompEn, paramcompAR, ParamCR, paramSponser, paramVat, paramHD, paramAD, paramGeneralManager,paramShortName, paramCompid);
                         MessageBox.Show("Record updated Successfully");
 
 
@@ -2643,6 +2665,8 @@ WHERE (COMPName_EN LIKE '%' + @C1 + '%')
 
         private void dataGridView7_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+           
+
             button17.Visible = false;
             button14.Visible = button15.Visible = button16.Visible = true;
 
@@ -2658,7 +2682,7 @@ WHERE (COMPName_EN LIKE '%' + @C1 + '%')
                     cmbDepartment.SelectedValue = row.Cells[1].Value?.ToString();
                     cmbworkfield.SelectedValue = row.Cells[2].Value?.ToString();
                     cmbemployee1.SelectedValue = row.Cells[3].Value?.ToString();
-                    
+                   
 
                 }
 
@@ -2690,6 +2714,35 @@ WHERE (COMPName_EN LIKE '%' + @C1 + '%')
         private void Companiestap_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void cmbDepartment_DropDown(object sender, EventArgs e)
+        {
+            cmbDepartment.DropDownStyle = ComboBoxStyle.DropDown;
+            SQLCONN.OpenConection();
+            cmbDepartment.ValueMember = "Dept_Type_ID";
+            cmbDepartment.DisplayMember = "Dept_Type_Name";
+            cmbDepartment.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Dept_Type_ID,Dept_Type_Name FROM [DeptTypes]");         
+            SQLCONN.CloseConnection();
+        }
+
+        private void cmbworkfield_DropDown(object sender, EventArgs e)
+        {
+            cmbworkfield.DropDownStyle = ComboBoxStyle.DropDown;
+            SQLCONN.OpenConection();
+            cmbDepartment.ValueMember = "Dept_Type_ID";
+            cmbDepartment.DisplayMember = "Dept_Type_Name";
+            cmbDepartment.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Dept_Type_ID,Dept_Type_Name FROM [DeptTypes]");
+
+            cmbworkfield.ValueMember = "WorkID";
+            cmbworkfield.DisplayMember = "Name";
+            cmbworkfield.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT WorkID,Name FROM [WorkLocations]");
+            SQLCONN.CloseConnection();
         }
 
         private void maxtxt_KeyPress(object sender, KeyPressEventArgs e)

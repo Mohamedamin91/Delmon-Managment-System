@@ -199,8 +199,8 @@ namespace Delmon_Managment_System.Forms
             cmbEmployJobHistory.ValueMember = "JobID";
             cmbEmployJobHistory.DisplayMember = "JobTitleEN";
             cmbEmployJobHistory.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS");
-                 cmbEmployJobHistory.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                 cmbEmployJobHistory.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbEmployJobHistory.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbEmployJobHistory.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             cmbempdepthistory.ValueMember = "DEPTID";
             cmbempdepthistory.DisplayMember = "Dept_Type_Name";
@@ -2873,6 +2873,18 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
 
         private void label8_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            SQLCONN.OpenConection();
+            cmbEmployJobHistory.ValueMember = "JobID";
+            cmbEmployJobHistory.DisplayMember = "JobTitleEN";
+            cmbEmployJobHistory.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS");
+            cmbEmployJobHistory.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbEmployJobHistory.AutoCompleteSource = AutoCompleteSource.ListItems;
+            SQLCONN.CloseConnection();
 
         }
     }

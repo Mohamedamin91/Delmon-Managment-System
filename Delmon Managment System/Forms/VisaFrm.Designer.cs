@@ -87,19 +87,13 @@ namespace Delmon_Managment_System.Forms
             this.cmbAgency = new System.Windows.Forms.ComboBox();
             this.btnnewJob = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
-            this.lblusername = new System.Windows.Forms.Label();
-            this.lblemail = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblFullname = new System.Windows.Forms.Label();
-            this.lblPC = new System.Windows.Forms.Label();
-            this.lbldatetime = new System.Windows.Forms.Label();
-            this.lblusertype = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.button3 = new System.Windows.Forms.Button();
+            this.lbldatetime = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -278,6 +272,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbCompany.Name = "cmbCompany";
             this.cmbCompany.Size = new System.Drawing.Size(481, 25);
             this.cmbCompany.TabIndex = 34;
+            this.cmbCompany.DropDown += new System.EventHandler(this.cmbCompany_DropDown);
             this.cmbCompany.SelectedIndexChanged += new System.EventHandler(this.cmbCompany_SelectedIndexChanged);
             this.cmbCompany.SelectionChangeCommitted += new System.EventHandler(this.cmbCompany_SelectionChangeCommitted);
             this.cmbCompany.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbCompany_KeyDown);
@@ -314,6 +309,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(277, 25);
             this.cmbStatus.TabIndex = 42;
+            this.cmbStatus.DropDown += new System.EventHandler(this.cmbStatus_DropDown);
             // 
             // label10
             // 
@@ -347,6 +343,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbJob.Name = "cmbJob";
             this.cmbJob.Size = new System.Drawing.Size(278, 25);
             this.cmbJob.TabIndex = 38;
+            this.cmbJob.DropDown += new System.EventHandler(this.cmbJob_DropDown);
             this.cmbJob.SelectedIndexChanged += new System.EventHandler(this.cmbJob_SelectedIndexChanged);
             this.cmbJob.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbJob_KeyDown);
             // 
@@ -372,6 +369,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbConsulate.Name = "cmbConsulate";
             this.cmbConsulate.Size = new System.Drawing.Size(155, 25);
             this.cmbConsulate.TabIndex = 36;
+            this.cmbConsulate.DropDown += new System.EventHandler(this.cmbConsulate_DropDown);
             this.cmbConsulate.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbConsulate_KeyDown);
             // 
             // label12
@@ -435,7 +433,7 @@ namespace Delmon_Managment_System.Forms
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnNew.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnNew.Location = new System.Drawing.Point(379, 15);
+            this.btnNew.Location = new System.Drawing.Point(417, 15);
             this.btnNew.Margin = new System.Windows.Forms.Padding(4);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(55, 27);
@@ -467,7 +465,7 @@ namespace Delmon_Managment_System.Forms
             this.DeleteBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DeleteBtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.DeleteBtn.ForeColor = System.Drawing.Color.Firebrick;
-            this.DeleteBtn.Location = new System.Drawing.Point(856, 680);
+            this.DeleteBtn.Location = new System.Drawing.Point(833, 680);
             this.DeleteBtn.Margin = new System.Windows.Forms.Padding(4);
             this.DeleteBtn.Name = "DeleteBtn";
             this.DeleteBtn.Size = new System.Drawing.Size(67, 28);
@@ -538,7 +536,7 @@ namespace Delmon_Managment_System.Forms
             this.Findbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Findbtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.Findbtn.ForeColor = System.Drawing.Color.Firebrick;
-            this.Findbtn.Location = new System.Drawing.Point(442, 15);
+            this.Findbtn.Location = new System.Drawing.Point(480, 15);
             this.Findbtn.Margin = new System.Windows.Forms.Padding(4);
             this.Findbtn.Name = "Findbtn";
             this.Findbtn.Size = new System.Drawing.Size(54, 27);
@@ -556,7 +554,7 @@ namespace Delmon_Managment_System.Forms
             this.btnAssign.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAssign.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnAssign.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnAssign.Location = new System.Drawing.Point(471, 231);
+            this.btnAssign.Location = new System.Drawing.Point(470, 233);
             this.btnAssign.Margin = new System.Windows.Forms.Padding(4);
             this.btnAssign.Name = "btnAssign";
             this.btnAssign.Size = new System.Drawing.Size(67, 27);
@@ -587,7 +585,9 @@ namespace Delmon_Managment_System.Forms
             this.cmbcandidates.Name = "cmbcandidates";
             this.cmbcandidates.Size = new System.Drawing.Size(277, 25);
             this.cmbcandidates.TabIndex = 44;
+            this.cmbcandidates.DropDown += new System.EventHandler(this.cmbcandidates_DropDown);
             this.cmbcandidates.SelectedIndexChanged += new System.EventHandler(this.cmbcandidates_SelectedIndexChanged);
+            this.cmbcandidates.Click += new System.EventHandler(this.cmbcandidates_Click);
             // 
             // label4
             // 
@@ -642,7 +642,7 @@ namespace Delmon_Managment_System.Forms
             this.groupBox2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.groupBox2.Location = new System.Drawing.Point(12, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1204, 294);
+            this.groupBox2.Size = new System.Drawing.Size(1280, 294);
             this.groupBox2.TabIndex = 89;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Visa Info";
@@ -702,6 +702,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbReservedTo.Name = "cmbReservedTo";
             this.cmbReservedTo.Size = new System.Drawing.Size(322, 25);
             this.cmbReservedTo.TabIndex = 87;
+            this.cmbReservedTo.DropDown += new System.EventHandler(this.cmbReservedTo_DropDown);
             // 
             // label16
             // 
@@ -739,7 +740,7 @@ namespace Delmon_Managment_System.Forms
             this.groupBox3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.groupBox3.Location = new System.Drawing.Point(12, 304);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1204, 333);
+            this.groupBox3.Size = new System.Drawing.Size(1280, 333);
             this.groupBox3.TabIndex = 90;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Visa JobList";
@@ -755,6 +756,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbcandidates2.Name = "cmbcandidates2";
             this.cmbcandidates2.Size = new System.Drawing.Size(277, 25);
             this.cmbcandidates2.TabIndex = 89;
+            this.cmbcandidates2.Click += new System.EventHandler(this.cmbcandidates2_Click);
             // 
             // label15
             // 
@@ -775,7 +777,7 @@ namespace Delmon_Managment_System.Forms
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.button2.ForeColor = System.Drawing.Color.Firebrick;
-            this.button2.Location = new System.Drawing.Point(476, 194);
+            this.button2.Location = new System.Drawing.Point(475, 196);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(52, 29);
@@ -805,6 +807,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbAgency.Name = "cmbAgency";
             this.cmbAgency.Size = new System.Drawing.Size(277, 25);
             this.cmbAgency.TabIndex = 85;
+            this.cmbAgency.DropDown += new System.EventHandler(this.cmbAgency_DropDown);
             this.cmbAgency.SelectedIndexChanged += new System.EventHandler(this.cmbAgency_SelectedIndexChanged);
             this.cmbAgency.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbAgency_KeyDown);
             // 
@@ -816,7 +819,7 @@ namespace Delmon_Managment_System.Forms
             this.btnnewJob.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnnewJob.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnnewJob.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnnewJob.Location = new System.Drawing.Point(471, 125);
+            this.btnnewJob.Location = new System.Drawing.Point(470, 127);
             this.btnnewJob.Margin = new System.Windows.Forms.Padding(4);
             this.btnnewJob.Name = "btnnewJob";
             this.btnnewJob.Size = new System.Drawing.Size(51, 32);
@@ -843,97 +846,38 @@ namespace Delmon_Managment_System.Forms
             this.btnUpdate.Visible = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
-            // lblusername
+            // timer1
             // 
-            this.lblusername.AutoSize = true;
-            this.lblusername.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.lblusername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblusername.Location = new System.Drawing.Point(7, 29);
-            this.lblusername.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblusername.Name = "lblusername";
-            this.lblusername.Size = new System.Drawing.Size(85, 17);
-            this.lblusername.TabIndex = 92;
-            this.lblusername.Text = "UserName";
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // lblemail
+            // button3
             // 
-            this.lblemail.AutoSize = true;
-            this.lblemail.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.lblemail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblemail.Location = new System.Drawing.Point(7, 78);
-            this.lblemail.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblemail.Name = "lblemail";
-            this.lblemail.Size = new System.Drawing.Size(48, 17);
-            this.lblemail.TabIndex = 95;
-            this.lblemail.Text = "Email";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.lblFullname);
-            this.groupBox1.Controls.Add(this.lblPC);
-            this.groupBox1.Controls.Add(this.lbldatetime);
-            this.groupBox1.Controls.Add(this.lblemail);
-            this.groupBox1.Controls.Add(this.lblusername);
-            this.groupBox1.Controls.Add(this.lblusertype);
-            this.groupBox1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.groupBox1.Location = new System.Drawing.Point(1312, 22);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(223, 211);
-            this.groupBox1.TabIndex = 96;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "User Info";
-            // 
-            // lblFullname
-            // 
-            this.lblFullname.AutoSize = true;
-            this.lblFullname.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.lblFullname.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblFullname.Location = new System.Drawing.Point(7, 53);
-            this.lblFullname.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblFullname.Name = "lblFullname";
-            this.lblFullname.Size = new System.Drawing.Size(80, 17);
-            this.lblFullname.TabIndex = 98;
-            this.lblFullname.Text = "Full Name";
-            // 
-            // lblPC
-            // 
-            this.lblPC.AutoSize = true;
-            this.lblPC.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.lblPC.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblPC.Location = new System.Drawing.Point(7, 123);
-            this.lblPC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPC.Name = "lblPC";
-            this.lblPC.Size = new System.Drawing.Size(27, 17);
-            this.lblPC.TabIndex = 97;
-            this.lblPC.Text = "Pc";
+            this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button3.BackColor = System.Drawing.Color.White;
+            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button3.ForeColor = System.Drawing.Color.Firebrick;
+            this.button3.Location = new System.Drawing.Point(924, 678);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(77, 32);
+            this.button3.TabIndex = 97;
+            this.button3.Text = "Refresh";
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // lbldatetime
             // 
             this.lbldatetime.AutoSize = true;
             this.lbldatetime.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.lbldatetime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lbldatetime.Location = new System.Drawing.Point(7, 151);
+            this.lbldatetime.Location = new System.Drawing.Point(1423, 19);
             this.lbldatetime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbldatetime.Name = "lbldatetime";
             this.lbldatetime.Size = new System.Drawing.Size(77, 17);
             this.lbldatetime.TabIndex = 96;
             this.lbldatetime.Text = "Date&Time";
-            // 
-            // lblusertype
-            // 
-            this.lblusertype.AutoSize = true;
-            this.lblusertype.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.lblusertype.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblusertype.Location = new System.Drawing.Point(7, 101);
-            this.lblusertype.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblusertype.Name = "lblusertype";
-            this.lblusertype.Size = new System.Drawing.Size(78, 17);
-            this.lblusertype.TabIndex = 94;
-            this.lblusertype.Text = "UserType";
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // VisaFrm
             // 
@@ -941,7 +885,8 @@ namespace Delmon_Managment_System.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1643, 813);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.lbldatetime);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox3);
@@ -961,9 +906,8 @@ namespace Delmon_Managment_System.Forms
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1013,24 +957,19 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btnnewJob;
         private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Label lblemail;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label lblusertype;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox cmbAgency;
         private System.Windows.Forms.Button button2;
-        public System.Windows.Forms.Label lblusername;
-        public System.Windows.Forms.Label lbldatetime;
-        public System.Windows.Forms.Label lblPC;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ComboBox cmbcandidates2;
-        public System.Windows.Forms.Label lblFullname;
         private System.Windows.Forms.ComboBox cmbReservedTo;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox txtsponserID;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox txtCRNumber;
+        private System.Windows.Forms.Button button3;
+        public System.Windows.Forms.Label lbldatetime;
     }
 }

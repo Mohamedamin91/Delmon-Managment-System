@@ -15,6 +15,7 @@ namespace Delmon_Managment_System.Forms
     {
         SQLCONNECTION SQLCONN = new SQLCONNECTION();
         int DeptTypeID;
+        SettingFrm settingFrm = new SettingFrm();
 
         public FrmDeptNew()
         {
@@ -61,20 +62,16 @@ namespace Delmon_Managment_System.Forms
                         paramDeptID.Value = DeptTypeID;
                         SQLCONN.ExecuteQueries("insert into DeptTypes ([Dept_Type_ID] ,[Dept_Type_Name]) values (@C1,@C2) ",
                                                        paramDeptID, paramDeptTypeName);
-                        MessageBox.Show("Record saved Successfully");
+                           MessageBox.Show("Record saved Successfully");
+                        settingFrm.SettingFrm_Load( sender,  e);
                         txtDepttypeName.Text = "";
 
 
                         dr.Dispose();
                         dr.Close();
 
-
-
                     }
                 }
-
-              
-           
 
             }
             else
@@ -82,7 +79,13 @@ namespace Delmon_Managment_System.Forms
                 MessageBox.Show("Please Fill the missing field  ");
 
             }
+      
             SQLCONN.CloseConnection();
+        }
+
+        private void FrmDeptNew_FormClosed(object sender, FormClosedEventArgs e)
+        {
+         
         }
     }
 }

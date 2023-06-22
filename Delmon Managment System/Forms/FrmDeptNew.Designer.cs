@@ -95,6 +95,7 @@ namespace Delmon_Managment_System.Forms
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmDeptNew";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmDeptNew_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
