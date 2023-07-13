@@ -231,11 +231,10 @@ namespace Delmon_Managment_System
             this.btnNotifications.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.btnNotifications.Size = new System.Drawing.Size(200, 60);
             this.btnNotifications.TabIndex = 5;
-            this.btnNotifications.Text = "  Notifications";
+            this.btnNotifications.Text = "Alerts";
             this.btnNotifications.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnNotifications.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnNotifications.UseVisualStyleBackColor = true;
-            this.btnNotifications.Visible = false;
             this.btnNotifications.Click += new System.EventHandler(this.btnNotifications_Click);
             // 
             // btnBilling
@@ -256,7 +255,6 @@ namespace Delmon_Managment_System
             this.btnBilling.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnBilling.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnBilling.UseVisualStyleBackColor = true;
-            this.btnBilling.Visible = false;
             this.btnBilling.Click += new System.EventHandler(this.btnBilling_Click);
             // 
             // btnprinting

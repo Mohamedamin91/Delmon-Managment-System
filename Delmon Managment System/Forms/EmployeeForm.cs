@@ -270,7 +270,7 @@ WHERE (e.EmployeeID LIKE '%' + REPLACE(@C1, ' ', '') + '%'
        OR e.SecondName LIKE '%' + @C1 + '%'
        OR e.ThirdName LIKE '%' + @C1 + '%'
        OR e.LastName LIKE '%' + @C1 + '%'
-      )
+      ) and e.EmployeeID !=0
 ORDER BY e.EmployeeID";
                 dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramEmployeenameSearch);
 
@@ -523,11 +523,22 @@ ORDER BY e.EmployeeID";
                         MessageBox.Show("Record Updated Successfully");
                         // dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT id_History,[EmployeeID],NewID,StatusTBL.StatusValue,[JOBS].JobTitleEN, DeptTypes.Dept_Type_Name,[StartDate],[EndDate],[UserID],[DatetimeLog]  FROM[DelmonGroupDB].[dbo].[EmploymentStatus], JOBS, DEPARTMENTS, StatusTBL, DeptTypes  where   StatusTBL.StatusID = EmploymentStatus.EmploymentStatusID and DEPARTMENTS.DeptName = EmploymentStatus.DeptID   and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID  and JOBS.JobID = EmploymentStatus.JobID  and  NEWID = @C14  ", paramNewID);
                         //  dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Employees where  EmployeeID = '" + EMPID + "'");
+                        string query = @"SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus,
+       s.StatusValue, j.JobTitleEN, dt.Dept_Type_Name, c.COMPName_EN, e.startdate, e.enddate,
+       cn.NationalityName, v.FileNumber, v.VISANumber
+FROM Employees e
+INNER JOIN StatusTBL s ON e.EmploymentStatusID = s.StatusID
+INNER JOIN JOBS j ON e.JobID = j.JobID
+INNER JOIN DEPARTMENTS d ON e.DeptID = d.DEPTID
+INNER JOIN DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
+INNER JOIN Companies c ON d.COMPID = c.COMPID
+INNER JOIN Countries cn ON e.NationalityID = cn.CountryId
+LEFT JOIN VISAJobList v ON e.EmployeeID = v.EmployeeID
+WHERE e.EmployeeID !=0 and e.EmployeeID= @id
+ORDER BY e.EmployeeID";
 
-                        dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"
-select Employees.EmployeeID, Employees.CurrentEmpID,FirstName,SecondName,ThirdName,LastName,Gender,MartialStatus,StatusTBL.StatusValue,jobs.JobTitleEN,DeptTypes.Dept_Type_Name,Companies.COMPName_EN,startdate, enddate,NationalityName 
-from  Countries,Employees,Companies,JOBS,StatusTBL,DEPARTMENTS,DeptTypes  where Countries.CountryId = Employees.NationalityID and
-Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.Dept_Type_ID and Employees.EmploymentStatusID = StatusTBL.StatusID  and Employees.JobID= JOBS.JobID  and Employees.COMPID = Companies.COMPID  and DEPARTMENTS.COMPID = Companies.COMPID and EmployeeID= @id order by EmployeeID desc", paramPID);
+
+                        dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramPID);
 
 
 
@@ -827,11 +838,22 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
 
                             tabControl1.Enabled = true;
 
+                            string query = @"SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus,
+       s.StatusValue, j.JobTitleEN, dt.Dept_Type_Name, c.COMPName_EN, e.startdate, e.enddate,
+       cn.NationalityName, v.FileNumber, v.VISANumber
+FROM Employees e
+INNER JOIN StatusTBL s ON e.EmploymentStatusID = s.StatusID
+INNER JOIN JOBS j ON e.JobID = j.JobID
+INNER JOIN DEPARTMENTS d ON e.DeptID = d.DEPTID
+INNER JOIN DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
+INNER JOIN Companies c ON d.COMPID = c.COMPID
+INNER JOIN Countries cn ON e.NationalityID = cn.CountryId
+LEFT JOIN VISAJobList v ON e.EmployeeID = v.EmployeeID
+WHERE e.EmployeeID !=0 and e.EmployeeID= @EmployeeID
+ORDER BY e.EmployeeID";
 
-                            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"
-select Employees.EmployeeID, Employees.CurrentEmpID,FirstName,SecondName,ThirdName,LastName,Gender,MartialStatus,StatusTBL.StatusValue,jobs.JobTitleEN,DeptTypes.Dept_Type_Name,Companies.COMPName_EN,startdate, enddate,NationalityName 
-from  Countries,Employees,Companies,JOBS,StatusTBL,DEPARTMENTS,DeptTypes  where Countries.CountryId = Employees.NationalityID and
-Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.Dept_Type_ID and Employees.EmploymentStatusID = StatusTBL.StatusID  and Employees.JobID= JOBS.JobID  and Employees.COMPID = Companies.COMPID  and DEPARTMENTS.COMPID = Companies.COMPID and EmployeeID= @EmployeeID order by EmployeeID desc", paramEmployeeID);
+
+                            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramEmployeeID);
 
 
 
@@ -1109,30 +1131,32 @@ Employees.DeptID = DEPARTMENTS.DEPTID  and  DEPARTMENTS.DeptName  = DeptTypes.De
                 string[] subfolderNames = Directory.GetDirectories(directoryPath)
                                                     .Select(Path.GetFileName)
                                                     .ToArray();
-                // Check if the variable matches any of the subfolder names
-                if (subfolderNames.Contains(variable))
+            // Check if the variable matches any of the subfolder names
+            if (subfolderNames.Contains(variable))
+            {
+                // Open file dialog to select a text file to insert into the subfolder
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                //  openFileDialog.Filter = "Text Files (*.txt)|*.txt";
+                openFileDialog.Title = "Select a text file to insert into the subfolder";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    // Open file dialog to select a text file to insert into the subfolder
-                    OpenFileDialog openFileDialog = new OpenFileDialog();
-                  //  openFileDialog.Filter = "Text Files (*.txt)|*.txt";
-                    openFileDialog.Title = "Select a text file to insert into the subfolder";
+                    // Insert the selected text file into the matching subfolder
+                    string subfolderPath = Path.Combine(directoryPath, variable);
+                    textFilePath = openFileDialog.FileName;
+                    fileName = Path.GetFileName(textFilePath);
+                    destinationFilePath = Path.Combine(subfolderPath, fileName);
 
-                    if (openFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        // Insert the selected text file into the matching subfolder
-                        string subfolderPath = Path.Combine(directoryPath, variable);
-                         textFilePath = openFileDialog.FileName;
-                         fileName = Path.GetFileName(textFilePath);
-                        destinationFilePath = Path.Combine(subfolderPath, fileName);
+                    File.Copy(textFilePath, destinationFilePath);
+                    Doctxt.Text = textFilePath;
+                    // MessageBox.Show(" Uploded Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        File.Copy(textFilePath, destinationFilePath);
-                        Doctxt.Text = textFilePath;
-                       // MessageBox.Show(" Uploded Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    }
                 }
+            }
 
-
+            else {
+                MessageBox.Show("Their is no folder in the server with company name " +cmbCompany.Text + " ", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
 
 
 

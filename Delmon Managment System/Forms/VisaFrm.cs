@@ -235,7 +235,7 @@ namespace Delmon_Managment_System.Forms
 
 
             }
-            else if (cmbCompany.Text == "Select")
+            else if (cmbCompany.Text == "Select" || cmbCompany.Text=="")
             {
                 MessageBox.Show("Please Select ' Company ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
@@ -243,7 +243,7 @@ namespace Delmon_Managment_System.Forms
 
 
             }
-            else if (issuhijritxt.Text == "")
+            else if (issuhijritxt.Text == "" || issuhijritxt.Text == "")
             {
                 MessageBox.Show("Please insert ' Issue hijri date ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
@@ -251,7 +251,7 @@ namespace Delmon_Managment_System.Forms
 
 
             }
-            else if (cmbConsulate.Text == "Select")
+            else if (cmbConsulate.Text == "Select" || cmbConsulate.Text == "" )
             {
                 MessageBox.Show("Please Select ' Consulate ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
@@ -259,9 +259,17 @@ namespace Delmon_Managment_System.Forms
 
 
             }
-            else if (cmbJob.Text == "Select")
+            else if (cmbJob.Text == "Select" || cmbJob.Text == "" )
             {
                 MessageBox.Show("Please Select ' Job ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                btnNew.Visible = true;
+
+
+            }
+            else if (cmbStatus.Text == "Select" || cmbStatus.Text == "")
+            {
+                MessageBox.Show("Please Select ' Visa status ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 btnNew.Visible = true;
 
@@ -300,10 +308,43 @@ namespace Delmon_Managment_System.Forms
                         SqlParameter paramJob = new SqlParameter("@C4", SqlDbType.NVarChar);
                         paramJob.Value = cmbJob.SelectedValue;
                         SqlParameter paramAgency = new SqlParameter("@C5", SqlDbType.NVarChar);
-                        paramAgency.Value = cmbAgency.SelectedValue;
+
+
+                        if (cmbAgency.Text == "Select" || cmbAgency.Text == "")
+                        {
+                            cmbAgency.SelectedValue = 0;
+                            paramAgency.Value = 0;
+                        }
+                        else
+                        {
+                            paramAgency.Value = cmbAgency.SelectedValue;
+
+                        }
+
                         SqlParameter paramCandidate = new SqlParameter("@cand", SqlDbType.NVarChar);
-                        paramCandidate.Value = cmbcandidates.SelectedValue;
-                        paramReservedTo.Value = cmbReservedTo.SelectedValue;
+                        if (cmbcandidates.Text == "Select" || cmbcandidates.Text == "")
+                        {
+                            cmbcandidates.SelectedValue = 0;
+                            paramCandidate.Value = 0;
+
+                        }
+                        else
+                        {
+                            paramCandidate.Value = cmbcandidates.SelectedValue;
+
+                        }
+
+                        if (cmbReservedTo.Text == "Select" || cmbReservedTo.Text == "")
+                        {
+                            cmbReservedTo.SelectedValue = 0;
+                            paramReservedTo.Value = 0;
+
+                        }
+                        else
+                        {
+                            paramReservedTo.Value = cmbReservedTo.SelectedValue;
+
+                        }
 
 
 
@@ -357,10 +398,43 @@ namespace Delmon_Managment_System.Forms
                         SqlParameter paramJob = new SqlParameter("@C4", SqlDbType.NVarChar);
                         paramJob.Value = cmbJob.SelectedValue;
                         SqlParameter paramAgency = new SqlParameter("@C5", SqlDbType.NVarChar);
-                        paramAgency.Value = cmbAgency.SelectedValue;
-                        paramReservedTo.Value = cmbReservedTo.SelectedValue;
+                        if (cmbAgency.Text == "Select" || cmbAgency.Text == "")
+                        {
+                            cmbAgency.SelectedValue = 0;
+                            paramAgency.Value = 0;
+                        }
+                        else 
+                        {
+                            paramAgency.Value = cmbAgency.SelectedValue;
+
+                        }
                         SqlParameter paramCandidate = new SqlParameter("@cand", SqlDbType.Int);
-                        paramCandidate.Value = cmbcandidates.SelectedValue;
+                        if (cmbcandidates.Text == "Select" || cmbcandidates.Text == "")
+                        {
+                            cmbcandidates.SelectedValue = 0;
+                            paramCandidate.Value = 0;
+
+                        }
+                        else
+                        {
+                            paramCandidate.Value = cmbcandidates.SelectedValue;
+
+                        }
+
+
+                        if (cmbReservedTo.Text == "Select" || cmbReservedTo.Text == "")
+                        {
+                            cmbReservedTo.SelectedValue = 0;
+                            paramReservedTo.Value = 0;
+
+                        }
+                        else
+                        {
+                            paramReservedTo.Value = cmbReservedTo.SelectedValue;
+
+                        }
+
+
 
 
 
@@ -607,7 +681,20 @@ namespace Delmon_Managment_System.Forms
 
                         dr.Dispose();
                         dr.Close();
-                        dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISA where visanumber=" + Visanumtxt.Text + " ");
+                        dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT [VisaNumber]
+      ,[ComapnyID]
+      ,[ReceviedDate]
+      ,[IssueDateHijri]
+      ,[IssueDateEN]
+      ,[ExpiryDateHijri]
+      ,[ExpiryDateEN]
+      ,[TotalVisas]
+      ,[Remarks]
+      ,[UserID]
+      ,[DatetimeLOG]
+      ,[CRNumber]
+      ,[ID_Number]
+       FROM[DelmonGroupDB].[dbo].[VISA], [Companies] where Companies.COMPID = VISA.ComapnyID and  visanumber =" + Visanumtxt.Text + " ");
 
                         SQLCONN.CloseConnection();
                         VisaFrm_Load(sender, e);
