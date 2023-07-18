@@ -28,6 +28,8 @@ namespace Delmon_Managment_System.Forms
         public PrintingFrm()
         {
             InitializeComponent();
+            dataGridView2.CellClick += dataGridView2_CellClick;
+
         }
 
         private void PrintingFrm_Load(object sender, EventArgs e)
@@ -84,8 +86,8 @@ namespace Delmon_Managment_System.Forms
                 cmbReservedTo.ValueMember = "COMPID";
                 cmbReservedTo.DisplayMember = "ShortCompName";
 
-                cmbCompany.DataSource  = SQLCONN.ShowDataInGridViewORCombobox(querycomp);
-                cmbcomp.DataSource=cmbReservedTo.DataSource = SQLCONN.ShowDataInGridViewORCombobox(querycomp2);
+                cmbCompany.DataSource = SQLCONN.ShowDataInGridViewORCombobox(querycomp);
+                cmbcomp.DataSource = cmbReservedTo.DataSource = SQLCONN.ShowDataInGridViewORCombobox(querycomp2);
                 cmbCompany.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 cmbCompany.AutoCompleteSource = AutoCompleteSource.ListItems;
                 cmbReservedTo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -592,7 +594,7 @@ namespace Delmon_Managment_System.Forms
             }
 
 
-        
+
 
 
 
@@ -630,18 +632,18 @@ namespace Delmon_Managment_System.Forms
             DataGridViewRow totalDataGridViewRow = dataGridView3.Rows[dataTable.Rows.Count - 1];
 
             // Set the cell style for the new row
-            totalDataGridViewRow.DefaultCellStyle.BackColor = Color.YellowGreen; 
-           
+            totalDataGridViewRow.DefaultCellStyle.BackColor = Color.YellowGreen;
+
             // Refresh the DataGridView to reflect the changes
             dataGridView3.Refresh();
 
-            
 
 
 
 
 
-                
+
+
 
 
 
@@ -745,7 +747,7 @@ namespace Delmon_Managment_System.Forms
                 query += "GROUP BY V.ComapnyID,J.ReservedTo, S.StatusID, C.ShortCompName, CO.ShortCompName, S.Status " +
                          "ORDER BY V.ComapnyID,J.ReservedTo, S.StatusID, C.ShortCompName, S.Status, CO.ShortCompName ";
 
-SqlCommand command = new SqlCommand(query, connection);
+                SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@param1", dtpfrom.Value);
                 command.Parameters.AddWithValue("@param2", dtpto.Value);
                 command.Parameters.AddWithValue("@param4", cmbCompany.SelectedValue);
@@ -761,7 +763,7 @@ SqlCommand command = new SqlCommand(query, connection);
             dataGridView2.Columns[0].Visible = false; // Replace "ColumnName" with the actual name of the column
             dataGridView2.Columns[1].Visible = false; // Replace "ColumnName" with the actual name of the column
             dataGridView2.Columns[2].Visible = false; // Replace "ColumnName" with the actual name of the column
-           // dataGridView2.Columns[6].Visible = false; // Replace "ColumnName" with the actual name of the column
+                                                      // dataGridView2.Columns[6].Visible = false; // Replace "ColumnName" with the actual name of the column
             dataGridView2.Columns[3].Width = 150; // Replace "ColumnName" with the actual name of the column
             dataGridView2.Columns[4].Width = 150; // Replace "ColumnName" with the actual name of the column
             dataGridView2.Columns[5].Width = 150; // Replace "ColumnName" with the actual name of the column
@@ -955,22 +957,21 @@ SqlCommand command = new SqlCommand(query, connection);
             //        e.Value = sum.ToString();
             //        e.FormattingApplied = true;
             //    }
-          //  CalculateAndDisplayTotal();
+            //  CalculateAndDisplayTotal();
         }
 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
-            if (e.RowIndex == -1)
-                return;
+            // if (e.RowIndex == -1)
 
             dataGridView4.Visible = true;
             // Check if the clicked cell is in the last row
-            if (e.RowIndex == dataGridView2.Rows.Count - 1)
-            {
-                // Prevent any action for the last row
-                return;
-            }
+            //if (e.RowIndex == dataGridView2.Rows.Count - 1)
+            //{
+            //    // Prevent any action for the last row
+            //    return;
+            //}
 
             foreach (DataGridViewRow rw in this.dataGridView2.Rows)
             {
@@ -980,46 +981,100 @@ SqlCommand command = new SqlCommand(query, connection);
                     {
                         //   MessageBox.Show("ogg");       
                     }
-                    else
+                    if (e.RowIndex != dataGridView2.Rows.Count - 1)
                     {
+
+
                         Visacompanyidfordisplayreport = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString());
                         VisaREservedToidfordisplayreport = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[1].Value.ToString());
                         VisaStatusIDfordisplayreport = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[2].Value.ToString());
                         VisaFileNumberfordisplayreport = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[6].Value.ToString());
+
+                    }
+                }
+
+                // Set the query parameters
+                SqlParameter paramDateFrom = new SqlParameter("@param3", SqlDbType.Date);
+                paramDateFrom.Value = dtpfromreport;
+
+                SqlParameter paramDateTo = new SqlParameter("@param4", SqlDbType.Date);
+                paramDateTo.Value = dtptoreport;
+
+                SqlParameter paramVisaStatus = new SqlParameter("@param5", SqlDbType.NVarChar);
+                paramVisaStatus.Value = VisaStatusIDfordisplayreport;
+
+                SqlParameter paramCompany = new SqlParameter("@param6", SqlDbType.Int);
+                paramCompany.Value = Visacompanyidfordisplayreport;
+
+                SqlParameter paramreservedto = new SqlParameter("@param7", SqlDbType.NVarChar);
+                paramreservedto.Value = VisaREservedToidfordisplayreport;
+
+                SqlParameter paramrFileNumber = new SqlParameter("@param8", SqlDbType.NVarChar);
+                paramrFileNumber.Value = VisaFileNumberfordisplayreport;
+
+                // Create a new DataTable to store the report data
+                DataTable VisaReport = new DataTable();
+
+                if (e.RowIndex == dataGridView2.Rows.Count - 1)
+                {
+                    // Connect to the database and retrieve the report data
+                    using (SqlConnection connection = new SqlConnection(SQLCONN.ConnectionString))
+                    {
+                        connection.Open();
+
+                        // Build the query based on the user's selected options
+                        string query = @"
+           	 SELECT  VISAJobList.Visanumber ,VISAJobList.FileNumber,TRIM(COALESCE(CONCAT(FirstName, ' '), '') + COALESCE(CONCAT(SecondName, ' '), '') +
+                     COALESCE(CONCAT(ThirdName, ' '), '') + COALESCE(Lastname, '')) AS [FullName], VISAStatus.Status AS [Status],JOBS.JobTitleEN,Companies.COMPName_EN 'Divison-ReservedTo'
+                    
+                     FROM Employees,VISA,VISAJobList,Countries,VISAStatus,jobs,Companies
+					 where Employees.EmployeeID = VISAJobList.EmployeeID
+					 and VISAJobList.StatusID= VISAStatus.StatusID
+                     and VISA.VisaNumber=VISAJobList.VISANumber
+                     and VISAJobList.ReservedTo=Companies.COMPID
+                     and VISAJobList.JobID= JOBS.JobID
+				     and  TRY_CONVERT(DATETIME, STARTDATE, 103) BETWEEN @param3 AND @param4   
+				    GROUP BY  VISAJobList.FileNumber, VISAJobList.Visanumber, VISAStatus.Status,JOBS.JobTitleEN,Companies.COMPName_EN,
+TRIM(COALESCE(CONCAT(FirstName, ' '), '') + COALESCE(CONCAT(SecondName, ' '), '') +
+                     COALESCE(CONCAT(ThirdName, ' '), '') + COALESCE(Lastname, '')) ";
+
+
+
+                        // Create a new SqlCommand object with the query and parameters
+                        using (SqlCommand command = new SqlCommand(query, connection))
+                        {
+                            command.Parameters.Add(paramDateFrom);
+                            command.Parameters.Add(paramDateTo);
+                            command.Parameters.Add(paramVisaStatus);
+                            command.Parameters.Add(paramCompany);
+                            command.Parameters.Add(paramreservedto);
+                            //command.Parameters.Add(paramrFileNumber);
+                            //  command.Parameters.Add(paramCandidate);
+
+                            // Execute the query and fill the DataTable with the results
+                            using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                            {
+                                adapter.Fill(VisaReport);
+                            }
+                        }
                     }
 
+                    // Set the DataTable as the DataSource for the DataGridView
+                    dataGridView4.DataSource = VisaReport;
+                    dataGridView4.Columns[5].Width = 300; // Replace "ColumnName" with the actual name of the column
+
+
+
                 }
-            }
+                else
+                {
+                    // Connect to the database and retrieve the report data
+                    using (SqlConnection connection = new SqlConnection(SQLCONN.ConnectionString))
+                    {
+                        connection.Open();
 
-            // Set the query parameters
-            SqlParameter paramDateFrom = new SqlParameter("@param3", SqlDbType.Date);
-            paramDateFrom.Value = dtpfromreport;
-
-            SqlParameter paramDateTo = new SqlParameter("@param4", SqlDbType.Date);
-            paramDateTo.Value = dtptoreport;
-
-            SqlParameter paramVisaStatus = new SqlParameter("@param5", SqlDbType.NVarChar);
-            paramVisaStatus.Value = VisaStatusIDfordisplayreport;
-
-            SqlParameter paramCompany = new SqlParameter("@param6", SqlDbType.Int);
-            paramCompany.Value = Visacompanyidfordisplayreport;
-
-            SqlParameter paramreservedto = new SqlParameter("@param7", SqlDbType.NVarChar);
-            paramreservedto.Value = VisaREservedToidfordisplayreport;
-
-            SqlParameter paramrFileNumber = new SqlParameter("@param8", SqlDbType.NVarChar);
-            paramrFileNumber.Value = VisaFileNumberfordisplayreport;
-
-            // Create a new DataTable to store the report data
-            DataTable VisaReport = new DataTable();
-
-            // Connect to the database and retrieve the report data
-            using (SqlConnection connection = new SqlConnection(SQLCONN.ConnectionString))
-            {
-                connection.Open();
-
-                // Build the query based on the user's selected options
-                string query = @"
+                        // Build the query based on the user's selected options
+                        string query = @"
            	 SELECT VISAJobList.FileNumber, VISAJobList.Visanumber, Employees.EmployeeID,
                      TRIM(COALESCE(CONCAT(FirstName, ' '), '') + COALESCE(CONCAT(SecondName, ' '), '') +
                      COALESCE(CONCAT(ThirdName, ' '), '') + COALESCE(Lastname, '')) AS [FullName],
@@ -1040,33 +1095,42 @@ SqlCommand command = new SqlCommand(query, connection);
 
 
 
-                // Create a new SqlCommand object with the query and parameters
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.Add(paramDateFrom);
-                    command.Parameters.Add(paramDateTo);
-                    command.Parameters.Add(paramVisaStatus);
-                    command.Parameters.Add(paramCompany);
-                    command.Parameters.Add(paramreservedto);
-                    //command.Parameters.Add(paramrFileNumber);
-                    //  command.Parameters.Add(paramCandidate);
+                        // Create a new SqlCommand object with the query and parameters
+                        using (SqlCommand command = new SqlCommand(query, connection))
+                        {
+                            command.Parameters.Add(paramDateFrom);
+                            command.Parameters.Add(paramDateTo);
+                            command.Parameters.Add(paramVisaStatus);
+                            command.Parameters.Add(paramCompany);
+                            command.Parameters.Add(paramreservedto);
+                            //command.Parameters.Add(paramrFileNumber);
+                            //  command.Parameters.Add(paramCandidate);
 
-                    // Execute the query and fill the DataTable with the results
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
-                    {
-                        adapter.Fill(VisaReport);
+                            // Execute the query and fill the DataTable with the results
+                            using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                            {
+                                adapter.Fill(VisaReport);
+                            }
+                        }
                     }
+
+                    // Set the DataTable as the DataSource for the DataGridView
+                    dataGridView4.DataSource = VisaReport;
+                    dataGridView4.Columns[3].Width = 300; // Replace "ColumnName" with the actual name of the column
+
+
+
                 }
+
+
+
+
+
+
+
+
+
             }
-
-            // Set the DataTable as the DataSource for the DataGridView
-            dataGridView4.DataSource = VisaReport;
-            dataGridView4.Columns[3].Width = 300; // Replace "ColumnName" with the actual name of the column
-
-
-
-
         }
     }
 }
-
