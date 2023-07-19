@@ -682,7 +682,7 @@ namespace Delmon_Managment_System.Forms
                     "JOIN DelmonGroupDB.dbo.Companies CO ON J.ReservedTo = CO.COMPID " +
                     "JOIN DelmonGroupDB.dbo.VisaStatus S ON J.StatusID = S.StatusID AND S.RefrenceID = 1 " +
                     "JOIN DelmonGroupDB.dbo.Employees E ON E.EmployeeID = J.EmployeeID " +
-                    "WHERE TRY_CONVERT(DATETIME, E.STARTDATE, 103) BETWEEN @param1 AND @param2 ";
+                    "WHERE TRY_CONVERT(DATETIME, v.IssueDateEN, 103) BETWEEN @param1 AND @param2 ";
 
                 // Rest of your code...
 
@@ -1023,25 +1023,48 @@ namespace Delmon_Managment_System.Forms
                         connection.Open();
 
                         // Build the query based on the user's selected options
-                        string query = @"
-           	 SELECT  VISAJobList.Visanumber ,VISAJobList.FileNumber,TRIM(COALESCE(CONCAT(FirstName, ' '), '') + COALESCE(CONCAT(SecondName, ' '), '') +
-                     COALESCE(CONCAT(ThirdName, ' '), '') + COALESCE(Lastname, '')) AS [FullName], VISAStatus.Status AS [Status],JOBS.JobTitleEN,Companies.COMPName_EN 'Divison-ReservedTo'
-                    
-                     FROM Employees,VISA,VISAJobList,Countries,VISAStatus,jobs,Companies
-					 where Employees.EmployeeID = VISAJobList.EmployeeID
-					 and VISAJobList.StatusID= VISAStatus.StatusID
-                     and VISA.VisaNumber=VISAJobList.VISANumber
-                     and VISAJobList.ReservedTo=Companies.COMPID
-                     and VISAJobList.JobID= JOBS.JobID
-				     and  TRY_CONVERT(DATETIME, STARTDATE, 103) BETWEEN @param3 AND @param4   
-				    GROUP BY  VISAJobList.FileNumber, VISAJobList.Visanumber, VISAStatus.Status,JOBS.JobTitleEN,Companies.COMPName_EN,
-TRIM(COALESCE(CONCAT(FirstName, ' '), '') + COALESCE(CONCAT(SecondName, ' '), '') +
-                     COALESCE(CONCAT(ThirdName, ' '), '') + COALESCE(Lastname, '')) ";
+
+
+
+
+
+
+
+                        string query0 = @"
+    SELECT J.FileNumber,
+           TRIM(COALESCE(CONCAT(FirstName, ' '), '') + COALESCE(CONCAT(SecondName, ' '), '') +
+           COALESCE(CONCAT(ThirdName, ' '), '') + COALESCE(Lastname, '')) AS [FullName],
+           J.Visanumber, V_COMP.COMPName_EN AS [Sponsor],CO_COMP.COMPName_EN AS [ReservedTO],
+           CON.ConsulateCity AS [Consulate],
+           Jo.[JobTitleEN], Jo.[JobTitleAR], S.Status AS [Status],
+           CONVERT(NVARCHAR(10), V.IssueDateEN, 103) AS [Date]
+       
+    FROM VISAJobList J
+    LEFT JOIN DelmonGroupDB.dbo.Employees E ON E.EmployeeID = J.EmployeeID
+    LEFT JOIN DelmonGroupDB.dbo.Consulates CON ON CON.ConsulateID = J.ConsulateID
+    LEFT JOIN DelmonGroupDB.dbo.VisaStatus S ON J.StatusID = S.StatusID
+    LEFT JOIN DelmonGroupDB.dbo.VISA V ON V.VisaNumber = J.VISANumber
+    LEFT JOIN DelmonGroupDB.dbo.Companies CO ON J.ReservedTo = CO.COMPID
+    LEFT JOIN DelmonGroupDB.dbo.Jobs Jo ON Jo.jobid = j.jobid
+    LEFT JOIN DelmonGroupDB.dbo.Companies CO_COMP ON J.ReservedTo = CO_COMP.COMPID
+    LEFT JOIN DelmonGroupDB.dbo.Companies V_COMP ON V.ComapnyID = V_COMP.COMPID
+    WHERE TRY_CONVERT(DATETIME, V.IssueDateEN, 103) BETWEEN @param3 AND @param4
+    GROUP BY J.FileNumber, J.Visanumber, S.Status, CO_COMP.COMPName_EN, V_COMP.COMPName_EN,
+             TRIM(COALESCE(CONCAT(FirstName, ' '), '') + COALESCE(CONCAT(SecondName, ' '), '') +
+             COALESCE(CONCAT(ThirdName, ' '), '') + COALESCE(Lastname, '')), E.EmployeeID,
+             CON.ConsulateCity, V.IssueDateEN, Jo.[JobTitleEN], Jo.[JobTitleAR]";
+
+
+
+
+
+
+
 
 
 
                         // Create a new SqlCommand object with the query and parameters
-                        using (SqlCommand command = new SqlCommand(query, connection))
+                        using (SqlCommand command = new SqlCommand(query0, connection))
                         {
                             command.Parameters.Add(paramDateFrom);
                             command.Parameters.Add(paramDateTo);
@@ -1061,7 +1084,7 @@ TRIM(COALESCE(CONCAT(FirstName, ' '), '') + COALESCE(CONCAT(SecondName, ' '), ''
 
                     // Set the DataTable as the DataSource for the DataGridView
                     dataGridView4.DataSource = VisaReport;
-                    dataGridView4.Columns[5].Width = 300; // Replace "ColumnName" with the actual name of the column
+               //     dataGridView4.Columns[5].Width = 300; // Replace "ColumnName" with the actual name of the column
 
 
 
@@ -1074,26 +1097,39 @@ TRIM(COALESCE(CONCAT(FirstName, ' '), '') + COALESCE(CONCAT(SecondName, ' '), ''
                         connection.Open();
 
                         // Build the query based on the user's selected options
+                      
+
+
+
+
                         string query = @"
-           	 SELECT VISAJobList.FileNumber, VISAJobList.Visanumber, Employees.EmployeeID,
+           	 SELECT J.FileNumber, J.Visanumber, E.EmployeeID,
                      TRIM(COALESCE(CONCAT(FirstName, ' '), '') + COALESCE(CONCAT(SecondName, ' '), '') +
                      COALESCE(CONCAT(ThirdName, ' '), '') + COALESCE(Lastname, '')) AS [FullName],
-                     Countries.NationalityName AS [Nationality],
-                     VISAStatus.Status AS [Status],
+                     CON.ConsulateCity AS [Consulate],
+                     S.Status AS [Status],
                     CONVERT(NVARCHAR(10), StartDate, 103) AS [Date]
-                     FROM Employees,VISA,VISAJobList,Countries,VISAStatus
-					 where Employees.EmployeeID = VISAJobList.EmployeeID
-					 and  Employees.NationalityID = Countries.CountryId
-					 and VISAJobList.StatusID= VISAStatus.StatusID
-                     and VISA.VisaNumber=VISAJobList.VISANumber
-				    and VISAJobList.ReservedTo =  @param7 and visa.ComapnyID=@param6
-				    and  TRY_CONVERT(DATETIME, STARTDATE, 103) BETWEEN @param3 AND @param4  and  VISAJobList.StatusID = @param5 
-				    GROUP BY Countries.NationalityName, VISAJobList.FileNumber, VISAJobList.Visanumber,
-    Employees.EmployeeID, VISAStatus.Status,
+                    FROM VISAJobList J
+              LEFT JOIN DelmonGroupDB.dbo.Employees E ON E.EmployeeID = J.EmployeeID
+              LEFT JOIN DelmonGroupDB.dbo.Consulates CON  ON CON.ConsulateID = J.ConsulateID
+              LEFT JOIN DelmonGroupDB.dbo.VisaStatus S ON J.StatusID = S.StatusID
+              LEFT JOIN DelmonGroupDB.dbo.VISA V ON V.VisaNumber = J.VISANumber
+              LEFT JOIN DelmonGroupDB.dbo.Companies CO ON J.ReservedTo = CO.COMPID
+              LEFT JOIN DelmonGroupDB.dbo.Jobs Jo ON Jo.jobid = j.jobid
+
+ WHERE TRY_CONVERT(DATETIME, V.IssueDateEN, 103) BETWEEN @param3 AND @param4  
+  and  J.StatusID = @param5 and V.ComapnyID=@param6  and J.ReservedTo =  @param7
+
+    GROUP BY J.FileNumber, J.Visanumber, S.Status, Jo.JobTitleEN, CO.COMPName_EN,
     TRIM(COALESCE(CONCAT(FirstName, ' '), '') + COALESCE(CONCAT(SecondName, ' '), '') +
-    COALESCE(CONCAT(ThirdName, ' '), '') + COALESCE(Lastname, '')), StartDate";
+    COALESCE(CONCAT(ThirdName, ' '), '') + COALESCE(Lastname, '')), E.EmployeeID,CON.ConsulateCity,E.startDate";
+  
 
 
+
+
+
+                     
 
                         // Create a new SqlCommand object with the query and parameters
                         using (SqlCommand command = new SqlCommand(query, connection))
