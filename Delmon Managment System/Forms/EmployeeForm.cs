@@ -202,11 +202,11 @@ namespace Delmon_Managment_System.Forms
             cmbEmployJobHistory.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbEmployJobHistory.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-            cmbempdepthistory.ValueMember = "DEPTID";
-            cmbempdepthistory.DisplayMember = "Dept_Type_Name";
-            cmbempdepthistory.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT DEPTID,[DeptName],Dept_Type_Name FROM [DelmonGroupDB].[dbo].[DEPARTMENTS], DeptTypes where DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID");
-            cmbempdepthistory.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbempdepthistory.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //cmbempdepthistory.ValueMember = "DEPTID";
+            //cmbempdepthistory.DisplayMember = "Dept_Type_Name";
+            //cmbempdepthistory.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT DEPTID,[DeptName],Dept_Type_Name FROM [DelmonGroupDB].[dbo].[DEPARTMENTS], DeptTypes where DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID");
+            //cmbempdepthistory.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //cmbempdepthistory.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             cmbissueplace.ValueMember = "Consulates.ConsulateID";
             cmbissueplace.DisplayMember = "ConsulateCity";
@@ -471,18 +471,39 @@ ORDER BY e.EmployeeID";
 
                         paramEmployeeID.Value = CurrentEmployeeIDtxt.Text;
 
-
-                        if ((int)cmbPersonalStatusStatus.SelectedValue == 25 || (int)cmbPersonalStatusStatus.SelectedValue == 26 || (int)cmbPersonalStatusStatus.SelectedValue == 27)
+                        if ((int)cmbCompany.SelectedIndex == -1 || (int)cmbempdepthistory.SelectedIndex == -1)
                         {
-                            SQLCONN.ExecuteQueries("update Employees set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,DeptID=@C15,StartDate=@C16,EndDate=@C17,COMPID=@C18,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc,NationalityID=@C19 where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany, paramEmployeeID, paramuser, parampc, paramNationality);
+                            if ((int)cmbPersonalStatusStatus.SelectedValue == 25 || (int)cmbPersonalStatusStatus.SelectedValue == 26 || (int)cmbPersonalStatusStatus.SelectedValue == 27)
+                            {
+                                SQLCONN.ExecuteQueries("update Employees set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,StartDate=@C16,EndDate=@C17,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc,NationalityID=@C19 where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, paramstartdate, paramenddate, paramEmployeeID, paramuser, parampc, paramNationality);
+
+                            }
+
+                            else
+                            {
+                                SQLCONN.ExecuteQueries("update Employees set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,StartDate=@C16,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc,NationalityID=@C19 where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, paramstartdate, paramEmployeeID, paramuser, parampc, paramNationality);
+
+                            }
+
 
                         }
-
-                        else
+                        
+                        else 
                         {
-                            SQLCONN.ExecuteQueries("update Employees set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,DeptID=@C15,StartDate=@C16,COMPID=@C18,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc,NationalityID=@C19 where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramcompany, paramEmployeeID, paramuser, parampc, paramNationality);
+                            if ((int)cmbPersonalStatusStatus.SelectedValue == 25 || (int)cmbPersonalStatusStatus.SelectedValue == 26 || (int)cmbPersonalStatusStatus.SelectedValue == 27)
+                            {
+                                SQLCONN.ExecuteQueries("update Employees set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,DeptID=@C15,StartDate=@C16,EndDate=@C17,COMPID=@C18,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc,NationalityID=@C19 where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany, paramEmployeeID, paramuser, parampc, paramNationality);
+
+                            }
+
+                            else
+                            {
+                                SQLCONN.ExecuteQueries("update Employees set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,DeptID=@C15,StartDate=@C16,COMPID=@C18,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc,NationalityID=@C19 where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramcompany, paramEmployeeID, paramuser, parampc, paramNationality);
+
+                            }
 
                         }
+                      
 
 
                         /* Update visa status **/
