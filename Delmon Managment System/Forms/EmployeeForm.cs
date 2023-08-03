@@ -1057,6 +1057,11 @@ ORDER BY e.EmployeeID";
                 {
                     MessageBox.Show("Please select a valid document.");
                 }
+                if (cmbDocuments.Text == "Select" || cmbDocuments.Text==string.Empty)
+                {
+                    MessageBox.Show("Please select a  document type.");
+
+                }
                 else
                 {
                     //Create the documents folder if it doesn't exist

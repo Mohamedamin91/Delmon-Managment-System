@@ -459,7 +459,9 @@ namespace Delmon_Managment_System.Forms
                             btnFinish.Enabled = true;
 
                             // Show a message to the user if necessary
-                            MessageBox.Show("Please click Finish Button after clicking Add Button", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                         //  MessageBox.Show("Please click Finish Button after clicking Add Button", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            btnFinish.PerformClick();
+                            btnFinish.Enabled = false;
                             dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber=" + Visanumtxt.Text + " ");
                             TotalVisastxt.Text = "";
                             cmbConsulate.Text = "Select";
@@ -472,6 +474,8 @@ namespace Delmon_Managment_System.Forms
 
 
                     }
+                   
+
 
                     SQLCONN.CloseConnection();
                     // VisaFrm_Load(sender, e);

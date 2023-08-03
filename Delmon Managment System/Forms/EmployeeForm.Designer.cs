@@ -30,8 +30,8 @@ namespace Delmon_Managment_System.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeeForm));
             this.Employeetxt = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -188,15 +188,15 @@ namespace Delmon_Managment_System.Forms
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(1008, 12);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.Size = new System.Drawing.Size(692, 320);
             this.dataGridView1.TabIndex = 88;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
@@ -851,7 +851,7 @@ namespace Delmon_Managment_System.Forms
             // issueplacetext
             // 
             this.issueplacetext.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.issueplacetext.Location = new System.Drawing.Point(229, 131);
+            this.issueplacetext.Location = new System.Drawing.Point(233, 135);
             this.issueplacetext.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.issueplacetext.Name = "issueplacetext";
             this.issueplacetext.Size = new System.Drawing.Size(228, 25);
@@ -861,7 +861,7 @@ namespace Delmon_Managment_System.Forms
             // numbertextbox
             // 
             this.numbertextbox.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.numbertextbox.Location = new System.Drawing.Point(231, 99);
+            this.numbertextbox.Location = new System.Drawing.Point(233, 100);
             this.numbertextbox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.numbertextbox.Name = "numbertextbox";
             this.numbertextbox.Size = new System.Drawing.Size(228, 25);
@@ -880,7 +880,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.docissueplacepicker.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.docissueplacepicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.docissueplacepicker.Location = new System.Drawing.Point(229, 167);
+            this.docissueplacepicker.Location = new System.Drawing.Point(233, 170);
             this.docissueplacepicker.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.docissueplacepicker.Name = "docissueplacepicker";
             this.docissueplacepicker.Size = new System.Drawing.Size(229, 25);
@@ -890,7 +890,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.docexpirefatepicker.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.docexpirefatepicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.docexpirefatepicker.Location = new System.Drawing.Point(229, 199);
+            this.docexpirefatepicker.Location = new System.Drawing.Point(233, 202);
             this.docexpirefatepicker.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.docexpirefatepicker.Name = "docexpirefatepicker";
             this.docexpirefatepicker.Size = new System.Drawing.Size(229, 25);
@@ -1008,7 +1008,7 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView3.AllowUserToAddRows = false;
             this.dataGridView3.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(229, 237);
+            this.dataGridView3.Location = new System.Drawing.Point(233, 237);
             this.dataGridView3.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.Size = new System.Drawing.Size(656, 141);
