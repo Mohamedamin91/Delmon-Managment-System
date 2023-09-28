@@ -93,9 +93,15 @@ namespace Delmon_Managment_System.Forms
 
         private void EmployeeForm_Load(object sender, EventArgs e)
         {
-            
+            if (CommonClass.EmployeeID == 179 || CommonClass.EmployeeID == 248)
+            {
+                btndeletecontact.Enabled = btndeletedoc.Enabled = button4.Enabled = button1.Enabled = true;
+            }
+            else {
+                btndeletecontact.Enabled = btndeletedoc.Enabled = button4.Enabled = button1.Enabled = false;
 
-           // tabControl1.TabPages.Remove(EmploymentHistory);
+            }
+            // tabControl1.TabPages.Remove(EmploymentHistory);
 
             //tabControl1.TabPages.Remove(SalaryTab);
 
@@ -1053,10 +1059,7 @@ ORDER BY e.EmployeeID";
         {
             if (EMPID != 0)
             {
-                if (fileName == null || destinationFilePath == string.Empty)
-                {
-                    MessageBox.Show("Please select a valid document.");
-                }
+               
                 if (cmbDocuments.Text == "Select" || cmbDocuments.Text==string.Empty)
                 {
                     MessageBox.Show("Please select a  document type.");
@@ -1075,9 +1078,24 @@ ORDER BY e.EmployeeID";
 
                     // Execute the query to insert the document into the database
                     SqlParameter paramfilename = new SqlParameter("@C0", SqlDbType.NVarChar);
-                    paramfilename.Value = fileName;
                     SqlParameter paramnameOFfile = new SqlParameter("@C1", SqlDbType.NVarChar);
-                    paramnameOFfile.Value = destinationFilePath;
+
+                    if (fileName == null|| destinationFilePath == string.Empty)
+                    {
+                        paramfilename.Value = "";
+                        paramnameOFfile.Value = "";
+
+
+                    }
+
+                    else 
+                    {
+                        paramfilename.Value = fileName;
+                        paramnameOFfile.Value = destinationFilePath;
+                    }
+
+
+
                     SqlParameter paramPID = new SqlParameter("@C2", SqlDbType.Int);
                     paramPID.Value = EmployeeID;
                     SqlParameter paramDocType = new SqlParameter("@C3", SqlDbType.Int);
@@ -1129,8 +1147,10 @@ ORDER BY e.EmployeeID";
                         }
                     }
 
+                    paramPID.Value = EmployeeID;
 
                 }
+
             }
             else
             {
@@ -1238,7 +1258,7 @@ ORDER BY e.EmployeeID";
                                                        paramContactType, paramContact, paramRefrenceID, paramPID);
                         MessageBox.Show("Record saved Successfully");
 
-                        dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =  " + EmployeeID + " ");
+                        dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID] ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =  " + EmployeeID + " ");
                         Contacttxt.Text = "";
                         cmbcontact.Text = "Select";
                         SQLCONN.CloseConnection();
@@ -1257,6 +1277,7 @@ ORDER BY e.EmployeeID";
 
             }
 
+            paramPID.Value = EmployeeID;
 
         }
 
@@ -1442,6 +1463,8 @@ ORDER BY e.EmployeeID";
             {
                 MessageBox.Show("Please Select Record to Update");
             }
+            paramPID.Value = EmployeeID;
+
         }
 
         private void tabContact_Click(object sender, EventArgs e)
@@ -1533,6 +1556,8 @@ ORDER BY e.EmployeeID";
             {
                 MessageBox.Show("Please Select Record to Update");
             }
+            paramPID.Value = EmployeeID;
+
         }
 
         private void firstnametxt_TextChanged(object sender, EventArgs e)
@@ -1574,7 +1599,8 @@ ORDER BY e.EmployeeID";
                 if (tabControl1.SelectedTab == tabControl1.TabPages[0])
                 {
                     dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID]  FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =@ID ", paramEmployeeID);
-
+                    Contacttxt.Text = "";
+                    cmbcontact.Text = "Select";
                 }
                 if (tabControl1.SelectedTab == tabControl1.TabPages[1])
                 {
@@ -1583,8 +1609,13 @@ ORDER BY e.EmployeeID";
                    
 
                  dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue]  ,[DocumentType].Doc_Type ,[RefrenceID],[Number] ,[DocIssueplace]  ,[docissuedate]  ,[docexpiredate] FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =@ID ", paramEmployeeID);
-                   
 
+                    cmbDocuments.Text = "Select";
+                    Doctxt.Text = "";
+                    numbertextbox.Text = "";
+                    issueplacetext.Text = "";
+                    docissueplacepicker.Value = DateTime.Now;
+                    docexpirefatepicker.Value = DateTime.Now;
 
 
                 }
@@ -1597,13 +1628,15 @@ ORDER BY e.EmployeeID";
                    
                     dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from employeehistory where employeeid=@ID", paramEmployeeID);
 
-
+                    richhistoryvalue.Text = "";
+                    dtphistorydate.Value = DateTime.Now;
 
                 }
                 if (tabControl1.SelectedTab == tabControl1.TabPages["SalaryTab"])
                 {
 
-
+                    cmbsalarytype.Text = "Select";
+                    txtvalue.Text = "";
                     dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  select SalaryDetID , SalaryTypeName 'Salary Type' ,SalaryDetails.Value from SalaryDetails,SalaryTypes where SalaryDetails.SalaryTypeID = SalaryTypes.SalaryTypeID and SalaryDetails.EmployeeID = @ID ", paramEmployeeID);
                     //  this.dataGridView5.Columns["SalaryDetID"].Visible = false;
 
@@ -2151,11 +2184,14 @@ ORDER BY e.EmployeeID";
                 {
 
                 }
+                paramemployee.Value = EmployeeID;
             }
             else
             {
                 MessageBox.Show("Please Select Record !");
             }
+      
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -2418,7 +2454,7 @@ ORDER BY e.EmployeeID";
 
                 }
 
-
+                paramemployee.Value = EmployeeID;
             }
             else
             {
@@ -2756,6 +2792,7 @@ ORDER BY e.EmployeeID";
                 MessageBox.Show("Please Select Record to Update");
 
             }
+            paramPID.Value = EmployeeID;
 
 
         }
@@ -2801,6 +2838,8 @@ ORDER BY e.EmployeeID";
                 MessageBox.Show("Please Select Record to Update");
             }
             SQLCONN.CloseConnection();
+            paramPID.Value = EmployeeID;
+
         }
 
         private void button4_Click(object sender, EventArgs e)

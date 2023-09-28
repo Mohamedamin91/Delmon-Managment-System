@@ -59,13 +59,14 @@ namespace Delmon_Managment_System
     Agencies.AgenceName,
     Agencies.LicenseNumber,
     Documents.Number AS 'Passport',
-    (
-        SELECT TOP 1 CONCAT(FirstName, ' ', LastName)
-        FROM DEPARTMENTS 
-        JOIN Employees ON DEPARTMENTS.DeptHeadID = Employees.EmployeeID
-        WHERE DEPARTMENTS.COMPID = Companies1.COMPID
-        ORDER BY DEPARTMENTS.DEPTID -- Replace with the actual column name
-    ) AS 'DivisionHead',
+   (
+    SELECT TOP 1 CONCAT(DepartmentHead.FirstName, ' ', DepartmentHead.LastName)
+    FROM DEPARTMENTS Dept
+    JOIN Employees DepartmentHead ON Dept.DeptHeadID = DepartmentHead.EmployeeID
+    WHERE Dept.COMPID = Companies1.COMPID
+    AND Dept.DEPTID = Employees.DeptID
+    ORDER BY Dept.DEPTID
+) AS 'DivisionHead',
 
 	( SELECT TOP 1 CONCAT(FirstName, ' ', SecondName, ' ', ThirdName, ' ', LastName)
          FROM Employees  

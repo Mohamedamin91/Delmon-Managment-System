@@ -56,15 +56,13 @@ namespace Delmon_Managment_System.Forms
 
 
 
-            string query = "SELECT COMPID,COMPName_EN FROM Companies";
-            cmbCompany.ValueMember = "COMPID";
-            cmbCompany.DisplayMember = "COMPName_EN";
-            cmbCompany.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query);
-            cmbCompany.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbCompany.AutoCompleteSource = AutoCompleteSource.ListItems;
+            string query = "select COMPID,COMPName_EN from Companies";
+            cmbRegisterUnder.ValueMember = "COMPID";
+            cmbRegisterUnder.DisplayMember = "COMPName_EN";
+            cmbRegisterUnder.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query);
+            cmbRegisterUnder.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbRegisterUnder.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-
-            
 
 
 
@@ -106,13 +104,22 @@ namespace Delmon_Managment_System.Forms
             cmbMedia.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbMedia.AutoCompleteSource = AutoCompleteSource.ListItems;
 
+            SQLCONN.OpenConection2();
+            string query2 = "SELECT OwnerID,OwnerName FROM Owners";
+            cmbOwner.ValueMember = "OwnerID";
+            cmbOwner.DisplayMember = "OwnerName";
+            cmbOwner.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query2);
+            cmbOwner.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbOwner.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
-
+            cmbemployee2.Enabled = false;
 
 
             cmbservice.Text = "Select";
-             cmbservice2.Text = "Select";
+            cmbRegisterType.Text = "Select";
+            cmbBillType.Text = "Select";
+            cmbservice2.Text = "Select";
 
 
 
@@ -122,7 +129,7 @@ namespace Delmon_Managment_System.Forms
 
         private void tabPage1_Click(object sender, EventArgs e)
         {
-
+            cmbemployee2.Enabled = false;
         }
 
         private void cmbCompany_SelectionChangeCommitted(object sender, EventArgs e)
@@ -139,7 +146,7 @@ namespace Delmon_Managment_System.Forms
 
 
             cmd.Parameters.Add(new SqlParameter("@C1", SqlDbType.Int));
-            cmd.Parameters["@C1"].Value = cmbCompany.SelectedValue;
+            cmd.Parameters["@C1"].Value = cmbOwner.SelectedValue;
 
 
             //Creating Sql Data Adapter
@@ -218,7 +225,7 @@ namespace Delmon_Managment_System.Forms
             SqlParameter paramHeadofDept = new SqlParameter("@C6", SqlDbType.NVarChar);
             paramHeadofDept.Value = cmbemployee.SelectedValue;
             SqlParameter paramOwner = new SqlParameter("@C7", SqlDbType.NVarChar);
-            paramOwner.Value = cmbCompany.SelectedValue;
+            paramOwner.Value = cmbOwner.SelectedValue;
             SqlParameter paramService = new SqlParameter("@C8", SqlDbType.NVarChar);
             paramService.Value = cmbservice.SelectedValue;
             SqlParameter paramNote = new SqlParameter("@C9", SqlDbType.NVarChar);
@@ -273,7 +280,7 @@ namespace Delmon_Managment_System.Forms
            ,[workID]
            ,[HeadOfDept]
            ,[OwnerId]
-           ,[ServiceID]
+           ,[ServiceStatusD]
            ,[Notes])
      VALUES
            (@C1,@C2,@C3,@C4,@C5,@C6 ,@C7,@C8,@C9)", paramaccount, paramsubscrip, parammetersn, paramDepart, paramWorkloc,paramHeadofDept,paramOwner,paramService,paramNote);
@@ -297,7 +304,7 @@ namespace Delmon_Managment_System.Forms
       ,WorkLocations.Name
       ,[HeadOfDept]
       ,[OwnerId]
-      ,[ServiceID]
+      ,[ServiceStatusD]
       ,[Notes]
   FROM [DelmonGroupDB].[dbo].[ElectrcityBills],DEPARTMENTS,WorkLocations,DeptTypes
   where DEPARTMENTS.DEPTID=ElectrcityBills.DEPTID
@@ -332,7 +339,7 @@ namespace Delmon_Managment_System.Forms
       ,WorkLocations.Name
       ,[HeadOfDept]
       ,[OwnerId]
-      ,[ServiceID]
+      ,[ServiceStatusD]
       ,[Notes]
   FROM [DelmonGroupDB].[dbo].[ElectrcityBills],DEPARTMENTS,WorkLocations,DeptTypes
   where DEPARTMENTS.DEPTID=ElectrcityBills.DEPTID
@@ -388,7 +395,7 @@ namespace Delmon_Managment_System.Forms
                         cmbDepartment.Text =  (dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString());
                         cmbworkfield.Text = (dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
                         cmbemployee.SelectedValue = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString());
-                        cmbCompany.SelectedValue = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString());
+                        cmbOwner.SelectedValue = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString());
                         cmbservice.SelectedValue = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString());
                         RemarksTxt.Text = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
 
@@ -426,7 +433,7 @@ namespace Delmon_Managment_System.Forms
             SqlParameter paramHeadofDept = new SqlParameter("@C6", SqlDbType.NVarChar);
             paramHeadofDept.Value = cmbemployee.SelectedValue;
             SqlParameter paramOwner = new SqlParameter("@C7", SqlDbType.NVarChar);
-            paramOwner.Value = cmbCompany.SelectedValue;
+            paramOwner.Value = cmbOwner.SelectedValue;
             SqlParameter paramService = new SqlParameter("@C8", SqlDbType.NVarChar);
             paramService.Value = cmbservice.SelectedValue;
             SqlParameter paramNote = new SqlParameter("@C9", SqlDbType.NVarChar);
@@ -465,7 +472,7 @@ namespace Delmon_Managment_System.Forms
            ,[MeterSN]=@C3
            ,[HeadOfDept]=@C6
            ,[OwnerId]=@C7
-           ,[ServiceID]=@C8
+           ,[ServiceStatusD]=@C8
            ,[Notes]=@C9 where SubscriptionNo=  @C2  ", paramaccount, paramsubscrip, parammetersn, paramHeadofDept, paramOwner, paramService, paramNote);
 
 
@@ -482,7 +489,7 @@ namespace Delmon_Managment_System.Forms
            ,[workID]=@C5
            ,[HeadOfDept]=@C6
            ,[OwnerId]=@C7
-           ,[ServiceID]=@C8
+           ,[ServiceStatusD]=@C8
            ,[Notes]=@C9 where SubscriptionNo=  @C2  ", paramaccount, paramsubscrip, parammetersn, paramDepart, paramWorkloc, paramHeadofDept, paramOwner, paramService, paramNote);
 
 
@@ -585,6 +592,15 @@ namespace Delmon_Managment_System.Forms
             paramExpiredate.Value = Expiredtp.Value;
             SqlParameter paramNotes = new SqlParameter("@C7", SqlDbType.NVarChar);
             paramNotes.Value = txtNotes.Text;
+            SqlParameter paramRegisterType = new SqlParameter("@C8", SqlDbType.NVarChar);
+            paramRegisterType.Value = cmbRegisterType.SelectedItem;
+            SqlParameter paramRegisterUnder = new SqlParameter("@C9", SqlDbType.NVarChar);
+            paramRegisterUnder.Value = cmbRegisterUnder.SelectedValue;
+
+
+
+
+
 
 
             SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
@@ -635,9 +651,11 @@ namespace Delmon_Managment_System.Forms
            ,[PackageID]
            ,[ServiceStatusID] 
            ,[ExpireDate]
-           ,[Notes])
-     VALUES
-           (@C1,@C2,@C3,@C4,@C5,@C6 ,@C7)", paramaccount, paramserviceNo, paramenduser, paramPackage, paramService, paramExpiredate , paramNotes);
+           ,[Notes]
+           ,[RegisterType]
+           ,[RegisterUnder])
+            VALUES
+           (@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8,@C9)", paramaccount, paramserviceNo, paramenduser, paramPackage, paramService, paramExpiredate , paramNotes,paramRegisterType,paramRegisterUnder);
 
                         SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('CommunicationsBills',@C2 ,'#','#',@datetime,@pc,@user,'Insert')", paramserviceNo, paramdatetimeLOG, parampc, paramuser);
 
@@ -656,7 +674,7 @@ namespace Delmon_Managment_System.Forms
   where  ServiceNo = @C2 ", paramserviceNo);
 
                     txtaccountno.Text = txtsubscription.Text = txtNotes.Text =txtmetersn.Text = string.Empty;
-                    cmbservice.Text = cmbemployee.Text = cmbpackage.Text = cmbDepartment.Text= cmbCompany.Text=cmbworkfield.Text= "Select";
+                    cmbservice.Text = cmbemployee.Text = cmbpackage.Text = cmbDepartment.Text= cmbOwner.Text=cmbworkfield.Text= "Select";
                 }
 
 
@@ -720,10 +738,12 @@ namespace Delmon_Managment_System.Forms
                         txtaccount.Text = dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString();
                         txtserviceNo.Text = dataGridView2.Rows[e.RowIndex].Cells[1].Value.ToString();
                         cmbemployee2.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[2].Value.ToString());
-                        cmbpackage.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[3].Value.ToString());
-                        cmbservice2.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[4].Value.ToString());
-                        Expiredtp.Value = Convert.ToDateTime(dataGridView2.Rows[e.RowIndex].Cells[5].Value.ToString());
-                        txtNotes.Text = dataGridView2.Rows[e.RowIndex].Cells[6].Value.ToString();
+                        cmbRegisterType.SelectedItem = (dataGridView2.Rows[e.RowIndex].Cells[3].Value.ToString());
+                        cmbRegisterUnder.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[4].Value.ToString());
+                        cmbpackage.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[5].Value.ToString());
+                        cmbservice2.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[6].Value.ToString());
+                        Expiredtp.Value = Convert.ToDateTime(dataGridView2.Rows[e.RowIndex].Cells[7].Value.ToString());
+                        txtNotes.Text = dataGridView2.Rows[e.RowIndex].Cells[8].Value.ToString();
 
                         // Check if the clicked cell is in the IsActive column
 
@@ -737,6 +757,47 @@ namespace Delmon_Managment_System.Forms
 
                     }
                 }
+
+
+                DataRow dr;
+                SqlConnection conn = new SqlConnection(@"Data Source=192.168.1.8;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@");
+                // SqlConnection conn = new SqlConnection(@"Data Source=AMIN-PC;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@");
+
+
+                conn.Open();
+                SqlCommand cmd = conn.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "SELECT [DEPTID],Dept_Type_Name FROM [DelmonGroupDB].[dbo].[DEPARTMENTS], DeptTypes where DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID and COMPID=@C1 ";
+
+
+                cmd.Parameters.Add(new SqlParameter("@C1", SqlDbType.Int));
+                cmd.Parameters["@C1"].Value = cmbRegisterUnder.SelectedValue;
+
+
+                //Creating Sql Data Adapter
+                cmd.ExecuteNonQuery();
+                DataTable dt = new DataTable();
+                SqlDataAdapter Da = new SqlDataAdapter(cmd);
+                Da.Fill(dt);
+                dr = dt.NewRow();
+
+
+                if (dt != null && dt.Rows.Count >= 0)
+                {
+
+                    cmbempdepthistory.ValueMember = "DEPTID";
+                    cmbempdepthistory.DisplayMember = "Dept_Type_Name";
+                    cmbempdepthistory.DataSource = dt;
+                    cmbempdepthistory.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                    cmbempdepthistory.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+
+
+
+                }
+
+                conn.Close();
 
             }
         }
@@ -762,6 +823,11 @@ namespace Delmon_Managment_System.Forms
             paramExpiredate.Value = Expiredtp.Value;
             SqlParameter paramNotes = new SqlParameter("@C7", SqlDbType.NVarChar);
             paramNotes.Value = txtNotes.Text;
+            SqlParameter paramRegisterType = new SqlParameter("@C8", SqlDbType.NVarChar);
+            paramRegisterType.Value = cmbRegisterType.SelectedItem;
+            SqlParameter paramRegisterUnder = new SqlParameter("@C9", SqlDbType.NVarChar);
+            paramRegisterUnder.Value = cmbRegisterUnder.SelectedValue;
+
 
 
             SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
@@ -795,7 +861,10 @@ namespace Delmon_Managment_System.Forms
            ,[PackageID]=@C4
            ,[ServiceStatusID]=@C5
            ,[ExpireDate]=@C6
-           ,[Notes]=@C7 where ServiceNo=  @C2  ", paramaccount, paramserviceNo, paramenduser, paramPackage, paramService, paramExpiredate, paramNotes);
+           ,[Notes]=@C7
+           ,[RegisterType]=@C8
+           ,[RegisterUnder]=@C9
+            where ServiceNo=@C2", paramaccount, paramserviceNo, paramenduser, paramPackage, paramService, paramExpiredate, paramNotes,paramRegisterType,paramRegisterUnder);
 
                     //   SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('ElectrcityBills',@C2 ,'#','#',@datetime,@pc,@user,'Insert')", paramsubscrip, paramdatetimeLOG, parampc, paramuser);
 
@@ -844,7 +913,7 @@ namespace Delmon_Managment_System.Forms
   where  ServiceNo = @C2 ", paramserviceNo);
 
                     txtaccount.Text = txtserviceNo.Text = txtNotes.Text = string.Empty;
-                    cmbservice2.Text = cmbemployee2.Text = cmbpackage.Text = "Select";
+                    cmbservice2.Text = cmbemployee2.Text = cmbRegisterUnder.Text=cmbempdepthistory.Text =cmbpackage.Text = "Select";
                     Expiredtp.Value = DateTime.Now;
 
 
@@ -887,6 +956,10 @@ namespace Delmon_Managment_System.Forms
 
             SqlParameter paramNOTES = new SqlParameter("@C9", SqlDbType.Date);
             paramNOTES.Value = dtpto.Value;
+            SqlParameter paramBillType = new SqlParameter("@C10", SqlDbType.NVarChar);
+            paramBillType.Value = cmbBillType.SelectedItem;
+
+
 
 
             SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
@@ -912,7 +985,7 @@ namespace Delmon_Managment_System.Forms
 
 
                     SQLCONN.ExecuteQueries(@"update   [dbo].[BillsPaymentStatus] set
-         [AccountNo] = @C1
+       [AccountNo] = @C1
       ,[IssuedDate] = @C2
       ,[DueDate]= @C3
       ,[DisconnectDate]= @C4
@@ -920,7 +993,8 @@ namespace Delmon_Managment_System.Forms
       ,[ToD]= @C6
       ,[BillAmount]= @C7
       ,[Paymentstatus]= @C8
-      ,[Notes]= @C9 where AccountNo=  @C1  ", paramaccount, paramissuedate, paramduedate, paramdisconnectdate, paramfromdate, paramtomdate, paramBillAmount, paramCheckBOX, paramNOTES);
+      ,[Notes]= @C9
+      ,[BillType]=@C10 where AccountNo=@C1", paramaccount, paramissuedate, paramduedate, paramdisconnectdate, paramfromdate, paramtomdate, paramBillAmount, paramCheckBOX, paramNOTES,paramBillType);
 
                     //   SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('ElectrcityBills',@C2 ,'#','#',@datetime,@pc,@user,'Insert')", paramsubscrip, paramdatetimeLOG, parampc, paramuser);
 
@@ -960,10 +1034,16 @@ namespace Delmon_Managment_System.Forms
             paramfromdate.Value = dtpfrom.Value;
             SqlParameter paramtomdate = new SqlParameter("@C6", SqlDbType.Date);
             paramtomdate.Value = dtpto.Value;
-
             SqlParameter paramBillAmount = new SqlParameter("@C7", SqlDbType.NVarChar);
             paramBillAmount.Value = txtBillAmount.Text;
             SqlParameter paramCheckBOX = new SqlParameter("@C8", SqlDbType.Int);
+
+         
+
+
+
+
+
 
             if (chbpaymentstatus.Checked == true)
             {
@@ -976,6 +1056,9 @@ namespace Delmon_Managment_System.Forms
 
             SqlParameter paramNOTES = new SqlParameter("@C9", SqlDbType.Date);
             paramNOTES.Value = dtpto.Value;
+            SqlParameter paramBillType = new SqlParameter("@C10", SqlDbType.NVarChar);
+            paramBillType.Value = cmbBillType.SelectedItem;
+
 
 
             SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
@@ -1028,9 +1111,10 @@ namespace Delmon_Managment_System.Forms
       ,[ToD]
       ,[BillAmount]
       ,[Paymentstatus]
-      ,[Notes])
+      ,[Notes]
+      ,[BillType])
      VALUES
-          (@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8,@C9)", paramaccount, paramissuedate, paramduedate, paramdisconnectdate, paramfromdate, paramtomdate, paramBillAmount, paramCheckBOX, paramNOTES);
+          (@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8,@C9,@C10)", paramaccount, paramissuedate, paramduedate, paramdisconnectdate, paramfromdate, paramtomdate, paramBillAmount, paramCheckBOX, paramNOTES,paramBillType);
 
                         SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('BillsPaymentStatus',@C1 ,'#','#',@datetime,@pc,@user,'Insert')", paramaccount, paramdatetimeLOG, parampc, paramuser);
 
@@ -1129,13 +1213,14 @@ namespace Delmon_Managment_System.Forms
 
                         //EmployeeID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
                         txtaccount3.Text = dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString();
-                        dtpissue.Value = Convert.ToDateTime(dataGridView3.Rows[e.RowIndex].Cells[1].Value.ToString());
-                        dtpdue.Value = Convert.ToDateTime(dataGridView3.Rows[e.RowIndex].Cells[2].Value.ToString());
-                        dtpdisconnect.Value = Convert.ToDateTime(dataGridView3.Rows[e.RowIndex].Cells[3].Value.ToString());
-                        dtpfrom.Value = Convert.ToDateTime(dataGridView3.Rows[e.RowIndex].Cells[4].Value.ToString());
-                        dtpto.Value = Convert.ToDateTime(dataGridView3.Rows[e.RowIndex].Cells[5].Value.ToString());
-                        txtBillAmount.Text = dataGridView3.Rows[e.RowIndex].Cells[6].Value.ToString();
-                        if (Convert.ToInt32(dataGridView3.CurrentRow.Cells[7].Value) == 1)
+                        cmbBillType.SelectedItem = dataGridView3.Rows[e.RowIndex].Cells[1].Value.ToString();
+                        dtpissue.Value = Convert.ToDateTime(dataGridView3.Rows[e.RowIndex].Cells[2].Value.ToString());
+                        dtpdue.Value = Convert.ToDateTime(dataGridView3.Rows[e.RowIndex].Cells[3].Value.ToString());
+                        dtpdisconnect.Value = Convert.ToDateTime(dataGridView3.Rows[e.RowIndex].Cells[4].Value.ToString());
+                        dtpfrom.Value = Convert.ToDateTime(dataGridView3.Rows[e.RowIndex].Cells[5].Value.ToString());
+                        dtpto.Value = Convert.ToDateTime(dataGridView3.Rows[e.RowIndex].Cells[6].Value.ToString());
+                        txtBillAmount.Text = dataGridView3.Rows[e.RowIndex].Cells[7].Value.ToString();
+                        if (Convert.ToInt32(dataGridView3.CurrentRow.Cells[8].Value) == 1)
                         {
                             chbpaymentstatus.Checked = true;
 
@@ -1145,7 +1230,7 @@ namespace Delmon_Managment_System.Forms
                             chbpaymentstatus.Checked = false;
 
                         }
-                        txtNotes.Text = dataGridView3.Rows[e.RowIndex].Cells[8].Value.ToString();
+                        txtNotes.Text = dataGridView3.Rows[e.RowIndex].Cells[9].Value.ToString();
 
                         // Check if the clicked cell is in the IsActive column
 
@@ -1523,6 +1608,84 @@ namespace Delmon_Managment_System.Forms
 
 
                 }
+
+            }
+        }
+
+        private void txtaccount_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtserviceNo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbRegisterUnder_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            DataRow dr;
+            SqlConnection conn = new SqlConnection(@"Data Source=192.168.1.8;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@");
+            // SqlConnection conn = new SqlConnection(@"Data Source=AMIN-PC;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@");
+
+
+            conn.Open();
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "SELECT [DEPTID],Dept_Type_Name FROM [DelmonGroupDB].[dbo].[DEPARTMENTS], DeptTypes where DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID and COMPID=@C1 ";
+
+
+            cmd.Parameters.Add(new SqlParameter("@C1", SqlDbType.Int));
+            cmd.Parameters["@C1"].Value = cmbRegisterUnder.SelectedValue;
+
+
+            //Creating Sql Data Adapter
+            cmd.ExecuteNonQuery();
+            DataTable dt = new DataTable();
+            SqlDataAdapter Da = new SqlDataAdapter(cmd);
+            Da.Fill(dt);
+            dr = dt.NewRow();
+
+
+            if (dt != null && dt.Rows.Count >= 0)
+            {
+
+                cmbempdepthistory.ValueMember = "DEPTID";
+                cmbempdepthistory.DisplayMember = "Dept_Type_Name";
+                cmbempdepthistory.DataSource = dt;
+                cmbempdepthistory.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cmbempdepthistory.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+
+
+
+            }
+
+            conn.Close();
+        }
+
+        private void cmbRegisterType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbRegisterType.SelectedItem.ToString() == "Personal")
+            {
+                cmbRegisterUnder.Enabled = cmbempdepthistory.Enabled = false;
+                cmbemployee2.Enabled = true;
+            }
+            else 
+            {
+                cmbRegisterUnder.Enabled = cmbempdepthistory.Enabled = true;
+                cmbemployee2.Enabled = true;
+
+            }
+        }
+
+        private void tabControl1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (tabControl1.SelectedTab == tabControl1.TabPages[1])
+            {
+
+                cmbemployee2.Enabled =cmbempdepthistory.Enabled =cmbRegisterUnder.Enabled= false;
 
             }
         }

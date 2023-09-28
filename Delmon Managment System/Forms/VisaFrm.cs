@@ -1464,12 +1464,28 @@ namespace Delmon_Managment_System.Forms
 
                         }
 
-                        VisaFileNumberID.Text = FileNumberID.ToString();
 
-                        cmbConsulate.Enabled = cmbJob.Enabled = false;
-                        cmbReservedTo.Enabled = cmbStatus.Enabled = cmbcandidates.Enabled = cmbAgency.Enabled = true;
-                        btnnewJob.Enabled = false;
-                        btnUpdate.Visible = true;
+
+                        /*update job consule for Mr.saleem/Amin*/
+                            if (CommonClass.EmployeeID == 179 || CommonClass.EmployeeID ==248)
+                            {
+                                VisaFileNumberID.Text = FileNumberID.ToString();
+
+                            cmbConsulate.Enabled = cmbJob.Enabled = true;
+                            cmbReservedTo.Enabled = cmbStatus.Enabled = cmbcandidates.Enabled = cmbAgency.Enabled = true;
+                            btnnewJob.Enabled = false;
+                            btnUpdate.Visible = true;
+                        }
+                        else
+                        {
+                            VisaFileNumberID.Text = FileNumberID.ToString();
+
+                            cmbConsulate.Enabled = cmbJob.Enabled = false;
+                            cmbReservedTo.Enabled = cmbStatus.Enabled = cmbcandidates.Enabled = cmbAgency.Enabled = true;
+                            btnnewJob.Enabled = false;
+                            btnUpdate.Visible = true;
+                        }
+
 
 
 

@@ -687,6 +687,7 @@ namespace Delmon_Managment_System.Forms
             this.EmploymentHistory.Controls.Add(this.button6);
             this.EmploymentHistory.Controls.Add(this.dataGridView4);
             this.EmploymentHistory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EmploymentHistory.ForeColor = System.Drawing.Color.BurlyWood;
             this.EmploymentHistory.Location = new System.Drawing.Point(4, 26);
             this.EmploymentHistory.Margin = new System.Windows.Forms.Padding(4);
             this.EmploymentHistory.Name = "EmploymentHistory";
@@ -809,7 +810,7 @@ namespace Delmon_Managment_System.Forms
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.BurlyWood;
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
@@ -832,6 +833,7 @@ namespace Delmon_Managment_System.Forms
             // 
             // tabDoc
             // 
+            this.tabDoc.BackColor = System.Drawing.Color.White;
             this.tabDoc.Controls.Add(this.btnshowDoc);
             this.tabDoc.Controls.Add(this.issueplacetext);
             this.tabDoc.Controls.Add(this.numbertextbox);
@@ -858,7 +860,6 @@ namespace Delmon_Managment_System.Forms
             this.tabDoc.Size = new System.Drawing.Size(1238, 386);
             this.tabDoc.TabIndex = 1;
             this.tabDoc.Text = "Document";
-            this.tabDoc.UseVisualStyleBackColor = true;
             this.tabDoc.Click += new System.EventHandler(this.tabDoc_Click);
             // 
             // btnshowDoc
