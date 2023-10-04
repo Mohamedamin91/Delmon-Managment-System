@@ -250,67 +250,80 @@ namespace Delmon_Managment_System.Forms
 
         private void Employeetxt_TextChanged(object sender, EventArgs e)
         {
-            SqlParameter paramEmployeenameSearch = new SqlParameter("@C1", SqlDbType.NVarChar);
-            paramEmployeenameSearch.Value = Employeetxt.Text;
-            SqlParameter paramloggiedemployeeid = new SqlParameter("@C2", SqlDbType.NVarChar);
-            paramloggiedemployeeid.Value = loggedEmpolyeeID;
-
-            SQLCONN.OpenConection();
-            if (lblusertype.Text == "Admin")
+            try
             {
-                string query = @"SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus,
-       s.StatusValue, j.JobTitleEN, dt.Dept_Type_Name, c.COMPName_EN, e.startdate, e.enddate,
-       cn.NationalityName, v.FileNumber, v.VISANumber
-FROM Employees e
-INNER JOIN StatusTBL s ON e.EmploymentStatusID = s.StatusID
-INNER JOIN JOBS j ON e.JobID = j.JobID
-INNER JOIN DEPARTMENTS d ON e.DeptID = d.DEPTID
-INNER JOIN DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
-INNER JOIN Companies c ON d.COMPID = c.COMPID
-INNER JOIN Countries cn ON e.NationalityID = cn.CountryId
-LEFT JOIN VISAJobList v ON e.EmployeeID = v.EmployeeID
-WHERE (e.EmployeeID LIKE '%' + REPLACE(@C1, ' ', '') + '%'
-       OR e.CurrentEmpID LIKE '%' + REPLACE(@C1, ' ', '') + '%'
-       OR REPLACE(e.FirstName, ' ', '') + REPLACE(e.SecondName, ' ', '') + REPLACE(e.ThirdName, ' ', '') + REPLACE(e.LastName, ' ', '') LIKE '%' + REPLACE(@C1, ' ', '') + '%'
-       OR e.FirstName LIKE '%' + @C1 + '%'
-       OR e.SecondName LIKE '%' + @C1 + '%'
-       OR e.ThirdName LIKE '%' + @C1 + '%'
-       OR e.LastName LIKE '%' + @C1 + '%'
-      ) and e.EmployeeID !=0
-ORDER BY e.EmployeeID";
-                dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramEmployeenameSearch);
+                string searchText = Employeetxt.Text.Trim();
 
+                if (string.IsNullOrEmpty(searchText))
+                {
+                    dataGridView1.DataSource = null;
+                    return;
+                }
 
+                SqlParameter paramEmployeenameSearch = new SqlParameter("@C1", SqlDbType.NVarChar);
+                paramEmployeenameSearch.Value = searchText;
+                SqlParameter paramloggiedemployeeid = new SqlParameter("@C2", SqlDbType.NVarChar);
+                paramloggiedemployeeid.Value = loggedEmpolyeeID;
 
+                SQLCONN.OpenConection();
 
+                if (lblusertype.Text == "Admin")
+                {
+                    // Your existing query for Admin
+                    string query = @"SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus, s.StatusValue, j.JobTitleEN, dt.Dept_Type_Name, c.COMPName_EN, e.startdate, e.enddate, cn.NationalityName, v.FileNumber, v.VISANumber
+        FROM Employees e
+        INNER JOIN StatusTBL s ON e.EmploymentStatusID = s.StatusID
+        INNER JOIN JOBS j ON e.JobID = j.JobID
+        INNER JOIN DEPARTMENTS d ON e.DeptID = d.DEPTID
+        INNER JOIN DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
+        INNER JOIN Companies c ON d.COMPID = c.COMPID
+        INNER JOIN Countries cn ON e.NationalityID = cn.CountryId
+        LEFT JOIN VISAJobList v ON e.EmployeeID = v.EmployeeID
+        WHERE (e.EmployeeID LIKE '%' + REPLACE(@C1, ' ', '') + '%'
+               OR e.CurrentEmpID LIKE '%' + REPLACE(@C1, ' ', '') + '%'
+               OR REPLACE(e.FirstName, ' ', '') + REPLACE(e.SecondName, ' ', '') + REPLACE(e.ThirdName, ' ', '') + REPLACE(e.LastName, ' ', '') LIKE '%' + REPLACE(@C1, ' ', '') + '%'
+               OR e.FirstName LIKE '%' + @C1 + '%'
+               OR e.SecondName LIKE '%' + @C1 + '%'
+               OR e.ThirdName LIKE '%' + @C1 + '%'
+               OR e.LastName LIKE '%' + @C1 + '%'
+              ) and e.EmployeeID !=0
+        ORDER BY e.EmployeeID";
+
+                    dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramEmployeenameSearch);
+                }
+                else
+                {
+                    // Your existing query for non-Admin users
+                    string query = "SELECT Employees.EmployeeID, Employees.CurrentEmpID, FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus, StatusTBL.StatusValue, jobs.JobTitleEN, DeptTypes.Dept_Type_Name, Companies.COMPName_EN, startdate, enddate, NationalityName " +
+                        "FROM Countries, Employees " +
+                        "INNER JOIN StatusTBL ON Employees.EmploymentStatusID = StatusTBL.StatusID " +
+                        "INNER JOIN JOBS ON Employees.JobID = JOBS.JobID " +
+                        "INNER JOIN DEPARTMENTS ON Employees.DeptID = DEPARTMENTS.DEPTID " +
+                        "INNER JOIN DeptTypes ON DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID " +
+                        "INNER JOIN Companies ON DEPARTMENTS.COMPID = Companies.COMPID " +
+                        "WHERE (REPLACE(CONCAT_WS(' ', firstname, secondname, thirdname, lastname), ' ', '') LIKE '%' + REPLACE(@C1, ' ', '') + '%' " +
+                        "OR Employees.EmployeeID LIKE '%' + REPLACE(@C1, ' ', '') + '%' " +
+                        "OR Employees.CurrentEmpID LIKE '%' + REPLACE(@C1, ' ', '') + '%') " +
+                        "AND Employees.DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = @C2) " +
+                        "AND Countries.CountryId = Employees.NationalityID " +
+                        "ORDER BY Employees.EmployeeID ASC";
+
+                    dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramEmployeenameSearch, paramloggiedemployeeid);
+                }
+
+                SQLCONN.CloseConnection();
+                firstnametxt.Text = secondnametxt.Text = thirdnametxt.Text = lastnametxt.Text = "";
+                cmbMartialStatus.Text = cmbGender.Text = "";
+                ClearAllControls();
+                tabControl1.Enabled = true;
             }
-            else
+            catch (Exception ex)
             {
-
-                string query = "SELECT Employees.EmployeeID, Employees.CurrentEmpID, FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus, StatusTBL.StatusValue, jobs.JobTitleEN, DeptTypes.Dept_Type_Name, Companies.COMPName_EN, startdate, enddate, NationalityName " +
-                   "FROM Countries, Employees " +
-                   "INNER JOIN StatusTBL ON Employees.EmploymentStatusID = StatusTBL.StatusID " +
-                   "INNER JOIN JOBS ON Employees.JobID = JOBS.JobID " +
-                   "INNER JOIN DEPARTMENTS ON Employees.DeptID = DEPARTMENTS.DEPTID " +
-                   "INNER JOIN DeptTypes ON DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID " +
-                   "INNER JOIN Companies ON DEPARTMENTS.COMPID = Companies.COMPID " +
-                   "WHERE (REPLACE(CONCAT_WS(' ', firstname, secondname, thirdname, lastname), ' ', '') LIKE '%' + REPLACE(@C1, ' ', '') + '%' " +
-                   "OR Employees.EmployeeID LIKE '%' + REPLACE(@C1, ' ', '') + '%' " +
-                   "OR Employees.CurrentEmpID LIKE '%' + REPLACE(@C1, ' ', '') + '%') " +
-                   "AND Employees.DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = @C2) " +
-                   "AND Countries.CountryId = Employees.NationalityID " +
-                   "ORDER BY Employees.EmployeeID ASC";
-
-                dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramEmployeenameSearch, paramloggiedemployeeid);
-
+                // Display the error message
+                MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            SQLCONN.CloseConnection();
-            firstnametxt.Text = secondnametxt.Text = thirdnametxt.Text = lastnametxt.Text = "";
-            cmbMartialStatus.Text = cmbGender.Text = "";
-            ClearAllControls();
-            tabControl1.Enabled = true;
         }
+
         private void ClearAllControls()
         {
             // Loop through each tab page
