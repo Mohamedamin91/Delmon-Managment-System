@@ -30,9 +30,9 @@ namespace Delmon_Managment_System.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.userTap = new System.Windows.Forms.TabPage();
             this.btnnew = new System.Windows.Forms.Button();
@@ -266,6 +266,7 @@ namespace Delmon_Managment_System.Forms
             this.passwordtxt.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.passwordtxt.Location = new System.Drawing.Point(9, 220);
             this.passwordtxt.Name = "passwordtxt";
+            this.passwordtxt.PasswordChar = '*';
             this.passwordtxt.Size = new System.Drawing.Size(249, 25);
             this.passwordtxt.TabIndex = 59;
             // 
@@ -429,8 +430,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView3.Location = new System.Drawing.Point(382, 7);
             this.dataGridView3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView3.Name = "dataGridView3";
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView3.Size = new System.Drawing.Size(637, 274);
             this.dataGridView3.TabIndex = 89;
             this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick_1);
@@ -636,8 +637,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView2.Location = new System.Drawing.Point(516, 18);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView2.Name = "dataGridView2";
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView2.Size = new System.Drawing.Size(511, 241);
             this.dataGridView2.TabIndex = 138;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick_1);
@@ -869,8 +870,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView7.Location = new System.Drawing.Point(440, 395);
             this.dataGridView7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView7.Name = "dataGridView7";
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView7.RowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView7.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView7.Size = new System.Drawing.Size(614, 193);
             this.dataGridView7.TabIndex = 171;
             this.dataGridView7.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView7_CellClick);

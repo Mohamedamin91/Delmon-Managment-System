@@ -58,6 +58,7 @@ namespace Delmon_Managment_System.Forms
             this.label16 = new System.Windows.Forms.Label();
             this.dtpfrom = new System.Windows.Forms.DateTimePicker();
             this.Emp = new System.Windows.Forms.TabPage();
+            this.ExportToExcelButton = new System.Windows.Forms.Button();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button4 = new System.Windows.Forms.Button();
@@ -383,6 +384,7 @@ namespace Delmon_Managment_System.Forms
             // 
             // Emp
             // 
+            this.Emp.Controls.Add(this.ExportToExcelButton);
             this.Emp.Controls.Add(this.dataGridView3);
             this.Emp.Controls.Add(this.dataGridView1);
             this.Emp.Controls.Add(this.button4);
@@ -405,6 +407,17 @@ namespace Delmon_Managment_System.Forms
             this.Emp.TabIndex = 1;
             this.Emp.Text = "Candidates";
             this.Emp.UseVisualStyleBackColor = true;
+            // 
+            // ExportToExcelButton
+            // 
+            this.ExportToExcelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ExportToExcelButton.Location = new System.Drawing.Point(827, 184);
+            this.ExportToExcelButton.Name = "ExportToExcelButton";
+            this.ExportToExcelButton.Size = new System.Drawing.Size(76, 36);
+            this.ExportToExcelButton.TabIndex = 148;
+            this.ExportToExcelButton.Text = "Export";
+            this.ExportToExcelButton.UseVisualStyleBackColor = true;
+            this.ExportToExcelButton.Click += new System.EventHandler(this.ExportToExcelButton_Click_1);
             // 
             // dataGridView3
             // 
@@ -740,5 +753,6 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.DataGridView dataGridView4;
         private System.Windows.Forms.ComboBox cmbReservedTo;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button ExportToExcelButton;
     }
 }

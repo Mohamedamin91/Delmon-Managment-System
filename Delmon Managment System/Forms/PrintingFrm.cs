@@ -1,4 +1,5 @@
 ﻿using Microsoft.Reporting.WinForms;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -593,12 +594,6 @@ namespace Delmon_Managment_System.Forms
                 }
             }
 
-
-
-
-
-
-
             // Set the DataTable as the DataSource for the DataGridView
             dataGridView3.DataSource = CandidateReport;
             dataGridView3.Columns[0].Visible = false; // Replace "ColumnName" with the actual name of the column
@@ -636,15 +631,6 @@ namespace Delmon_Managment_System.Forms
 
             // Refresh the DataGridView to reflect the changes
             dataGridView3.Refresh();
-
-
-
-
-
-
-
-
-
 
 
         }
@@ -805,37 +791,132 @@ namespace Delmon_Managment_System.Forms
 
         }
 
+        private bool shouldUpdateData = true;
+
+        private DataTable LoadData(bool isLastRow, SqlParameter paramDateFrom, SqlParameter paramDateTo, SqlParameter paramVisaStatus, SqlParameter paramCompany, SqlParameter paramCell1, SqlParameter paramCell2)
+        {
+            if (!shouldUpdateData)
+            {
+                return new DataTable();
+            }
+
+            DataTable CandidateReport = new DataTable();
+
+            using (SqlConnection connection = new SqlConnection(SQLCONN.ConnectionString))
+            {
+                connection.Open();
+
+                string query;
+
+                if (isLastRow)
+                {
+                    // Query for the last row
+                    query = @"
+                SELECT 
+                    VISAJobList.[FileNumber],
+                    VISA.[VisaNumber],
+                    Employees.EmployeeID,
+                    TRIM(COALESCE(CONCAT(FirstName, ' '), '') +
+                         COALESCE(CONCAT(SecondName, ' '), '') +
+                         COALESCE(CONCAT(ThirdName, ' '), '') +
+                         COALESCE(Lastname, '')) AS [FullName],
+                    CompaniesSponsor.COMPName_EN AS [Sponsor],
+                    CompaniesReservedTo.COMPName_EN AS [ReservedTO],
+                    DeptTypes.Dept_Type_Name AS [Department],
+                    Countries.NationalityName AS [Nationality],
+                    StatusTBL.StatusValue AS [Status],
+                    CONVERT(NVARCHAR(10), StartDate, 103) AS [Date]
+                FROM [DelmonGroupDB].[dbo].[VISAJobList] AS VISAJobList
+                LEFT JOIN [DelmonGroupDB].[dbo].[VISA] AS VISA ON VISAJobList.[VISANumber] = VISA.[VisaNumber]
+                RIGHT JOIN [DelmonGroupDB].[dbo].[Employees] AS Employees ON VISAJobList.[EmployeeID] = Employees.[EmployeeID]
+                LEFT JOIN [DelmonGroupDB].[dbo].[Companies] AS CompaniesSponsor ON VISA.[ComapnyID] = CompaniesSponsor.[COMPID]
+                LEFT JOIN [DelmonGroupDB].[dbo].[Companies] AS CompaniesReservedTo ON VISAJobList.[ReservedTo] = CompaniesReservedTo.[COMPID]
+                LEFT JOIN [DelmonGroupDB].[dbo].[DEPARTMENTS] AS departments ON Employees.[DeptID] = departments.DEPTID
+                LEFT JOIN [DelmonGroupDB].[dbo].[DeptTypes] AS DeptTypes ON departments.[DeptName] = DeptTypes.[Dept_Type_ID]
+                LEFT JOIN [DelmonGroupDB].[dbo].[Countries] AS Countries ON Employees.[NationalityID] = Countries.[CountryId]
+                LEFT JOIN [DelmonGroupDB].[dbo].[StatusTBL] AS StatusTBL ON Employees.[EmploymentStatusID] = StatusTBL.[StatusID]
+                WHERE TRY_CONVERT(DATE, StartDate, 103) BETWEEN @param3 AND @param4 ";
+
+                    if (cmbPersonalStatusStatus.Text != "Select")
+                    {
+                        query += "  AND Employees.[EmploymentStatusID] = @param5";
+                    }
+
+                    if (cmbcomp.Text != "Select")
+                    {
+                        query += "  AND Employees.[COMPID] = @param6";
+                    }
+
+                    query += " GROUP BY VISAJobList.[FileNumber], VISA.[VisaNumber], CompaniesSponsor.COMPName_EN, CompaniesReservedTo.COMPName_EN, DeptTypes.Dept_Type_Name, Countries.NationalityName, Employees.EmployeeID, StatusTBL.StatusValue, TRIM(COALESCE(CONCAT(FirstName, ' '), '') + COALESCE(CONCAT(SecondName, ' '), '') + COALESCE(CONCAT(ThirdName, ' '), '') + COALESCE(Lastname, '')), StartDate;";
+                }
+                else
+                {
+                    // Query for other rows
+                    query = @"
+                SELECT 
+                    VISAJobList.[FileNumber],
+                    VISA.[VisaNumber],
+                    Employees.EmployeeID,
+                    TRIM(COALESCE(CONCAT(FirstName, ' '), '') +
+                         COALESCE(CONCAT(SecondName, ' '), '') +
+                         COALESCE(CONCAT(ThirdName, ' '), '') +
+                         COALESCE(Lastname, '')) AS [FullName],
+                    CompaniesSponsor.COMPName_EN AS [Sponsor],
+                    CompaniesReservedTo.COMPName_EN AS [ReservedTO],
+                    DeptTypes.Dept_Type_Name AS [Department],
+                    Countries.NationalityName AS [Nationality],
+                    StatusTBL.StatusValue AS [Status],
+                    CONVERT(NVARCHAR(10), StartDate, 103) AS [Date]
+                FROM [DelmonGroupDB].[dbo].[VISAJobList] AS VISAJobList
+                LEFT JOIN [DelmonGroupDB].[dbo].[VISA] AS VISA ON VISAJobList.[VISANumber] = VISA.[VisaNumber]
+                RIGHT JOIN [DelmonGroupDB].[dbo].[Employees] AS Employees ON VISAJobList.[EmployeeID] = Employees.[EmployeeID]
+                LEFT JOIN [DelmonGroupDB].[dbo].[Companies] AS CompaniesSponsor ON VISA.[ComapnyID] = CompaniesSponsor.[COMPID]
+                LEFT JOIN [DelmonGroupDB].[dbo].[Companies] AS CompaniesReservedTo ON VISAJobList.[ReservedTo] = CompaniesReservedTo.[COMPID]
+                LEFT JOIN [DelmonGroupDB].[dbo].[DEPARTMENTS] AS departments ON Employees.[DeptID] = departments.DEPTID
+                LEFT JOIN [DelmonGroupDB].[dbo].[DeptTypes] AS DeptTypes ON departments.[DeptName] = DeptTypes.[Dept_Type_ID]
+                LEFT JOIN [DelmonGroupDB].[dbo].[Countries] AS Countries ON Employees.[NationalityID] = Countries.[CountryId]
+                LEFT JOIN [DelmonGroupDB].[dbo].[StatusTBL] AS StatusTBL ON Employees.[EmploymentStatusID] = StatusTBL.[StatusID]
+                WHERE TRY_CONVERT(DATE, StartDate, 103) BETWEEN @param3 AND @param4 
+                AND Employees.[EmploymentStatusID] = @param8
+                AND Employees.[COMPID] = @param7
+               
+                GROUP BY VISAJobList.[FileNumber], VISA.[VisaNumber], CompaniesSponsor.COMPName_EN, CompaniesReservedTo.COMPName_EN, DeptTypes.Dept_Type_Name, Countries.NationalityName, Employees.EmployeeID, StatusTBL.StatusValue, TRIM(COALESCE(CONCAT(FirstName, ' '), '') + COALESCE(CONCAT(SecondName, ' '), '') + COALESCE(CONCAT(ThirdName, ' '), '') + COALESCE(Lastname, '')), StartDate;";
+                }
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.Add(paramDateFrom);
+                    command.Parameters.Add(paramDateTo);
+                    command.Parameters.Add(paramVisaStatus);
+                    command.Parameters.Add(paramCompany);
+
+                    if (!isLastRow)
+                    {
+                        command.Parameters.Add(paramCell1);
+                        command.Parameters.Add(paramCell2);
+                    }
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(CandidateReport);
+                    }
+                }
+            }
+
+            return CandidateReport;
+        }
+
         private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex == -1) return;
-
-            dataGridView1.Visible = true;
-            // Check if the clicked cell is in the last row
-            if (e.RowIndex == dataGridView3.Rows.Count - 1)
+            // Check if the clicked cell is in the header (last row)
+            if (e.RowIndex == -1)
             {
-                // Prevent any action for the last row
+                // Clicked on a header cell, don't update data
+                shouldUpdateData = false;
                 return;
             }
 
-            foreach (DataGridViewRow rw in this.dataGridView3.Rows)
-            {
-                for (int i = 0; i < rw.Cells.Count; i++)
-                {
-                    if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
-                    {
-                        //   MessageBox.Show("ogg");       
-                    }
-                    else
-                    {
-                        companyidfordisplayreport = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString());
-                        StatusIDfordisplayreport = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[1].Value.ToString());
-
-                    }
-
-
-
-                }
-            }
+            shouldUpdateData = true;
 
             // Set the query parameters
             SqlParameter paramDateFrom = new SqlParameter("@param3", SqlDbType.Date);
@@ -845,63 +926,46 @@ namespace Delmon_Managment_System.Forms
             paramDateTo.Value = todate.Value;
 
             SqlParameter paramVisaStatus = new SqlParameter("@param5", SqlDbType.NVarChar);
-            paramVisaStatus.Value = StatusIDfordisplayreport;
+            paramVisaStatus.Value = cmbPersonalStatusStatus.SelectedValue;
 
             SqlParameter paramCompany = new SqlParameter("@param6", SqlDbType.Int);
-            paramCompany.Value = companyidfordisplayreport;
+            paramCompany.Value = cmbcomp.SelectedValue;
 
-            SqlParameter paramCandidate = new SqlParameter("@param7", SqlDbType.NVarChar);
-            paramCandidate.Value = cmbcandidates2.SelectedValue;
+            dataGridView1.Visible = true;
 
-            // Create a new DataTable to store the report data
-            DataTable CandidateReport = new DataTable();
+            bool isLastRow = (e.RowIndex == dataGridView3.Rows.Count - 1);
 
-            // Connect to the database and retrieve the report data
-            using (SqlConnection connection = new SqlConnection(SQLCONN.ConnectionString))
+            DataTable CandidateReport;
+
+            if (isLastRow)
             {
-                connection.Open();
+                // When it's the last row, call LoadData with only 4 parameters
+                CandidateReport = LoadData(isLastRow, paramDateFrom, paramDateTo, paramVisaStatus, paramCompany, null, null);
+            }
+            else
+            {
+                // When it's not the last row, get the values from cell 0 and cell 1
+                string cell1Value = dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string cell2Value = dataGridView3.Rows[e.RowIndex].Cells[1].Value.ToString();
 
-                // Build the query based on the user's selected options
-                string query = @"
-            SELECT V.FileNumber,Employees.EmployeeID,TRIM(COALESCE(CONCAT(FirstName, ' '), '') +
-                        COALESCE(CONCAT(SecondName, ' '), '') +
-                        COALESCE(CONCAT(ThirdName, ' '), '') +
-                        COALESCE(Lastname, '')) AS [FullName],Countries.NationalityName 'Nationality',
-                    StatusTBL.StatusValue 'Status',                 
-                    CONVERT(NVARCHAR(10), StartDate, 103) AS [Date]               
-            FROM Employees
-            JOIN Countries ON Employees.NationalityID = Countries.CountryId
-            JOIN StatusTBL ON Employees.EmploymentStatusID = StatusTBL.StatusID
-            LEFT JOIN VISAJobList v ON Employees.EmployeeID = v.EmployeeID
+                SqlParameter paramCell1 = new SqlParameter("@param7", SqlDbType.NVarChar);
+                paramCell1.Value = cell1Value;
 
-            WHERE TRY_CONVERT(DATE, StartDate, 103) BETWEEN @param3 AND @param4 AND Employees.EmploymentStatusID = @param5 AND Employees.COMPID = @param6 
-               GROUP BY Countries.NationalityName,V.FileNumber,Employees.EmployeeID,StatusTBL.StatusValue, TRIM(COALESCE(CONCAT(FirstName, ' '), '') + COALESCE(CONCAT(SecondName, ' '), '') + COALESCE(CONCAT(ThirdName, ' '), '') + COALESCE(Lastname, '')), StartDate";
+                SqlParameter paramCell2 = new SqlParameter("@param8", SqlDbType.NVarChar);
+                paramCell2.Value = cell2Value;
 
-
-
-                // Create a new SqlCommand object with the query and parameters
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.Add(paramDateFrom);
-                    command.Parameters.Add(paramDateTo);
-                    command.Parameters.Add(paramVisaStatus);
-                    command.Parameters.Add(paramCompany);
-                    //  command.Parameters.Add(paramCandidate);
-
-                    // Execute the query and fill the DataTable with the results
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
-                    {
-                        adapter.Fill(CandidateReport);
-                    }
-                }
+                // Call LoadData with 6 parameters
+                CandidateReport = LoadData(isLastRow, paramDateFrom, paramDateTo, paramVisaStatus, paramCompany, paramCell1, paramCell2);
             }
 
-            // Set the DataTable as the DataSource for the DataGridView
             dataGridView1.DataSource = CandidateReport;
-            dataGridView1.Columns[2].Width = 300; // Replace "ColumnName" with the actual name of the column
 
-
+            dataGridView1.Columns[3].Width = 300;
+            dataGridView1.Columns[4].Width = 100;
+            dataGridView1.Columns[5].Width = 100;
         }
+
+
         private void CalculateAndDisplayTotal()
         {
             int sum = 0;
@@ -1168,5 +1232,64 @@ namespace Delmon_Managment_System.Forms
 
             }
         }
+        
+
+    private void ExportToExcelButton_Click(object sender, EventArgs e)
+        {
+            using (var package = new ExcelPackage())
+            {
+                ExcelWorksheet worksheet1 = package.Workbook.Worksheets.Add("Data1");
+                ExcelWorksheet worksheet2 = package.Workbook.Worksheets.Add("Data2");
+
+                ExportDataGridViewToExcel(dataGridView2, worksheet1);
+                ExportDataGridViewToExcel(dataGridView4, worksheet2);
+
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Excel Files|*.xlsx";
+                saveFileDialog.Title = "Save as Excel File";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    package.SaveAs(new System.IO.FileInfo(saveFileDialog.FileName));
+                }
+            }
+        }
+        private void ExportDataGridViewToExcel(DataGridView dataGridView, ExcelWorksheet worksheet)
+        {
+            for (int i = 1; i <= dataGridView.ColumnCount; i++)
+            {
+                worksheet.Cells[1, i].Value = dataGridView.Columns[i - 1].HeaderText;
+            }
+
+            for (int i = 0; i < dataGridView.RowCount; i++)
+            {
+                for (int j = 0; j < dataGridView.ColumnCount; j++)
+                {
+                    worksheet.Cells[i + 2, j + 1].Value = dataGridView.Rows[i].Cells[j].Value;
+                }
+            }
+        }
+
+        private void ExportToExcelButton_Click_1(object sender, EventArgs e)
+        {
+            using (var package = new ExcelPackage())
+            {
+                ExcelWorksheet worksheet1 = package.Workbook.Worksheets.Add("Data1");
+                ExcelWorksheet worksheet2 = package.Workbook.Worksheets.Add("Data2");
+
+                ExportDataGridViewToExcel(dataGridView1, worksheet1);
+                ExportDataGridViewToExcel(dataGridView3, worksheet2);
+
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Excel Files|*.xlsx";
+                saveFileDialog.Title = "Save as Excel File";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    package.SaveAs(new System.IO.FileInfo(saveFileDialog.FileName));
+                }
+            }
+        }
     }
 }
+
