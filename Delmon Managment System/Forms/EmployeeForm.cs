@@ -269,31 +269,32 @@ namespace Delmon_Managment_System.Forms
 
                 if (lblusertype.Text == "Admin")
                 {
-                    // Your existing query for Admin
                     string query = @"SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus, s.StatusValue, j.JobTitleEN, dt.Dept_Type_Name, c.COMPName_EN, e.startdate, e.enddate, cn.NationalityName, v.FileNumber, v.VISANumber
-        FROM Employees e
-        INNER JOIN StatusTBL s ON e.EmploymentStatusID = s.StatusID
-        INNER JOIN JOBS j ON e.JobID = j.JobID
-        INNER JOIN DEPARTMENTS d ON e.DeptID = d.DEPTID
-        INNER JOIN DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
-        INNER JOIN Companies c ON d.COMPID = c.COMPID
-        INNER JOIN Countries cn ON e.NationalityID = cn.CountryId
-        LEFT JOIN VISAJobList v ON e.EmployeeID = v.EmployeeID
-        WHERE (e.EmployeeID LIKE '%' + REPLACE(@C1, ' ', '') + '%'
-               OR e.CurrentEmpID LIKE '%' + REPLACE(@C1, ' ', '') + '%'
+    FROM Employees e
+    INNER JOIN StatusTBL s ON e.EmploymentStatusID = s.StatusID
+    INNER JOIN JOBS j ON e.JobID = j.JobID
+    INNER JOIN DEPARTMENTS d ON e.DeptID = d.DEPTID
+    INNER JOIN DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
+    INNER JOIN Companies c ON d.COMPID = c.COMPID
+    INNER JOIN Countries cn ON e.NationalityID = cn.CountryId
+    LEFT JOIN VISAJobList v ON e.EmployeeID = v.EmployeeID
+    WHERE ((LEN(@C1) = 1 AND (e.EmployeeID LIKE @C1 OR e.CurrentEmpID LIKE @C1))
+           OR (LEN(@C1) > 1 AND (
+               e.EmployeeID LIKE '%' + REPLACE(@C1, ' ', '') + '%'
                OR REPLACE(e.FirstName, ' ', '') + REPLACE(e.SecondName, ' ', '') + REPLACE(e.ThirdName, ' ', '') + REPLACE(e.LastName, ' ', '') LIKE '%' + REPLACE(@C1, ' ', '') + '%'
                OR e.FirstName LIKE '%' + @C1 + '%'
                OR e.SecondName LIKE '%' + @C1 + '%'
                OR e.ThirdName LIKE '%' + @C1 + '%'
                OR e.LastName LIKE '%' + @C1 + '%'
-              ) and e.EmployeeID !=0
-        ORDER BY e.EmployeeID";
+           )))
+    ORDER BY e.EmployeeID";
+
+                    dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramEmployeenameSearch);
 
                     dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramEmployeenameSearch);
                 }
                 else
                 {
-                    // Your existing query for non-Admin users
                     string query = "SELECT Employees.EmployeeID, Employees.CurrentEmpID, FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus, StatusTBL.StatusValue, jobs.JobTitleEN, DeptTypes.Dept_Type_Name, Companies.COMPName_EN, startdate, enddate, NationalityName " +
                         "FROM Countries, Employees " +
                         "INNER JOIN StatusTBL ON Employees.EmploymentStatusID = StatusTBL.StatusID " +
@@ -301,7 +302,8 @@ namespace Delmon_Managment_System.Forms
                         "INNER JOIN DEPARTMENTS ON Employees.DeptID = DEPARTMENTS.DEPTID " +
                         "INNER JOIN DeptTypes ON DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID " +
                         "INNER JOIN Companies ON DEPARTMENTS.COMPID = Companies.COMPID " +
-                        "WHERE (REPLACE(CONCAT_WS(' ', firstname, secondname, thirdname, lastname), ' ', '') LIKE '%' + REPLACE(@C1, ' ', '') + '%' " +
+                        "WHERE (LEN(@C1) = 1 AND Employees.EmployeeID LIKE '%' + @C1 + '%' " +
+                        "OR REPLACE(CONCAT_WS(' ', firstname, secondname, thirdname, lastname), ' ', '') LIKE '%' + REPLACE(@C1, ' ', '') + '%' " +
                         "OR Employees.EmployeeID LIKE '%' + REPLACE(@C1, ' ', '') + '%' " +
                         "OR Employees.CurrentEmpID LIKE '%' + REPLACE(@C1, ' ', '') + '%') " +
                         "AND Employees.DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = @C2) " +
@@ -323,6 +325,7 @@ namespace Delmon_Managment_System.Forms
                 MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void ClearAllControls()
         {
