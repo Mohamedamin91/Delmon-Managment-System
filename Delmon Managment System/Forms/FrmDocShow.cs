@@ -24,7 +24,7 @@ namespace Delmon_Managment_System.Forms
         string textFilePath;
         string Shortname;
         int DocID;
-        string filenameDB, documnetvalueDB;
+       // string filenameDB, documnetvalueDB;
 
         public FrmDocShow()
         {

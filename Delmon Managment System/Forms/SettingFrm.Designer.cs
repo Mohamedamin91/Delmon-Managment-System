@@ -173,6 +173,7 @@ namespace Delmon_Managment_System.Forms
             // 
             // userTap
             // 
+            this.userTap.BackColor = System.Drawing.Color.White;
             this.userTap.Controls.Add(this.btnnew);
             this.userTap.Controls.Add(this.cmbusertype);
             this.userTap.Controls.Add(this.label3);
@@ -195,7 +196,6 @@ namespace Delmon_Managment_System.Forms
             this.userTap.Size = new System.Drawing.Size(1274, 597);
             this.userTap.TabIndex = 0;
             this.userTap.Text = "Users";
-            this.userTap.UseVisualStyleBackColor = true;
             this.userTap.Click += new System.EventHandler(this.userTap_Click);
             // 
             // btnnew

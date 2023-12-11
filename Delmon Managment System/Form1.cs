@@ -253,5 +253,64 @@ namespace Delmon_Managment_System
             this.lbldatetime.Text = DateTime.Now.ToString("dd-MMM-yyyy  hh:mm:ss tt");
 
         }
+
+        private void btnBilling_Click_1(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.BillsFrm(), sender);
+
+        }
+
+        private void btnprinting_Click_1(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.PrintingFrm(), sender);
+
+
+        }
+
+        private void btnemployee_Click_1(object sender, EventArgs e)
+        {
+            groupBox1.Visible = false;
+
+            OpenChildForm(new Forms.EmployeeForm(), sender);
+        }
+
+        private void btnvisa_Click_1(object sender, EventArgs e)
+        {
+            groupBox1.Visible = false;
+
+            if (lblusertype.Text == "Admin")
+            {
+                OpenChildForm(new Forms.VisaFrm(), sender);
+            }
+            else
+            {
+                MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.AssetFrm(), sender);
+
+        }
+
+        private void button2_Click_2(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.SettingFrm(), sender);
+
+        }
+
+        private void btnNotifications_Click_1(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.NotificationFrm(), sender);
+
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            Application.Restart();
+
+        }
     }
 }

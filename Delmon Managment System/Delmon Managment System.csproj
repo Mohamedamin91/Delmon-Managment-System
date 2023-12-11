@@ -25,7 +25,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>74</ApplicationRevision>
+    <ApplicationRevision>75</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -107,6 +107,12 @@
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AssetFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AssetFrm.Designer.cs">
+      <DependentUpon>AssetFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\BillsFrm.cs">
       <SubType>Form</SubType>
@@ -200,6 +206,9 @@
     <EmbeddedResource Include="CandidateReport.rdlc" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AssetFrm.resx">
+      <DependentUpon>AssetFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\BillsFrm.resx">
       <DependentUpon>BillsFrm.cs</DependentUpon>

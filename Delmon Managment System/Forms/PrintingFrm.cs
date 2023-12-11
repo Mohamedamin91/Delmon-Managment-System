@@ -18,8 +18,8 @@ namespace Delmon_Managment_System.Forms
     {
         SQLCONNECTION SQLCONN = new SQLCONNECTION();
         int loggedEmployee;
-        int companyidfordisplayreport;
-        int StatusIDfordisplayreport;
+      //  int companyidfordisplayreport;
+      //  int StatusIDfordisplayreport;
         int Visacompanyidfordisplayreport;
         int VisaREservedToidfordisplayreport;
         int VisaStatusIDfordisplayreport;

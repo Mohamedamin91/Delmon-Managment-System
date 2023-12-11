@@ -33,12 +33,6 @@ namespace Delmon_Managment_System.Forms
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeeForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Employeetxt = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -678,6 +672,7 @@ namespace Delmon_Managment_System.Forms
             // 
             // EmploymentHistory
             // 
+            this.EmploymentHistory.BackColor = System.Drawing.Color.White;
             this.EmploymentHistory.Controls.Add(this.label28);
             this.EmploymentHistory.Controls.Add(this.richhistoryvalue);
             this.EmploymentHistory.Controls.Add(this.label27);
@@ -695,7 +690,6 @@ namespace Delmon_Managment_System.Forms
             this.EmploymentHistory.Size = new System.Drawing.Size(1238, 386);
             this.EmploymentHistory.TabIndex = 2;
             this.EmploymentHistory.Text = "Employment History";
-            this.EmploymentHistory.UseVisualStyleBackColor = true;
             this.EmploymentHistory.Click += new System.EventHandler(this.EmploymentHistory_Click);
             // 
             // label28
@@ -798,34 +792,10 @@ namespace Delmon_Managment_System.Forms
             // 
             this.dataGridView4.AllowUserToAddRows = false;
             this.dataGridView4.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView4.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.BurlyWood;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView4.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView4.Location = new System.Drawing.Point(132, 200);
             this.dataGridView4.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView4.Name = "dataGridView4";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView4.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView4.Size = new System.Drawing.Size(1003, 180);
             this.dataGridView4.TabIndex = 133;
             this.dataGridView4.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellClick);
@@ -1038,34 +1008,10 @@ namespace Delmon_Managment_System.Forms
             // 
             this.dataGridView3.AllowUserToAddRows = false;
             this.dataGridView3.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView3.DefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridView3.Location = new System.Drawing.Point(233, 237);
             this.dataGridView3.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView3.Name = "dataGridView3";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView3.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView3.Size = new System.Drawing.Size(656, 141);
             this.dataGridView3.TabIndex = 134;
             this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick);
@@ -1115,6 +1061,7 @@ namespace Delmon_Managment_System.Forms
             // 
             // tabContact
             // 
+            this.tabContact.BackColor = System.Drawing.Color.White;
             this.tabContact.Controls.Add(this.btndeletecontact);
             this.tabContact.Controls.Add(this.btnaddcontact);
             this.tabContact.Controls.Add(this.btnupdatecontat);
@@ -1131,7 +1078,6 @@ namespace Delmon_Managment_System.Forms
             this.tabContact.Size = new System.Drawing.Size(1238, 386);
             this.tabContact.TabIndex = 0;
             this.tabContact.Text = "Contact";
-            this.tabContact.UseVisualStyleBackColor = true;
             this.tabContact.Click += new System.EventHandler(this.tabContact_Click);
             // 
             // btndeletecontact
@@ -1263,6 +1209,7 @@ namespace Delmon_Managment_System.Forms
             // 
             // SalaryTab
             // 
+            this.SalaryTab.BackColor = System.Drawing.Color.White;
             this.SalaryTab.Controls.Add(this.lblprovide);
             this.SalaryTab.Controls.Add(this.button1);
             this.SalaryTab.Controls.Add(this.button2);
@@ -1280,7 +1227,6 @@ namespace Delmon_Managment_System.Forms
             this.SalaryTab.Size = new System.Drawing.Size(1238, 386);
             this.SalaryTab.TabIndex = 3;
             this.SalaryTab.Text = "Salary";
-            this.SalaryTab.UseVisualStyleBackColor = true;
             this.SalaryTab.Click += new System.EventHandler(this.SalaryTab_Click);
             // 
             // lblprovide

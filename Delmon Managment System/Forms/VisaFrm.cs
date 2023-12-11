@@ -37,7 +37,7 @@ namespace Delmon_Managment_System.Forms
         CultureInfo SA = new CultureInfo("ar-SA");
         CultureInfo US = new CultureInfo("en-US");
         FrmLogin frmLogin = new FrmLogin();
-        System.Timers.Timer tmr = null;
+       // System.Timers.Timer tmr = null;
         SqlParameter paramcomapany = new SqlParameter("@Comp", SqlDbType.Int);
         SqlParameter paramReservedTo = new SqlParameter("@CompReservedTo", SqlDbType.Int);
 
