@@ -29,17 +29,17 @@ namespace Delmon_Managment_System.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AssetFrm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.btnnew = new System.Windows.Forms.Button();
-            this.deletebtn = new System.Windows.Forms.Button();
-            this.addbtn = new System.Windows.Forms.Button();
-            this.seratchassettxt = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.Assetmodeltxt = new System.Windows.Forms.TextBox();
+            this.updatebtn = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cmbbrand = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbtype = new System.Windows.Forms.ComboBox();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.lblprovide = new System.Windows.Forms.Label();
@@ -49,27 +49,29 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView5 = new System.Windows.Forms.DataGridView();
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
-            this.cmbsalarytype = new System.Windows.Forms.ComboBox();
+            this.cmbdeviceatt = new System.Windows.Forms.ComboBox();
             this.txtvalue = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cmbtype = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cmbbrand = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
-            this.Assetmodeltxt = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.seratchassettxt = new System.Windows.Forms.TextBox();
+            this.btnnew = new System.Windows.Forms.Button();
+            this.deletebtn = new System.Windows.Forms.Button();
+            this.addbtn = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.lblFullname = new System.Windows.Forms.Label();
             this.lblPC = new System.Windows.Forms.Label();
             this.lbldatetime = new System.Windows.Forms.Label();
             this.lblemail = new System.Windows.Forms.Label();
             this.lblusername = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -87,7 +89,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
             this.tabPage1.Controls.Add(this.Assetmodeltxt);
-            this.tabPage1.Controls.Add(this.button4);
+            this.tabPage1.Controls.Add(this.updatebtn);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.cmbbrand);
@@ -111,26 +113,265 @@ namespace Delmon_Managment_System.Forms
             this.tabPage1.Text = "Asset";
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
-            // tabPage2
+            // Assetmodeltxt
             // 
-            this.tabPage2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.tabPage2.Location = new System.Drawing.Point(4, 26);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(1564, 825);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Report";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.Assetmodeltxt.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.Assetmodeltxt.Location = new System.Drawing.Point(124, 216);
+            this.Assetmodeltxt.Margin = new System.Windows.Forms.Padding(4);
+            this.Assetmodeltxt.Name = "Assetmodeltxt";
+            this.Assetmodeltxt.Size = new System.Drawing.Size(224, 25);
+            this.Assetmodeltxt.TabIndex = 155;
             // 
-            // dataGridView1
+            // updatebtn
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(402, 7);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(952, 304);
-            this.dataGridView1.TabIndex = 58;
+            this.updatebtn.BackColor = System.Drawing.Color.White;
+            this.updatebtn.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.updatebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.updatebtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.updatebtn.ForeColor = System.Drawing.Color.Firebrick;
+            this.updatebtn.Location = new System.Drawing.Point(190, 309);
+            this.updatebtn.Name = "updatebtn";
+            this.updatebtn.Size = new System.Drawing.Size(70, 26);
+            this.updatebtn.TabIndex = 154;
+            this.updatebtn.Text = "Update";
+            this.updatebtn.UseVisualStyleBackColor = false;
+            this.updatebtn.Visible = false;
+            this.updatebtn.Click += new System.EventHandler(this.updatebtn_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label3.Location = new System.Drawing.Point(20, 219);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(96, 17);
+            this.label3.TabIndex = 153;
+            this.label3.Text = "Asset Model";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label2.Location = new System.Drawing.Point(17, 168);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(98, 17);
+            this.label2.TabIndex = 151;
+            this.label2.Text = "Asset Brand";
+            // 
+            // cmbbrand
+            // 
+            this.cmbbrand.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.cmbbrand.FormattingEnabled = true;
+            this.cmbbrand.Location = new System.Drawing.Point(124, 168);
+            this.cmbbrand.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbbrand.Name = "cmbbrand";
+            this.cmbbrand.Size = new System.Drawing.Size(224, 25);
+            this.cmbbrand.TabIndex = 150;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label1.Location = new System.Drawing.Point(20, 118);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(88, 17);
+            this.label1.TabIndex = 149;
+            this.label1.Text = "Asset Type";
+            // 
+            // cmbtype
+            // 
+            this.cmbtype.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.cmbtype.FormattingEnabled = true;
+            this.cmbtype.Location = new System.Drawing.Point(124, 115);
+            this.cmbtype.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbtype.Name = "cmbtype";
+            this.cmbtype.Size = new System.Drawing.Size(224, 25);
+            this.cmbtype.TabIndex = 148;
+            this.cmbtype.SelectionChangeCommitted += new System.EventHandler(this.cmbtype_SelectionChangeCommitted);
+            // 
+            // tabControl2
+            // 
+            this.tabControl2.Controls.Add(this.tabPage3);
+            this.tabControl2.Location = new System.Drawing.Point(23, 362);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(1331, 426);
+            this.tabControl2.TabIndex = 146;
+            this.tabControl2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl2_MouseClick);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.BackColor = System.Drawing.Color.White;
+            this.tabPage3.Controls.Add(this.lblprovide);
+            this.tabPage3.Controls.Add(this.button1);
+            this.tabPage3.Controls.Add(this.button2);
+            this.tabPage3.Controls.Add(this.button3);
+            this.tabPage3.Controls.Add(this.dataGridView5);
+            this.tabPage3.Controls.Add(this.label21);
+            this.tabPage3.Controls.Add(this.label22);
+            this.tabPage3.Controls.Add(this.cmbdeviceatt);
+            this.tabPage3.Controls.Add(this.txtvalue);
+            this.tabPage3.Location = new System.Drawing.Point(4, 26);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1323, 396);
+            this.tabPage3.TabIndex = 0;
+            this.tabPage3.Text = "Device Details";
+            this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
+            // 
+            // lblprovide
+            // 
+            this.lblprovide.AutoSize = true;
+            this.lblprovide.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.lblprovide.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblprovide.Location = new System.Drawing.Point(21, 121);
+            this.lblprovide.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblprovide.Name = "lblprovide";
+            this.lblprovide.Size = new System.Drawing.Size(221, 17);
+            this.lblprovide.TabIndex = 154;
+            this.lblprovide.Text = "*Provide (Yes or No) as Value";
+            this.lblprovide.Visible = false;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button1.ForeColor = System.Drawing.Color.Firebrick;
+            this.button1.Location = new System.Drawing.Point(760, 50);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(111, 35);
+            this.button1.TabIndex = 153;
+            this.button1.Text = "Delete";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button2.BackColor = System.Drawing.Color.White;
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button2.ForeColor = System.Drawing.Color.Firebrick;
+            this.button2.Location = new System.Drawing.Point(489, 50);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(111, 35);
+            this.button2.TabIndex = 151;
+            this.button2.Text = "Add";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button3.BackColor = System.Drawing.Color.White;
+            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button3.ForeColor = System.Drawing.Color.Firebrick;
+            this.button3.Location = new System.Drawing.Point(630, 50);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(111, 35);
+            this.button3.TabIndex = 152;
+            this.button3.Text = "Update";
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // dataGridView5
+            // 
+            this.dataGridView5.AllowUserToAddRows = false;
+            this.dataGridView5.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView5.Location = new System.Drawing.Point(16, 154);
+            this.dataGridView5.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView5.Name = "dataGridView5";
+            this.dataGridView5.Size = new System.Drawing.Size(1009, 217);
+            this.dataGridView5.TabIndex = 150;
+            this.dataGridView5.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView5_CellClick);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label21.Location = new System.Drawing.Point(33, 68);
+            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(117, 17);
+            this.label21.TabIndex = 149;
+            this.label21.Text = "Amount / Value";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label22.Location = new System.Drawing.Point(33, 20);
+            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(126, 17);
+            this.label22.TabIndex = 147;
+            this.label22.Text = "Device Attribute";
+            // 
+            // cmbdeviceatt
+            // 
+            this.cmbdeviceatt.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.cmbdeviceatt.FormattingEnabled = true;
+            this.cmbdeviceatt.Items.AddRange(new object[] {
+            "Male",
+            "Female"});
+            this.cmbdeviceatt.Location = new System.Drawing.Point(205, 22);
+            this.cmbdeviceatt.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbdeviceatt.Name = "cmbdeviceatt";
+            this.cmbdeviceatt.Size = new System.Drawing.Size(197, 25);
+            this.cmbdeviceatt.TabIndex = 146;
+            // 
+            // txtvalue
+            // 
+            this.txtvalue.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.txtvalue.Location = new System.Drawing.Point(205, 68);
+            this.txtvalue.Margin = new System.Windows.Forms.Padding(4);
+            this.txtvalue.Name = "txtvalue";
+            this.txtvalue.Size = new System.Drawing.Size(197, 25);
+            this.txtvalue.TabIndex = 148;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(20, 37);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(20, 24);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 145;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label10.Location = new System.Drawing.Point(40, 40);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(61, 17);
+            this.label10.TabIndex = 144;
+            this.label10.Text = "Search";
+            // 
+            // seratchassettxt
+            // 
+            this.seratchassettxt.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.seratchassettxt.Location = new System.Drawing.Point(124, 36);
+            this.seratchassettxt.Name = "seratchassettxt";
+            this.seratchassettxt.Size = new System.Drawing.Size(224, 25);
+            this.seratchassettxt.TabIndex = 143;
+            this.seratchassettxt.TextChanged += new System.EventHandler(this.seratchassettxt_TextChanged);
             // 
             // btnnew
             // 
@@ -161,6 +402,7 @@ namespace Delmon_Managment_System.Forms
             this.deletebtn.Text = "Delete";
             this.deletebtn.UseVisualStyleBackColor = false;
             this.deletebtn.Visible = false;
+            this.deletebtn.Click += new System.EventHandler(this.deletebtn_Click);
             // 
             // addbtn
             // 
@@ -178,266 +420,28 @@ namespace Delmon_Managment_System.Forms
             this.addbtn.Visible = false;
             this.addbtn.Click += new System.EventHandler(this.addbtn_Click);
             // 
-            // seratchassettxt
+            // dataGridView1
             // 
-            this.seratchassettxt.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.seratchassettxt.Location = new System.Drawing.Point(124, 36);
-            this.seratchassettxt.Name = "seratchassettxt";
-            this.seratchassettxt.Size = new System.Drawing.Size(224, 25);
-            this.seratchassettxt.TabIndex = 143;
-            this.seratchassettxt.TextChanged += new System.EventHandler(this.seratchassettxt_TextChanged);
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(402, 7);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(952, 304);
+            this.dataGridView1.TabIndex = 58;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
-            // pictureBox1
+            // tabPage2
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(20, 37);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(20, 24);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 145;
-            this.pictureBox1.TabStop = false;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label10.Location = new System.Drawing.Point(40, 40);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(61, 17);
-            this.label10.TabIndex = 144;
-            this.label10.Text = "Search";
-            // 
-            // tabControl2
-            // 
-            this.tabControl2.Controls.Add(this.tabPage3);
-            this.tabControl2.Location = new System.Drawing.Point(23, 362);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(1331, 426);
-            this.tabControl2.TabIndex = 146;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.BackColor = System.Drawing.Color.White;
-            this.tabPage3.Controls.Add(this.lblprovide);
-            this.tabPage3.Controls.Add(this.button1);
-            this.tabPage3.Controls.Add(this.button2);
-            this.tabPage3.Controls.Add(this.button3);
-            this.tabPage3.Controls.Add(this.dataGridView5);
-            this.tabPage3.Controls.Add(this.label21);
-            this.tabPage3.Controls.Add(this.label22);
-            this.tabPage3.Controls.Add(this.cmbsalarytype);
-            this.tabPage3.Controls.Add(this.txtvalue);
-            this.tabPage3.Location = new System.Drawing.Point(4, 26);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1323, 396);
-            this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "Device Details";
-            // 
-            // lblprovide
-            // 
-            this.lblprovide.AutoSize = true;
-            this.lblprovide.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.lblprovide.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblprovide.Location = new System.Drawing.Point(21, 121);
-            this.lblprovide.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lblprovide.Name = "lblprovide";
-            this.lblprovide.Size = new System.Drawing.Size(221, 17);
-            this.lblprovide.TabIndex = 154;
-            this.lblprovide.Text = "*Provide (Yes or No) as Value";
-            this.lblprovide.Visible = false;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.button1.ForeColor = System.Drawing.Color.Firebrick;
-            this.button1.Location = new System.Drawing.Point(760, 50);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(111, 35);
-            this.button1.TabIndex = 153;
-            this.button1.Text = "Delete";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.button2.ForeColor = System.Drawing.Color.Firebrick;
-            this.button2.Location = new System.Drawing.Point(489, 50);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(111, 35);
-            this.button2.TabIndex = 151;
-            this.button2.Text = "Add";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // button3
-            // 
-            this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button3.BackColor = System.Drawing.Color.White;
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.button3.ForeColor = System.Drawing.Color.Firebrick;
-            this.button3.Location = new System.Drawing.Point(630, 50);
-            this.button3.Margin = new System.Windows.Forms.Padding(4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(111, 35);
-            this.button3.TabIndex = 152;
-            this.button3.Text = "Update";
-            this.button3.UseVisualStyleBackColor = false;
-            // 
-            // dataGridView5
-            // 
-            this.dataGridView5.AllowUserToAddRows = false;
-            this.dataGridView5.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView5.Location = new System.Drawing.Point(16, 154);
-            this.dataGridView5.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView5.Name = "dataGridView5";
-            this.dataGridView5.Size = new System.Drawing.Size(1009, 217);
-            this.dataGridView5.TabIndex = 150;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label21.Location = new System.Drawing.Point(33, 68);
-            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(117, 17);
-            this.label21.TabIndex = 149;
-            this.label21.Text = "Amount / Value";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label22.Location = new System.Drawing.Point(33, 20);
-            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(126, 17);
-            this.label22.TabIndex = 147;
-            this.label22.Text = "Device Attribute";
-            // 
-            // cmbsalarytype
-            // 
-            this.cmbsalarytype.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.cmbsalarytype.FormattingEnabled = true;
-            this.cmbsalarytype.Items.AddRange(new object[] {
-            "Male",
-            "Female"});
-            this.cmbsalarytype.Location = new System.Drawing.Point(205, 22);
-            this.cmbsalarytype.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbsalarytype.Name = "cmbsalarytype";
-            this.cmbsalarytype.Size = new System.Drawing.Size(197, 25);
-            this.cmbsalarytype.TabIndex = 146;
-            // 
-            // txtvalue
-            // 
-            this.txtvalue.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.txtvalue.Location = new System.Drawing.Point(205, 68);
-            this.txtvalue.Margin = new System.Windows.Forms.Padding(4);
-            this.txtvalue.Name = "txtvalue";
-            this.txtvalue.Size = new System.Drawing.Size(197, 25);
-            this.txtvalue.TabIndex = 148;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label1.Location = new System.Drawing.Point(20, 118);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(88, 17);
-            this.label1.TabIndex = 149;
-            this.label1.Text = "Asset Type";
-            // 
-            // cmbtype
-            // 
-            this.cmbtype.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.cmbtype.FormattingEnabled = true;
-            this.cmbtype.Items.AddRange(new object[] {
-            "Computer",
-            "Printer",
-            "Screen",
-            "Other"});
-            this.cmbtype.Location = new System.Drawing.Point(124, 115);
-            this.cmbtype.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbtype.Name = "cmbtype";
-            this.cmbtype.Size = new System.Drawing.Size(224, 25);
-            this.cmbtype.TabIndex = 148;
-            this.cmbtype.SelectionChangeCommitted += new System.EventHandler(this.cmbtype_SelectionChangeCommitted);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label2.Location = new System.Drawing.Point(17, 168);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 17);
-            this.label2.TabIndex = 151;
-            this.label2.Text = "Asset Brand";
-            // 
-            // cmbbrand
-            // 
-            this.cmbbrand.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.cmbbrand.FormattingEnabled = true;
-            this.cmbbrand.Items.AddRange(new object[] {
-            "Male",
-            "Female"});
-            this.cmbbrand.Location = new System.Drawing.Point(124, 168);
-            this.cmbbrand.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbbrand.Name = "cmbbrand";
-            this.cmbbrand.Size = new System.Drawing.Size(224, 25);
-            this.cmbbrand.TabIndex = 150;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label3.Location = new System.Drawing.Point(20, 219);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(96, 17);
-            this.label3.TabIndex = 153;
-            this.label3.Text = "Asset Model";
-            // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.Color.White;
-            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.button4.ForeColor = System.Drawing.Color.Firebrick;
-            this.button4.Location = new System.Drawing.Point(190, 309);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(70, 26);
-            this.button4.TabIndex = 154;
-            this.button4.Text = "Update";
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Visible = false;
-            // 
-            // Assetmodeltxt
-            // 
-            this.Assetmodeltxt.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.Assetmodeltxt.Location = new System.Drawing.Point(124, 216);
-            this.Assetmodeltxt.Margin = new System.Windows.Forms.Padding(4);
-            this.Assetmodeltxt.Name = "Assetmodeltxt";
-            this.Assetmodeltxt.Size = new System.Drawing.Size(224, 25);
-            this.Assetmodeltxt.TabIndex = 155;
+            this.tabPage2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.tabPage2.Location = new System.Drawing.Point(4, 26);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage2.Size = new System.Drawing.Size(1417, 825);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Report";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // lblFullname
             // 
@@ -499,6 +503,10 @@ namespace Delmon_Managment_System.Forms
             this.lblusername.TabIndex = 156;
             this.lblusername.Text = "UserName";
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // AssetFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
@@ -519,12 +527,12 @@ namespace Delmon_Managment_System.Forms
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabControl2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -551,9 +559,9 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.DataGridView dataGridView5;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.ComboBox cmbsalarytype;
+        private System.Windows.Forms.ComboBox cmbdeviceatt;
         private System.Windows.Forms.TextBox txtvalue;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button updatebtn;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbbrand;
@@ -565,5 +573,6 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Label lbldatetime;
         private System.Windows.Forms.Label lblemail;
         private System.Windows.Forms.Label lblusername;
+        private System.Windows.Forms.Timer timer1;
     }
 }
