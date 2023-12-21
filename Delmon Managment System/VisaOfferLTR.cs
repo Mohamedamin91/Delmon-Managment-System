@@ -16,7 +16,7 @@ namespace Delmon_Managment_System
     public partial class VisaOfferLTR : Form
     {
         int EmpIDRPT;
-        string CandidateName, EmployeeName;
+        string EmployeeName;
         SQLCONNECTION sql = new SQLCONNECTION();
 
         public VisaOfferLTR()

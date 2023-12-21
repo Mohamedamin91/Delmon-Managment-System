@@ -23,7 +23,7 @@ namespace Delmon_Managment_System
         public string UserName;
         public string Email;
         public string EmployeeName;
-        string latestVersionNumber = GetLatestVersionNumber(@"\\MyPC\ShareFolder\version.txt");
+        //string latestVersionNumber = GetLatestVersionNumber(@"\\MyPC\ShareFolder\version.txt");
 
 
 
@@ -107,23 +107,24 @@ namespace Delmon_Managment_System
             }
             SQLCONN.CloseConnection();
         }
-        public static string GetLatestVersionNumber(string filePath)
-        {
-            try
-            {
-                using (StreamReader sr = new StreamReader(filePath))
-                {
-                    string line = sr.ReadLine();
-                    return line.Trim();
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle exception
-            }
+        //public static string GetLatestVersionNumber(string filePath)
+        //{
+        //    try
+        //    {
+        //        using (StreamReader sr = new StreamReader(filePath))
+        //        {
+        //            string line = sr.ReadLine();
+        //            return line.Trim();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.ToString());
+        //        // Handle exception
+        //    }
 
-            return "";
-        }
+        //    return "";
+        //}
 
 
         private void FrmLogin_Load(object sender, EventArgs e)

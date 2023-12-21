@@ -14,9 +14,7 @@ using System.Data.SqlClient;
 using System.Net.Mail;
 using System.Net;
 using Outlook = Microsoft.Office.Interop.Outlook;
-
-
-
+using Tulpep.NotificationWindow;
 
 namespace Delmon_Managment_System.Forms
 {
@@ -131,21 +129,7 @@ namespace Delmon_Managment_System.Forms
 
 
         }
-        private void LoadTheme()
-        {
-            //foreach (Control btns in this.Controls)
-            //{
-            //    if (btns.GetType() == typeof(Button))
-            //    {
-            //        Button btn = (Button)btns;
-            //        btn.BackColor = ThemeColor.PrimaryColor;
-            //        btn.ForeColor = Color.White;
-            //        btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
-            //    }
-            //}
-            // label4.ForeColor = ThemeColor.SecondaryColor;
-            //  label5.ForeColor = ThemeColor.PrimaryColor;
-        }
+       
 
         private void visasToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1469,8 +1453,8 @@ namespace Delmon_Managment_System.Forms
                         /*update job consule for Mr.saleem/Amin*/
                             if (CommonClass.EmployeeID == 179 || CommonClass.EmployeeID ==248)
                             {
-                                VisaFileNumberID.Text = FileNumberID.ToString();
 
+                            VisaFileNumberID.Text = FileNumberID.ToString();
                             cmbConsulate.Enabled = cmbJob.Enabled = true;
                             cmbReservedTo.Enabled = cmbStatus.Enabled = cmbcandidates.Enabled = cmbAgency.Enabled = true;
                             btnnewJob.Enabled = false;
@@ -1479,7 +1463,6 @@ namespace Delmon_Managment_System.Forms
                         else
                         {
                             VisaFileNumberID.Text = FileNumberID.ToString();
-
                             cmbConsulate.Enabled = cmbJob.Enabled = false;
                             cmbReservedTo.Enabled = cmbStatus.Enabled = cmbcandidates.Enabled = cmbAgency.Enabled = true;
                             btnnewJob.Enabled = false;
@@ -1499,6 +1482,7 @@ namespace Delmon_Managment_System.Forms
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            //dataGridView3.Visible = false;
             if (e.RowIndex == -1) return;
 
             dataGridView2.Visible = true;
@@ -1925,21 +1909,11 @@ namespace Delmon_Managment_System.Forms
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string query2 = "SELECT JobID, JobTitleEN FROM JOBS";
-            SQLCONN.OpenConection();
-            cmbJob.ValueMember = "JobID";
-            cmbJob.DisplayMember = "JobTitleEN";
-            cmbJob.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query2);
-            cmbJob.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbJob.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
-            cmbAgency.ValueMember = "AgencID";
-            cmbAgency.DisplayMember = "AgenceName";
-            cmbAgency.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select AgencID,AgenceName  from Agencies /*order by AgencID*/ ");
-            cmbAgency.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbAgency.AutoCompleteSource = AutoCompleteSource.ListItems;
-            SQLCONN.CloseConnection();
+          
+
+
         }
 
         private void cmbcandidates2_Click(object sender, EventArgs e)
@@ -2156,8 +2130,41 @@ namespace Delmon_Managment_System.Forms
             cmbcandidates.AutoCompleteSource = AutoCompleteSource.ListItems;
             SQLCONN.CloseConnection();
         }
+
+        private void btnwexpire_Click(object sender, EventArgs e)
+        {
+            dataGridView3.Visible = true;
+            SQLCONN.OpenConection();
+            dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT
+    visa.VisaNumber,
+    ExpiryDateEN as ExpiryDate
+FROM
+    Visa, VISAJobList
+WHERE
+    VISAJobList.StatusID != 6
+    AND DATEDIFF(MONTH, GETDATE(), CONVERT(DATE, ExpiryDateEN, 103)) <= 1
+    AND CONVERT(DATE, ExpiryDateEN, 103) > GETDATE() -- Check if the visa has not yet expired
+GROUP BY
+    visa.VisaNumber, ExpiryDateEN;");
+            SQLCONN.CloseConnection();
+        }
+
+        private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            foreach (DataGridViewRow rw in this.dataGridView3.Rows)
+            {
+                for (int i = 0; i < rw.Cells.Count; i++)
+                {
+                  VisaNumberID = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString());
+                 }
+                    Visanumtxt.Text = VisaNumberID.ToString();    
+                }
+            }
+
+        }
     }
-}
+    
+
 
 
 

@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tulpep.NotificationWindow;
 
 namespace Delmon_Managment_System
 {
     public partial class FormMainMenu : Form
     {
-        
+
+
+        SQLCONNECTION sqlconn = new SQLCONNECTION();
+
         //Fields
         private Button currentButton;
         private Random random;
@@ -60,19 +65,7 @@ namespace Delmon_Managment_System
                 if (currentButton != (Button)btnSender)
                 {
                     DisableButton();
-                    //   Color color = SelectThemeColor();
-                    //   Color color = Color.FromArgb(178,34,34);
-                       Color color = Color.White;
-                    //currentButton = (Button)btnSender;
-                    //currentButton.BackColor = color;
-                    //currentButton.ForeColor = Color.White;
-                    //currentButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                    //panelTitleBar.BackColor = color;
-                    //lblTitle.BackColor = color;
-                  //  panelLogo.BackColor = ThemeColor.ChangeColorBrightness(color, -0.3);
-                  //  ThemeColor.PrimaryColor = color;
-                  //  ThemeColor.SecondaryColor = ThemeColor.ChangeColorBrightness(color, -0.3);
-                    btnCloseChildForm.Visible = true;
+                       btnCloseChildForm.Visible = true;
                 }
             }
         }
@@ -104,9 +97,43 @@ namespace Delmon_Managment_System
             childForm.Show();
             lblTitle.Text = childForm.Text;
         }
+        public void ShowNotification()
+        {
+            PopupNotifier Popup = new PopupNotifier();
+            Popup.BodyColor = Color.White; // Change this to the desired color
+            Popup.HeaderColor = Color.Firebrick; // Change this to the desired color
+            Popup.BorderColor = Color.White; // Change this to the desired color
+            Popup.TitleColor = Color.DarkBlue; // Change this to the desired color
+            Popup.TitleText = "You have new notification - VISAS Expired Soon";
+            Popup.ContentText = "Kindly check the Visa screen - Expired Button";
+            Popup.Image = Properties.Resources.Delmonlogo2;
+            Popup.TitleFont = new Font(Popup.TitleFont.FontFamily, Popup.TitleFont.Size + 1); // Adjust the size increase (2 in this example)
+            Popup.ContentFont = new Font(Popup.ContentFont.FontFamily, Popup.ContentFont.Size + 4); // Adjust the size increase (2 in this example)
+            Popup.Popup();
+
+          
+
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            sqlconn.OpenConection();
+            SqlDataReader dr=sqlconn.DataReader(@"SELECT
+    visa.VisaNumber,
+    ExpiryDateEN as ExpiryDate
+FROM
+    Visa, VISAJobList
+WHERE
+    VISAJobList.StatusID != 6
+    AND DATEDIFF(MONTH, GETDATE(), CONVERT(DATE, ExpiryDateEN, 103)) <= 1
+    AND CONVERT(DATE, ExpiryDateEN, 103) > GETDATE() -- Check if the visa has not yet expired
+GROUP BY
+    visa.VisaNumber, ExpiryDateEN;");
+            if (dr.HasRows)
+            {
+                ShowNotification();
+            }
+            sqlconn.CloseConnection();
             panelTitleBar.BackColor = Color.FromArgb(235, 45, 46);
             lblTitle.BackColor = Color.FromArgb(235, 45, 46);
             lblusername.Text = CommonClass.LoginUserName;
@@ -256,22 +283,51 @@ namespace Delmon_Managment_System
 
         private void btnBilling_Click_1(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.BillsFrm(), sender);
+            if (lblusertype.Text != "Admin")
+            {
+
+                MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+
+            }
+            else
+            {
+                OpenChildForm(new Forms.BillsFrm(), sender);
+            }
 
         }
 
         private void btnprinting_Click_1(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.PrintingFrm(), sender);
+            if (lblusertype.Text != "Admin")
+            {
 
+                MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+
+            }
+            else
+            {
+                OpenChildForm(new Forms.PrintingFrm(), sender);
+            }
 
         }
 
         private void btnemployee_Click_1(object sender, EventArgs e)
         {
-            groupBox1.Visible = false;
+            if (lblusertype.Text != "Admin")
+            {
 
-            OpenChildForm(new Forms.EmployeeForm(), sender);
+                MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+
+            }
+            else
+            {
+                groupBox1.Visible = false;
+
+                OpenChildForm(new Forms.EmployeeForm(), sender);
+            }
         }
 
         private void btnvisa_Click_1(object sender, EventArgs e)

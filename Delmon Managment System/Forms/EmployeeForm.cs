@@ -673,9 +673,6 @@ ORDER BY e.EmployeeID";
             parampc.Value = lblPC.Text;
 
 
-
-
-
             if (EMPID != 0)
             {
 
@@ -781,7 +778,7 @@ ORDER BY e.EmployeeID";
                 {
                     SQLCONN.OpenConection();
                     SqlDataReader dr = SQLCONN.DataReader("select  * from Employees where " +
-                         " firstname=  @C1 and    SecondName =  @C2 and thirdname = @C3  and lastname = @C4", paramfirstname, paramsecondname, Paramthirdname, paramlastname);
+                         " firstname=  @C1 and   SecondName =  @C2 and thirdname = @C3  and lastname = @C4", paramfirstname, paramsecondname, Paramthirdname, paramlastname);
                     dr.Read();
 
 
@@ -1724,6 +1721,16 @@ ORDER BY e.EmployeeID";
 
 
 
+
+                        if (CommonClass.EmployeeID == 179 || CommonClass.EmployeeID == 248)
+                        {
+                            DeleteBTN.Enabled = true;
+                        }
+                        else 
+                        {
+                            DeleteBTN.Enabled = false;
+
+                        }
 
 
 

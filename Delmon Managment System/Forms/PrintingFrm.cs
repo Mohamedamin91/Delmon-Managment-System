@@ -198,84 +198,24 @@ namespace Delmon_Managment_System.Forms
         private void button1_Click(object sender, EventArgs e)
         {
 
-            //reportViewer1.Visible = true;
-            //SQLCONN.OpenConection();
 
-            //loggedEmployee = CommonClass.EmployeeID;
+            using (var package = new ExcelPackage())
+            {
+                ExcelWorksheet worksheet1 = package.Workbook.Worksheets.Add("General");
+                ExcelWorksheet worksheet2 = package.Workbook.Worksheets.Add("Details");
 
-            //SqlParameter paramDateFrom = new SqlParameter("@param1", SqlDbType.Date);
-            //paramDateFrom.Value = dtpfrom.Value;
-            //SqlParameter paramDateTo = new SqlParameter("@param2", SqlDbType.Date);
-            //paramDateTo.Value = dtpto.Value;
-            //SqlParameter paramCompany = new SqlParameter("@param4", SqlDbType.NVarChar);
-            //paramCompany.Value = cmbCompany.SelectedValue;
+                ExportDataGridViewToExcel(dataGridView2, worksheet1);
+                ExportDataGridViewToExcel(dataGridView4, worksheet2);
 
-            //List<int> selectedStatus = new List<int>();
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Excel Files|*.xlsx";
+                saveFileDialog.Title = "Save as Excel File";
 
-            //// Code for check box selection
-
-            //DataTable VisaReport = new DataTable();
-
-            //using (SqlConnection connection = new SqlConnection(SQLCONN.ConnectionString))
-            //{
-            //    connection.Open();
-
-            //    string query = "SELECT C.COMPName_EN as [CompanyName], CO.COMPName_EN as [ReservedTo], S.Status as [VisaStatus], COUNT(*) AS [TotalVisas] " +
-            //       "FROM DelmonGroupDB.dbo.VISA V " +
-            //       "JOIN DelmonGroupDB.dbo.VISAJobList J ON V.VisaNumber = J.VISANumber " +
-            //       "JOIN DelmonGroupDB.dbo.Companies C ON V.ComapnyID = C.COMPID " +
-            //                      "JOIN DelmonGroupDB.dbo.Companies CO ON J.ReservedTo = CO.COMPID " +
-            //       "JOIN DelmonGroupDB.dbo.VisaStatus S ON J.StatusID = S.StatusID AND S.RefrenceID = 1 " +
-            //       "JOIN DelmonGroupDB.dbo.Employees E ON E.EmployeeID = J.EmployeeID " +
-            //       "WHERE TRY_CONVERT(DATETIME, IssueDateEN, 103) BETWEEN @param1 AND @param2 ";
-
-            //    // Append the selected status filter to the query
-            //    if (selectedStatus.Count > 0)
-            //    {
-            //        query += "AND J.StatusID IN (";
-            //        for (int i = 0; i < selectedStatus.Count; i++)
-            //        {
-            //            query += "@status" + i;
-            //            if (i < selectedStatus.Count - 1)
-            //                query += ", ";
-            //        }
-            //        query += ")";
-            //    }
-
-            //    // Add the employee start date filter
-            //    query += "AND E.startDate >= @startDate ";
-
-            //    query += "GROUP BY C.COMPName_EN, S.Status,CO.COMPName_EN " +
-            //             "ORDER BY C.COMPName_EN, S.Status,CO.COMPName_EN ";
-
-            //    SqlCommand command = new SqlCommand(query, connection);
-            //    command.Parameters.AddWithValue("@param1", dtpfrom.Value);
-            //    command.Parameters.AddWithValue("@param2", dtpto.Value);
-
-            //    // Add parameters for selected status values
-            //    for (int i = 0; i < selectedStatus.Count; i++)
-            //    {
-            //        command.Parameters.AddWithValue("@status" + i, selectedStatus[i]);
-            //    }
-
-            //    // Add the parameter for employee start date
-            //    command.Parameters.AddWithValue("@startDate", dtpfrom.Value);
-
-            //    // command.Parameters.Add(paramCompany); // add the parameter to the command object
-
-            //    SqlDataAdapter adapter = new SqlDataAdapter(command);
-            //    adapter.Fill(VisaReport);
-            //    connection.Close();
-            //}
-
-            //ReportDataSource dataSource = new ReportDataSource("DataSet1", VisaReport);
-            //reportViewer1.LocalReport.DataSources.Clear();
-            //reportViewer1.LocalReport.DataSources.Add(dataSource);
-            //reportViewer1.LocalReport.SetParameters(new ReportParameter[] { new ReportParameter("param1", dtpfrom.Value.ToString("dd/MM/yyyy")) });
-            //reportViewer1.LocalReport.SetParameters(new ReportParameter[] { new ReportParameter("param2", dtpto.Value.ToString("dd/MM/yyyy")) });
-            //this.reportViewer1.RefreshReport();
-            //SQLCONN.CloseConnection();
-
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    package.SaveAs(new System.IO.FileInfo(saveFileDialog.FileName));
+                }
+            }
 
 
 
@@ -1274,8 +1214,8 @@ namespace Delmon_Managment_System.Forms
         {
             using (var package = new ExcelPackage())
             {
-                ExcelWorksheet worksheet1 = package.Workbook.Worksheets.Add("Data1");
-                ExcelWorksheet worksheet2 = package.Workbook.Worksheets.Add("Data2");
+                ExcelWorksheet worksheet1 = package.Workbook.Worksheets.Add("General");
+                ExcelWorksheet worksheet2 = package.Workbook.Worksheets.Add("Details");
 
                 ExportDataGridViewToExcel(dataGridView1, worksheet1);
                 ExportDataGridViewToExcel(dataGridView3, worksheet2);

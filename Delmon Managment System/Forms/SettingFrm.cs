@@ -4,7 +4,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -23,6 +25,14 @@ namespace Delmon_Managment_System.Forms
         int DeptID;
         double num1, num2;
 
+        // Replace these values with your own secret key and IV
+        private static readonly string key = "6104891273";
+        private static readonly string iv = "1056478913";
+
+        // Convert string key and IV to byte arrays
+        private static readonly byte[] keyBytes = Encoding.UTF8.GetBytes(key);
+        private static readonly byte[] ivBytes = Encoding.UTF8.GetBytes(iv);
+
         static Regex validate_emailaddress = email_validation();
 
 
@@ -30,25 +40,9 @@ namespace Delmon_Managment_System.Forms
         public SettingFrm()
         {
             InitializeComponent();
-            // Define the new font
-            //Font newFont = new Font("Times New Roman", 12);
-
-            //// Loop through all controls on the form and change their font properties
-            //foreach (Control control in Controls)
-            //{
-            //    control.Font = newFont;
-            //}
-
-
-
-
-
-
-
+           
 
         }
-
-   
 
         public static Regex email_validation()
         {
@@ -247,7 +241,7 @@ namespace Delmon_Managment_System.Forms
             SqlParameter paramusername = new SqlParameter("@C2", SqlDbType.NVarChar);
             paramusername.Value = usernametxt.Text;
             SqlParameter parampassword = new SqlParameter("@C3", SqlDbType.NVarChar);
-            parampassword.Value = passwordtxt.Text;
+             parampassword.Value = passwordtxt.Text;
             SqlParameter paramusertype = new SqlParameter("@C4", SqlDbType.NVarChar);
             paramusertype.Value = cmbusertype.SelectedValue;
             SqlParameter paramisActive = new SqlParameter("@C5", SqlDbType.NVarChar);
@@ -264,7 +258,7 @@ namespace Delmon_Managment_System.Forms
             parampc.Value = lblPC.Text;
 
 
-            SqlDataReader dr, dr2;
+            SqlDataReader dr;
             if ((int)cmbemployee.SelectedValue != 0 && usernametxt.Text != "" && passwordtxt.Text != "")
             {
                 SQLCONN.OpenConection();
@@ -350,6 +344,10 @@ namespace Delmon_Managment_System.Forms
             }
             SQLCONN.CloseConnection();
         }
+   
+
+
+
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -418,7 +416,9 @@ namespace Delmon_Managment_System.Forms
             SqlParameter paramusername = new SqlParameter("@C2", SqlDbType.NVarChar);
             paramusername.Value = usernametxt.Text;
             SqlParameter parampassword = new SqlParameter("@C3", SqlDbType.NVarChar);
-            parampassword.Value = passwordtxt.Text;
+              parampassword.Value = passwordtxt.Text;
+
+
             SqlParameter paramusertype = new SqlParameter("@C4", SqlDbType.NVarChar);
             paramusertype.Value = cmbusertype.SelectedValue;
             SqlParameter paramisActive = new SqlParameter("@C5", SqlDbType.NVarChar);

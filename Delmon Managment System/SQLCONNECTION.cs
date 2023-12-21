@@ -15,7 +15,7 @@ namespace Delmon_Managment_System
    public  class SQLCONNECTION
     {
 
-         public string ConnectionString = "Data Source=192.168.1.8;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@";
+        public string ConnectionString = "Data Source=192.168.1.8;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@";
         public string ConnectionString2 = "Data Source=192.168.1.8;Initial Catalog=DelmonRealState;User ID=sa;password=Ram72763@";
         public string ConnectionString3 = "Data Source=192.168.1.8;Initial Catalog=DelmonGroupAssests;User ID=sa;password=Ram72763@";
         //public string ConnectionString = "Data Source=AMIN-PC;Initial Catalog=DelmonGroupDB;Persist Security Info=True;User ID=sa;password=Ram72763@";
@@ -88,9 +88,6 @@ namespace Delmon_Managment_System
 
 
         }
-
-
-
 
     }
    
