@@ -134,8 +134,9 @@ GROUP BY
                 ShowNotification();
             }
             sqlconn.CloseConnection();
-            panelTitleBar.BackColor = Color.FromArgb(235, 45, 46);
-            lblTitle.BackColor = Color.FromArgb(235, 45, 46);
+            panelTitleBar.BackColor = Color.Firebrick;
+          //  panelTitleBar.BackColor = Color.FromArgb(235, 45, 46);
+            lblTitle.BackColor = Color.Firebrick;
             lblusername.Text = CommonClass.LoginUserName;
             lblusertype.Text = CommonClass.Usertype;
             lblemail.Text = CommonClass.Email;

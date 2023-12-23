@@ -46,7 +46,7 @@ namespace Delmon_Managment_System
             // 
             // loginbtn
             // 
-            this.loginbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(45)))), ((int)(((byte)(46)))));
+            this.loginbtn.BackColor = System.Drawing.Color.Firebrick;
             this.loginbtn.FlatAppearance.BorderSize = 0;
             this.loginbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loginbtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
@@ -128,7 +128,7 @@ namespace Delmon_Managment_System
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(45)))), ((int)(((byte)(46)))));
+            this.button2.ForeColor = System.Drawing.Color.Firebrick;
             this.button2.Location = new System.Drawing.Point(187, 303);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(152, 26);

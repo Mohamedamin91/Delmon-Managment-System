@@ -553,14 +553,28 @@ namespace Delmon_Managment_System.Forms
                         /* Update visa status **/
 
 
+                        /* Update visa Candidate status **/
+                        if ((int)cmbPersonalStatusStatus.SelectedValue == 20)
+                        {
+                            SqlDataReader dr = SQLCONN.DataReader("SELECT FileNumber,VISANumber FROM [DelmonGroupDB].[dbo].[VISAJobList] where StatusID !=6 and EmployeeID=" + EMPID + " ");
+                            if (dr.Read())
+                            {
+                                string Visanumber = dr["VISANumber"].ToString();
+                                string filenumber = dr["FileNumber"].ToString();
+                                if (DialogResult.Yes == MessageBox.Show("File number :" + filenumber + " for a requested candidate will realsed Automatically to 'SELECT/0', Do You Want to perform this operation?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                                {
+                                    dr.Dispose();
+                                    dr.Close();
+                                    SQLCONN.ExecuteQueries("update VISAJobList set [EmployeeID] =0 where  FileNumber= " + filenumber + " and VISANumber= " + Visanumber + " ");
+                                }
+                                dr.Dispose();
+                                dr.Close();
+                            }
+                            dr.Dispose();
+                            dr.Close();
+                        }
+                        /* Update visa Candidate status **/
 
-
-
-
-
-
-
-                       
 
 
                         MessageBox.Show("Record Updated Successfully");

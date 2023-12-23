@@ -522,19 +522,20 @@ from Assets ,AssetBrand,AssetType
                 if (tabControl2.SelectedTab == tabControl2.TabPages[0])
                 {
 
-                    dataGridView5.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(@"  select Assets.AssetID,DeviceDetials.DeviceDetilasID,AssetType.AssettypeValue,
-AssetBrand.AssetBrandValue,Assets.Model,DeviceDetials.DeviceDetialsValue,AssetsDetials.Value
- from Assets,AssetType,AssetBrand,AssetsDetials,DeviceDetials
- where Assets.Type= AssetType.AssetTypeID
- and Assets.Brand = AssetBrand.AssetBrandID
- and DeviceDetials.DeviceDetilasID= AssetsDetials.DeviceDetilasID
+                    dataGridView5.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(@" select 
+Assets.AssetID,
+DeviceDetials.DeviceDetilasID,
+ DeviceDetials.DeviceDetialsValue,AssetsDetials.Value
+from Assets,AssetsDetials,DeviceDetials
+where 
+  DeviceDetials.DeviceDetilasID= AssetsDetials.DeviceDetilasID
  and Assets.AssetID= AssetsDetials.AssetID
  and Assets.AssetID=@ID ", paramID);
                                      
                     cmbdeviceatt.Text = "Select";
                     txtvalue.Text = "";
-                    dataGridView5.Columns[5].Width = 200;
-                    dataGridView5.Columns[4].Width = 200;
+                    dataGridView5.Columns[0].Visible = false;
+                    dataGridView5.Columns[1].Visible = false;
                     dataGridView5.Columns[3].Width = 200;
                     dataGridView5.Columns[2].Width = 200;
                 }
@@ -588,12 +589,13 @@ AssetBrand.AssetBrandValue,Assets.Model,DeviceDetials.DeviceDetialsValue,AssetsD
                         txtvalue.Text = "";
 
 
-                        dataGridView5.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(@"  select Assets.AssetID,DeviceDetials.DeviceDetilasID,AssetType.AssettypeValue,
-AssetBrand.AssetBrandValue,Assets.Model,DeviceDetials.DeviceDetialsValue,AssetsDetials.Value
- from Assets,AssetType,AssetBrand,AssetsDetials,DeviceDetials
- where Assets.Type= AssetType.AssetTypeID
- and Assets.Brand = AssetBrand.AssetBrandID
- and DeviceDetials.DeviceDetilasID= AssetsDetials.DeviceDetilasID
+                        dataGridView5.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(@"  select 
+Assets.AssetID,
+DeviceDetials.DeviceDetilasID,
+ DeviceDetials.DeviceDetialsValue,AssetsDetials.Value
+from Assets,AssetsDetials,DeviceDetials
+where 
+  DeviceDetials.DeviceDetilasID= AssetsDetials.DeviceDetilasID
  and Assets.AssetID= AssetsDetials.AssetID
  and Assets.AssetID=@ID ", paramID);
 
@@ -657,12 +659,13 @@ AssetBrand.AssetBrandValue,Assets.Model,DeviceDetials.DeviceDetialsValue,AssetsD
                         txtvalue.Text = "";
 
 
-                    dataGridView5.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(@"  select Assets.AssetID,DeviceDetials.DeviceDetilasID,AssetType.AssettypeValue,
-AssetBrand.AssetBrandValue,Assets.Model,DeviceDetials.DeviceDetialsValue,AssetsDetials.Value
- from Assets,AssetType,AssetBrand,AssetsDetials,DeviceDetials
- where Assets.Type= AssetType.AssetTypeID
- and Assets.Brand = AssetBrand.AssetBrandID
- and DeviceDetials.DeviceDetilasID= AssetsDetials.DeviceDetilasID
+                    dataGridView5.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(@"  select 
+Assets.AssetID,
+DeviceDetials.DeviceDetilasID,
+ DeviceDetials.DeviceDetialsValue,AssetsDetials.Value
+from Assets,AssetsDetials,DeviceDetials
+where 
+  DeviceDetials.DeviceDetilasID= AssetsDetials.DeviceDetilasID
  and Assets.AssetID= AssetsDetials.AssetID
  and Assets.AssetID=@ID ", paramID);
 
@@ -710,8 +713,8 @@ AssetBrand.AssetBrandValue,Assets.Model,DeviceDetials.DeviceDetialsValue,AssetsD
                     {
 
                         AssetDetialsInfoID = (dataGridView5.Rows[e.RowIndex].Cells[0].Value.ToString());
-                        cmbdeviceatt.Text = dataGridView5.Rows[e.RowIndex].Cells[5].Value.ToString();
-                        txtvalue.Text = dataGridView5.Rows[e.RowIndex].Cells[6].Value.ToString();
+                        cmbdeviceatt.Text = dataGridView5.Rows[e.RowIndex].Cells[2].Value.ToString();
+                        txtvalue.Text = dataGridView5.Rows[e.RowIndex].Cells[3].Value.ToString();
 
 
                     }

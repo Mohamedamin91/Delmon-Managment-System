@@ -33,6 +33,14 @@ namespace Delmon_Managment_System
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMainMenu));
             this.panelLogo = new System.Windows.Forms.Panel();
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.btnNotifications = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.btnBilling = new System.Windows.Forms.Button();
+            this.btnprinting = new System.Windows.Forms.Button();
+            this.btnemployee = new System.Windows.Forms.Button();
+            this.btnvisa = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblFullname = new System.Windows.Forms.Label();
             this.lblPC = new System.Windows.Forms.Label();
@@ -49,14 +57,6 @@ namespace Delmon_Managment_System
             this.panelDesktopPanel = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.button4 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.btnNotifications = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.btnBilling = new System.Windows.Forms.Button();
-            this.btnprinting = new System.Windows.Forms.Button();
-            this.btnemployee = new System.Windows.Forms.Button();
-            this.btnvisa = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panelTitleBar.SuspendLayout();
@@ -66,7 +66,7 @@ namespace Delmon_Managment_System
             // 
             // panelLogo
             // 
-            this.panelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(45)))), ((int)(((byte)(46)))));
+            this.panelLogo.BackColor = System.Drawing.Color.Firebrick;
             this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelLogo.Location = new System.Drawing.Point(0, 0);
             this.panelLogo.Name = "panelLogo";
@@ -91,204 +91,6 @@ namespace Delmon_Managment_System
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(200, 760);
             this.panelMenu.TabIndex = 0;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.lblFullname);
-            this.groupBox1.Controls.Add(this.lblPC);
-            this.groupBox1.Controls.Add(this.lbldatetime);
-            this.groupBox1.Controls.Add(this.lblemail);
-            this.groupBox1.Controls.Add(this.lblusername);
-            this.groupBox1.Controls.Add(this.lblusertype);
-            this.groupBox1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.groupBox1.Location = new System.Drawing.Point(3, 748);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(194, 183);
-            this.groupBox1.TabIndex = 146;
-            this.groupBox1.TabStop = false;
-            // 
-            // lblFullname
-            // 
-            this.lblFullname.AutoSize = true;
-            this.lblFullname.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFullname.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblFullname.Location = new System.Drawing.Point(2, 44);
-            this.lblFullname.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblFullname.Name = "lblFullname";
-            this.lblFullname.Size = new System.Drawing.Size(63, 15);
-            this.lblFullname.TabIndex = 99;
-            this.lblFullname.Text = "Full Name";
-            // 
-            // lblPC
-            // 
-            this.lblPC.AutoSize = true;
-            this.lblPC.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPC.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblPC.Location = new System.Drawing.Point(8, 124);
-            this.lblPC.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.lblPC.Name = "lblPC";
-            this.lblPC.Size = new System.Drawing.Size(21, 15);
-            this.lblPC.TabIndex = 98;
-            this.lblPC.Text = "Pc";
-            // 
-            // lbldatetime
-            // 
-            this.lbldatetime.AutoSize = true;
-            this.lbldatetime.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbldatetime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lbldatetime.Location = new System.Drawing.Point(8, 149);
-            this.lbldatetime.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.lbldatetime.Name = "lbldatetime";
-            this.lbldatetime.Size = new System.Drawing.Size(60, 15);
-            this.lbldatetime.TabIndex = 96;
-            this.lbldatetime.Text = "Date&Time";
-            // 
-            // lblemail
-            // 
-            this.lblemail.AutoSize = true;
-            this.lblemail.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblemail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblemail.Location = new System.Drawing.Point(8, 75);
-            this.lblemail.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.lblemail.Name = "lblemail";
-            this.lblemail.Size = new System.Drawing.Size(38, 15);
-            this.lblemail.TabIndex = 95;
-            this.lblemail.Text = "Email";
-            // 
-            // lblusername
-            // 
-            this.lblusername.AutoSize = true;
-            this.lblusername.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblusername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblusername.Location = new System.Drawing.Point(2, 18);
-            this.lblusername.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.lblusername.Name = "lblusername";
-            this.lblusername.Size = new System.Drawing.Size(64, 15);
-            this.lblusername.TabIndex = 92;
-            this.lblusername.Text = "UserName";
-            // 
-            // lblusertype
-            // 
-            this.lblusertype.AutoSize = true;
-            this.lblusertype.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblusertype.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblusertype.Location = new System.Drawing.Point(8, 99);
-            this.lblusertype.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.lblusertype.Name = "lblusertype";
-            this.lblusertype.Size = new System.Drawing.Size(58, 15);
-            this.lblusertype.TabIndex = 94;
-            this.lblusertype.Text = "UserType";
-            // 
-            // panelTitleBar
-            // 
-            this.panelTitleBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.panelTitleBar.Controls.Add(this.btnMinum);
-            this.panelTitleBar.Controls.Add(this.button1);
-            this.panelTitleBar.Controls.Add(this.BTNcLOSE);
-            this.panelTitleBar.Controls.Add(this.btnCloseChildForm);
-            this.panelTitleBar.Controls.Add(this.lblTitle);
-            this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTitleBar.Location = new System.Drawing.Point(200, 0);
-            this.panelTitleBar.Name = "panelTitleBar";
-            this.panelTitleBar.Size = new System.Drawing.Size(884, 49);
-            this.panelTitleBar.TabIndex = 1;
-            this.panelTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitleBar_MouseDown);
-            // 
-            // btnMinum
-            // 
-            this.btnMinum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMinum.FlatAppearance.BorderSize = 0;
-            this.btnMinum.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMinum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMinum.ForeColor = System.Drawing.Color.White;
-            this.btnMinum.Location = new System.Drawing.Point(807, 3);
-            this.btnMinum.Name = "btnMinum";
-            this.btnMinum.Size = new System.Drawing.Size(43, 24);
-            this.btnMinum.TabIndex = 3;
-            this.btnMinum.Text = "O";
-            this.btnMinum.UseVisualStyleBackColor = true;
-            this.btnMinum.Click += new System.EventHandler(this.btnMinum_Click_1);
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(715, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(43, 24);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "O";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // BTNcLOSE
-            // 
-            this.BTNcLOSE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTNcLOSE.FlatAppearance.BorderSize = 0;
-            this.BTNcLOSE.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTNcLOSE.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTNcLOSE.ForeColor = System.Drawing.Color.White;
-            this.BTNcLOSE.Location = new System.Drawing.Point(841, 3);
-            this.BTNcLOSE.Name = "BTNcLOSE";
-            this.BTNcLOSE.Size = new System.Drawing.Size(43, 24);
-            this.BTNcLOSE.TabIndex = 1;
-            this.BTNcLOSE.Text = "O";
-            this.BTNcLOSE.UseVisualStyleBackColor = true;
-            this.BTNcLOSE.Click += new System.EventHandler(this.BTNcLOSE_Click);
-            // 
-            // btnCloseChildForm
-            // 
-            this.btnCloseChildForm.FlatAppearance.BorderSize = 0;
-            this.btnCloseChildForm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCloseChildForm.Image = ((System.Drawing.Image)(resources.GetObject("btnCloseChildForm.Image")));
-            this.btnCloseChildForm.Location = new System.Drawing.Point(17, 8);
-            this.btnCloseChildForm.Name = "btnCloseChildForm";
-            this.btnCloseChildForm.Size = new System.Drawing.Size(40, 35);
-            this.btnCloseChildForm.TabIndex = 0;
-            this.btnCloseChildForm.UseVisualStyleBackColor = true;
-            this.btnCloseChildForm.Click += new System.EventHandler(this.btnCloseChildForm_Click);
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.lblTitle.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(268, 10);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(53, 17);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "HOME";
-            // 
-            // panelDesktopPanel
-            // 
-            this.panelDesktopPanel.BackColor = System.Drawing.Color.White;
-            this.panelDesktopPanel.Controls.Add(this.pictureBox1);
-            this.panelDesktopPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelDesktopPanel.Location = new System.Drawing.Point(200, 49);
-            this.panelDesktopPanel.Name = "panelDesktopPanel";
-            this.panelDesktopPanel.Size = new System.Drawing.Size(884, 711);
-            this.panelDesktopPanel.TabIndex = 2;
-            this.panelDesktopPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panelDesktopPanel_Paint);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(469, 141);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(515, 379);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // button4
             // 
@@ -449,6 +251,204 @@ namespace Delmon_Managment_System
             this.btnvisa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnvisa.UseVisualStyleBackColor = true;
             this.btnvisa.Click += new System.EventHandler(this.btnvisa_Click_1);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lblFullname);
+            this.groupBox1.Controls.Add(this.lblPC);
+            this.groupBox1.Controls.Add(this.lbldatetime);
+            this.groupBox1.Controls.Add(this.lblemail);
+            this.groupBox1.Controls.Add(this.lblusername);
+            this.groupBox1.Controls.Add(this.lblusertype);
+            this.groupBox1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.groupBox1.Location = new System.Drawing.Point(3, 748);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(194, 183);
+            this.groupBox1.TabIndex = 146;
+            this.groupBox1.TabStop = false;
+            // 
+            // lblFullname
+            // 
+            this.lblFullname.AutoSize = true;
+            this.lblFullname.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFullname.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.lblFullname.Location = new System.Drawing.Point(2, 44);
+            this.lblFullname.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblFullname.Name = "lblFullname";
+            this.lblFullname.Size = new System.Drawing.Size(63, 15);
+            this.lblFullname.TabIndex = 99;
+            this.lblFullname.Text = "Full Name";
+            // 
+            // lblPC
+            // 
+            this.lblPC.AutoSize = true;
+            this.lblPC.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPC.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.lblPC.Location = new System.Drawing.Point(8, 124);
+            this.lblPC.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblPC.Name = "lblPC";
+            this.lblPC.Size = new System.Drawing.Size(21, 15);
+            this.lblPC.TabIndex = 98;
+            this.lblPC.Text = "Pc";
+            // 
+            // lbldatetime
+            // 
+            this.lbldatetime.AutoSize = true;
+            this.lbldatetime.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbldatetime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.lbldatetime.Location = new System.Drawing.Point(8, 149);
+            this.lbldatetime.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lbldatetime.Name = "lbldatetime";
+            this.lbldatetime.Size = new System.Drawing.Size(60, 15);
+            this.lbldatetime.TabIndex = 96;
+            this.lbldatetime.Text = "Date&Time";
+            // 
+            // lblemail
+            // 
+            this.lblemail.AutoSize = true;
+            this.lblemail.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblemail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.lblemail.Location = new System.Drawing.Point(8, 75);
+            this.lblemail.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblemail.Name = "lblemail";
+            this.lblemail.Size = new System.Drawing.Size(38, 15);
+            this.lblemail.TabIndex = 95;
+            this.lblemail.Text = "Email";
+            // 
+            // lblusername
+            // 
+            this.lblusername.AutoSize = true;
+            this.lblusername.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblusername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.lblusername.Location = new System.Drawing.Point(2, 18);
+            this.lblusername.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblusername.Name = "lblusername";
+            this.lblusername.Size = new System.Drawing.Size(64, 15);
+            this.lblusername.TabIndex = 92;
+            this.lblusername.Text = "UserName";
+            // 
+            // lblusertype
+            // 
+            this.lblusertype.AutoSize = true;
+            this.lblusertype.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblusertype.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.lblusertype.Location = new System.Drawing.Point(8, 99);
+            this.lblusertype.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblusertype.Name = "lblusertype";
+            this.lblusertype.Size = new System.Drawing.Size(58, 15);
+            this.lblusertype.TabIndex = 94;
+            this.lblusertype.Text = "UserType";
+            // 
+            // panelTitleBar
+            // 
+            this.panelTitleBar.BackColor = System.Drawing.Color.Firebrick;
+            this.panelTitleBar.Controls.Add(this.btnMinum);
+            this.panelTitleBar.Controls.Add(this.button1);
+            this.panelTitleBar.Controls.Add(this.BTNcLOSE);
+            this.panelTitleBar.Controls.Add(this.btnCloseChildForm);
+            this.panelTitleBar.Controls.Add(this.lblTitle);
+            this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTitleBar.Location = new System.Drawing.Point(200, 0);
+            this.panelTitleBar.Name = "panelTitleBar";
+            this.panelTitleBar.Size = new System.Drawing.Size(884, 49);
+            this.panelTitleBar.TabIndex = 1;
+            this.panelTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitleBar_MouseDown);
+            // 
+            // btnMinum
+            // 
+            this.btnMinum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMinum.FlatAppearance.BorderSize = 0;
+            this.btnMinum.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMinum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMinum.ForeColor = System.Drawing.Color.White;
+            this.btnMinum.Location = new System.Drawing.Point(807, 3);
+            this.btnMinum.Name = "btnMinum";
+            this.btnMinum.Size = new System.Drawing.Size(43, 24);
+            this.btnMinum.TabIndex = 3;
+            this.btnMinum.Text = "O";
+            this.btnMinum.UseVisualStyleBackColor = true;
+            this.btnMinum.Click += new System.EventHandler(this.btnMinum_Click_1);
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(715, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(43, 24);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "O";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // BTNcLOSE
+            // 
+            this.BTNcLOSE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTNcLOSE.FlatAppearance.BorderSize = 0;
+            this.BTNcLOSE.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTNcLOSE.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTNcLOSE.ForeColor = System.Drawing.Color.White;
+            this.BTNcLOSE.Location = new System.Drawing.Point(841, 3);
+            this.BTNcLOSE.Name = "BTNcLOSE";
+            this.BTNcLOSE.Size = new System.Drawing.Size(43, 24);
+            this.BTNcLOSE.TabIndex = 1;
+            this.BTNcLOSE.Text = "O";
+            this.BTNcLOSE.UseVisualStyleBackColor = true;
+            this.BTNcLOSE.Click += new System.EventHandler(this.BTNcLOSE_Click);
+            // 
+            // btnCloseChildForm
+            // 
+            this.btnCloseChildForm.FlatAppearance.BorderSize = 0;
+            this.btnCloseChildForm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCloseChildForm.Image = ((System.Drawing.Image)(resources.GetObject("btnCloseChildForm.Image")));
+            this.btnCloseChildForm.Location = new System.Drawing.Point(17, 8);
+            this.btnCloseChildForm.Name = "btnCloseChildForm";
+            this.btnCloseChildForm.Size = new System.Drawing.Size(40, 35);
+            this.btnCloseChildForm.TabIndex = 0;
+            this.btnCloseChildForm.UseVisualStyleBackColor = true;
+            this.btnCloseChildForm.Click += new System.EventHandler(this.btnCloseChildForm_Click);
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.lblTitle.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.lblTitle.ForeColor = System.Drawing.Color.White;
+            this.lblTitle.Location = new System.Drawing.Point(268, 10);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(53, 17);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "HOME";
+            // 
+            // panelDesktopPanel
+            // 
+            this.panelDesktopPanel.BackColor = System.Drawing.Color.White;
+            this.panelDesktopPanel.Controls.Add(this.pictureBox1);
+            this.panelDesktopPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelDesktopPanel.Location = new System.Drawing.Point(200, 49);
+            this.panelDesktopPanel.Name = "panelDesktopPanel";
+            this.panelDesktopPanel.Size = new System.Drawing.Size(884, 711);
+            this.panelDesktopPanel.TabIndex = 2;
+            this.panelDesktopPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panelDesktopPanel_Paint);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(469, 141);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(515, 379);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // FormMainMenu
             // 
