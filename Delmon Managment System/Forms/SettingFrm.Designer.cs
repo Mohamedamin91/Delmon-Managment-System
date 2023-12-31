@@ -266,7 +266,6 @@ namespace Delmon_Managment_System.Forms
             this.passwordtxt.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.passwordtxt.Location = new System.Drawing.Point(9, 220);
             this.passwordtxt.Name = "passwordtxt";
-            this.passwordtxt.PasswordChar = '*';
             this.passwordtxt.Size = new System.Drawing.Size(249, 25);
             this.passwordtxt.TabIndex = 59;
             // 
@@ -283,6 +282,7 @@ namespace Delmon_Managment_System.Forms
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(491, 6);

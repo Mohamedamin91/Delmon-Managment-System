@@ -5,7 +5,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,6 +23,7 @@ namespace Delmon_Managment_System.Forms
         string AssetID;
         string AssetDetialsInfoID;
         int LoggedEmployeeID;
+        string encryptionKey= "0pqnU2X00mf+i8mDTzyPVw==", iv= "0pqnU2X00mf+i8mDTzyPVw==";
         public AssetFrm()
         {
             InitializeComponent();
@@ -35,9 +38,22 @@ namespace Delmon_Managment_System.Forms
         {
 
         }
+        private void InitializeEncryptionParameters()
+        {
+            // Check if the key and IV are already initialized
+            if (string.IsNullOrEmpty(encryptionKey) || string.IsNullOrEmpty(iv))
+            {
+                // If not initialized, generate new key and IV
+                encryptionKey = GenerateRandomKey();
+                iv = GenerateRandomIV();
+            }
+        }
 
         private void AssetFrm_Load(object sender, EventArgs e)
         {
+
+
+
             this.timer1.Interval = 1000;
             timer1.Start();
 
@@ -55,6 +71,8 @@ namespace Delmon_Managment_System.Forms
             cmbdeviceatt.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT DeviceDetilasID ,DeviceDetialsValue FROM DeviceDetials ");
 
             SQLCONN.CloseConnection();
+          //  InitializeEncryptionParameters();
+          
 
         }
 
@@ -539,6 +557,7 @@ where
                     dataGridView5.Columns[3].Width = 200;
                     dataGridView5.Columns[2].Width = 200;
                 }
+            
 
 
             }
@@ -546,12 +565,77 @@ where
 
         }
 
+        static string GenerateRandomKey()
+        {
+            byte[] keyBytes = new byte[32]; // 256 bits for AES-256
+            using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
+            {
+                rng.GetBytes(keyBytes);
+            }
+            return Convert.ToBase64String(keyBytes);
+        }
+        static string GenerateRandomIV()
+        {
+            byte[] ivBytes = new byte[16]; // 128 bits for AES
+            using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
+            {
+                rng.GetBytes(ivBytes);
+            }
+            return Convert.ToBase64String(ivBytes);
+        }
+        static string Encrypt(string input, string key, string iv)
+        {
+            using (Aes aesAlg = Aes.Create())
+            {
+                aesAlg.Key = Convert.FromBase64String(key);
+                aesAlg.IV = Convert.FromBase64String(iv);
+
+                // Set the padding mode
+                aesAlg.Padding = PaddingMode.PKCS7;
+
+                using (MemoryStream msEncrypt = new MemoryStream())
+                {
+                    using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, aesAlg.CreateEncryptor(), CryptoStreamMode.Write))
+                    {
+                        using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
+                        {
+                            swEncrypt.Write(input);
+                        }
+                    }
+
+                    return Convert.ToBase64String(msEncrypt.ToArray());
+                }
+            }
+        }
+        static string Decrypt(string input, string key, string iv)
+        {
+            using (Aes aesAlg = Aes.Create())
+            {
+                aesAlg.Key = Convert.FromBase64String(key);
+                aesAlg.IV = Convert.FromBase64String(iv);
+
+                // Set the padding mode
+                aesAlg.Padding = PaddingMode.PKCS7;
+
+                using (MemoryStream msDecrypt = new MemoryStream(Convert.FromBase64String(input)))
+                {
+                    using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, aesAlg.CreateDecryptor(), CryptoStreamMode.Read))
+                    {
+                        using (StreamReader srDecrypt = new StreamReader(csDecrypt))
+                        {
+                            return srDecrypt.ReadToEnd();
+                        }
+                    }
+                }
+            }
+        }
         private void button2_Click(object sender, EventArgs e)
         {
             if (AssetID != string.Empty & (int)cmbdeviceatt.SelectedValue!=0)
             {
                 SqlParameter paramDeviceatt = new SqlParameter("@C1", SqlDbType.Int);
                 paramDeviceatt.Value = cmbdeviceatt.SelectedValue;
+
                 SqlParameter paramValue = new SqlParameter("@C2", SqlDbType.NVarChar);
                 paramValue.Value = txtvalue.Text;
 
@@ -577,12 +661,25 @@ where
                     {
                         dr.Dispose();
                         dr.Close();
-                       
+
+                        if (cmbdeviceatt.SelectedValue != null && (int)cmbdeviceatt.SelectedValue == 21)
+                        {
+                            string originalValue = txtvalue.Text.ToString();
+
+                            // Generate a random encryption key and IV
+                         
+                            string encryptedValue = Encrypt(originalValue, encryptionKey, iv);
+
+                            paramValue.Value = encryptedValue;
+                            // Use the encryptedValue as needed
+
+                            // In a real-world scenario, store the encryptionKey and iv securely for later decryption
+                        }
 
 
+                        else { paramValue.Value = txtvalue.Text; }
 
-                      paramValue.Value = txtvalue.Text;
-                      SQLCONN3.ExecuteQueries("insert into AssetsDetials (AssetID,DeviceDetilasID,Value) values (@ID,@C1,@C2)",
+                        SQLCONN3.ExecuteQueries("insert into AssetsDetials (AssetID,DeviceDetilasID,Value) values (@ID,@C1,@C2)",
                                                    paramID, paramDeviceatt, paramValue);
                         MessageBox.Show("Record saved Successfully");
                         cmbdeviceatt.SelectedValue = 0;
@@ -644,17 +741,33 @@ where
                 {
                     SQLCONN3.OpenConection3();
 
-                  
-                   
-                     
+
+                    if (cmbdeviceatt.SelectedValue != null && (int)cmbdeviceatt.SelectedValue == 21)
+                    {
+                        string originalValue = txtvalue.Text.ToString();
+
+                        // Generate a random encryption key and IV
+
+                        string encryptedValue = Encrypt(originalValue, encryptionKey, iv);
+
+                        paramValue.Value = encryptedValue;
+                        // Use the encryptedValue as needed
+                        MessageBox.Show(paramValue.Value.ToString());
+
+                        // In a real-world scenario, store the encryptionKey and iv securely for later decryption
+                    }
+
+
+                    else { paramValue.Value = txtvalue.Text; }
 
 
 
-                        paramValue.Value = txtvalue.Text;
+
+
                         SQLCONN3.ExecuteQueries("update  AssetsDetials set AssetID=@ID,DeviceDetilasID=@C1,Value=@C2 where AssetID=@ID and DeviceDetilasID=@C1 ",
                                                      paramID, paramDeviceatt, paramValue);
 
-                     MessageBox.Show("Record updated Successfully");
+                          MessageBox.Show("Record updated Successfully");
                         cmbdeviceatt.SelectedValue = 0;
                         txtvalue.Text = "";
 
@@ -697,6 +810,8 @@ where
 
         private void dataGridView5_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            DataGridViewCell clickedCell = dataGridView5.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
             addbtn.Visible = false;
             btnnew.Visible = updatebtn.Visible = deletebtn.Visible = true;
             if (e.RowIndex == -1) return;
@@ -716,6 +831,31 @@ where
                         cmbdeviceatt.Text = dataGridView5.Rows[e.RowIndex].Cells[2].Value.ToString();
                         txtvalue.Text = dataGridView5.Rows[e.RowIndex].Cells[3].Value.ToString();
 
+
+                    }
+
+
+                    string cellValue = clickedCell.Value?.ToString();
+
+                    // Check if the value in the first column is 'OS_Key'
+                    if (string.Equals(cellValue, "OS_Key", StringComparison.OrdinalIgnoreCase))
+                    {
+                        try
+                        {
+                            string encryptedValue = dataGridView5.Rows[e.RowIndex].Cells[3].Value?.ToString();
+
+                            // Decrypt the value using the stored key and IV
+                            string decryptedValue = Decrypt(encryptedValue, encryptionKey, iv);
+
+                            txtvalue.Text = decryptedValue;
+                            // The first column has the value 'OS_Key'
+                            // Add your logic here
+                        }
+                        catch (Exception ex)
+                        {
+
+                            MessageBox.Show(ex.ToString());
+                        }
 
                     }
                 }
@@ -748,14 +888,25 @@ where
                     SQLCONN3.ExecuteQueries("delete AssetsDetials where AssetID =@id and DeviceDetilasID = @C1 and value = @C2 ", paramID, paramDeviceatt, paramValue);
              
                     
-                    dataGridView5.DataSource = SQLCONN3.ShowDataInGridViewORCombobox("select * from AssetsDetials where AssetID=@id and DeviceDetilasID=@C1 and value=@C2 "
-                       , paramID,paramDeviceatt,paramValue);
+                    //dataGridView5.DataSource = SQLCONN3.ShowDataInGridViewORCombobox("select * from AssetsDetials where AssetID=@id and DeviceDetilasID=@C1 and value=@C2 "
+                    //   , paramID,paramDeviceatt,paramValue);
+
+                    dataGridView5.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(@" select 
+Assets.AssetID,
+DeviceDetials.DeviceDetilasID,
+ DeviceDetials.DeviceDetialsValue,AssetsDetials.Value
+from Assets,AssetsDetials,DeviceDetials
+where 
+  DeviceDetials.DeviceDetilasID= AssetsDetials.DeviceDetilasID
+ and Assets.AssetID= AssetsDetials.AssetID
+ and Assets.AssetID=@ID ", paramID);
                     MessageBox.Show("Record has been deleted successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     SQLCONN3.CloseConnection();
                     cmbtype.Text = "Select";
                     cmbbrand.Text = "";
                     Assetmodeltxt.Text = "";
+                    txtvalue.Text = "";
 
 
 
@@ -805,6 +956,7 @@ where
             }
         }
 
+       
         private void cmbbrand_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -814,6 +966,8 @@ where
 
             }
         }
+
+
     }
-    }
+}
 

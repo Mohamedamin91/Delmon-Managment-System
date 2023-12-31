@@ -25,13 +25,8 @@ namespace Delmon_Managment_System.Forms
         int DeptID;
         double num1, num2;
 
-        // Replace these values with your own secret key and IV
-        private static readonly string key = "6104891273";
-        private static readonly string iv = "1056478913";
+        string encryptionKey = "0pqnU2X00mf+i8mDTzyPVw==", iv = "0pqnU2X00mf+i8mDTzyPVw==";
 
-        // Convert string key and IV to byte arrays
-        private static readonly byte[] keyBytes = Encoding.UTF8.GetBytes(key);
-        private static readonly byte[] ivBytes = Encoding.UTF8.GetBytes(iv);
 
         static Regex validate_emailaddress = email_validation();
 
@@ -40,7 +35,7 @@ namespace Delmon_Managment_System.Forms
         public SettingFrm()
         {
             InitializeComponent();
-           
+
 
         }
 
@@ -55,7 +50,59 @@ namespace Delmon_Managment_System.Forms
 
 
         // Method to populate the ComboBox
-      
+
+
+
+        static string Encrypt(string input, string key, string iv)
+        {
+            using (Aes aesAlg = Aes.Create())
+            {
+                aesAlg.Key = Convert.FromBase64String(key);
+                aesAlg.IV = Convert.FromBase64String(iv);
+
+                // Set the padding mode
+                aesAlg.Padding = PaddingMode.PKCS7;
+
+                using (MemoryStream msEncrypt = new MemoryStream())
+                {
+                    using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, aesAlg.CreateEncryptor(), CryptoStreamMode.Write))
+                    {
+                        using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
+                        {
+                            swEncrypt.Write(input);
+                        }
+                    }
+
+                    return Convert.ToBase64String(msEncrypt.ToArray());
+                }
+            }
+        }
+        static string Decrypt(string input, string key, string iv)
+        {
+            using (Aes aesAlg = Aes.Create())
+            {
+                aesAlg.Key = Convert.FromBase64String(key);
+                aesAlg.IV = Convert.FromBase64String(iv);
+
+                // Set the padding mode
+                aesAlg.Padding = PaddingMode.PKCS7;
+
+                using (MemoryStream msDecrypt = new MemoryStream(Convert.FromBase64String(input)))
+                {
+                    using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, aesAlg.CreateDecryptor(), CryptoStreamMode.Read))
+                    {
+                        using (StreamReader srDecrypt = new StreamReader(csDecrypt))
+                        {
+                            return srDecrypt.ReadToEnd();
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+
         public void SettingFrm_Load(object sender, EventArgs e)
         {
             SqlParameter paramloggedemployee = new SqlParameter("@LoggedEmployeeid", SqlDbType.NVarChar);
@@ -165,7 +212,7 @@ namespace Delmon_Managment_System.Forms
             cmbDepartment.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
-           
+
 
 
 
@@ -241,7 +288,7 @@ namespace Delmon_Managment_System.Forms
             SqlParameter paramusername = new SqlParameter("@C2", SqlDbType.NVarChar);
             paramusername.Value = usernametxt.Text;
             SqlParameter parampassword = new SqlParameter("@C3", SqlDbType.NVarChar);
-             parampassword.Value = passwordtxt.Text;
+            parampassword.Value = passwordtxt.Text;
             SqlParameter paramusertype = new SqlParameter("@C4", SqlDbType.NVarChar);
             paramusertype.Value = cmbusertype.SelectedValue;
             SqlParameter paramisActive = new SqlParameter("@C5", SqlDbType.NVarChar);
@@ -259,6 +306,15 @@ namespace Delmon_Managment_System.Forms
 
 
             SqlDataReader dr;
+
+            // Generate a random encryption key and IV
+            string originalValue = passwordtxt.Text.ToString();
+            string encryptedValue = Encrypt(originalValue, encryptionKey, iv);
+            parampassword.Value = encryptedValue;
+
+
+
+
             if ((int)cmbemployee.SelectedValue != 0 && usernametxt.Text != "" && passwordtxt.Text != "")
             {
                 SQLCONN.OpenConection();
@@ -284,6 +340,9 @@ namespace Delmon_Managment_System.Forms
                         {
                             dr.Dispose();
                             dr.Close();
+
+
+
 
                             SQLCONN.ExecuteQueries("insert into tblUser ( [EmployeeID] ,[UserName],[Password],[UserTypeID],[IsActive]) values (@C1,@C2,@C3,@C4,1)",
                                                      paramemployee, paramusername, parampassword, paramusertype, paramisActive);
@@ -344,13 +403,14 @@ namespace Delmon_Managment_System.Forms
             }
             SQLCONN.CloseConnection();
         }
-   
+
 
 
 
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+
             addbtn.Visible = false;
             btnnew.Visible = updatebtn.Visible = deletebtn.Visible = true;
             if (e.RowIndex == -1) return;
@@ -371,7 +431,11 @@ namespace Delmon_Managment_System.Forms
                         cmbusertype.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
                         usernametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
                         passwordtxt.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+                        string encryptedValue = passwordtxt.Text;
+                        // Decrypt the value using the stored key and IV
+                        string decryptedValue = Decrypt(encryptedValue, encryptionKey, iv);
 
+                        passwordtxt.Text = decryptedValue;
 
                         // Check if the clicked cell is in the IsActive column
 
@@ -390,25 +454,34 @@ namespace Delmon_Managment_System.Forms
 
 
 
+                        // Check if the value in the first column is 'OS_Key'
 
-
-
-                        EmployeeID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-
-                        ////CurrentEmployeeIDtxt.Text = EmployeeID.ToString();
-                        ////addbtn.Visible = false;
-                        //btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = true;
-                        //firstnametxt.Enabled = secondnametxt.Enabled = thirdnametxt.Enabled = lastnametxt.Enabled = true;
-                        //cmbMartialStatus.Enabled = cmbGender.Enabled = cmbCompany.Enabled = cmbempdepthistory.Enabled = cmbEmployJobHistory.Enabled = cmbPersonalStatusStatus.Enabled = true;
-                        //StartDatePicker.Enabled = true;
-
+                      
                     }
-                }
 
+
+
+
+
+
+
+
+
+                    EmployeeID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+
+                    ////CurrentEmployeeIDtxt.Text = EmployeeID.ToString();
+                    ////addbtn.Visible = false;
+                    //btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = true;
+                    //firstnametxt.Enabled = secondnametxt.Enabled = thirdnametxt.Enabled = lastnametxt.Enabled = true;
+                    //cmbMartialStatus.Enabled = cmbGender.Enabled = cmbCompany.Enabled = cmbempdepthistory.Enabled = cmbEmployJobHistory.Enabled = cmbPersonalStatusStatus.Enabled = true;
+                    //StartDatePicker.Enabled = true;
+
+                }
             }
 
         }
 
+    
         private void updatebtn_Click(object sender, EventArgs e)
         {
             SqlParameter paramemployee = new SqlParameter("@C1", SqlDbType.NVarChar);
@@ -431,6 +504,13 @@ namespace Delmon_Managment_System.Forms
             paramdatetimeLOG.Value = lbldatetime.Text;
             SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
             parampc.Value = lblPC.Text;
+
+            // Generate a random encryption key and IV
+            string originalValue1 = passwordtxt.Text.ToString();
+            string encryptedValue = Encrypt(originalValue1, encryptionKey, iv);
+            parampassword.Value = encryptedValue;
+
+
 
 
             if (EmployeeID != 0)
@@ -485,10 +565,11 @@ namespace Delmon_Managment_System.Forms
 
 
                         //   paramEmployeeID.Value = CurrentEmployeeIDtxt.Text;
-
+                      
 
                         if (isactivecheck.Checked)
                         {
+
                             SQLCONN.ExecuteQueries("update tblUser set employeeid =@C1,username=@C2,password=@C3,usertypeid=@C4,isActive=1 where  userid=@id  ", paramPID, paramemployee, paramusername, parampassword, paramusertype);
 
                         }

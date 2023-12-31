@@ -302,7 +302,7 @@ namespace Delmon_Managment_System.Forms
             this.lblprovide.AutoSize = true;
             this.lblprovide.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.lblprovide.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblprovide.Location = new System.Drawing.Point(-8, 120);
+            this.lblprovide.Location = new System.Drawing.Point(-3, 120);
             this.lblprovide.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblprovide.Name = "lblprovide";
             this.lblprovide.Size = new System.Drawing.Size(221, 17);
@@ -402,7 +402,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbdeviceatt.Items.AddRange(new object[] {
             "Male",
             "Female"});
-            this.cmbdeviceatt.Location = new System.Drawing.Point(205, 22);
+            this.cmbdeviceatt.Location = new System.Drawing.Point(172, 22);
             this.cmbdeviceatt.Margin = new System.Windows.Forms.Padding(4);
             this.cmbdeviceatt.Name = "cmbdeviceatt";
             this.cmbdeviceatt.Size = new System.Drawing.Size(197, 25);
@@ -411,10 +411,10 @@ namespace Delmon_Managment_System.Forms
             // txtvalue
             // 
             this.txtvalue.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.txtvalue.Location = new System.Drawing.Point(205, 68);
+            this.txtvalue.Location = new System.Drawing.Point(172, 68);
             this.txtvalue.Margin = new System.Windows.Forms.Padding(4);
             this.txtvalue.Name = "txtvalue";
-            this.txtvalue.Size = new System.Drawing.Size(197, 25);
+            this.txtvalue.Size = new System.Drawing.Size(275, 25);
             this.txtvalue.TabIndex = 148;
             // 
             // pictureBox1
