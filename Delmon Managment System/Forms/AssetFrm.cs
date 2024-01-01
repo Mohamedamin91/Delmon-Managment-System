@@ -124,8 +124,24 @@ namespace Delmon_Managment_System.Forms
 
 
             }
+           
 
             conn.Close();
+            SQLCONN3.OpenConection3();
+            SqlParameter paramAssetSearch = new SqlParameter("@C11", SqlDbType.NVarChar);
+            paramAssetSearch.Value = cmbtype.SelectedValue;
+
+            string query = @"
+    SELECT Assets.AssetID, Assets.SapAssetId, Assets.sn, AssetType.AssettypeValue, AssetBrand.AssetBrandValue, Assets.Model
+    FROM Assets
+    INNER JOIN AssetBrand ON Assets.Brand = AssetBrand.AssetBrandID
+    INNER JOIN AssetType ON Assets.Type = AssetType.AssetTypeID
+    WHERE AssetType.AssetTypeID=@C11 ;";
+            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramAssetSearch);
+            dataGridView1.Columns[3].Width = 200;
+            dataGridView1.Columns[4].Width = 200;
+            dataGridView1.Columns[5].Width = 200;
+            SQLCONN3.CloseConnection();
         }
 
         private void btnnew_Click(object sender, EventArgs e)
@@ -313,17 +329,15 @@ from Assets ,AssetBrand,AssetType
                 SqlParameter paramAssetSearch = new SqlParameter("@C1", SqlDbType.NVarChar);
             paramAssetSearch.Value = seratchassettxt.Text;
             SQLCONN3.OpenConection3();
-         
-      
 
             string query = @"
     SELECT Assets.AssetID, Assets.SapAssetId, Assets.sn, AssetType.AssettypeValue, AssetBrand.AssetBrandValue, Assets.Model
     FROM Assets
     INNER JOIN AssetBrand ON Assets.Brand = AssetBrand.AssetBrandID
     INNER JOIN AssetType ON Assets.Type = AssetType.AssetTypeID
-    WHERE Assets.Model LIKE '%' + @C1 + '%';";
-
-            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramAssetSearch);
+    WHERE (Assets.Model LIKE '%' + @C1 + '%') or (Assets.AssetID LIKE '%' + @C1 + '%')
+or (AssetType.AssettypeValue LIKE '%' + @C1 + '%') or (AssetBrand.AssetBrandValue LIKE '%' + @C1 + '%') ;";
+    dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramAssetSearch);
 
 
 

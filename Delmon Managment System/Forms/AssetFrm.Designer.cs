@@ -202,7 +202,7 @@ namespace Delmon_Managment_System.Forms
             this.updatebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.updatebtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.updatebtn.ForeColor = System.Drawing.Color.Firebrick;
-            this.updatebtn.Location = new System.Drawing.Point(199, 342);
+            this.updatebtn.Location = new System.Drawing.Point(236, 342);
             this.updatebtn.Name = "updatebtn";
             this.updatebtn.Size = new System.Drawing.Size(70, 26);
             this.updatebtn.TabIndex = 154;
@@ -420,7 +420,7 @@ namespace Delmon_Managment_System.Forms
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(5, 37);
+            this.pictureBox1.Location = new System.Drawing.Point(458, 33);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(20, 17);
@@ -432,7 +432,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label10.Location = new System.Drawing.Point(25, 40);
+            this.label10.Location = new System.Drawing.Point(478, 36);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(61, 17);
@@ -442,9 +442,9 @@ namespace Delmon_Managment_System.Forms
             // seratchassettxt
             // 
             this.seratchassettxt.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.seratchassettxt.Location = new System.Drawing.Point(143, 37);
+            this.seratchassettxt.Location = new System.Drawing.Point(546, 33);
             this.seratchassettxt.Name = "seratchassettxt";
-            this.seratchassettxt.Size = new System.Drawing.Size(274, 25);
+            this.seratchassettxt.Size = new System.Drawing.Size(498, 25);
             this.seratchassettxt.TabIndex = 143;
             this.seratchassettxt.TextChanged += new System.EventHandler(this.seratchassettxt_TextChanged);
             // 
@@ -455,7 +455,7 @@ namespace Delmon_Managment_System.Forms
             this.btnnew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnnew.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnnew.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnnew.Location = new System.Drawing.Point(37, 342);
+            this.btnnew.Location = new System.Drawing.Point(74, 342);
             this.btnnew.Name = "btnnew";
             this.btnnew.Size = new System.Drawing.Size(70, 26);
             this.btnnew.TabIndex = 142;
@@ -470,7 +470,7 @@ namespace Delmon_Managment_System.Forms
             this.deletebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deletebtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.deletebtn.ForeColor = System.Drawing.Color.Firebrick;
-            this.deletebtn.Location = new System.Drawing.Point(287, 342);
+            this.deletebtn.Location = new System.Drawing.Point(324, 342);
             this.deletebtn.Name = "deletebtn";
             this.deletebtn.Size = new System.Drawing.Size(70, 26);
             this.deletebtn.TabIndex = 141;
@@ -486,7 +486,7 @@ namespace Delmon_Managment_System.Forms
             this.addbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addbtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.addbtn.ForeColor = System.Drawing.Color.Firebrick;
-            this.addbtn.Location = new System.Drawing.Point(116, 342);
+            this.addbtn.Location = new System.Drawing.Point(153, 342);
             this.addbtn.Name = "addbtn";
             this.addbtn.Size = new System.Drawing.Size(70, 26);
             this.addbtn.TabIndex = 139;
@@ -500,7 +500,7 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(451, 24);
+            this.dataGridView1.Location = new System.Drawing.Point(455, 64);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(955, 304);
             this.dataGridView1.TabIndex = 58;
