@@ -554,7 +554,8 @@ from Assets ,AssetBrand,AssetType
                 if (tabControl2.SelectedTab == tabControl2.TabPages[0])
                 {
 
-                    dataGridView5.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(@" select 
+                    dataGridView5.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(@" 
+select 
 Assets.AssetID,
 DeviceDetials.DeviceDetilasID,
  DeviceDetials.DeviceDetialsValue,AssetsDetials.Value
@@ -824,56 +825,60 @@ where
 
         private void dataGridView5_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewCell clickedCell = dataGridView5.Rows[e.RowIndex].Cells[e.ColumnIndex];
-
-            addbtn.Visible = false;
-            btnnew.Visible = updatebtn.Visible = deletebtn.Visible = true;
             if (e.RowIndex == -1) return;
-
-            foreach (DataGridViewRow rw in this.dataGridView5.Rows)
+            else
             {
-                for (int i = 0; i < rw.Cells.Count; i++)
+
+                DataGridViewCell clickedCell = dataGridView5.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+                addbtn.Visible = false;
+                btnnew.Visible = updatebtn.Visible = deletebtn.Visible = true;
+
+                foreach (DataGridViewRow rw in this.dataGridView5.Rows)
                 {
-                    if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
+                    for (int i = 0; i < rw.Cells.Count; i++)
                     {
-                        //   MessageBox.Show("ogg");       
-                    }
-                    else
-                    {
-
-                        AssetDetialsInfoID = (dataGridView5.Rows[e.RowIndex].Cells[0].Value.ToString());
-                        cmbdeviceatt.Text = dataGridView5.Rows[e.RowIndex].Cells[2].Value.ToString();
-                        txtvalue.Text = dataGridView5.Rows[e.RowIndex].Cells[3].Value.ToString();
-
-
-                    }
-
-
-                    string cellValue = clickedCell.Value?.ToString();
-
-                    // Check if the value in the first column is 'OS_Key'
-                    if (string.Equals(cellValue, "OS_Key", StringComparison.OrdinalIgnoreCase))
-                    {
-                        try
+                        if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
                         {
-                            string encryptedValue = dataGridView5.Rows[e.RowIndex].Cells[3].Value?.ToString();
-
-                            // Decrypt the value using the stored key and IV
-                            string decryptedValue = Decrypt(encryptedValue, encryptionKey, iv);
-
-                            txtvalue.Text = decryptedValue;
-                            // The first column has the value 'OS_Key'
-                            // Add your logic here
+                            //   MessageBox.Show("ogg");       
                         }
-                        catch (Exception ex)
+                        else
                         {
 
-                            MessageBox.Show(ex.ToString());
+                            AssetDetialsInfoID = (dataGridView5.Rows[e.RowIndex].Cells[0].Value.ToString());
+                            cmbdeviceatt.Text = dataGridView5.Rows[e.RowIndex].Cells[2].Value.ToString();
+                            txtvalue.Text = dataGridView5.Rows[e.RowIndex].Cells[3].Value.ToString();
+
+
                         }
 
+
+                        string cellValue = clickedCell.Value?.ToString();
+
+                        // Check if the value in the first column is 'OS_Key'
+                        if (string.Equals(cellValue, "OS_Key", StringComparison.OrdinalIgnoreCase))
+                        {
+                            try
+                            {
+                                string encryptedValue = dataGridView5.Rows[e.RowIndex].Cells[3].Value?.ToString();
+
+                                // Decrypt the value using the stored key and IV
+                                string decryptedValue = Decrypt(encryptedValue, encryptionKey, iv);
+
+                                txtvalue.Text = decryptedValue;
+                                // The first column has the value 'OS_Key'
+                                // Add your logic here
+                            }
+                            catch (Exception ex)
+                            {
+
+                                MessageBox.Show(ex.ToString());
+                            }
+
+                        }
                     }
+
                 }
-
             }
         }
 

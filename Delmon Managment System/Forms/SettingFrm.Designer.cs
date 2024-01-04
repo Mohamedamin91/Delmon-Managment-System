@@ -639,7 +639,7 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView2.Name = "dataGridView2";
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView2.Size = new System.Drawing.Size(511, 241);
+            this.dataGridView2.Size = new System.Drawing.Size(697, 241);
             this.dataGridView2.TabIndex = 138;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick_1);
             // 

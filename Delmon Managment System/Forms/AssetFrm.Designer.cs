@@ -48,7 +48,6 @@ namespace Delmon_Managment_System.Forms
             this.cmbtype = new System.Windows.Forms.ComboBox();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.lblprovide = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -280,7 +279,6 @@ namespace Delmon_Managment_System.Forms
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.White;
-            this.tabPage3.Controls.Add(this.lblprovide);
             this.tabPage3.Controls.Add(this.button1);
             this.tabPage3.Controls.Add(this.button2);
             this.tabPage3.Controls.Add(this.button3);
@@ -297,19 +295,6 @@ namespace Delmon_Managment_System.Forms
             this.tabPage3.Text = "Device Details";
             this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
             // 
-            // lblprovide
-            // 
-            this.lblprovide.AutoSize = true;
-            this.lblprovide.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.lblprovide.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblprovide.Location = new System.Drawing.Point(-3, 120);
-            this.lblprovide.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lblprovide.Name = "lblprovide";
-            this.lblprovide.Size = new System.Drawing.Size(221, 17);
-            this.lblprovide.TabIndex = 154;
-            this.lblprovide.Text = "*Provide (Yes or No) as Value";
-            this.lblprovide.Visible = false;
-            // 
             // button1
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -318,7 +303,7 @@ namespace Delmon_Managment_System.Forms
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.button1.ForeColor = System.Drawing.Color.Firebrick;
-            this.button1.Location = new System.Drawing.Point(495, 111);
+            this.button1.Location = new System.Drawing.Point(361, 111);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(111, 35);
@@ -335,7 +320,7 @@ namespace Delmon_Managment_System.Forms
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.button2.ForeColor = System.Drawing.Color.Firebrick;
-            this.button2.Location = new System.Drawing.Point(224, 111);
+            this.button2.Location = new System.Drawing.Point(90, 111);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(111, 35);
@@ -352,7 +337,7 @@ namespace Delmon_Managment_System.Forms
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.button3.ForeColor = System.Drawing.Color.Firebrick;
-            this.button3.Location = new System.Drawing.Point(365, 111);
+            this.button3.Location = new System.Drawing.Point(231, 111);
             this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(111, 35);
@@ -364,6 +349,8 @@ namespace Delmon_Managment_System.Forms
             // dataGridView5
             // 
             this.dataGridView5.AllowUserToAddRows = false;
+            this.dataGridView5.AllowUserToDeleteRows = false;
+            this.dataGridView5.AllowUserToOrderColumns = true;
             this.dataGridView5.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView5.Location = new System.Drawing.Point(16, 154);
@@ -627,7 +614,6 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Label lblprovide;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
