@@ -87,5 +87,10 @@ namespace Delmon_Managment_System.Forms
         {
          
         }
+
+        private void FrmDeptNew_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

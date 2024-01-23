@@ -43,9 +43,9 @@ namespace Delmon_Managment_System.Forms
             this.addbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addbtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.addbtn.ForeColor = System.Drawing.Color.White;
-            this.addbtn.Location = new System.Drawing.Point(23, 146);
+            this.addbtn.Location = new System.Drawing.Point(-8, 177);
             this.addbtn.Name = "addbtn";
-            this.addbtn.Size = new System.Drawing.Size(193, 28);
+            this.addbtn.Size = new System.Drawing.Size(261, 28);
             this.addbtn.TabIndex = 32;
             this.addbtn.Text = "Add";
             this.addbtn.UseVisualStyleBackColor = false;
@@ -54,7 +54,7 @@ namespace Delmon_Managment_System.Forms
             // txtWorklocation
             // 
             this.txtWorklocation.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.txtWorklocation.Location = new System.Drawing.Point(23, 101);
+            this.txtWorklocation.Location = new System.Drawing.Point(23, 86);
             this.txtWorklocation.Multiline = true;
             this.txtWorklocation.Name = "txtWorklocation";
             this.txtWorklocation.Size = new System.Drawing.Size(193, 24);
@@ -65,7 +65,7 @@ namespace Delmon_Managment_System.Forms
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(20, 81);
+            this.label3.Location = new System.Drawing.Point(30, 66);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(114, 17);
             this.label3.TabIndex = 30;

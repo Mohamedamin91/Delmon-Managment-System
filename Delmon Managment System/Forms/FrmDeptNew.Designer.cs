@@ -96,6 +96,7 @@ namespace Delmon_Managment_System.Forms
             this.Name = "FrmDeptNew";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmDeptNew_FormClosed);
+            this.Load += new System.EventHandler(this.FrmDeptNew_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

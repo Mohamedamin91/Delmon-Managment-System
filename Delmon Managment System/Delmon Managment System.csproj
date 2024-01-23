@@ -150,6 +150,12 @@
     <Compile Include="Forms\FrmJobsNew.Designer.cs">
       <DependentUpon>FrmJobsNew.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmNewModel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmNewModel.Designer.cs">
+      <DependentUpon>frmNewModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmNewWorkLoc.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -227,6 +233,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmJobsNew.resx">
       <DependentUpon>FrmJobsNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmNewModel.resx">
+      <DependentUpon>frmNewModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmNewWorkLoc.resx">
       <DependentUpon>FrmNewWorkLoc.cs</DependentUpon>

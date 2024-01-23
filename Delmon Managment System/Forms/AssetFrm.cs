@@ -49,7 +49,7 @@ namespace Delmon_Managment_System.Forms
             }
         }
 
-        private void AssetFrm_Load(object sender, EventArgs e)
+        public void AssetFrm_Load(object sender, EventArgs e)
         {
 
 
@@ -63,6 +63,7 @@ namespace Delmon_Managment_System.Forms
             lblFullname.Text = CommonClass.LoginEmployeeName;
             lblPC.Text = Environment.MachineName;
             SQLCONN.OpenConection3();
+
             cmbtype.ValueMember = "AssetTypeID";
             cmbtype.DisplayMember = "AssettypeValue";
             cmbtype.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT AssetTypeID,AssettypeValue FROM AssetType");
@@ -85,7 +86,7 @@ namespace Delmon_Managment_System.Forms
 
             cmbAssetModel.ValueMember = "AssetModeID";
             cmbAssetModel.DisplayMember = "AssetModel";
-            cmbAssetModel.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT AssetModeID ,AssetModel FROM AssetModel ");
+            cmbAssetModel.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT AssetModeID ,AssetModel FROM AssetsModel ");
             cmbAssetModel.Text = "Select";
 
             cmbVersion.ValueMember = "OSVersionID";
@@ -340,20 +341,24 @@ namespace Delmon_Managment_System.Forms
 
 
 
-                            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"
-                             select Assets.AssetID,Assets.SapAssetId,Assets.sn ,
-	AssetType.AssettypeValue, AssetBrand.AssetBrandValue,AssetModel.AssetModel,PurchasingDate,DeviceTypes.DeviceType,AssetsStatus.AssetStatus
-from Assets,AssetBrand,AssetType,AssetModel,DeviceTypes,AssetsStatus
-  where  AssetBrand.AssetBrandID = Assets.Brand
-  and Assets.AssetTypeID = AssetType.AssetTypeID
-  and AssetModel.AssetModeID= Assets.Model
-  and DeviceTypes.DeviceTypeID=Assets.DeviceTypeID
-  and Assets.AssetStatusID= AssetsStatus.AssetStatusID
-  and Assets.AssetTypeID=  @C1 and brand=@C2 and Assets.Model=@C3 and SN=@C5 and PurchasingDate=@C6 ", paramcmbtype, paramcmbrand, paramassetmodel,paramSN,paramPurchasingdate);
+          
+                        
+                        dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"
+                              SELECT Assets.AssetID, Assets.SapAssetId, Assets.sn, AssetType.AssettypeValue, AssetBrand.AssetBrandValue, Assets.Model,[PurchasingDate]
+      ,[DeviceTypeID]
+      ,[AssetStatusID]
+    FROM Assets
+    INNER JOIN AssetBrand ON Assets.Brand = AssetBrand.AssetBrandID
+    INNER JOIN AssetType ON Assets.AssetTypeID = AssetType.AssetTypeID where  AssetBrand.AssetBrandID = Assets.Brand
+  and Assets.AssetTypeID=  @C1 and brand=@C2 and Assets.Model=@C3 and SN=@C5 and PurchasingDate=@C6 ", paramcmbtype, paramcmbrand, paramassetmodel, paramSN, paramPurchasingdate);
 
 
-                        }
-                        else
+
+
+
+
+                    }
+                    else
                         {
 
                             dr.Dispose();
@@ -638,12 +643,14 @@ or (AssetType.AssettypeValue LIKE '%' + @C1 + '%') or (AssetBrand.AssetBrandValu
                 {
                     SQLCONN3.OpenConection3();
                     SQLCONN3.ExecuteQueries("delete  Assets where AssetID=@idd", paramIDD);
-                   // SQLCONN3.ExecuteQueries(" declare @max int select @max = max([AssetID]) from [Assets] if @max IS NULL    SET @max = 0 DBCC CHECKIDENT('[Assets]', RESEED, @max)");
+                    SQLCONN3.ExecuteQueries("delete AssetsDetials where AssetID =@idd  ", paramIDD);
+
+                    // SQLCONN3.ExecuteQueries(" declare @max int select @max = max([AssetID]) from [Assets] if @max IS NULL    SET @max = 0 DBCC CHECKIDENT('[Assets]', RESEED, @max)");
                     dataGridView1.DataSource = SQLCONN3.ShowDataInGridViewORCombobox("select * from Assets where AssetID=@idd", paramIDD);
                     MessageBox.Show("Record has been deleted successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     cmbtype.Text = "Select";
                     cmbbrand.Text = "";
-                    cmbAssetModel.Text = "Select";
+                    cmbAssetModel.Text = cmbDevice.Text=cmbAssetStatus.Text = "Select";
                     AssetIDTXT.Text = "";
                     txtsapid.Text = txtSN.Text = "";
                     tabControl2.TabPages[0].ForeColor = Color.Black; // Adjust the color as needed
@@ -1233,7 +1240,7 @@ where
             SqlParameter paramAssetBrandSearch = new SqlParameter("@C2", SqlDbType.NVarChar);
             paramAssetBrandSearch.Value = cmbbrand.SelectedValue;
 
-            string query2 = @"SELECT AssetModeID ,AssetModel FROM AssetModel where AssetTypeID= @C1 and AssetBrandID= @C2 ";
+            string query2 = @"SELECT AssetModeID ,AssetModel FROM AssetsModel where AssetTypeID= @C1 and AssetBrandID= @C2 ";
 
             cmbAssetModel.ValueMember = "AssetModeID";
             cmbAssetModel.DisplayMember = "AssetModel";
@@ -1259,6 +1266,14 @@ where
 
 
         }
+
+        private void btnnewJob_Click(object sender, EventArgs e)
+        {
+            frmNewModel frmmodel = new frmNewModel();
+            // this.Hide();
+            frmmodel.Show();
+        }
+
         private void cmbbrand_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
