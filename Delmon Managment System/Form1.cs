@@ -278,7 +278,7 @@ GROUP BY
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            this.lbldatetime.Text = DateTime.Now.ToString("dd-MMM-yyyy  hh:mm:ss tt");
+          //  this.lbldatetime.Text = DateTime.Now.ToString("dd-MMM-yyyy  hh:mm:ss tt");
 
         }
 

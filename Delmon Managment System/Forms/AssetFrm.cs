@@ -66,9 +66,33 @@ namespace Delmon_Managment_System.Forms
             cmbtype.ValueMember = "AssetTypeID";
             cmbtype.DisplayMember = "AssettypeValue";
             cmbtype.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT AssetTypeID,AssettypeValue FROM AssetType");
+            cmbtype.Text = "Select";
+            
             cmbdeviceatt.ValueMember = "DeviceDetilasID";
             cmbdeviceatt.DisplayMember = "DeviceDetialsValue";
             cmbdeviceatt.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT DeviceDetilasID ,DeviceDetialsValue FROM DeviceDetials ");
+            cmbdeviceatt.Text = "Select";
+
+            cmbDevice.ValueMember = "DeviceTypeID";
+            cmbDevice.DisplayMember = "DeviceType";
+            cmbDevice.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT DeviceTypeID , DeviceType FROM DeviceTypes ");
+            cmbDevice.Text = "Select";
+
+            cmbAssetStatus.ValueMember = "AssetStatusID";
+            cmbAssetStatus.DisplayMember = "AssetStatus";
+            cmbAssetStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT AssetStatusID ,AssetStatus FROM AssetsStatus ");
+            cmbAssetStatus.Text = "Select";
+
+            cmbAssetModel.ValueMember = "AssetModeID";
+            cmbAssetModel.DisplayMember = "AssetModel";
+            cmbAssetModel.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT AssetModeID ,AssetModel FROM AssetModel ");
+            cmbAssetModel.Text = "Select";
+
+            cmbVersion.ValueMember = "OSVersionID";
+            cmbVersion.DisplayMember = "OSVerisonValue";
+            cmbVersion.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT OSVersionID ,OSVerisonValue FROM OSVerisons ");
+            cmbVersion.Text = "Select";
+
 
             SQLCONN.CloseConnection();
           //  InitializeEncryptionParameters();
@@ -88,12 +112,17 @@ namespace Delmon_Managment_System.Forms
 
         private void cmbtype_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            
+            
+            
+            
             DataRow dr;
             SqlConnection conn = new SqlConnection(@"Data Source=192.168.1.8;Initial Catalog=DelmonGroupAssests;User ID=sa;password=Ram72763@");
 
 
             conn.Open();
             SqlCommand cmd = conn.CreateCommand();
+            SqlCommand cmd1= conn.CreateCommand();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = @"SELECT [AssetBrandID],[AssetBrandValue] FROM [DelmonGroupAssests].[dbo].[AssetBrand] where AssetTypeID=@C1 ";
 
@@ -119,13 +148,8 @@ namespace Delmon_Managment_System.Forms
                 cmbbrand.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 cmbbrand.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-
-
-
-
             }
            
-
             conn.Close();
             SQLCONN3.OpenConection3();
             SqlParameter paramAssetSearch = new SqlParameter("@C11", SqlDbType.NVarChar);
@@ -135,12 +159,31 @@ namespace Delmon_Managment_System.Forms
     SELECT Assets.AssetID, Assets.SapAssetId, Assets.sn, AssetType.AssettypeValue, AssetBrand.AssetBrandValue, Assets.Model
     FROM Assets
     INNER JOIN AssetBrand ON Assets.Brand = AssetBrand.AssetBrandID
-    INNER JOIN AssetType ON Assets.Type = AssetType.AssetTypeID
+    INNER JOIN AssetType ON Assets.AssetTypeID = AssetType.AssetTypeID
     WHERE AssetType.AssetTypeID=@C11 ;";
             dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramAssetSearch);
             dataGridView1.Columns[3].Width = 200;
             dataGridView1.Columns[4].Width = 200;
             dataGridView1.Columns[5].Width = 200;
+
+         
+
+            if ((int)cmbtype.SelectedValue == 1 || (int)cmbtype.SelectedValue == 2 || (int)cmbtype.SelectedValue == 4)
+            {
+                string query2 = @"SELECT DeviceTypeID ,DeviceType FROM DeviceTypes where AssetTypeID= @C11";
+
+                cmbDevice.ValueMember = "DeviceTypeID";
+                cmbDevice.DisplayMember = "DeviceType";
+                cmbDevice.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query2, paramAssetSearch);
+
+            }
+            else
+            {
+                cmbDevice.Text = "Select";
+            }
+
+
+
             SQLCONN3.CloseConnection();
         }
 
@@ -149,7 +192,6 @@ namespace Delmon_Managment_System.Forms
             addbtn.Visible = true;
             cmbtype.Text = "Select";
             cmbbrand.Text = "";
-            Assetmodeltxt.Text = "";
             AssetIDTXT.Text = "";
             txtvalue.Text = "";
             txtsapid.Text = txtSN.Text = "";
@@ -165,7 +207,7 @@ namespace Delmon_Managment_System.Forms
             {
                 sqlConnection.Open();
 
-                string maxIDQuery = "SELECT MAX(AssetID) FROM Assets WHERE Type = @AssetTypeID";
+                string maxIDQuery = "SELECT MAX(AssetID) FROM Assets WHERE AssetTypeID = @AssetTypeID";
 
                 using (SqlCommand cmd = new SqlCommand(maxIDQuery, sqlConnection))
                 {
@@ -186,12 +228,10 @@ namespace Delmon_Managment_System.Forms
                             return maxID + 1;
                         }
                     }
-
                     return 1;
                 }
             }
         }
-
 
         public static string GenerateAssetID(int assetTypeID, int nextID)
         {
@@ -220,7 +260,7 @@ namespace Delmon_Managment_System.Forms
                 case 7:
                     return "TL";
                 case 8:
-                    return "FP";
+                    return "Bi";
               
                 default:
                     throw new ArgumentException("Unsupported asset type");
@@ -235,12 +275,21 @@ namespace Delmon_Managment_System.Forms
             SqlParameter paramcmbrand = new SqlParameter("@C2", SqlDbType.NVarChar);
             paramcmbrand.Value = cmbbrand.SelectedValue;
             SqlParameter paramassetmodel = new SqlParameter("@C3", SqlDbType.NVarChar);
-            paramassetmodel.Value = Assetmodeltxt.Text;
+            paramassetmodel.Value = cmbAssetModel.SelectedValue;
             SqlParameter paramSAPAssetid = new SqlParameter("@C4", SqlDbType.NVarChar);
             paramSAPAssetid.Value = txtsapid.Text;
             SqlParameter paramSN = new SqlParameter("@C5", SqlDbType.NVarChar);
             paramSN.Value = txtSN.Text;
 
+
+            /*new update */
+            SqlParameter paramPurchasingdate = new SqlParameter("@C6", SqlDbType.Date);
+            paramPurchasingdate.Value = PurchasingDtp.Value;
+            SqlParameter paramcmbDevice = new SqlParameter("@C7", SqlDbType.NVarChar);
+            paramcmbDevice.Value = cmbDevice.SelectedValue;
+            SqlParameter paramcmbAssetStatus = new SqlParameter("@C8", SqlDbType.NVarChar);
+            paramcmbAssetStatus.Value = cmbAssetStatus.SelectedValue;
+            /*new update */
 
 
             int assetTypeID = (int)cmbtype.SelectedValue; // Make sure to use the correct value
@@ -257,11 +306,12 @@ namespace Delmon_Managment_System.Forms
 
             SqlDataReader dr;
             
-                if ((int)cmbtype.SelectedValue != 0 && (int)cmbbrand.SelectedValue != 0 && Assetmodeltxt.Text != "")
+                if ((int)cmbtype.SelectedValue != 0 && (int)cmbbrand.SelectedValue != 0 && (int)cmbAssetModel.SelectedValue != 0 
+                && (int)cmbDevice.SelectedValue!=0 && (int) cmbAssetStatus.SelectedValue!=0 && txtSN.Text !=string.Empty)
                 {
                     SQLCONN3.OpenConection3();
                     dr = SQLCONN3.DataReader("select  * from Assets  where " +
-                        " brand=@C2 and model = @C3", paramcmbrand, paramassetmodel);
+                        " brand=@C2 and model = @C3 and sn= @C5", paramcmbrand, paramassetmodel,paramSN);
                     dr.Read();
 
 
@@ -280,8 +330,10 @@ namespace Delmon_Managment_System.Forms
                             dr.Close();
 
 
-                            SQLCONN3.ExecuteQueries("insert into Assets ( [AssetID],[type],[brand],[model],[SapAssetID],[SN] ) values (@C0,@C1,@C2,@C3,@C4,@C5)",
-                                                         paramgeneratedAssetID, paramcmbtype, paramcmbrand, paramassetmodel, paramSAPAssetid, paramSN);
+                            SQLCONN3.ExecuteQueries("insert into Assets ( [AssetID],[AssetTypeID],[brand],[model],[SapAssetID],[SN],[PurchasingDate],[DeviceTypeID],[AssetStatusID]) " +
+                                "values (@C0,@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8)",
+                                                         paramgeneratedAssetID, paramcmbtype, paramcmbrand, paramassetmodel, 
+                                                         paramSAPAssetid, paramSN,paramPurchasingdate,paramcmbDevice,paramcmbAssetStatus);
                             MessageBox.Show("Record saved Successfully");
 
                             btnnew.Visible = true;
@@ -289,12 +341,15 @@ namespace Delmon_Managment_System.Forms
 
 
                             dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"
-                             select Assets.AssetID,Assets.SapAssetId,Assets.sn ,AssetType.AssettypeValue, AssetBrand.AssetBrandValue,Assets.Model
-from Assets ,AssetBrand,AssetType
-  where  Brand = AssetBrand.AssetBrandID
-  and Assets.Type = AssetType.AssetTypeID and type= @C1 and brand=@C2 and model=@C3", paramcmbtype, paramcmbrand, paramassetmodel);
-
-
+                             select Assets.AssetID,Assets.SapAssetId,Assets.sn ,
+	AssetType.AssettypeValue, AssetBrand.AssetBrandValue,AssetModel.AssetModel,PurchasingDate,DeviceTypes.DeviceType,AssetsStatus.AssetStatus
+from Assets,AssetBrand,AssetType,AssetModel,DeviceTypes,AssetsStatus
+  where  AssetBrand.AssetBrandID = Assets.Brand
+  and Assets.AssetTypeID = AssetType.AssetTypeID
+  and AssetModel.AssetModeID= Assets.Model
+  and DeviceTypes.DeviceTypeID=Assets.DeviceTypeID
+  and Assets.AssetStatusID= AssetsStatus.AssetStatusID
+  and Assets.AssetTypeID=  @C1 and brand=@C2 and Assets.Model=@C3 and SN=@C5 and PurchasingDate=@C6 ", paramcmbtype, paramcmbrand, paramassetmodel,paramSN,paramPurchasingdate);
 
 
                         }
@@ -318,7 +373,7 @@ from Assets ,AssetBrand,AssetType
          
             SQLCONN3.CloseConnection();
             cmbtype.Text = cmbbrand.Text = "Select";
-            Assetmodeltxt.Text = "";
+            cmbAssetModel.Text = "Select";
         }
 
         private void seratchassettxt_TextChanged(object sender, EventArgs e)
@@ -331,12 +386,21 @@ from Assets ,AssetBrand,AssetType
             SQLCONN3.OpenConection3();
 
             string query = @"
-    SELECT Assets.AssetID, Assets.SapAssetId, Assets.sn, AssetType.AssettypeValue, AssetBrand.AssetBrandValue, Assets.Model
+    SELECT Assets.AssetID, Assets.SapAssetId, Assets.sn, AssetType.AssettypeValue, AssetBrand.AssetBrandValue, Assets.Model,[PurchasingDate]
+      ,[DeviceTypeID]
+      ,[AssetStatusID]
     FROM Assets
     INNER JOIN AssetBrand ON Assets.Brand = AssetBrand.AssetBrandID
-    INNER JOIN AssetType ON Assets.Type = AssetType.AssetTypeID
-    WHERE (Assets.Model LIKE '%' + @C1 + '%') or (Assets.AssetID LIKE '%' + @C1 + '%')
+    INNER JOIN AssetType ON Assets.AssetTypeID = AssetType.AssetTypeID
+    WHERE 
+(Assets.Model LIKE '%' + @C1 + '%') or (Assets.AssetID LIKE '%' + @C1 + '%')
 or (AssetType.AssettypeValue LIKE '%' + @C1 + '%') or (AssetBrand.AssetBrandValue LIKE '%' + @C1 + '%') ;";
+
+
+            
+
+
+
     dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramAssetSearch);
 
 
@@ -371,10 +435,25 @@ or (AssetType.AssettypeValue LIKE '%' + @C1 + '%') or (AssetBrand.AssetBrandValu
                         txtSN.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
                         cmbtype.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
                         cmbbrand.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-                        Assetmodeltxt.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+                        cmbAssetModel.SelectedValue = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+
+                        if (dataGridView1.CurrentRow.Cells[6].Value == null || dataGridView1.CurrentRow.Cells[6].Value == DBNull.Value || String.IsNullOrWhiteSpace(dataGridView1.CurrentRow.Cells[6].Value.ToString()))
+                        {
+                            PurchasingDtp.Value = DateTime.Now;
+                        }
+                        else 
+                        {
+                            PurchasingDtp.Value = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString());
+                        }
 
 
-                    
+
+
+                        cmbDevice.SelectedValue = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
+                        cmbAssetStatus.SelectedValue = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
+
+
+
 
 
 
@@ -395,13 +474,27 @@ or (AssetType.AssettypeValue LIKE '%' + @C1 + '%') or (AssetBrand.AssetBrandValu
             SqlParameter paramcmbrand = new SqlParameter("@C2", SqlDbType.NVarChar);
             paramcmbrand.Value = cmbbrand.SelectedValue;
             SqlParameter paramassetmodel = new SqlParameter("@C3", SqlDbType.NVarChar);
-            paramassetmodel.Value = Assetmodeltxt.Text;
+            paramassetmodel.Value = cmbAssetModel.SelectedValue;
             SqlParameter paramSAPAssetid = new SqlParameter("@C4", SqlDbType.NVarChar);
             paramSAPAssetid.Value = txtsapid.Text;
             SqlParameter paramSN = new SqlParameter("@C5", SqlDbType.NVarChar);
             paramSN.Value = txtSN.Text;
             SqlParameter paramIDD = new SqlParameter("@idd", SqlDbType.NVarChar);
             paramIDD.Value = AssetID;
+
+
+            /*new update */
+            SqlParameter paramPurchasingdate = new SqlParameter("@C6", SqlDbType.Date);
+            paramPurchasingdate.Value = PurchasingDtp.Value;
+            SqlParameter paramcmbDevice = new SqlParameter("@C7", SqlDbType.NVarChar);
+            paramcmbDevice.Value = cmbDevice.SelectedValue;
+            SqlParameter paramcmbAssetStatus = new SqlParameter("@C8", SqlDbType.NVarChar);
+            paramcmbAssetStatus.Value = cmbAssetStatus.SelectedValue;
+            /*new update */
+
+
+
+
 
 
             SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
@@ -431,7 +524,7 @@ or (AssetType.AssettypeValue LIKE '%' + @C1 + '%') or (AssetBrand.AssetBrandValu
                     {
                         MessageBox.Show("Please Select Brand !!");
                     }
-                    else if (Assetmodeltxt.Text == "")
+                    else if (cmbAssetModel.Text == "Select")
 
                     {
                         MessageBox.Show("Please insert Asset Model !!");
@@ -451,28 +544,57 @@ or (AssetType.AssettypeValue LIKE '%' + @C1 + '%') or (AssetBrand.AssetBrandValu
 
                         if ((int)cmbtype.SelectedIndex == -1)
                         {
-                            SQLCONN3.ExecuteQueries("update Assets set brand=@C2,model=@C3,SAPAssetId=@C4,Sn=@C5 where  AssetID=@idd  ", paramIDD, paramcmbrand, paramassetmodel,paramSAPAssetid,paramSN);
+                            SQLCONN3.ExecuteQueries("update Assets set brand=@C2,model=@C3,SAPAssetId=@C4,Sn=@C5 ,PurchasingDate=@C6 ,DeviceTypeID=@C7 ,AssetStatusID=@C8 where AssetID=@idd  ",
+                                paramIDD, paramcmbrand, paramassetmodel,paramSAPAssetid,paramSN, paramPurchasingdate,paramcmbDevice,paramcmbAssetStatus);
 
                         }
                         else if ((int)cmbbrand.SelectedIndex == -1)
                         {
-                            SQLCONN3.ExecuteQueries("update Assets set type=@C1,model=@C3,SAPAssetId=@C4,Sn=@C5 where  AssetID=@idd  ", paramIDD, paramcmbtype, paramassetmodel, paramSAPAssetid, paramSN);
+                            SQLCONN3.ExecuteQueries("update Assets set AssetTypeID=@C1,model=@C3,SAPAssetId=@C4,Sn=@C5 ,PurchasingDate=@C6 ,DeviceTypeID=@C7 ,AssetStatusID=@C8 where  AssetID=@idd  ", 
+                                paramIDD, paramcmbtype, paramassetmodel, paramSAPAssetid, paramSN,paramPurchasingdate, paramcmbDevice, paramcmbAssetStatus);
 
                         }
+                        else if ((int)cmbAssetModel.SelectedIndex == -1)
+                        {
+                            SQLCONN3.ExecuteQueries("update Assets set AssetTypeID=@C1,model=@C3,SAPAssetId=@C4,Sn=@C5 ,PurchasingDate=@C6 ,DeviceTypeID=@C7 ,AssetStatusID=@C8 where  AssetID=@idd  ", 
+                                paramIDD, paramcmbtype, paramassetmodel, paramSAPAssetid, paramSN, paramPurchasingdate, paramcmbDevice, paramcmbAssetStatus);
 
+                        }
+                        else if ((int)cmbDevice.SelectedIndex == -1)
+                        {
+                            SQLCONN3.ExecuteQueries("update Assets set AssetTypeID=@C1,model=@C3,SAPAssetId=@C4,Sn=@C5 ,PurchasingDate=@C6 ,AssetStatusID=@C8 where  AssetID=@idd  ",
+                                paramIDD, paramcmbtype, paramassetmodel, paramSAPAssetid, paramSN, paramPurchasingdate, paramcmbAssetStatus);
+
+                        }
+                        else if ((int)cmbAssetStatus.SelectedIndex == -1)
+                        {
+                            SQLCONN3.ExecuteQueries("update Assets set AssetTypeID=@C1,model=@C3,SAPAssetId=@C4,Sn=@C5 ,PurchasingDate=@C6 ,DeviceTypeID=@C7  where  AssetID=@idd  "
+                                , paramIDD, paramcmbtype, paramassetmodel, paramSAPAssetid, paramSN, paramPurchasingdate, paramcmbDevice);
+
+                        }
                         else 
                         {
-                            SQLCONN3.ExecuteQueries("update Assets set type=@C1,brand=@C2,model=@C3,SAPAssetId=@C4,Sn=@C5 where  AssetID=@idd  ", paramIDD, paramcmbtype, paramcmbrand, paramassetmodel,paramSAPAssetid,paramSN);
+                            SQLCONN3.ExecuteQueries("update Assets set AssetTypeID=@C1,brand=@C2,model=@C3,SAPAssetId=@C4,Sn=@C5 ,PurchasingDate=@C6 ,DeviceTypeID=@C7 ,AssetStatusID=@C8 where  AssetID=@idd  ",
+                                paramIDD, paramcmbtype, paramcmbrand, paramassetmodel,paramSAPAssetid,paramSN, paramPurchasingdate, paramcmbDevice, paramcmbAssetStatus);
 
                         }
 
-                           MessageBox.Show("Record Updated Successfully");
+                 
+
+
+
+
+                        MessageBox.Show("Record Updated Successfully");
                         // dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT id_History,[EmployeeID],NewID,StatusTBL.StatusValue,[JOBS].JobTitleEN, DeptTypes.Dept_Type_Name,[StartDate],[EndDate],[UserID],[DatetimeLog]  FROM[DelmonGroupDB].[dbo].[EmploymentStatus], JOBS, DEPARTMENTS, StatusTBL, DeptTypes  where   StatusTBL.StatusID = EmploymentStatus.EmploymentStatusID and DEPARTMENTS.DeptName = EmploymentStatus.DeptID   and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID  and JOBS.JobID = EmploymentStatus.JobID  and  NEWID = @C14  ", paramNewID);
+
                         dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"
-                             select Assets.AssetID,Assets.SapAssetId,Assets.sn ,AssetType.AssettypeValue, AssetBrand.AssetBrandValue,Assets.Model
-from Assets ,AssetBrand,AssetType
-  where  Brand = AssetBrand.AssetBrandID
-  and Assets.Type = AssetType.AssetTypeID and type= @C1 and brand=@C2 and model=@C3", paramcmbtype, paramcmbrand, paramassetmodel);
+                              SELECT Assets.AssetID, Assets.SapAssetId, Assets.sn, AssetType.AssettypeValue, AssetBrand.AssetBrandValue, Assets.Model,[PurchasingDate]
+      ,[DeviceTypeID]
+      ,[AssetStatusID]
+    FROM Assets
+    INNER JOIN AssetBrand ON Assets.Brand = AssetBrand.AssetBrandID
+    INNER JOIN AssetType ON Assets.AssetTypeID = AssetType.AssetTypeID where  AssetBrand.AssetBrandID = Assets.Brand
+  and Assets.AssetID=  @idd ", paramIDD);
 
 
 
@@ -521,7 +643,7 @@ from Assets ,AssetBrand,AssetType
                     MessageBox.Show("Record has been deleted successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     cmbtype.Text = "Select";
                     cmbbrand.Text = "";
-                    Assetmodeltxt.Text = "";
+                    cmbAssetModel.Text = "Select";
                     AssetIDTXT.Text = "";
                     txtsapid.Text = txtSN.Text = "";
                     tabControl2.TabPages[0].ForeColor = Color.Black; // Adjust the color as needed
@@ -531,6 +653,10 @@ from Assets ,AssetBrand,AssetType
                     //Assetmodeltxt.Text = "";
                     //AssetIDTXT.Text = "";
                     //txtsapid.Text = txtSN.Text = "";
+
+                
+
+
 
 
 
@@ -654,6 +780,10 @@ where
                 SqlParameter paramValue = new SqlParameter("@C2", SqlDbType.NVarChar);
                 paramValue.Value = txtvalue.Text;
 
+                SqlParameter paramcmbOS = new SqlParameter("@C3", SqlDbType.Int);
+                paramcmbOS.Value = cmbVersion.SelectedValue;
+
+
                 SqlParameter paramID = new SqlParameter("@ID", SqlDbType.NVarChar);
                 paramID.Value = AssetID;
 
@@ -693,15 +823,24 @@ where
 
 
                         else { paramValue.Value = txtvalue.Text; }
+                        if ((int)cmbdeviceatt.SelectedValue==20 )
+                        {
+                            SQLCONN3.ExecuteQueries("insert into AssetsDetials (AssetID,DeviceDetilasID,Value) values (@ID,@C1,@C3)", paramID, paramDeviceatt, paramcmbOS);
 
-                        SQLCONN3.ExecuteQueries("insert into AssetsDetials (AssetID,DeviceDetilasID,Value) values (@ID,@C1,@C2)",
-                                                   paramID, paramDeviceatt, paramValue);
+                        }
+                        else 
+                        {
+                            SQLCONN3.ExecuteQueries("insert into AssetsDetials (AssetID,DeviceDetilasID,Value) values (@ID,@C1,@C2)", paramID, paramDeviceatt, paramValue);
+
+                        }
+                        
                         MessageBox.Show("Record saved Successfully");
-                        cmbdeviceatt.SelectedValue = 0;
-                        txtvalue.Text = "";
+                        
 
 
-                        dataGridView5.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(@"  select 
+                      
+                      
+                            dataGridView5.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(@"select 
 Assets.AssetID,
 DeviceDetials.DeviceDetilasID,
  DeviceDetials.DeviceDetialsValue,AssetsDetials.Value
@@ -710,6 +849,9 @@ where
   DeviceDetials.DeviceDetilasID= AssetsDetials.DeviceDetilasID
  and Assets.AssetID= AssetsDetials.AssetID
  and Assets.AssetID=@ID ", paramID);
+                      
+
+                         
 
                         //  this.dataGridView5.Columns["AssetDetailsID"].Visible = false;
                         //dataGridView5.Columns[6].Width = 200;
@@ -722,6 +864,8 @@ where
                         cmbdeviceatt.Text = "Select";
                         txtvalue.Text = "";
                         SQLCONN3.CloseConnection();
+                        cmbdeviceatt.SelectedValue = 0;
+                        txtvalue.Text = "";
 
                     }
                 }
@@ -743,9 +887,14 @@ where
             SqlParameter paramDeviceatt = new SqlParameter("@C1", SqlDbType.Int);
             paramDeviceatt.Value = cmbdeviceatt.SelectedValue;
             SqlParameter paramValue = new SqlParameter("@C2", SqlDbType.NVarChar);
+
+            SqlParameter paramcmbOS = new SqlParameter("@C3", SqlDbType.Int);
+            paramcmbOS.Value = cmbVersion.SelectedValue;
+
             paramValue.Value = txtvalue.Text;
             SqlParameter paramID = new SqlParameter("@ID", SqlDbType.NVarChar);
             paramID.Value = AssetID;
+
 
 
             if (AssetID!= string.Empty  && ((int)cmbdeviceatt.SelectedValue !=0))
@@ -777,10 +926,22 @@ where
 
 
 
+                    if ((int)cmbdeviceatt.SelectedValue == 20)
+                    {
+                        SQLCONN3.ExecuteQueries("update  AssetsDetials set AssetID=@ID,DeviceDetilasID=@C1,Value=@C3 where AssetID=@ID and DeviceDetilasID=@C1 ",
+                                              paramID, paramDeviceatt, paramcmbOS);
 
 
+                    }
+                    else 
+                    {
                         SQLCONN3.ExecuteQueries("update  AssetsDetials set AssetID=@ID,DeviceDetilasID=@C1,Value=@C2 where AssetID=@ID and DeviceDetilasID=@C1 ",
-                                                     paramID, paramDeviceatt, paramValue);
+                                              paramID, paramDeviceatt, paramValue);
+
+
+                    }
+
+
 
                           MessageBox.Show("Record updated Successfully");
                         cmbdeviceatt.SelectedValue = 0;
@@ -834,51 +995,120 @@ where
                 addbtn.Visible = false;
                 btnnew.Visible = updatebtn.Visible = deletebtn.Visible = true;
 
-                foreach (DataGridViewRow rw in this.dataGridView5.Rows)
+
+
+                if (dataGridView1.Rows.Count > 0 &&
+    dataGridView5.Rows[0].Cells.Count > 1 &&
+    dataGridView5.Rows[0].Cells[2].Value != null &&
+    dataGridView5.Rows[0].Cells[2].Value.ToString() == "OS")
                 {
-                    for (int i = 0; i < rw.Cells.Count; i++)
+                    // The cell at row 0, column 1 contains the value "20"
+                    cmbVersion.Enabled = true;
+                    txtvalue.Enabled = false;
+                    foreach (DataGridViewRow rw in this.dataGridView5.Rows)
                     {
-                        if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
+                        for (int i = 0; i < rw.Cells.Count; i++)
                         {
-                            //   MessageBox.Show("ogg");       
-                        }
-                        else
-                        {
-
-                            AssetDetialsInfoID = (dataGridView5.Rows[e.RowIndex].Cells[0].Value.ToString());
-                            cmbdeviceatt.Text = dataGridView5.Rows[e.RowIndex].Cells[2].Value.ToString();
-                            txtvalue.Text = dataGridView5.Rows[e.RowIndex].Cells[3].Value.ToString();
-
-
-                        }
-
-
-                        string cellValue = clickedCell.Value?.ToString();
-
-                        // Check if the value in the first column is 'OS_Key'
-                        if (string.Equals(cellValue, "OS_Key", StringComparison.OrdinalIgnoreCase))
-                        {
-                            try
+                            if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
                             {
-                                string encryptedValue = dataGridView5.Rows[e.RowIndex].Cells[3].Value?.ToString();
-
-                                // Decrypt the value using the stored key and IV
-                                string decryptedValue = Decrypt(encryptedValue, encryptionKey, iv);
-
-                                txtvalue.Text = decryptedValue;
-                                // The first column has the value 'OS_Key'
-                                // Add your logic here
+                                //   MessageBox.Show("ogg");       
                             }
-                            catch (Exception ex)
+                            else
                             {
 
-                                MessageBox.Show(ex.ToString());
+                                AssetDetialsInfoID = (dataGridView5.Rows[e.RowIndex].Cells[0].Value.ToString());
+                                cmbdeviceatt.Text = dataGridView5.Rows[e.RowIndex].Cells[2].Value.ToString();
+                                cmbVersion.SelectedValue = dataGridView5.Rows[e.RowIndex].Cells[3].Value.ToString();
+
+
                             }
 
+
+                            string cellValue = clickedCell.Value?.ToString();
+
+                            // Check if the value in the first column is 'OS_Key'
+                            if (string.Equals(cellValue, "OS_Key", StringComparison.OrdinalIgnoreCase))
+                            {
+                                try
+                                {
+                                    string encryptedValue = dataGridView5.Rows[e.RowIndex].Cells[3].Value?.ToString();
+
+                                    // Decrypt the value using the stored key and IV
+                                    string decryptedValue = Decrypt(encryptedValue, encryptionKey, iv);
+
+                                    txtvalue.Text = decryptedValue;
+                                    // The first column has the value 'OS_Key'
+                                    // Add your logic here
+                                }
+                                catch (Exception ex)
+                                {
+
+                                    MessageBox.Show(ex.ToString());
+                                }
+
+                            }
                         }
+
                     }
 
+
                 }
+
+                else 
+                {
+                    cmbVersion.Enabled = false;
+                    txtvalue.Enabled = true;
+                    foreach (DataGridViewRow rw in this.dataGridView5.Rows)
+                    {
+                        for (int i = 0; i < rw.Cells.Count; i++)
+                        {
+                            if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
+                            {
+                                //   MessageBox.Show("ogg");       
+                            }
+                            else
+                            {
+
+                                AssetDetialsInfoID = (dataGridView5.Rows[e.RowIndex].Cells[0].Value.ToString());
+                                cmbdeviceatt.Text = dataGridView5.Rows[e.RowIndex].Cells[2].Value.ToString();
+                                txtvalue.Text = dataGridView5.Rows[e.RowIndex].Cells[3].Value.ToString();
+
+
+                            }
+
+
+                            string cellValue = clickedCell.Value?.ToString();
+
+                            // Check if the value in the first column is 'OS_Key'
+                            if (string.Equals(cellValue, "OS_Key", StringComparison.OrdinalIgnoreCase))
+                            {
+                                try
+                                {
+                                    string encryptedValue = dataGridView5.Rows[e.RowIndex].Cells[3].Value?.ToString();
+
+                                    // Decrypt the value using the stored key and IV
+                                    string decryptedValue = Decrypt(encryptedValue, encryptionKey, iv);
+
+                                    txtvalue.Text = decryptedValue;
+                                    // The first column has the value 'OS_Key'
+                                    // Add your logic here
+                                }
+                                catch (Exception ex)
+                                {
+
+                                    MessageBox.Show(ex.ToString());
+                                }
+
+                            }
+                        }
+
+                    }
+
+
+                }
+
+
+
             }
         }
 
@@ -890,6 +1120,9 @@ where
             paramDeviceatt.Value = cmbdeviceatt.SelectedValue;
             SqlParameter paramValue = new SqlParameter("@C2", SqlDbType.NVarChar);
             paramValue.Value = txtvalue.Text;
+            SqlParameter paramcmbOS = new SqlParameter("@C3", SqlDbType.Int);
+            paramcmbOS.Value = cmbVersion.SelectedValue;
+
 
 
 
@@ -904,9 +1137,21 @@ where
                 if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
                     SQLCONN3.OpenConection3();
-                    SQLCONN3.ExecuteQueries("delete AssetsDetials where AssetID =@id and DeviceDetilasID = @C1 and value = @C2 ", paramID, paramDeviceatt, paramValue);
-             
-                    
+
+                    if ((int)cmbdeviceatt.SelectedValue == 20)
+                    {
+                        SQLCONN3.ExecuteQueries("delete AssetsDetials where AssetID =@id and DeviceDetilasID = @C1 and value = @C3 ", paramID, paramDeviceatt, paramcmbOS);
+                        cmbVersion.Text = "";
+                    }
+                    else 
+
+                    {
+                        SQLCONN3.ExecuteQueries("delete AssetsDetials where AssetID =@id and DeviceDetilasID = @C1 and value = @C2 ", paramID, paramDeviceatt, paramValue);
+
+                    }
+
+
+
                     //dataGridView5.DataSource = SQLCONN3.ShowDataInGridViewORCombobox("select * from AssetsDetials where AssetID=@id and DeviceDetilasID=@C1 and value=@C2 "
                     //   , paramID,paramDeviceatt,paramValue);
 
@@ -924,7 +1169,7 @@ where
                     SQLCONN3.CloseConnection();
                     cmbtype.Text = "Select";
                     cmbbrand.Text = "";
-                    Assetmodeltxt.Text = "";
+                    cmbAssetModel.Text = "Select";
                     txtvalue.Text = "";
 
 
@@ -975,12 +1220,50 @@ where
             }
         }
 
-       
+        private void cmbtype_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbbrand_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            SQLCONN3.OpenConection();
+            SqlParameter paramAssetModelSearch = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramAssetModelSearch.Value = cmbtype.SelectedValue;
+            SqlParameter paramAssetBrandSearch = new SqlParameter("@C2", SqlDbType.NVarChar);
+            paramAssetBrandSearch.Value = cmbbrand.SelectedValue;
+
+            string query2 = @"SELECT AssetModeID ,AssetModel FROM AssetModel where AssetTypeID= @C1 and AssetBrandID= @C2 ";
+
+            cmbAssetModel.ValueMember = "AssetModeID";
+            cmbAssetModel.DisplayMember = "AssetModel";
+            cmbAssetModel.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query2, paramAssetModelSearch, paramAssetBrandSearch);
+            SQLCONN3.CloseConnection();
+
+        }
+
+        private void cmbdeviceatt_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if ((int)cmbdeviceatt.SelectedValue == 20)
+            {
+                cmbVersion.Enabled = true;
+                txtvalue.Enabled = false;
+
+            }
+            else 
+            {
+                cmbVersion.Enabled = false;
+                txtvalue.Enabled = true;
+
+            }
+
+
+        }
         private void cmbbrand_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                Assetmodeltxt.Focus();
+                cmbAssetModel.Focus();
                 e.Handled = true;
 
             }
