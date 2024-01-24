@@ -43,7 +43,7 @@ namespace Delmon_Managment_System.Forms
         {
 
             InitializeComponent();
-          //  Font newFont = new Font("Times New Roman", 10);
+            //  Font newFont = new Font("Times New Roman", 10);
             cmbEmployJobHistory.KeyDown += new KeyEventHandler(cmbEmployJobHistory_KeyDown);
             cmbCompany.KeyDown += new KeyEventHandler(cmbCompany_KeyDown);
             cmbPersonalStatusStatus.KeyDown += new KeyEventHandler(cmbPersonalStatusStatus_KeyDown);
@@ -52,7 +52,7 @@ namespace Delmon_Managment_System.Forms
             // Loop through all controls on the form and change their font properties
             foreach (Control control in Controls)
             {
-           //     control.Font = newFont;
+                //     control.Font = newFont;
             }
 
 
@@ -117,39 +117,39 @@ namespace Delmon_Managment_System.Forms
             paramloggiedemployeeid.Value = loggedEmpolyeeID;
             SQLCONN.OpenConection();
 
-//            if (lblusertype.Text == "Admin")
-//            {
-//                DeleteBTN.Enabled = btndeletecontact.Enabled = btndeletedoc.Enabled = button1.Enabled = button4.Enabled = true;
-//                dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"
-//SELECT Employees.EmployeeID, Employees.CurrentEmpID, FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus, StatusTBL.StatusValue, jobs.JobTitleEN, DeptTypes.Dept_Type_Name, Companies.COMPName_EN, 
-//startdate, enddate, NationalityName,v.FileNumber, v.VISANumber 
-//FROM Employees
-//JOIN Countries ON Countries.CountryId = Employees.NationalityID
-//JOIN DEPARTMENTS ON Employees.DeptID = DEPARTMENTS.DEPTID
-//JOIN DeptTypes ON DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID
-//JOIN StatusTBL ON Employees.EmploymentStatusID = StatusTBL.StatusID
-//JOIN JOBS ON Employees.JobID = JOBS.JobID
-//LEFT JOIN VISAJobList v ON Employees.EmployeeID = v.EmployeeID
-//JOIN Companies ON Employees.COMPID = Companies.COMPID AND DEPARTMENTS.COMPID = Companies.COMPID
-//ORDER BY EmployeeID DESC;
-//");
-//            }
-//            else
-//            {
-//                string query = "SELECT Employees.EmployeeID, Employees.CurrentEmpID, FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus, StatusTBL.StatusValue, jobs.JobTitleEN, DeptTypes.Dept_Type_Name, Companies.COMPName_EN, startdate, enddate,NationalityName " +
-//                  "FROM Employees " +
-//                  "INNER JOIN StatusTBL ON Employees.EmploymentStatusID = StatusTBL.StatusID " +
-//                  "INNER JOIN JOBS ON Employees.JobID = JOBS.JobID " +
-//                  "INNER JOIN DEPARTMENTS ON Employees.DeptID = DEPARTMENTS.DEPTID " +
-//                  "INNER JOIN DeptTypes ON DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID " +
-//                  "INNER JOIN Companies ON DEPARTMENTS.COMPID = Companies.COMPID " +
-//                  "INNER JOIN Countries ON Countries.CountryId = Employees.NationalityID " +
-//                  "WHERE Employees.DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = @C1) " +
-//                  "ORDER BY Employees.EmployeeID ASC";
-//               //    Doctxt.Visible = false;
+            //            if (lblusertype.Text == "Admin")
+            //            {
+            //                DeleteBTN.Enabled = btndeletecontact.Enabled = btndeletedoc.Enabled = button1.Enabled = button4.Enabled = true;
+            //                dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"
+            //SELECT Employees.EmployeeID, Employees.CurrentEmpID, FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus, StatusTBL.StatusValue, jobs.JobTitleEN, DeptTypes.Dept_Type_Name, Companies.COMPName_EN, 
+            //startdate, enddate, NationalityName,v.FileNumber, v.VISANumber 
+            //FROM Employees
+            //JOIN Countries ON Countries.CountryId = Employees.NationalityID
+            //JOIN DEPARTMENTS ON Employees.DeptID = DEPARTMENTS.DEPTID
+            //JOIN DeptTypes ON DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID
+            //JOIN StatusTBL ON Employees.EmploymentStatusID = StatusTBL.StatusID
+            //JOIN JOBS ON Employees.JobID = JOBS.JobID
+            //LEFT JOIN VISAJobList v ON Employees.EmployeeID = v.EmployeeID
+            //JOIN Companies ON Employees.COMPID = Companies.COMPID AND DEPARTMENTS.COMPID = Companies.COMPID
+            //ORDER BY EmployeeID DESC;
+            //");
+            //            }
+            //            else
+            //            {
+            //                string query = "SELECT Employees.EmployeeID, Employees.CurrentEmpID, FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus, StatusTBL.StatusValue, jobs.JobTitleEN, DeptTypes.Dept_Type_Name, Companies.COMPName_EN, startdate, enddate,NationalityName " +
+            //                  "FROM Employees " +
+            //                  "INNER JOIN StatusTBL ON Employees.EmploymentStatusID = StatusTBL.StatusID " +
+            //                  "INNER JOIN JOBS ON Employees.JobID = JOBS.JobID " +
+            //                  "INNER JOIN DEPARTMENTS ON Employees.DeptID = DEPARTMENTS.DEPTID " +
+            //                  "INNER JOIN DeptTypes ON DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID " +
+            //                  "INNER JOIN Companies ON DEPARTMENTS.COMPID = Companies.COMPID " +
+            //                  "INNER JOIN Countries ON Countries.CountryId = Employees.NationalityID " +
+            //                  "WHERE Employees.DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = @C1) " +
+            //                  "ORDER BY Employees.EmployeeID ASC";
+            //               //    Doctxt.Visible = false;
 
-//                dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramloggiedemployeeid);
-//            }
+            //                dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramloggiedemployeeid);
+            //            }
 
 
 
@@ -509,8 +509,8 @@ namespace Delmon_Managment_System.Forms
 
 
                         }
-                        
-                        else 
+
+                        else
                         {
                             if ((int)cmbPersonalStatusStatus.SelectedValue == 25 || (int)cmbPersonalStatusStatus.SelectedValue == 26 || (int)cmbPersonalStatusStatus.SelectedValue == 27)
                             {
@@ -525,7 +525,7 @@ namespace Delmon_Managment_System.Forms
                             }
 
                         }
-                      
+
 
 
                         /* Update visa status **/
@@ -1078,16 +1078,12 @@ ORDER BY e.EmployeeID";
 
         }
 
-        private void BrowseBTN_Click(object sender, EventArgs e)
-        {
-        }
-
         private void UplodeBTN_Click(object sender, EventArgs e)
         {
             if (EMPID != 0)
             {
-               
-                if (cmbDocuments.Text == "Select" || cmbDocuments.Text==string.Empty)
+
+                if (cmbDocuments.Text == "Select" || cmbDocuments.Text == string.Empty)
                 {
                     MessageBox.Show("Please select a  document type.");
 
@@ -1107,7 +1103,7 @@ ORDER BY e.EmployeeID";
                     SqlParameter paramfilename = new SqlParameter("@C0", SqlDbType.NVarChar);
                     SqlParameter paramnameOFfile = new SqlParameter("@C1", SqlDbType.NVarChar);
 
-                    if (fileName == null|| destinationFilePath == string.Empty)
+                    if (fileName == null || destinationFilePath == string.Empty)
                     {
                         paramfilename.Value = "";
                         paramnameOFfile.Value = "";
@@ -1115,7 +1111,7 @@ ORDER BY e.EmployeeID";
 
                     }
 
-                    else 
+                    else
                     {
                         paramfilename.Value = fileName;
                         paramnameOFfile.Value = destinationFilePath;
@@ -1196,14 +1192,14 @@ ORDER BY e.EmployeeID";
 
         private void button5_Click(object sender, EventArgs e)
         {
-           
-                string directoryPath = @"\\192.168.1.8\HR SW Documents\";
-                string variable = cmbCompany.Text;
 
-                // Get all subfolder names in the directory
-                string[] subfolderNames = Directory.GetDirectories(directoryPath)
-                                                    .Select(Path.GetFileName)
-                                                    .ToArray();
+            string directoryPath = @"\\192.168.1.8\HR SW Documents\";
+            string variable = cmbCompany.Text;
+
+            // Get all subfolder names in the directory
+            string[] subfolderNames = Directory.GetDirectories(directoryPath)
+                                                .Select(Path.GetFileName)
+                                                .ToArray();
             // Check if the variable matches any of the subfolder names
             if (subfolderNames.Contains(variable))
             {
@@ -1228,7 +1224,7 @@ ORDER BY e.EmployeeID";
             }
 
             else {
-                MessageBox.Show("Their is no folder in the server with company name " +cmbCompany.Text + " ", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Their is no folder in the server with company name " + cmbCompany.Text + " ", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
 
@@ -1298,7 +1294,7 @@ ORDER BY e.EmployeeID";
                 }
 
             }
-            else 
+            else
             {
                 MessageBox.Show("Please Select Record !");
 
@@ -1321,7 +1317,7 @@ ORDER BY e.EmployeeID";
                     SQLCONN.ExecuteQueries("delete from Contacts where Contact_ID=@ID", paramPID);
                     SQLCONN.ExecuteQueries(" declare @max int select @max = max(Contact_ID) from[Contacts] if @max IS NULL SET @max = 0 DBCC CHECKIDENT('[Contacts]', RESEED, @max)");
                     MessageBox.Show("Record Deleted Successfully");
-                    
+
 
                     SQLCONN.CloseConnection();
                     EmployeeID = EMPID;
@@ -1376,7 +1372,7 @@ ORDER BY e.EmployeeID";
 
         private void dataGridView3_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-        
+
         }
 
         private void btndeletedoc_Click(object sender, EventArgs e)
@@ -1405,8 +1401,8 @@ ORDER BY e.EmployeeID";
                     MessageBox.Show("Record Deleted Successfully");
 
                     // Delete the file from disk
-                    
-                     filePath = Path.Combine(filePath);
+
+                    filePath = Path.Combine(filePath);
 
                     if (File.Exists(filePath))
                     {
@@ -1467,8 +1463,8 @@ ORDER BY e.EmployeeID";
 
                     SQLCONN.OpenConection();
 
-            SQLCONN.ExecuteQueries("update  Contacts set ContTypeID=@C1,ContValue=@C2 where Contact_ID=@C4",
-                                                   paramContactType, paramContact, paramPID);
+                    SQLCONN.ExecuteQueries("update  Contacts set ContTypeID=@C1,ContValue=@C2 where Contact_ID=@C4",
+                                                           paramContactType, paramContact, paramPID);
                     MessageBox.Show("Record Updated Successfully");
 
                     EmployeeID = EMPID;
@@ -1501,7 +1497,7 @@ ORDER BY e.EmployeeID";
 
         private void btnupdatedoc_Click(object sender, EventArgs e)
         {
-            
+
 
             SqlParameter paramDoc = new SqlParameter("@ID", SqlDbType.Int);
             paramDoc.Value = dOCID;
@@ -1533,7 +1529,7 @@ ORDER BY e.EmployeeID";
 
             if (EmployeeID != 0)
             {
-             
+
                 if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
                     if (cmbDocuments.Text == "Select")
@@ -1554,8 +1550,8 @@ ORDER BY e.EmployeeID";
                     else
                     {
                         SQLCONN.OpenConection();
-                          SQLCONN.ExecuteQueries("update  Documents set documentValue=@C1,name=@C0,DocTypeID=@C3,Number=@C5,DocIssueplace=@C6,docissuedate=@C7,docexpiredate=@C8,CR_ID=@C2  where Doc_id = @ID ", paramfilename, paramnameOFfile, paramDocType, paramPID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate, paramDoc);
-                      //  SQLCONN.ExecuteQueries("update  Documents set DocTypeID=@C3,Number=@C5,DocIssueplace=@C6,docissuedate=@C7,docexpiredate=@C8,CR_ID=@C2  where Doc_id = @ID ", paramDocType, paramPID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate, paramDoc);
+                        SQLCONN.ExecuteQueries("update  Documents set documentValue=@C1,name=@C0,DocTypeID=@C3,Number=@C5,DocIssueplace=@C6,docissuedate=@C7,docexpiredate=@C8,CR_ID=@C2  where Doc_id = @ID ", paramfilename, paramnameOFfile, paramDocType, paramPID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate, paramDoc);
+                        //  SQLCONN.ExecuteQueries("update  Documents set DocTypeID=@C3,Number=@C5,DocIssueplace=@C6,docissuedate=@C7,docexpiredate=@C8,CR_ID=@C2  where Doc_id = @ID ", paramDocType, paramPID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate, paramDoc);
 
 
                         MessageBox.Show("Record Updated Successfully");
@@ -1616,7 +1612,7 @@ ORDER BY e.EmployeeID";
             EmployeeID = EMPID;
             SqlParameter paramEmployeeID = new SqlParameter("@ID", SqlDbType.NVarChar);
             paramEmployeeID.Value = EmployeeID;
-            if (EmployeeID == 0)
+            if (EmployeeID == 0 || filenumbertxt.Text == string.Empty)
             {
                 MessageBox.Show("Please Choose A Record !  ");
 
@@ -1633,9 +1629,9 @@ ORDER BY e.EmployeeID";
                 {
 
 
-                   
 
-                 dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue]  ,[DocumentType].Doc_Type ,[RefrenceID],[Number] ,[DocIssueplace]  ,[docissuedate]  ,[docexpiredate] FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =@ID ", paramEmployeeID);
+
+                    dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue]  ,[DocumentType].Doc_Type ,[RefrenceID],[Number] ,[DocIssueplace]  ,[docissuedate]  ,[docexpiredate] FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =@ID ", paramEmployeeID);
 
                     cmbDocuments.Text = "Select";
                     Doctxt.Text = "";
@@ -1649,10 +1645,10 @@ ORDER BY e.EmployeeID";
                 if (tabControl1.SelectedTab == tabControl1.TabPages[2])
                 {
 
-                      paramEmployeeID.Value = EmployeeID;
+                    paramEmployeeID.Value = EmployeeID;
 
-                   
-                   
+
+
                     dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from employeehistory where employeeid=@ID", paramEmployeeID);
 
                     richhistoryvalue.Text = "";
@@ -1740,7 +1736,7 @@ ORDER BY e.EmployeeID";
                         {
                             DeleteBTN.Enabled = true;
                         }
-                        else 
+                        else
                         {
                             DeleteBTN.Enabled = false;
 
@@ -1828,7 +1824,7 @@ ORDER BY e.EmployeeID";
 
                         dOCID = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString());
                         EmployeeID = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[1].Value.ToString());
-                        Doctxt.Text = dataGridView3.Rows[e.RowIndex].Cells[2].Value.ToString(); 
+                        Doctxt.Text = dataGridView3.Rows[e.RowIndex].Cells[2].Value.ToString();
                         cmbDocuments.Text = dataGridView3.Rows[e.RowIndex].Cells[4].Value.ToString();
                         numbertextbox.Text = dataGridView3.Rows[e.RowIndex].Cells[6].Value.ToString();
                         issueplacetext.Text = dataGridView3.Rows[e.RowIndex].Cells[7].Value.ToString();
@@ -1838,7 +1834,7 @@ ORDER BY e.EmployeeID";
                         CommonClass.DocPath = dataGridView3.Rows[e.RowIndex].Cells[3].Value.ToString();
 
 
-                       
+
                     }
                 }
             }
@@ -2151,7 +2147,7 @@ ORDER BY e.EmployeeID";
                                 CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
                                 TextInfo textInfo = cultureInfo.TextInfo;
                                 txtvalue.Text = textInfo.ToTitleCase(txtvalue.Text);
-                                txtvalue.Text =   "Provided By Company";
+                                txtvalue.Text = "Provided By Company";
 
                             }
                         }
@@ -2173,7 +2169,7 @@ ORDER BY e.EmployeeID";
                                 CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
                                 TextInfo textInfo = cultureInfo.TextInfo;
                                 txtvalue.Text = textInfo.ToTitleCase(txtvalue.Text);
-                                txtvalue.Text =  "Provided By Company";
+                                txtvalue.Text = "Provided By Company";
 
                             }
                         }
@@ -2192,7 +2188,7 @@ ORDER BY e.EmployeeID";
                                 CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
                                 TextInfo textInfo = cultureInfo.TextInfo;
                                 txtvalue.Text = textInfo.ToTitleCase(txtvalue.Text);
-                                txtvalue.Text =   "Provided By Company";
+                                txtvalue.Text = "Provided By Company";
 
                             }
                         }
@@ -2227,7 +2223,7 @@ ORDER BY e.EmployeeID";
             {
                 MessageBox.Show("Please Select Record !");
             }
-      
+
 
         }
 
@@ -2362,21 +2358,21 @@ ORDER BY e.EmployeeID";
                     {
                         if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES"))
                         {
-                            txtvalue.Text =  "Provided By Company";
+                            txtvalue.Text = "Provided By Company";
                         }
                     }
                     if ((int)cmbsalarytype.SelectedValue == 9)
                     {
                         if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES"))
                         {
-                            txtvalue.Text =  "Provided By Company";
+                            txtvalue.Text = "Provided By Company";
                         }
                     }
                     if ((int)cmbsalarytype.SelectedValue == 10)
                     {
                         if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES"))
                         {
-                            txtvalue.Text =  "Provided By Company";
+                            txtvalue.Text = "Provided By Company";
                         }
                     }
                     if ((int)cmbsalarytype.SelectedValue == 11)
@@ -2385,7 +2381,7 @@ ORDER BY e.EmployeeID";
                     {
                         if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES") || txtvalue.Text.Contains("Yes") || txtvalue.Text.Contains("YEs"))
                         {
-                            txtvalue.Text =  "Provided By Company";
+                            txtvalue.Text = "Provided By Company";
                         }
                     }
 
@@ -2418,7 +2414,7 @@ ORDER BY e.EmployeeID";
                     SQLCONN.ExecuteQueries("update  SalaryDetails set SalaryTypeID=@C1,Value=@C2 where EmployeeID=@ID  and SalaryDetID=@SalaryID",
                                                    paramSalaryType, paramValue, paramemployee, paramSalaryID);
                     MessageBox.Show("Record Updated Successfully");
-                    
+
 
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {
@@ -2505,10 +2501,10 @@ ORDER BY e.EmployeeID";
         {
             DataRow dr;
             SqlConnection conn = new SqlConnection(@"Data Source=192.168.1.8;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@");
-             // SqlConnection conn = new SqlConnection(@"Data Source=AMIN-PC;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@");
+            // SqlConnection conn = new SqlConnection(@"Data Source=AMIN-PC;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@");
 
 
-              conn.Open();
+            conn.Open();
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT [DEPTID],Dept_Type_Name FROM [DelmonGroupDB].[dbo].[DEPARTMENTS], DeptTypes where DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID and COMPID=@C1 ";
@@ -2614,7 +2610,7 @@ ORDER BY e.EmployeeID";
 
         private void cmbEmployJobHistory_KeyDown(object sender, KeyEventArgs e)
         {
-           
+
             if (e.KeyCode == Keys.Enter)
             {
                 // Handle the Enter key press
@@ -2688,7 +2684,64 @@ ORDER BY e.EmployeeID";
 
         private void filenumbertxt_TextChanged(object sender, EventArgs e)
         {
+            EmployeeID = EMPID;
+            SqlParameter paramEmployeeID = new SqlParameter("@ID", SqlDbType.NVarChar);
+            paramEmployeeID.Value = filenumbertxt.Text;
+            if (EmployeeID == 0 && filenumbertxt.Text==string.Empty)
+            {
+                MessageBox.Show("Please Choose A Record !  ");
 
+            }
+            else
+            {
+                if (tabControl1.SelectedTab == tabControl1.TabPages[0])
+                {
+                    dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID]  FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =@ID ", paramEmployeeID);
+                    Contacttxt.Text = "";
+                    cmbcontact.Text = "Select";
+                }
+                if (tabControl1.SelectedTab == tabControl1.TabPages[1])
+                {
+
+
+
+
+                    dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue]  ,[DocumentType].Doc_Type ,[RefrenceID],[Number] ,[DocIssueplace]  ,[docissuedate]  ,[docexpiredate] FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =@ID ", paramEmployeeID);
+
+                    cmbDocuments.Text = "Select";
+                    Doctxt.Text = "";
+                    numbertextbox.Text = "";
+                    issueplacetext.Text = "";
+                    docissueplacepicker.Value = DateTime.Now;
+                    docexpirefatepicker.Value = DateTime.Now;
+
+
+                }
+                if (tabControl1.SelectedTab == tabControl1.TabPages[2])
+                {
+
+                    paramEmployeeID.Value = EmployeeID;
+
+
+
+                    dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from employeehistory where employeeid=@ID", paramEmployeeID);
+
+                    richhistoryvalue.Text = "";
+                    dtphistorydate.Value = DateTime.Now;
+
+                }
+                if (tabControl1.SelectedTab == tabControl1.TabPages["SalaryTab"])
+                {
+
+                    cmbsalarytype.Text = "Select";
+                    txtvalue.Text = "";
+                    dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  select SalaryDetID , SalaryTypeName 'Salary Type' ,SalaryDetails.Value from SalaryDetails,SalaryTypes where SalaryDetails.SalaryTypeID = SalaryTypes.SalaryTypeID and SalaryDetails.EmployeeID = @ID ", paramEmployeeID);
+                    //  this.dataGridView5.Columns["SalaryDetID"].Visible = false;
+
+                }
+
+
+            }
         }
 
         private void label25_Click(object sender, EventArgs e)
@@ -2714,11 +2767,6 @@ ORDER BY e.EmployeeID";
             FrmJobsNew frmJobs = new FrmJobsNew();
             // this.Hide();
             frmJobs.Show();
-        }
-
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void label22_Click(object sender, EventArgs e)

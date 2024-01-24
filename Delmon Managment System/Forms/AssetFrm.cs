@@ -338,11 +338,7 @@ namespace Delmon_Managment_System.Forms
                             MessageBox.Show("Record saved Successfully");
 
                             btnnew.Visible = true;
-
-
-
-          
-                        
+                    
                         dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"
                               SELECT Assets.AssetID, Assets.SapAssetId, Assets.sn, AssetType.AssettypeValue, AssetBrand.AssetBrandValue, Assets.Model,[PurchasingDate]
       ,[DeviceTypeID]
@@ -353,20 +349,13 @@ namespace Delmon_Managment_System.Forms
   and Assets.AssetTypeID=  @C1 and brand=@C2 and Assets.Model=@C3 and SN=@C5 and PurchasingDate=@C6 ", paramcmbtype, paramcmbrand, paramassetmodel, paramSN, paramPurchasingdate);
 
 
-
-
-
-
                     }
                     else
                         {
-
                             dr.Dispose();
                             dr.Close();
                         }
                     }
-
-
 
                 }
                 else
@@ -374,8 +363,7 @@ namespace Delmon_Managment_System.Forms
                     MessageBox.Show("Please Fill the missing fields  ");
 
                 }
-            
-         
+             
             SQLCONN3.CloseConnection();
             cmbtype.Text = cmbbrand.Text = "Select";
             cmbAssetModel.Text = "Select";
@@ -688,15 +676,24 @@ or (AssetType.AssettypeValue LIKE '%' + @C1 + '%') or (AssetBrand.AssetBrandValu
                 {
 
                     dataGridView5.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(@" 
-select 
-Assets.AssetID,
-DeviceDetials.DeviceDetilasID,
- DeviceDetials.DeviceDetialsValue,AssetsDetials.Value
-from Assets,AssetsDetials,DeviceDetials
-where 
-  DeviceDetials.DeviceDetilasID= AssetsDetials.DeviceDetilasID
- and Assets.AssetID= AssetsDetials.AssetID
- and Assets.AssetID=@ID ", paramID);
+SELECT 
+    Assets.AssetID,
+    DeviceDetials.DeviceDetilasID,
+    DeviceDetials.DeviceDetialsValue,
+    CASE
+        WHEN DeviceDetials.DeviceDetilasID = 20 THEN OSVerisons.OSVerisonValue
+        ELSE AssetsDetials.Value
+    END AS Value
+FROM 
+    Assets
+JOIN 
+    AssetsDetials ON Assets.AssetID = AssetsDetials.AssetID
+JOIN 
+    DeviceDetials ON DeviceDetials.DeviceDetilasID = AssetsDetials.DeviceDetilasID
+LEFT JOIN 
+    OSVerisons ON LTRIM(RTRIM(CAST(AssetsDetials.Value AS NVARCHAR(50)))) = OSVerisons.OSVersionID
+WHERE 
+    Assets.AssetID=@ID ", paramID);
                                      
                     cmbdeviceatt.Text = "Select";
                     txtvalue.Text = "";
@@ -993,129 +990,37 @@ where
 
         private void dataGridView5_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex == -1) return;
-            else
+            if (e.RowIndex == -1)
+                return;
+
+            addbtn.Visible = false;
+            btnnew.Visible = updatebtn.Visible = deletebtn.Visible = true;
+
+            DataGridViewCell clickedCell = dataGridView5.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+            cmbVersion.Enabled = false;
+            txtvalue.Enabled = true;
+
+            if (clickedCell.Value != null && !string.IsNullOrWhiteSpace(clickedCell.Value.ToString()))
             {
+                AssetDetialsInfoID = dataGridView5.Rows[e.RowIndex].Cells[0].Value.ToString();
+                cmbdeviceatt.Text = dataGridView5.Rows[e.RowIndex].Cells[2].Value.ToString();
 
-                DataGridViewCell clickedCell = dataGridView5.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                string cellValue = clickedCell.Value.ToString();
 
-                addbtn.Visible = false;
-                btnnew.Visible = updatebtn.Visible = deletebtn.Visible = true;
-
-
-
-                if (dataGridView1.Rows.Count > 0 &&
-    dataGridView5.Rows[0].Cells.Count > 1 &&
-    dataGridView5.Rows[0].Cells[2].Value != null &&
-    dataGridView5.Rows[0].Cells[2].Value.ToString() == "OS")
+                // Check if the cell value is "OS" (case-insensitive)
+                if (string.Equals(cellValue, "OS", StringComparison.OrdinalIgnoreCase))
                 {
-                    // The cell at row 0, column 1 contains the value "20"
                     cmbVersion.Enabled = true;
                     txtvalue.Enabled = false;
-                    foreach (DataGridViewRow rw in this.dataGridView5.Rows)
-                    {
-                        for (int i = 0; i < rw.Cells.Count; i++)
-                        {
-                            if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
-                            {
-                                //   MessageBox.Show("ogg");       
-                            }
-                            else
-                            {
-
-                                AssetDetialsInfoID = (dataGridView5.Rows[e.RowIndex].Cells[0].Value.ToString());
-                                cmbdeviceatt.Text = dataGridView5.Rows[e.RowIndex].Cells[2].Value.ToString();
-                                cmbVersion.SelectedValue = dataGridView5.Rows[e.RowIndex].Cells[3].Value.ToString();
-
-
-                            }
-
-
-                            string cellValue = clickedCell.Value?.ToString();
-
-                            // Check if the value in the first column is 'OS_Key'
-                            if (string.Equals(cellValue, "OS_Key", StringComparison.OrdinalIgnoreCase))
-                            {
-                                try
-                                {
-                                    string encryptedValue = dataGridView5.Rows[e.RowIndex].Cells[3].Value?.ToString();
-
-                                    // Decrypt the value using the stored key and IV
-                                    string decryptedValue = Decrypt(encryptedValue, encryptionKey, iv);
-
-                                    txtvalue.Text = decryptedValue;
-                                    // The first column has the value 'OS_Key'
-                                    // Add your logic here
-                                }
-                                catch (Exception ex)
-                                {
-
-                                    MessageBox.Show(ex.ToString());
-                                }
-
-                            }
-                        }
-
-                    }
-
-
+                    // You can include additional logic specific to cmbVersion here if needed
                 }
-
-                else 
+                else
                 {
-                    cmbVersion.Enabled = false;
-                    txtvalue.Enabled = true;
-                    foreach (DataGridViewRow rw in this.dataGridView5.Rows)
-                    {
-                        for (int i = 0; i < rw.Cells.Count; i++)
-                        {
-                            if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
-                            {
-                                //   MessageBox.Show("ogg");       
-                            }
-                            else
-                            {
+                    txtvalue.Text = cellValue;
 
-                                AssetDetialsInfoID = (dataGridView5.Rows[e.RowIndex].Cells[0].Value.ToString());
-                                cmbdeviceatt.Text = dataGridView5.Rows[e.RowIndex].Cells[2].Value.ToString();
-                                txtvalue.Text = dataGridView5.Rows[e.RowIndex].Cells[3].Value.ToString();
-
-
-                            }
-
-
-                            string cellValue = clickedCell.Value?.ToString();
-
-                            // Check if the value in the first column is 'OS_Key'
-                            if (string.Equals(cellValue, "OS_Key", StringComparison.OrdinalIgnoreCase))
-                            {
-                                try
-                                {
-                                    string encryptedValue = dataGridView5.Rows[e.RowIndex].Cells[3].Value?.ToString();
-
-                                    // Decrypt the value using the stored key and IV
-                                    string decryptedValue = Decrypt(encryptedValue, encryptionKey, iv);
-
-                                    txtvalue.Text = decryptedValue;
-                                    // The first column has the value 'OS_Key'
-                                    // Add your logic here
-                                }
-                                catch (Exception ex)
-                                {
-
-                                    MessageBox.Show(ex.ToString());
-                                }
-
-                            }
-                        }
-
-                    }
-
-
+                    // You can include additional logic specific to txtvalue here if needed
                 }
-
-
-
             }
         }
 
@@ -1272,6 +1177,58 @@ where
             frmNewModel frmmodel = new frmNewModel();
             // this.Hide();
             frmmodel.Show();
+        }
+
+        private void AssetIDTXT_TextChanged(object sender, EventArgs e)
+        {
+            SQLCONN3.OpenConection3();
+            SqlParameter paramID = new SqlParameter("@ID", SqlDbType.NVarChar);
+            paramID.Value = AssetIDTXT.Text;
+            if (AssetID == null && AssetIDTXT.Text==string.Empty)
+            {
+                MessageBox.Show("Please Choose A Record !  ");
+
+            }
+            else
+            {
+                if (tabControl2.SelectedTab == tabControl2.TabPages[0])
+                {
+
+                    dataGridView5.DataSource = 
+       SQLCONN3.ShowDataInGridViewORCombobox(@"    
+SELECT 
+    Assets.AssetID,
+    DeviceDetials.DeviceDetilasID,
+    DeviceDetials.DeviceDetialsValue,
+    CASE
+        WHEN DeviceDetials.DeviceDetilasID = 20 THEN OSVerisons.OSVerisonValue
+        ELSE AssetsDetials.Value
+    END AS Value
+FROM 
+    Assets
+JOIN 
+    AssetsDetials ON Assets.AssetID = AssetsDetials.AssetID
+JOIN 
+    DeviceDetials ON DeviceDetials.DeviceDetilasID = AssetsDetials.DeviceDetilasID
+LEFT JOIN 
+    OSVerisons ON LTRIM(RTRIM(CAST(AssetsDetials.Value AS NVARCHAR(50)))) = OSVerisons.OSVersionID
+WHERE 
+    Assets.AssetID=@ID ", paramID);
+
+
+                    cmbdeviceatt.Text = "Select";
+                    txtvalue.Text = "";
+                    dataGridView5.Columns[0].Visible = false;
+                    dataGridView5.Columns[1].Visible = false;
+                    dataGridView5.Columns[3].Width = 200;
+                    dataGridView5.Columns[2].Width = 200;
+                }
+
+
+
+            }
+            SQLCONN3.CloseConnection();
+
         }
 
         private void cmbbrand_KeyDown(object sender, KeyEventArgs e)

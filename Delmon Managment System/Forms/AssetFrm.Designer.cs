@@ -278,6 +278,7 @@ namespace Delmon_Managment_System.Forms
             this.AssetIDTXT.Name = "AssetIDTXT";
             this.AssetIDTXT.Size = new System.Drawing.Size(289, 25);
             this.AssetIDTXT.TabIndex = 157;
+            this.AssetIDTXT.TextChanged += new System.EventHandler(this.AssetIDTXT_TextChanged);
             // 
             // label4
             // 
@@ -479,7 +480,7 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView5.AllowUserToOrderColumns = true;
             this.dataGridView5.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView5.Location = new System.Drawing.Point(7, 141);
+            this.dataGridView5.Location = new System.Drawing.Point(11, 141);
             this.dataGridView5.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView5.Name = "dataGridView5";
             this.dataGridView5.Size = new System.Drawing.Size(590, 211);
