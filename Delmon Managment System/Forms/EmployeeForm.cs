@@ -2562,14 +2562,6 @@ ORDER BY e.EmployeeID";
                 {
                     cmbPersonalStatusStatus.SelectedItem = cmbPersonalStatusStatus.Text;
                 }
-
-
-
-
-
-
-
-
             }
         }
 

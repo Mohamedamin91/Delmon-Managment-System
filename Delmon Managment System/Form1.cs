@@ -184,7 +184,7 @@ GROUP BY
 
         private void btnNotifications_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.NotificationFrm(), sender);
+         //   OpenChildForm(new Forms.NotificationFrm(), sender);
 
         }
 
@@ -360,7 +360,7 @@ GROUP BY
 
         private void btnNotifications_Click_1(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.NotificationFrm(), sender);
+          //  OpenChildForm(new Forms.NotificationFrm(), sender);
 
         }
 

@@ -293,6 +293,9 @@ namespace Delmon_Managment_System.Forms
                         paramJob.Value = cmbJob.SelectedValue;
                         SqlParameter paramAgency = new SqlParameter("@C5", SqlDbType.NVarChar);
 
+                        SqlParameter paramRemarks = new SqlParameter("@C6", SqlDbType.NVarChar);
+                        paramRemarks.Value = RemarksTxt.Text;
+
 
                         if (cmbAgency.Text == "Select" || cmbAgency.Text == "")
                         {
@@ -347,9 +350,9 @@ namespace Delmon_Managment_System.Forms
                                 dr.Dispose();
                                 dr.Close();
 
-                                SQLCONN.ExecuteQueries("insert into VISAJobList (VisaNumber,statusid,ConsulateID,JobID,ReservedTo,AgencyID,EmployeeID) " +
-                                    " values (@C1,@C2,@C3,@C4,@CompReservedTo,@C5,@cand) ",
-                                    paramVisanumber, paramstatusID, ParamConsulate, paramJob, paramReservedTo, paramCandidate);
+                                SQLCONN.ExecuteQueries("insert into VISAJobList (VisaNumber,statusid,ConsulateID,JobID,ReservedTo,AgencyID,EmployeeID,Remarks) " +
+                                    " values (@C1,@C2,@C3,@C4,@CompReservedTo,@C5,@cand,@C6) ",
+                                    paramVisanumber, paramstatusID, ParamConsulate, paramJob, paramReservedTo, paramCandidate,paramRemarks);
 
                             }
                             MessageBox.Show("Jobs has been added successfully to Visa", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1710,7 +1713,8 @@ namespace Delmon_Managment_System.Forms
 
             paramReservedTo.Value = cmbReservedTo.SelectedValue;
 
-
+            SqlParameter paramRemarks = new SqlParameter("@C10", SqlDbType.NVarChar);
+            paramRemarks.Value = RemarksTxt.Text;
 
 
 
@@ -1745,14 +1749,14 @@ namespace Delmon_Managment_System.Forms
                     if ((int)cmbcandidates.SelectedIndex == -1)
                     {
 
-                        SQLCONN.ExecuteQueries("update VISAJobList set StatusID=@C4,[EmployeeID]=@C9,AgencyID=@C7 ,[ConsulateID] = @C5,[JobID] = @C6 ,ReservedTo=@CompReservedTo where FileNumber=@FileNumberid",
-                       paramstatusID, paramCandidate2, paramAgency, ParamConsulate, paramJob, paramReservedTo, paramFileNumberID);
+                        SQLCONN.ExecuteQueries("update VISAJobList set StatusID=@C4,[EmployeeID]=@C9,AgencyID=@C7 ,[ConsulateID] = @C5,[JobID] = @C6 ,ReservedTo=@CompReservedTo  where FileNumber=@FileNumberid",
+                       paramstatusID, paramCandidate2, paramAgency, ParamConsulate, paramJob, paramReservedTo, paramFileNumberID,paramRemarks);
 
                     }
                     else
                     {
                         SQLCONN.ExecuteQueries("update VISAJobList set StatusID=@C4,[EmployeeID]=@C8,AgencyID=@C7 ,[ConsulateID] = @C5,[JobID] = @C6 ,ReservedTo=@CompReservedTo where FileNumber=@FileNumberid",
-                     paramstatusID, paramCandidate, paramAgency, ParamConsulate, paramJob, paramReservedTo, paramFileNumberID);
+                     paramstatusID, paramCandidate, paramAgency, ParamConsulate, paramJob, paramReservedTo, paramFileNumberID, paramRemarks);
 
                     }
 
