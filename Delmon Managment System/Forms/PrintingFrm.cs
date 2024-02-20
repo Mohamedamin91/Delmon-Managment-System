@@ -988,7 +988,6 @@ namespace Delmon_Managment_System.Forms
                     if (e.RowIndex != dataGridView2.Rows.Count - 1)
                     {
 
-
                         Visacompanyidfordisplayreport = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString());
                         VisaREservedToidfordisplayreport = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[1].Value.ToString());
                         VisaStatusIDfordisplayreport = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[2].Value.ToString());
@@ -996,7 +995,6 @@ namespace Delmon_Managment_System.Forms
 
                     }
                 }
-
                 // Set the query parameters
                 SqlParameter paramDateFrom = new SqlParameter("@param3", SqlDbType.Date);
                 paramDateFrom.Value = dtpfromreport;
@@ -1103,9 +1101,6 @@ namespace Delmon_Managment_System.Forms
                         // Build the query based on the user's selected options
                       
 
-
-
-
                         string query = @"
            	 SELECT J.FileNumber, J.Visanumber, E.EmployeeID,
                      TRIM(COALESCE(CONCAT(FirstName, ' '), '') + COALESCE(CONCAT(SecondName, ' '), '') +
@@ -1128,12 +1123,7 @@ namespace Delmon_Managment_System.Forms
     TRIM(COALESCE(CONCAT(FirstName, ' '), '') + COALESCE(CONCAT(SecondName, ' '), '') +
     COALESCE(CONCAT(ThirdName, ' '), '') + COALESCE(Lastname, '')), E.EmployeeID,CON.ConsulateCity,E.startDate";
   
-
-
-
-
-
-                     
+   
 
                         // Create a new SqlCommand object with the query and parameters
                         using (SqlCommand command = new SqlCommand(query, connection))
@@ -1161,12 +1151,6 @@ namespace Delmon_Managment_System.Forms
 
 
                 }
-
-
-
-
-
-
 
 
 

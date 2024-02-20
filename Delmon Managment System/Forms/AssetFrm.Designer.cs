@@ -33,6 +33,12 @@ namespace Delmon_Managment_System.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AssetFrm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnDownload = new System.Windows.Forms.Button();
+            this.btnuplode = new System.Windows.Forms.Button();
+            this.AssignDtp = new System.Windows.Forms.DateTimePicker();
+            this.label13 = new System.Windows.Forms.Label();
+            this.cmbemployee = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.cmbAssetModel = new System.Windows.Forms.ComboBox();
             this.btnnewJob = new System.Windows.Forms.Button();
             this.PurchasingDtp = new System.Windows.Forms.DateTimePicker();
@@ -55,6 +61,8 @@ namespace Delmon_Managment_System.Forms
             this.cmbtype = new System.Windows.Forms.ComboBox();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.labl = new System.Windows.Forms.TabPage();
+            this.btnuplode2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.cmbVersion = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -64,6 +72,8 @@ namespace Delmon_Managment_System.Forms
             this.label22 = new System.Windows.Forms.Label();
             this.cmbdeviceatt = new System.Windows.Forms.ComboBox();
             this.txtvalue = new System.Windows.Forms.TextBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label10 = new System.Windows.Forms.Label();
             this.seratchassettxt = new System.Windows.Forms.TextBox();
@@ -77,21 +87,15 @@ namespace Delmon_Managment_System.Forms
             this.lblemail = new System.Windows.Forms.Label();
             this.lblusername = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.cmbemployee = new System.Windows.Forms.ComboBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.AssignDtp = new System.Windows.Forms.DateTimePicker();
-            this.label13 = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.labl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -108,6 +112,8 @@ namespace Delmon_Managment_System.Forms
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
+            this.tabPage1.Controls.Add(this.btnDownload);
+            this.tabPage1.Controls.Add(this.btnuplode);
             this.tabPage1.Controls.Add(this.AssignDtp);
             this.tabPage1.Controls.Add(this.label13);
             this.tabPage1.Controls.Add(this.cmbemployee);
@@ -148,6 +154,79 @@ namespace Delmon_Managment_System.Forms
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Asset";
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            // 
+            // btnDownload
+            // 
+            this.btnDownload.BackColor = System.Drawing.Color.White;
+            this.btnDownload.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDownload.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.btnDownload.ForeColor = System.Drawing.Color.Firebrick;
+            this.btnDownload.Location = new System.Drawing.Point(476, 466);
+            this.btnDownload.Name = "btnDownload";
+            this.btnDownload.Size = new System.Drawing.Size(185, 26);
+            this.btnDownload.TabIndex = 179;
+            this.btnDownload.Text = "Asset Template";
+            this.btnDownload.UseVisualStyleBackColor = false;
+            this.btnDownload.Visible = false;
+            this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
+            // 
+            // btnuplode
+            // 
+            this.btnuplode.BackColor = System.Drawing.Color.White;
+            this.btnuplode.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.btnuplode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnuplode.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.btnuplode.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.btnuplode.Location = new System.Drawing.Point(264, 466);
+            this.btnuplode.Name = "btnuplode";
+            this.btnuplode.Size = new System.Drawing.Size(122, 26);
+            this.btnuplode.TabIndex = 178;
+            this.btnuplode.Text = "Asset - Import";
+            this.btnuplode.UseVisualStyleBackColor = false;
+            this.btnuplode.Click += new System.EventHandler(this.btnuplode_Click);
+            // 
+            // AssignDtp
+            // 
+            this.AssignDtp.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.AssignDtp.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.AssignDtp.Location = new System.Drawing.Point(139, 420);
+            this.AssignDtp.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.AssignDtp.Name = "AssignDtp";
+            this.AssignDtp.Size = new System.Drawing.Size(291, 25);
+            this.AssignDtp.TabIndex = 177;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label13.Location = new System.Drawing.Point(11, 426);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(95, 17);
+            this.label13.TabIndex = 176;
+            this.label13.Text = "Assign Date";
+            // 
+            // cmbemployee
+            // 
+            this.cmbemployee.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.cmbemployee.FormattingEnabled = true;
+            this.cmbemployee.Location = new System.Drawing.Point(139, 384);
+            this.cmbemployee.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cmbemployee.Name = "cmbemployee";
+            this.cmbemployee.Size = new System.Drawing.Size(291, 25);
+            this.cmbemployee.TabIndex = 175;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label12.ForeColor = System.Drawing.Color.Black;
+            this.label12.Location = new System.Drawing.Point(11, 387);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(75, 17);
+            this.label12.TabIndex = 174;
+            this.label12.Text = "End User";
             // 
             // cmbAssetModel
             // 
@@ -389,6 +468,8 @@ namespace Delmon_Managment_System.Forms
             // labl
             // 
             this.labl.BackColor = System.Drawing.Color.White;
+            this.labl.Controls.Add(this.btnuplode2);
+            this.labl.Controls.Add(this.button1);
             this.labl.Controls.Add(this.label11);
             this.labl.Controls.Add(this.cmbVersion);
             this.labl.Controls.Add(this.button2);
@@ -405,6 +486,40 @@ namespace Delmon_Managment_System.Forms
             this.labl.TabIndex = 0;
             this.labl.Text = "Device Details";
             this.labl.Click += new System.EventHandler(this.tabPage3_Click);
+            // 
+            // btnuplode2
+            // 
+            this.btnuplode2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnuplode2.BackColor = System.Drawing.Color.White;
+            this.btnuplode2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.btnuplode2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnuplode2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.btnuplode2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.btnuplode2.Location = new System.Drawing.Point(980, 46);
+            this.btnuplode2.Margin = new System.Windows.Forms.Padding(4);
+            this.btnuplode2.Name = "btnuplode2";
+            this.btnuplode2.Size = new System.Drawing.Size(178, 35);
+            this.btnuplode2.TabIndex = 157;
+            this.btnuplode2.Text = "Asset Details - Import";
+            this.btnuplode2.UseVisualStyleBackColor = false;
+            this.btnuplode2.Click += new System.EventHandler(this.btnuplode2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button1.ForeColor = System.Drawing.Color.Firebrick;
+            this.button1.Location = new System.Drawing.Point(840, 46);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(111, 35);
+            this.button1.TabIndex = 156;
+            this.button1.Text = "Delete";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // label11
             // 
@@ -524,6 +639,30 @@ namespace Delmon_Managment_System.Forms
             this.txtvalue.Size = new System.Drawing.Size(383, 25);
             this.txtvalue.TabIndex = 148;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.dataGridView2);
+            this.tabPage3.Location = new System.Drawing.Point(4, 26);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1391, 362);
+            this.tabPage3.TabIndex = 1;
+            this.tabPage3.Text = "Assign History ";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.AllowUserToOrderColumns = true;
+            this.dataGridView2.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(15, 17);
+            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(948, 240);
+            this.dataGridView2.TabIndex = 151;
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
@@ -604,7 +743,7 @@ namespace Delmon_Managment_System.Forms
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(1417, 825);
+            this.tabPage2.Size = new System.Drawing.Size(1415, 871);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Report";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -673,72 +812,6 @@ namespace Delmon_Managment_System.Forms
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // cmbemployee
-            // 
-            this.cmbemployee.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.cmbemployee.FormattingEnabled = true;
-            this.cmbemployee.Location = new System.Drawing.Point(139, 384);
-            this.cmbemployee.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.cmbemployee.Name = "cmbemployee";
-            this.cmbemployee.Size = new System.Drawing.Size(291, 25);
-            this.cmbemployee.TabIndex = 175;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label12.ForeColor = System.Drawing.Color.Black;
-            this.label12.Location = new System.Drawing.Point(11, 387);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(75, 17);
-            this.label12.TabIndex = 174;
-            this.label12.Text = "End User";
-            // 
-            // AssignDtp
-            // 
-            this.AssignDtp.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.AssignDtp.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.AssignDtp.Location = new System.Drawing.Point(139, 420);
-            this.AssignDtp.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.AssignDtp.Name = "AssignDtp";
-            this.AssignDtp.Size = new System.Drawing.Size(291, 25);
-            this.AssignDtp.TabIndex = 177;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label13.Location = new System.Drawing.Point(11, 426);
-            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(95, 17);
-            this.label13.TabIndex = 176;
-            this.label13.Text = "Assign Date";
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.dataGridView2);
-            this.tabPage3.Location = new System.Drawing.Point(4, 26);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1391, 362);
-            this.tabPage3.TabIndex = 1;
-            this.tabPage3.Text = "Assign History ";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.AllowUserToOrderColumns = true;
-            this.dataGridView2.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(15, 17);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(948, 240);
-            this.dataGridView2.TabIndex = 151;
-            // 
             // AssetFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
@@ -763,10 +836,10 @@ namespace Delmon_Managment_System.Forms
             this.labl.ResumeLayout(false);
             this.labl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -826,5 +899,9 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnuplode;
+        private System.Windows.Forms.Button btnDownload;
+        private System.Windows.Forms.Button btnuplode2;
     }
 }

@@ -11,6 +11,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ExcelDataReader; // You need to install ExcelDataReader package via NuGet
+
 
 namespace Delmon_Managment_System.Forms
 {
@@ -274,7 +276,7 @@ namespace Delmon_Managment_System.Forms
                 case 2:
                     return "PR";
                 case 3:
-                    return "Mo";
+                    return "MO";
                 case 4:
                     return "SR";
                 case 5:
@@ -284,7 +286,7 @@ namespace Delmon_Managment_System.Forms
                 case 7:
                     return "TL";
                 case 8:
-                    return "Bi";
+                    return "BI";
               
                 default:
                     throw new ArgumentException("Unsupported asset type");
@@ -972,7 +974,7 @@ WHERE
 
                         if (dr.HasRows)
                         {
-                            MessageBox.Show("This ' Value For This Asset '  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("The ' Value For This Asset '  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                         }
 
@@ -1376,7 +1378,8 @@ where
             dr.Read();
 
 
-            if (dr.HasRows)
+            if (dr != null && dr.HasRows && !string.IsNullOrEmpty(dr["PurchasingDate"].ToString()))
+
             {
                 AssignDtp.Value = Convert.ToDateTime(dr["PurchasingDate"].ToString());
             }
@@ -1459,7 +1462,312 @@ where
 
         }
 
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            SqlParameter paramID = new SqlParameter("@id", SqlDbType.NVarChar);
+            paramID.Value = AssetID;
+            SqlParameter paramDeviceatt = new SqlParameter("@C1", SqlDbType.Int);
+            paramDeviceatt.Value = cmbdeviceatt.SelectedValue;
+            SqlParameter paramValue = new SqlParameter("@C2", SqlDbType.NVarChar);
+            paramValue.Value = txtvalue.Text;
+            SqlParameter paramcmbOS = new SqlParameter("@C3", SqlDbType.Int);
+            paramcmbOS.Value = cmbVersion.SelectedValue;
 
+
+
+
+
+            if (AssetDetialsInfoID == string.Empty)
+            {
+                MessageBox.Show("Please select  Asset first ! " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+            else
+            {
+                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    SQLCONN3.OpenConection3();
+
+                    if ((int)cmbdeviceatt.SelectedValue == 20)
+                    {
+                        SQLCONN3.ExecuteQueries("delete AssetsDetials where AssetID =@id and DeviceDetilasID = @C1 and value = @C3 ", paramID, paramDeviceatt, paramcmbOS);
+                        cmbVersion.Text = "";
+                    }
+                    else
+
+                    {
+                        SQLCONN3.ExecuteQueries("delete AssetsDetials where AssetID =@id and DeviceDetilasID = @C1 and value = @C2 ", paramID, paramDeviceatt, paramValue);
+
+                    }
+
+
+
+                    //dataGridView5.DataSource = SQLCONN3.ShowDataInGridViewORCombobox("select * from AssetsDetials where AssetID=@id and DeviceDetilasID=@C1 and value=@C2 "
+                    //   , paramID,paramDeviceatt,paramValue);
+
+                    dataGridView5.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(@" select 
+Assets.AssetID,
+DeviceDetials.DeviceDetilasID,
+ DeviceDetials.DeviceDetialsValue,AssetsDetials.Value
+from Assets,AssetsDetials,DeviceDetials
+where 
+  DeviceDetials.DeviceDetilasID= AssetsDetials.DeviceDetilasID
+ and Assets.AssetID= AssetsDetials.AssetID
+ and Assets.AssetID=@ID ", paramID);
+                    MessageBox.Show("Record has been deleted successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    SQLCONN3.CloseConnection();
+                    cmbtype.Text = "Select";
+                    cmbdeviceatt.Text = "Select";
+                    cmbbrand.Text = "";
+                    cmbAssetModel.Text = "Select";
+                    txtvalue.Text = "";
+
+
+
+                }
+
+            }
+        }
+
+
+
+        private void btnuplode_Click(object sender, EventArgs e)
+        {
+            SqlDataReader dr;
+            SqlParameter paramAssetID = new SqlParameter("@C1", SqlDbType.NVarChar);
+            try
+            {
+                // Open file dialog to select Excel file
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm";
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        // Get the selected file path
+                        string filePath = openFileDialog.FileName;
+
+                        // Check if the file is already open
+                        try
+                        {
+                            using (System.IO.File.OpenRead(filePath))
+                            {
+                                // File is not already open, proceed with reading and processing
+                            }
+                        }
+                        catch (IOException)
+                        {
+                            MessageBox.Show("The file is already open. Please close it and try again.");
+                            return; // Exit the method if the file is already open
+                        }
+
+                        // Read data from Excel using ExcelDataReader
+                        using (var stream = System.IO.File.Open(filePath, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+                        {
+                            using (var reader = ExcelReaderFactory.CreateReader(stream))
+                            {
+                                // Use dataset to store the data from Excel
+                                var result = reader.AsDataSet();
+                                DataTable table = result.Tables[0]; // Assuming data is in first sheet
+
+                                // Establish connection to SQL Server
+                                string connectionString = SQLCONN.ConnectionString3;
+                                using (SqlConnection connection = new SqlConnection(connectionString))
+                                {
+                                    connection.Open();
+
+                                    // Iterate through each row in the DataTable
+                                    for (int i = 0; i < table.Rows.Count; i++)
+                                    {
+                                        DataRow row = table.Rows[i];
+
+                                        // Map Excel columns to SQL Server table columns based on their positions
+                                        string assetID = row[0].ToString(); // Assuming AssetID is the first column in Excel
+                                        string brand = row[1].ToString();   // Assuming Brand is the second column in Excel
+                                        string model = row[2].ToString();   // Assuming Model is the third column in Excel
+                                        string assetTypeID = row[3].ToString(); // Assuming AssetTypeID is the fourth column in Excel
+                                        string sAPAssetID = row[4].ToString();   // Assuming SAPAssetID is the fifth column in Excel
+                                        string SN = row[5].ToString();           // Assuming SN is the sixth column in Excel
+                                        string purchasingDateString = row[6].ToString().Split(' ')[0].Trim(); // Trim the string to remove leading/trailing spaces and time component
+                                        string deviceTypeID = row[7].ToString();    // Assuming DeviceTypeID is the eighth column in Excel
+                                        string assetStatusID = row[8].ToString();   // Assuming AssetStatusID is the ninth column in Excel
+
+                                        DateTime purchasingDate;
+                                       
+                                        if (DateTime.TryParseExact(purchasingDateString, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out purchasingDate))
+                                        {
+                                            SQLCONN3.OpenConection3();
+                                            paramAssetID.Value = assetID;
+
+                                            dr = SQLCONN3.DataReader("select  * from Assets  where " +
+                                                 " AssetID=@C1 ", paramAssetID);
+                                            dr.Read();
+
+                                            if (dr.HasRows)
+                                            {
+                                                MessageBox.Show("This 'Asset' : " + assetID + "  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                            }
+                                            else
+                                            {
+                                                dr.Dispose();
+                                                dr.Close();
+
+                                                // Prepare INSERT statement
+                                                string insertQuery = "INSERT INTO Assets (AssetID, Brand, Model, AssetTypeID, SAPAssetID, SN, PurchasingDate, DeviceTypeID, AssetStatusID) " +
+                                                                "VALUES (@AssetID, @Brand, @Model, @AssetTypeID, @SAPAssetID, @SN, @PurchasingDate, @DeviceTypeID, @AssetStatusID)";
+
+                                                // Create SqlCommand object
+                                                SqlCommand command = new SqlCommand(insertQuery, connection);
+
+                                                // Set parameter values
+                                                command.Parameters.AddWithValue("@AssetID", assetID);
+                                                command.Parameters.AddWithValue("@Brand", brand);
+                                                command.Parameters.AddWithValue("@Model", model);
+                                                command.Parameters.AddWithValue("@AssetTypeID", assetTypeID);
+                                                command.Parameters.AddWithValue("@SAPAssetID", sAPAssetID);
+                                                command.Parameters.AddWithValue("@SN", SN);
+                                                command.Parameters.AddWithValue("@PurchasingDate", purchasingDate);
+                                                command.Parameters.AddWithValue("@DeviceTypeID", deviceTypeID);
+                                                command.Parameters.AddWithValue("@AssetStatusID", assetStatusID);
+                                                // Execute INSERT command
+
+                                                command.ExecuteNonQuery();
+                                                MessageBox.Show("Data uploaded successfully!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                            }
+                                        }
+                                        else
+                                        {
+                                            // Date parsing failed, handle the error
+                                            // For example, you can log an error message or display a warning to the user
+                                            //  MessageBox.Show($"Invalid date format: {purchasingDateString}. Please ensure the date format is dd/MM/yyyy.");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+
+        }
+
+        private void btnDownload_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnuplode2_Click(object sender, EventArgs e)
+        {
+            SqlDataReader dr;
+            SqlParameter paramAssetID = new SqlParameter("@ID", SqlDbType.NVarChar);
+            SqlParameter paramDeviceatt = new SqlParameter("@C1", SqlDbType.Int);
+            SqlParameter paramValue = new SqlParameter("@C2", SqlDbType.NVarChar);
+            try
+            {
+                // Open file dialog to select Excel file
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm";
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        // Get the selected file path
+                        string filePath = openFileDialog.FileName;
+
+                        // Check if the file is already open
+                        try
+                        {
+                            using (System.IO.File.OpenRead(filePath))
+                            {
+                                // File is not already open, proceed with reading and processing
+                            }
+                        }
+                        catch (IOException)
+                        {
+                            MessageBox.Show("The file is already open. Please close it and try again.");
+                            return; // Exit the method if the file is already open
+                        }
+
+                        // Read data from Excel using ExcelDataReader
+                        using (var stream = System.IO.File.Open(filePath, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+                        {
+                            using (var reader = ExcelReaderFactory.CreateReader(stream))
+                            {
+                                // Use dataset to store the data from Excel
+                                var result = reader.AsDataSet();
+                                DataTable table = result.Tables[0]; // Assuming data is in first sheet
+
+                                // Establish connection to SQL Server
+                                string connectionString = SQLCONN.ConnectionString3;
+                                using (SqlConnection connection = new SqlConnection(connectionString))
+                                {
+                                    connection.Open();
+
+                                    // Iterate through each row in the DataTable
+                                    for (int i = 1; i < table.Rows.Count; i++)
+                                    {
+                                        DataRow row = table.Rows[i];
+
+                                        // Map Excel columns to SQL Server table columns based on their positions
+                                        string assetID = row[0].ToString(); // Assuming AssetID is the first column in Excel
+                                        string DeviceDetilasIDstring = row[1].ToString().Split(' ')[0].Trim();   // Assuming Brand is the second column in Excel
+                                        string Value = row[2].ToString();   // Assuming Model is the third column in Excel
+
+                                        int DeviceDetilasID;
+                                        if (int.TryParse(DeviceDetilasIDstring.ToString(), out DeviceDetilasID))
+                                        { 
+                                         SQLCONN3.OpenConection3();
+                                        paramAssetID.Value = assetID;
+                                        paramDeviceatt.Value = DeviceDetilasID;
+                                        paramValue.Value = Value;
+
+                                        dr = SQLCONN3.DataReader("select * from [AssetsDetials] where  AssetID=@ID  and DeviceDetilasID=@C1  and value=@C2 ", paramAssetID, paramDeviceatt, paramValue);
+
+                                        dr.Read();
+
+                                            if (dr.HasRows)
+                                            {
+                                                MessageBox.Show("The ' Value: " + Value + " For This Asset '  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                            }
+                                            else
+                                            {
+                                                dr.Dispose();
+                                                dr.Close();
+                                                // Prepare INSERT statement
+                                                string insertQuery = "INSERT INTO AssetsDetials (AssetID, DeviceDetilasID,Value) " +
+                                                                    "VALUES (@AssetID,@DeviceDetilasID, @Value)";
+                                                // Create SqlCommand object
+                                                SqlCommand command = new SqlCommand(insertQuery, connection);
+
+                                                // Set parameter values
+                                                command.Parameters.AddWithValue("@AssetID", assetID);
+                                                command.Parameters.AddWithValue("@DeviceDetilasID", DeviceDetilasID);
+                                                command.Parameters.AddWithValue("@Value", Value);
+                                                // Execute INSERT command
+
+                                                command.ExecuteNonQuery();
+                                                MessageBox.Show("Data uploaded successfully!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                            }
+                                        }
+
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
 
         private void cmbbrand_KeyDown(object sender, KeyEventArgs e)
         {
