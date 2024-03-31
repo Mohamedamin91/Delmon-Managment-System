@@ -30,9 +30,9 @@ namespace Delmon_Managment_System.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.Visanumtxt = new System.Windows.Forms.TextBox();
@@ -74,6 +74,8 @@ namespace Delmon_Managment_System.Forms
             this.label4 = new System.Windows.Forms.Label();
             this.VisaFileNumberID = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.btnwexpire = new System.Windows.Forms.Button();
             this.label26 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
@@ -98,13 +100,11 @@ namespace Delmon_Managment_System.Forms
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.button3 = new System.Windows.Forms.Button();
             this.lbldatetime = new System.Windows.Forms.Label();
-            this.btnwexpire = new System.Windows.Forms.Button();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -181,8 +181,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView1.Location = new System.Drawing.Point(674, 18);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.Size = new System.Drawing.Size(629, 225);
             this.dataGridView1.TabIndex = 9;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
@@ -464,8 +464,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView2.Location = new System.Drawing.Point(696, 25);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView2.Name = "dataGridView2";
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView2.Size = new System.Drawing.Size(523, 190);
             this.dataGridView2.TabIndex = 83;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
@@ -668,6 +668,38 @@ namespace Delmon_Managment_System.Forms
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Visa Info";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter_1);
+            // 
+            // dataGridView3
+            // 
+            this.dataGridView3.AllowUserToAddRows = false;
+            this.dataGridView3.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Location = new System.Drawing.Point(1311, 18);
+            this.dataGridView3.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView3.Name = "dataGridView3";
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.dataGridView3.Size = new System.Drawing.Size(257, 225);
+            this.dataGridView3.TabIndex = 105;
+            this.dataGridView3.Visible = false;
+            this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick);
+            // 
+            // btnwexpire
+            // 
+            this.btnwexpire.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnwexpire.BackColor = System.Drawing.Color.White;
+            this.btnwexpire.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.btnwexpire.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnwexpire.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.btnwexpire.ForeColor = System.Drawing.Color.Firebrick;
+            this.btnwexpire.Location = new System.Drawing.Point(501, 18);
+            this.btnwexpire.Margin = new System.Windows.Forms.Padding(4);
+            this.btnwexpire.Name = "btnwexpire";
+            this.btnwexpire.Size = new System.Drawing.Size(126, 27);
+            this.btnwexpire.TabIndex = 104;
+            this.btnwexpire.Text = "Expired soon";
+            this.btnwexpire.UseVisualStyleBackColor = false;
+            this.btnwexpire.Click += new System.EventHandler(this.btnwexpire_Click);
             // 
             // label26
             // 
@@ -983,44 +1015,12 @@ namespace Delmon_Managment_System.Forms
             this.lbldatetime.AutoSize = true;
             this.lbldatetime.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.lbldatetime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lbldatetime.Location = new System.Drawing.Point(1062, 730);
+            this.lbldatetime.Location = new System.Drawing.Point(1127, 769);
             this.lbldatetime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbldatetime.Name = "lbldatetime";
             this.lbldatetime.Size = new System.Drawing.Size(77, 17);
             this.lbldatetime.TabIndex = 96;
             this.lbldatetime.Text = "Date&Time";
-            // 
-            // btnwexpire
-            // 
-            this.btnwexpire.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnwexpire.BackColor = System.Drawing.Color.White;
-            this.btnwexpire.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.btnwexpire.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnwexpire.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.btnwexpire.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnwexpire.Location = new System.Drawing.Point(501, 18);
-            this.btnwexpire.Margin = new System.Windows.Forms.Padding(4);
-            this.btnwexpire.Name = "btnwexpire";
-            this.btnwexpire.Size = new System.Drawing.Size(126, 27);
-            this.btnwexpire.TabIndex = 104;
-            this.btnwexpire.Text = "Expired soon";
-            this.btnwexpire.UseVisualStyleBackColor = false;
-            this.btnwexpire.Click += new System.EventHandler(this.btnwexpire_Click);
-            // 
-            // dataGridView3
-            // 
-            this.dataGridView3.AllowUserToAddRows = false;
-            this.dataGridView3.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(1311, 18);
-            this.dataGridView3.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView3.Name = "dataGridView3";
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView3.Size = new System.Drawing.Size(257, 225);
-            this.dataGridView3.TabIndex = 105;
-            this.dataGridView3.Visible = false;
-            this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick);
             // 
             // VisaFrm
             // 
@@ -1047,9 +1047,9 @@ namespace Delmon_Managment_System.Forms
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

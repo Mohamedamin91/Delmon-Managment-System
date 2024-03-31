@@ -1,7 +1,7 @@
 ﻿
 namespace Delmon_Managment_System.Forms
 {
-    partial class frmNewModel
+    partial class FrmNewModel
     {
         /// <summary>
         /// Required designer variable.
@@ -128,7 +128,7 @@ namespace Delmon_Managment_System.Forms
             this.txtvalue.Size = new System.Drawing.Size(300, 25);
             this.txtvalue.TabIndex = 157;
             // 
-            // frmNewModel
+            // FrmNewModel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -142,8 +142,11 @@ namespace Delmon_Managment_System.Forms
             this.Controls.Add(this.cmbtype);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.addbtn);
-            this.Name = "frmNewModel";
+            this.Name = "FrmNewModel";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmNewModel";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmNewModel_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmNewModel_FormClosed);
             this.Load += new System.EventHandler(this.frmNewModel_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

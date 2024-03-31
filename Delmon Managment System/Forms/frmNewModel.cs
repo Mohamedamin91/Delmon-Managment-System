@@ -11,13 +11,13 @@ using System.Windows.Forms;
 
 namespace Delmon_Managment_System.Forms
 {
-    public partial class frmNewModel : Form
+    public partial class FrmNewModel : Form
     {
         SQLCONNECTION SQLCONN3 = new SQLCONNECTION();
         AssetFrm Asset = new AssetFrm();
 
 
-        public frmNewModel()
+        public FrmNewModel()
         {
             InitializeComponent();
         }
@@ -113,12 +113,9 @@ namespace Delmon_Managment_System.Forms
                                                        paramValue, paramcmbtype, paramcmbrand);
                         MessageBox.Show("Model saved Successfully");
                         // settingFrm.SettingFrm_Load(sender, e);
-                         Asset.AssetFrm_Load(sender, e);
                         txtvalue.Text = "";
                         cmbbrand.Text = cmbtype.Text = "Select";
-
-
-                      
+                        generteModel();
 
                     }
                 }
@@ -131,6 +128,24 @@ namespace Delmon_Managment_System.Forms
             }
 
             SQLCONN3.CloseConnection();
+        }
+        public void generteModel()
+        {
+            SQLCONN3.OpenConection3();
+            Asset.cmbAssetModel.ValueMember = "AssetModeID";
+            Asset.cmbAssetModel.DisplayMember = "AssetModel";
+            Asset. cmbAssetModel.DataSource = SQLCONN3.ShowDataInGridViewORCombobox("SELECT AssetModeID ,AssetModel FROM AssetsModel ");
+            Asset.cmbAssetModel.Text = "Select";
+            SQLCONN3.CloseConnection();
+
+        }
+
+        private void FrmNewModel_FormClosed(object sender, FormClosedEventArgs e)
+        {
+        }
+
+        private void FrmNewModel_FormClosing(object sender, FormClosingEventArgs e)
+        {
         }
     }
 }

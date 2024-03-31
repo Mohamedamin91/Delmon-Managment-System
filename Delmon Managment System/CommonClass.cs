@@ -20,8 +20,11 @@ namespace Delmon_Managment_System
         public static String CRNmber { get; set; }
         public static String ShortName { get; set; }
         public static int CompanyId { get; set; }
+      
         public static int DeptID { get; set; }
         public static int DOCID { get; set; }
+
+        public static int EndUserID { get; set; }
 
 
     }
