@@ -30,9 +30,9 @@ namespace Delmon_Managment_System.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.Visanumtxt = new System.Windows.Forms.TextBox();
@@ -181,8 +181,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView1.Location = new System.Drawing.Point(674, 18);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Size = new System.Drawing.Size(629, 225);
             this.dataGridView1.TabIndex = 9;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
@@ -312,6 +312,8 @@ namespace Delmon_Managment_System.Forms
             // 
             // cmbStatus
             // 
+            this.cmbStatus.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbStatus.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.cmbStatus.Enabled = false;
             this.cmbStatus.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.cmbStatus.FormattingEnabled = true;
@@ -347,6 +349,8 @@ namespace Delmon_Managment_System.Forms
             // 
             // cmbJob
             // 
+            this.cmbJob.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbJob.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.cmbJob.Enabled = false;
             this.cmbJob.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.cmbJob.FormattingEnabled = true;
@@ -358,6 +362,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbJob.DropDown += new System.EventHandler(this.cmbJob_DropDown);
             this.cmbJob.SelectedIndexChanged += new System.EventHandler(this.cmbJob_SelectedIndexChanged);
             this.cmbJob.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbAgency_KeyDown);
+            this.cmbJob.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbJob_KeyPress);
             this.cmbJob.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cmbJob_MouseDown);
             // 
             // label44
@@ -374,6 +379,8 @@ namespace Delmon_Managment_System.Forms
             // 
             // cmbConsulate
             // 
+            this.cmbConsulate.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbConsulate.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.cmbConsulate.Enabled = false;
             this.cmbConsulate.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.cmbConsulate.FormattingEnabled = true;
@@ -384,6 +391,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbConsulate.TabIndex = 36;
             this.cmbConsulate.DropDown += new System.EventHandler(this.cmbConsulate_DropDown);
             this.cmbConsulate.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbConsulate_KeyDown);
+            this.cmbConsulate.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbConsulate_KeyPress);
             this.cmbConsulate.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cmbConsulate_MouseDown);
             // 
             // label12
@@ -464,8 +472,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView2.Location = new System.Drawing.Point(696, 25);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView2.Name = "dataGridView2";
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView2.Size = new System.Drawing.Size(523, 190);
             this.dataGridView2.TabIndex = 83;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
@@ -591,6 +599,8 @@ namespace Delmon_Managment_System.Forms
             // 
             // cmbcandidates
             // 
+            this.cmbcandidates.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbcandidates.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.cmbcandidates.Enabled = false;
             this.cmbcandidates.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.cmbcandidates.FormattingEnabled = true;
@@ -602,6 +612,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbcandidates.DropDown += new System.EventHandler(this.cmbcandidates_DropDown);
             this.cmbcandidates.SelectedIndexChanged += new System.EventHandler(this.cmbcandidates_SelectedIndexChanged);
             this.cmbcandidates.Click += new System.EventHandler(this.cmbcandidates_Click);
+            this.cmbcandidates.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbcandidates_KeyPress);
             this.cmbcandidates.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cmbcandidates_MouseDown);
             // 
             // label4
@@ -677,8 +688,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView3.Location = new System.Drawing.Point(1311, 18);
             this.dataGridView3.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView3.Name = "dataGridView3";
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView3.Size = new System.Drawing.Size(257, 225);
             this.dataGridView3.TabIndex = 105;
             this.dataGridView3.Visible = false;
@@ -795,6 +806,8 @@ namespace Delmon_Managment_System.Forms
             // 
             // cmbReservedTo
             // 
+            this.cmbReservedTo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbReservedTo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.cmbReservedTo.Enabled = false;
             this.cmbReservedTo.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.cmbReservedTo.FormattingEnabled = true;
@@ -889,6 +902,8 @@ namespace Delmon_Managment_System.Forms
             // 
             // cmbcandidates2
             // 
+            this.cmbcandidates2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbcandidates2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.cmbcandidates2.Enabled = false;
             this.cmbcandidates2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.cmbcandidates2.FormattingEnabled = true;
@@ -940,6 +955,8 @@ namespace Delmon_Managment_System.Forms
             // 
             // cmbAgency
             // 
+            this.cmbAgency.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbAgency.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.cmbAgency.Enabled = false;
             this.cmbAgency.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.cmbAgency.FormattingEnabled = true;
@@ -951,6 +968,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbAgency.DropDown += new System.EventHandler(this.cmbAgency_DropDown);
             this.cmbAgency.SelectedIndexChanged += new System.EventHandler(this.cmbAgency_SelectedIndexChanged);
             this.cmbAgency.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbAgency_KeyDown);
+            this.cmbAgency.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbAgency_KeyPress);
             this.cmbAgency.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cmbAgency_MouseDown);
             // 
             // btnnewJob

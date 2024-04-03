@@ -2812,6 +2812,36 @@ WHERE (COMPName_EN LIKE '%' + @C1 + '%')
             SQLCONN.CloseConnection();
         }
 
+        private void cmbemployee_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            cmbemployee.DroppedDown = false;
+
+        }
+
+        private void cmbemployee2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            cmbemployee2.DroppedDown = false;
+
+        }
+
+        private void cmbDepartment_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            cmbDepartment.DroppedDown = false;
+
+        }
+
+        private void cmbworkfield_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            cmbworkfield.DroppedDown = false;
+
+        }
+
+        private void cmbemployee1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            cmbemployee1.DroppedDown = false;
+
+        }
+
         private void cmbworkfield_DropDown(object sender, EventArgs e)
         {
             cmbworkfield.DropDownStyle = ComboBoxStyle.DropDown;

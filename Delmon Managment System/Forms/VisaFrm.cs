@@ -116,7 +116,7 @@ namespace Delmon_Managment_System.Forms
             //lblFullname.Text = CommonClass.LoginEmployeeName;
             //lblPC.Text = Environment.MachineName;
 
-
+           
 
 
 
@@ -2130,8 +2130,8 @@ namespace Delmon_Managment_System.Forms
             SQLCONN.OpenConection();
             cmbcandidates.ValueMember = "EmployeeID";
             cmbcandidates.DisplayMember = "Name";
-            cmbcandidates.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees] , StatusTBL where Employees.EmploymentStatusID = StatusTBL.StatusID and RefrenceID=2 and StatusTBL.StatusID = 23 order by EmployeeID");
-            cmbcandidates.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbcandidates.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees] , StatusTBL where Employees.EmploymentStatusID = StatusTBL.StatusID and RefrenceID=2 and StatusTBL.StatusID = 23 order by EmployeeID");
+            cmbcandidates.AutoCompleteSource = AutoCompleteSource.CustomSource;
             SQLCONN.CloseConnection();
         }
 
@@ -2167,7 +2167,30 @@ GROUP BY
                 }
             }
 
+        private void cmbcandidates_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           // cmbcandidates.DroppedDown = false;
+
         }
+
+        private void cmbAgency_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           // cmbAgency.DroppedDown = false;
+
+        }
+
+        private void cmbJob_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //cmbJob.DroppedDown = false;
+
+        }
+
+        private void cmbConsulate_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           // cmbConsulate.DroppedDown = false;
+
+        }
+    }
     }
     
 

@@ -254,17 +254,16 @@ namespace Delmon_Managment_System.Forms
             // 
             // cmbemployee
             // 
-            this.cmbemployee.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbemployee.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbemployee.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.cmbemployee.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.cmbemployee.FormattingEnabled = true;
-            this.cmbemployee.Location = new System.Drawing.Point(139, 384);
+            this.cmbemployee.Location = new System.Drawing.Point(137, 386);
             this.cmbemployee.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbemployee.Name = "cmbemployee";
             this.cmbemployee.Size = new System.Drawing.Size(291, 25);
             this.cmbemployee.TabIndex = 175;
             this.cmbemployee.SelectedIndexChanged += new System.EventHandler(this.cmbemployee_SelectedIndexChanged);
-            this.cmbemployee.TextChanged += new System.EventHandler(this.cmbemployee_TextChanged);
-            this.cmbemployee.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbemployee_KeyDown);
             this.cmbemployee.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbemployee_KeyPress);
             // 
             // label12
@@ -287,6 +286,9 @@ namespace Delmon_Managment_System.Forms
             this.cmbAssetModel.Name = "cmbAssetModel";
             this.cmbAssetModel.Size = new System.Drawing.Size(289, 25);
             this.cmbAssetModel.TabIndex = 173;
+            this.cmbAssetModel.SelectedIndexChanged += new System.EventHandler(this.cmbAssetModel_SelectedIndexChanged);
+            this.cmbAssetModel.Click += new System.EventHandler(this.cmbAssetModel_Click);
+            this.cmbAssetModel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbAssetModel_KeyPress);
             // 
             // btnnewJob
             // 
@@ -335,6 +337,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbAssetStatus.Name = "cmbAssetStatus";
             this.cmbAssetStatus.Size = new System.Drawing.Size(289, 25);
             this.cmbAssetStatus.TabIndex = 169;
+            this.cmbAssetStatus.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbAssetStatus_KeyPress);
             // 
             // label7
             // 
@@ -356,6 +359,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbDevice.Name = "cmbDevice";
             this.cmbDevice.Size = new System.Drawing.Size(291, 25);
             this.cmbDevice.TabIndex = 167;
+            this.cmbDevice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbDevice_KeyPress);
             // 
             // label6
             // 
@@ -479,6 +483,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbbrand.TabIndex = 150;
             this.cmbbrand.SelectionChangeCommitted += new System.EventHandler(this.cmbbrand_SelectionChangeCommitted);
             this.cmbbrand.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbbrand_KeyDown);
+            this.cmbbrand.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbbrand_KeyPress);
             // 
             // label1
             // 
@@ -503,6 +508,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbtype.SelectedIndexChanged += new System.EventHandler(this.cmbtype_SelectedIndexChanged);
             this.cmbtype.SelectionChangeCommitted += new System.EventHandler(this.cmbtype_SelectionChangeCommitted);
             this.cmbtype.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbtype_KeyDown);
+            this.cmbtype.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbtype_KeyPress);
             // 
             // tabControl2
             // 

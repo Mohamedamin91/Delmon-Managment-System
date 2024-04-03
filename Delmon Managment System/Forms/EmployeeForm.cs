@@ -2808,7 +2808,8 @@ ORDER BY e.EmployeeID";
 
         private void cmbEmployJobHistory_KeyPress(object sender, KeyPressEventArgs e)
         {
-          
+            cmbEmployJobHistory.DroppedDown = false;
+
 
         }
 
@@ -3053,6 +3054,12 @@ ORDER BY e.EmployeeID";
             cmbEmployJobHistory.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbEmployJobHistory.AutoCompleteSource = AutoCompleteSource.ListItems;
             SQLCONN.CloseConnection();
+
+        }
+
+        private void cmbempdepthistory_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            cmbempdepthistory.DroppedDown = false;
 
         }
     }
