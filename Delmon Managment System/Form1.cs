@@ -243,15 +243,21 @@ GROUP BY
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (WindowState == FormWindowState.Normal)
-                this.WindowState = FormWindowState.Maximized;
-            else
-                this.WindowState = FormWindowState.Normal;
+            this.WindowState = FormWindowState.Minimized;
         }
 
         private void btnMinum_Click_1(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Minimized;
+
+            if (WindowState == FormWindowState.Normal)
+            {
+                this.WindowState = FormWindowState.Maximized;
+                this.StartPosition = FormStartPosition.CenterParent; // Center the form on the screen
+            }
+            else
+                this.WindowState = FormWindowState.Normal;
+            this.StartPosition = FormStartPosition.CenterParent; // Center the form on the screen
+
 
         }
 

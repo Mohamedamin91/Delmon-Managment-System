@@ -125,11 +125,11 @@ namespace Delmon_Managment_System.Forms
             cmbAssetStatus.Text = "Select";
 
 
-            //cmbAssetModel.ValueMember = "AssetModeID";
-            //cmbAssetModel.DisplayMember = "AssetModel";
-            //cmbAssetModel.DataSource = SQLCONN3.ShowDataInGridViewORCombobox("SELECT AssetModeID ,AssetModel FROM AssetsModel ");
-            //cmbAssetModel.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //cmbAssetModel.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbAssetModel.ValueMember = "AssetModeID";
+            cmbAssetModel.DisplayMember = "AssetModel";
+            cmbAssetModel.DataSource = SQLCONN3.ShowDataInGridViewORCombobox("SELECT AssetModeID ,AssetModel FROM AssetsModel ");
+            cmbAssetModel.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbAssetModel.AutoCompleteSource = AutoCompleteSource.ListItems;
             cmbAssetModel.Text = "Select";
 
 
@@ -536,6 +536,14 @@ namespace Delmon_Managment_System.Forms
             cmbAssetStatus.ValueMember = "AssetStatusID";
             cmbAssetStatus.DisplayMember = "AssetStatus";
             cmbAssetStatus.DataSource = SQLCONN3.ShowDataInGridViewORCombobox("SELECT AssetStatusID ,AssetStatus FROM AssetsStatus ");
+
+
+            cmbAssetModel.ValueMember = "AssetModeID";
+            cmbAssetModel.DisplayMember = "AssetModel";
+            cmbAssetModel.DataSource = SQLCONN3.ShowDataInGridViewORCombobox("SELECT AssetModeID ,AssetModel FROM AssetsModel ");
+            cmbAssetModel.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbAssetModel.AutoCompleteSource = AutoCompleteSource.ListItems;
+
             SQLCONN3.CloseConnection();
 
 
@@ -1980,7 +1988,7 @@ where
 
         private void cmbAssetModel_KeyPress(object sender, KeyPressEventArgs e)
         {
-          //  cmbAssetModel.DroppedDown = false;
+           cmbAssetModel.DroppedDown = false;
           
 
 
@@ -1992,10 +2000,7 @@ where
 
         }
 
-        private void cmbAssetModel_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           
-        }
+      
         public void RefreshComboBox()
         {
             SQLCONN3.OpenConection3();
@@ -2007,14 +2012,14 @@ where
 
         private void cmbAssetModel_Click(object sender, EventArgs e)
         {
-            SQLCONN3.OpenConection3();
-            cmbAssetModel.ValueMember = "AssetModeID";
-            cmbAssetModel.DisplayMember = "AssetModel";
-            cmbAssetModel.DataSource = SQLCONN3.ShowDataInGridViewORCombobox("SELECT AssetModeID ,AssetModel FROM AssetsModel ");
-            //cmbAssetModel.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //cmbAssetModel.AutoCompleteSource = AutoCompleteSource.ListItems;
-            cmbAssetModel.Text = "Select";
-            SQLCONN3.CloseConnection();
+            //SQLCONN3.OpenConection3();
+            //cmbAssetModel.ValueMember = "AssetModeID";
+            //cmbAssetModel.DisplayMember = "AssetModel";
+            //cmbAssetModel.DataSource = SQLCONN3.ShowDataInGridViewORCombobox("SELECT AssetModeID ,AssetModel FROM AssetsModel ");
+            ////cmbAssetModel.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            ////cmbAssetModel.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //cmbAssetModel.Text = "Select";
+            //SQLCONN3.CloseConnection();
 
         }
 

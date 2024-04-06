@@ -286,7 +286,6 @@ namespace Delmon_Managment_System.Forms
             this.cmbAssetModel.Name = "cmbAssetModel";
             this.cmbAssetModel.Size = new System.Drawing.Size(289, 25);
             this.cmbAssetModel.TabIndex = 173;
-            this.cmbAssetModel.SelectedIndexChanged += new System.EventHandler(this.cmbAssetModel_SelectedIndexChanged);
             this.cmbAssetModel.Click += new System.EventHandler(this.cmbAssetModel_Click);
             this.cmbAssetModel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbAssetModel_KeyPress);
             // 

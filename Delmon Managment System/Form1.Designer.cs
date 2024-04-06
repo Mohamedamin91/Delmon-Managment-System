@@ -361,11 +361,11 @@ namespace Delmon_Managment_System
             this.btnMinum.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMinum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMinum.ForeColor = System.Drawing.Color.White;
-            this.btnMinum.Location = new System.Drawing.Point(807, 3);
+            this.btnMinum.Location = new System.Drawing.Point(808, 1);
             this.btnMinum.Name = "btnMinum";
-            this.btnMinum.Size = new System.Drawing.Size(43, 24);
+            this.btnMinum.Size = new System.Drawing.Size(28, 40);
             this.btnMinum.TabIndex = 3;
-            this.btnMinum.Text = "O";
+            this.btnMinum.Text = "[]";
             this.btnMinum.UseVisualStyleBackColor = true;
             this.btnMinum.Click += new System.EventHandler(this.btnMinum_Click_1);
             // 
@@ -376,11 +376,11 @@ namespace Delmon_Managment_System
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(768, 3);
+            this.button1.Location = new System.Drawing.Point(759, 9);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(43, 24);
             this.button1.TabIndex = 2;
-            this.button1.Text = "O";
+            this.button1.Text = "-";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -391,11 +391,11 @@ namespace Delmon_Managment_System
             this.BTNcLOSE.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNcLOSE.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTNcLOSE.ForeColor = System.Drawing.Color.White;
-            this.BTNcLOSE.Location = new System.Drawing.Point(841, 3);
+            this.BTNcLOSE.Location = new System.Drawing.Point(842, 9);
             this.BTNcLOSE.Name = "BTNcLOSE";
             this.BTNcLOSE.Size = new System.Drawing.Size(43, 24);
             this.BTNcLOSE.TabIndex = 1;
-            this.BTNcLOSE.Text = "O";
+            this.BTNcLOSE.Text = "X";
             this.BTNcLOSE.UseVisualStyleBackColor = true;
             this.BTNcLOSE.Click += new System.EventHandler(this.BTNcLOSE_Click);
             // 

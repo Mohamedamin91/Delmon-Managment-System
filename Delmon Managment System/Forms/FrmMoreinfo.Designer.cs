@@ -29,6 +29,7 @@ namespace Delmon_Managment_System.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMoreinfo));
             this.label3 = new System.Windows.Forms.Label();
             this.lblphone = new System.Windows.Forms.Label();
             this.closebtn = new System.Windows.Forms.Button();
@@ -39,7 +40,19 @@ namespace Delmon_Managment_System.Forms
             this.label7 = new System.Windows.Forms.Label();
             this.lblemail = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.piccompany = new System.Windows.Forms.PictureBox();
+            this.picdept = new System.Windows.Forms.PictureBox();
+            this.picemail = new System.Windows.Forms.PictureBox();
+            this.picphone = new System.Windows.Forms.PictureBox();
+            this.txtcomp = new System.Windows.Forms.Label();
+            this.txtdept = new System.Windows.Forms.Label();
+            this.txtemail = new System.Windows.Forms.Label();
+            this.txtphone = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.piccompany)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picdept)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picemail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picphone)).BeginInit();
             this.SuspendLayout();
             // 
             // label3
@@ -73,7 +86,7 @@ namespace Delmon_Managment_System.Forms
             this.closebtn.ForeColor = System.Drawing.Color.White;
             this.closebtn.Location = new System.Drawing.Point(-5, 176);
             this.closebtn.Name = "closebtn";
-            this.closebtn.Size = new System.Drawing.Size(430, 37);
+            this.closebtn.Size = new System.Drawing.Size(483, 37);
             this.closebtn.TabIndex = 158;
             this.closebtn.Text = "Close";
             this.closebtn.UseVisualStyleBackColor = false;
@@ -81,6 +94,14 @@ namespace Delmon_Managment_System.Forms
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtphone);
+            this.groupBox1.Controls.Add(this.txtemail);
+            this.groupBox1.Controls.Add(this.txtdept);
+            this.groupBox1.Controls.Add(this.txtcomp);
+            this.groupBox1.Controls.Add(this.picphone);
+            this.groupBox1.Controls.Add(this.picemail);
+            this.groupBox1.Controls.Add(this.picdept);
+            this.groupBox1.Controls.Add(this.piccompany);
             this.groupBox1.Controls.Add(this.lblCompany);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.lbldepartment);
@@ -91,7 +112,7 @@ namespace Delmon_Managment_System.Forms
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(399, 147);
+            this.groupBox1.Size = new System.Drawing.Size(457, 147);
             this.groupBox1.TabIndex = 162;
             this.groupBox1.TabStop = false;
             // 
@@ -161,12 +182,104 @@ namespace Delmon_Managment_System.Forms
             this.label2.TabIndex = 163;
             this.label2.Text = "Email:";
             // 
+            // piccompany
+            // 
+            this.piccompany.Image = ((System.Drawing.Image)(resources.GetObject("piccompany.Image")));
+            this.piccompany.Location = new System.Drawing.Point(340, 10);
+            this.piccompany.Name = "piccompany";
+            this.piccompany.Size = new System.Drawing.Size(25, 25);
+            this.piccompany.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.piccompany.TabIndex = 168;
+            this.piccompany.TabStop = false;
+            this.piccompany.Click += new System.EventHandler(this.piccompany_Click);
+            // 
+            // picdept
+            // 
+            this.picdept.Image = ((System.Drawing.Image)(resources.GetObject("picdept.Image")));
+            this.picdept.Location = new System.Drawing.Point(340, 42);
+            this.picdept.Name = "picdept";
+            this.picdept.Size = new System.Drawing.Size(25, 25);
+            this.picdept.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picdept.TabIndex = 169;
+            this.picdept.TabStop = false;
+            this.picdept.Click += new System.EventHandler(this.picdept_Click);
+            // 
+            // picemail
+            // 
+            this.picemail.Image = ((System.Drawing.Image)(resources.GetObject("picemail.Image")));
+            this.picemail.Location = new System.Drawing.Point(340, 76);
+            this.picemail.Name = "picemail";
+            this.picemail.Size = new System.Drawing.Size(25, 25);
+            this.picemail.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picemail.TabIndex = 170;
+            this.picemail.TabStop = false;
+            this.picemail.Click += new System.EventHandler(this.picemail_Click);
+            // 
+            // picphone
+            // 
+            this.picphone.Image = ((System.Drawing.Image)(resources.GetObject("picphone.Image")));
+            this.picphone.Location = new System.Drawing.Point(340, 107);
+            this.picphone.Name = "picphone";
+            this.picphone.Size = new System.Drawing.Size(25, 25);
+            this.picphone.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picphone.TabIndex = 171;
+            this.picphone.TabStop = false;
+            this.picphone.Click += new System.EventHandler(this.picphone_Click);
+            // 
+            // txtcomp
+            // 
+            this.txtcomp.AutoSize = true;
+            this.txtcomp.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtcomp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.txtcomp.Location = new System.Drawing.Point(381, 16);
+            this.txtcomp.Name = "txtcomp";
+            this.txtcomp.Size = new System.Drawing.Size(35, 15);
+            this.txtcomp.TabIndex = 172;
+            this.txtcomp.Text = "Text";
+            this.txtcomp.Visible = false;
+            // 
+            // txtdept
+            // 
+            this.txtdept.AutoSize = true;
+            this.txtdept.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtdept.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.txtdept.Location = new System.Drawing.Point(381, 50);
+            this.txtdept.Name = "txtdept";
+            this.txtdept.Size = new System.Drawing.Size(35, 15);
+            this.txtdept.TabIndex = 173;
+            this.txtdept.Text = "Text";
+            this.txtdept.Visible = false;
+            // 
+            // txtemail
+            // 
+            this.txtemail.AutoSize = true;
+            this.txtemail.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtemail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.txtemail.Location = new System.Drawing.Point(381, 82);
+            this.txtemail.Name = "txtemail";
+            this.txtemail.Size = new System.Drawing.Size(35, 15);
+            this.txtemail.TabIndex = 174;
+            this.txtemail.Text = "Text";
+            this.txtemail.Visible = false;
+            // 
+            // txtphone
+            // 
+            this.txtphone.AutoSize = true;
+            this.txtphone.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtphone.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.txtphone.Location = new System.Drawing.Point(381, 115);
+            this.txtphone.Name = "txtphone";
+            this.txtphone.Size = new System.Drawing.Size(35, 15);
+            this.txtphone.TabIndex = 175;
+            this.txtphone.Text = "Text";
+            this.txtphone.Visible = false;
+            // 
             // FrmMoreinfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(423, 212);
+            this.ClientSize = new System.Drawing.Size(481, 213);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.closebtn);
             this.Name = "FrmMoreinfo";
@@ -175,6 +288,10 @@ namespace Delmon_Managment_System.Forms
             this.Load += new System.EventHandler(this.FrmMoreinfo_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.piccompany)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picdept)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picemail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picphone)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -190,5 +307,13 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lbldepartment;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label txtphone;
+        private System.Windows.Forms.Label txtemail;
+        private System.Windows.Forms.Label txtdept;
+        private System.Windows.Forms.Label txtcomp;
+        private System.Windows.Forms.PictureBox picphone;
+        private System.Windows.Forms.PictureBox picemail;
+        private System.Windows.Forms.PictureBox picdept;
+        private System.Windows.Forms.PictureBox piccompany;
     }
 }
