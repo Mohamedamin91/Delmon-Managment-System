@@ -1269,8 +1269,16 @@ ORDER BY e.EmployeeID";
 
                     if (dr.HasRows)
                     {
-                        MessageBox.Show("This 'Contact Value'  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        dr.Dispose();
+                        dr.Close();
+                        SQLCONN.ExecuteQueries("insert into Contacts ( ContTypeID,ContValue,RefrenceID,CR_ID) values (@C1,@C2,@C3,@C4)",
+                                                       paramContactType, paramContact, paramRefrenceID, paramPID);
+                        MessageBox.Show("Record saved Successfully");
 
+                        dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID] ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =  " + EmployeeID + " ");
+                        Contacttxt.Text = "";
+                        cmbcontact.Text = "Select";
+                        SQLCONN.CloseConnection();
                     }
 
                     else
@@ -3061,6 +3069,37 @@ ORDER BY e.EmployeeID";
         {
             cmbempdepthistory.DroppedDown = false;
 
+        }
+
+        private void picVisa_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void picVisa_Click_1(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void picVisa_Click_2(object sender, EventArgs e)
+        {
+            if (txtvisanumber.Text != string.Empty)
+            {
+                Clipboard.SetText(txtvisanumber.Text);
+                txtvisa.Visible = true;
+                txtvisa.Text = "Copied !";
+            }
+            else
+            {
+                
+            }
+        }
+
+        private void picvisascreen_Click(object sender, EventArgs e)
+        {
+            VisaFrm visaform = new VisaFrm();
+            // this.Hide();
+            visaform.Show();
         }
     }
 }

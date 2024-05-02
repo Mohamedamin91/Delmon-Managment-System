@@ -38,6 +38,8 @@ namespace Delmon_Managment_System.Forms
        // System.Timers.Timer tmr = null;
         SqlParameter paramcomapany = new SqlParameter("@Comp", SqlDbType.Int);
         SqlParameter paramReservedTo = new SqlParameter("@CompReservedTo", SqlDbType.Int);
+        public bool btnExpireChk =false;
+        public bool Dgv3CHK = false;
 
 
 
@@ -551,9 +553,10 @@ namespace Delmon_Managment_System.Forms
 
         private void Visanumtxt_TextChanged(object sender, EventArgs e)
         {
-            Visanumtxt.BackColor = Color.White;
-            SQLCONN.OpenConection();
-            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT  [VisaNumber]
+            
+                Visanumtxt.BackColor = Color.White;
+                SQLCONN.OpenConection();
+                dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT  [VisaNumber]
       ,[ComapnyID]
       ,[ReceviedDate]
       ,[IssueDateHijri]
@@ -567,16 +570,18 @@ namespace Delmon_Managment_System.Forms
       ,[CRNumber]
       ,[ID_Number]
        FROM [DelmonGroupDB].[dbo].[VISA], [Companies] where Companies.COMPID=VISA.ComapnyID and VisaNumber LIKE '%" + Visanumtxt.Text + "%'");
-            SQLCONN.CloseConnection();
-            //this.dataGridView1.Columns[2].Visible = false;
-            //this.dataGridView1.Columns[4].Visible = false;
-            //this.dataGridView1.Columns[5].Visible = false;
-            //this.dataGridView1.Columns[6].Visible = false;
-            //this.dataGridView1.Columns[8].Visible = false;
+                SQLCONN.CloseConnection();
+                //this.dataGridView1.Columns[2].Visible = false;
+                //this.dataGridView1.Columns[4].Visible = false;
+                //this.dataGridView1.Columns[5].Visible = false;
+                //this.dataGridView1.Columns[6].Visible = false;
+                //this.dataGridView1.Columns[8].Visible = false;
 
 
-            dataGridView1.Visible = true;
-        }
+                dataGridView1.Visible = true;
+            }
+            
+        
 
         private void Visanumtxt_Leave(object sender, EventArgs e)
         {
@@ -1485,146 +1490,290 @@ namespace Delmon_Managment_System.Forms
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //dataGridView3.Visible = false;
-            if (e.RowIndex == -1) return;
-
-            dataGridView2.Visible = true;
-
-            SQLCONN.OpenConection();
-            string query = "SELECT COMPID,COMPName_EN FROM Companies";
-            cmbCompany.ValueMember = "COMPID";
-            cmbCompany.DisplayMember = "COMPName_EN";
-            cmbCompany.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query);
-            SQLCONN.CloseConnection();
-
-            foreach (DataGridViewRow rw in this.dataGridView1.Rows)
+            if (btnExpireChk && Dgv3CHK == true)
             {
-                for (int i = 0; i < rw.Cells.Count; i++)
+                //dataGridView3.Visible = false;
+                if (e.RowIndex == -1) return;
+
+                dataGridView2.Visible = true;
+
+                SQLCONN.OpenConection();
+                string query = "SELECT COMPID,COMPName_EN FROM Companies";
+                cmbCompany.ValueMember = "COMPID";
+                cmbCompany.DisplayMember = "COMPName_EN";
+                cmbCompany.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query);
+                SQLCONN.CloseConnection();
+
+                foreach (DataGridViewRow rw in this.dataGridView1.Rows)
+                {
+                    for (int i = 0; i < rw.Cells.Count; i++)
                     {
-                    if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
-                    {
-                        //   MessageBox.Show("ogg");       
-                    }
-                    else
-                    {
-                        object cell2Value = rw.Cells[2].Value;
-                        object cell3Value = rw.Cells[3].Value;
-                        object cell4Value = rw.Cells[4].Value;
-                        object cell5Value = rw.Cells[5].Value;
-                        object cell6Value = rw.Cells[6].Value;
-                        if (cell2Value != null && cell2Value != DBNull.Value && !string.IsNullOrEmpty(cell2Value.ToString()))
+                        if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
                         {
-                            ReceviedPicker.Value = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[2].Value);
+                            //   MessageBox.Show("ogg");       
                         }
-                        if (cell3Value != null && cell3Value != DBNull.Value && !string.IsNullOrEmpty(cell3Value.ToString()))
+                        else
                         {
-                            issuhijritxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString());
+                            object cell2Value = rw.Cells[2].Value;
+                            object cell3Value = rw.Cells[3].Value;
+                            object cell4Value = rw.Cells[4].Value;
+                            object cell5Value = rw.Cells[5].Value;
+                            object cell6Value = rw.Cells[6].Value;
+                            if (cell2Value != null && cell2Value != DBNull.Value && !string.IsNullOrEmpty(cell2Value.ToString()))
+                            {
+                                ReceviedPicker.Value = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[2].Value);
+                            }
+                            if (cell3Value != null && cell3Value != DBNull.Value && !string.IsNullOrEmpty(cell3Value.ToString()))
+                            {
+                                issuhijritxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString());
+                            }
+                            if (cell4Value != null && cell4Value != DBNull.Value && !string.IsNullOrEmpty(cell4Value.ToString()))
+                            {
+                                IssueDateENTxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
+                            }
+                            if (cell5Value != null && cell5Value != DBNull.Value && !string.IsNullOrEmpty(cell5Value.ToString()))
+                            {
+                                ExpiaryHijritxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString());
+                            }
+                            if (cell6Value != null && cell6Value != DBNull.Value && !string.IsNullOrEmpty(cell6Value.ToString()))
+                            {
+                                expairENDATEtxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString());
+                            }
+
+
+                            VisaNumberID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                            cmbCompany.SelectedValue = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
+
+                            TotalVisastxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString());
+                            RemarksTxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString());
+                            txtCRNumber.Text = (dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString());
+                            txtsponserID.Text = (dataGridView1.Rows[e.RowIndex].Cells[12].Value.ToString());
+
+                            dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber=" + VisaNumberID + " and  VISAJobList.StatusID != 6 ");
+
                         }
-                        if (cell4Value != null && cell4Value != DBNull.Value && !string.IsNullOrEmpty(cell4Value.ToString()))
-                        {
-                            IssueDateENTxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
-                        }
-                        if (cell5Value != null && cell5Value != DBNull.Value && !string.IsNullOrEmpty(cell5Value.ToString()))
-                        {
-                            ExpiaryHijritxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString());
-                        }
-                        if (cell6Value != null && cell6Value != DBNull.Value && !string.IsNullOrEmpty(cell6Value.ToString()))
-                        {
-                            expairENDATEtxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString());
-                        }
-
-
-                        VisaNumberID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-                        cmbCompany.SelectedValue = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
-         
-                        TotalVisastxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString());
-                        RemarksTxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString());
-                        txtCRNumber.Text = (dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString());
-                        txtsponserID.Text = (dataGridView1.Rows[e.RowIndex].Cells[12].Value.ToString());
-
-                        dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber=" + VisaNumberID + " ");
-
-                    }
-                      Visanumtxt.Text = VisaNumberID.ToString();
-
-                 
+                        Visanumtxt.Text = VisaNumberID.ToString();
 
 
 
-                    ///*calculate the */
-
-                    string a = issuhijritxt.Text.Trim();
-                    a = issuhijritxt.Text.TrimStart();
-                    a = issuhijritxt.Text.TrimEnd();
-                    DateTime toGegorian;
-                    DateTime b, b2, dtNOW;
-                  //  MessageBox.Show(a);
-                    if (a != "" && a != null)
-                    {
-                         toGegorian = DateTime.ParseExact(a, "dd/MM/yyyy", SA);
-                         b = DateTime.ParseExact(a, "dd/MM/yyyy", null);
-
-
-                          b2 = DateTime.ParseExact(a, "dd/MM/yyyy", null);
-                         dtNOW = DateTime.Now;
-                        dtNOW.ToString("dd/MM/yyyy");
-
-                        issuhijritxt.Text = b.ToString("f");
-                        IssueDateHijri = b.Date.ToString("dd/MM/yyyy");
-                        issuhijritxt.Text = IssueDateHijri.ToString();
-                        /*calculate expairy hiri date**/
-
-
-                        b2 = b2.Date.AddDays(709);
-                        ExpiryDateHijri = b2.ToString("dd/MM/yyyy");
-                        ExpiaryHijritxt.Text = ExpiryDateHijri.ToString();
-
-
-                        /*calculate issu milaidy  date**/
-                        IssueDateEN = toGegorian.ToString();
-                        IssueDateEN = toGegorian.ToString("dd/MM/yyyy");
-                        IssueDateENTxt.Text = IssueDateEN;
-
-
-
-
-
-                        ///*calculate expairy milaidy date**/
-                        toGegorian = toGegorian.AddDays(709);
-                        ExpiryDateENP = toGegorian.ToString("dd/MM/yyyy");
-                        expairENDATEtxt.Text = ExpiryDateENP;
 
 
                         ///*calculate the */
 
-                        DateTime futurDate = DateTime.ParseExact(ExpiryDateENP, "dd/MM/yyyy", null);
-                        var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
-
-                        if (numberOfDays <= 0)
+                        string a = issuhijritxt.Text.Trim();
+                        a = issuhijritxt.Text.TrimStart();
+                        a = issuhijritxt.Text.TrimEnd();
+                        DateTime toGegorian;
+                        DateTime b, b2, dtNOW;
+                        //  MessageBox.Show(a);
+                        if (a != "" && a != null)
                         {
-                            Remaininglbl.Text = "Expired";
+                            toGegorian = DateTime.ParseExact(a, "dd/MM/yyyy", SA);
+                            b = DateTime.ParseExact(a, "dd/MM/yyyy", null);
 
+
+                            b2 = DateTime.ParseExact(a, "dd/MM/yyyy", null);
+                            dtNOW = DateTime.Now;
+                            dtNOW.ToString("dd/MM/yyyy");
+
+                            issuhijritxt.Text = b.ToString("f");
+                            IssueDateHijri = b.Date.ToString("dd/MM/yyyy");
+                            issuhijritxt.Text = IssueDateHijri.ToString();
+                            /*calculate expairy hiri date**/
+
+
+                            b2 = b2.Date.AddDays(709);
+                            ExpiryDateHijri = b2.ToString("dd/MM/yyyy");
+                            ExpiaryHijritxt.Text = ExpiryDateHijri.ToString();
+
+
+                            /*calculate issu milaidy  date**/
+                            IssueDateEN = toGegorian.ToString();
+                            IssueDateEN = toGegorian.ToString("dd/MM/yyyy");
+                            IssueDateENTxt.Text = IssueDateEN;
+
+
+
+
+
+                            ///*calculate expairy milaidy date**/
+                            toGegorian = toGegorian.AddDays(709);
+                            ExpiryDateENP = toGegorian.ToString("dd/MM/yyyy");
+                            expairENDATEtxt.Text = ExpiryDateENP;
+
+
+                            ///*calculate the */
+
+                            DateTime futurDate = DateTime.ParseExact(ExpiryDateENP, "dd/MM/yyyy", null);
+                            var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
+
+                            if (numberOfDays <= 0)
+                            {
+                                Remaininglbl.Text = "Expired";
+
+                            }
+                            else
+                            {
+                                Remaininglbl.Text = numberOfDays.ToString();
+
+                            }
                         }
                         else
                         {
-                            Remaininglbl.Text = numberOfDays.ToString();
-
+                            toGegorian = DateTime.Now;
+                            b = DateTime.Now; b2 = DateTime.Now; dtNOW = DateTime.Now;
                         }
+
+
+
+                        ///*calculate the */
+
+
                     }
-                    else 
-                    {
-                         toGegorian = DateTime.Now;
-                        b = DateTime.Now; b2 = DateTime.Now; dtNOW = DateTime.Now;
-                    }
-
-
-
-                    ///*calculate the */
-
-
                 }
             }
+            else
+            {
+                //dataGridView3.Visible = false;
+                if (e.RowIndex == -1) return;
 
+                dataGridView2.Visible = true;
+
+                SQLCONN.OpenConection();
+                string query = "SELECT COMPID,COMPName_EN FROM Companies";
+                cmbCompany.ValueMember = "COMPID";
+                cmbCompany.DisplayMember = "COMPName_EN";
+                cmbCompany.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query);
+                SQLCONN.CloseConnection();
+
+                foreach (DataGridViewRow rw in this.dataGridView1.Rows)
+                {
+                    for (int i = 0; i < rw.Cells.Count; i++)
+                    {
+                        if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
+                        {
+                            //   MessageBox.Show("ogg");       
+                        }
+                        else
+                        {
+                            object cell2Value = rw.Cells[2].Value;
+                            object cell3Value = rw.Cells[3].Value;
+                            object cell4Value = rw.Cells[4].Value;
+                            object cell5Value = rw.Cells[5].Value;
+                            object cell6Value = rw.Cells[6].Value;
+                            if (cell2Value != null && cell2Value != DBNull.Value && !string.IsNullOrEmpty(cell2Value.ToString()))
+                            {
+                                ReceviedPicker.Value = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[2].Value);
+                            }
+                            if (cell3Value != null && cell3Value != DBNull.Value && !string.IsNullOrEmpty(cell3Value.ToString()))
+                            {
+                                issuhijritxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString());
+                            }
+                            if (cell4Value != null && cell4Value != DBNull.Value && !string.IsNullOrEmpty(cell4Value.ToString()))
+                            {
+                                IssueDateENTxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
+                            }
+                            if (cell5Value != null && cell5Value != DBNull.Value && !string.IsNullOrEmpty(cell5Value.ToString()))
+                            {
+                                ExpiaryHijritxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString());
+                            }
+                            if (cell6Value != null && cell6Value != DBNull.Value && !string.IsNullOrEmpty(cell6Value.ToString()))
+                            {
+                                expairENDATEtxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString());
+                            }
+
+
+                            VisaNumberID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                            cmbCompany.SelectedValue = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
+
+                            TotalVisastxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString());
+                            RemarksTxt.Text = (dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString());
+                            txtCRNumber.Text = (dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString());
+                            txtsponserID.Text = (dataGridView1.Rows[e.RowIndex].Cells[12].Value.ToString());
+
+                            dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber=" + VisaNumberID + " ");
+
+                        }
+                        Visanumtxt.Text = VisaNumberID.ToString();
+
+
+
+
+
+                        ///*calculate the */
+
+                        string a = issuhijritxt.Text.Trim();
+                        a = issuhijritxt.Text.TrimStart();
+                        a = issuhijritxt.Text.TrimEnd();
+                        DateTime toGegorian;
+                        DateTime b, b2, dtNOW;
+                        //  MessageBox.Show(a);
+                        if (a != "" && a != null)
+                        {
+                            toGegorian = DateTime.ParseExact(a, "dd/MM/yyyy", SA);
+                            b = DateTime.ParseExact(a, "dd/MM/yyyy", null);
+
+
+                            b2 = DateTime.ParseExact(a, "dd/MM/yyyy", null);
+                            dtNOW = DateTime.Now;
+                            dtNOW.ToString("dd/MM/yyyy");
+
+                            issuhijritxt.Text = b.ToString("f");
+                            IssueDateHijri = b.Date.ToString("dd/MM/yyyy");
+                            issuhijritxt.Text = IssueDateHijri.ToString();
+                            /*calculate expairy hiri date**/
+
+
+                            b2 = b2.Date.AddDays(709);
+                            ExpiryDateHijri = b2.ToString("dd/MM/yyyy");
+                            ExpiaryHijritxt.Text = ExpiryDateHijri.ToString();
+
+
+                            /*calculate issu milaidy  date**/
+                            IssueDateEN = toGegorian.ToString();
+                            IssueDateEN = toGegorian.ToString("dd/MM/yyyy");
+                            IssueDateENTxt.Text = IssueDateEN;
+
+
+
+
+
+                            ///*calculate expairy milaidy date**/
+                            toGegorian = toGegorian.AddDays(709);
+                            ExpiryDateENP = toGegorian.ToString("dd/MM/yyyy");
+                            expairENDATEtxt.Text = ExpiryDateENP;
+
+
+                            ///*calculate the */
+
+                            DateTime futurDate = DateTime.ParseExact(ExpiryDateENP, "dd/MM/yyyy", null);
+                            var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
+
+                            if (numberOfDays <= 0)
+                            {
+                                Remaininglbl.Text = "Expired";
+
+                            }
+                            else
+                            {
+                                Remaininglbl.Text = numberOfDays.ToString();
+
+                            }
+                        }
+                        else
+                        {
+                            toGegorian = DateTime.Now;
+                            b = DateTime.Now; b2 = DateTime.Now; dtNOW = DateTime.Now;
+                        }
+
+
+
+                        ///*calculate the */
+
+
+                    }
+                }
+            }
         }
 
         private void btnAssign_Click(object sender, EventArgs e)
@@ -2137,24 +2286,30 @@ namespace Delmon_Managment_System.Forms
 
         private void btnwexpire_Click(object sender, EventArgs e)
         {
+            btnExpireChk = true;
+
             dataGridView3.Visible = true;
             SQLCONN.OpenConection();
             dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT
     visa.VisaNumber,
-    ExpiryDateEN as ExpiryDate
+    visa.ExpiryDateEN AS ExpiryDate
 FROM
-    Visa, VISAJobList
+    Visa
+INNER JOIN
+    VISAJobList ON Visa.VisaNumber = VISAJobList.VisaNumber
 WHERE
-    VISAJobList.StatusID != 6
-    AND DATEDIFF(MONTH, GETDATE(), CONVERT(DATE, ExpiryDateEN, 103)) <= 1
-    AND CONVERT(DATE, ExpiryDateEN, 103) > GETDATE() -- Check if the visa has not yet expired
+   -- VISAJobList.StatusID != 6
+     DATEDIFF(MONTH, GETDATE(), CONVERT(DATE, visa.ExpiryDateEN, 103)) <= 1
+    AND CONVERT(DATE, visa.ExpiryDateEN, 103) > GETDATE() -- Check if the visa has not yet expired with one /M
 GROUP BY
-    visa.VisaNumber, ExpiryDateEN;");
+    visa.VisaNumber, visa.ExpiryDateEN;
+");
             SQLCONN.CloseConnection();
         }
 
         private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            Dgv3CHK = true;
             if (e.RowIndex == -1) return;
 
             foreach (DataGridViewRow rw in this.dataGridView3.Rows)
@@ -2189,6 +2344,35 @@ GROUP BY
         {
            // cmbConsulate.DroppedDown = false;
 
+        }
+
+        private void picemail_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtemail_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void picVisa_Click(object sender, EventArgs e)
+        {
+            if (Visanumtxt.Text != string.Empty)
+            {
+                Clipboard.SetText(Visanumtxt.Text);
+                txtvisa.Visible = true;
+                txtvisa.Text = "Copied !";
+            }
+            else
+            {
+
+            }
+        }
+
+        private void dataGridView3_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Dgv3CHK = true;
         }
     }
     }

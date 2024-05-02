@@ -1214,6 +1214,13 @@ namespace Delmon_Managment_System.Forms
                 }
             }
         }
+
+        private void picvisascreen_Click(object sender, EventArgs e)
+        {
+            VisaFrm visaform = new VisaFrm();
+            // this.Hide();
+            visaform.Show();
+        }
     }
 }
 

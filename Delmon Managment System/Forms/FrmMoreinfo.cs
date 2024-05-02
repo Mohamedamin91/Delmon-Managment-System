@@ -46,10 +46,12 @@ JOIN Contacts ON Employees.EmployeeID = Contacts.CR_ID
 JOIN ContactTypes ON Contacts.ContTypeID = ContactTypes.ContTypeID
 WHERE Contacts.RefrenceID = 2
   AND Employees.EmployeeID = @C0
-GROUP BY Companies.COMPName_EN, DeptTypes.Dept_Type_Name;",paramEnduserID);
+GROUP BY Companies.COMPName_EN, DeptTypes.Dept_Type_Name;", paramEnduserID);
                 if (dr.HasRows)
                 {
+                    lblEmployeeID.Text = CommonClass.EndUserID.ToString();
                     dr.Read();
+                   
                     if (dr["COMPName_EN"] == DBNull.Value)
                     {
                         lblCompany.Text = "There is no company for this Enduser";
@@ -112,11 +114,11 @@ GROUP BY Companies.COMPName_EN, DeptTypes.Dept_Type_Name;",paramEnduserID);
         private void piccompany_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(lblCompany.Text);
-            txtcomp.Visible = true;
-            txtdept.Visible = false;
-            txtphone.Visible = false;
+            //txtcomp.Visible = true;
+            //txtdept.Visible = false;
+            //txtphone.Visible = false;
             txtemail.Visible = false;
-            txtcomp.Text = "Copied !";
+           // txtcomp.Text = "Copied !";
            
 
         }
@@ -124,17 +126,18 @@ GROUP BY Companies.COMPName_EN, DeptTypes.Dept_Type_Name;",paramEnduserID);
         private void picdept_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(lbldepartment.Text);
-            txtcomp.Visible = false;
-            txtdept.Visible = true;
+         //   txtcomp.Visible = false;
+         //   txtdept.Visible = true;
             txtphone.Visible = false;
-            txtemail.Visible = false; txtdept.Text = "Copied !";
+            txtemail.Visible = false;
+          //  txtdept.Text = "Copied !";
         }
 
         private void picemail_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(lblemail.Text);
-            txtcomp.Visible = false;
-            txtdept.Visible = false;
+            //txtcomp.Visible = false;
+            //txtdept.Visible = false;
             txtphone.Visible = false;
             txtemail.Visible = true;
             txtemail.Text = "Copied !";
@@ -143,8 +146,8 @@ GROUP BY Companies.COMPName_EN, DeptTypes.Dept_Type_Name;",paramEnduserID);
         private void picphone_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(lblphone.Text);
-            txtcomp.Visible = false;
-            txtdept.Visible = false;
+            //txtcomp.Visible = false;
+            //txtdept.Visible = false;
             txtphone.Visible = true;
             txtemail.Visible = false; txtphone.Text = "Copied !";
         }

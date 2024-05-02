@@ -30,9 +30,10 @@ namespace Delmon_Managment_System.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VisaFrm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.Visanumtxt = new System.Windows.Forms.TextBox();
@@ -74,6 +75,8 @@ namespace Delmon_Managment_System.Forms
             this.label4 = new System.Windows.Forms.Label();
             this.VisaFileNumberID = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtvisa = new System.Windows.Forms.Label();
+            this.picVisa = new System.Windows.Forms.PictureBox();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.btnwexpire = new System.Windows.Forms.Button();
             this.label26 = new System.Windows.Forms.Label();
@@ -103,6 +106,7 @@ namespace Delmon_Managment_System.Forms
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picVisa)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
@@ -181,8 +185,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView1.Location = new System.Drawing.Point(674, 18);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridView1.Size = new System.Drawing.Size(629, 225);
             this.dataGridView1.TabIndex = 9;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
@@ -455,7 +459,7 @@ namespace Delmon_Managment_System.Forms
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnNew.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnNew.Location = new System.Drawing.Point(438, 18);
+            this.btnNew.Location = new System.Drawing.Point(465, 18);
             this.btnNew.Margin = new System.Windows.Forms.Padding(4);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(55, 27);
@@ -472,8 +476,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView2.Location = new System.Drawing.Point(696, 25);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView2.Name = "dataGridView2";
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView2.Size = new System.Drawing.Size(523, 190);
             this.dataGridView2.TabIndex = 83;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
@@ -558,7 +562,7 @@ namespace Delmon_Managment_System.Forms
             this.Findbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Findbtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.Findbtn.ForeColor = System.Drawing.Color.Firebrick;
-            this.Findbtn.Location = new System.Drawing.Point(501, 18);
+            this.Findbtn.Location = new System.Drawing.Point(528, 18);
             this.Findbtn.Margin = new System.Windows.Forms.Padding(4);
             this.Findbtn.Name = "Findbtn";
             this.Findbtn.Size = new System.Drawing.Size(54, 27);
@@ -638,6 +642,8 @@ namespace Delmon_Managment_System.Forms
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtvisa);
+            this.groupBox2.Controls.Add(this.picVisa);
             this.groupBox2.Controls.Add(this.dataGridView3);
             this.groupBox2.Controls.Add(this.btnwexpire);
             this.groupBox2.Controls.Add(this.label26);
@@ -680,6 +686,29 @@ namespace Delmon_Managment_System.Forms
             this.groupBox2.Text = "Visa Info";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter_1);
             // 
+            // txtvisa
+            // 
+            this.txtvisa.AutoSize = true;
+            this.txtvisa.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtvisa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.txtvisa.Location = new System.Drawing.Point(373, 28);
+            this.txtvisa.Name = "txtvisa";
+            this.txtvisa.Size = new System.Drawing.Size(35, 15);
+            this.txtvisa.TabIndex = 180;
+            this.txtvisa.Text = "Text";
+            this.txtvisa.Visible = false;
+            // 
+            // picVisa
+            // 
+            this.picVisa.Image = ((System.Drawing.Image)(resources.GetObject("picVisa.Image")));
+            this.picVisa.Location = new System.Drawing.Point(346, 27);
+            this.picVisa.Name = "picVisa";
+            this.picVisa.Size = new System.Drawing.Size(18, 18);
+            this.picVisa.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picVisa.TabIndex = 179;
+            this.picVisa.TabStop = false;
+            this.picVisa.Click += new System.EventHandler(this.picVisa_Click);
+            // 
             // dataGridView3
             // 
             this.dataGridView3.AllowUserToAddRows = false;
@@ -688,12 +717,13 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView3.Location = new System.Drawing.Point(1311, 18);
             this.dataGridView3.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView3.Name = "dataGridView3";
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridView3.Size = new System.Drawing.Size(257, 225);
             this.dataGridView3.TabIndex = 105;
             this.dataGridView3.Visible = false;
             this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick);
+            this.dataGridView3.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellDoubleClick);
             // 
             // btnwexpire
             // 
@@ -703,7 +733,7 @@ namespace Delmon_Managment_System.Forms
             this.btnwexpire.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnwexpire.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnwexpire.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnwexpire.Location = new System.Drawing.Point(501, 18);
+            this.btnwexpire.Location = new System.Drawing.Point(528, 18);
             this.btnwexpire.Margin = new System.Windows.Forms.Padding(4);
             this.btnwexpire.Name = "btnwexpire";
             this.btnwexpire.Size = new System.Drawing.Size(126, 27);
@@ -1058,6 +1088,7 @@ namespace Delmon_Managment_System.Forms
             this.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "VisaFrm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Visa";
             this.Load += new System.EventHandler(this.VisaFrm_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.VisaFrm_KeyUp);
@@ -1065,6 +1096,7 @@ namespace Delmon_Managment_System.Forms
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picVisa)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -1142,5 +1174,7 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Button btnwexpire;
         private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.Label txtvisa;
+        private System.Windows.Forms.PictureBox picVisa;
     }
 }

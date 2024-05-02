@@ -166,6 +166,28 @@
   <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>272, 17</value>
   </metadata>
+  <data name="picVisa.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EwAACxMBAJqcGAAAANJJREFUOE9jwAXMDfs1TU16/2Pinq/mRj3GFha90lCl+AE+g0xMuoNMjHvum5v3
+        K0CVMzCYmPQpYcNmZhP5gJqO4DIIyr4NdxmmQgg2M+51NDbuDsE0DNkgMB9iGKoiJGza62Fi3Psd07Ce
+        ryCNQItCYdjYuNcMr0EgGtOwnn8mJr3v0DFBg6D4p4lJTziQ3o8khoJxGgRyLjDQXWDY2LjHxsSkXx2b
+        WhDG7SJsGNWVKHjUICgevgYB05YuLFOjY5IMAhUt4JyODWDTgAvjNoiBAQCJaxSiSTQVFAAAAABJRU5E
+        rkJggg==
+</value>
+  </data>
+  <data name="picvisascreen.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EwAACxMBAJqcGAAAAWVJREFUOE+llM9Kw0AQxiPeBA/eBD168OIhmZ0YStWbPkFBxKsi3hQPRR/A2uxG
+        wUOpgtdCRcE+SPEq3vRB9Jt2qoH8odEPPnY2M/lldpONl6da7WqeyfaYXLfIxtiOlheLub0IUFOnuUL+
+        WsOsiOzqemAppGSbjb2VOG104Xve14zUloKQHKD4sNBkn6VbrS0FFSch5Jt/AhF15zQcqTLIGLeFZbzi
+        7Xxgr94x39f89KAwbC1jbMMPMsfeWPg8DJINzKcHjTfWHcN9dPSEeYsoPpFcZRDGUzbu8V+gKHJLgCSI
+        f5aG8QLfWB1jtc1mjjfRzdCQ+4TfEO9pvhqovna5IJbuJnGj0Z+tBDImZnTwInvza3fP7A4qgcLARbhx
+        Vy+NJGeQKTkSEMBnsLyQgaazEpDvuxV8jHfpjtDhDQd2R0ByoOUAC1xvy0pAGuZKQJOllQpP7+DpuT+y
+        sW1PfnpanpLnfQMYsN//OSV/kAAAAABJRU5ErkJggg==
+</value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>25</value>
   </metadata>
