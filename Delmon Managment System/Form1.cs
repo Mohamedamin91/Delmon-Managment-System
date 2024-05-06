@@ -120,15 +120,17 @@ namespace Delmon_Managment_System
             sqlconn.OpenConection();
             SqlDataReader dr=sqlconn.DataReader(@"SELECT
     visa.VisaNumber,
-    ExpiryDateEN as ExpiryDate
+    visa.ExpiryDateEN AS ExpiryDate
 FROM
-    Visa, VISAJobList
+    Visa
+INNER JOIN
+    VISAJobList ON Visa.VisaNumber = VISAJobList.VisaNumber
 WHERE
     VISAJobList.StatusID != 6
-    AND DATEDIFF(MONTH, GETDATE(), CONVERT(DATE, ExpiryDateEN, 103)) <= 1
-    AND CONVERT(DATE, ExpiryDateEN, 103) > GETDATE() -- Check if the visa has not yet expired
+    and DATEDIFF(MONTH, GETDATE(), CONVERT(DATE, visa.ExpiryDateEN, 103)) <= 1
+    AND CONVERT(DATE, visa.ExpiryDateEN, 103) > GETDATE() -- Check if the visa has not yet expired with one /M
 GROUP BY
-    visa.VisaNumber, ExpiryDateEN;");
+    visa.VisaNumber, visa.ExpiryDateEN;");
             if (dr.HasRows)
             {
                 ShowNotification();

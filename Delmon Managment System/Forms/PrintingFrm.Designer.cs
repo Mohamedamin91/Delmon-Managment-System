@@ -29,13 +29,17 @@ namespace Delmon_Managment_System.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintingFrm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintingFrm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.VisaReq = new System.Windows.Forms.TabPage();
+            this.cmbConsulate = new System.Windows.Forms.ComboBox();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.picvisascreen = new System.Windows.Forms.PictureBox();
             this.label10 = new System.Windows.Forms.Label();
             this.cmbReservedTo = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -83,10 +87,9 @@ namespace Delmon_Managment_System.Forms
             this.lblusername = new System.Windows.Forms.Label();
             this.lblusertype = new System.Windows.Forms.Label();
             this.delmon = new Delmon_Managment_System.Delmon();
-            this.picvisascreen = new System.Windows.Forms.PictureBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.VisaReq.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picvisascreen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -95,7 +98,6 @@ namespace Delmon_Managment_System.Forms
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.delmon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picvisascreen)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -112,6 +114,8 @@ namespace Delmon_Managment_System.Forms
             // 
             // VisaReq
             // 
+            this.VisaReq.Controls.Add(this.cmbConsulate);
+            this.VisaReq.Controls.Add(this.label44);
             this.VisaReq.Controls.Add(this.label11);
             this.VisaReq.Controls.Add(this.picvisascreen);
             this.VisaReq.Controls.Add(this.label10);
@@ -137,6 +141,52 @@ namespace Delmon_Managment_System.Forms
             this.VisaReq.Text = "Visa";
             this.VisaReq.UseVisualStyleBackColor = true;
             this.VisaReq.Click += new System.EventHandler(this.VisaReq_Click);
+            // 
+            // cmbConsulate
+            // 
+            this.cmbConsulate.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbConsulate.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.cmbConsulate.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.cmbConsulate.FormattingEnabled = true;
+            this.cmbConsulate.Location = new System.Drawing.Point(718, 155);
+            this.cmbConsulate.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbConsulate.Name = "cmbConsulate";
+            this.cmbConsulate.Size = new System.Drawing.Size(170, 25);
+            this.cmbConsulate.TabIndex = 185;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label44.Location = new System.Drawing.Point(715, 134);
+            this.label44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(113, 17);
+            this.label44.TabIndex = 186;
+            this.label44.Text = "Consulate City";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.Firebrick;
+            this.label11.Location = new System.Drawing.Point(898, 205);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(16, 15);
+            this.label11.TabIndex = 184;
+            this.label11.Text = "* ";
+            // 
+            // picvisascreen
+            // 
+            this.picvisascreen.Image = ((System.Drawing.Image)(resources.GetObject("picvisascreen.Image")));
+            this.picvisascreen.Location = new System.Drawing.Point(905, 220);
+            this.picvisascreen.Name = "picvisascreen";
+            this.picvisascreen.Size = new System.Drawing.Size(18, 18);
+            this.picvisascreen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picvisascreen.TabIndex = 183;
+            this.picvisascreen.TabStop = false;
+            this.picvisascreen.Click += new System.EventHandler(this.picvisascreen_Click);
             // 
             // label10
             // 
@@ -464,7 +514,6 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView3.Size = new System.Drawing.Size(827, 268);
             this.dataGridView3.TabIndex = 146;
             this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick);
-            this.dataGridView3.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView3_CellFormatting);
             // 
             // dataGridView1
             // 
@@ -692,29 +741,6 @@ namespace Delmon_Managment_System.Forms
             this.delmon.DataSetName = "Delmon";
             this.delmon.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // picvisascreen
-            // 
-            this.picvisascreen.Image = ((System.Drawing.Image)(resources.GetObject("picvisascreen.Image")));
-            this.picvisascreen.Location = new System.Drawing.Point(905, 220);
-            this.picvisascreen.Name = "picvisascreen";
-            this.picvisascreen.Size = new System.Drawing.Size(18, 18);
-            this.picvisascreen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picvisascreen.TabIndex = 183;
-            this.picvisascreen.TabStop = false;
-            this.picvisascreen.Click += new System.EventHandler(this.picvisascreen_Click);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.Firebrick;
-            this.label11.Location = new System.Drawing.Point(898, 205);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(16, 15);
-            this.label11.TabIndex = 184;
-            this.label11.Text = "* ";
-            // 
             // PrintingFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -732,6 +758,7 @@ namespace Delmon_Managment_System.Forms
             this.tabControl1.ResumeLayout(false);
             this.VisaReq.ResumeLayout(false);
             this.VisaReq.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picvisascreen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.groupBox2.ResumeLayout(false);
@@ -743,7 +770,6 @@ namespace Delmon_Managment_System.Forms
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.delmon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picvisascreen)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -801,5 +827,7 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.PictureBox picvisascreen;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox cmbConsulate;
+        private System.Windows.Forms.Label label44;
     }
 }

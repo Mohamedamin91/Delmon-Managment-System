@@ -2298,8 +2298,8 @@ FROM
 INNER JOIN
     VISAJobList ON Visa.VisaNumber = VISAJobList.VisaNumber
 WHERE
-   -- VISAJobList.StatusID != 6
-     DATEDIFF(MONTH, GETDATE(), CONVERT(DATE, visa.ExpiryDateEN, 103)) <= 1
+    VISAJobList.StatusID != 6
+    and DATEDIFF(MONTH, GETDATE(), CONVERT(DATE, visa.ExpiryDateEN, 103)) <= 1
     AND CONVERT(DATE, visa.ExpiryDateEN, 103) > GETDATE() -- Check if the visa has not yet expired with one /M
 GROUP BY
     visa.VisaNumber, visa.ExpiryDateEN;

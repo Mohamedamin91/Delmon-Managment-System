@@ -36,18 +36,7 @@ namespace Delmon_Managment_System.Forms
         private void PrintingFrm_Load(object sender, EventArgs e)
         {
 
-            //// Set report parameters
-            //ReportParameter param1 = new ReportParameter("param1", DateTime.Now.ToString("dd/MM/yyyy"));
-            //reportViewer1.LocalReport.SetParameters(param1);
-            //// Set report parameters
-            //ReportParameter param2 = new ReportParameter("param2", DateTime.Now.ToString("dd/MM/yyyy"));
-            //reportViewer1.LocalReport.SetParameters(param2);
-
-            //ReportParameter param3 = new ReportParameter("param3", DateTime.Now.ToString("dd/MM/yyyy"));
-            //reportViewer2.LocalReport.SetParameters(param3);
-            //// Set report parameters
-            //ReportParameter param4 = new ReportParameter("param4", DateTime.Now.ToString("dd/MM/yyyy"));
-            //reportViewer2.LocalReport.SetParameters(param4);
+            
 
 
             lblusername.Text = CommonClass.LoginUserName;
@@ -62,13 +51,7 @@ namespace Delmon_Managment_System.Forms
             {
                 //LoadTheme(); 
 
-                //cmbStatus.ValueMember = "statusid";
-                //cmbStatus.DisplayMember = "status";
-                //cmbStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select statusid,status  from Visastatus where RefrenceID =1 or RefrenceID = 0 order by statusid");
-                //cmbStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                //cmbStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-
+             
                 cmbPersonalStatusStatus.ValueMember = "StatusID";
                 cmbPersonalStatusStatus.DisplayMember = "StatusValue";
                 cmbPersonalStatusStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" select  StatusID , StatusValue  from StatusTBL where RefrenceID=2 or RefrenceID=0  ");
@@ -96,14 +79,19 @@ namespace Delmon_Managment_System.Forms
 
 
 
-
-
                 cmbcandidates2.ValueMember = "EmployeeID";
                 cmbcandidates2.DisplayMember = "Name";
                 cmbcandidates2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees]       order by EmployeeID");
                 cmbcandidates2.Text = "Select";
                 cmbcandidates2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 cmbcandidates2.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+                string query3 = "select Consulates.ConsulateID,ConsulateCity from Countries,Consulates where Countries.CountryId = Consulates.CountryId";
+                cmbConsulate.ValueMember = "Consulates.ConsulateID";
+                cmbConsulate.DisplayMember = "ConsulateCity";
+                cmbConsulate.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query3);
+
 
 
 
@@ -152,6 +140,14 @@ namespace Delmon_Managment_System.Forms
                     " AND Employees.DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = @C1 )", paramloggiedemployeeid);
                 cmbcandidates2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 cmbcandidates2.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+
+                string query3 = "select Consulates.ConsulateID,ConsulateCity from Countries,Consulates where Countries.CountryId = Consulates.CountryId";
+                cmbConsulate.ValueMember = "Consulates.ConsulateID";
+                cmbConsulate.DisplayMember = "ConsulateCity";
+                cmbConsulate.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query3);
+
 
 
 
@@ -575,163 +571,167 @@ namespace Delmon_Managment_System.Forms
 
         }
 
+
+        private bool shouldUpdateData = true;
         private void button3_Click(object sender, EventArgs e)
         {
+            // Clear the DataGridView's data source
+            dataGridView2.DataSource = null;
 
-
-            dataGridView4.DataSource = null;
+            // Define loggedEmployee and other variables
             loggedEmployee = CommonClass.EmployeeID;
 
-            SqlParameter paramDateFrom = new SqlParameter("@param1", SqlDbType.Date);
-            paramDateFrom.Value = dtpfrom.Value;
-            SqlParameter paramDateTo = new SqlParameter("@param2", SqlDbType.Date);
-            paramDateTo.Value = dtpto.Value;
-            SqlParameter paramCompany = new SqlParameter("@param4", SqlDbType.NVarChar);
-            paramCompany.Value = cmbCompany.SelectedValue;
-            SqlParameter paramReservedTo = new SqlParameter("@param5", SqlDbType.NVarChar);
-            paramReservedTo.Value = cmbReservedTo.SelectedValue;
+            // Construct SQL query
+            string query = @"
+        SELECT 
+            V.ComapnyID, 
+            J.ReservedTo, 
+            S.StatusID, 
+            C.ShortCompName as [Company], 
+            CO.ShortCompName as [Reserved To], 
+            S.Status as [VisaStatus], 
+            COUNT (DISTINCT J.FileNumber) AS [TotalFiles] 
+        FROM 
+            DelmonGroupDB.dbo.VISA V 
+        JOIN 
+            DelmonGroupDB.dbo.VISAJobList J ON V.VisaNumber = J.VISANumber 
+        JOIN 
+            DelmonGroupDB.dbo.Companies C ON V.ComapnyID = C.COMPID 
+        JOIN 
+            DelmonGroupDB.dbo.Companies CO ON J.ReservedTo = CO.COMPID 
+        JOIN 
+            DelmonGroupDB.dbo.VisaStatus S ON J.StatusID = S.StatusID AND S.RefrenceID = 1 
+        JOIN 
+            DelmonGroupDB.dbo.Employees E ON E.EmployeeID = J.EmployeeID 
+        WHERE 
+            TRY_CONVERT(DATETIME, v.IssueDateEN, 103) BETWEEN @fromDate AND @toDate";
 
-            // Define a list to store the selected status values
+            // Add conditions based on checkbox filters
             List<int> selectedStatus = new List<int>();
 
-            // Code to retrieve data and display in DataGridView
-            DataTable VisaReport = new DataTable();
+            if (cbNotused.Checked)
+            {
+                query += " AND J.StatusID = @statusNotUsed";
+                selectedStatus.Add(2);
+            }
 
+            if (cbReserved.Checked)
+            {
+                query += " AND J.StatusID = @statusReserved";
+                selectedStatus.Add(3);
+            }
+
+            // Add conditions based on combobox selections
+            if ((int)cmbCompany.SelectedValue != 0)
+            {
+                query += " AND V.ComapnyID = @companyId";
+            }
+
+            if ((int)cmbReservedTo.SelectedValue != 0)
+            {
+                query += " AND J.ReservedTo = @reservedToId";
+            }
+
+            if ((int)cmbConsulate.SelectedValue != 0)
+            {
+                query += " AND J.ConsulateID = @consulateId";
+            }
+
+            // Add fixed date conditions
+            query += @"
+        GROUP BY 
+            V.ComapnyID, J.ReservedTo, S.StatusID, C.ShortCompName, CO.ShortCompName, S.Status 
+        ORDER BY 
+            V.ComapnyID, J.ReservedTo, S.StatusID, C.ShortCompName, S.Status, CO.ShortCompName";
+
+            // Execute the SQL query
             using (SqlConnection connection = new SqlConnection(SQLCONN.ConnectionString))
             {
                 connection.Open();
-                string query = " SELECT V.ComapnyID, J.ReservedTo, S.StatusID, C.ShortCompName as [Company], CO.ShortCompName as [Reserved To], S.Status as [VisaStatus], " +
-                    "  COUNT (DISTINCT J.FileNumber) AS [TotalFiles] " +
-                    "FROM DelmonGroupDB.dbo.VISA V " +
-                    "JOIN DelmonGroupDB.dbo.VISAJobList J ON V.VisaNumber = J.VISANumber " +
-                    "JOIN DelmonGroupDB.dbo.Companies C ON V.ComapnyID = C.COMPID " +
-                    "JOIN DelmonGroupDB.dbo.Companies CO ON J.ReservedTo = CO.COMPID " +
-                    "JOIN DelmonGroupDB.dbo.VisaStatus S ON J.StatusID = S.StatusID AND S.RefrenceID = 1 " +
-                    "JOIN DelmonGroupDB.dbo.Employees E ON E.EmployeeID = J.EmployeeID " +
-                    "WHERE TRY_CONVERT(DATETIME, v.IssueDateEN, 103) BETWEEN @param1 AND @param2 ";
+                SqlCommand command = new SqlCommand(query, connection);
 
-                // Rest of your code...
+                // Add parameters
+                command.Parameters.AddWithValue("@fromDate", dtpfrom.Value);
+                command.Parameters.AddWithValue("@toDate", dtpto.Value);
 
-                // Rest of your code...
+                // Add parameters for checkbox filters
+                if (selectedStatus.Contains(2))
+                {
+                    command.Parameters.AddWithValue("@statusNotUsed", 2);
+                }
 
-                //company
+                if (selectedStatus.Contains(3))
+                {
+                    command.Parameters.AddWithValue("@statusReserved", 3);
+                }
+
+                // Add parameters for combobox selections
                 if ((int)cmbCompany.SelectedValue != 0)
                 {
-                    query += "AND V.ComapnyID = @param4 ";
+                    command.Parameters.AddWithValue("@companyId", cmbCompany.SelectedValue);
                 }
+
                 if ((int)cmbReservedTo.SelectedValue != 0)
                 {
-                    query += "AND j.ReservedTo = @param5 ";
+                    command.Parameters.AddWithValue("@reservedToId", cmbReservedTo.SelectedValue);
                 }
 
-                // Add the selected status filter to the query
-                if (cbNotused.Checked)
+                if ((int)cmbConsulate.SelectedValue != 0)
                 {
-                    selectedStatus.Add(2);
+                    command.Parameters.AddWithValue("@consulateId", cmbConsulate.SelectedValue);
                 }
-
-                if (cbReserved.Checked)
-                {
-                    selectedStatus.Add(3);
-                }
-
-                if (cbUnderProcess.Checked)
-                {
-                    selectedStatus.Add(4);
-                }
-
-                if (cbVISAStamped.Checked)
-                {
-                    selectedStatus.Add(5);
-                }
-
-                if (cbUsed.Checked)
-                {
-                    selectedStatus.Add(6);
-                }
-
-                if (cbExpired.Checked)
-                {
-                    selectedStatus.Add(7);
-                }
-
-                if (cbRefunded.Checked)
-                {
-                    selectedStatus.Add(8);
-                }
-
-                if (cbVISAExpiredAfterStamped.Checked)
-                {
-                    selectedStatus.Add(9);
-                }
-
-                if (selectedStatus.Count > 0)
-                {
-                    query += "AND J.StatusID IN (" + string.Join(",", selectedStatus) + ") ";
-                }
-
-                query += "GROUP BY V.ComapnyID,J.ReservedTo, S.StatusID, C.ShortCompName, CO.ShortCompName, S.Status " +
-                         "ORDER BY V.ComapnyID,J.ReservedTo, S.StatusID, C.ShortCompName, S.Status, CO.ShortCompName ";
-
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@param1", dtpfrom.Value);
-                command.Parameters.AddWithValue("@param2", dtpto.Value);
-                command.Parameters.AddWithValue("@param4", cmbCompany.SelectedValue);
-                command.Parameters.AddWithValue("@param5", cmbReservedTo.SelectedValue);
 
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable VisaReport = new DataTable();
                 adapter.Fill(VisaReport);
                 connection.Close();
-            }
 
-            // Bind the DataTable to the DataGridView
-            dataGridView2.DataSource = VisaReport;
-            dataGridView2.Columns[0].Visible = false; // Replace "ColumnName" with the actual name of the column
-            dataGridView2.Columns[1].Visible = false; // Replace "ColumnName" with the actual name of the column
-            dataGridView2.Columns[2].Visible = false; // Replace "ColumnName" with the actual name of the column
-                                                      // dataGridView2.Columns[6].Visible = false; // Replace "ColumnName" with the actual name of the column
-            dataGridView2.Columns[3].Width = 150; // Replace "ColumnName" with the actual name of the column
-            dataGridView2.Columns[4].Width = 150; // Replace "ColumnName" with the actual name of the column
-            dataGridView2.Columns[5].Width = 150; // Replace "ColumnName" with the actual name of the column
+                // Bind the DataTable to the DataGridView
+                dataGridView2.DataSource = VisaReport;
 
-            // Calculate the sum of the column
-            int sum = 0;
-            foreach (DataGridViewRow row in dataGridView2.Rows)
-            {
-                if (row.Cells[6].Value != null)
+                // Set column visibility and width
+                dataGridView2.Columns[0].Visible = false;
+                dataGridView2.Columns[1].Visible = false;
+                dataGridView2.Columns[2].Visible = false;
+                dataGridView2.Columns[3].Width = 150;
+                dataGridView2.Columns[4].Width = 150;
+                dataGridView2.Columns[5].Width = 150;
+
+                // Calculate total
+                int sum = 0;
+                foreach (DataGridViewRow row in dataGridView2.Rows)
                 {
-                    int quantity;
-                    if (int.TryParse(row.Cells[6].Value.ToString(), out quantity))
+                    if (row.Cells[6].Value != null)
                     {
-                        sum += quantity;
+                        int quantity;
+                        if (int.TryParse(row.Cells[6].Value.ToString(), out quantity))
+                        {
+                            sum += quantity;
+                        }
                     }
                 }
+
+                // Add total row
+                DataTable dataTable = (DataTable)dataGridView2.DataSource;
+                DataRow totalRow = dataTable.NewRow();
+                totalRow[3] = "Total";
+                totalRow[6] = sum;
+                dataTable.Rows.Add(totalRow);
+
+                // Get the DataGridViewRow for the total row
+                DataGridViewRow totalDataGridViewRow = dataGridView2.Rows[dataTable.Rows.Count - 1];
+
+                // Set the cell style for the new row
+                totalDataGridViewRow.DefaultCellStyle.BackColor = Color.YellowGreen;
+
+                // Refresh the DataGridView
+                dataGridView2.Refresh();
+
+                // Store filter dates
+                dtpfromreport = dtpfrom.Value;
+                dtptoreport = dtpto.Value;
             }
-
-            // Create a new DataRow for the total row
-            DataTable dataTable = (DataTable)dataGridView2.DataSource;
-            DataRow totalRow = dataTable.NewRow();
-            totalRow[3] = "Total";
-            totalRow[6] = sum;
-            // Add the total row to the DataTable
-            dataTable.Rows.Add(totalRow);
-
-            // Get the DataGridViewRow for the total row
-            DataGridViewRow totalDataGridViewRow = dataGridView2.Rows[dataTable.Rows.Count - 1];
-
-            // Set the cell style for the new row
-            totalDataGridViewRow.DefaultCellStyle.BackColor = Color.YellowGreen;
-
-            // Refresh the DataGridView to reflect the changes
-            dataGridView2.Refresh();
-
-            dtpfromreport = dtpfrom.Value;
-            dtptoreport = dtpto.Value;
-
-
         }
-
-        private bool shouldUpdateData = true;
 
         private DataTable LoadData(bool isLastRow, SqlParameter paramDateFrom, SqlParameter paramDateTo, SqlParameter paramVisaStatus, SqlParameter paramCompany, SqlParameter paramCell1, SqlParameter paramCell2)
         {
@@ -937,37 +937,11 @@ namespace Delmon_Managment_System.Forms
         // Call the CalculateAndDisplayTotal method whenever you want to update the total row
 
 
-        private void dataGridView3_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            //    Check if it's the desired column and the last row
-            //    if (e.ColumnIndex == dataGridView3.Columns[4].Index && e.RowIndex == dataGridView3.Rows.Count - 1)
-            //    {
-            //        int sum = 0;
-
-            //        Calculate the sum of the column
-            //        foreach (DataGridViewRow row in dataGridView3.Rows)
-            //        {
-            //            if (row.Cells[4].Value != null)
-            //            {
-            //                int quantity;
-            //                if (int.TryParse(row.Cells[4].Value.ToString(), out quantity))
-            //                {
-            //                    sum += quantity;
-            //                }
-            //            }
-            //        }
-
-            //        Set the value of the last cell in the column to the sum
-            //        e.Value = sum.ToString();
-            //        e.FormattingApplied = true;
-            //    }
-            //  CalculateAndDisplayTotal();
-        }
+        
 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
-            // if (e.RowIndex == -1)
+          //   if (e.RowIndex == -1)
 
             dataGridView4.Visible = true;
             // Check if the clicked cell is in the last row
@@ -1017,6 +991,7 @@ namespace Delmon_Managment_System.Forms
                 // Create a new DataTable to store the report data
                 DataTable VisaReport = new DataTable();
 
+              // when user click total cell
                 if (e.RowIndex == dataGridView2.Rows.Count - 1)
                 {
                     // Connect to the database and retrieve the report data
@@ -1025,12 +1000,6 @@ namespace Delmon_Managment_System.Forms
                         connection.Open();
 
                         // Build the query based on the user's selected options
-
-
-
-
-
-
 
                         string query0 = @"
     SELECT J.FileNumber,
@@ -1050,18 +1019,13 @@ namespace Delmon_Managment_System.Forms
     LEFT JOIN DelmonGroupDB.dbo.Jobs Jo ON Jo.jobid = j.jobid
     LEFT JOIN DelmonGroupDB.dbo.Companies CO_COMP ON J.ReservedTo = CO_COMP.COMPID
     LEFT JOIN DelmonGroupDB.dbo.Companies V_COMP ON V.ComapnyID = V_COMP.COMPID
-    WHERE TRY_CONVERT(DATETIME, V.IssueDateEN, 103) BETWEEN @param3 AND @param4
+    WHERE 
+     TRY_CONVERT(DATETIME, V.IssueDateEN, 103) BETWEEN @param3 AND @param4
+     
     GROUP BY J.FileNumber, J.Visanumber, S.Status, CO_COMP.COMPName_EN, V_COMP.COMPName_EN,
              TRIM(COALESCE(CONCAT(FirstName, ' '), '') + COALESCE(CONCAT(SecondName, ' '), '') +
              COALESCE(CONCAT(ThirdName, ' '), '') + COALESCE(Lastname, '')), E.EmployeeID,
              CON.ConsulateCity, V.IssueDateEN, Jo.[JobTitleEN], Jo.[JobTitleAR]";
-
-
-
-
-
-
-
 
 
 
@@ -1084,13 +1048,15 @@ namespace Delmon_Managment_System.Forms
                         }
                     }
 
-                    // Set the DataTable as the DataSource for the DataGridView
-                    dataGridView4.DataSource = VisaReport;
-               //     dataGridView4.Columns[5].Width = 300; // Replace "ColumnName" with the actual name of the column
+                         // Set the DataTable as the DataSource for the DataGridView
+                         dataGridView4.DataSource = VisaReport;
+                        //     dataGridView4.Columns[5].Width = 300; // Replace "ColumnName" with the actual name of the column
 
 
 
                 }
+
+                // when user click any cell except 'total'
                 else
                 {
                     // Connect to the database and retrieve the report data
@@ -1099,7 +1065,7 @@ namespace Delmon_Managment_System.Forms
                         connection.Open();
 
                         // Build the query based on the user's selected options
-                      
+
 
                         string query = @"
            	 SELECT J.FileNumber, J.Visanumber, E.EmployeeID,
@@ -1122,8 +1088,8 @@ namespace Delmon_Managment_System.Forms
     GROUP BY J.FileNumber, J.Visanumber, S.Status, Jo.JobTitleEN, CO.COMPName_EN,
     TRIM(COALESCE(CONCAT(FirstName, ' '), '') + COALESCE(CONCAT(SecondName, ' '), '') +
     COALESCE(CONCAT(ThirdName, ' '), '') + COALESCE(Lastname, '')), E.EmployeeID,CON.ConsulateCity,E.startDate";
-  
-   
+
+
 
                         // Create a new SqlCommand object with the query and parameters
                         using (SqlCommand command = new SqlCommand(query, connection))
@@ -1135,7 +1101,6 @@ namespace Delmon_Managment_System.Forms
                             command.Parameters.Add(paramreservedto);
                             //command.Parameters.Add(paramrFileNumber);
                             //  command.Parameters.Add(paramCandidate);
-
                             // Execute the query and fill the DataTable with the results
                             using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                             {
@@ -1143,22 +1108,13 @@ namespace Delmon_Managment_System.Forms
                             }
                         }
                     }
-
                     // Set the DataTable as the DataSource for the DataGridView
                     dataGridView4.DataSource = VisaReport;
                     dataGridView4.Columns[3].Width = 300; // Replace "ColumnName" with the actual name of the column
-
-
-
-                }
-
-
-
+               }
             }
         }
-        
-
-    private void ExportToExcelButton_Click(object sender, EventArgs e)
+            private void ExportToExcelButton_Click(object sender, EventArgs e)
         {
             using (var package = new ExcelPackage())
             {

@@ -582,7 +582,9 @@ WHERE
                     {
 
                         AssetID = (dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-                        AssetIDTXT.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+                        //MessageBox.Show(AssetID);
+                        //AssetIDTXT.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+                        AssetIDTXT.Text = AssetID;
                         txtsapid.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
                         txtSN.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
                         cmbtype.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
@@ -715,26 +717,7 @@ WHERE
                          "values (@idd,@C9,@C10)",
                                                   paramIDD, paramcmbAssignto, paramAssigndate);
 
-                            //     dr = SQLCONN3.DataReader("select  * from AssetAssign  where " +
-                            //" AssetID=@idd and EmployeeID = @C9 and AssginDate= @C10", paramIDD, paramcmbAssignto, paramAssigndate);
-
-                            //     if (dr.HasRows)
-                            //     {
-                            //         dr.Close();
-
-                            //         SQLCONN3.ExecuteQueries("update  AssetAssign set [EmployeeID]=@C9,[AssginDate]=@C10 where AssetID=@idd ", paramIDD, paramcmbAssignto, paramAssigndate);
-                            //     }
-                            //     else
-                            //     {
-                            //         dr.Close();
-
-                            //         SQLCONN3.ExecuteQueries("insert into AssetAssign ([AssetID],[EmployeeID],[AssginDate]) " +
-                            //      "values (@idd,@C9,@C10)",
-                            //                               paramIDD, paramcmbAssignto, paramAssigndate);
-
-                            //     }
-
-                            //     dr.Close();
+                           
 
                         }
                         else if ((int)cmbbrand.SelectedIndex == -1)
@@ -748,24 +731,6 @@ WHERE
                                                   paramIDD, paramcmbAssignto, paramAssigndate);
 
 
-                            //    dr = SQLCONN3.DataReader("select  * from AssetAssign  where " +
-                            //" AssetID=@idd and EmployeeID = @C9 and AssginDate= @C10", paramIDD, paramcmbAssignto, paramAssigndate);
-
-                            //    if (dr.HasRows)
-                            //    {
-                            //        dr.Close();
-
-                            //        SQLCONN3.ExecuteQueries("update  AssetAssign set [EmployeeID]=@C9,[AssginDate]=@C10 where AssetID=@idd ", paramIDD, paramcmbAssignto, paramAssigndate);
-                            //    }
-                            //    else
-                            //    {
-                            //        dr.Close();
-
-                            //        SQLCONN3.ExecuteQueries("insert into AssetAssign ([AssetID],[EmployeeID],[AssginDate]) " +
-                            //     "values (@idd,@C9,@C10)",
-                            //                              paramIDD, paramcmbAssignto, paramAssigndate);
-
-                            //    }
 
                         }
                         else if ((int)cmbAssetModel.SelectedIndex == -1)
@@ -778,23 +743,7 @@ WHERE
                                                   paramIDD, paramcmbAssignto, paramAssigndate);
 
 
-                            //     dr = SQLCONN3.DataReader("select  * from AssetAssign  where " +
-                            //" AssetID=@idd and EmployeeID = @C9 and AssginDate= @C10", paramIDD, paramcmbAssignto, paramAssigndate);
-
-                            //     //if (dr.HasRows)
-                            //     //{
-                            //     //    dr.Close();
-
-                            //     //    SQLCONN3.ExecuteQueries("update  AssetAssign set [EmployeeID]=@C9,[AssginDate]=@C10 where AssetID=@idd ", paramIDD, paramcmbAssignto, paramAssigndate);
-                            //     //}
-                            //     //else
-                            //     //{
-                            //     //    dr.Close();
-
-                            //     //    SQLCONN3.ExecuteQueries("insert into AssetAssign ([AssetID],[EmployeeID],[AssginDate]) " +
-                            //     // "values (@idd,@C9,@C10)",
-                            //     //                          paramIDD, paramcmbAssignto, paramAssigndate);
-                            //     //}
+                         
 
                         }
                         else if ((int)cmbDevice.SelectedIndex == -1)
@@ -807,24 +756,7 @@ WHERE
                          "values (@idd,@C9,@C10)",
                                                   paramIDD, paramcmbAssignto, paramAssigndate);
 
-                            //    dr = SQLCONN3.DataReader("select  * from AssetAssign  where " +
-                            //" AssetID=@idd and EmployeeID = @C9 and AssginDate= @C10", paramIDD, paramcmbAssignto, paramAssigndate);
-
-                            //    if (dr.HasRows)
-                            //    {
-                            //        dr.Close();
-
-                            //        SQLCONN3.ExecuteQueries("update  AssetAssign set [EmployeeID]=@C9,[AssginDate]=@C10 where AssetID=@idd ", paramIDD, paramcmbAssignto, paramAssigndate);
-                            //    }
-                            //    else
-                            //    {
-                            //        dr.Close();
-
-                            //        SQLCONN3.ExecuteQueries("insert into AssetAssign ([AssetID],[EmployeeID],[AssginDate]) " +
-                            //     "values (@idd,@C9,@C10)",
-                            //                              paramIDD, paramcmbAssignto, paramAssigndate);
-
-                            //    }
+                       
                         }
                         else if ((int)cmbAssetStatus.SelectedIndex == -1)
                         {
@@ -836,24 +768,7 @@ WHERE
                          "values (@idd,@C9,@C10)",
                                                   paramIDD, paramcmbAssignto, paramAssigndate);
 
-                            // dr = SQLCONN3.DataReader("select  * from AssetAssign  where " +
-                            //" AssetID=@idd and EmployeeID = @C9 and AssginDate= @C10", paramIDD, paramcmbAssignto, paramAssigndate);
-
-                            // if (dr.HasRows)
-                            // {
-                            //     dr.Close();
-
-                            //     SQLCONN3.ExecuteQueries("update  AssetAssign set [EmployeeID]=@C9,[AssginDate]=@C10 where AssetID=@idd ", paramIDD, paramcmbAssignto, paramAssigndate);
-                            // }
-                            // else
-                            // {
-                            //     dr.Close();
-
-                            //     SQLCONN3.ExecuteQueries("insert into AssetAssign ([AssetID],[EmployeeID],[AssginDate]) " +
-                            //  "values (@idd,@C9,@C10)",
-                            //                           paramIDD, paramcmbAssignto, paramAssigndate);
-
-                            // }
+                           
                         }
                         else
                         {
@@ -865,24 +780,7 @@ WHERE
                                                   paramIDD, paramcmbAssignto, paramAssigndate);
 
 
-                            //   dr = SQLCONN3.DataReader("select  * from AssetAssign  where " +
-                            //" AssetID=@idd  ", paramIDD);
-
-                            //   if (dr.HasRows)
-                            //   {
-                            //       dr.Close();
-
-                            //       SQLCONN3.ExecuteQueries("update  AssetAssign set [EmployeeID]=@C9,[AssginDate]=@C10 where AssetID=@idd ", paramIDD, paramcmbAssignto, paramAssigndate);
-                            //   }
-                            //   else
-                            //   {
-                            //       dr.Close();
-
-                            //       SQLCONN3.ExecuteQueries("insert into AssetAssign ([AssetID],[EmployeeID],[AssginDate]) " +
-                            //    "values (@idd,@C9,@C10)",
-                            //                             paramIDD, paramcmbAssignto, paramAssigndate);
-
-                            //   }
+                       
 
                         }
 
@@ -892,7 +790,6 @@ WHERE
 
 
                         MessageBox.Show("Record Updated Successfully");
-                        // dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT id_History,[EmployeeID],NewID,StatusTBL.StatusValue,[JOBS].JobTitleEN, DeptTypes.Dept_Type_Name,[StartDate],[EndDate],[UserID],[DatetimeLog]  FROM[DelmonGroupDB].[dbo].[EmploymentStatus], JOBS, DEPARTMENTS, StatusTBL, DeptTypes  where   StatusTBL.StatusID = EmploymentStatus.EmploymentStatusID and DEPARTMENTS.DeptName = EmploymentStatus.DeptID   and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID  and JOBS.JobID = EmploymentStatus.JobID  and  NEWID = @C14  ", paramNewID);
 
                         dataGridView1.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(@"
                               SELECT Assets.AssetID, Assets.SapAssetId, Assets.sn, AssetType.AssettypeValue, AssetBrand.AssetBrandValue, Assets.Model,[PurchasingDate]
@@ -945,7 +842,7 @@ WHERE
             paramID.Value = AssetID;
             if (AssetID == null)
             {
-                MessageBox.Show("Please Choose A Record !  ");
+                MessageBox.Show("Please Choose A Record !");
 
             }
             else
@@ -956,6 +853,7 @@ WHERE
                     dataGridView5.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(@" 
 SELECT 
     Assets.AssetID,
+
     DeviceDetials.DeviceDetilasID,
     DeviceDetials.DeviceDetialsValue,
     CASE
@@ -980,6 +878,8 @@ WHERE
                     dataGridView5.Columns[3].Width = 200;
                     dataGridView5.Columns[2].Width = 200;
                 }
+
+                // asset history tab
                 if (tabControl2.SelectedTab == tabControl2.TabPages[1])
                 {
                     dataGridView2.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(@"
@@ -1438,22 +1338,7 @@ where
 
 
 
-            //SQLCONN3.OpenConection();
-            //SqlParameter paramAssetModelSearch = new SqlParameter("@C1", SqlDbType.NVarChar);
-            //paramAssetModelSearch.Value = cmbtype.SelectedValue;
-            //SqlParameter paramAssetBrandSearch = new SqlParameter("@C2", SqlDbType.NVarChar);
-            //paramAssetBrandSearch.Value = cmbbrand.SelectedValue;
-
-            //string query2 = @" SELECT AssetModeID,AssetModel FROM AssetsModel where AssetTypeID= @C1 and AssetBrandID= @C2 ";
-
-            //cmbAssetModel.ValueMember = "AssetModeID";
-            //cmbAssetModel.DisplayMember = "AssetModel";
-            //cmbAssetModel.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(query2, paramAssetModelSearch, paramAssetBrandSearch);
-            //cmbAssetModel.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //cmbAssetModel.AutoCompleteSource = AutoCompleteSource.ListItems;
-            //cmbAssetModel.Text = "Select";
-
-            //SQLCONN3.CloseConnection();
+        
 
 
         }
@@ -1530,7 +1415,7 @@ where
                 A.[AssetID], 
               
                 CONCAT(E.[FirstName], ' ', E.[SecondName], ' ', E.[ThirdName], ' ', E.[LastName]) AS 'FullName',  A.[AssginDate] 
-            FROM 
+            FROM
                 [DelmonGroupAssests].[dbo].[AssetAssign] A
             INNER JOIN 
                 [DelmonGroupDB].[dbo].[Employees] E ON A.[EmployeeID] = E.[EmployeeID] AND assetid = @ID", paramID);
@@ -1569,8 +1454,8 @@ where
             SELECT  
                 A.[AssetID], 
               
-                CONCAT(E.[FirstName], ' ', E.[SecondName], ' ', E.[ThirdName], ' ', E.[LastName]) AS 'FullName',  A.[AssginDate], 
-            FROM 
+                CONCAT(E.[FirstName], ' ', E.[SecondName], ' ', E.[ThirdName], ' ', E.[LastName]) AS 'FullName',  A.[AssginDate]
+            FROM
                 [DelmonGroupAssests].[dbo].[AssetAssign] A
             INNER JOIN 
                 [DelmonGroupDB].[dbo].[Employees] E ON A.[EmployeeID] = E.[EmployeeID] AND assetid = @ID", paramID);
