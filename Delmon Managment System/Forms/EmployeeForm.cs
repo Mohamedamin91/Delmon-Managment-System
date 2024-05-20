@@ -36,6 +36,12 @@ namespace Delmon_Managment_System.Forms
         string destinationFilePath;
         string fileName;
 
+        bool hasView = false;
+        bool hasEdit = false;
+        bool hasDelete = false;
+        bool hasAdd = false;
+
+
 
 
 
@@ -93,158 +99,176 @@ namespace Delmon_Managment_System.Forms
 
         private void EmployeeForm_Load(object sender, EventArgs e)
         {
-            if (CommonClass.EmployeeID == 179 || CommonClass.EmployeeID == 248)
-            {
-                btndeletecontact.Enabled = btndeletedoc.Enabled = button4.Enabled = button1.Enabled = true;
-            }
-            else {
-                btndeletecontact.Enabled = btndeletedoc.Enabled = button4.Enabled = button1.Enabled = false;
 
-            }
-            // tabControl1.TabPages.Remove(EmploymentHistory);
-
-            //tabControl1.TabPages.Remove(SalaryTab);
-
-
-            lblusername.Text = CommonClass.LoginUserName;
-            lblusertype.Text = CommonClass.Usertype;
-            lblemail.Text = CommonClass.Email;
-            lblPC.Text = Environment.MachineName;
-            loggedEmpolyeeID = CommonClass.EmployeeID;
-            lblFullname.Text = CommonClass.LoginEmployeeName;
-
-            SqlParameter paramloggiedemployeeid = new SqlParameter("@C1", SqlDbType.NVarChar);
-            paramloggiedemployeeid.Value = loggedEmpolyeeID;
             SQLCONN.OpenConection();
-
-            //            if (lblusertype.Text == "Admin")
-            //            {
-            //                DeleteBTN.Enabled = btndeletecontact.Enabled = btndeletedoc.Enabled = button1.Enabled = button4.Enabled = true;
-            //                dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"
-            //SELECT Employees.EmployeeID, Employees.CurrentEmpID, FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus, StatusTBL.StatusValue, jobs.JobTitleEN, DeptTypes.Dept_Type_Name, Companies.COMPName_EN, 
-            //startdate, enddate, NationalityName,v.FileNumber, v.VISANumber 
-            //FROM Employees
-            //JOIN Countries ON Countries.CountryId = Employees.NationalityID
-            //JOIN DEPARTMENTS ON Employees.DeptID = DEPARTMENTS.DEPTID
-            //JOIN DeptTypes ON DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID
-            //JOIN StatusTBL ON Employees.EmploymentStatusID = StatusTBL.StatusID
-            //JOIN JOBS ON Employees.JobID = JOBS.JobID
-            //LEFT JOIN VISAJobList v ON Employees.EmployeeID = v.EmployeeID
-            //JOIN Companies ON Employees.COMPID = Companies.COMPID AND DEPARTMENTS.COMPID = Companies.COMPID
-            //ORDER BY EmployeeID DESC;
-            //");
-            //            }
-            //            else
-            //            {
-            //                string query = "SELECT Employees.EmployeeID, Employees.CurrentEmpID, FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus, StatusTBL.StatusValue, jobs.JobTitleEN, DeptTypes.Dept_Type_Name, Companies.COMPName_EN, startdate, enddate,NationalityName " +
-            //                  "FROM Employees " +
-            //                  "INNER JOIN StatusTBL ON Employees.EmploymentStatusID = StatusTBL.StatusID " +
-            //                  "INNER JOIN JOBS ON Employees.JobID = JOBS.JobID " +
-            //                  "INNER JOIN DEPARTMENTS ON Employees.DeptID = DEPARTMENTS.DEPTID " +
-            //                  "INNER JOIN DeptTypes ON DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID " +
-            //                  "INNER JOIN Companies ON DEPARTMENTS.COMPID = Companies.COMPID " +
-            //                  "INNER JOIN Countries ON Countries.CountryId = Employees.NationalityID " +
-            //                  "WHERE Employees.DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = @C1) " +
-            //                  "ORDER BY Employees.EmployeeID ASC";
-            //               //    Doctxt.Visible = false;
-
-            //                dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramloggiedemployeeid);
-            //            }
+            SqlDataReader dr = SQLCONN.DataReader(@"
+        SELECT ps.PermissionName
+        FROM UserPermissions us
+        JOIN tblUserType ut ON us.UserTypeID = ut.UserTypeID
+        JOIN Permissions ps ON us.PermissionID = ps.PermissionID
+        WHERE ut.UserType = @UserType",
+            new SqlParameter("@UserType", SqlDbType.NVarChar) { Value = CommonClass.Usertype });
 
 
-
-
-            firstnametxt.Enabled = secondnametxt.Enabled = thirdnametxt.Enabled = lastnametxt.Enabled = false;
-            cmbMartialStatus.Enabled = cmbGender.Enabled = cmbempdepthistory.Enabled = cmbEmployJobHistory.Enabled = cmbPersonalStatusStatus.Enabled = cmbnationality.Enabled = false;
-            StartDatePicker.Enabled = EndDatePicker.Enabled = false;
-
-            this.timer1.Interval = 1000;
-            timer1.Start();
-
-            this.ActiveControl = firstnametxt;
-
-            AddBtn.Visible = DeleteBTN.Visible = Updatebtn.Visible = false;
-            btnNew.Visible = true;
-
-
-
-
-
-            cmbCompany.ValueMember = "COMPID";
-            cmbCompany.DisplayMember = "COMPName_EN";
-            cmbCompany.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT COMPID,COMPName_EN FROM Companies");
-
-
-
-            cmbDocuments.ValueMember = "DocType_ID";
-            cmbDocuments.DisplayMember = "Doc_Type";
-            cmbDocuments.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT DocType_ID,Doc_Type FROM DocumentType");
-
-            cmbcontact.ValueMember = "ContTypeID";
-            cmbcontact.DisplayMember = "ContType";
-            cmbcontact.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT ContTypeID ,ContType FROM ContactTypes ");
-
-
-            //CmbReqierdJob.ValueMember = "JobID";
-            //CmbReqierdJob.DisplayMember = "JobTitleEN";
-            //CmbReqierdJob.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS");
-
-
-
-
-            //cmbReferredBy.ValueMember = "empid";
-            //cmbReferredBy.DisplayMember = "EmpName";
-            //cmbReferredBy.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT empid,EmpName FROM Employees ");
-
-            cmbPersonalStatusStatus.ValueMember = "StatusID";
-            cmbPersonalStatusStatus.DisplayMember = "StatusValue";
-            cmbPersonalStatusStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" select  StatusID , StatusValue  from StatusTBL where RefrenceID=2  ");
-            cmbPersonalStatusStatus.AutoCompleteMode = AutoCompleteMode.Suggest;
-            cmbPersonalStatusStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-            cmbEmployJobHistory.ValueMember = "JobID";
-            cmbEmployJobHistory.DisplayMember = "JobTitleEN";
-            cmbEmployJobHistory.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS");
-            cmbEmployJobHistory.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbEmployJobHistory.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-            //cmbempdepthistory.ValueMember = "DEPTID";
-            //cmbempdepthistory.DisplayMember = "Dept_Type_Name";
-            //cmbempdepthistory.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT DEPTID,[DeptName],Dept_Type_Name FROM [DelmonGroupDB].[dbo].[DEPARTMENTS], DeptTypes where DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID");
-            //cmbempdepthistory.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //cmbempdepthistory.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-            cmbissueplace.ValueMember = "Consulates.ConsulateID";
-            cmbissueplace.DisplayMember = "ConsulateCity";
-            cmbissueplace.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select Consulates.ConsulateID,ConsulateCity from Countries,Consulates where Countries.CountryId = Consulates.CountryId");
-            cmbissueplace.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbissueplace.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-            //cmbCountry.ValueMember = "CountryId";
-            //cmbCountry.DisplayMember = "CountryName";
-            //cmbCountry.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select CountryId,CountryName from Countries ");
-            cmbsalarytype.ValueMember = "SalaryTypeID";
-            cmbsalarytype.DisplayMember = "SalaryTypeName";
-            cmbsalarytype.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select SalaryTypeID,SalaryTypeName from SalaryTypes");
-            cmbsalarytype.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbsalarytype.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-
-            cmbnationality.ValueMember = "CountryId";
-            cmbnationality.DisplayMember = "NationalityName";
-            cmbnationality.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select CountryId,NationalityName from Countries");
-            cmbnationality.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbnationality.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-
-
-
-            cmbPersonalStatusStatus.Text = "Select";
-            cmbempdepthistory.Text = "Select";
-            CurrentEmployeeIDtxt.Enabled = true;
-
-
+            while (dr.Read())
+            {
+                string permissionName = dr["PermissionName"].ToString();
+                if (permissionName.Contains("ViewPersonalInformation"))
+                    
+                {
+                    hasView = true;
+                }
+                if (permissionName.Contains("EditPersonalInformation"))
+                {
+                    hasEdit = true;
+                }
+                if (permissionName.Contains("DeletePersonalInformation"))
+                {
+                    hasDelete = true;
+                }
+                if (permissionName.Contains("AddPersonalInformation"))
+                {
+                    hasAdd = true;
+                }
+            }
+            dr.Close();
             SQLCONN.CloseConnection();
+            if (hasView == false)
+            {
+                MessageBox.Show("Sorry, You are not allowed to view this Module/Screen , kindly contact the administrator !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Employeetxt.Enabled = false;
+              
+            }
+            else
+
+            {
+                Employeetxt.Enabled = true;
+                if (hasEdit)
+                {
+                    // btnUpdate.Visible = true;
+                    Updatebtn.Enabled = true;
+                }
+                else
+                {
+                    Updatebtn.Enabled = false;
+                }
+                if (hasDelete)
+                {
+                  DeleteBTN.Enabled=  btndeletecontact.Enabled = btndeletedoc.Enabled = button4.Enabled = button1.Enabled = true;
+                }
+                else
+                {
+                    DeleteBTN.Enabled = btndeletecontact.Enabled = btndeletedoc.Enabled = button4.Enabled = button1.Enabled = false;
+
+                }
+                if (hasAdd)
+                {
+                   btnCancel.Enabled= AddBtn.Enabled = true;
+                     btnNew.Enabled = true;
+
+                }
+                else
+                {
+                    btnCancel.Enabled = AddBtn.Enabled = false;
+                    btnNew.Enabled = false;
+
+
+                }
+
+
+
+
+                firstnametxt.Enabled = secondnametxt.Enabled = thirdnametxt.Enabled = lastnametxt.Enabled = false;
+                cmbMartialStatus.Enabled = cmbGender.Enabled = cmbempdepthistory.Enabled = cmbEmployJobHistory.Enabled = cmbPersonalStatusStatus.Enabled = cmbnationality.Enabled = false;
+                StartDatePicker.Enabled = EndDatePicker.Enabled = false;
+
+
+
+
+
+
+                lblusername.Text = CommonClass.LoginUserName;
+                lblusertype.Text = CommonClass.Usertype;
+                lblemail.Text = CommonClass.Email;
+                lblPC.Text = Environment.MachineName;
+                loggedEmpolyeeID = CommonClass.EmployeeID;
+                lblFullname.Text = CommonClass.LoginEmployeeName;
+
+                SqlParameter paramloggiedemployeeid = new SqlParameter("@C1", SqlDbType.NVarChar);
+                paramloggiedemployeeid.Value = loggedEmpolyeeID;
+                SQLCONN.OpenConection();
+
+
+
+
+              
+
+                this.timer1.Interval = 1000;
+                timer1.Start();
+
+                this.ActiveControl = firstnametxt;
+
+
+
+
+
+
+
+                cmbCompany.ValueMember = "COMPID";
+                cmbCompany.DisplayMember = "COMPName_EN";
+                cmbCompany.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT COMPID,COMPName_EN FROM Companies");
+
+
+
+                cmbDocuments.ValueMember = "DocType_ID";
+                cmbDocuments.DisplayMember = "Doc_Type";
+                cmbDocuments.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT DocType_ID,Doc_Type FROM DocumentType");
+
+                cmbcontact.ValueMember = "ContTypeID";
+                cmbcontact.DisplayMember = "ContType";
+                cmbcontact.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT ContTypeID ,ContType FROM ContactTypes ");
+
+                cmbPersonalStatusStatus.ValueMember = "StatusID";
+                cmbPersonalStatusStatus.DisplayMember = "StatusValue";
+                cmbPersonalStatusStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" select  StatusID , StatusValue  from StatusTBL where RefrenceID=2  ");
+                cmbPersonalStatusStatus.AutoCompleteMode = AutoCompleteMode.Suggest;
+                cmbPersonalStatusStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+                cmbEmployJobHistory.ValueMember = "JobID";
+                cmbEmployJobHistory.DisplayMember = "JobTitleEN";
+                cmbEmployJobHistory.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS");
+                cmbEmployJobHistory.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cmbEmployJobHistory.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+                cmbissueplace.ValueMember = "Consulates.ConsulateID";
+                cmbissueplace.DisplayMember = "ConsulateCity";
+                cmbissueplace.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select Consulates.ConsulateID,ConsulateCity from Countries,Consulates where Countries.CountryId = Consulates.CountryId");
+                cmbissueplace.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cmbissueplace.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+                cmbsalarytype.ValueMember = "SalaryTypeID";
+                cmbsalarytype.DisplayMember = "SalaryTypeName";
+                cmbsalarytype.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select SalaryTypeID,SalaryTypeName from SalaryTypes");
+                cmbsalarytype.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cmbsalarytype.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+                cmbnationality.ValueMember = "CountryId";
+                cmbnationality.DisplayMember = "NationalityName";
+                cmbnationality.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select CountryId,NationalityName from Countries");
+                cmbnationality.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cmbnationality.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+
+
+                cmbPersonalStatusStatus.Text = "Select";
+                cmbempdepthistory.Text = "Select";
+                CurrentEmployeeIDtxt.Enabled = true;
+
+
+                SQLCONN.CloseConnection();
+            }
 
         }
 
@@ -1598,7 +1622,10 @@ ORDER BY e.EmployeeID";
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            AddBtn.Visible = true;
+            if (hasAdd)
+            {
+                AddBtn.Visible = true;
+            }
             btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = false;
             firstnametxt.Enabled = secondnametxt.Enabled = thirdnametxt.Enabled = lastnametxt.Enabled = true;
             cmbMartialStatus.Enabled = cmbGender.Enabled = cmbempdepthistory.Enabled = cmbEmployJobHistory.Enabled = cmbPersonalStatusStatus.Enabled = cmbCompany.Enabled = cmbnationality.Enabled = true;
@@ -1738,17 +1765,45 @@ ORDER BY e.EmployeeID";
 
 
 
-
-
-                        if (CommonClass.EmployeeID == 179 || CommonClass.EmployeeID == 248)
+                        if (hasEdit)
                         {
-                            DeleteBTN.Enabled = true;
+                            // btnUpdate.Visible = true;
+                            Updatebtn.Enabled = true;
                         }
                         else
                         {
-                            DeleteBTN.Enabled = false;
+                            Updatebtn.Enabled = false;
+                        }
+                        if (hasDelete)
+                        {
+                            DeleteBTN.Enabled = btndeletecontact.Enabled = btndeletedoc.Enabled = button4.Enabled = button1.Enabled = true;
+                        }
+                        else
+                        {
+                            DeleteBTN.Enabled = btndeletecontact.Enabled = btndeletedoc.Enabled = button4.Enabled = button1.Enabled = false;
 
                         }
+                        if (hasAdd)
+                        {
+                            btnCancel.Enabled = AddBtn.Enabled = true;
+                            btnNew.Enabled = true;
+
+                        }
+                        else
+                        {
+                            btnCancel.Enabled = AddBtn.Enabled = false;
+                            btnNew.Enabled = false;
+
+
+                        }
+
+
+
+
+
+
+
+                      
 
 
 

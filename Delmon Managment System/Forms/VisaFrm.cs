@@ -41,6 +41,11 @@ namespace Delmon_Managment_System.Forms
         public bool btnExpireChk =false;
         public bool Dgv3CHK = false;
 
+        bool hasView = false;
+        bool hasEdit = false;
+        bool hasDelete = false;
+        bool hasAdd = false;
+
 
 
 
@@ -55,29 +60,7 @@ namespace Delmon_Managment_System.Forms
 
 
             InitializeComponent();
-          //  cmbJob.KeyDown += new KeyEventHandler(cmbJob_KeyDown);
-         //   this.timer1.Interval = 1000;
-        //    timer1.Start();
-
-
-
-            //  Font newFont = new Font("Times New Roman", 12);
-
-            // Loop through all controls on the form and change their font properties
-        //    foreach (Control control in Controls)
-            //{
-         // //      control.Font = newFont;
-//}
-
-
-            //cmbStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //cmbStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
-            //cmbConsulate.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //cmbConsulate.AutoCompleteSource = AutoCompleteSource.ListItems;
-            //cmbCompany.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //cmbCompany.AutoCompleteSource = AutoCompleteSource.ListItems;
-            ////cmbJob.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //cmbJob.AutoCompleteSource = AutoCompleteSource.ListItems;
+      
 
 
 
@@ -108,30 +91,94 @@ namespace Delmon_Managment_System.Forms
         {
             this.timer1.Interval = 1000;
             timer1.Start();
+            SQLCONN.OpenConection();
+            SqlDataReader dr = SQLCONN.DataReader(@"
+        SELECT ps.PermissionName
+        FROM UserPermissions us
+        JOIN tblUserType ut ON us.UserTypeID = ut.UserTypeID
+        JOIN Permissions ps ON us.PermissionID = ps.PermissionID
+        WHERE ut.UserType = @UserType",
+           new SqlParameter("@UserType", SqlDbType.NVarChar) { Value = CommonClass.Usertype });
+
+        
+            while (dr.Read())
+            {
+                string permissionName = dr["PermissionName"].ToString();
+                if (permissionName.Contains("ViewVisa"))
+                {
+                    hasView = true;
+                }
+                if (permissionName.Contains("EditVisa"))
+                {
+                    hasEdit = true;
+                }
+                if (permissionName.Contains("DeleteVisa"))
+                {
+                    hasDelete = true;
+                }
+                if (permissionName.Contains("AddVisa"))
+                {
+                    hasAdd = true;
+                }
+            }
+            dr.Close();
+            SQLCONN.CloseConnection();
+            if (hasView == false)
+            {
+                MessageBox.Show("Sorry, You are not allowed to view this Module/Screen , kindly contact the administrator !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Visanumtxt.Enabled = false;
+            }
+            else 
+
+            {
+              
+                this.ActiveControl = Visanumtxt;
 
 
-            // cmbConsulate.Text = cmbJob.Text = cmbStatus.Text = cmbcandidates.Text = cmbcandidates2.Text = cmbAgency.Text = "Select";
+                if (hasEdit)
+                {
 
-            //lblusername.Text = CommonClass.LoginUserName;
-            //lblusertype.Text = CommonClass.Usertype;
-            //lblemail.Text = CommonClass.Email;
-            //lblFullname.Text = CommonClass.LoginEmployeeName;
-            //lblPC.Text = Environment.MachineName;
+                   // btnUpdate.Visible = true;
+                    btnUpdate.Enabled = true;
+                }
+                if (hasDelete)
+                {
+                   // DeleteBtn.Visible = true;
+                    DeleteBtn.Enabled = true;
+                }
+                if (hasAdd)
+                {
+                    btnNew.Visible = btnAssign.Visible = AddBtn.Visible = btnFinish.Visible = button2.Enabled = btnnewJob.Visible = true;
+                    btnNew.Enabled = btnAssign.Enabled = AddBtn.Enabled = btnFinish.Enabled = button2.Enabled = btnnewJob.Enabled = true;
+                }
 
-           
+            }
+
+            SQLCONN.CloseConnection();
 
 
 
-            AddBtn.Visible = DeleteBtn.Visible = btnFinish.Visible = Findbtn.Visible = true;
-            btnNew.Visible = Findbtn.Visible = true;
 
-            this.ActiveControl = Visanumtxt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
         }
-       
+
 
         private void visasToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1104,7 +1151,12 @@ namespace Delmon_Managment_System.Forms
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            btnUpdate.Visible = AddBtn.Visible = DeleteBtn.Visible = btnFinish.Visible = true;
+            if (hasAdd==true)
+            {
+                AddBtn.Visible = btnFinish.Visible = true;
+            }
+
+           
             btnNew.Visible = Findbtn.Visible = false;
             ClearTextBoxes();
             VisaFrm_Load(sender, e);
@@ -1112,7 +1164,7 @@ namespace Delmon_Managment_System.Forms
             Visanumtxt.BackColor = Color.White;
             TotalVisastxt.BackColor = Color.White;
             cmbReservedTo.Enabled = cmbCompany.Enabled = cmbcandidates.Enabled = cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = cmbAgency.Enabled = true;
-           txtCRNumber.Enabled= txtsponserID.Enabled= TotalVisastxt.Enabled = RemarksTxt.Enabled = true;
+            txtCRNumber.Enabled= txtsponserID.Enabled= TotalVisastxt.Enabled = RemarksTxt.Enabled = true;
             ReceviedPicker.Enabled = true;
             // set the hint text for the TextBox control
             Visanumtxt.Focus();
@@ -1395,12 +1447,6 @@ namespace Delmon_Managment_System.Forms
 
 
 
-         
-
-
-
-
-
 
             if (e.RowIndex == -1) return;
 
@@ -1457,25 +1503,46 @@ namespace Delmon_Managment_System.Forms
                         }
 
 
+                        if (hasEdit)
+                        {
+
+                            btnUpdate.Visible = true;
+                            btnUpdate.Enabled = true;
+                        }
+                        if (hasDelete)
+                        {
+                             DeleteBtn.Visible = true;
+                            DeleteBtn.Enabled = true;
+                        }
+                        if (hasAdd)
+                        {
+                            btnNew.Visible = btnAssign.Visible = AddBtn.Visible = btnFinish.Visible = button2.Enabled = btnnewJob.Visible = true;
+                            btnNew.Enabled = btnAssign.Enabled = AddBtn.Enabled = btnFinish.Enabled = button2.Enabled = btnnewJob.Enabled = true;
+                        }
+
 
                         /*update job consule for Mr.saleem/Amin*/
-                            if (CommonClass.EmployeeID == 179 || CommonClass.EmployeeID ==248)
-                            {
+                        //    if (CommonClass.EmployeeID == 179 || CommonClass.EmployeeID ==248)
+                        //    {
 
-                            VisaFileNumberID.Text = FileNumberID.ToString();
-                            cmbConsulate.Enabled = cmbJob.Enabled = true;
-                            cmbReservedTo.Enabled = cmbStatus.Enabled = cmbcandidates.Enabled = cmbAgency.Enabled = true;
-                            btnnewJob.Enabled = false;
-                            btnUpdate.Visible = true;
-                        }
-                        else
-                        {
-                            VisaFileNumberID.Text = FileNumberID.ToString();
-                            cmbConsulate.Enabled = cmbJob.Enabled = false;
-                            cmbReservedTo.Enabled = cmbStatus.Enabled = cmbcandidates.Enabled = cmbAgency.Enabled = true;
-                            btnnewJob.Enabled = false;
-                            btnUpdate.Visible = true;
-                        }
+                        //    VisaFileNumberID.Text = FileNumberID.ToString();
+                        //    cmbConsulate.Enabled = cmbJob.Enabled = true;
+                        //    cmbReservedTo.Enabled = cmbStatus.Enabled = cmbcandidates.Enabled = cmbAgency.Enabled = true;
+                        //    btnnewJob.Enabled = false;
+                        //    btnUpdate.Visible = true;
+                        //}
+                        //else
+                        //{
+                        //    VisaFileNumberID.Text = FileNumberID.ToString();
+                        //    cmbConsulate.Enabled = cmbJob.Enabled = false;
+                        //    cmbReservedTo.Enabled = cmbStatus.Enabled = cmbcandidates.Enabled = cmbAgency.Enabled = true;
+
+                        //    btnnewJob.Enabled = false;
+                        //    if (hasAdd)
+                        //    {
+                        //        btnUpdate.Visible = true;
+                        //    }
+                        //}
 
 
 
@@ -2289,6 +2356,7 @@ namespace Delmon_Managment_System.Forms
             btnExpireChk = true;
 
             dataGridView3.Visible = true;
+            lblexpire.Visible = true;
             SQLCONN.OpenConection();
             dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT
     visa.VisaNumber,
@@ -2305,6 +2373,12 @@ GROUP BY
     visa.VisaNumber, visa.ExpiryDateEN;
 ");
             SQLCONN.CloseConnection();
+            // Check if the DataGridView has no data
+            if (dataGridView3.Rows.Count == 0)
+            {
+                // Display your message
+                MessageBox.Show("There are No visas that will expire within one month.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)

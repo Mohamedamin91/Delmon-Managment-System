@@ -82,7 +82,7 @@ namespace Delmon_Managment_System.Forms
             this.closebtn.ForeColor = System.Drawing.Color.White;
             this.closebtn.Location = new System.Drawing.Point(-4, 194);
             this.closebtn.Name = "closebtn";
-            this.closebtn.Size = new System.Drawing.Size(492, 45);
+            this.closebtn.Size = new System.Drawing.Size(574, 45);
             this.closebtn.TabIndex = 158;
             this.closebtn.Text = "Close";
             this.closebtn.UseVisualStyleBackColor = false;
@@ -106,7 +106,7 @@ namespace Delmon_Managment_System.Forms
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(457, 176);
+            this.groupBox1.Size = new System.Drawing.Size(549, 176);
             this.groupBox1.TabIndex = 162;
             this.groupBox1.TabStop = false;
             // 
@@ -137,7 +137,7 @@ namespace Delmon_Managment_System.Forms
             this.txtphone.AutoSize = true;
             this.txtphone.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtphone.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.txtphone.Location = new System.Drawing.Point(358, 143);
+            this.txtphone.Location = new System.Drawing.Point(479, 143);
             this.txtphone.Name = "txtphone";
             this.txtphone.Size = new System.Drawing.Size(35, 15);
             this.txtphone.TabIndex = 175;
@@ -149,7 +149,7 @@ namespace Delmon_Managment_System.Forms
             this.txtemail.AutoSize = true;
             this.txtemail.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtemail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.txtemail.Location = new System.Drawing.Point(358, 112);
+            this.txtemail.Location = new System.Drawing.Point(479, 112);
             this.txtemail.Name = "txtemail";
             this.txtemail.Size = new System.Drawing.Size(35, 15);
             this.txtemail.TabIndex = 174;
@@ -159,7 +159,7 @@ namespace Delmon_Managment_System.Forms
             // picphone
             // 
             this.picphone.Image = ((System.Drawing.Image)(resources.GetObject("picphone.Image")));
-            this.picphone.Location = new System.Drawing.Point(330, 140);
+            this.picphone.Location = new System.Drawing.Point(451, 140);
             this.picphone.Name = "picphone";
             this.picphone.Size = new System.Drawing.Size(18, 18);
             this.picphone.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -170,7 +170,7 @@ namespace Delmon_Managment_System.Forms
             // picemail
             // 
             this.picemail.Image = ((System.Drawing.Image)(resources.GetObject("picemail.Image")));
-            this.picemail.Location = new System.Drawing.Point(330, 109);
+            this.picemail.Location = new System.Drawing.Point(451, 109);
             this.picemail.Name = "picemail";
             this.picemail.Size = new System.Drawing.Size(18, 18);
             this.picemail.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -249,7 +249,7 @@ namespace Delmon_Managment_System.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(481, 236);
+            this.ClientSize = new System.Drawing.Size(573, 241);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.closebtn);
             this.Name = "FrmMoreinfo";

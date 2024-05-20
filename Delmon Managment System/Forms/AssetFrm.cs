@@ -498,7 +498,7 @@ WITH LastAssignments AS (
         asi.AssetID, 
         asi.EmployeeID, 
         asi.AssginDate,
-        ROW_NUMBER() OVER (PARTITION BY asi.AssetID ORDER BY asi.AssginDate DESC) AS RowNum
+        ROW_NUMBER() OVER (PARTITION BY asi.AssetID ORDER BY asi.ID DESC) AS RowNum
     FROM
         AssetAssign asi
 )
@@ -528,7 +528,6 @@ WHERE
     A.AssetID LIKE '%' + @C1 + '%' OR
     AT.AssettypeValue LIKE '%' + @C1 + '%' OR
     AB.AssetBrandValue LIKE '%' + @C1 + '%';
-
 
 
 ";
@@ -883,11 +882,21 @@ WHERE
                 if (tabControl2.SelectedTab == tabControl2.TabPages[1])
                 {
                     dataGridView2.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(@"
-            SELECT  
+         SELECT  A.ID,
     A.[AssetID], 
     CONCAT(E.[FirstName], ' ', E.[SecondName], ' ', E.[ThirdName], ' ', E.[LastName]) AS 'FullName',  
-    A.[AssginDate] from [AssetAssign] A  INNER JOIN [DelmonGroupDB].[dbo].[Employees] E ON A.[EmployeeID] = E.[EmployeeID]  WHERE A.[AssetID] = @ID; ", paramID);
-                    dataGridView2.Columns[1].Width = 300;
+    A.[AssginDate]
+FROM 
+    [AssetAssign] A  
+INNER JOIN 
+    [DelmonGroupDB].[dbo].[Employees] E ON A.[EmployeeID] = E.[EmployeeID]  
+WHERE 
+    A.[AssetID] = @ID
+ORDER BY 
+    A.[ID] DESC;", paramID);
+                    dataGridView2.Columns[2].Width = 300;
+                    dataGridView2.Columns["ID"].Visible = false;
+
 
                 }
 

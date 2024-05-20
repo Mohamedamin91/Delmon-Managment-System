@@ -23,8 +23,8 @@ namespace Delmon_Managment_System
       
         public static int DeptID { get; set; }
         public static int DOCID { get; set; }
-
         public static int EndUserID { get; set; }
+        public static int UserPermissionID{ get; set; }
 
 
     }

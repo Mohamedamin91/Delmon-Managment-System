@@ -30,9 +30,13 @@ namespace Delmon_Managment_System.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.userTap = new System.Windows.Forms.TabPage();
             this.btnnew = new System.Windows.Forms.Button();
@@ -50,6 +54,24 @@ namespace Delmon_Managment_System.Forms
             this.usernametxt = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.addbtn = new System.Windows.Forms.Button();
+            this.permissionstab = new System.Windows.Forms.TabPage();
+            this.label36 = new System.Windows.Forms.Label();
+            this.button30 = new System.Windows.Forms.Button();
+            this.dataGridView10 = new System.Windows.Forms.DataGridView();
+            this.txtdelete = new System.Windows.Forms.TextBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.txtedit = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.txtadd = new System.Windows.Forms.TextBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.txtselect = new System.Windows.Forms.TextBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.button19 = new System.Windows.Forms.Button();
+            this.button24 = new System.Windows.Forms.Button();
+            this.button29 = new System.Windows.Forms.Button();
+            this.dataGridView9 = new System.Windows.Forms.DataGridView();
+            this.cmbusertype1 = new System.Windows.Forms.ComboBox();
+            this.label25 = new System.Windows.Forms.Label();
             this.jobsTap = new System.Windows.Forms.TabPage();
             this.BtnnewJob = new System.Windows.Forms.Button();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
@@ -127,6 +149,27 @@ namespace Delmon_Managment_System.Forms
             this.txtAD = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.dataGridView6 = new System.Windows.Forms.DataGridView();
+            this.ConsulatesTAB = new System.Windows.Forms.TabPage();
+            this.dataGridView5 = new System.Windows.Forms.DataGridView();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.button20 = new System.Windows.Forms.Button();
+            this.cmbcont = new System.Windows.Forms.ComboBox();
+            this.button21 = new System.Windows.Forms.Button();
+            this.label24 = new System.Windows.Forms.Label();
+            this.button22 = new System.Windows.Forms.Button();
+            this.txtconsulatcity = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.button23 = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.txtcontname = new System.Windows.Forms.TextBox();
+            this.button25 = new System.Windows.Forms.Button();
+            this.button26 = new System.Windows.Forms.Button();
+            this.label33 = new System.Windows.Forms.Label();
+            this.button27 = new System.Windows.Forms.Button();
+            this.txtnationname = new System.Windows.Forms.TextBox();
+            this.button28 = new System.Windows.Forms.Button();
+            this.dataGridView8 = new System.Windows.Forms.DataGridView();
             this.EmployeeLogTap = new System.Windows.Forms.TabPage();
             this.notificationsTap = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -137,9 +180,14 @@ namespace Delmon_Managment_System.Forms
             this.lblusername = new System.Windows.Forms.Label();
             this.lblusertype = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.label37 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.userTap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.permissionstab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView9)).BeginInit();
             this.jobsTap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.agenciesTap.SuspendLayout();
@@ -151,22 +199,30 @@ namespace Delmon_Managment_System.Forms
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).BeginInit();
+            this.ConsulatesTAB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
+            this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView8)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox7.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.userTap);
+            this.tabControl1.Controls.Add(this.permissionstab);
             this.tabControl1.Controls.Add(this.jobsTap);
             this.tabControl1.Controls.Add(this.agenciesTap);
             this.tabControl1.Controls.Add(this.Companiestap);
+            this.tabControl1.Controls.Add(this.ConsulatesTAB);
             this.tabControl1.Controls.Add(this.EmployeeLogTap);
             this.tabControl1.Controls.Add(this.notificationsTap);
             this.tabControl1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.tabControl1.Location = new System.Drawing.Point(1, -2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1282, 627);
+            this.tabControl1.Size = new System.Drawing.Size(1169, 627);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.TabStop = false;
             this.tabControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseClick);
@@ -193,7 +249,7 @@ namespace Delmon_Managment_System.Forms
             this.userTap.Location = new System.Drawing.Point(4, 26);
             this.userTap.Name = "userTap";
             this.userTap.Padding = new System.Windows.Forms.Padding(3);
-            this.userTap.Size = new System.Drawing.Size(1274, 597);
+            this.userTap.Size = new System.Drawing.Size(1161, 597);
             this.userTap.TabIndex = 0;
             this.userTap.Text = "Users";
             this.userTap.Click += new System.EventHandler(this.userTap_Click);
@@ -254,9 +310,9 @@ namespace Delmon_Managment_System.Forms
             this.Generatebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Generatebtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.Generatebtn.ForeColor = System.Drawing.Color.Navy;
-            this.Generatebtn.Location = new System.Drawing.Point(279, 216);
+            this.Generatebtn.Location = new System.Drawing.Point(264, 201);
             this.Generatebtn.Name = "Generatebtn";
-            this.Generatebtn.Size = new System.Drawing.Size(169, 44);
+            this.Generatebtn.Size = new System.Drawing.Size(95, 64);
             this.Generatebtn.TabIndex = 60;
             this.Generatebtn.Text = "Generate Password";
             this.Generatebtn.UseVisualStyleBackColor = false;
@@ -286,7 +342,7 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(491, 6);
+            this.dataGridView1.Location = new System.Drawing.Point(380, 6);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(764, 269);
             this.dataGridView1.TabIndex = 57;
@@ -381,8 +437,235 @@ namespace Delmon_Managment_System.Forms
             this.addbtn.Visible = false;
             this.addbtn.Click += new System.EventHandler(this.addbtn_Click);
             // 
+            // permissionstab
+            // 
+            this.permissionstab.BackColor = System.Drawing.Color.White;
+            this.permissionstab.Controls.Add(this.groupBox7);
+            this.permissionstab.Controls.Add(this.button30);
+            this.permissionstab.Controls.Add(this.dataGridView10);
+            this.permissionstab.Controls.Add(this.txtdelete);
+            this.permissionstab.Controls.Add(this.label30);
+            this.permissionstab.Controls.Add(this.txtedit);
+            this.permissionstab.Controls.Add(this.label32);
+            this.permissionstab.Controls.Add(this.txtadd);
+            this.permissionstab.Controls.Add(this.label34);
+            this.permissionstab.Controls.Add(this.txtselect);
+            this.permissionstab.Controls.Add(this.label35);
+            this.permissionstab.Controls.Add(this.button19);
+            this.permissionstab.Controls.Add(this.button24);
+            this.permissionstab.Controls.Add(this.button29);
+            this.permissionstab.Controls.Add(this.dataGridView9);
+            this.permissionstab.Controls.Add(this.cmbusertype1);
+            this.permissionstab.Controls.Add(this.label25);
+            this.permissionstab.Location = new System.Drawing.Point(4, 26);
+            this.permissionstab.Name = "permissionstab";
+            this.permissionstab.Padding = new System.Windows.Forms.Padding(3);
+            this.permissionstab.Size = new System.Drawing.Size(1161, 597);
+            this.permissionstab.TabIndex = 8;
+            this.permissionstab.Text = "Permissions";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.label36.Location = new System.Drawing.Point(7, 21);
+            this.label36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(336, 45);
+            this.label36.TabIndex = 154;
+            this.label36.Text = "- You can select more than one row (Add operation)\r\n\r\n\r\n";
+            // 
+            // button30
+            // 
+            this.button30.BackColor = System.Drawing.Color.White;
+            this.button30.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button30.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button30.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button30.ForeColor = System.Drawing.Color.Firebrick;
+            this.button30.Location = new System.Drawing.Point(16, 314);
+            this.button30.Name = "button30";
+            this.button30.Size = new System.Drawing.Size(70, 26);
+            this.button30.TabIndex = 153;
+            this.button30.Text = "New";
+            this.button30.UseVisualStyleBackColor = false;
+            this.button30.Click += new System.EventHandler(this.button30_Click);
+            // 
+            // dataGridView10
+            // 
+            this.dataGridView10.AllowUserToAddRows = false;
+            this.dataGridView10.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView10.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView10.Location = new System.Drawing.Point(737, 6);
+            this.dataGridView10.Name = "dataGridView10";
+            dataGridViewCellStyle43.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView10.RowsDefaultCellStyle = dataGridViewCellStyle43;
+            this.dataGridView10.Size = new System.Drawing.Size(288, 254);
+            this.dataGridView10.TabIndex = 152;
+            this.dataGridView10.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView10_CellClick);
+            // 
+            // txtdelete
+            // 
+            this.txtdelete.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.txtdelete.Location = new System.Drawing.Point(16, 263);
+            this.txtdelete.Name = "txtdelete";
+            this.txtdelete.Size = new System.Drawing.Size(249, 25);
+            this.txtdelete.TabIndex = 151;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label30.ForeColor = System.Drawing.Color.Black;
+            this.label30.Location = new System.Drawing.Point(16, 242);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(55, 17);
+            this.label30.TabIndex = 150;
+            this.label30.Text = "Delete";
+            // 
+            // txtedit
+            // 
+            this.txtedit.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.txtedit.Location = new System.Drawing.Point(16, 209);
+            this.txtedit.Name = "txtedit";
+            this.txtedit.Size = new System.Drawing.Size(249, 25);
+            this.txtedit.TabIndex = 149;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label32.ForeColor = System.Drawing.Color.Black;
+            this.label32.Location = new System.Drawing.Point(13, 190);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(36, 17);
+            this.label32.TabIndex = 148;
+            this.label32.Text = "Edit";
+            // 
+            // txtadd
+            // 
+            this.txtadd.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.txtadd.Location = new System.Drawing.Point(16, 152);
+            this.txtadd.Name = "txtadd";
+            this.txtadd.Size = new System.Drawing.Size(249, 25);
+            this.txtadd.TabIndex = 147;
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label34.ForeColor = System.Drawing.Color.Black;
+            this.label34.Location = new System.Drawing.Point(16, 133);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(37, 17);
+            this.label34.TabIndex = 146;
+            this.label34.Text = "Add";
+            // 
+            // txtselect
+            // 
+            this.txtselect.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.txtselect.Location = new System.Drawing.Point(16, 98);
+            this.txtselect.Name = "txtselect";
+            this.txtselect.Size = new System.Drawing.Size(249, 25);
+            this.txtselect.TabIndex = 145;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label35.ForeColor = System.Drawing.Color.Black;
+            this.label35.Location = new System.Drawing.Point(13, 79);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(103, 17);
+            this.label35.TabIndex = 144;
+            this.label35.Text = "View (Select)";
+            // 
+            // button19
+            // 
+            this.button19.BackColor = System.Drawing.Color.White;
+            this.button19.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button19.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button19.ForeColor = System.Drawing.Color.Firebrick;
+            this.button19.Location = new System.Drawing.Point(277, 317);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(70, 26);
+            this.button19.TabIndex = 143;
+            this.button19.Text = "Delete";
+            this.button19.UseVisualStyleBackColor = false;
+            this.button19.Visible = false;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
+            // 
+            // button24
+            // 
+            this.button24.BackColor = System.Drawing.Color.White;
+            this.button24.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button24.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button24.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button24.ForeColor = System.Drawing.Color.Firebrick;
+            this.button24.Location = new System.Drawing.Point(193, 315);
+            this.button24.Name = "button24";
+            this.button24.Size = new System.Drawing.Size(70, 26);
+            this.button24.TabIndex = 142;
+            this.button24.Text = "Update";
+            this.button24.UseVisualStyleBackColor = false;
+            this.button24.Visible = false;
+            this.button24.Click += new System.EventHandler(this.button24_Click);
+            // 
+            // button29
+            // 
+            this.button29.BackColor = System.Drawing.Color.White;
+            this.button29.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button29.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button29.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button29.ForeColor = System.Drawing.Color.Firebrick;
+            this.button29.Location = new System.Drawing.Point(105, 315);
+            this.button29.Name = "button29";
+            this.button29.Size = new System.Drawing.Size(70, 26);
+            this.button29.TabIndex = 141;
+            this.button29.Text = "Add";
+            this.button29.UseVisualStyleBackColor = false;
+            this.button29.Visible = false;
+            this.button29.Click += new System.EventHandler(this.button29_Click);
+            // 
+            // dataGridView9
+            // 
+            this.dataGridView9.AllowUserToAddRows = false;
+            this.dataGridView9.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView9.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView9.Location = new System.Drawing.Point(304, 6);
+            this.dataGridView9.Name = "dataGridView9";
+            dataGridViewCellStyle44.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView9.RowsDefaultCellStyle = dataGridViewCellStyle44;
+            this.dataGridView9.Size = new System.Drawing.Size(418, 254);
+            this.dataGridView9.TabIndex = 140;
+            this.dataGridView9.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView9_CellClick);
+            // 
+            // cmbusertype1
+            // 
+            this.cmbusertype1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.cmbusertype1.FormattingEnabled = true;
+            this.cmbusertype1.Location = new System.Drawing.Point(15, 41);
+            this.cmbusertype1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cmbusertype1.Name = "cmbusertype1";
+            this.cmbusertype1.Size = new System.Drawing.Size(250, 25);
+            this.cmbusertype1.TabIndex = 139;
+            this.cmbusertype1.SelectionChangeCommitted += new System.EventHandler(this.cmbusertype1_SelectionChangeCommitted);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label25.ForeColor = System.Drawing.Color.Black;
+            this.label25.Location = new System.Drawing.Point(12, 21);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(78, 17);
+            this.label25.TabIndex = 138;
+            this.label25.Text = "User type";
+            // 
             // jobsTap
             // 
+            this.jobsTap.BackColor = System.Drawing.Color.White;
             this.jobsTap.Controls.Add(this.BtnnewJob);
             this.jobsTap.Controls.Add(this.dataGridView3);
             this.jobsTap.Controls.Add(this.button6);
@@ -402,10 +685,9 @@ namespace Delmon_Managment_System.Forms
             this.jobsTap.Location = new System.Drawing.Point(4, 26);
             this.jobsTap.Name = "jobsTap";
             this.jobsTap.Padding = new System.Windows.Forms.Padding(3);
-            this.jobsTap.Size = new System.Drawing.Size(1274, 597);
+            this.jobsTap.Size = new System.Drawing.Size(1161, 597);
             this.jobsTap.TabIndex = 1;
             this.jobsTap.Text = "Jobs";
-            this.jobsTap.UseVisualStyleBackColor = true;
             this.jobsTap.Click += new System.EventHandler(this.jobsTap_Click);
             // 
             // BtnnewJob
@@ -426,13 +708,15 @@ namespace Delmon_Managment_System.Forms
             // dataGridView3
             // 
             this.dataGridView3.AllowUserToAddRows = false;
+            dataGridViewCellStyle45.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView3.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle45;
             this.dataGridView3.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView3.Location = new System.Drawing.Point(382, 7);
             this.dataGridView3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView3.Name = "dataGridView3";
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle46.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle46;
             this.dataGridView3.Size = new System.Drawing.Size(637, 274);
             this.dataGridView3.TabIndex = 89;
             this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick_1);
@@ -591,6 +875,7 @@ namespace Delmon_Managment_System.Forms
             // 
             // agenciesTap
             // 
+            this.agenciesTap.BackColor = System.Drawing.Color.White;
             this.agenciesTap.Controls.Add(this.BtnnewAgaency);
             this.agenciesTap.Controls.Add(this.dataGridView2);
             this.agenciesTap.Controls.Add(this.groupBox2);
@@ -609,10 +894,9 @@ namespace Delmon_Managment_System.Forms
             this.agenciesTap.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.agenciesTap.Location = new System.Drawing.Point(4, 26);
             this.agenciesTap.Name = "agenciesTap";
-            this.agenciesTap.Size = new System.Drawing.Size(1274, 597);
+            this.agenciesTap.Size = new System.Drawing.Size(1161, 597);
             this.agenciesTap.TabIndex = 2;
             this.agenciesTap.Text = "Agencies";
-            this.agenciesTap.UseVisualStyleBackColor = true;
             this.agenciesTap.Click += new System.EventHandler(this.agenciesTap_Click);
             // 
             // BtnnewAgaency
@@ -635,12 +919,12 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(516, 18);
+            this.dataGridView2.Location = new System.Drawing.Point(419, 18);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView2.Name = "dataGridView2";
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle15;
-            this.dataGridView2.Size = new System.Drawing.Size(697, 241);
+            dataGridViewCellStyle47.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle47;
+            this.dataGridView2.Size = new System.Drawing.Size(576, 241);
             this.dataGridView2.TabIndex = 138;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick_1);
             // 
@@ -850,6 +1134,7 @@ namespace Delmon_Managment_System.Forms
             // 
             // Companiestap
             // 
+            this.Companiestap.BackColor = System.Drawing.Color.White;
             this.Companiestap.Controls.Add(this.dataGridView7);
             this.Companiestap.Controls.Add(this.groupBox4);
             this.Companiestap.Controls.Add(this.groupBox3);
@@ -857,10 +1142,9 @@ namespace Delmon_Managment_System.Forms
             this.Companiestap.Location = new System.Drawing.Point(4, 26);
             this.Companiestap.Name = "Companiestap";
             this.Companiestap.Padding = new System.Windows.Forms.Padding(3);
-            this.Companiestap.Size = new System.Drawing.Size(1274, 597);
+            this.Companiestap.Size = new System.Drawing.Size(1161, 597);
             this.Companiestap.TabIndex = 5;
             this.Companiestap.Text = "Companies";
-            this.Companiestap.UseVisualStyleBackColor = true;
             this.Companiestap.Click += new System.EventHandler(this.Companiestap_Click);
             // 
             // dataGridView7
@@ -868,17 +1152,18 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView7.AllowUserToAddRows = false;
             this.dataGridView7.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView7.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView7.Location = new System.Drawing.Point(440, 395);
+            this.dataGridView7.Location = new System.Drawing.Point(440, 404);
             this.dataGridView7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView7.Name = "dataGridView7";
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView7.RowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle48.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView7.RowsDefaultCellStyle = dataGridViewCellStyle48;
             this.dataGridView7.Size = new System.Drawing.Size(614, 193);
             this.dataGridView7.TabIndex = 171;
             this.dataGridView7.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView7_CellClick);
             // 
             // groupBox4
             // 
+            this.groupBox4.BackColor = System.Drawing.Color.White;
             this.groupBox4.Controls.Add(this.button8);
             this.groupBox4.Controls.Add(this.button7);
             this.groupBox4.Controls.Add(this.button14);
@@ -1063,6 +1348,7 @@ namespace Delmon_Managment_System.Forms
             // 
             // groupBox3
             // 
+            this.groupBox3.BackColor = System.Drawing.Color.White;
             this.groupBox3.Controls.Add(this.label19);
             this.groupBox3.Controls.Add(this.txtshort);
             this.groupBox3.Controls.Add(this.button9);
@@ -1363,11 +1649,291 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView6.TabIndex = 163;
             this.dataGridView6.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView6_CellClick);
             // 
+            // ConsulatesTAB
+            // 
+            this.ConsulatesTAB.BackColor = System.Drawing.Color.White;
+            this.ConsulatesTAB.Controls.Add(this.dataGridView5);
+            this.ConsulatesTAB.Controls.Add(this.groupBox5);
+            this.ConsulatesTAB.Controls.Add(this.groupBox6);
+            this.ConsulatesTAB.Controls.Add(this.dataGridView8);
+            this.ConsulatesTAB.Location = new System.Drawing.Point(4, 26);
+            this.ConsulatesTAB.Name = "ConsulatesTAB";
+            this.ConsulatesTAB.Padding = new System.Windows.Forms.Padding(3);
+            this.ConsulatesTAB.Size = new System.Drawing.Size(1161, 597);
+            this.ConsulatesTAB.TabIndex = 7;
+            this.ConsulatesTAB.Text = "Countries/Consulates";
+            // 
+            // dataGridView5
+            // 
+            this.dataGridView5.AllowUserToAddRows = false;
+            this.dataGridView5.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView5.Location = new System.Drawing.Point(459, 221);
+            this.dataGridView5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dataGridView5.Name = "dataGridView5";
+            dataGridViewCellStyle49.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView5.RowsDefaultCellStyle = dataGridViewCellStyle49;
+            this.dataGridView5.Size = new System.Drawing.Size(342, 210);
+            this.dataGridView5.TabIndex = 175;
+            this.dataGridView5.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView5_CellClick);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.BackColor = System.Drawing.Color.White;
+            this.groupBox5.Controls.Add(this.button20);
+            this.groupBox5.Controls.Add(this.cmbcont);
+            this.groupBox5.Controls.Add(this.button21);
+            this.groupBox5.Controls.Add(this.label24);
+            this.groupBox5.Controls.Add(this.button22);
+            this.groupBox5.Controls.Add(this.txtconsulatcity);
+            this.groupBox5.Controls.Add(this.label29);
+            this.groupBox5.Controls.Add(this.button23);
+            this.groupBox5.Location = new System.Drawing.Point(7, 212);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(418, 219);
+            this.groupBox5.TabIndex = 174;
+            this.groupBox5.TabStop = false;
+            // 
+            // button20
+            // 
+            this.button20.BackColor = System.Drawing.Color.White;
+            this.button20.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button20.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button20.ForeColor = System.Drawing.Color.Firebrick;
+            this.button20.Location = new System.Drawing.Point(11, 158);
+            this.button20.Name = "button20";
+            this.button20.Size = new System.Drawing.Size(71, 35);
+            this.button20.TabIndex = 172;
+            this.button20.Text = "New";
+            this.button20.UseVisualStyleBackColor = false;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
+            // 
+            // cmbcont
+            // 
+            this.cmbcont.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.cmbcont.FormattingEnabled = true;
+            this.cmbcont.Location = new System.Drawing.Point(15, 43);
+            this.cmbcont.Name = "cmbcont";
+            this.cmbcont.Size = new System.Drawing.Size(256, 25);
+            this.cmbcont.TabIndex = 163;
+            // 
+            // button21
+            // 
+            this.button21.BackColor = System.Drawing.Color.White;
+            this.button21.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button21.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button21.ForeColor = System.Drawing.Color.Firebrick;
+            this.button21.Location = new System.Drawing.Point(270, 158);
+            this.button21.Name = "button21";
+            this.button21.Size = new System.Drawing.Size(68, 35);
+            this.button21.TabIndex = 171;
+            this.button21.Text = "Delete";
+            this.button21.UseVisualStyleBackColor = false;
+            this.button21.Visible = false;
+            this.button21.Click += new System.EventHandler(this.button21_Click);
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label24.ForeColor = System.Drawing.Color.Black;
+            this.label24.Location = new System.Drawing.Point(15, 24);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(66, 17);
+            this.label24.TabIndex = 162;
+            this.label24.Text = "Country";
+            // 
+            // button22
+            // 
+            this.button22.BackColor = System.Drawing.Color.White;
+            this.button22.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button22.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button22.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button22.ForeColor = System.Drawing.Color.Firebrick;
+            this.button22.Location = new System.Drawing.Point(188, 158);
+            this.button22.Name = "button22";
+            this.button22.Size = new System.Drawing.Size(71, 35);
+            this.button22.TabIndex = 170;
+            this.button22.Text = "Update";
+            this.button22.UseVisualStyleBackColor = false;
+            this.button22.Visible = false;
+            this.button22.Click += new System.EventHandler(this.button22_Click);
+            // 
+            // txtconsulatcity
+            // 
+            this.txtconsulatcity.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.txtconsulatcity.Location = new System.Drawing.Point(12, 106);
+            this.txtconsulatcity.Name = "txtconsulatcity";
+            this.txtconsulatcity.Size = new System.Drawing.Size(259, 25);
+            this.txtconsulatcity.TabIndex = 166;
+            this.txtconsulatcity.TextChanged += new System.EventHandler(this.txtconsulatcity_TextChanged);
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label29.ForeColor = System.Drawing.Color.Black;
+            this.label29.Location = new System.Drawing.Point(12, 86);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(113, 17);
+            this.label29.TabIndex = 165;
+            this.label29.Text = "Consulate City";
+            // 
+            // button23
+            // 
+            this.button23.BackColor = System.Drawing.Color.White;
+            this.button23.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button23.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button23.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button23.ForeColor = System.Drawing.Color.Firebrick;
+            this.button23.Location = new System.Drawing.Point(94, 158);
+            this.button23.Name = "button23";
+            this.button23.Size = new System.Drawing.Size(76, 35);
+            this.button23.TabIndex = 169;
+            this.button23.Text = "Add";
+            this.button23.UseVisualStyleBackColor = false;
+            this.button23.Visible = false;
+            this.button23.Click += new System.EventHandler(this.button23_Click);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.BackColor = System.Drawing.Color.White;
+            this.groupBox6.Controls.Add(this.label31);
+            this.groupBox6.Controls.Add(this.txtcontname);
+            this.groupBox6.Controls.Add(this.button25);
+            this.groupBox6.Controls.Add(this.button26);
+            this.groupBox6.Controls.Add(this.label33);
+            this.groupBox6.Controls.Add(this.button27);
+            this.groupBox6.Controls.Add(this.txtnationname);
+            this.groupBox6.Controls.Add(this.button28);
+            this.groupBox6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.groupBox6.Location = new System.Drawing.Point(7, 3);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(418, 194);
+            this.groupBox6.TabIndex = 173;
+            this.groupBox6.TabStop = false;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label31.Location = new System.Drawing.Point(15, 21);
+            this.label31.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(112, 17);
+            this.label31.TabIndex = 140;
+            this.label31.Text = "Country Name";
+            // 
+            // txtcontname
+            // 
+            this.txtcontname.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.txtcontname.Location = new System.Drawing.Point(15, 41);
+            this.txtcontname.Name = "txtcontname";
+            this.txtcontname.Size = new System.Drawing.Size(259, 25);
+            this.txtcontname.TabIndex = 141;
+            this.txtcontname.TextChanged += new System.EventHandler(this.txtcontname_TextChanged);
+            // 
+            // button25
+            // 
+            this.button25.BackColor = System.Drawing.Color.White;
+            this.button25.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button25.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button25.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button25.ForeColor = System.Drawing.Color.Firebrick;
+            this.button25.Location = new System.Drawing.Point(242, 149);
+            this.button25.Name = "button25";
+            this.button25.Size = new System.Drawing.Size(70, 31);
+            this.button25.TabIndex = 160;
+            this.button25.Text = "Delete";
+            this.button25.UseVisualStyleBackColor = false;
+            this.button25.Visible = false;
+            this.button25.Click += new System.EventHandler(this.button25_Click);
+            // 
+            // button26
+            // 
+            this.button26.BackColor = System.Drawing.Color.White;
+            this.button26.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button26.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button26.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button26.ForeColor = System.Drawing.Color.Firebrick;
+            this.button26.Location = new System.Drawing.Point(15, 149);
+            this.button26.Name = "button26";
+            this.button26.Size = new System.Drawing.Size(58, 31);
+            this.button26.TabIndex = 161;
+            this.button26.Text = "New";
+            this.button26.UseVisualStyleBackColor = false;
+            this.button26.Click += new System.EventHandler(this.button26_Click);
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label33.Location = new System.Drawing.Point(15, 75);
+            this.label33.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(131, 17);
+            this.label33.TabIndex = 142;
+            this.label33.Text = "Nationality Name";
+            // 
+            // button27
+            // 
+            this.button27.BackColor = System.Drawing.Color.White;
+            this.button27.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button27.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button27.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button27.ForeColor = System.Drawing.Color.Firebrick;
+            this.button27.Location = new System.Drawing.Point(160, 149);
+            this.button27.Name = "button27";
+            this.button27.Size = new System.Drawing.Size(73, 31);
+            this.button27.TabIndex = 159;
+            this.button27.Text = "Update";
+            this.button27.UseVisualStyleBackColor = false;
+            this.button27.Visible = false;
+            this.button27.Click += new System.EventHandler(this.button27_Click);
+            // 
+            // txtnationname
+            // 
+            this.txtnationname.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.txtnationname.Location = new System.Drawing.Point(15, 95);
+            this.txtnationname.Name = "txtnationname";
+            this.txtnationname.Size = new System.Drawing.Size(259, 25);
+            this.txtnationname.TabIndex = 143;
+            // 
+            // button28
+            // 
+            this.button28.BackColor = System.Drawing.Color.White;
+            this.button28.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button28.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button28.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button28.ForeColor = System.Drawing.Color.Firebrick;
+            this.button28.Location = new System.Drawing.Point(81, 149);
+            this.button28.Name = "button28";
+            this.button28.Size = new System.Drawing.Size(73, 31);
+            this.button28.TabIndex = 158;
+            this.button28.Text = "Add";
+            this.button28.UseVisualStyleBackColor = false;
+            this.button28.Visible = false;
+            this.button28.Click += new System.EventHandler(this.button28_Click);
+            // 
+            // dataGridView8
+            // 
+            this.dataGridView8.AllowUserToAddRows = false;
+            this.dataGridView8.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView8.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView8.Location = new System.Drawing.Point(459, 13);
+            this.dataGridView8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dataGridView8.Name = "dataGridView8";
+            this.dataGridView8.Size = new System.Drawing.Size(342, 184);
+            this.dataGridView8.TabIndex = 172;
+            this.dataGridView8.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView8_CellClick);
+            // 
             // EmployeeLogTap
             // 
             this.EmployeeLogTap.Location = new System.Drawing.Point(4, 26);
             this.EmployeeLogTap.Name = "EmployeeLogTap";
-            this.EmployeeLogTap.Size = new System.Drawing.Size(1274, 597);
+            this.EmployeeLogTap.Size = new System.Drawing.Size(1161, 597);
             this.EmployeeLogTap.TabIndex = 6;
             this.EmployeeLogTap.Text = "Employee Log";
             this.EmployeeLogTap.UseVisualStyleBackColor = true;
@@ -1376,7 +1942,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.notificationsTap.Location = new System.Drawing.Point(4, 26);
             this.notificationsTap.Name = "notificationsTap";
-            this.notificationsTap.Size = new System.Drawing.Size(1274, 597);
+            this.notificationsTap.Size = new System.Drawing.Size(1161, 597);
             this.notificationsTap.TabIndex = 3;
             this.notificationsTap.Text = "Notifications";
             this.notificationsTap.UseVisualStyleBackColor = true;
@@ -1471,6 +2037,30 @@ namespace Delmon_Managment_System.Forms
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.label37);
+            this.groupBox7.Controls.Add(this.label36);
+            this.groupBox7.ForeColor = System.Drawing.Color.Firebrick;
+            this.groupBox7.Location = new System.Drawing.Point(6, 467);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(363, 115);
+            this.groupBox7.TabIndex = 155;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Tips & Notes";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label37.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.label37.Location = new System.Drawing.Point(7, 42);
+            this.label37.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(297, 60);
+            this.label37.TabIndex = 155;
+            this.label37.Text = "- View means: user can search for records on\r\n   the specific screen \r\n\r\n\r\n";
+            // 
             // SettingFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1486,6 +2076,10 @@ namespace Delmon_Managment_System.Forms
             this.userTap.ResumeLayout(false);
             this.userTap.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.permissionstab.ResumeLayout(false);
+            this.permissionstab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView9)).EndInit();
             this.jobsTap.ResumeLayout(false);
             this.jobsTap.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
@@ -1502,8 +2096,17 @@ namespace Delmon_Managment_System.Forms
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).EndInit();
+            this.ConsulatesTAB.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView8)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1614,5 +2217,46 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.TextBox txtshort;
         public System.Windows.Forms.ComboBox cmbDepartment;
         public System.Windows.Forms.ComboBox cmbworkfield;
+        private System.Windows.Forms.TabPage ConsulatesTAB;
+        private System.Windows.Forms.DataGridView dataGridView5;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button button20;
+        private System.Windows.Forms.ComboBox cmbcont;
+        private System.Windows.Forms.Button button21;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Button button22;
+        private System.Windows.Forms.TextBox txtconsulatcity;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Button button23;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.TextBox txtcontname;
+        private System.Windows.Forms.Button button25;
+        private System.Windows.Forms.Button button26;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Button button27;
+        private System.Windows.Forms.TextBox txtnationname;
+        private System.Windows.Forms.Button button28;
+        private System.Windows.Forms.DataGridView dataGridView8;
+        private System.Windows.Forms.TabPage permissionstab;
+        private System.Windows.Forms.ComboBox cmbusertype1;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.DataGridView dataGridView10;
+        private System.Windows.Forms.TextBox txtdelete;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.TextBox txtedit;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.TextBox txtadd;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.TextBox txtselect;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.Button button24;
+        private System.Windows.Forms.Button button29;
+        private System.Windows.Forms.DataGridView dataGridView9;
+        private System.Windows.Forms.Button button30;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Label label37;
     }
 }

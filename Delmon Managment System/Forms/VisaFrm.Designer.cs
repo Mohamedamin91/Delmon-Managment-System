@@ -75,6 +75,7 @@ namespace Delmon_Managment_System.Forms
             this.label4 = new System.Windows.Forms.Label();
             this.VisaFileNumberID = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblexpire = new System.Windows.Forms.Label();
             this.txtvisa = new System.Windows.Forms.Label();
             this.picVisa = new System.Windows.Forms.PictureBox();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
@@ -163,6 +164,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.AddBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.AddBtn.BackColor = System.Drawing.Color.White;
+            this.AddBtn.Enabled = false;
             this.AddBtn.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
             this.AddBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AddBtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
@@ -413,6 +415,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.btnFinish.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnFinish.BackColor = System.Drawing.Color.White;
+            this.btnFinish.Enabled = false;
             this.btnFinish.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
             this.btnFinish.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFinish.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
@@ -487,6 +490,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.DeleteBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.DeleteBtn.BackColor = System.Drawing.Color.White;
+            this.DeleteBtn.Enabled = false;
             this.DeleteBtn.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
             this.DeleteBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DeleteBtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
@@ -576,6 +580,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.btnAssign.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnAssign.BackColor = System.Drawing.Color.White;
+            this.btnAssign.Enabled = false;
             this.btnAssign.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
             this.btnAssign.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAssign.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
@@ -642,6 +647,7 @@ namespace Delmon_Managment_System.Forms
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.lblexpire);
             this.groupBox2.Controls.Add(this.txtvisa);
             this.groupBox2.Controls.Add(this.picVisa);
             this.groupBox2.Controls.Add(this.dataGridView3);
@@ -685,6 +691,19 @@ namespace Delmon_Managment_System.Forms
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Visa Info";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter_1);
+            // 
+            // lblexpire
+            // 
+            this.lblexpire.AutoSize = true;
+            this.lblexpire.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblexpire.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.lblexpire.Location = new System.Drawing.Point(1308, 247);
+            this.lblexpire.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblexpire.Name = "lblexpire";
+            this.lblexpire.Size = new System.Drawing.Size(235, 15);
+            this.lblexpire.TabIndex = 181;
+            this.lblexpire.Text = "*Visas that expire within one month";
+            this.lblexpire.Visible = false;
             // 
             // txtvisa
             // 
@@ -959,6 +978,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button2.BackColor = System.Drawing.Color.White;
+            this.button2.Enabled = false;
             this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
@@ -1005,6 +1025,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.btnnewJob.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnnewJob.BackColor = System.Drawing.Color.White;
+            this.btnnewJob.Enabled = false;
             this.btnnewJob.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
             this.btnnewJob.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnnewJob.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
@@ -1022,6 +1043,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.btnUpdate.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnUpdate.BackColor = System.Drawing.Color.White;
+            this.btnUpdate.Enabled = false;
             this.btnUpdate.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdate.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
@@ -1176,5 +1198,6 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.DataGridView dataGridView3;
         private System.Windows.Forms.Label txtvisa;
         private System.Windows.Forms.PictureBox picVisa;
+        private System.Windows.Forms.Label lblexpire;
     }
 }
