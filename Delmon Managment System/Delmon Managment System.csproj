@@ -168,12 +168,6 @@
     <Compile Include="Forms\FrmNewWorkLoc.Designer.cs">
       <DependentUpon>FrmNewWorkLoc.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FrmUserPermissions.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FrmUserPermissions.Designer.cs">
-      <DependentUpon>FrmUserPermissions.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\PrintingFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -248,9 +242,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmNewWorkLoc.resx">
       <DependentUpon>FrmNewWorkLoc.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmUserPermissions.resx">
-      <DependentUpon>FrmUserPermissions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PrintingFrm.resx">
       <DependentUpon>PrintingFrm.cs</DependentUpon>

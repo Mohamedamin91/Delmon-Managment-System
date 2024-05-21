@@ -30,6 +30,33 @@ namespace Delmon_Managment_System.Forms
         int userpermissionID;
         int PermissiondID;
 
+        bool hasViewcountr = false;
+        bool hasEditcountr = false;
+        bool hasDeletecountr = false;
+        bool hasAddcountr = false;
+
+
+        bool hasViewcompan = false;
+        bool hasEditcompan = false;
+        bool hasDeletecompan = false;
+        bool hasAddcompan = false;
+
+
+        bool hasViewAgenc = false;
+        bool hasEditAgenc = false;
+        bool hasDeleteAgenc = false;
+        bool hasAddAgenc = false;
+
+        bool hasViewJob = false;
+        bool hasEditJob = false;
+        bool hasDeleteJob = false;
+        bool hasAddJob = false;
+
+        bool hasViewUser = false;
+        bool hasEditUser = false;
+        bool hasDeleteUser = false;
+        bool hasAddUser = false;
+
 
         string encryptionKey = "0pqnU2X00mf+i8mDTzyPVw==", iv = "0pqnU2X00mf+i8mDTzyPVw==";
 
@@ -111,6 +138,105 @@ namespace Delmon_Managment_System.Forms
 
         public void SettingFrm_Load(object sender, EventArgs e)
         {
+            if (CommonClass.Usertype == "SuperAdmin")
+
+            {
+                cmbusertype.Enabled = true;
+            }
+            else
+
+            {
+                cmbusertype.Enabled = false;
+                cmbusertype.SelectedValue = 2;
+            }
+
+            SQLCONN.OpenConection();
+            SqlDataReader dr = SQLCONN.DataReader(@"
+        SELECT ps.PermissionName
+        FROM UserPermissions us
+        JOIN tblUserType ut ON us.UserTypeID = ut.UserTypeID
+        JOIN Permissions ps ON us.PermissionID = ps.PermissionID
+        WHERE ut.UserType = @UserType",
+          new SqlParameter("@UserType", SqlDbType.NVarChar) { Value = CommonClass.Usertype });
+
+
+            while (dr.Read())
+            {
+                string permissionName = dr["PermissionName"].ToString();
+                /*user*/
+                if (permissionName.Contains("ViewUserTab"))
+                {
+                    hasViewUser = true;
+                }
+                if (permissionName.Contains("AddUserTab"))
+                {
+                    hasAddUser = true;
+                }
+                if (permissionName.Contains("EditUserTab"))
+                {
+                    hasEditUser = true;
+                }
+                if (permissionName.Contains("DeleteUserTab"))
+                {
+                    hasDeleteUser = true;
+                }
+
+            }
+            dr.Close();
+
+            if (hasViewUser == false)
+            {
+
+                MessageBox.Show("Sorry, You are not allowed to view this Module/Screen , kindly contact the administrator !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                groupBox10.Enabled = false;
+                dataGridView1.DataSource = null;
+
+
+            }
+            else
+            {
+                groupBox10.Enabled = true;
+
+
+                if (hasAddUser)
+                {
+                    btnnew.Enabled = addbtn.Enabled = true;
+
+                }
+                else
+                {
+                    btnnew.Enabled = addbtn.Enabled = false;
+
+                }
+                if (hasEditUser)
+                {
+                    updatebtn.Enabled = true;
+                }
+                else
+                {
+                    updatebtn.Enabled = false;
+
+                }
+                if (hasDeleteUser)
+                {
+                    deletebtn.Enabled = true;
+                }
+                else
+                {
+                    deletebtn.Enabled = false;
+
+                }
+            }
+
+
+
+
+
+
+
+
+
             SqlParameter paramloggedemployee = new SqlParameter("@LoggedEmployeeid", SqlDbType.NVarChar);
             paramloggedemployee.Value = LoggedEmployeeID;
             this.timer1.Interval = 1000;
@@ -122,20 +248,13 @@ namespace Delmon_Managment_System.Forms
             LoggedEmployeeID = CommonClass.EmployeeID;
             lblFullname.Text = CommonClass.LoginEmployeeName;
             lblPC.Text = Environment.MachineName;
-            SQLCONN.OpenConection();
             cmbemployee.ValueMember = "EmployeeID";
             cmbemployee.DisplayMember = "FullName";
             cmbemployee.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT EmployeeID ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName' from Employees   order by EmployeeID ");
             cmbemployee.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbemployee.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-            //cmbemployee13633.ValueMember = "EmployeeID";
-            //cmbemployee13633.DisplayMember = "FullName";
-            //cmbemployee13633.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT EmployeeID ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName' from Employees   order by EmployeeID ");
-            //cmbemployee13633.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //cmbemployee13633.AutoCompleteSource = AutoCompleteSource.ListItems;
-            //cmbemployee13633.KeyDown += cmbemployee1_KeyDown;
-
+         
             cmbemployee2.ValueMember = "EmployeeID";
             cmbemployee2.DisplayMember = "FullName";
             cmbemployee2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT EmployeeID ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName' from Employees   order by EmployeeID ");
@@ -160,7 +279,7 @@ namespace Delmon_Managment_System.Forms
             cmbusertype.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT UserTypeID,UserType  from [tblUserType] order by UserTypeID desc ");
             cmbusertype.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbusertype.AutoCompleteSource = AutoCompleteSource.ListItems;
-            cmbusertype.Text = "Select";
+            //cmbusertype.Text = "Select";
 
 
             cmbusertype1.ValueMember = "UserTypeID";
@@ -218,7 +337,7 @@ namespace Delmon_Managment_System.Forms
             dataGridView10.Columns[0].Width = 50;
 
 
-            if (lblusertype.Text == "Admin")
+            if (CommonClass.Usertype == "SuperAdmin")
             {
                 dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
              (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID    ");
@@ -237,7 +356,10 @@ namespace Delmon_Managment_System.Forms
 
 
             dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox
+
               (" SELECT * from  Agencies   ");
+
+          
 
             SQLCONN.CloseConnection();
 
@@ -337,11 +459,19 @@ namespace Delmon_Managment_System.Forms
                             dr.Close();
 
 
+                            if (lblusertype.Text == "Admin")
 
+                            {
+                                SQLCONN.ExecuteQueries("insert into tblUser ( [EmployeeID] ,[UserName],[Password],[UserTypeID],[IsActive]) values (@C1,@C2,@C3,@C4,1)",
+                                                   paramemployee, paramusername, parampassword, paramusertype, paramisActive);
+                            }
+                            else
+                            {
+                                SQLCONN.ExecuteQueries("insert into tblUser ( [EmployeeID] ,[UserName],[Password],[UserTypeID],[IsActive]) values (@C1,@C2,@C3,2,1)",
+                                               paramemployee, paramusername, parampassword, paramusertype, paramisActive);
+                            }
 
-                            SQLCONN.ExecuteQueries("insert into tblUser ( [EmployeeID] ,[UserName],[Password],[UserTypeID],[IsActive]) values (@C1,@C2,@C3,@C4,1)",
-                                                     paramemployee, paramusername, parampassword, paramusertype, paramisActive);
-                            MessageBox.Show("Record saved Successfully");
+                                    MessageBox.Show("Record saved Successfully");
 
                             SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('User Info',@C1 ,'#','#',@datetime,@pc,@user,'Insert')", paramemployee, paramdatetimeLOG, parampc, paramuser);
                             btnnew.Visible = true;
@@ -353,13 +483,23 @@ namespace Delmon_Managment_System.Forms
                             dr.Close();
 
 
+                            if (lblusertype.Text == "Admin")
+
+                            {
+                                SQLCONN.ExecuteQueries("insert into tblUser ( [EmployeeID] ,[UserName],[Password],[UserTypeID],[IsActive]) values (@C1,@C2,@C3,@C4,0)",
 
 
-                            SQLCONN.ExecuteQueries("insert into tblUser ( [EmployeeID] ,[UserName],[Password],[UserTypeID],[IsActive]) values (@C1,@C2,@C3,@C4,0)",
+                               paramemployee, paramusername, parampassword, paramusertype, paramisActive);
+                            }
+                            else
+                            {
+                                 SQLCONN.ExecuteQueries("insert into tblUser ( [EmployeeID] ,[UserName],[Password],[UserTypeID],[IsActive]) values (@C1,@C2,@C3,2,0)",
 
 
-                                paramemployee, paramusername, parampassword, paramusertype, paramisActive);
-                            MessageBox.Show("Record saved Successfully");
+                                     paramemployee, paramusername, parampassword, paramusertype, paramisActive);
+                            }
+
+                                  MessageBox.Show("Record saved Successfully");
 
 
 
@@ -1866,6 +2006,111 @@ namespace Delmon_Managment_System.Forms
         private void tabControl1_MouseClick(object sender, MouseEventArgs e)
         {
             SQLCONN.OpenConection();
+            SqlDataReader dr = SQLCONN.DataReader(@"
+        SELECT ps.PermissionName
+        FROM UserPermissions us
+        JOIN tblUserType ut ON us.UserTypeID = ut.UserTypeID
+        JOIN Permissions ps ON us.PermissionID = ps.PermissionID
+        WHERE ut.UserType = @UserType",
+          new SqlParameter("@UserType", SqlDbType.NVarChar) { Value = CommonClass.Usertype });
+
+
+            while (dr.Read())
+            {
+                /*Countries*/
+                string permissionName = dr["PermissionName"].ToString();
+                if (permissionName.Contains("ViewCountriesTab"))
+
+                {
+                    hasViewcountr = true;
+                }
+                if (permissionName.Contains("AddCountriesTab"))
+                {
+                    hasAddcountr = true;
+                }
+                if (permissionName.Contains("EditCountriesTab"))
+                {
+                    hasEditcountr = true;
+                }
+                if (permissionName.Contains("DeleteCountriesTab"))
+                {
+                    hasDeletecountr = true;
+                }
+                /*Companies*/
+                if (permissionName.Contains("ViewCompaniesTab"))
+
+                {
+                    hasViewcompan = true;
+                }
+                if (permissionName.Contains("AddCompaniesTab"))
+                {
+                    hasAddcompan = true;
+                }
+                if (permissionName.Contains("EditCompaniesTab"))
+                {
+                    hasEditcompan = true;
+                }
+                if (permissionName.Contains("DeleteCompaniesTab"))
+                {
+                    hasDeletecompan = true;
+                }
+                /*Agency*/
+                if (permissionName.Contains("ViewAgenciesTab"))
+
+                {
+                    hasViewAgenc = true;
+                }
+                if (permissionName.Contains("AddAgenciesTab"))
+                {
+                    hasAddAgenc = true;
+                }
+                if (permissionName.Contains("EditAgenciesTab"))
+                {
+                    hasEditAgenc = true;
+                }
+                if (permissionName.Contains("DeleteAgenciesTab"))
+                {
+                    hasDeleteAgenc = true;
+                }
+                /*job*/
+                if (permissionName.Contains("ViewJobTab"))
+                {
+                    hasViewJob = true;
+                }
+                if (permissionName.Contains("AddJobTab"))
+                {
+                    hasAddJob = true;
+                }
+                if (permissionName.Contains("EditJobTab"))
+                {
+                    hasEditJob = true;
+                }
+                if (permissionName.Contains("DeleteJobTab"))
+                {
+                    hasDeleteJob = true;
+                }
+
+                /*user*/
+                if (permissionName.Contains("ViewUserTab"))
+                {
+                    hasViewUser = true;
+                }
+                if (permissionName.Contains("AddUserTab"))
+                {
+                    hasAddUser = true;
+                }
+                if (permissionName.Contains("EditUserTab"))
+                {
+                    hasEditUser = true;
+                }
+                if (permissionName.Contains("DeleteUserTab"))
+                {
+                    hasDeleteUser = true;
+                }
+            }
+            dr.Close();
+
+
             cmbusertype1.ValueMember = "UserTypeID";
             cmbusertype1.DisplayMember = "UserType";
             cmbusertype1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT UserTypeID,UserType  from [tblUserType]   order by UserTypeID desc  ");
@@ -1873,17 +2118,62 @@ namespace Delmon_Managment_System.Forms
             cmbusertype1.AutoCompleteSource = AutoCompleteSource.ListItems;
             cmbusertype1.Text = "Select";
             SQLCONN.CloseConnection();
+
+
             if (tabControl1.SelectedTab == tabControl1.TabPages[0])
             {
+                if (hasViewUser == false)
+                {
 
+                    MessageBox.Show("Sorry, You are not allowed to view this Module/Screen , kindly contact the administrator !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    groupBox10.Enabled = false;
+                    dataGridView1.DataSource = null;
+
+
+                }
+                else
+                {
+                    groupBox10.Enabled = true;
+
+
+                    if (hasAddUser)
+                    {
+                        btnnew.Enabled =addbtn.Enabled = true;
+
+                    }
+                    else
+                    {
+                        btnnew.Enabled = addbtn.Enabled = false;
+
+                    }
+                    if (hasEditUser)
+                    {
+                        updatebtn.Enabled = true;
+                    }
+                    else
+                    {
+                        updatebtn.Enabled = false;
+
+                    }
+                    if (hasDeleteUser)
+                    {
+                        deletebtn.Enabled = true;
+                    }
+                    else
+                    {
+                        deletebtn.Enabled = false;
+
+                    }
+                }
             }
             if (tabControl1.SelectedTab == tabControl1.TabPages[1])
             {
                 tabControl1.TabPages[1].Visible = false;
-                if (lblusertype.Text != "Admin")
+                if (lblusertype.Text != "SuperAdmin")
                 {
 
-                    MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Sorry This Section for SuperAdmin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
 
                 }
@@ -1895,54 +2185,207 @@ namespace Delmon_Managment_System.Forms
             }
             if (tabControl1.SelectedTab == tabControl1.TabPages[2])
             {
-                tabControl1.TabPages[2].Visible = false;
-
-                if (lblusertype.Text != "Admin")
+                if (hasViewJob == false)
                 {
 
-                    MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Sorry, You are not allowed to view this Module/Screen , kindly contact the administrator !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    groupBox9.Enabled = false;
+                    dataGridView3.DataSource = null;
+
 
                 }
                 else
                 {
-                    tabControl1.TabPages[2].Visible = true;
+                    groupBox9.Enabled = true;
 
+
+                    if (hasAddJob)
+                    {
+                        button4.Enabled = BtnnewJob.Enabled = true;
+
+                    }
+                    else
+                    {
+                        button4.Enabled = BtnnewJob.Enabled = false;
+
+                    }
+                    if (hasEditJob)
+                    {
+                        button5.Enabled = true;
+                    }
+                    else
+                    {
+                        button5.Enabled = false;
+
+                    }
+                    if (hasDeleteJob)
+                    {
+                        button6.Enabled = true;
+                    }
+                    else
+                    {
+                        button6.Enabled = false;
+
+                    }
                 }
+
             }
             if (tabControl1.SelectedTab == tabControl1.TabPages[3])
             {
-                tabControl1.TabPages[3].Visible = false;
-                // MessageBox.Show("Comming Soon  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                if (lblusertype.Text != "Admin")
+                if (hasViewAgenc == false)
                 {
 
-                    MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Sorry, You are not allowed to view this Module/Screen , kindly contact the administrator !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    groupBox2.Enabled = false;
+                    groupBox8.Enabled = false;
+                    dataGridView2.DataSource = null;
+
                 }
                 else
                 {
-                    tabControl1.TabPages[3].Visible = true;
+                    groupBox2.Enabled = true;
+                    groupBox8.Enabled = true;
 
+
+                    if (hasAddAgenc)
+                    {
+                        button1.Enabled = BtnnewAgaency.Enabled  = true;
+
+                    }
+                    else
+                    {
+                        button1.Enabled = BtnnewAgaency.Enabled = false;
+
+                    }
+                    if (hasEditAgenc)
+                    {
+                        button3.Enabled  =true;
+                    }
+                    else
+                    {
+                        button3.Enabled = false;
+
+                    }
+                    if (hasDeletecompan)
+                    {
+                        button2.Enabled = true;
+                    }
+                    else
+                    {
+                        button2.Enabled = false;
+
+                    }
                 }
+
             }
             if (tabControl1.SelectedTab == tabControl1.TabPages[4])
             {
-                //tabControl1.TabPages[4].Visible = false;
-                //MessageBox.Show("Comming Soon  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (hasViewcountr == false)
+                {
 
-                //if (lblusertype.Text != "Admin")
-                //{
+                    MessageBox.Show("Sorry, You are not allowed to view this Module/Screen , kindly contact the administrator !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                //    MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    groupBox3.Enabled = false;
+                    groupBox4.Enabled = false;
 
-                //}
-                //else
-                //{
-                //    tabControl1.TabPages[4].Visible = true;
+                }
+                else
+                {
+                    groupBox3.Enabled = true;
+                    groupBox4.Enabled = true;
 
-                //}
+                    if (hasAddcompan)
+                    {
+                        button13.Enabled=  button9.Enabled = button10.Enabled = true;
+                        button14.Enabled = button17.Enabled =button7.Enabled= button8.Enabled = true;
+
+                    }
+                    else
+                    {
+                        button13.Enabled = button9.Enabled = button10.Enabled = false;
+                        button14.Enabled = button17.Enabled = button7.Enabled = button8.Enabled = false;
+
+                    }
+                    if (hasEditcompan)
+                    {
+                        button16.Enabled = button12.Enabled = true;
+                    }
+                    else
+                    {
+                        button16.Enabled = button12.Enabled = false;
+
+                    }
+                    if (hasDeletecompan)
+                    {
+                        button11.Enabled = button15.Enabled = true;
+                    }
+                    else
+                    {
+                        button11.Enabled = button15.Enabled = false;
+
+                    }
+
+                }
             }
             if (tabControl1.SelectedTab == tabControl1.TabPages[5])
+            {
+                if (hasViewcountr == false)
+                {
+
+                    MessageBox.Show("Sorry, You are not allowed to view this Module/Screen , kindly contact the administrator !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    groupBox6.Enabled = false;
+                    groupBox5.Enabled = false;
+
+                }
+                else
+                {
+                    groupBox6.Enabled = true;
+                    groupBox5.Enabled = true;
+
+                    if (hasAddcountr)
+                    {
+                        button28.Enabled = button26.Enabled = true;
+                        button23.Enabled = button20.Enabled = true;
+
+                    }
+                    else
+                    {
+                        button23.Enabled = button20.Enabled = false;
+                        button28.Enabled = button26.Enabled = false;
+
+                    }
+                    if (hasEditcountr)
+                    {
+                        button22.Enabled = button27.Enabled = true;
+                    }
+                    else
+                    {
+                        button22.Enabled = button27.Enabled = false;
+
+                    }
+                    if (hasDeletecountr)
+                    {
+                        button21.Enabled = button25.Enabled = true;
+                    }
+                    else 
+                    {
+                        button21.Enabled = button25.Enabled = false;
+
+                    }
+
+
+                }
+
+            }
+            if (tabControl1.SelectedTab == tabControl1.TabPages[6])
+            {
+                MessageBox.Show("Comming Soon  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+            if (tabControl1.SelectedTab == tabControl1.TabPages[7])
             {
                 MessageBox.Show("Comming Soon  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
@@ -3612,7 +4055,7 @@ ORDER BY
                 p.PermissionName
             FROM 
                 [DelmonGroupDB].[dbo].[UserPermissions] as us
-                JOIN [Permissions] as p ON p.PermissionID = us.PermissionID");
+                JOIN [Permissions] as p ON p.PermissionID = us.PermissionID and us.UserTypeID= " + cmbusertype1.SelectedValue + " ");
                 }
 
                 dataGridView9.Columns["PermissionID"].Visible = false;
@@ -3654,7 +4097,7 @@ ORDER BY
                 p.PermissionName
             FROM 
                 [DelmonGroupDB].[dbo].[UserPermissions] as us
-                JOIN [Permissions] as p ON p.PermissionID = us.PermissionID");
+                JOIN [Permissions] as p ON p.PermissionID = us.PermissionID where us.UserTypeID= " +cmbusertype1.SelectedValue +" ");
 
                 dataGridView9.Columns["PermissionID"].Visible = false;
                 dataGridView9.Columns[3].Width = 300;
@@ -3718,7 +4161,6 @@ ORDER BY
                         {
                             txtadd.Text = permissionName;
                             Add = PermissiondID;
-                            MessageBox.Show(Add.ToString());
 
 
 
@@ -3844,7 +4286,7 @@ ORDER BY
   us.[PermissionID]
       ,p.PermissionName
   FROM [DelmonGroupDB].[dbo].[UserPermissions]as us,Permissions as p
-  where p.PermissionID= us.PermissionID");
+  where p.PermissionID= us.PermissionID and us.UserTypeID= " + cmbusertype1.SelectedValue + " ");
                     dataGridView9.Columns["PermissionID"].Visible = false;
                     dataGridView9.Columns[3].Width = 300;
 

@@ -153,15 +153,15 @@ GROUP BY
         {
             groupBox1.Visible = false;
 
-            if (lblusertype.Text == "Admin")
-            {
+            //if (lblusertype.Text == "Admin")
+            //{
                 OpenChildForm(new Forms.VisaFrm(), sender);
-            }
-            else
-            {
-                MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-            }
+            //}
          }
 
         private void btnemployee_Click(object sender, EventArgs e)
@@ -186,7 +186,7 @@ GROUP BY
 
         private void btnNotifications_Click(object sender, EventArgs e)
         {
-         //   OpenChildForm(new Forms.NotificationFrm(), sender);
+           // OpenChildForm(new Forms.NotificationFrm(), sender);
 
         }
 
@@ -292,17 +292,17 @@ GROUP BY
 
         private void btnBilling_Click_1(object sender, EventArgs e)
         {
-            if (lblusertype.Text != "Admin")
-            {
+            //if (lblusertype.Text != "Admin")
+            //{
 
-                MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
 
-            }
-            else
-            {
-                OpenChildForm(new Forms.BillsFrm(), sender);
-            }
+            //}
+            //else
+            //{
+              OpenChildForm(new Forms.BillsFrm(), sender);
+            //}
 
         }
 
@@ -324,34 +324,34 @@ GROUP BY
 
         private void btnemployee_Click_1(object sender, EventArgs e)
         {
-            if (lblusertype.Text != "Admin")
-            {
+            //if (lblusertype.Text != "Admin")
+            //{
 
-                MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
 
-            }
-            else
-            {
-                groupBox1.Visible = false;
+            //}
+            //else
+            //{
+            //    groupBox1.Visible = false;
 
                 OpenChildForm(new Forms.EmployeeForm(), sender);
-            }
+            //}
         }
 
         private void btnvisa_Click_1(object sender, EventArgs e)
         {
-            groupBox1.Visible = false;
+            //groupBox1.Visible = false;
 
-            if (lblusertype.Text == "Admin")
-            {
-                OpenChildForm(new Forms.VisaFrm(), sender);
-            }
-            else
-            {
-                MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //if (lblusertype.Text == "Admin")
+            //{
+               OpenChildForm(new Forms.VisaFrm(), sender);
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-            }
+            //}
         }
 
         private void button3_Click(object sender, EventArgs e)
