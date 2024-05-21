@@ -22,14 +22,15 @@ namespace Delmon_Managment_System.Forms
 
         SQLCONNECTION SQLCONN = new SQLCONNECTION();
         SQLCONNECTION SQLCONN3 = new SQLCONNECTION();
-
-
-
         string AssetID;
         string AssetDetialsInfoID;
         int LoggedEmployeeID;
         string encryptionKey = "0pqnU2X00mf+i8mDTzyPVw==", iv = "0pqnU2X00mf+i8mDTzyPVw==";
         private List<string> originalData = new List<string>(); // List to store original data
+        bool hasView = false;
+        bool hasEdit = false;
+        bool hasDelete = false;
+        bool hasAdd = false;
 
 
         public AssetFrm()
@@ -69,6 +70,92 @@ namespace Delmon_Managment_System.Forms
 
         public void AssetFrm_Load(object sender, EventArgs e)
         {
+            SQLCONN3.OpenConection3();
+            SQLCONN.OpenConection();
+
+
+
+
+
+            SqlDataReader dr = SQLCONN.DataReader(@"
+        SELECT ps.PermissionName
+        FROM UserPermissions us
+        JOIN tblUserType ut ON us.UserTypeID = ut.UserTypeID
+        JOIN Permissions ps ON us.PermissionID = ps.PermissionID
+        WHERE ut.UserType = @UserType",
+          new SqlParameter("@UserType", SqlDbType.NVarChar) { Value = CommonClass.Usertype });
+
+
+            while (dr.Read())
+            {
+                string permissionName = dr["PermissionName"].ToString();
+                if (permissionName.Contains("ViewAssets"))
+                {
+                    hasView = true;
+                }
+                if (permissionName.Contains("EditAssets"))
+                {
+                    hasEdit = true;
+                }
+                if (permissionName.Contains("DeleteAssets"))
+                {
+                    hasDelete = true;
+                }
+                if (permissionName.Contains("AddAssets"))
+                {
+                    hasAdd = true;
+                }
+            }
+            dr.Close();
+            if (hasView == false)
+            {
+                MessageBox.Show("Sorry, You are not allowed to view this Module/Screen , kindly contact the administrator !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                groupBox1.Enabled = false;
+                tabControl2.Enabled = false;
+            }
+            else
+
+            {
+                groupBox1.Enabled = true;
+                tabControl2.Enabled = true;
+
+
+
+                if (hasEdit)
+                {
+                    updatebtn.Enabled = true;
+                    button3.Enabled = true;                }
+                if (hasDelete)
+                {
+                    btnDelete.Enabled = true;
+
+                     button1.Enabled = true;
+                }
+                if (hasAdd)
+                {
+                  btnuplode2.Enabled= button2.Enabled= btnnew.Enabled= btnuplode.Enabled = addbtn.Enabled = btnDownload.Enabled= true;
+                }
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             this.timer1.Interval = 1000;
             timer1.Start();
@@ -78,10 +165,7 @@ namespace Delmon_Managment_System.Forms
             LoggedEmployeeID = CommonClass.EmployeeID;
             lblFullname.Text = CommonClass.LoginEmployeeName;
             lblPC.Text = Environment.MachineName;
-            SQLCONN3.OpenConection3();
-            SQLCONN.OpenConection();
-
-            
+          
 
             
 
@@ -547,7 +631,7 @@ WHERE
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             addbtn.Visible = false;
-            btnnew.Visible = updatebtn.Visible = true;
+            btnnew.Visible = updatebtn.Visible = btnDelete.Visible= true;
             SQLCONN3.OpenConection3();
             cmbDevice.ValueMember = "DeviceTypeID";
             cmbDevice.DisplayMember = "DeviceType";
@@ -1490,10 +1574,6 @@ where
             SqlParameter paramcmbOS = new SqlParameter("@C3", SqlDbType.Int);
             paramcmbOS.Value = cmbVersion.SelectedValue;
 
-
-
-
-
             if (AssetDetialsInfoID == string.Empty)
             {
                 MessageBox.Show("Please select  Asset first ! " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1961,6 +2041,70 @@ where
             //cmbAssetModel.Text = "Select";
             //SQLCONN3.CloseConnection();
 
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+//            SqlParameter paramID = new SqlParameter("@id", SqlDbType.NVarChar);
+//            paramID.Value = AssetID;
+//            SqlParameter paramDeviceatt = new SqlParameter("@C1", SqlDbType.Int);
+//            paramDeviceatt.Value = cmbdeviceatt.SelectedValue;
+//            SqlParameter paramValue = new SqlParameter("@C2", SqlDbType.NVarChar);
+//            paramValue.Value = txtvalue.Text;
+//            SqlParameter paramcmbOS = new SqlParameter("@C3", SqlDbType.Int);
+//            paramcmbOS.Value = cmbVersion.SelectedValue;
+
+//            if (AssetDetialsInfoID == string.Empty)
+//            {
+//                MessageBox.Show("Please select  Asset first ! " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+//            }
+//            else
+//            {
+//                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+//                {
+//                    SQLCONN3.OpenConection3();
+
+//                    if ((int)cmbdeviceatt.SelectedValue == 20)
+//                    {
+//                        SQLCONN3.ExecuteQueries("delete AssetsDetials where AssetID =@id and DeviceDetilasID = @C1 and value = @C3 ", paramID, paramDeviceatt, paramcmbOS);
+//                        cmbVersion.Text = "";
+//                    }
+//                    else
+
+//                    {
+//                        SQLCONN3.ExecuteQueries("delete AssetsDetials where AssetID =@id and DeviceDetilasID = @C1 and value = @C2 ", paramID, paramDeviceatt, paramValue);
+
+//                    }
+
+
+
+//                    //dataGridView5.DataSource = SQLCONN3.ShowDataInGridViewORCombobox("select * from AssetsDetials where AssetID=@id and DeviceDetilasID=@C1 and value=@C2 "
+//                    //   , paramID,paramDeviceatt,paramValue);
+
+//                    dataGridView5.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(@" select 
+//Assets.AssetID,
+//DeviceDetials.DeviceDetilasID,
+// DeviceDetials.DeviceDetialsValue,AssetsDetials.Value
+//from Assets,AssetsDetials,DeviceDetials
+//where 
+//  DeviceDetials.DeviceDetilasID= AssetsDetials.DeviceDetilasID
+// and Assets.AssetID= AssetsDetials.AssetID
+// and Assets.AssetID=@ID ", paramID);
+//                    MessageBox.Show("Record has been deleted successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+//                    SQLCONN3.CloseConnection();
+//                    cmbtype.Text = "Select";
+//                    cmbdeviceatt.Text = "Select";
+//                    cmbbrand.Text = "";
+//                    cmbAssetModel.Text = "Select";
+//                    txtvalue.Text = "";
+
+
+
+//                }
+
+//            }
         }
 
         private void cmbbrand_KeyDown(object sender, KeyEventArgs e)

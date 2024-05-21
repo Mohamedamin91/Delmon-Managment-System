@@ -30,10 +30,10 @@ namespace Delmon_Managment_System.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VisaFrm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.Visanumtxt = new System.Windows.Forms.TextBox();
@@ -187,8 +187,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView1.Location = new System.Drawing.Point(674, 18);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Size = new System.Drawing.Size(629, 225);
             this.dataGridView1.TabIndex = 9;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
@@ -479,8 +479,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView2.Location = new System.Drawing.Point(696, 25);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView2.Name = "dataGridView2";
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView2.Size = new System.Drawing.Size(523, 190);
             this.dataGridView2.TabIndex = 83;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
@@ -683,6 +683,7 @@ namespace Delmon_Managment_System.Forms
             this.groupBox2.Controls.Add(this.ReceviedPicker);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.Remaininglbl);
+            this.groupBox2.Enabled = false;
             this.groupBox2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.groupBox2.Location = new System.Drawing.Point(12, 4);
             this.groupBox2.Name = "groupBox2";
@@ -736,8 +737,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView3.Location = new System.Drawing.Point(1311, 18);
             this.dataGridView3.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView3.Name = "dataGridView3";
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView3.Size = new System.Drawing.Size(257, 225);
             this.dataGridView3.TabIndex = 105;
             this.dataGridView3.Visible = false;
@@ -904,6 +905,7 @@ namespace Delmon_Managment_System.Forms
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.label44);
             this.groupBox3.Controls.Add(this.dataGridView2);
+            this.groupBox3.Enabled = false;
             this.groupBox3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.groupBox3.Location = new System.Drawing.Point(12, 304);
             this.groupBox3.Name = "groupBox3";

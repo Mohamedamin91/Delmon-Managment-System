@@ -122,16 +122,19 @@ namespace Delmon_Managment_System.Forms
                 }
             }
             dr.Close();
-            SQLCONN.CloseConnection();
             if (hasView == false)
             {
                 MessageBox.Show("Sorry, You are not allowed to view this Module/Screen , kindly contact the administrator !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Visanumtxt.Enabled = false;
+                groupBox2.Enabled = false;
+                groupBox3.Enabled = false;
             }
             else 
 
             {
-              
+                groupBox2.Enabled = true;
+                groupBox3.Enabled = true;
+
                 this.ActiveControl = Visanumtxt;
 
 

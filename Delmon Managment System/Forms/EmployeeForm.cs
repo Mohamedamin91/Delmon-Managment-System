@@ -134,14 +134,18 @@ namespace Delmon_Managment_System.Forms
             dr.Close();
             SQLCONN.CloseConnection();
             if (hasView == false)
-            {
+            {   
                 MessageBox.Show("Sorry, You are not allowed to view this Module/Screen , kindly contact the administrator !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Employeetxt.Enabled = false;
+                groupBox2.Enabled = false;
+                tabControl1.Enabled = false;
               
             }
             else
 
             {
+                groupBox2.Enabled = true;
+                tabControl1.Enabled = true;
                 Employeetxt.Enabled = true;
                 if (hasEdit)
                 {

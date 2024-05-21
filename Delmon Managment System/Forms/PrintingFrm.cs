@@ -26,6 +26,11 @@ namespace Delmon_Managment_System.Forms
         int VisaFileNumberfordisplayreport;
         DateTime dtpfromreport;
         DateTime dtptoreport;
+        bool hasViewVISA = false;
+        bool hasViewCANDIDATES = false;
+
+
+
         public PrintingFrm()
         {
             InitializeComponent();
@@ -35,8 +40,53 @@ namespace Delmon_Managment_System.Forms
 
         private void PrintingFrm_Load(object sender, EventArgs e)
         {
+            SQLCONN.OpenConection();
+            SqlDataReader dr = SQLCONN.DataReader(@"
+        SELECT ps.PermissionName
+        FROM UserPermissions us
+        JOIN tblUserType ut ON us.UserTypeID = ut.UserTypeID
+        JOIN Permissions ps ON us.PermissionID = ps.PermissionID
+        WHERE ut.UserType = @UserType",
+          new SqlParameter("@UserType", SqlDbType.NVarChar) { Value = CommonClass.Usertype });
 
-            
+
+            while (dr.Read())
+            {
+                string permissionName = dr["PermissionName"].ToString();
+                if (permissionName.Contains("VisaReport"))
+
+                {
+                    hasViewVISA = true;
+                }
+                if (permissionName.Contains("CandidatesReport"))
+                {
+                    hasViewCANDIDATES = true;
+                }
+
+            }
+            dr.Close();
+
+            if (hasViewVISA == false)
+            {
+
+                MessageBox.Show("Sorry, You are not allowed to view this Module/Screen , kindly contact the administrator !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                button1.Enabled = false;
+                button3.Enabled = false;
+                groupBox2.Enabled = false;
+                groupBox3.Enabled = false;
+                picvisascreen.Enabled = false;
+
+            }
+            else
+            {
+                picvisascreen.Enabled = false;
+                button1.Enabled = true;
+                button3.Enabled = true;
+                groupBox3.Enabled = true;
+
+            }
+
+
 
 
             lblusername.Text = CommonClass.LoginUserName;
@@ -46,7 +96,17 @@ namespace Delmon_Managment_System.Forms
             loggedEmployee = CommonClass.EmployeeID;
             lblPC.Text = Environment.MachineName;
 
-            SQLCONN.OpenConection();
+
+
+
+
+
+
+          
+              
+               
+
+
             if (lblusertype.Text == "Admin")
             {
                 //LoadTheme(); 
@@ -1176,6 +1236,78 @@ namespace Delmon_Managment_System.Forms
             VisaFrm visaform = new VisaFrm();
             // this.Hide();
             visaform.Show();
+        }
+
+        private void tabControl1_MouseClick(object sender, MouseEventArgs e)
+        {
+            SQLCONN.OpenConection();
+            SqlDataReader dr = SQLCONN.DataReader(@"
+        SELECT ps.PermissionName
+        FROM UserPermissions us
+        JOIN tblUserType ut ON us.UserTypeID = ut.UserTypeID
+        JOIN Permissions ps ON us.PermissionID = ps.PermissionID
+        WHERE ut.UserType = @UserType",
+          new SqlParameter("@UserType", SqlDbType.NVarChar) { Value = CommonClass.Usertype });
+
+
+            while (dr.Read())
+            {
+                string permissionName = dr["PermissionName"].ToString();
+                if (permissionName.Contains("VisaReport"))
+
+                {
+                    hasViewVISA = true;
+                }
+                if (permissionName.Contains("CandidatesReport"))
+                {
+                    hasViewCANDIDATES = true;
+                }
+
+            }
+            dr.Close();
+         
+             if (tabControl1.SelectedTab == tabControl1.TabPages[0])
+            {
+                if (hasViewVISA == false)
+                {
+
+                    MessageBox.Show("Sorry, You are not allowed to view this Module/Screen , kindly contact the administrator !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    button1.Enabled = false;
+                    button3.Enabled = false;
+                    groupBox2.Enabled = false;
+                    groupBox3.Enabled = false;
+                    picvisascreen.Enabled = false;
+
+                }
+                else
+                {
+                    picvisascreen.Enabled = false;
+                    button1.Enabled = true;
+                    button3.Enabled = true;
+                    groupBox3.Enabled = true;
+
+                }
+            }
+            if (tabControl1.SelectedTab == tabControl1.TabPages[1])
+            {
+                if (hasViewCANDIDATES == false)
+                {
+                    MessageBox.Show("Sorry, You are not allowed to view this Module/Screen , kindly contact the administrator !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    button4.Enabled = false;
+                    ExportToExcelButton.Enabled = false;
+                    groupBox4.Enabled = false;
+                }
+                else
+                {
+                    button4.Enabled = true;
+                    ExportToExcelButton.Enabled = true;
+                    groupBox4.Enabled = true;
+
+                }
+            }
+
+
+            SQLCONN.CloseConnection();
         }
     }
 }
