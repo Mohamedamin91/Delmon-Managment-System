@@ -576,6 +576,7 @@ namespace Delmon_Managment_System.Forms
             paramAssetSearch.Value = seratchassettxt.Text;
             SQLCONN3.OpenConection3();
 
+
             string query = @"
 WITH LastAssignments AS (
     SELECT 
@@ -596,6 +597,7 @@ SELECT
     A.PurchasingDate,
     A.DeviceTypeID,
     A.AssetStatusID,
+    CONCAT(E.FirstName, ' ', E.SecondName, ' ', E.ThirdName, ' ', E.LastName) AS FullName,
     LA.EmployeeID AS LastEmployeeID,
     LA.AssginDate AS LastAssignDate
 FROM
@@ -606,15 +608,17 @@ INNER JOIN
     AssetType AT ON A.AssetTypeID = AT.AssetTypeID
 LEFT JOIN 
     LastAssignments LA ON A.AssetID = LA.AssetID AND LA.RowNum = 1
+LEFT JOIN
+    [DelmonGroupDB].[dbo].[Employees] E ON LA.EmployeeID = E.EmployeeID
 WHERE 
     A.sn LIKE '%' + @C1 + '%' OR 
     A.Model LIKE '%' + @C1 + '%' OR 
     A.AssetID LIKE '%' + @C1 + '%' OR
     AT.AssettypeValue LIKE '%' + @C1 + '%' OR
-    AB.AssetBrandValue LIKE '%' + @C1 + '%';
+    AB.AssetBrandValue LIKE '%' + @C1 + '%' or
+ REPLACE(CONCAT_WS(' ', firstname, secondname, thirdname, lastname), ' ', '') LIKE '%' + REPLACE(@C1, ' ', '') + '%' ";
 
 
-";
 
 
             dataGridView1.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(query, paramAssetSearch);
@@ -685,22 +689,22 @@ WHERE
                         cmbDevice.SelectedValue = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
                         cmbAssetStatus.SelectedValue = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
 
-                        object cellValue = dataGridView1.Rows[e.RowIndex].Cells[9].Value;
+                        object cellValue = dataGridView1.Rows[e.RowIndex].Cells[10].Value;
                         if (cellValue != null && cellValue.ToString() != "")
                         {
-                            cmbemployee.SelectedValue = dataGridView1.Rows[e.RowIndex].Cells[9].Value.ToString();
+                            cmbemployee.SelectedValue = dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString();
                         }
                         else
                         {
                             cmbemployee.SelectedValue = 0; // or any default value you want to assign
                         }
-                        if (dataGridView1.CurrentRow.Cells[10].Value == null || dataGridView1.CurrentRow.Cells[10].Value == DBNull.Value || String.IsNullOrWhiteSpace(dataGridView1.CurrentRow.Cells[10].Value.ToString()))
+                        if (dataGridView1.CurrentRow.Cells[11].Value == null || dataGridView1.CurrentRow.Cells[11].Value == DBNull.Value || String.IsNullOrWhiteSpace(dataGridView1.CurrentRow.Cells[11].Value.ToString()))
                         {
                             AssignDtp.Value = DateTime.Now;
                         }
                         else
                         {
-                            AssignDtp.Value = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString());
+                            AssignDtp.Value = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString());
                         }
                     }
                 }
