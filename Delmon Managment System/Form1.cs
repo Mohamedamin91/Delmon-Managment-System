@@ -308,17 +308,17 @@ GROUP BY
 
         private void btnprinting_Click_1(object sender, EventArgs e)
         {
-            if (lblusertype.Text != "Admin")
-            {
+            //if (lblusertype.Text != "Admin")
+            //{
 
-                MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    MessageBox.Show("Sorry This Section for Admin Only  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
 
-            }
-            else
-            {
-                OpenChildForm(new Forms.PrintingFrm(), sender);
-            }
+            //}
+            //else
+            //{
+               OpenChildForm(new Forms.PrintingFrm(), sender);
+            //}
 
         }
 

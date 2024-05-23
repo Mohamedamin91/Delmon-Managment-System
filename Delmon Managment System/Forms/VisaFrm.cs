@@ -95,10 +95,10 @@ namespace Delmon_Managment_System.Forms
             SqlDataReader dr = SQLCONN.DataReader(@"
         SELECT ps.PermissionName
         FROM UserPermissions us
-        JOIN tblUserType ut ON us.UserTypeID = ut.UserTypeID
+        	JOIN tblUser u ON us.UserID = u.EmployeeID
         JOIN Permissions ps ON us.PermissionID = ps.PermissionID
-        WHERE ut.UserType = @UserType",
-           new SqlParameter("@UserType", SqlDbType.NVarChar) { Value = CommonClass.Usertype });
+               WHERE u.EmployeeID = @UserID",
+                       new SqlParameter("@UserID", SqlDbType.NVarChar) { Value = CommonClass.EmployeeID });
 
         
             while (dr.Read())

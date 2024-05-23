@@ -30,13 +30,12 @@ namespace Delmon_Managment_System.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.userTap = new System.Windows.Forms.TabPage();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
@@ -57,26 +56,28 @@ namespace Delmon_Managment_System.Forms
             this.label5 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.permissionstab = new System.Windows.Forms.TabPage();
-            this.label39 = new System.Windows.Forms.Label();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.button30 = new System.Windows.Forms.Button();
-            this.dataGridView10 = new System.Windows.Forms.DataGridView();
-            this.txtdelete = new System.Windows.Forms.TextBox();
-            this.label30 = new System.Windows.Forms.Label();
-            this.txtedit = new System.Windows.Forms.TextBox();
-            this.label32 = new System.Windows.Forms.Label();
-            this.txtadd = new System.Windows.Forms.TextBox();
-            this.label34 = new System.Windows.Forms.Label();
-            this.txtselect = new System.Windows.Forms.TextBox();
-            this.label35 = new System.Windows.Forms.Label();
-            this.button19 = new System.Windows.Forms.Button();
-            this.button24 = new System.Windows.Forms.Button();
-            this.button29 = new System.Windows.Forms.Button();
             this.dataGridView9 = new System.Windows.Forms.DataGridView();
-            this.cmbusertype1 = new System.Windows.Forms.ComboBox();
-            this.label25 = new System.Windows.Forms.Label();
+            this.ViewVisabx = new System.Windows.Forms.CheckBox();
+            this.AddVisabx = new System.Windows.Forms.CheckBox();
+            this.button18 = new System.Windows.Forms.Button();
+            this.EditVisabx = new System.Windows.Forms.CheckBox();
+            this.button31 = new System.Windows.Forms.Button();
+            this.DeleteVisabx = new System.Windows.Forms.CheckBox();
+            this.button32 = new System.Windows.Forms.Button();
+            this.button33 = new System.Windows.Forms.Button();
+            this.label47 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
+            this.ViewBillsbx = new System.Windows.Forms.CheckBox();
+            this.label43 = new System.Windows.Forms.Label();
+            this.cmbUserPermission = new System.Windows.Forms.ComboBox();
+            this.AddBillsbx = new System.Windows.Forms.CheckBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.EditBillsbx = new System.Windows.Forms.CheckBox();
+            this.DeleteBillsbx = new System.Windows.Forms.CheckBox();
+            this.ViewAssetsbx = new System.Windows.Forms.CheckBox();
+            this.AddAssetsbx = new System.Windows.Forms.CheckBox();
+            this.EditAssetsbx = new System.Windows.Forms.CheckBox();
+            this.DeleteAssetsbx = new System.Windows.Forms.CheckBox();
             this.jobsTap = new System.Windows.Forms.TabPage();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -187,13 +188,61 @@ namespace Delmon_Managment_System.Forms
             this.lblusername = new System.Windows.Forms.Label();
             this.lblusertype = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.ViewPersonalInformationbx = new System.Windows.Forms.CheckBox();
+            this.AddPersonalInformationbx = new System.Windows.Forms.CheckBox();
+            this.EditPersonalInformationbx = new System.Windows.Forms.CheckBox();
+            this.DeletePersonalInformationbx = new System.Windows.Forms.CheckBox();
+            this.label44 = new System.Windows.Forms.Label();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.ViewVisaReportbx = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label45 = new System.Windows.Forms.Label();
+            this.ViewCandidatesReportbx = new System.Windows.Forms.CheckBox();
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.groupBox15 = new System.Windows.Forms.GroupBox();
+            this.label41 = new System.Windows.Forms.Label();
+            this.DeleteAlertsBx = new System.Windows.Forms.CheckBox();
+            this.EditAlertsbx = new System.Windows.Forms.CheckBox();
+            this.AddAlertsbx = new System.Windows.Forms.CheckBox();
+            this.ViewAlertsbx = new System.Windows.Forms.CheckBox();
+            this.groupBox16 = new System.Windows.Forms.GroupBox();
+            this.label42 = new System.Windows.Forms.Label();
+            this.AddUserTabx = new System.Windows.Forms.CheckBox();
+            this.EditUserTabx = new System.Windows.Forms.CheckBox();
+            this.ViewUserTabx = new System.Windows.Forms.CheckBox();
+            this.DeleteUserTabx = new System.Windows.Forms.CheckBox();
+            this.groupBox17 = new System.Windows.Forms.GroupBox();
+            this.ViewJobTabx = new System.Windows.Forms.CheckBox();
+            this.AddJobTabx = new System.Windows.Forms.CheckBox();
+            this.editJobTabx = new System.Windows.Forms.CheckBox();
+            this.DeleteJobTabx = new System.Windows.Forms.CheckBox();
+            this.label48 = new System.Windows.Forms.Label();
+            this.groupBox18 = new System.Windows.Forms.GroupBox();
+            this.DeleteAgenciesTabx = new System.Windows.Forms.CheckBox();
+            this.label51 = new System.Windows.Forms.Label();
+            this.EditAgenciesTabx = new System.Windows.Forms.CheckBox();
+            this.AddAgenciesTabx = new System.Windows.Forms.CheckBox();
+            this.ViewAgenciesTabx = new System.Windows.Forms.CheckBox();
+            this.groupBox19 = new System.Windows.Forms.GroupBox();
+            this.label49 = new System.Windows.Forms.Label();
+            this.DeleteCompaniesTabx = new System.Windows.Forms.CheckBox();
+            this.EditCompaniesTabx = new System.Windows.Forms.CheckBox();
+            this.AddCompaniesTabx = new System.Windows.Forms.CheckBox();
+            this.ViewCompaniesTabx = new System.Windows.Forms.CheckBox();
+            this.groupBox20 = new System.Windows.Forms.GroupBox();
+            this.DeleteCountriesTabx = new System.Windows.Forms.CheckBox();
+            this.label50 = new System.Windows.Forms.Label();
+            this.EditCountriesTabx = new System.Windows.Forms.CheckBox();
+            this.AddCountriesTabx = new System.Windows.Forms.CheckBox();
+            this.ViewCountriesTabx = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.userTap.SuspendLayout();
             this.groupBox10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.permissionstab.SuspendLayout();
-            this.groupBox7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView9)).BeginInit();
             this.jobsTap.SuspendLayout();
             this.groupBox9.SuspendLayout();
@@ -214,6 +263,17 @@ namespace Delmon_Managment_System.Forms
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView8)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox11.SuspendLayout();
+            this.groupBox12.SuspendLayout();
+            this.groupBox13.SuspendLayout();
+            this.groupBox14.SuspendLayout();
+            this.groupBox15.SuspendLayout();
+            this.groupBox16.SuspendLayout();
+            this.groupBox17.SuspendLayout();
+            this.groupBox18.SuspendLayout();
+            this.groupBox19.SuspendLayout();
+            this.groupBox20.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -391,6 +451,7 @@ namespace Delmon_Managment_System.Forms
             this.isactivecheck.TabIndex = 54;
             this.isactivecheck.Text = "IsActive";
             this.isactivecheck.UseVisualStyleBackColor = true;
+            this.isactivecheck.Visible = false;
             // 
             // Generatebtn
             // 
@@ -473,266 +534,282 @@ namespace Delmon_Managment_System.Forms
             // permissionstab
             // 
             this.permissionstab.BackColor = System.Drawing.Color.White;
-            this.permissionstab.Controls.Add(this.label39);
-            this.permissionstab.Controls.Add(this.groupBox7);
-            this.permissionstab.Controls.Add(this.button30);
-            this.permissionstab.Controls.Add(this.dataGridView10);
-            this.permissionstab.Controls.Add(this.txtdelete);
-            this.permissionstab.Controls.Add(this.label30);
-            this.permissionstab.Controls.Add(this.txtedit);
-            this.permissionstab.Controls.Add(this.label32);
-            this.permissionstab.Controls.Add(this.txtadd);
-            this.permissionstab.Controls.Add(this.label34);
-            this.permissionstab.Controls.Add(this.txtselect);
-            this.permissionstab.Controls.Add(this.label35);
-            this.permissionstab.Controls.Add(this.button19);
-            this.permissionstab.Controls.Add(this.button24);
-            this.permissionstab.Controls.Add(this.button29);
+            this.permissionstab.Controls.Add(this.groupBox20);
+            this.permissionstab.Controls.Add(this.groupBox19);
+            this.permissionstab.Controls.Add(this.button18);
+            this.permissionstab.Controls.Add(this.label40);
+            this.permissionstab.Controls.Add(this.button33);
+            this.permissionstab.Controls.Add(this.groupBox18);
+            this.permissionstab.Controls.Add(this.button32);
+            this.permissionstab.Controls.Add(this.cmbUserPermission);
+            this.permissionstab.Controls.Add(this.button31);
+            this.permissionstab.Controls.Add(this.groupBox17);
             this.permissionstab.Controls.Add(this.dataGridView9);
-            this.permissionstab.Controls.Add(this.cmbusertype1);
-            this.permissionstab.Controls.Add(this.label25);
+            this.permissionstab.Controls.Add(this.groupBox16);
+            this.permissionstab.Controls.Add(this.groupBox15);
+            this.permissionstab.Controls.Add(this.groupBox14);
+            this.permissionstab.Controls.Add(this.groupBox13);
+            this.permissionstab.Controls.Add(this.groupBox12);
+            this.permissionstab.Controls.Add(this.groupBox11);
+            this.permissionstab.Controls.Add(this.groupBox7);
             this.permissionstab.Location = new System.Drawing.Point(4, 26);
             this.permissionstab.Name = "permissionstab";
-            this.permissionstab.Padding = new System.Windows.Forms.Padding(3);
             this.permissionstab.Size = new System.Drawing.Size(1161, 597);
-            this.permissionstab.TabIndex = 8;
+            this.permissionstab.TabIndex = 9;
             this.permissionstab.Text = "Permissions";
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label39.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.label39.Location = new System.Drawing.Point(734, 263);
-            this.label39.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(123, 15);
-            this.label39.TabIndex = 156;
-            this.label39.Text = "* Permissions List\r\n";
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.label37);
-            this.groupBox7.Controls.Add(this.label36);
-            this.groupBox7.ForeColor = System.Drawing.Color.Firebrick;
-            this.groupBox7.Location = new System.Drawing.Point(6, 467);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(363, 115);
-            this.groupBox7.TabIndex = 155;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Tips & Notes";
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.label37.Location = new System.Drawing.Point(7, 42);
-            this.label37.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(297, 60);
-            this.label37.TabIndex = 155;
-            this.label37.Text = "- View means: user can search for records on\r\n   the specific screen \r\n\r\n\r\n";
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label36.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.label36.Location = new System.Drawing.Point(7, 21);
-            this.label36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(336, 45);
-            this.label36.TabIndex = 154;
-            this.label36.Text = "- You can select more than one row (Add operation)\r\n\r\n\r\n";
-            // 
-            // button30
-            // 
-            this.button30.BackColor = System.Drawing.Color.White;
-            this.button30.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button30.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button30.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.button30.ForeColor = System.Drawing.Color.Firebrick;
-            this.button30.Location = new System.Drawing.Point(16, 314);
-            this.button30.Name = "button30";
-            this.button30.Size = new System.Drawing.Size(70, 26);
-            this.button30.TabIndex = 153;
-            this.button30.Text = "New";
-            this.button30.UseVisualStyleBackColor = false;
-            this.button30.Click += new System.EventHandler(this.button30_Click);
-            // 
-            // dataGridView10
-            // 
-            this.dataGridView10.AllowUserToAddRows = false;
-            this.dataGridView10.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView10.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView10.Location = new System.Drawing.Point(737, 6);
-            this.dataGridView10.Name = "dataGridView10";
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView10.RowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView10.Size = new System.Drawing.Size(288, 254);
-            this.dataGridView10.TabIndex = 152;
-            this.dataGridView10.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView10_CellClick);
-            this.dataGridView10.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView10_CellFormatting);
-            // 
-            // txtdelete
-            // 
-            this.txtdelete.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.txtdelete.Location = new System.Drawing.Point(16, 263);
-            this.txtdelete.Name = "txtdelete";
-            this.txtdelete.Size = new System.Drawing.Size(249, 25);
-            this.txtdelete.TabIndex = 151;
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label30.ForeColor = System.Drawing.Color.Black;
-            this.label30.Location = new System.Drawing.Point(16, 242);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(55, 17);
-            this.label30.TabIndex = 150;
-            this.label30.Text = "Delete";
-            // 
-            // txtedit
-            // 
-            this.txtedit.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.txtedit.Location = new System.Drawing.Point(16, 209);
-            this.txtedit.Name = "txtedit";
-            this.txtedit.Size = new System.Drawing.Size(249, 25);
-            this.txtedit.TabIndex = 149;
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label32.ForeColor = System.Drawing.Color.Black;
-            this.label32.Location = new System.Drawing.Point(13, 190);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(36, 17);
-            this.label32.TabIndex = 148;
-            this.label32.Text = "Edit";
-            // 
-            // txtadd
-            // 
-            this.txtadd.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.txtadd.Location = new System.Drawing.Point(16, 152);
-            this.txtadd.Name = "txtadd";
-            this.txtadd.Size = new System.Drawing.Size(249, 25);
-            this.txtadd.TabIndex = 147;
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label34.ForeColor = System.Drawing.Color.Black;
-            this.label34.Location = new System.Drawing.Point(16, 133);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(37, 17);
-            this.label34.TabIndex = 146;
-            this.label34.Text = "Add";
-            // 
-            // txtselect
-            // 
-            this.txtselect.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.txtselect.Location = new System.Drawing.Point(16, 98);
-            this.txtselect.Name = "txtselect";
-            this.txtselect.Size = new System.Drawing.Size(249, 25);
-            this.txtselect.TabIndex = 145;
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label35.ForeColor = System.Drawing.Color.Black;
-            this.label35.Location = new System.Drawing.Point(13, 79);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(103, 17);
-            this.label35.TabIndex = 144;
-            this.label35.Text = "View (Select)";
-            // 
-            // button19
-            // 
-            this.button19.BackColor = System.Drawing.Color.White;
-            this.button19.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button19.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.button19.ForeColor = System.Drawing.Color.Firebrick;
-            this.button19.Location = new System.Drawing.Point(277, 317);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(70, 26);
-            this.button19.TabIndex = 143;
-            this.button19.Text = "Delete";
-            this.button19.UseVisualStyleBackColor = false;
-            this.button19.Visible = false;
-            this.button19.Click += new System.EventHandler(this.button19_Click);
-            // 
-            // button24
-            // 
-            this.button24.BackColor = System.Drawing.Color.White;
-            this.button24.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button24.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button24.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.button24.ForeColor = System.Drawing.Color.Firebrick;
-            this.button24.Location = new System.Drawing.Point(193, 315);
-            this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(70, 26);
-            this.button24.TabIndex = 142;
-            this.button24.Text = "Update";
-            this.button24.UseVisualStyleBackColor = false;
-            this.button24.Visible = false;
-            this.button24.Click += new System.EventHandler(this.button24_Click);
-            // 
-            // button29
-            // 
-            this.button29.BackColor = System.Drawing.Color.White;
-            this.button29.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button29.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button29.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.button29.ForeColor = System.Drawing.Color.Firebrick;
-            this.button29.Location = new System.Drawing.Point(105, 315);
-            this.button29.Name = "button29";
-            this.button29.Size = new System.Drawing.Size(70, 26);
-            this.button29.TabIndex = 141;
-            this.button29.Text = "Add";
-            this.button29.UseVisualStyleBackColor = false;
-            this.button29.Visible = false;
-            this.button29.Click += new System.EventHandler(this.button29_Click);
+            this.permissionstab.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // dataGridView9
             // 
             this.dataGridView9.AllowUserToAddRows = false;
             this.dataGridView9.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView9.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView9.Location = new System.Drawing.Point(304, 6);
+            this.dataGridView9.Location = new System.Drawing.Point(7, 61);
             this.dataGridView9.Name = "dataGridView9";
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView9.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView9.Size = new System.Drawing.Size(418, 254);
-            this.dataGridView9.TabIndex = 140;
-            this.dataGridView9.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView9_CellClick);
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView9.RowsDefaultCellStyle = dataGridViewCellStyle7;
+            this.dataGridView9.Size = new System.Drawing.Size(386, 472);
+            this.dataGridView9.TabIndex = 218;
+            this.dataGridView9.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView9_CellClick_1);
+            this.dataGridView9.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView9_CellFormatting);
             // 
-            // cmbusertype1
+            // ViewVisabx
             // 
-            this.cmbusertype1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.cmbusertype1.FormattingEnabled = true;
-            this.cmbusertype1.Location = new System.Drawing.Point(15, 41);
-            this.cmbusertype1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.cmbusertype1.Name = "cmbusertype1";
-            this.cmbusertype1.Size = new System.Drawing.Size(250, 25);
-            this.cmbusertype1.TabIndex = 139;
-            this.cmbusertype1.SelectionChangeCommitted += new System.EventHandler(this.cmbusertype1_SelectionChangeCommitted);
+            this.ViewVisabx.AutoSize = true;
+            this.ViewVisabx.Location = new System.Drawing.Point(170, 19);
+            this.ViewVisabx.Name = "ViewVisabx";
+            this.ViewVisabx.Size = new System.Drawing.Size(62, 21);
+            this.ViewVisabx.TabIndex = 167;
+            this.ViewVisabx.Text = "View";
+            this.ViewVisabx.UseVisualStyleBackColor = true;
             // 
-            // label25
+            // AddVisabx
             // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label25.ForeColor = System.Drawing.Color.Black;
-            this.label25.Location = new System.Drawing.Point(12, 21);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(78, 17);
-            this.label25.TabIndex = 138;
-            this.label25.Text = "User type";
+            this.AddVisabx.AutoSize = true;
+            this.AddVisabx.Location = new System.Drawing.Point(274, 20);
+            this.AddVisabx.Name = "AddVisabx";
+            this.AddVisabx.Size = new System.Drawing.Size(56, 21);
+            this.AddVisabx.TabIndex = 168;
+            this.AddVisabx.Text = "Add";
+            this.AddVisabx.UseVisualStyleBackColor = true;
+            // 
+            // button18
+            // 
+            this.button18.BackColor = System.Drawing.Color.White;
+            this.button18.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button18.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button18.ForeColor = System.Drawing.Color.Firebrick;
+            this.button18.Location = new System.Drawing.Point(12, 544);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(70, 26);
+            this.button18.TabIndex = 216;
+            this.button18.Text = "New";
+            this.button18.UseVisualStyleBackColor = false;
+            this.button18.Click += new System.EventHandler(this.button18_Click_1);
+            // 
+            // EditVisabx
+            // 
+            this.EditVisabx.AutoSize = true;
+            this.EditVisabx.Location = new System.Drawing.Point(383, 20);
+            this.EditVisabx.Name = "EditVisabx";
+            this.EditVisabx.Size = new System.Drawing.Size(55, 21);
+            this.EditVisabx.TabIndex = 169;
+            this.EditVisabx.Text = "Edit";
+            this.EditVisabx.UseVisualStyleBackColor = true;
+            // 
+            // button31
+            // 
+            this.button31.BackColor = System.Drawing.Color.White;
+            this.button31.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button31.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button31.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button31.ForeColor = System.Drawing.Color.Firebrick;
+            this.button31.Location = new System.Drawing.Point(273, 545);
+            this.button31.Name = "button31";
+            this.button31.Size = new System.Drawing.Size(70, 26);
+            this.button31.TabIndex = 215;
+            this.button31.Text = "Delete";
+            this.button31.UseVisualStyleBackColor = false;
+            this.button31.Visible = false;
+            this.button31.Click += new System.EventHandler(this.button31_Click);
+            // 
+            // DeleteVisabx
+            // 
+            this.DeleteVisabx.AutoSize = true;
+            this.DeleteVisabx.Location = new System.Drawing.Point(476, 19);
+            this.DeleteVisabx.Name = "DeleteVisabx";
+            this.DeleteVisabx.Size = new System.Drawing.Size(74, 21);
+            this.DeleteVisabx.TabIndex = 170;
+            this.DeleteVisabx.Text = "Delete";
+            this.DeleteVisabx.UseVisualStyleBackColor = true;
+            // 
+            // button32
+            // 
+            this.button32.BackColor = System.Drawing.Color.White;
+            this.button32.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button32.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button32.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button32.ForeColor = System.Drawing.Color.Firebrick;
+            this.button32.Location = new System.Drawing.Point(189, 545);
+            this.button32.Name = "button32";
+            this.button32.Size = new System.Drawing.Size(70, 26);
+            this.button32.TabIndex = 214;
+            this.button32.Text = "Update";
+            this.button32.UseVisualStyleBackColor = false;
+            this.button32.Visible = false;
+            this.button32.Click += new System.EventHandler(this.button32_Click);
+            // 
+            // button33
+            // 
+            this.button33.BackColor = System.Drawing.Color.White;
+            this.button33.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button33.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button33.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button33.ForeColor = System.Drawing.Color.Firebrick;
+            this.button33.Location = new System.Drawing.Point(101, 545);
+            this.button33.Name = "button33";
+            this.button33.Size = new System.Drawing.Size(70, 26);
+            this.button33.TabIndex = 213;
+            this.button33.Text = "Add";
+            this.button33.UseVisualStyleBackColor = false;
+            this.button33.Visible = false;
+            this.button33.Click += new System.EventHandler(this.button33_Click);
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label47.ForeColor = System.Drawing.Color.Black;
+            this.label47.Location = new System.Drawing.Point(12, 21);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(57, 17);
+            this.label47.TabIndex = 161;
+            this.label47.Text = "Assets";
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label46.ForeColor = System.Drawing.Color.Black;
+            this.label46.Location = new System.Drawing.Point(12, 23);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(39, 17);
+            this.label46.TabIndex = 160;
+            this.label46.Text = "Bills";
+            // 
+            // ViewBillsbx
+            // 
+            this.ViewBillsbx.AutoSize = true;
+            this.ViewBillsbx.Location = new System.Drawing.Point(174, 22);
+            this.ViewBillsbx.Name = "ViewBillsbx";
+            this.ViewBillsbx.Size = new System.Drawing.Size(62, 21);
+            this.ViewBillsbx.TabIndex = 179;
+            this.ViewBillsbx.Text = "View";
+            this.ViewBillsbx.UseVisualStyleBackColor = true;
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label43.ForeColor = System.Drawing.Color.Black;
+            this.label43.Location = new System.Drawing.Point(13, 21);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(39, 17);
+            this.label43.TabIndex = 157;
+            this.label43.Text = "Visa";
+            // 
+            // cmbUserPermission
+            // 
+            this.cmbUserPermission.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.cmbUserPermission.FormattingEnabled = true;
+            this.cmbUserPermission.Location = new System.Drawing.Point(6, 29);
+            this.cmbUserPermission.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cmbUserPermission.Name = "cmbUserPermission";
+            this.cmbUserPermission.Size = new System.Drawing.Size(257, 25);
+            this.cmbUserPermission.TabIndex = 139;
+            this.cmbUserPermission.SelectionChangeCommitted += new System.EventHandler(this.cmbUserPermission_SelectionChangeCommitted);
+            // 
+            // AddBillsbx
+            // 
+            this.AddBillsbx.AutoSize = true;
+            this.AddBillsbx.Location = new System.Drawing.Point(274, 20);
+            this.AddBillsbx.Name = "AddBillsbx";
+            this.AddBillsbx.Size = new System.Drawing.Size(56, 21);
+            this.AddBillsbx.TabIndex = 180;
+            this.AddBillsbx.Text = "Add";
+            this.AddBillsbx.UseVisualStyleBackColor = true;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label40.ForeColor = System.Drawing.Color.Black;
+            this.label40.Location = new System.Drawing.Point(3, 8);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(43, 17);
+            this.label40.TabIndex = 138;
+            this.label40.Text = "User";
+            // 
+            // EditBillsbx
+            // 
+            this.EditBillsbx.AutoSize = true;
+            this.EditBillsbx.Location = new System.Drawing.Point(383, 20);
+            this.EditBillsbx.Name = "EditBillsbx";
+            this.EditBillsbx.Size = new System.Drawing.Size(55, 21);
+            this.EditBillsbx.TabIndex = 181;
+            this.EditBillsbx.Text = "Edit";
+            this.EditBillsbx.UseVisualStyleBackColor = true;
+            // 
+            // DeleteBillsbx
+            // 
+            this.DeleteBillsbx.AutoSize = true;
+            this.DeleteBillsbx.Location = new System.Drawing.Point(476, 19);
+            this.DeleteBillsbx.Name = "DeleteBillsbx";
+            this.DeleteBillsbx.Size = new System.Drawing.Size(74, 21);
+            this.DeleteBillsbx.TabIndex = 182;
+            this.DeleteBillsbx.Text = "Delete";
+            this.DeleteBillsbx.UseVisualStyleBackColor = true;
+            // 
+            // ViewAssetsbx
+            // 
+            this.ViewAssetsbx.AutoSize = true;
+            this.ViewAssetsbx.Location = new System.Drawing.Point(174, 24);
+            this.ViewAssetsbx.Name = "ViewAssetsbx";
+            this.ViewAssetsbx.Size = new System.Drawing.Size(62, 21);
+            this.ViewAssetsbx.TabIndex = 183;
+            this.ViewAssetsbx.Text = "View";
+            this.ViewAssetsbx.UseVisualStyleBackColor = true;
+            // 
+            // AddAssetsbx
+            // 
+            this.AddAssetsbx.AutoSize = true;
+            this.AddAssetsbx.Location = new System.Drawing.Point(274, 20);
+            this.AddAssetsbx.Name = "AddAssetsbx";
+            this.AddAssetsbx.Size = new System.Drawing.Size(56, 21);
+            this.AddAssetsbx.TabIndex = 184;
+            this.AddAssetsbx.Text = "Add";
+            this.AddAssetsbx.UseVisualStyleBackColor = true;
+            // 
+            // EditAssetsbx
+            // 
+            this.EditAssetsbx.AutoSize = true;
+            this.EditAssetsbx.Location = new System.Drawing.Point(383, 20);
+            this.EditAssetsbx.Name = "EditAssetsbx";
+            this.EditAssetsbx.Size = new System.Drawing.Size(55, 21);
+            this.EditAssetsbx.TabIndex = 185;
+            this.EditAssetsbx.Text = "Edit";
+            this.EditAssetsbx.UseVisualStyleBackColor = true;
+            // 
+            // DeleteAssetsbx
+            // 
+            this.DeleteAssetsbx.AutoSize = true;
+            this.DeleteAssetsbx.Location = new System.Drawing.Point(476, 17);
+            this.DeleteAssetsbx.Name = "DeleteAssetsbx";
+            this.DeleteAssetsbx.Size = new System.Drawing.Size(74, 21);
+            this.DeleteAssetsbx.TabIndex = 186;
+            this.DeleteAssetsbx.Text = "Delete";
+            this.DeleteAssetsbx.UseVisualStyleBackColor = true;
             // 
             // jobsTap
             // 
@@ -943,15 +1020,15 @@ namespace Delmon_Managment_System.Forms
             // dataGridView3
             // 
             this.dataGridView3.AllowUserToAddRows = false;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView3.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView3.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView3.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView3.Location = new System.Drawing.Point(419, 27);
             this.dataGridView3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView3.Name = "dataGridView3";
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridView3.Size = new System.Drawing.Size(637, 274);
             this.dataGridView3.TabIndex = 89;
             this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick_1);
@@ -1111,8 +1188,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView2.Location = new System.Drawing.Point(421, 4);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView2.Name = "dataGridView2";
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridView2.Size = new System.Drawing.Size(576, 241);
             this.dataGridView2.TabIndex = 138;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick_1);
@@ -1252,8 +1329,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView7.Location = new System.Drawing.Point(440, 404);
             this.dataGridView7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView7.Name = "dataGridView7";
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView7.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView7.RowsDefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridView7.Size = new System.Drawing.Size(614, 193);
             this.dataGridView7.TabIndex = 171;
             this.dataGridView7.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView7_CellClick);
@@ -1770,8 +1847,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView5.Location = new System.Drawing.Point(459, 221);
             this.dataGridView5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView5.Name = "dataGridView5";
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView5.RowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView5.RowsDefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridView5.Size = new System.Drawing.Size(342, 210);
             this.dataGridView5.TabIndex = 175;
             this.dataGridView5.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView5_CellClick);
@@ -2138,6 +2215,546 @@ namespace Delmon_Managment_System.Forms
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.DeleteVisabx);
+            this.groupBox7.Controls.Add(this.label43);
+            this.groupBox7.Controls.Add(this.EditVisabx);
+            this.groupBox7.Controls.Add(this.ViewVisabx);
+            this.groupBox7.Controls.Add(this.AddVisabx);
+            this.groupBox7.Location = new System.Drawing.Point(451, 3);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(570, 46);
+            this.groupBox7.TabIndex = 220;
+            this.groupBox7.TabStop = false;
+            // 
+            // groupBox11
+            // 
+            this.groupBox11.Controls.Add(this.ViewPersonalInformationbx);
+            this.groupBox11.Controls.Add(this.AddPersonalInformationbx);
+            this.groupBox11.Controls.Add(this.EditPersonalInformationbx);
+            this.groupBox11.Controls.Add(this.DeletePersonalInformationbx);
+            this.groupBox11.Controls.Add(this.label44);
+            this.groupBox11.Location = new System.Drawing.Point(451, 49);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(570, 52);
+            this.groupBox11.TabIndex = 221;
+            this.groupBox11.TabStop = false;
+            // 
+            // ViewPersonalInformationbx
+            // 
+            this.ViewPersonalInformationbx.AutoSize = true;
+            this.ViewPersonalInformationbx.Location = new System.Drawing.Point(170, 20);
+            this.ViewPersonalInformationbx.Name = "ViewPersonalInformationbx";
+            this.ViewPersonalInformationbx.Size = new System.Drawing.Size(62, 21);
+            this.ViewPersonalInformationbx.TabIndex = 176;
+            this.ViewPersonalInformationbx.Text = "View";
+            this.ViewPersonalInformationbx.UseVisualStyleBackColor = true;
+            // 
+            // AddPersonalInformationbx
+            // 
+            this.AddPersonalInformationbx.AutoSize = true;
+            this.AddPersonalInformationbx.Location = new System.Drawing.Point(274, 21);
+            this.AddPersonalInformationbx.Name = "AddPersonalInformationbx";
+            this.AddPersonalInformationbx.Size = new System.Drawing.Size(56, 21);
+            this.AddPersonalInformationbx.TabIndex = 177;
+            this.AddPersonalInformationbx.Text = "Add";
+            this.AddPersonalInformationbx.UseVisualStyleBackColor = true;
+            // 
+            // EditPersonalInformationbx
+            // 
+            this.EditPersonalInformationbx.AutoSize = true;
+            this.EditPersonalInformationbx.Location = new System.Drawing.Point(383, 21);
+            this.EditPersonalInformationbx.Name = "EditPersonalInformationbx";
+            this.EditPersonalInformationbx.Size = new System.Drawing.Size(55, 21);
+            this.EditPersonalInformationbx.TabIndex = 178;
+            this.EditPersonalInformationbx.Text = "Edit";
+            this.EditPersonalInformationbx.UseVisualStyleBackColor = true;
+            // 
+            // DeletePersonalInformationbx
+            // 
+            this.DeletePersonalInformationbx.AutoSize = true;
+            this.DeletePersonalInformationbx.Location = new System.Drawing.Point(476, 24);
+            this.DeletePersonalInformationbx.Name = "DeletePersonalInformationbx";
+            this.DeletePersonalInformationbx.Size = new System.Drawing.Size(74, 21);
+            this.DeletePersonalInformationbx.TabIndex = 179;
+            this.DeletePersonalInformationbx.Text = "Delete";
+            this.DeletePersonalInformationbx.UseVisualStyleBackColor = true;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label44.ForeColor = System.Drawing.Color.Black;
+            this.label44.Location = new System.Drawing.Point(12, 21);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(105, 17);
+            this.label44.TabIndex = 175;
+            this.label44.Text = "Personal Info";
+            // 
+            // groupBox12
+            // 
+            this.groupBox12.Controls.Add(this.ViewVisaReportbx);
+            this.groupBox12.Controls.Add(this.checkBox1);
+            this.groupBox12.Controls.Add(this.label45);
+            this.groupBox12.Controls.Add(this.ViewCandidatesReportbx);
+            this.groupBox12.Location = new System.Drawing.Point(452, 100);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Size = new System.Drawing.Size(570, 52);
+            this.groupBox12.TabIndex = 222;
+            this.groupBox12.TabStop = false;
+            // 
+            // ViewVisaReportbx
+            // 
+            this.ViewVisaReportbx.AutoSize = true;
+            this.ViewVisaReportbx.Location = new System.Drawing.Point(173, 24);
+            this.ViewVisaReportbx.Name = "ViewVisaReportbx";
+            this.ViewVisaReportbx.Size = new System.Drawing.Size(58, 21);
+            this.ViewVisaReportbx.TabIndex = 209;
+            this.ViewVisaReportbx.Text = "Visa";
+            this.ViewVisaReportbx.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(380, 21);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(68, 21);
+            this.checkBox1.TabIndex = 211;
+            this.checkBox1.Text = "Asset";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label45.ForeColor = System.Drawing.Color.Black;
+            this.label45.Location = new System.Drawing.Point(12, 21);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(58, 17);
+            this.label45.TabIndex = 208;
+            this.label45.Text = "Report";
+            // 
+            // ViewCandidatesReportbx
+            // 
+            this.ViewCandidatesReportbx.AutoSize = true;
+            this.ViewCandidatesReportbx.Location = new System.Drawing.Point(273, 20);
+            this.ViewCandidatesReportbx.Name = "ViewCandidatesReportbx";
+            this.ViewCandidatesReportbx.Size = new System.Drawing.Size(101, 21);
+            this.ViewCandidatesReportbx.TabIndex = 210;
+            this.ViewCandidatesReportbx.Text = "Candidate";
+            this.ViewCandidatesReportbx.UseVisualStyleBackColor = true;
+            // 
+            // groupBox13
+            // 
+            this.groupBox13.Controls.Add(this.DeleteBillsbx);
+            this.groupBox13.Controls.Add(this.EditBillsbx);
+            this.groupBox13.Controls.Add(this.AddBillsbx);
+            this.groupBox13.Controls.Add(this.ViewBillsbx);
+            this.groupBox13.Controls.Add(this.label46);
+            this.groupBox13.Location = new System.Drawing.Point(451, 152);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Size = new System.Drawing.Size(570, 52);
+            this.groupBox13.TabIndex = 223;
+            this.groupBox13.TabStop = false;
+            // 
+            // groupBox14
+            // 
+            this.groupBox14.Controls.Add(this.DeleteAssetsbx);
+            this.groupBox14.Controls.Add(this.EditAssetsbx);
+            this.groupBox14.Controls.Add(this.AddAssetsbx);
+            this.groupBox14.Controls.Add(this.ViewAssetsbx);
+            this.groupBox14.Controls.Add(this.label47);
+            this.groupBox14.Location = new System.Drawing.Point(451, 208);
+            this.groupBox14.Name = "groupBox14";
+            this.groupBox14.Size = new System.Drawing.Size(570, 52);
+            this.groupBox14.TabIndex = 224;
+            this.groupBox14.TabStop = false;
+            // 
+            // groupBox15
+            // 
+            this.groupBox15.Controls.Add(this.label41);
+            this.groupBox15.Controls.Add(this.DeleteAlertsBx);
+            this.groupBox15.Controls.Add(this.EditAlertsbx);
+            this.groupBox15.Controls.Add(this.AddAlertsbx);
+            this.groupBox15.Controls.Add(this.ViewAlertsbx);
+            this.groupBox15.Location = new System.Drawing.Point(451, 263);
+            this.groupBox15.Name = "groupBox15";
+            this.groupBox15.Size = new System.Drawing.Size(570, 52);
+            this.groupBox15.TabIndex = 225;
+            this.groupBox15.TabStop = false;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label41.ForeColor = System.Drawing.Color.Black;
+            this.label41.Location = new System.Drawing.Point(6, 24);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(52, 17);
+            this.label41.TabIndex = 191;
+            this.label41.Text = "Alerts";
+            // 
+            // DeleteAlertsBx
+            // 
+            this.DeleteAlertsBx.AutoSize = true;
+            this.DeleteAlertsBx.Location = new System.Drawing.Point(476, 20);
+            this.DeleteAlertsBx.Name = "DeleteAlertsBx";
+            this.DeleteAlertsBx.Size = new System.Drawing.Size(74, 21);
+            this.DeleteAlertsBx.TabIndex = 195;
+            this.DeleteAlertsBx.Text = "Delete";
+            this.DeleteAlertsBx.UseVisualStyleBackColor = true;
+            // 
+            // EditAlertsbx
+            // 
+            this.EditAlertsbx.AutoSize = true;
+            this.EditAlertsbx.Location = new System.Drawing.Point(383, 20);
+            this.EditAlertsbx.Name = "EditAlertsbx";
+            this.EditAlertsbx.Size = new System.Drawing.Size(55, 21);
+            this.EditAlertsbx.TabIndex = 194;
+            this.EditAlertsbx.Text = "Edit";
+            this.EditAlertsbx.UseVisualStyleBackColor = true;
+            // 
+            // AddAlertsbx
+            // 
+            this.AddAlertsbx.AutoSize = true;
+            this.AddAlertsbx.Location = new System.Drawing.Point(274, 20);
+            this.AddAlertsbx.Name = "AddAlertsbx";
+            this.AddAlertsbx.Size = new System.Drawing.Size(56, 21);
+            this.AddAlertsbx.TabIndex = 193;
+            this.AddAlertsbx.Text = "Add";
+            this.AddAlertsbx.UseVisualStyleBackColor = true;
+            // 
+            // ViewAlertsbx
+            // 
+            this.ViewAlertsbx.AutoSize = true;
+            this.ViewAlertsbx.Location = new System.Drawing.Point(174, 20);
+            this.ViewAlertsbx.Name = "ViewAlertsbx";
+            this.ViewAlertsbx.Size = new System.Drawing.Size(62, 21);
+            this.ViewAlertsbx.TabIndex = 192;
+            this.ViewAlertsbx.Text = "View";
+            this.ViewAlertsbx.UseVisualStyleBackColor = true;
+            // 
+            // groupBox16
+            // 
+            this.groupBox16.Controls.Add(this.label42);
+            this.groupBox16.Controls.Add(this.AddUserTabx);
+            this.groupBox16.Controls.Add(this.EditUserTabx);
+            this.groupBox16.Controls.Add(this.ViewUserTabx);
+            this.groupBox16.Controls.Add(this.DeleteUserTabx);
+            this.groupBox16.Location = new System.Drawing.Point(452, 321);
+            this.groupBox16.Name = "groupBox16";
+            this.groupBox16.Size = new System.Drawing.Size(570, 52);
+            this.groupBox16.TabIndex = 227;
+            this.groupBox16.TabStop = false;
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label42.ForeColor = System.Drawing.Color.Black;
+            this.label42.Location = new System.Drawing.Point(11, 22);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(51, 17);
+            this.label42.TabIndex = 195;
+            this.label42.Text = "Users";
+            // 
+            // AddUserTabx
+            // 
+            this.AddUserTabx.AutoSize = true;
+            this.AddUserTabx.Location = new System.Drawing.Point(273, 20);
+            this.AddUserTabx.Name = "AddUserTabx";
+            this.AddUserTabx.Size = new System.Drawing.Size(56, 21);
+            this.AddUserTabx.TabIndex = 197;
+            this.AddUserTabx.Text = "Add";
+            this.AddUserTabx.UseVisualStyleBackColor = true;
+            // 
+            // EditUserTabx
+            // 
+            this.EditUserTabx.AutoSize = true;
+            this.EditUserTabx.Location = new System.Drawing.Point(382, 20);
+            this.EditUserTabx.Name = "EditUserTabx";
+            this.EditUserTabx.Size = new System.Drawing.Size(55, 21);
+            this.EditUserTabx.TabIndex = 198;
+            this.EditUserTabx.Text = "Edit";
+            this.EditUserTabx.UseVisualStyleBackColor = true;
+            // 
+            // ViewUserTabx
+            // 
+            this.ViewUserTabx.AutoSize = true;
+            this.ViewUserTabx.Location = new System.Drawing.Point(173, 20);
+            this.ViewUserTabx.Name = "ViewUserTabx";
+            this.ViewUserTabx.Size = new System.Drawing.Size(62, 21);
+            this.ViewUserTabx.TabIndex = 196;
+            this.ViewUserTabx.Text = "View";
+            this.ViewUserTabx.UseVisualStyleBackColor = true;
+            // 
+            // DeleteUserTabx
+            // 
+            this.DeleteUserTabx.AutoSize = true;
+            this.DeleteUserTabx.Location = new System.Drawing.Point(475, 20);
+            this.DeleteUserTabx.Name = "DeleteUserTabx";
+            this.DeleteUserTabx.Size = new System.Drawing.Size(74, 21);
+            this.DeleteUserTabx.TabIndex = 199;
+            this.DeleteUserTabx.Text = "Delete";
+            this.DeleteUserTabx.UseVisualStyleBackColor = true;
+            // 
+            // groupBox17
+            // 
+            this.groupBox17.Controls.Add(this.label48);
+            this.groupBox17.Controls.Add(this.ViewJobTabx);
+            this.groupBox17.Controls.Add(this.AddJobTabx);
+            this.groupBox17.Controls.Add(this.editJobTabx);
+            this.groupBox17.Controls.Add(this.DeleteJobTabx);
+            this.groupBox17.Location = new System.Drawing.Point(448, 379);
+            this.groupBox17.Name = "groupBox17";
+            this.groupBox17.Size = new System.Drawing.Size(570, 52);
+            this.groupBox17.TabIndex = 228;
+            this.groupBox17.TabStop = false;
+            // 
+            // ViewJobTabx
+            // 
+            this.ViewJobTabx.AutoSize = true;
+            this.ViewJobTabx.Location = new System.Drawing.Point(177, 20);
+            this.ViewJobTabx.Name = "ViewJobTabx";
+            this.ViewJobTabx.Size = new System.Drawing.Size(62, 21);
+            this.ViewJobTabx.TabIndex = 199;
+            this.ViewJobTabx.Text = "View";
+            this.ViewJobTabx.UseVisualStyleBackColor = true;
+            // 
+            // AddJobTabx
+            // 
+            this.AddJobTabx.AutoSize = true;
+            this.AddJobTabx.Location = new System.Drawing.Point(277, 25);
+            this.AddJobTabx.Name = "AddJobTabx";
+            this.AddJobTabx.Size = new System.Drawing.Size(56, 21);
+            this.AddJobTabx.TabIndex = 200;
+            this.AddJobTabx.Text = "Add";
+            this.AddJobTabx.UseVisualStyleBackColor = true;
+            // 
+            // editJobTabx
+            // 
+            this.editJobTabx.AutoSize = true;
+            this.editJobTabx.Location = new System.Drawing.Point(386, 25);
+            this.editJobTabx.Name = "editJobTabx";
+            this.editJobTabx.Size = new System.Drawing.Size(55, 21);
+            this.editJobTabx.TabIndex = 201;
+            this.editJobTabx.Text = "Edit";
+            this.editJobTabx.UseVisualStyleBackColor = true;
+            // 
+            // DeleteJobTabx
+            // 
+            this.DeleteJobTabx.AutoSize = true;
+            this.DeleteJobTabx.Location = new System.Drawing.Point(479, 24);
+            this.DeleteJobTabx.Name = "DeleteJobTabx";
+            this.DeleteJobTabx.Size = new System.Drawing.Size(74, 21);
+            this.DeleteJobTabx.TabIndex = 202;
+            this.DeleteJobTabx.Text = "Delete";
+            this.DeleteJobTabx.UseVisualStyleBackColor = true;
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label48.ForeColor = System.Drawing.Color.Black;
+            this.label48.Location = new System.Drawing.Point(23, 24);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(43, 17);
+            this.label48.TabIndex = 203;
+            this.label48.Text = "Jobs";
+            // 
+            // groupBox18
+            // 
+            this.groupBox18.Controls.Add(this.DeleteAgenciesTabx);
+            this.groupBox18.Controls.Add(this.label51);
+            this.groupBox18.Controls.Add(this.EditAgenciesTabx);
+            this.groupBox18.Controls.Add(this.AddAgenciesTabx);
+            this.groupBox18.Controls.Add(this.ViewAgenciesTabx);
+            this.groupBox18.Location = new System.Drawing.Point(452, 437);
+            this.groupBox18.Name = "groupBox18";
+            this.groupBox18.Size = new System.Drawing.Size(570, 52);
+            this.groupBox18.TabIndex = 229;
+            this.groupBox18.TabStop = false;
+            // 
+            // DeleteAgenciesTabx
+            // 
+            this.DeleteAgenciesTabx.AutoSize = true;
+            this.DeleteAgenciesTabx.Location = new System.Drawing.Point(475, 20);
+            this.DeleteAgenciesTabx.Name = "DeleteAgenciesTabx";
+            this.DeleteAgenciesTabx.Size = new System.Drawing.Size(74, 21);
+            this.DeleteAgenciesTabx.TabIndex = 217;
+            this.DeleteAgenciesTabx.Text = "Delete";
+            this.DeleteAgenciesTabx.UseVisualStyleBackColor = true;
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label51.ForeColor = System.Drawing.Color.Black;
+            this.label51.Location = new System.Drawing.Point(16, 21);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(76, 17);
+            this.label51.TabIndex = 213;
+            this.label51.Text = "Agencies";
+            // 
+            // EditAgenciesTabx
+            // 
+            this.EditAgenciesTabx.AutoSize = true;
+            this.EditAgenciesTabx.Location = new System.Drawing.Point(382, 21);
+            this.EditAgenciesTabx.Name = "EditAgenciesTabx";
+            this.EditAgenciesTabx.Size = new System.Drawing.Size(55, 21);
+            this.EditAgenciesTabx.TabIndex = 216;
+            this.EditAgenciesTabx.Text = "Edit";
+            this.EditAgenciesTabx.UseVisualStyleBackColor = true;
+            // 
+            // AddAgenciesTabx
+            // 
+            this.AddAgenciesTabx.AutoSize = true;
+            this.AddAgenciesTabx.Location = new System.Drawing.Point(273, 23);
+            this.AddAgenciesTabx.Name = "AddAgenciesTabx";
+            this.AddAgenciesTabx.Size = new System.Drawing.Size(56, 21);
+            this.AddAgenciesTabx.TabIndex = 215;
+            this.AddAgenciesTabx.Text = "Add";
+            this.AddAgenciesTabx.UseVisualStyleBackColor = true;
+            // 
+            // ViewAgenciesTabx
+            // 
+            this.ViewAgenciesTabx.AutoSize = true;
+            this.ViewAgenciesTabx.Location = new System.Drawing.Point(173, 21);
+            this.ViewAgenciesTabx.Name = "ViewAgenciesTabx";
+            this.ViewAgenciesTabx.Size = new System.Drawing.Size(62, 21);
+            this.ViewAgenciesTabx.TabIndex = 214;
+            this.ViewAgenciesTabx.Text = "View";
+            this.ViewAgenciesTabx.UseVisualStyleBackColor = true;
+            // 
+            // groupBox19
+            // 
+            this.groupBox19.Controls.Add(this.label49);
+            this.groupBox19.Controls.Add(this.DeleteCompaniesTabx);
+            this.groupBox19.Controls.Add(this.EditCompaniesTabx);
+            this.groupBox19.Controls.Add(this.AddCompaniesTabx);
+            this.groupBox19.Controls.Add(this.ViewCompaniesTabx);
+            this.groupBox19.Location = new System.Drawing.Point(451, 545);
+            this.groupBox19.Name = "groupBox19";
+            this.groupBox19.Size = new System.Drawing.Size(570, 45);
+            this.groupBox19.TabIndex = 230;
+            this.groupBox19.TabStop = false;
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label49.ForeColor = System.Drawing.Color.Black;
+            this.label49.Location = new System.Drawing.Point(15, 21);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(89, 17);
+            this.label49.TabIndex = 203;
+            this.label49.Text = "Companies";
+            // 
+            // DeleteCompaniesTabx
+            // 
+            this.DeleteCompaniesTabx.AutoSize = true;
+            this.DeleteCompaniesTabx.Location = new System.Drawing.Point(476, 20);
+            this.DeleteCompaniesTabx.Name = "DeleteCompaniesTabx";
+            this.DeleteCompaniesTabx.Size = new System.Drawing.Size(74, 21);
+            this.DeleteCompaniesTabx.TabIndex = 207;
+            this.DeleteCompaniesTabx.Text = "Delete";
+            this.DeleteCompaniesTabx.UseVisualStyleBackColor = true;
+            // 
+            // EditCompaniesTabx
+            // 
+            this.EditCompaniesTabx.AutoSize = true;
+            this.EditCompaniesTabx.Location = new System.Drawing.Point(383, 21);
+            this.EditCompaniesTabx.Name = "EditCompaniesTabx";
+            this.EditCompaniesTabx.Size = new System.Drawing.Size(55, 21);
+            this.EditCompaniesTabx.TabIndex = 206;
+            this.EditCompaniesTabx.Text = "Edit";
+            this.EditCompaniesTabx.UseVisualStyleBackColor = true;
+            // 
+            // AddCompaniesTabx
+            // 
+            this.AddCompaniesTabx.AutoSize = true;
+            this.AddCompaniesTabx.Location = new System.Drawing.Point(274, 20);
+            this.AddCompaniesTabx.Name = "AddCompaniesTabx";
+            this.AddCompaniesTabx.Size = new System.Drawing.Size(56, 21);
+            this.AddCompaniesTabx.TabIndex = 205;
+            this.AddCompaniesTabx.Text = "Add";
+            this.AddCompaniesTabx.UseVisualStyleBackColor = true;
+            // 
+            // ViewCompaniesTabx
+            // 
+            this.ViewCompaniesTabx.AutoSize = true;
+            this.ViewCompaniesTabx.Location = new System.Drawing.Point(174, 21);
+            this.ViewCompaniesTabx.Name = "ViewCompaniesTabx";
+            this.ViewCompaniesTabx.Size = new System.Drawing.Size(62, 21);
+            this.ViewCompaniesTabx.TabIndex = 204;
+            this.ViewCompaniesTabx.Text = "View";
+            this.ViewCompaniesTabx.UseVisualStyleBackColor = true;
+            // 
+            // groupBox20
+            // 
+            this.groupBox20.Controls.Add(this.DeleteCountriesTabx);
+            this.groupBox20.Controls.Add(this.label50);
+            this.groupBox20.Controls.Add(this.EditCountriesTabx);
+            this.groupBox20.Controls.Add(this.AddCountriesTabx);
+            this.groupBox20.Controls.Add(this.ViewCountriesTabx);
+            this.groupBox20.Location = new System.Drawing.Point(451, 495);
+            this.groupBox20.Name = "groupBox20";
+            this.groupBox20.Size = new System.Drawing.Size(570, 52);
+            this.groupBox20.TabIndex = 231;
+            this.groupBox20.TabStop = false;
+            // 
+            // DeleteCountriesTabx
+            // 
+            this.DeleteCountriesTabx.AutoSize = true;
+            this.DeleteCountriesTabx.Location = new System.Drawing.Point(476, 17);
+            this.DeleteCountriesTabx.Name = "DeleteCountriesTabx";
+            this.DeleteCountriesTabx.Size = new System.Drawing.Size(74, 21);
+            this.DeleteCountriesTabx.TabIndex = 211;
+            this.DeleteCountriesTabx.Text = "Delete";
+            this.DeleteCountriesTabx.UseVisualStyleBackColor = true;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label50.ForeColor = System.Drawing.Color.Black;
+            this.label50.Location = new System.Drawing.Point(10, 21);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(156, 17);
+            this.label50.TabIndex = 207;
+            this.label50.Text = "Countries/Consulate";
+            // 
+            // EditCountriesTabx
+            // 
+            this.EditCountriesTabx.AutoSize = true;
+            this.EditCountriesTabx.Location = new System.Drawing.Point(381, 21);
+            this.EditCountriesTabx.Name = "EditCountriesTabx";
+            this.EditCountriesTabx.Size = new System.Drawing.Size(55, 21);
+            this.EditCountriesTabx.TabIndex = 210;
+            this.EditCountriesTabx.Text = "Edit";
+            this.EditCountriesTabx.UseVisualStyleBackColor = true;
+            // 
+            // AddCountriesTabx
+            // 
+            this.AddCountriesTabx.AutoSize = true;
+            this.AddCountriesTabx.Location = new System.Drawing.Point(274, 20);
+            this.AddCountriesTabx.Name = "AddCountriesTabx";
+            this.AddCountriesTabx.Size = new System.Drawing.Size(56, 21);
+            this.AddCountriesTabx.TabIndex = 209;
+            this.AddCountriesTabx.Text = "Add";
+            this.AddCountriesTabx.UseVisualStyleBackColor = true;
+            // 
+            // ViewCountriesTabx
+            // 
+            this.ViewCountriesTabx.AutoSize = true;
+            this.ViewCountriesTabx.Location = new System.Drawing.Point(174, 21);
+            this.ViewCountriesTabx.Name = "ViewCountriesTabx";
+            this.ViewCountriesTabx.Size = new System.Drawing.Size(62, 21);
+            this.ViewCountriesTabx.TabIndex = 208;
+            this.ViewCountriesTabx.Text = "View";
+            this.ViewCountriesTabx.UseVisualStyleBackColor = true;
+            // 
             // SettingFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2156,9 +2773,6 @@ namespace Delmon_Managment_System.Forms
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.permissionstab.ResumeLayout(false);
             this.permissionstab.PerformLayout();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView9)).EndInit();
             this.jobsTap.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
@@ -2187,6 +2801,28 @@ namespace Delmon_Managment_System.Forms
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView8)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox11.ResumeLayout(false);
+            this.groupBox11.PerformLayout();
+            this.groupBox12.ResumeLayout(false);
+            this.groupBox12.PerformLayout();
+            this.groupBox13.ResumeLayout(false);
+            this.groupBox13.PerformLayout();
+            this.groupBox14.ResumeLayout(false);
+            this.groupBox14.PerformLayout();
+            this.groupBox15.ResumeLayout(false);
+            this.groupBox15.PerformLayout();
+            this.groupBox16.ResumeLayout(false);
+            this.groupBox16.PerformLayout();
+            this.groupBox17.ResumeLayout(false);
+            this.groupBox17.PerformLayout();
+            this.groupBox18.ResumeLayout(false);
+            this.groupBox18.PerformLayout();
+            this.groupBox19.ResumeLayout(false);
+            this.groupBox19.PerformLayout();
+            this.groupBox20.ResumeLayout(false);
+            this.groupBox20.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2318,30 +2954,82 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.TextBox txtnationname;
         private System.Windows.Forms.Button button28;
         private System.Windows.Forms.DataGridView dataGridView8;
-        private System.Windows.Forms.TabPage permissionstab;
-        private System.Windows.Forms.ComboBox cmbusertype1;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.DataGridView dataGridView10;
-        private System.Windows.Forms.TextBox txtdelete;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.TextBox txtedit;
-        private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.TextBox txtadd;
-        private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.TextBox txtselect;
-        private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.Button button19;
-        private System.Windows.Forms.Button button24;
-        private System.Windows.Forms.Button button29;
-        private System.Windows.Forms.DataGridView dataGridView9;
-        private System.Windows.Forms.Button button30;
-        private System.Windows.Forms.Label label36;
-        private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.GroupBox groupBox10;
-        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.TabPage permissionstab;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.ComboBox cmbUserPermission;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.CheckBox DeleteAssetsbx;
+        private System.Windows.Forms.CheckBox EditAssetsbx;
+        private System.Windows.Forms.CheckBox AddAssetsbx;
+        private System.Windows.Forms.CheckBox ViewAssetsbx;
+        private System.Windows.Forms.CheckBox DeleteBillsbx;
+        private System.Windows.Forms.CheckBox EditBillsbx;
+        private System.Windows.Forms.CheckBox AddBillsbx;
+        private System.Windows.Forms.CheckBox ViewBillsbx;
+        private System.Windows.Forms.CheckBox DeleteVisabx;
+        private System.Windows.Forms.CheckBox EditVisabx;
+        private System.Windows.Forms.CheckBox AddVisabx;
+        private System.Windows.Forms.CheckBox ViewVisabx;
+        private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.Button button31;
+        private System.Windows.Forms.Button button32;
+        private System.Windows.Forms.Button button33;
+        private System.Windows.Forms.DataGridView dataGridView9;
+        private System.Windows.Forms.GroupBox groupBox20;
+        private System.Windows.Forms.CheckBox DeleteCountriesTabx;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.CheckBox EditCountriesTabx;
+        private System.Windows.Forms.CheckBox AddCountriesTabx;
+        private System.Windows.Forms.CheckBox ViewCountriesTabx;
+        private System.Windows.Forms.GroupBox groupBox19;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.CheckBox DeleteCompaniesTabx;
+        private System.Windows.Forms.CheckBox EditCompaniesTabx;
+        private System.Windows.Forms.CheckBox AddCompaniesTabx;
+        private System.Windows.Forms.CheckBox ViewCompaniesTabx;
+        private System.Windows.Forms.GroupBox groupBox18;
+        private System.Windows.Forms.CheckBox DeleteAgenciesTabx;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.CheckBox EditAgenciesTabx;
+        private System.Windows.Forms.CheckBox AddAgenciesTabx;
+        private System.Windows.Forms.CheckBox ViewAgenciesTabx;
+        private System.Windows.Forms.GroupBox groupBox17;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.CheckBox ViewJobTabx;
+        private System.Windows.Forms.CheckBox AddJobTabx;
+        private System.Windows.Forms.CheckBox editJobTabx;
+        private System.Windows.Forms.CheckBox DeleteJobTabx;
+        private System.Windows.Forms.GroupBox groupBox16;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.CheckBox AddUserTabx;
+        private System.Windows.Forms.CheckBox EditUserTabx;
+        private System.Windows.Forms.CheckBox ViewUserTabx;
+        private System.Windows.Forms.CheckBox DeleteUserTabx;
+        private System.Windows.Forms.GroupBox groupBox15;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.CheckBox DeleteAlertsBx;
+        private System.Windows.Forms.CheckBox EditAlertsbx;
+        private System.Windows.Forms.CheckBox AddAlertsbx;
+        private System.Windows.Forms.CheckBox ViewAlertsbx;
+        private System.Windows.Forms.GroupBox groupBox14;
+        private System.Windows.Forms.GroupBox groupBox13;
+        private System.Windows.Forms.GroupBox groupBox12;
+        private System.Windows.Forms.CheckBox ViewVisaReportbx;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.CheckBox ViewCandidatesReportbx;
+        private System.Windows.Forms.GroupBox groupBox11;
+        private System.Windows.Forms.CheckBox ViewPersonalInformationbx;
+        private System.Windows.Forms.CheckBox AddPersonalInformationbx;
+        private System.Windows.Forms.CheckBox EditPersonalInformationbx;
+        private System.Windows.Forms.CheckBox DeletePersonalInformationbx;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.GroupBox groupBox7;
     }
 }
