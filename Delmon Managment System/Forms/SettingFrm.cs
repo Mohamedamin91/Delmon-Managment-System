@@ -3885,8 +3885,9 @@ ORDER BY
             // Define the group keywords and their associated colors
             var groupColors = new Dictionary<string, Color>
         {
-            { "VisaReport", Color.LightSkyBlue },
-            { "CandidatesReport", Color.LightSkyBlue },
+            { "VisaReport", Color.AliceBlue },
+            { "CandidatesReport", Color.AliceBlue },
+            { "AssetsReport", Color.AliceBlue },
             { "Visa", Color.LightGreen },
             { "PersonalInformation", Color.LightCoral },
             { "Bills", Color.LightGoldenrodYellow },
@@ -3909,6 +3910,10 @@ ORDER BY
                 return groupColors["CandidatesReport"];
             }
 
+            if (permission.Contains("AssetsReport"))
+            {
+                return groupColors["AssetsReport"];
+            }
             // General group detection based on the keyword
             foreach (var group in groupColors)
             {
@@ -3935,7 +3940,7 @@ ORDER BY
                 !ViewCandidatesReportbx.Checked && !ViewVisaReportbx.Checked &&
                 !DeletePersonalInformationbx.Checked && !EditPersonalInformationbx.Checked && !AddPersonalInformationbx.Checked && !ViewPersonalInformationbx.Checked &&
                 !DeleteVisabx.Checked && !EditVisabx.Checked && !AddVisabx.Checked && !ViewVisabx.Checked &&
-                !DeleteAgenciesTabx.Checked && !EditAgenciesTabx.Checked && !AddAgenciesTabx.Checked && !ViewAgenciesTabx.Checked))
+                !DeleteAgenciesTabx.Checked && !EditAgenciesTabx.Checked && !AddAgenciesTabx.Checked && !ViewAssetReportbx.Checked && !ViewAgenciesTabx.Checked))
             {
                 MessageBox.Show("Please select a User / enter at least one permission.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -4168,6 +4173,13 @@ ORDER BY
                     SqlParameter paramViewVisaReport = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 9 };
                     values.Add("(@C1, @C" + parameterIndex + ")");
                     parameters.Add(paramViewVisaReport);
+                     parameterIndex++;
+                }
+                if (ViewAssetReportbx.Checked)
+                {
+                    SqlParameter paramViewVisaReport = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 43 };
+                    values.Add("(@C1, @C" + parameterIndex + ")");
+                    parameters.Add(paramViewVisaReport);
                     parameterIndex++;
                 }
 
@@ -4380,6 +4392,9 @@ ORDER BY
                 case "ViewCandidatesReport":
                     ViewCandidatesReportbx.Checked = !ViewCandidatesReportbx.Checked;
                     break;
+                case "ViewAssetsReport":
+                    ViewAssetReportbx.Checked = !ViewAssetReportbx.Checked;
+                    break;
                 case "ViewAssets":
                     ViewAssetsbx.Checked = !ViewAssetsbx.Checked;
                     break;
@@ -4467,15 +4482,40 @@ ORDER BY
             // Prepare SQL parameters
             SqlParameter paramUser = new SqlParameter("@C1", SqlDbType.Int) { Value = userID };
 
-            dataGridView9.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT [UserPermissionID],
-  us.UserID,
-  us.[PermissionID]
-      ,p.PermissionName
-  FROM [DelmonGroupDB].[dbo].[UserPermissions]as us,Permissions as p
-  where p.PermissionID= us.PermissionID and us.UserID=@C1", paramUser);
-            dataGridView9.Columns["PermissionID"].Visible = false;
-            dataGridView9.Columns[3].Width = 300;
+            // Retrieve the data from the database
+            DataTable dataTable = (DataTable)SQLCONN.ShowDataInGridViewORCombobox(@"SELECT [UserPermissionID],
+        us.UserID,
+        us.[PermissionID],
+        p.PermissionName
+        FROM [DelmonGroupDB].[dbo].[UserPermissions] as us
+        JOIN Permissions as p ON p.PermissionID = us.PermissionID
+        WHERE us.UserID = @C1", paramUser);
+            if (dataTable.Rows.Count == 0)
+            {
+                MessageBox.Show("There are no permissions for this user!", "No Permissions", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else
+            {
 
+                // Sort the data by the second and third words in PermissionName
+                var sortedTable = dataTable.AsEnumerable()
+                    .OrderBy(row =>
+                    {
+                        var words = row.Field<string>("PermissionName").Split(' ');
+                        string secondWord = words.Length > 1 ? words[1] : string.Empty;
+                        string thirdWord = words.Length > 2 ? words[2] : string.Empty;
+                        return secondWord + " " + thirdWord;
+                    })
+                    .CopyToDataTable();
+
+                // Bind the sorted data to the DataGridView
+                dataGridView9.DataSource = sortedTable;
+
+                // Adjust the DataGridView columns
+                dataGridView9.Columns["PermissionID"].Visible = false;
+                dataGridView9.Columns[3].Width = 300;
+            }
         }
 
         private void dataGridView9_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -4708,6 +4748,12 @@ ORDER BY
                 {
                     updateQuery += "PermissionID = @PermissionID_ViewVisaReportbx, ";
                     parameters.Add(new SqlParameter("@PermissionID_ViewVisaReportbx", SqlDbType.Int) { Value = 9 });
+                }
+
+                if (ViewAssetReportbx.Checked)
+                {
+                    updateQuery += "PermissionID = @PermissionID_ViewAssetsReport, ";
+                    parameters.Add(new SqlParameter("@PermissionID_ViewAssetsReport", SqlDbType.Int) { Value = 9 });
                 }
 
                 // ViewVisabx

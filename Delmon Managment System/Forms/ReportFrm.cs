@@ -33,6 +33,7 @@ namespace Delmon_Managment_System.Forms
         DateTime dtptoreport;
         bool hasViewVISA = false;
         bool hasViewCANDIDATES = false;
+        bool hasViewAssets = false;
 
 
 
@@ -60,14 +61,18 @@ namespace Delmon_Managment_System.Forms
             while (dr.Read())
             {
                 string permissionName = dr["PermissionName"].ToString();
-                if (permissionName.Contains("VisaReport"))
+                if (permissionName.Contains("ViewVisaReport"))
 
                 {
                     hasViewVISA = true;
                 }
-                if (permissionName.Contains("CandidatesReport"))
+                if (permissionName.Contains("ViewCandidatesReport"))
                 {
                     hasViewCANDIDATES = true;
+                }
+                if (permissionName.Contains("ViewAssetsReport"))
+                {
+                    hasViewAssets = true;
                 }
 
             }
@@ -1261,14 +1266,18 @@ namespace Delmon_Managment_System.Forms
             while (dr.Read())
             {
                 string permissionName = dr["PermissionName"].ToString();
-                if (permissionName.Contains("VisaReport"))
+                if (permissionName.Contains("ViewVisaReport"))
 
                 {
                     hasViewVISA = true;
                 }
-                if (permissionName.Contains("CandidatesReport"))
+                if (permissionName.Contains("ViewCandidatesReport"))
                 {
                     hasViewCANDIDATES = true;
+                }
+                if (permissionName.Contains("ViewAssetsReport"))
+                {
+                    hasViewAssets = true;
                 }
 
             }
@@ -1297,7 +1306,7 @@ namespace Delmon_Managment_System.Forms
 
                 }
             }
-            if (tabControl1.SelectedTab == tabControl1.TabPages[1])
+              if (tabControl1.SelectedTab == tabControl1.TabPages[1])
             {
                 if (hasViewCANDIDATES == false)
                 {
@@ -1318,6 +1327,19 @@ namespace Delmon_Managment_System.Forms
             if(tabControl1.SelectedTab==tabControl1.TabPages[2])
             {
                 cmbPrinter.Text = "Select";
+                if (hasViewAssets == false)
+                {
+                    MessageBox.Show("Sorry, You are not allowed to view this Module/Screen , kindly contact the administrator !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    button2.Enabled=btnuplode.Enabled = false;
+                   
+                }
+                else
+                {
+                   
+                       btnuplode.Enabled = true;
+                    button2.Enabled = false;
+
+                }
 
             }
 
