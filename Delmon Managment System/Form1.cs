@@ -174,7 +174,7 @@ GROUP BY
 
         private void btnprinting_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.PrintingFrm(), sender);
+            OpenChildForm(new Forms.ReportFrm(), sender);
 
         }
 
@@ -317,7 +317,7 @@ GROUP BY
             //}
             //else
             //{
-               OpenChildForm(new Forms.PrintingFrm(), sender);
+               OpenChildForm(new Forms.ReportFrm(), sender);
             //}
 
         }

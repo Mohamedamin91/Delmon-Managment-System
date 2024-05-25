@@ -141,22 +141,6 @@ namespace Delmon_Managment_System.Forms
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             this.timer1.Interval = 1000;
             timer1.Start();
 
@@ -166,9 +150,6 @@ namespace Delmon_Managment_System.Forms
             lblFullname.Text = CommonClass.LoginEmployeeName;
             lblPC.Text = Environment.MachineName;
           
-
-            
-
 
             cmbemployee.ValueMember = "EmployeeID";
             cmbemployee.DisplayMember = "FullName";
@@ -239,12 +220,7 @@ namespace Delmon_Managment_System.Forms
             //  InitializeEncryptionParameters();
 
 
-
         }
-
-
-
-
 
 
         public void generteModel()

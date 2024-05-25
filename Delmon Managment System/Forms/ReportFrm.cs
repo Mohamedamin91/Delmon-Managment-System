@@ -1,4 +1,6 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using CsvHelper;
+using ExcelDataReader;
+using Microsoft.Reporting.WinForms;
 using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
@@ -7,6 +9,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,9 +17,11 @@ using System.Windows.Forms;
 
 namespace Delmon_Managment_System.Forms
 {
-    public partial class PrintingFrm : Form
+    public partial class ReportFrm : Form
     {
         SQLCONNECTION SQLCONN = new SQLCONNECTION();
+        SQLCONNECTION SQLCONN3 = new SQLCONNECTION();
+        SQLCONNECTION SQLCONN4 = new SQLCONNECTION();
         int loggedEmployee;
       //  int companyidfordisplayreport;
       //  int StatusIDfordisplayreport;
@@ -31,7 +36,7 @@ namespace Delmon_Managment_System.Forms
 
 
 
-        public PrintingFrm()
+        public ReportFrm()
         {
             InitializeComponent();
             dataGridView2.CellClick += dataGridView2_CellClick;
@@ -41,6 +46,8 @@ namespace Delmon_Managment_System.Forms
         private void PrintingFrm_Load(object sender, EventArgs e)
         {
             SQLCONN.OpenConection();
+            SQLCONN3.OpenConection3();
+            SQLCONN4.OpenConection4();
             SqlDataReader dr = SQLCONN.DataReader(@"
         SELECT ps.PermissionName
         FROM UserPermissions us
@@ -99,16 +106,6 @@ namespace Delmon_Managment_System.Forms
             lblPC.Text = Environment.MachineName;
 
 
-
-
-
-
-
-          
-              
-               
-
-
             //if (lblusertype.Text == "SuperAdmin")
             //{
                 //LoadTheme(); 
@@ -147,6 +144,17 @@ namespace Delmon_Managment_System.Forms
                 cmbcandidates2.Text = "Select";
                 cmbcandidates2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 cmbcandidates2.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+                 cmbPrinter.ValueMember = "AssetID";
+                 cmbPrinter.DisplayMember = "AssetID";
+                 cmbPrinter.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(@" select AssetID  FROM [DelmonGroupAssests].[dbo].[Assets] where AssetTypeID=2 ");
+                 cmbPrinter.Text = "Select";
+                 cmbPrinter.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                 cmbPrinter.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+
 
 
                 string query3 = "select Consulates.ConsulateID,ConsulateCity from Countries,Consulates where Countries.CountryId = Consulates.CountryId";
@@ -211,13 +219,11 @@ namespace Delmon_Managment_System.Forms
             //    cmbConsulate.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query3);
 
 
-
-
-
-
-
             //}
             SQLCONN.CloseConnection();
+            SQLCONN3.CloseConnection();
+            SQLCONN4.CloseConnection();
+
         }
         private void LoadTheme()
         {
@@ -1309,8 +1315,198 @@ namespace Delmon_Managment_System.Forms
                 }
             }
 
+            if(tabControl1.SelectedTab==tabControl1.TabPages[2])
+            {
+                cmbPrinter.Text = "Select";
+
+            }
+
 
             SQLCONN.CloseConnection();
+        }
+        private void btnuplode_Click(object sender, EventArgs e)
+        {
+            if (cmbPrinter.Text == "Select")
+            {
+                MessageBox.Show("Please select Printer !.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else
+            {
+                SqlDataReader dr;
+                SqlParameter paramJobID = new SqlParameter("@C1", SqlDbType.NVarChar);
+                try
+                {
+                    // Open file dialog to select file
+                    using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                    {
+                        //openFileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm|CSV Files|*.csv";
+                        openFileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm;*.csv";
+                        if (openFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            // Get the selected file path
+                            string filePath = openFileDialog.FileName;
+                            string fileExtension = Path.GetExtension(filePath).ToLower();
+
+                            DataTable table = new DataTable();
+
+                            // Check if the file is already open
+                            try
+                            {
+                                using (System.IO.File.OpenRead(filePath))
+                                {
+                                    // File is not already open, proceed with reading and processing
+                                }
+                            }
+                            catch (IOException)
+                            {
+                                MessageBox.Show("The file is already open. Please close it and try again.");
+                                return; // Exit the method if the file is already open
+                            }
+
+                            // Read data based on file type
+                            if (fileExtension == ".csv")
+                            {
+                                using (var reader = new StreamReader(filePath))
+                                using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                                {
+                                    using (var dr1 = new CsvDataReader(csv))
+                                    {
+                                        table.Load(dr1);
+                                    }
+                                }
+                            }
+                            else if (fileExtension == ".xls" || fileExtension == ".xlsx" || fileExtension == ".xlsm")
+                            {
+                                using (var stream = System.IO.File.Open(filePath, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+                                {
+                                    using (var reader = ExcelReaderFactory.CreateReader(stream))
+                                    {
+                                        var result = reader.AsDataSet();
+                                        table = result.Tables[0]; // Assuming data is in first sheet
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Unsupported file format. Please select a CSV or Excel file.");
+                                return;
+                            }
+
+                            if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                            {
+                                // Establish connection to SQL Server
+                                SQLCONN4.OpenConection4();
+
+                                // Check if any JobID already exists in the database
+                                List<string> jobIDs = new List<string>();
+                                for (int i = 0; i < table.Rows.Count; i++)
+                                {
+                                    string jobID = table.Rows[i][0].ToString();
+                                    jobIDs.Add(jobID);
+                                }
+
+                                bool jobIDExists = false;
+                                string existingJobID = string.Empty;
+                                foreach (string jobID in jobIDs)
+                                {
+                                    paramJobID.Value = jobID;
+                                    dr = SQLCONN4.DataReader("select * from LogReport where JobID=@C1", paramJobID);
+                                    if (dr.Read())
+                                    {
+                                        jobIDExists = true;
+                                        existingJobID = jobID;
+                                        break;
+                                    }
+                                    dr.Close();
+                                }
+
+                                if (jobIDExists)
+                                {
+                                    MessageBox.Show("Some Jobs like 'JobId' : " + existingJobID + " Already Exists,Pease recheck the Imported file again !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    return;
+                                }
+
+                                bool dataInserted = false; // Flag to track if data has been inserted
+
+                                // Iterate through each row in the DataTable
+                                for (int i = 0; i < table.Rows.Count; i++)
+                                {
+                                    DataRow row = table.Rows[i];
+
+                                    // Map file columns to SQL Server table columns based on their positions
+                                    string assetID = cmbPrinter.Text.ToString();
+                                    string JobID = row[0].ToString();
+                                    string UserName = row[1].ToString();
+                                    string Domain = row[2].ToString();
+                                    string Documentname = row[3].ToString();
+                                    string PrintDate = row[4].ToString();
+                                    string type = row[5].ToString().Split(' ')[0].Trim();
+                                    string Department = row[6].ToString();
+                                    string Pages = row[7].ToString();
+                                    string Size = row[8].ToString();
+                                    string Status = row[9].ToString();
+                                    string Sets = row[10].ToString();
+
+                                    // Calculate total
+                                    int pages = int.Parse(Pages);
+                                    int sets = int.Parse(Sets);
+                                    int total = pages * sets;
+
+                                    // Multiply by 2 if Size is A3
+                                    if (Size.ToUpper() == "A3")
+                                    {
+                                        total *= 2;
+                                    }
+
+                                    // Format PrintDate as a string
+                                    PrintDate = PrintDate.Replace('T', ' ');
+
+                                    // Set parameter values
+                                    SqlParameter paramAssetID = new SqlParameter("@AssetID", SqlDbType.NVarChar) { Value = assetID };
+                                    SqlParameter paramJobid = new SqlParameter("@Jobid", SqlDbType.NVarChar) { Value = JobID };
+                                    SqlParameter paramUserName = new SqlParameter("@UserName", SqlDbType.NVarChar) { Value = UserName };
+                                    SqlParameter paramDomain = new SqlParameter("@Domain", SqlDbType.NVarChar) { Value = Domain };
+                                    SqlParameter paramDocumentname = new SqlParameter("@Documentname", SqlDbType.NVarChar) { Value = Documentname };
+                                    SqlParameter paramDate = new SqlParameter("@Date", SqlDbType.NVarChar) { Value = PrintDate };
+                                    SqlParameter paramType = new SqlParameter("@Type", SqlDbType.NVarChar) { Value = type };
+                                    SqlParameter paramDepartment = new SqlParameter("@Department", SqlDbType.NVarChar) { Value = Department };
+                                    SqlParameter paramPages = new SqlParameter("@Pages", SqlDbType.Int) { Value = pages };
+                                    SqlParameter paramSize = new SqlParameter("@Size", SqlDbType.NVarChar) { Value = Size };
+                                    SqlParameter paramStatus = new SqlParameter("@Status", SqlDbType.NVarChar) { Value = Status };
+                                    SqlParameter paramSets = new SqlParameter("@Sets", SqlDbType.Int) { Value = sets };
+                                    SqlParameter paramTotal = new SqlParameter("@Total", SqlDbType.Int) { Value = total };
+
+                                    // Execute INSERT command using SQLCONN4.ExecuteQueries
+                                    SQLCONN4.ExecuteQueries("insert into LogReport (AssetID, jobid, username, domain, Documentname, PrintDate, type, Department, Pages, Size, Status, Sets, Total) " +
+                                                            "values (@AssetID, @Jobid, @UserName, @Domain, @Documentname, @Date, @Type, @Department, @Pages, @Size, @Status, @Sets, @Total)",
+                                                            paramAssetID, paramJobid, paramUserName, paramDomain, paramDocumentname, paramDate, paramType, paramDepartment, paramPages, paramSize, paramStatus, paramSets, paramTotal);
+
+                                    dataInserted = true; // Set flag to true if data is inserted
+                                }
+
+                                // Show message after all rows are processed
+                                if (dataInserted)
+                                {
+                                    MessageBox.Show("Data uploaded successfully!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"Select * from LogReport");
+                                }
+
+                                SQLCONN4.CloseConnection();
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

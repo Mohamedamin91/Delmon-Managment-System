@@ -25,7 +25,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>116</ApplicationRevision>
+    <ApplicationRevision>117</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -168,11 +168,11 @@
     <Compile Include="Forms\FrmNewWorkLoc.Designer.cs">
       <DependentUpon>FrmNewWorkLoc.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\PrintingFrm.cs">
+    <Compile Include="Forms\ReportFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\PrintingFrm.Designer.cs">
-      <DependentUpon>PrintingFrm.cs</DependentUpon>
+    <Compile Include="Forms\ReportFrm.Designer.cs">
+      <DependentUpon>ReportFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SettingFrm.cs">
       <SubType>Form</SubType>
@@ -243,8 +243,8 @@
     <EmbeddedResource Include="Forms\FrmNewWorkLoc.resx">
       <DependentUpon>FrmNewWorkLoc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PrintingFrm.resx">
-      <DependentUpon>PrintingFrm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\ReportFrm.resx">
+      <DependentUpon>ReportFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SettingFrm.resx">
       <DependentUpon>SettingFrm.cs</DependentUpon>
@@ -300,6 +300,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="CsvHelper">
+      <Version>32.0.3</Version>
+    </PackageReference>
     <PackageReference Include="EntityFramework">
       <Version>6.2.0</Version>
     </PackageReference>
