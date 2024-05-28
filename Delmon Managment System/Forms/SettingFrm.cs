@@ -69,6 +69,133 @@ namespace Delmon_Managment_System.Forms
         {
             InitializeComponent();
 
+            // Attach the CheckedChanged event handler to each radio button
+            radioButton1.CheckedChanged += RadioButton_CheckedChanged;
+            radioButton2.CheckedChanged += RadioButton_CheckedChanged;
+            radioButton3.CheckedChanged += RadioButton_CheckedChanged;
+            radioButton4.CheckedChanged += RadioButton_CheckedChanged;
+            radioButton5.CheckedChanged += RadioButton_CheckedChanged;
+            radioButton6.CheckedChanged += RadioButton_CheckedChanged;
+            radioButton7.CheckedChanged += RadioButton_CheckedChanged;
+            radioButton8.CheckedChanged += RadioButton_CheckedChanged;
+            radioButton9.CheckedChanged += RadioButton_CheckedChanged;
+            radioButton10.CheckedChanged += RadioButton_CheckedChanged;
+            radioButton11.CheckedChanged += RadioButton_CheckedChanged;
+            radioButton12.CheckedChanged += RadioButton_CheckedChanged;
+            radioButton13.CheckedChanged += RadioButton_CheckedChanged;
+            radioButton14.CheckedChanged += RadioButton_CheckedChanged;
+            radioButton15.CheckedChanged += RadioButton_CheckedChanged;
+            radioButton16.CheckedChanged += RadioButton_CheckedChanged;
+            radioButton17.CheckedChanged += RadioButton_CheckedChanged;
+            radioButton18.CheckedChanged += RadioButton_CheckedChanged;
+            radioButton19.CheckedChanged += RadioButton_CheckedChanged;
+            radioButton20.CheckedChanged += RadioButton_CheckedChanged;
+            radioButton21.CheckedChanged += RadioButton_CheckedChanged;
+            radioButton22.CheckedChanged += RadioButton_CheckedChanged;
+
+            // Set Tag properties for all checkboxes
+            ViewCountriesTabx.Tag = 39;
+            AddCountriesTabx.Tag = 40;
+            EditCountriesTabx.Tag = 41;
+            DeleteCountriesTabx.Tag = 42;
+
+            ViewCompaniesTabx.Tag = 35;
+            AddCompaniesTabx.Tag = 36;
+            EditCompaniesTabx.Tag = 37;
+            DeleteCompaniesTabx.Tag = 38;
+
+            ViewJobTabx.Tag = 27;
+            AddJobTabx.Tag = 28;
+            editJobTabx.Tag = 29;
+            DeleteJobTabx.Tag = 30;
+
+            ViewUserTabx.Tag = 23;
+            AddUserTabx.Tag = 24;
+            EditUserTabx.Tag = 25;
+            DeleteUserTabx.Tag = 26;
+
+            ViewAlertsbx.Tag = 19;
+            AddAlertsbx.Tag = 20;
+            EditAlertsbx.Tag = 21;
+            DeleteAlertsBx.Tag = 22;
+
+            ViewAssetsbx.Tag = 15;
+            AddAssetsbx.Tag = 16;
+            EditAssetsbx.Tag = 17;
+            DeleteAssetsbx.Tag = 18;
+
+            ViewBillsbx.Tag = 11;
+            AddBillsbx.Tag = 12;
+            EditBillsbx.Tag = 13;
+            DeleteBillsbx.Tag = 14;
+
+            ViewCandidatesReportbx.Tag = 10;
+            ViewVisaReportbx.Tag = 9;
+            ViewAssetReportbx.Tag = 43;
+
+            ViewPersonalInformationbx.Tag = 5;
+            AddPersonalInformationbx.Tag = 6;
+            EditPersonalInformationbx.Tag = 7;
+            DeletePersonalInformationbx.Tag = 8;
+
+            ViewVisabx.Tag = 1;
+            AddVisabx.Tag = 2;
+            EditVisabx.Tag = 3;
+            DeleteVisabx.Tag = 4;
+
+            ViewAgenciesTabx.Tag = 31;
+            AddAgenciesTabx.Tag = 32;
+            EditAgenciesTabx.Tag = 33;
+            DeleteAgenciesTabx.Tag = 34;
+
+
+
+
+            // Add event handlers for all checkboxes
+            ViewCountriesTabx.CheckedChanged += CheckBox_CheckedChanged;
+            AddCountriesTabx.CheckedChanged += CheckBox_CheckedChanged;
+            EditCountriesTabx.CheckedChanged += CheckBox_CheckedChanged;
+            DeleteCountriesTabx.CheckedChanged += CheckBox_CheckedChanged;
+            ViewCompaniesTabx.CheckedChanged += CheckBox_CheckedChanged;
+            AddCompaniesTabx.CheckedChanged += CheckBox_CheckedChanged;
+            EditCompaniesTabx.CheckedChanged += CheckBox_CheckedChanged;
+            DeleteCompaniesTabx.CheckedChanged += CheckBox_CheckedChanged;
+            ViewJobTabx.CheckedChanged += CheckBox_CheckedChanged;
+            AddJobTabx.CheckedChanged += CheckBox_CheckedChanged;
+            editJobTabx.CheckedChanged += CheckBox_CheckedChanged;
+            DeleteJobTabx.CheckedChanged += CheckBox_CheckedChanged;
+            ViewUserTabx.CheckedChanged += CheckBox_CheckedChanged;
+            AddUserTabx.CheckedChanged += CheckBox_CheckedChanged;
+            EditUserTabx.CheckedChanged += CheckBox_CheckedChanged;
+            DeleteUserTabx.CheckedChanged += CheckBox_CheckedChanged;
+            ViewAlertsbx.CheckedChanged += CheckBox_CheckedChanged;
+            AddAlertsbx.CheckedChanged += CheckBox_CheckedChanged;
+            EditAlertsbx.CheckedChanged += CheckBox_CheckedChanged;
+            DeleteAlertsBx.CheckedChanged += CheckBox_CheckedChanged;
+            ViewAssetsbx.CheckedChanged += CheckBox_CheckedChanged;
+            AddAssetsbx.CheckedChanged += CheckBox_CheckedChanged;
+            EditAssetsbx.CheckedChanged += CheckBox_CheckedChanged;
+            DeleteAssetsbx.CheckedChanged += CheckBox_CheckedChanged;
+            ViewBillsbx.CheckedChanged += CheckBox_CheckedChanged;
+            AddBillsbx.CheckedChanged += CheckBox_CheckedChanged;
+            EditBillsbx.CheckedChanged += CheckBox_CheckedChanged;
+            DeleteBillsbx.CheckedChanged += CheckBox_CheckedChanged;
+            ViewCandidatesReportbx.CheckedChanged += CheckBox_CheckedChanged;
+            ViewVisaReportbx.CheckedChanged += CheckBox_CheckedChanged;
+            ViewAssetReportbx.CheckedChanged += CheckBox_CheckedChanged;
+            ViewPersonalInformationbx.CheckedChanged += CheckBox_CheckedChanged;
+            AddPersonalInformationbx.CheckedChanged += CheckBox_CheckedChanged;
+            EditPersonalInformationbx.CheckedChanged += CheckBox_CheckedChanged;
+            DeletePersonalInformationbx.CheckedChanged += CheckBox_CheckedChanged;
+            ViewVisabx.CheckedChanged += CheckBox_CheckedChanged;
+            AddVisabx.CheckedChanged += CheckBox_CheckedChanged;
+            EditVisabx.CheckedChanged += CheckBox_CheckedChanged;
+            DeleteVisabx.CheckedChanged += CheckBox_CheckedChanged;
+            ViewAgenciesTabx.CheckedChanged += CheckBox_CheckedChanged;
+            AddAgenciesTabx.CheckedChanged += CheckBox_CheckedChanged;
+            EditAgenciesTabx.CheckedChanged += CheckBox_CheckedChanged;
+            DeleteAgenciesTabx.CheckedChanged += CheckBox_CheckedChanged;
+
 
         }
 
@@ -3863,10 +3990,126 @@ ORDER BY
             }
         }
 
-      
-    
 
-     
+
+        private void UpdatePermissions()
+        {
+           
+                // Retrieve userID from ComboBox
+                int userID = Convert.ToInt32(cmbUserPermission.SelectedValue);
+
+                // Prepare SQL connection and open it
+                SQLCONN.OpenConection();
+
+                // List of permission checkboxes and their corresponding permission IDs
+                var permissions = new Dictionary<CheckBox, int>
+        {
+            { ViewCountriesTabx, 39 },
+            { AddCountriesTabx, 40 },
+            { EditCountriesTabx, 41 },
+            { DeleteCountriesTabx, 42 },
+            { ViewCompaniesTabx, 35 },
+            { AddCompaniesTabx, 36 },
+            { EditCompaniesTabx, 37 },
+            { DeleteCompaniesTabx, 38 },
+            { ViewJobTabx, 27 },
+            { AddJobTabx, 28 },
+            { editJobTabx, 29 },
+            { DeleteJobTabx, 30 },
+            { ViewUserTabx, 23 },
+            { AddUserTabx, 24 },
+            { EditUserTabx, 25 },
+            { DeleteUserTabx, 26 },
+            { ViewAlertsbx, 19 },
+            { AddAlertsbx, 20 },
+            { EditAlertsbx, 21 },
+            { DeleteAlertsBx, 22 },
+            { ViewAssetsbx, 15 },
+            { AddAssetsbx, 16 },
+            { EditAssetsbx, 17 },
+            { DeleteAssetsbx, 18 },
+            { ViewBillsbx, 11 },
+            { AddBillsbx, 12 },
+            { EditBillsbx, 13 },
+            { DeleteBillsbx, 14 },
+            { ViewCandidatesReportbx, 10 },
+            { ViewVisaReportbx, 9 },
+            { ViewAssetReportbx, 43 },
+            { ViewPersonalInformationbx, 5 },
+            { AddPersonalInformationbx, 6 },
+            { EditPersonalInformationbx, 7 },
+            { DeletePersonalInformationbx, 8 },
+            { ViewVisabx, 1 },
+            { AddVisabx, 2 },
+            { EditVisabx, 3 },
+            { DeleteVisabx, 4 },
+            { ViewAgenciesTabx, 31 },
+            { AddAgenciesTabx, 32 },
+            { EditAgenciesTabx, 33 },
+            { DeleteAgenciesTabx, 34 }
+        };
+
+                foreach (var permission in permissions)
+                {
+                    CheckBox checkbox = permission.Key;
+                    int permissionID = permission.Value;
+
+                    SqlDataReader dr = null; // Initialize dr to null
+
+                    try
+                    {
+                        // Check if the checkbox is checked
+                        if (checkbox.Checked)
+                        {
+                            // Check if the permission already exists
+                            string checkQuery = "SELECT * FROM [UserPermissions] WHERE UserID = @UserID AND PermissionID = @PermissionID";
+                            SqlParameter[] checkParams = new SqlParameter[]
+                            {
+                        new SqlParameter("@UserID", SqlDbType.Int) { Value = userID },
+                        new SqlParameter("@PermissionID", SqlDbType.Int) { Value = permissionID }
+                            };
+
+                            // Execute the query to check if the permission exists
+                            dr = SQLCONN.DataReader(checkQuery, checkParams);
+
+                            if (!dr.HasRows)
+                            {
+                                dr.Dispose();
+                                dr.Close();
+                                // Insert the new permission
+                                string insertQuery = "INSERT INTO [UserPermissions] (UserID, PermissionID) VALUES (@UserID, @PermissionID)";
+                                SQLCONN.ExecuteQueries(insertQuery, checkParams);
+                            }
+                        }
+                        else
+                        {
+                            // Delete the permission if it exists
+                            string deleteQuery = "DELETE FROM [UserPermissions] WHERE UserID = @UserID AND PermissionID = @PermissionID";
+                            SqlParameter[] deleteParams = new SqlParameter[]
+                            {
+                        new SqlParameter("@UserID", SqlDbType.Int) { Value = userID },
+                        new SqlParameter("@PermissionID", SqlDbType.Int) { Value = permissionID }
+                            };
+
+                            SQLCONN.ExecuteQueries(deleteQuery, deleteParams);
+                        }
+                    }
+                    finally
+                    {
+                        if (dr != null)
+                        {
+                            dr.Dispose();
+                            dr.Close();
+                        }
+                    }
+                }
+
+                // Close the SQL connection
+                SQLCONN.CloseConnection();
+
+              //  MessageBox.Show("Permissions updated successfully.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
+        }
         private void button19_Click(object sender, EventArgs e)
         {
           }
@@ -3880,484 +4123,64 @@ ORDER BY
             //    e.CellStyle.BackColor = color;
             //}
         }
-        private Color GetGroupColor(string permission)
+        //private Color GetGroupColor(string permission)
+        //{
+        //    // Define the group keywords and their associated colors
+        //    var groupColors = new Dictionary<string, Color>
+        //{
+        //    { "VisaReport", Color.AliceBlue },
+        //    { "CandidatesReport", Color.AliceBlue },
+        //    { "AssetsReport", Color.AliceBlue },
+        //    { "Visa", Color.LightGreen },
+        //    { "PersonalInformation", Color.LightCoral },
+        //    { "Bills", Color.LightGoldenrodYellow },
+        //    { "Assets", Color.LightPink },
+        //    { "Alerts", Color.LightCyan },
+        //    { "UserTab", Color.LightSalmon },
+        //    { "JobTab", Color.LightSeaGreen },
+        //    { "AgenciesTab", Color.LightSlateGray },
+        //    { "CompaniesTab", Color.LightSteelBlue },
+        //    { "CountriesTab", Color.LightSkyBlue }
+        //};
+
+        //    // Specific checks to ensure accurate group color assignment
+        //    if (permission.Contains("VisaReport"))
+        //    {
+        //        return groupColors["VisaReport"];
+        //    }
+        //    if (permission.Contains("CandidatesReport"))
+        //    {
+        //        return groupColors["CandidatesReport"];
+        //    }
+
+        //    if (permission.Contains("AssetsReport"))
+        //    {
+        //        return groupColors["AssetsReport"];
+        //    }
+        //    // General group detection based on the keyword
+        //    foreach (var group in groupColors)
+        //    {
+        //        if (permission.Contains(group.Key) && !permission.Contains("Report"))
+        //        {
+        //            return groupColors[group.Key];
+        //        }
+        //    }
+
+        //    // Default color if no group matches
+        //    return Color.White;
+        //}
+        private void CheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            // Define the group keywords and their associated colors
-            var groupColors = new Dictionary<string, Color>
-        {
-            { "VisaReport", Color.AliceBlue },
-            { "CandidatesReport", Color.AliceBlue },
-            { "AssetsReport", Color.AliceBlue },
-            { "Visa", Color.LightGreen },
-            { "PersonalInformation", Color.LightCoral },
-            { "Bills", Color.LightGoldenrodYellow },
-            { "Assets", Color.LightPink },
-            { "Alerts", Color.LightCyan },
-            { "UserTab", Color.LightSalmon },
-            { "JobTab", Color.LightSeaGreen },
-            { "AgenciesTab", Color.LightSlateGray },
-            { "CompaniesTab", Color.LightSteelBlue },
-            { "CountriesTab", Color.LightSkyBlue }
-        };
+           // ValidatePermissions();
+            UpdatePermissions(); // Call the UpdatePermissions() method whenever a checkbox state changes
 
-            // Specific checks to ensure accurate group color assignment
-            if (permission.Contains("VisaReport"))
-            {
-                return groupColors["VisaReport"];
-            }
-            if (permission.Contains("CandidatesReport"))
-            {
-                return groupColors["CandidatesReport"];
-            }
-
-            if (permission.Contains("AssetsReport"))
-            {
-                return groupColors["AssetsReport"];
-            }
-            // General group detection based on the keyword
-            foreach (var group in groupColors)
-            {
-                if (permission.Contains(group.Key) && !permission.Contains("Report"))
-                {
-                    return groupColors[group.Key];
-                }
-            }
-
-            // Default color if no group matches
-            return Color.White;
         }
 
-        private void button33_Click(object sender, EventArgs e)
-        {
-            if (cmbUserPermission.Text == "Select" ||
-                (!DeleteCountriesTabx.Checked && !EditCountriesTabx.Checked && !AddCountriesTabx.Checked && !ViewCountriesTabx.Checked &&
-                !DeleteCompaniesTabx.Checked && !EditCompaniesTabx.Checked && !AddCompaniesTabx.Checked && !ViewCompaniesTabx.Checked &&
-                !DeleteJobTabx.Checked && !editJobTabx.Checked && !AddJobTabx.Checked && !ViewJobTabx.Checked &&
-                !DeleteUserTabx.Checked && !EditUserTabx.Checked && !AddUserTabx.Checked && !ViewUserTabx.Checked &&
-                !DeleteAlertsBx.Checked && !EditAlertsbx.Checked && !AddAlertsbx.Checked && !ViewAlertsbx.Checked &&
-                !DeleteAssetsbx.Checked && !EditAssetsbx.Checked && !AddAssetsbx.Checked && !ViewAssetsbx.Checked &&
-                !DeleteBillsbx.Checked && !EditBillsbx.Checked && !AddBillsbx.Checked && !ViewBillsbx.Checked &&
-                !ViewCandidatesReportbx.Checked && !ViewVisaReportbx.Checked &&
-                !DeletePersonalInformationbx.Checked && !EditPersonalInformationbx.Checked && !AddPersonalInformationbx.Checked && !ViewPersonalInformationbx.Checked &&
-                !DeleteVisabx.Checked && !EditVisabx.Checked && !AddVisabx.Checked && !ViewVisabx.Checked &&
-                !DeleteAgenciesTabx.Checked && !EditAgenciesTabx.Checked && !AddAgenciesTabx.Checked && !ViewAssetReportbx.Checked && !ViewAgenciesTabx.Checked))
-            {
-                MessageBox.Show("Please select a User / enter at least one permission.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            else
-            {
-                int userID = Convert.ToInt32(cmbUserPermission.SelectedValue);
+      
 
-                // Prepare SQL parameters
-                SqlParameter paramUserType = new SqlParameter("@C1", SqlDbType.Int) { Value = userID };
+      
 
-                List<SqlParameter> parameters = new List<SqlParameter> { paramUserType };
-                List<string> values = new List<string>();
-
-                // Adding permissions based on checkbox selections
-                int parameterIndex = 2; // Start from 2 as @C1 is already used
-
-                if (ViewCountriesTabx.Checked)
-                {
-                    SqlParameter paramViewCountries = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 39 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramViewCountries);
-                    parameterIndex++;
-                }
-                if (AddCountriesTabx.Checked)
-                {
-                    SqlParameter paramAddCountries = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 40 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramAddCountries);
-                    parameterIndex++;
-                }
-                if (EditCountriesTabx.Checked)
-                {
-                    SqlParameter paramEditCountries = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 41 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramEditCountries);
-                    parameterIndex++;
-                }
-                if (DeleteCountriesTabx.Checked)
-                {
-                    SqlParameter paramDeleteCountries = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 42 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramDeleteCountries);
-                    parameterIndex++;
-                }
-
-                if (ViewCompaniesTabx.Checked)
-                {
-                    SqlParameter paramViewCompanies = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 35 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramViewCompanies);
-                    parameterIndex++;
-                }
-                if (AddCompaniesTabx.Checked)
-                {
-                    SqlParameter paramAddCompanies = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 36 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramAddCompanies);
-                    parameterIndex++;
-                }
-                if (EditCompaniesTabx.Checked)
-                {
-                    SqlParameter paramEditCompanies = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 37 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramEditCompanies);
-                    parameterIndex++;
-                }
-                if (DeleteCompaniesTabx.Checked)
-                {
-                    SqlParameter paramDeleteCompanies = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 38 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramDeleteCompanies);
-                    parameterIndex++;
-                }
-
-                if (ViewJobTabx.Checked)
-                {
-                    SqlParameter paramViewJob = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 27 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramViewJob);
-                    parameterIndex++;
-                }
-                if (AddJobTabx.Checked)
-                {
-                    SqlParameter paramAddJob = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 28 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramAddJob);
-                    parameterIndex++;
-                }
-                if (editJobTabx.Checked)
-                {
-                    SqlParameter paramEditJob = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 29 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramEditJob);
-                    parameterIndex++;
-                }
-                if (DeleteJobTabx.Checked)
-                {
-                    SqlParameter paramDeleteJob = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 30 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramDeleteJob);
-                    parameterIndex++;
-                }
-
-                if (ViewUserTabx.Checked)
-                {
-                    SqlParameter paramViewUser = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 23 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramViewUser);
-                    parameterIndex++;
-                }
-                if (AddUserTabx.Checked)
-                {
-                    SqlParameter paramAddUser = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 24 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramAddUser);
-                    parameterIndex++;
-                }
-                if (EditUserTabx.Checked)
-                {
-                    SqlParameter paramEditUser = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 25 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramEditUser);
-                    parameterIndex++;
-                }
-                if (DeleteUserTabx.Checked)
-                {
-                    SqlParameter paramDeleteUser = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 26 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramDeleteUser);
-                    parameterIndex++;
-                }
-
-                if (ViewAlertsbx.Checked)
-                {
-                    SqlParameter paramViewAlerts = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 19 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramViewAlerts);
-                    parameterIndex++;
-                }
-                if (AddAlertsbx.Checked)
-                {
-                    SqlParameter paramAddAlerts = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 20 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramAddAlerts);
-                    parameterIndex++;
-                }
-                if (EditAlertsbx.Checked)
-                {
-                    SqlParameter paramEditAlerts = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 21 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramEditAlerts);
-                    parameterIndex++;
-                }
-                if (DeleteAlertsBx.Checked)
-                {
-                    SqlParameter paramDeleteAlerts = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 22 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramDeleteAlerts);
-                    parameterIndex++;
-                }
-
-                if (ViewAssetsbx.Checked)
-                {
-                    SqlParameter paramViewAssets = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 15 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramViewAssets);
-                    parameterIndex++;
-                }
-                if (AddAssetsbx.Checked)
-                {
-                    SqlParameter paramAddAssets = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 16 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramAddAssets);
-                    parameterIndex++;
-                }
-                if (EditAssetsbx.Checked)
-                {
-                    SqlParameter paramEditAssets = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 17 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramEditAssets);
-                    parameterIndex++;
-                }
-                if (DeleteAssetsbx.Checked)
-                {
-                    SqlParameter paramDeleteAssets = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 18 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramDeleteAssets);
-                    parameterIndex++;
-                }
-
-                if (ViewBillsbx.Checked)
-                {
-                    SqlParameter paramViewBills = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 11 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramViewBills);
-                    parameterIndex++;
-                }
-                if (AddBillsbx.Checked)
-                {
-                    SqlParameter paramAddBills = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 12 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramAddBills);
-                    parameterIndex++;
-                }
-                if (EditBillsbx.Checked)
-                {
-                    SqlParameter paramEditBills = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 13 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramEditBills);
-                    parameterIndex++;
-                }
-                if (DeleteBillsbx.Checked)
-                {
-                    SqlParameter paramDeleteBills = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 14 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramDeleteBills);
-                    parameterIndex++;
-                }
-
-                if (ViewCandidatesReportbx.Checked)
-                {
-                    SqlParameter paramViewCandidatesReport = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 10 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramViewCandidatesReport);
-                    parameterIndex++;
-                }
-                if (ViewVisaReportbx.Checked)
-                {
-                    SqlParameter paramViewVisaReport = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 9 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramViewVisaReport);
-                     parameterIndex++;
-                }
-                if (ViewAssetReportbx.Checked)
-                {
-                    SqlParameter paramViewVisaReport = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 43 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramViewVisaReport);
-                    parameterIndex++;
-                }
-
-                if (ViewPersonalInformationbx.Checked)
-                {
-                    SqlParameter paramViewPersonalInformation = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 5 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramViewPersonalInformation);
-                    parameterIndex++;
-                }
-                if (AddPersonalInformationbx.Checked)
-                {
-                    SqlParameter paramAddPersonalInformation = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 6 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramAddPersonalInformation);
-                    parameterIndex++;
-                }
-                if (EditPersonalInformationbx.Checked)
-                {
-                    SqlParameter paramEditPersonalInformation = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 7 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramEditPersonalInformation);
-                    parameterIndex++;
-                }
-                if (DeletePersonalInformationbx.Checked)
-                {
-                    SqlParameter paramDeletePersonalInformation = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 8 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramDeletePersonalInformation);
-                    parameterIndex++;
-                }
-
-                if (ViewVisabx.Checked)
-                {
-                    SqlParameter paramViewVisa = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 1 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramViewVisa);
-                    parameterIndex++;
-                }
-                if (AddVisabx.Checked)
-                {
-                    SqlParameter paramAddVisa = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 2 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramAddVisa);
-                    parameterIndex++;
-                }
-                if (EditVisabx.Checked)
-                {
-                    SqlParameter paramEditVisa = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 3 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramEditVisa);
-                    parameterIndex++;
-                }
-                if (DeleteVisabx.Checked)
-                {
-                    SqlParameter paramDeleteVisa = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 4 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramDeleteVisa);
-                    parameterIndex++;
-                }
-
-                if (ViewAgenciesTabx.Checked)
-                {
-                    SqlParameter paramViewAgencies = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 31 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramViewAgencies);
-                    parameterIndex++;
-                }
-                if (AddAgenciesTabx.Checked)
-                {
-                    SqlParameter paramAddAgencies = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 32 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramAddAgencies);
-                    parameterIndex++;
-                }
-                if (EditAgenciesTabx.Checked)
-                {
-                    SqlParameter paramEditAgencies = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 33 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramEditAgencies);
-                    parameterIndex++;
-                }
-                if (DeleteAgenciesTabx.Checked)
-                {
-                    SqlParameter paramDeleteAgencies = new SqlParameter($"@C{parameterIndex}", SqlDbType.Int) { Value = 34 };
-                    values.Add("(@C1, @C" + parameterIndex + ")");
-                    parameters.Add(paramDeleteAgencies);
-                    parameterIndex++;
-                }
-
-                // Check if the permissions already exist
-                SQLCONN.OpenConection();
-                string selectQuery = @"
-        SELECT [UserID], [PermissionID]
-        FROM [DelmonGroupDB].[dbo].[UserPermissions]
-        WHERE UserID = @C1
-          AND PermissionID IN (" + string.Join(", ", values.Select((_, i) => $"@C{i + 2}")) + ")";
-
-                SqlDataReader dr = SQLCONN.DataReader(selectQuery, parameters.ToArray());
-
-                if (dr.Read())
-                {
-                    MessageBox.Show("The permission for this user type already exists.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    dr.Close();
-                    SQLCONN.CloseConnection();
-                    return;
-                }
-                dr.Close();
-
-                // Confirm the operation
-                if (DialogResult.Yes == MessageBox.Show("Do you want to perform this operation?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-                {
-                    // Construct the insert query dynamically
-                    string insertQuery = "INSERT INTO [DelmonGroupDB].[dbo].[UserPermissions] (UserID, PermissionID) VALUES " + string.Join(", ", values);
-
-                    // Execute the insert query
-                    SQLCONN.ExecuteQueries(insertQuery, parameters.ToArray());
-                    MessageBox.Show("Record saved successfully.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Update the DataGridView
-                    dataGridView9.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"
-            SELECT [UserPermissionID], us.UserID, us.[PermissionID], p.PermissionName
-            FROM [DelmonGroupDB].[dbo].[UserPermissions] as us
-            JOIN Permissions as p ON p.PermissionID = us.PermissionID
-            WHERE us.UserID = " + cmbUserPermission.SelectedValue);
-
-                    dataGridView9.Columns["PermissionID"].Visible = false;
-                    dataGridView9.Columns[3].Width = 300;
-
-                    // Reset checkboxes and combobox
-                    foreach (Control control in this.Controls)
-                    {
-                        if (control is CheckBox)
-                        {
-                            ((CheckBox)control).Checked = false;
-                        }
-                    }
-                    cmbUserPermission.Text = "Select";
-                }
-
-                SQLCONN.CloseConnection();
-            }
-        }
-
-        private void button18_Click_1(object sender, EventArgs e)
-        {
-            button33.Visible = true;
-            button32.Visible = false;
-             button31.Visible = false;
-            cmbUserPermission.Text = "Select";
-        }
-
-        private void dataGridView9_CellClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-            button33.Visible = false;
-            button31.Visible = button32.Visible = button18.Visible = true;
-
-            if (e.RowIndex == -1) return;
-
-            if (e.RowIndex >= 0 && e.RowIndex < dataGridView9.Rows.Count && e.ColumnIndex >= 0 && e.ColumnIndex < dataGridView9.Columns.Count)
-            {
-                DataGridViewRow row = dataGridView9.Rows[e.RowIndex];
-
-                if (row.Cells[0].Value != null)
-                {
-                    userpermissionID = Convert.ToInt32(row.Cells[0].Value.ToString());
-
-                    string permissionName = row.Cells[3].Value.ToString(); // Assuming the permission name is in the third column
-                    dataGridView9.Columns["PermissionID"].Visible = false;
-                    dataGridView9.Columns[3].Width = 300;
-
-                    PermissiondID = Convert.ToInt32(row.Cells[2].Value.ToString()); // Assuming the permission ID is in the second column
-
-                    ToggleCheckBoxState(permissionName);
-                }
-            }
-        }
-
+   
         private void ToggleCheckBoxState(string permissionName)
         {
             switch (permissionName)
@@ -4483,365 +4306,140 @@ ORDER BY
             SqlParameter paramUser = new SqlParameter("@C1", SqlDbType.Int) { Value = userID };
 
             // Retrieve the data from the database
-            DataTable dataTable = (DataTable)SQLCONN.ShowDataInGridViewORCombobox(@"SELECT [UserPermissionID],
-        us.UserID,
-        us.[PermissionID],
-        p.PermissionName
+            DataTable dataTable = (DataTable)SQLCONN.ShowDataInGridViewORCombobox(@"
+        SELECT us.PermissionID
         FROM [DelmonGroupDB].[dbo].[UserPermissions] as us
-        JOIN Permissions as p ON p.PermissionID = us.PermissionID
         WHERE us.UserID = @C1", paramUser);
-            if (dataTable.Rows.Count == 0)
+
+            // Clear all checkboxes
+            var permissions = new List<CheckBox>
+    {
+        ViewCountriesTabx,
+        AddCountriesTabx,
+        EditCountriesTabx,
+        DeleteCountriesTabx,
+        ViewCompaniesTabx,
+        AddCompaniesTabx,
+        EditCompaniesTabx,
+        DeleteCompaniesTabx,
+        ViewJobTabx,
+        AddJobTabx,
+        editJobTabx,
+        DeleteJobTabx,
+        ViewUserTabx,
+        AddUserTabx,
+        EditUserTabx,
+        DeleteUserTabx,
+        ViewAlertsbx,
+        AddAlertsbx,
+        EditAlertsbx,
+        DeleteAlertsBx,
+        ViewAssetsbx,
+        AddAssetsbx,
+        EditAssetsbx,
+        DeleteAssetsbx,
+        ViewBillsbx,
+        AddBillsbx,
+        EditBillsbx,
+        DeleteBillsbx,
+        ViewCandidatesReportbx,
+        ViewVisaReportbx,
+        ViewAssetReportbx,
+        ViewPersonalInformationbx,
+        AddPersonalInformationbx,
+        EditPersonalInformationbx,
+        DeletePersonalInformationbx,
+        ViewVisabx,
+        AddVisabx,
+        EditVisabx,
+        DeleteVisabx,
+        ViewAgenciesTabx,
+        AddAgenciesTabx,
+        EditAgenciesTabx,
+        DeleteAgenciesTabx
+    };
+
+            // Uncheck all checkboxes initially
+            foreach (var checkbox in permissions)
             {
-                MessageBox.Show("There are no permissions for this user!", "No Permissions", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                checkbox.Checked = false;
             }
-            else
+
+            // Check checkboxes based on the retrieved data
+            foreach (DataRow row in dataTable.Rows)
             {
+                int permissionID = row.Field<int>("PermissionID");
 
-                // Sort the data by the second and third words in PermissionName
-                var sortedTable = dataTable.AsEnumerable()
-                    .OrderBy(row =>
-                    {
-                        var words = row.Field<string>("PermissionName").Split(' ');
-                        string secondWord = words.Length > 1 ? words[1] : string.Empty;
-                        string thirdWord = words.Length > 2 ? words[2] : string.Empty;
-                        return secondWord + " " + thirdWord;
-                    })
-                    .CopyToDataTable();
-
-                // Bind the sorted data to the DataGridView
-                dataGridView9.DataSource = sortedTable;
-
-                // Adjust the DataGridView columns
-                dataGridView9.Columns["PermissionID"].Visible = false;
-                dataGridView9.Columns[3].Width = 300;
+                // Find the corresponding checkbox and check it
+                var checkbox = permissions.FirstOrDefault(cb => (int)cb.Tag == permissionID);
+                if (checkbox != null)
+                {
+                    checkbox.Checked = true;
+                }
             }
         }
 
-        private void dataGridView9_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void ViewCandidatesReportbx_CheckedChanged(object sender, EventArgs e)
         {
-            if (e.ColumnIndex == dataGridView9.Columns["PermissionName"].Index && e.Value != null)
-            {
-                string permission = e.Value.ToString();
-                Color color = GetGroupColor(permission);
-                e.CellStyle.BackColor = color;
-            }
+
         }
 
-        private void button32_Click(object sender, EventArgs e)
+        private void label25_Click(object sender, EventArgs e)
         {
-            if (cmbUserPermission.Text == "Select" || userpermissionID == 0)
-            {
-                MessageBox.Show("Please select a User and a Permission.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
-            if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-            {
-                int userID = Convert.ToInt32(cmbUserPermission.SelectedValue);
-
-                // Prepare SQL parameters
-                List<SqlParameter> parameters = new List<SqlParameter>();
-                parameters.Add(new SqlParameter("@UserID", SqlDbType.Int) { Value = userID });
-                parameters.Add(new SqlParameter("@UserPermissionID", SqlDbType.Int) { Value = userpermissionID });
-
-                // Construct the update query
-                string updateQuery = "UPDATE [DelmonGroupDB].[dbo].[UserPermissions] SET ";
-
-                if (ViewCountriesTabx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_ViewCountriesTabx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_ViewCountriesTabx", SqlDbType.Int) { Value = 39 });
-                }
-                if (AddCountriesTabx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_AddCountriesTabx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_AddCountriesTabx", SqlDbType.Int) { Value = 40 });
-                }
-                if (EditCountriesTabx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_EditCountriesTabx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_EditCountriesTabx", SqlDbType.Int) { Value = 41 });
-                }
-                if (DeleteCountriesTabx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_DeleteCountriesTabx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_DeleteCountriesTabx", SqlDbType.Int) { Value = 42 });
-                }
-                // AddCompaniesTabx
-                if (AddCompaniesTabx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_AddCompaniesTabx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_AddCompaniesTabx", SqlDbType.Int) { Value = 36 });
-                }
-                // EditCompaniesTabx
-                if (EditCompaniesTabx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_EditCompaniesTabx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_EditCompaniesTabx", SqlDbType.Int) { Value = 37 });
-                }
-                // DeleteCompaniesTabx
-                if (DeleteCompaniesTabx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_DeleteCompaniesTabx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_DeleteCompaniesTabx", SqlDbType.Int) { Value = 38 });
-                }
-
-                // Continue with other checkboxes in a similar manner...
-
-                // ViewJobTabx
-                if (ViewJobTabx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_ViewJobTabx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_ViewJobTabx", SqlDbType.Int) { Value = 27 });
-                }
-                // AddJobTabx
-                if (AddJobTabx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_AddJobTabx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_AddJobTabx", SqlDbType.Int) { Value = 28 });
-                }
-                // editJobTabx
-                if (editJobTabx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_EditJobTabx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_EditJobTabx", SqlDbType.Int) { Value = 29 });
-                }
-                // DeleteJobTabx
-                if (DeleteJobTabx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_DeleteJobTabx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_DeleteJobTabx", SqlDbType.Int) { Value = 30 });
-                }
-                // ViewAgenciesTabx
-                if (ViewAgenciesTabx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_ViewAgenciesTabx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_ViewAgenciesTabx", SqlDbType.Int) { Value = 31 });
-                }
-                // AddAgenciesTabx
-                if (AddAgenciesTabx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_AddAgenciesTabx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_AddAgenciesTabx", SqlDbType.Int) { Value = 32 });
-                }
-                // EditAgenciesTabx
-                if (EditAgenciesTabx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_EditAgenciesTabx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_EditAgenciesTabx", SqlDbType.Int) { Value = 33 });
-                }
-                // DeleteAgenciesTabx
-                if (DeleteAgenciesTabx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_DeleteAgenciesTabx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_DeleteAgenciesTabx", SqlDbType.Int) { Value = 34 });
-                }
-
-                // ViewAlertsbx
-                if (ViewAlertsbx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_ViewAlertsbx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_ViewAlertsbx", SqlDbType.Int) { Value = 19 });
-                }
-                // AddAlertsbx
-                if (AddAlertsbx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_AddAlertsbx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_AddAlertsbx", SqlDbType.Int) { Value = 20 });
-                }
-                // EditAlertsbx
-                if (EditAlertsbx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_EditAlertsbx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_EditAlertsbx", SqlDbType.Int) { Value = 21 });
-                }
-                // DeleteAlertsBx
-                if (DeleteAlertsBx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_DeleteAlertsBx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_DeleteAlertsBx", SqlDbType.Int) { Value = 22 });
-                }
-
-                // ViewUserTabx
-                if (ViewUserTabx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_ViewUserTabx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_ViewUserTabx", SqlDbType.Int) { Value = 23 });
-                }
-                // AddUserTabx
-                if (AddUserTabx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_AddUserTabx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_AddUserTabx", SqlDbType.Int) { Value = 24 });
-                }
-                // EditUserTabx
-                if (EditUserTabx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_EditUserTabx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_EditUserTabx", SqlDbType.Int) { Value = 25 });
-                }
-                // DeleteUserTabx
-                if (DeleteUserTabx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_DeleteUserTabx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_DeleteUserTabx", SqlDbType.Int) { Value = 26 });
-                }
-                // ViewAssetsbx
-                if (ViewAssetsbx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_ViewAssetsbx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_ViewAssetsbx", SqlDbType.Int) { Value = 15 });
-                }
-                // AddAssetsbx
-                if (AddAssetsbx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_AddAssetsbx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_AddAssetsbx", SqlDbType.Int) { Value = 16 });
-                }
-                // EditAssetsbx
-                if (EditAssetsbx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_EditAssetsbx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_EditAssetsbx", SqlDbType.Int) { Value = 17 });
-                }
-                // DeleteAssetsbx
-                if (DeleteAssetsbx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_DeleteAssetsbx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_DeleteAssetsbx", SqlDbType.Int) { Value = 18 });
-                }
-
-                // ViewBillsbx
-                if (ViewBillsbx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_ViewBillsbx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_ViewBillsbx", SqlDbType.Int) { Value = 11 });
-                }
-                // AddBillsbx
-                if (AddBillsbx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_AddBillsbx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_AddBillsbx", SqlDbType.Int) { Value = 12 });
-                }
-                // EditBillsbx
-                if (EditBillsbx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_EditBillsbx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_EditBillsbx", SqlDbType.Int) { Value = 13 });
-                }
-                // DeleteBillsbx
-                if (DeleteBillsbx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_DeleteBillsbx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_DeleteBillsbx", SqlDbType.Int) { Value = 14 });
-                }
-
-                // ViewCandidatesReportbx
-                if (ViewCandidatesReportbx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_ViewCandidatesReportbx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_ViewCandidatesReportbx", SqlDbType.Int) { Value = 10 });
-                }
-                // ViewVisaReportbx
-                if (ViewVisaReportbx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_ViewVisaReportbx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_ViewVisaReportbx", SqlDbType.Int) { Value = 9 });
-                }
-
-                if (ViewAssetReportbx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_ViewAssetsReport, ";
-                    parameters.Add(new SqlParameter("@PermissionID_ViewAssetsReport", SqlDbType.Int) { Value = 9 });
-                }
-
-                // ViewVisabx
-                if (ViewVisabx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_ViewVisabx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_ViewVisabx", SqlDbType.Int) { Value = 1 });
-                }
-                // AddVisabx
-                if (AddVisabx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_AddVisabx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_AddVisabx", SqlDbType.Int) { Value = 2 });
-                }
-                // EditVisabx
-                if (EditVisabx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_EditVisabx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_EditVisabx", SqlDbType.Int) { Value = 3 });
-                }
-                // DeleteVisabx
-                if (DeleteVisabx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_DeleteVisabx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_DeleteVisabx", SqlDbType.Int) { Value = 4 });
-                }
-
-                // ViewPersonalInformationbx
-                if (ViewPersonalInformationbx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_ViewPersonalInformationbx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_ViewPersonalInformationbx", SqlDbType.Int) { Value = 5 });
-                }
-                // AddPersonalInformationbx
-                if (AddPersonalInformationbx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_AddPersonalInformationbx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_AddPersonalInformationbx", SqlDbType.Int) { Value = 6 });
-                }
-                // EditPersonalInformationbx
-                if (EditPersonalInformationbx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_EditPersonalInformationbx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_EditPersonalInformationbx", SqlDbType.Int) { Value = 7 });
-                }
-                // DeletePersonalInformationbx
-                if (DeletePersonalInformationbx.Checked)
-                {
-                    updateQuery += "PermissionID = @PermissionID_DeletePersonalInformationbx, ";
-                    parameters.Add(new SqlParameter("@PermissionID_DeletePersonalInformationbx", SqlDbType.Int) { Value = 8 });
-                }
-
-
-                // Remove the last comma and space if any
-                if (updateQuery.EndsWith(", "))
-                {
-                    updateQuery = updateQuery.Remove(updateQuery.Length - 2);
-                }
-
-                // Add WHERE clause
-                updateQuery += " WHERE UserID = @UserID AND UserPermissionID = @UserPermissionID";
-
-                try
-                {
-                    // Execute the update query
-                    SQLCONN.OpenConection();
-                    SQLCONN.ExecuteQueries(updateQuery, parameters.ToArray());
-                    SQLCONN.CloseConnection();
-
-                    // Inform the user
-                    MessageBox.Show("Permissions updated successfully.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    // Update the DataGridView
-                    dataGridView9.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"
-            SELECT [UserPermissionID], us.UserID, us.[PermissionID], p.PermissionName
-            FROM [DelmonGroupDB].[dbo].[UserPermissions] as us
-            JOIN Permissions as p ON p.PermissionID = us.PermissionID
-            WHERE us.UserID = " + cmbUserPermission.SelectedValue);
-
-                    dataGridView9.Columns["PermissionID"].Visible = false;
-                    dataGridView9.Columns[3].Width = 300;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
         }
 
+        private void label30_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label32_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label34_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label35_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox15_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label49_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label43_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label44_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox12_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox7_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+     
 
         private void tabPage1_Click(object sender, EventArgs e)
         {
@@ -4877,19 +4475,7 @@ ORDER BY
                         ((CheckBox)control).Checked = false;
                     }
                 }
-                // Refresh the DataGridView
-                dataGridView9.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"
-            SELECT 
-                [UserPermissionID],
-                us.UserID,
-                us.[PermissionID],
-                p.PermissionName
-            FROM 
-                [DelmonGroupDB].[dbo].[UserPermissions] as us
-                JOIN [Permissions] as p ON p.PermissionID = us.PermissionID where us.UserID= " + cmbUserPermission.SelectedValue + " ");
-
-                dataGridView9.Columns["PermissionID"].Visible = false;
-                dataGridView9.Columns[3].Width = 300;
+              
 
             }
 
@@ -4921,6 +4507,33 @@ ORDER BY
             {
                 e.Handled = true; // suppress the key press event
                 MessageBox.Show("Please enter numbers only.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+        private void RadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            // Cast the sender to a RadioButton
+            RadioButton radioButton = sender as RadioButton;
+
+            if (radioButton != null && radioButton.Checked)
+            {
+                // Get the parent group box
+                GroupBox parentGroupBox = radioButton.Parent as GroupBox;
+
+                if (parentGroupBox != null)
+                {
+                    // Determine the action based on the radio button's text
+                    bool check = radioButton.Text == "Select All";
+
+                    // Iterate through the controls of the group box
+                    foreach (Control control in parentGroupBox.Controls)
+                    {
+                        // Check or uncheck all checkboxes
+                        if (control is CheckBox checkBox)
+                        {
+                            checkBox.Checked = check;
+                        }
+                    }
+                }
             }
         }
     }

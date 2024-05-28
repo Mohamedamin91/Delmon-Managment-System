@@ -151,18 +151,40 @@ namespace Delmon_Managment_System.Forms
                 cmbcandidates2.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
-                 cmbPrinter.ValueMember = "AssetID";
-                 cmbPrinter.DisplayMember = "AssetID";
-                 cmbPrinter.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(@" select AssetID  FROM [DelmonGroupAssests].[dbo].[Assets] where AssetTypeID=2 ");
-                 cmbPrinter.Text = "Select";
-                 cmbPrinter.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                 cmbPrinter.AutoCompleteSource = AutoCompleteSource.ListItems;
+            // Retrieve data from the database
+            DataTable assetsData = (DataTable)SQLCONN3.ShowDataInGridViewORCombobox(@"SELECT AssetID FROM [DelmonGroupAssests].[dbo].[Assets] WHERE AssetTypeID=2");
+
+            // Create a new DataTable to store the ComboBox items
+            DataTable comboBoxData = new DataTable();
+            comboBoxData.Columns.Add("AssetID", typeof(string));
+
+            // Add the "Select" option as the first item
+            DataRow selectRow = comboBoxData.NewRow();
+            selectRow["AssetID"] = "Select";
+            comboBoxData.Rows.Add(selectRow);
+
+            // Merge the retrieved data with the new DataTable
+            foreach (DataRow row in assetsData.Rows)
+            {
+                comboBoxData.ImportRow(row);
+            }
+
+            // Bind the new data source to the ComboBox
+            cmbPrinter.ValueMember = "AssetID";
+            cmbPrinter.DisplayMember = "AssetID";
+            cmbPrinter.DataSource = comboBoxData;
+
+            // Set additional ComboBox properties
+            cmbPrinter.SelectedIndex = 0; // Set the "Select" option as the default selected item
+            cmbPrinter.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbPrinter.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
 
 
 
-                string query3 = "select Consulates.ConsulateID,ConsulateCity from Countries,Consulates where Countries.CountryId = Consulates.CountryId";
+
+            string query3 = "select Consulates.ConsulateID,ConsulateCity from Countries,Consulates where Countries.CountryId = Consulates.CountryId";
                 cmbConsulate.ValueMember = "Consulates.ConsulateID";
                 cmbConsulate.DisplayMember = "ConsulateCity";
                 cmbConsulate.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query3);
@@ -172,59 +194,7 @@ namespace Delmon_Managment_System.Forms
 
 
 
-            //}
-            //else
-            //{
-
-            //    SqlParameter paramloggiedemployeeid = new SqlParameter("@C1", SqlDbType.NVarChar);
-            //    paramloggiedemployeeid.Value = loggedEmployee;
-            //    //cmbStatus.ValueMember = "statusid";
-            //    //cmbStatus.DisplayMember = "status";
-            //    //cmbStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select statusid,status  from Visastatus where RefrenceID =1 or RefrenceID = 0 order by statusid");
-            //    //cmbStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //    //cmbStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-            //    cmbPersonalStatusStatus.ValueMember = "StatusID";
-            //    cmbPersonalStatusStatus.DisplayMember = "StatusValue";
-            //    cmbPersonalStatusStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" select  StatusID , StatusValue  from StatusTBL where RefrenceID=2  ");
-            //    cmbPersonalStatusStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //    cmbPersonalStatusStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-
-
-            //    cmbCompany.ValueMember = "Companies.COMPID";
-            //    cmbCompany.DisplayMember = "COMPName_EN";
-            //    cmbCompany.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Companies.COMPID,COMPName_EN FROM Companies,Employees where Employees.COMPID=Companies.COMPID and Employees.EmployeeID=@C1", paramloggiedemployeeid);
-            //    cmbCompany.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //    cmbCompany.AutoCompleteSource = AutoCompleteSource.ListItems;
-            //    cmbCompany.Enabled = false;
-
-
-            //    cmbcomp.ValueMember = "Companies.COMPID";
-            //    cmbcomp.DisplayMember = "COMPName_EN";
-            //    cmbcomp.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Companies.COMPID,COMPName_EN FROM Companies,Employees where Employees.COMPID=Companies.COMPID and Employees.EmployeeID=@C1", paramloggiedemployeeid);
-            //    cmbcomp.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //    cmbcomp.AutoCompleteSource = AutoCompleteSource.ListItems;
-            //    cmbcomp.Text = "Select";
-            //    cmbcomp.Enabled = false;
-
-
-            //    cmbcandidates2.ValueMember = "EmployeeID";
-            //    cmbcandidates2.DisplayMember = "Name";
-            //    cmbcandidates2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees],DEPARTMENTS where Employees.DeptID = DEPARTMENTS.DEPTID  " +
-            //        " AND Employees.DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = @C1 )", paramloggiedemployeeid);
-            //    cmbcandidates2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //    cmbcandidates2.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-
-
-            //    string query3 = "select Consulates.ConsulateID,ConsulateCity from Countries,Consulates where Countries.CountryId = Consulates.CountryId";
-            //    cmbConsulate.ValueMember = "Consulates.ConsulateID";
-            //    cmbConsulate.DisplayMember = "ConsulateCity";
-            //    cmbConsulate.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query3);
-
-
-            //}
+           
             SQLCONN.CloseConnection();
             SQLCONN3.CloseConnection();
             SQLCONN4.CloseConnection();
@@ -1306,7 +1276,7 @@ namespace Delmon_Managment_System.Forms
 
                 }
             }
-              if (tabControl1.SelectedTab == tabControl1.TabPages[1])
+             if (tabControl1.SelectedTab == tabControl1.TabPages[1])
             {
                 if (hasViewCANDIDATES == false)
                 {
@@ -1323,21 +1293,23 @@ namespace Delmon_Managment_System.Forms
 
                 }
             }
-
-            if(tabControl1.SelectedTab==tabControl1.TabPages[2])
+             if(tabControl1.SelectedTab==tabControl1.TabPages[2])
             {
                 cmbPrinter.Text = "Select";
                 if (hasViewAssets == false)
                 {
                     MessageBox.Show("Sorry, You are not allowed to view this Module/Screen , kindly contact the administrator !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    button2.Enabled=btnuplode.Enabled = false;
-                   
+                    button2.Enabled= button5.Enabled = btnuplode.Enabled = false;
+                    radioButton1.Enabled = radioButton2.Enabled = radioButton3.Enabled =radioButton4.Enabled= false;
+                    dateTimePicker1.Enabled = dateTimePicker2.Enabled = false;
+
                 }
                 else
                 {
-                   
-                       btnuplode.Enabled = true;
-                    button2.Enabled = false;
+                    dateTimePicker1.Enabled = dateTimePicker2.Enabled = true;
+                          btnuplode.Enabled = true;
+                         button2.Enabled = button5.Enabled = true;
+                    radioButton1.Enabled = radioButton2.Enabled = radioButton3.Enabled = radioButton4.Enabled = true;
 
                 }
 
@@ -1346,6 +1318,10 @@ namespace Delmon_Managment_System.Forms
 
             SQLCONN.CloseConnection();
         }
+
+
+
+
         private void btnuplode_Click(object sender, EventArgs e)
         {
             if (cmbPrinter.Text == "Select")
@@ -1355,14 +1331,11 @@ namespace Delmon_Managment_System.Forms
             }
             else
             {
-                SqlDataReader dr;
-                SqlParameter paramJobID = new SqlParameter("@C1", SqlDbType.NVarChar);
                 try
                 {
                     // Open file dialog to select file
                     using (OpenFileDialog openFileDialog = new OpenFileDialog())
                     {
-                        //openFileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm|CSV Files|*.csv";
                         openFileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm;*.csv";
                         if (openFileDialog.ShowDialog() == DialogResult.OK)
                         {
@@ -1420,91 +1393,129 @@ namespace Delmon_Managment_System.Forms
                                 // Establish connection to SQL Server
                                 SQLCONN4.OpenConection4();
 
-                                // Check if any JobID already exists in the database
-                                List<string> jobIDs = new List<string>();
-                                for (int i = 0; i < table.Rows.Count; i++)
+                                // Check for existing JobID and AssetID combinations
+                                HashSet<string> existingRecords = new HashSet<string>();
+                                SqlDataReader dr = SQLCONN4.DataReader("SELECT JobID, AssetID FROM LogReport");
+                                while (dr.Read())
                                 {
-                                    string jobID = table.Rows[i][0].ToString();
-                                    jobIDs.Add(jobID);
+                                    string jobID = dr["JobID"].ToString();
+                                    string assetID = dr["AssetID"].ToString();
+                                    existingRecords.Add($"{jobID}_{assetID}");
                                 }
+                                dr.Close();
 
-                                bool jobIDExists = false;
-                                string existingJobID = string.Empty;
-                                foreach (string jobID in jobIDs)
-                                {
-                                    paramJobID.Value = jobID;
-                                    dr = SQLCONN4.DataReader("select * from LogReport where JobID=@C1", paramJobID);
-                                    if (dr.Read())
-                                    {
-                                        jobIDExists = true;
-                                        existingJobID = jobID;
-                                        break;
-                                    }
-                                    dr.Close();
-                                }
-
-                                if (jobIDExists)
-                                {
-                                    MessageBox.Show("Some Jobs like 'JobId' : " + existingJobID + " Already Exists,Pease recheck the Imported file again !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                    return;
-                                }
-
+                                bool duplicatesFound = false; // Flag to track if duplicates were found
                                 bool dataInserted = false; // Flag to track if data has been inserted
+                                Dictionary<string, string> fileRecordTracker = new Dictionary<string, string>(); // To track duplicates within the file
 
                                 // Iterate through each row in the DataTable
                                 for (int i = 0; i < table.Rows.Count; i++)
                                 {
                                     DataRow row = table.Rows[i];
-
-                                    // Map file columns to SQL Server table columns based on their positions
+                                    string jobID = row[0].ToString();
                                     string assetID = cmbPrinter.Text.ToString();
-                                    string JobID = row[0].ToString();
-                                    string UserName = row[1].ToString();
-                                    string Domain = row[2].ToString();
-                                    string Documentname = row[3].ToString();
-                                    string PrintDate = row[4].ToString();
-                                    string type = row[5].ToString().Split(' ')[0].Trim();
-                                    string Department = row[6].ToString();
-                                    string Pages = row[7].ToString();
-                                    string Size = row[8].ToString();
-                                    string Status = row[9].ToString();
-                                    string Sets = row[10].ToString();
+                                    string recordKey = $"{jobID}_{assetID}";
 
-                                    // Calculate total
-                                    int pages = int.Parse(Pages);
-                                    int sets = int.Parse(Sets);
-                                    int total = pages * sets;
-
-                                    // Multiply by 2 if Size is A3
-                                    if (Size.ToUpper() == "A3")
+                                    // Check for duplicates within the file
+                                    if (fileRecordTracker.ContainsKey(recordKey))
                                     {
-                                        total *= 2;
+                                        duplicatesFound = true;
+                                        // Log the duplicate within the file
+                                        string duplicatePrintDate = fileRecordTracker[recordKey];
+                                        SqlParameter paramDupAssetID = new SqlParameter("@AssetID", SqlDbType.NVarChar) { Value = assetID };
+                                        SqlParameter paramDupJobID = new SqlParameter("@JobID", SqlDbType.NVarChar) { Value = jobID };
+                                        SqlParameter paramDupPrintDate = new SqlParameter("@PrintDate", SqlDbType.NVarChar) { Value = duplicatePrintDate };
+
+                                        SQLCONN4.ExecuteQueries("INSERT INTO DuplicateLog (AssetID, JobID, PrintDate) VALUES (@AssetID, @JobID, @PrintDate)",
+                                        paramDupAssetID, paramDupJobID, paramDupPrintDate);
                                     }
+                                    else
+                                    {
+                                        fileRecordTracker[recordKey] = row[4].ToString(); // Store PrintDate for the current recordKey
 
-                                    // Format PrintDate as a string
-                                    PrintDate = PrintDate.Replace('T', ' ');
+                                        if (existingRecords.Contains(recordKey))
+                                        {
+                                            duplicatesFound = true;
 
-                                    // Set parameter values
-                                    SqlParameter paramAssetID = new SqlParameter("@AssetID", SqlDbType.NVarChar) { Value = assetID };
-                                    SqlParameter paramJobid = new SqlParameter("@Jobid", SqlDbType.NVarChar) { Value = JobID };
-                                    SqlParameter paramUserName = new SqlParameter("@UserName", SqlDbType.NVarChar) { Value = UserName };
-                                    SqlParameter paramDomain = new SqlParameter("@Domain", SqlDbType.NVarChar) { Value = Domain };
-                                    SqlParameter paramDocumentname = new SqlParameter("@Documentname", SqlDbType.NVarChar) { Value = Documentname };
-                                    SqlParameter paramDate = new SqlParameter("@Date", SqlDbType.NVarChar) { Value = PrintDate };
-                                    SqlParameter paramType = new SqlParameter("@Type", SqlDbType.NVarChar) { Value = type };
-                                    SqlParameter paramDepartment = new SqlParameter("@Department", SqlDbType.NVarChar) { Value = Department };
-                                    SqlParameter paramPages = new SqlParameter("@Pages", SqlDbType.Int) { Value = pages };
-                                    SqlParameter paramSize = new SqlParameter("@Size", SqlDbType.NVarChar) { Value = Size };
-                                    SqlParameter paramStatus = new SqlParameter("@Status", SqlDbType.NVarChar) { Value = Status };
-                                    SqlParameter paramSets = new SqlParameter("@Sets", SqlDbType.Int) { Value = sets };
-                                    SqlParameter paramTotal = new SqlParameter("@Total", SqlDbType.Int) { Value = total };
+                                            // Retrieve the duplicate record details from LogReport
+                                            SqlParameter paramJobID = new SqlParameter("@JobID", SqlDbType.NVarChar) { Value = jobID };
+                                            SqlParameter paramAssetID = new SqlParameter("@AssetID", SqlDbType.NVarChar) { Value = assetID };
+                                            SqlDataReader duplicateReader = SQLCONN4.DataReader("SELECT * FROM LogReport WHERE JobID = @JobID AND AssetID = @AssetID", paramJobID, paramAssetID);
 
-                                    // Execute INSERT command using SQLCONN4.ExecuteQueries
-                                    SQLCONN4.ExecuteQueries("insert into LogReport (AssetID, jobid, username, domain, Documentname, PrintDate, type, Department, Pages, Size, Status, Sets, Total) " +
-                                                            "values (@AssetID, @Jobid, @UserName, @Domain, @Documentname, @Date, @Type, @Department, @Pages, @Size, @Status, @Sets, @Total)",
-                                                            paramAssetID, paramJobid, paramUserName, paramDomain, paramDocumentname, paramDate, paramType, paramDepartment, paramPages, paramSize, paramStatus, paramSets, paramTotal);
+                                            List<DuplicateRecord> duplicateRecords = new List<DuplicateRecord>();
 
-                                    dataInserted = true; // Set flag to true if data is inserted
+                                            while (duplicateReader.Read())
+                                            {
+                                                string duplicatePrintDate = duplicateReader["PrintDate"].ToString();
+                                                duplicateRecords.Add(new DuplicateRecord { AssetID = assetID, JobID = jobID, PrintDate = duplicatePrintDate });
+                                            }
+                                            duplicateReader.Close(); // Close the SqlDataReader after use
+
+                                            // Insert duplicate job into DuplicateLog table
+                                            foreach (var record in duplicateRecords)
+                                            {
+                                                // Format PrintDate as a string
+                                                string formattedPrintDate = record.PrintDate.Replace('T', ' ');
+
+                                                SqlParameter paramDupAssetID = new SqlParameter("@AssetID", SqlDbType.NVarChar) { Value = record.AssetID };
+                                                SqlParameter paramDupJobID = new SqlParameter("@JobID", SqlDbType.NVarChar) { Value = record.JobID };
+                                                SqlParameter paramDupPrintDate = new SqlParameter("@PrintDate", SqlDbType.NVarChar) { Value = formattedPrintDate };
+                                                
+                                                SQLCONN4.ExecuteQueries("INSERT INTO DuplicateLog (AssetID, JobID, PrintDate) VALUES (@AssetID, @JobID, @PrintDate)",
+                                                paramDupAssetID, paramDupJobID, paramDupPrintDate);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            // Map file columns to SQL Server table columns based on their positions
+                                            string UserName = row[1].ToString();
+                                            string Domain = row[2].ToString();
+                                            string Documentname = row[3].ToString();
+                                            string PrintDate = row[4].ToString();
+                                            string type = row[5].ToString().Split(' ')[0].Trim();
+                                            string Department = row[6].ToString();
+                                            string Pages = row[7].ToString();
+                                            string Size = row[8].ToString();
+                                            string Status = row[9].ToString();
+                                            string Sets = row[10].ToString();
+
+                                            // Calculate total
+                                            int pages = int.Parse(Pages);
+                                            int sets = int.Parse(Sets);
+                                            int total = pages * sets;
+
+                                            // Multiply by 2 if Size is A3
+                                            if (Size.ToUpper() == "A3")
+                                            {
+                                                total *= 2;
+                                            }
+
+                                            // Format PrintDate as a string
+                                            PrintDate = PrintDate.Replace('T', ' ');
+
+                                            // Set parameter values
+                                            SqlParameter paramNewAssetID = new SqlParameter("@AssetID", SqlDbType.NVarChar) { Value = assetID };
+                                            SqlParameter paramNewJobid = new SqlParameter("@Jobid", SqlDbType.NVarChar) { Value = jobID };
+                                            SqlParameter paramUserName = new SqlParameter("@UserName", SqlDbType.NVarChar) { Value = UserName };
+                                            SqlParameter paramDomain = new SqlParameter("@Domain", SqlDbType.NVarChar) { Value = Domain };
+                                            SqlParameter paramDocumentname = new SqlParameter("@Documentname", SqlDbType.NVarChar) { Value = Documentname };
+                                            SqlParameter paramDate = new SqlParameter("@Date", SqlDbType.NVarChar) { Value = PrintDate };
+                                            SqlParameter paramType = new SqlParameter("@Type", SqlDbType.NVarChar) { Value = type };
+                                            SqlParameter paramDepartment = new SqlParameter("@Department", SqlDbType.NVarChar) { Value = Department };
+                                            SqlParameter paramPages = new SqlParameter("@Pages", SqlDbType.Int) { Value = pages };
+                                            SqlParameter paramSize = new SqlParameter("@Size", SqlDbType.NVarChar) { Value = Size };
+                                            SqlParameter paramStatus = new SqlParameter("@Status", SqlDbType.NVarChar) { Value = Status };
+                                            SqlParameter paramSets = new SqlParameter("@Sets", SqlDbType.Int) { Value = sets };
+                                            SqlParameter paramTotal = new SqlParameter("@Total", SqlDbType.Int) { Value = total };
+
+                                            // Execute INSERT command using SQLCONN4.ExecuteQueries
+                                            SQLCONN4.ExecuteQueries("INSERT INTO LogReport (AssetID, jobid, username, domain, Documentname, PrintDate, type, Department, Pages, Size, Status, Sets, Total) " +
+                                                                    "VALUES (@AssetID, @Jobid, @UserName, @Domain, @Documentname, @Date, @Type, @Department, @Pages, @Size, @Status, @Sets, @Total)",
+                                                                    paramNewAssetID, paramNewJobid, paramUserName, paramDomain, paramDocumentname, paramDate, paramType, paramDepartment, paramPages, paramSize, paramStatus, paramSets, paramTotal);
+
+                                            dataInserted = true; // Set flag to true if data is inserted
+                                        }
+                                    }
                                 }
 
                                 // Show message after all rows are processed
@@ -1514,6 +1525,11 @@ namespace Delmon_Managment_System.Forms
                                     dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"Select * from LogReport");
                                 }
 
+                                if (duplicatesFound)
+                                {
+                                    MessageBox.Show("Some duplicate Job IDs were found and logged into the DuplicateLog table,Kindly check ", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                }
+
                                 SQLCONN4.CloseConnection();
                             }
                         }
@@ -1521,14 +1537,201 @@ namespace Delmon_Managment_System.Forms
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.ToString());
+                    MessageBox.Show($"An error occurred: {ex.Message}");
                 }
             }
         }
 
+        private class DuplicateRecord
+        {
+            public string AssetID { get; set; }
+            public string JobID { get; set; }
+            public string PrintDate { get; set; }
+        }
+
+
+
+
         private void button2_Click_1(object sender, EventArgs e)
         {
+            SQLCONN4.OpenConection4();
+            SqlParameter ParamUserPrinter = new SqlParameter("@C0", SqlDbType.NVarChar) { Value = cmbPrinter.SelectedValue };
+            SqlParameter Paramfrom = new SqlParameter("@C1", SqlDbType.Date) { Value = dateTimePicker1.Value };
+            SqlParameter ParamTo = new SqlParameter("@C2", SqlDbType.Date) { Value = dateTimePicker2.Value };
 
+            if ((!radioButton1.Checked && !radioButton2.Checked && !radioButton3.Checked && !radioButton4.Checked))
+            {
+                MessageBox.Show("Kindly select one of the Radio buttons! / Printer", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+            else
+            {
+                //by user 
+                if (radioButton1.Checked)
+                {
+                    if (cmbPrinter.Text == "Select")
+                    {
+                        MessageBox.Show("Kindly select one of the Printers", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
+                    else
+                    {
+                        dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT Username, SUM(Total) AS Count FROM  LogReport WHERE 
+    CONVERT(DATE, Printdate, 120) between @C1 and  @C2 and AssetId=@C0 GROUP BY Username ORDER BY Count;", Paramfrom, ParamTo, ParamUserPrinter);
+                    }
+                }
+
+                // bydepartment
+                if (radioButton2.Checked)
+                {
+                    if (cmbPrinter.Text == "Select")
+                    {
+                        MessageBox.Show("Kindly select one of the Printers", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
+                    else
+                    {
+
+                        dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT Department, SUM(Total) AS Count FROM LogReport WHERE 
+    CONVERT(DATE, Printdate, 120) between @C1 and @C2 and AssetId=@C0 GROUP BY Department ORDER BY Count;", Paramfrom, ParamTo, ParamUserPrinter);
+                    }
+                }
+                // full
+                if (radioButton3.Checked)
+                {
+
+                    if (cmbPrinter.Text == "Select")
+                    {
+                        dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT * FROM LogReport WHERE 
+    CONVERT(DATE, Printdate, 120) between @C1 and @C2  ;", Paramfrom, ParamTo);
+                    }
+                    else
+                    {
+            
+                        dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT * FROM LogReport WHERE 
+    CONVERT(DATE, Printdate, 120) between @C1 and @C2 and AssetId=@C0 ;", Paramfrom, ParamTo, ParamUserPrinter);
+                    }
+
+
+
+                }
+                //Duplicate
+                if (radioButton4.Checked)
+                {
+                    if (cmbPrinter.Text == "Select")
+                    {
+                        dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT * FROM  [DuplicateLog]  WHERE 
+    CONVERT(DATE, Printdate, 120) between @C1 and  @C2  ;", Paramfrom, ParamTo);
+                    }
+                    else
+                    {
+
+                        dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT * FROM  [DuplicateLog]  WHERE 
+    CONVERT(DATE, Printdate, 120) between @C1 and  @C2 and AssetId=@C0 ;", Paramfrom, ParamTo, ParamUserPrinter);
+                    }
+                }
+                    // bu user //by department
+                    if (radioButton1.Checked || radioButton2.Checked)
+                    {
+                        dataGridView5.Columns[0].Width = 150;
+
+                        // Calculate total
+                        int sum = 0;
+                        foreach (DataGridViewRow row in dataGridView5.Rows)
+                        {
+                            if (row.Cells[1].Value != null)
+                            {
+                                int quantity;
+                                if (int.TryParse(row.Cells[1].Value.ToString(), out quantity))
+                                {
+                                    sum += quantity;
+                                }
+                            }
+                        }
+
+                        // Add total row
+                        DataTable dataTable = (DataTable)dataGridView5.DataSource;
+                        DataRow totalRow = dataTable.NewRow();
+                        totalRow[0] = "Total";
+                        totalRow[1] = sum;
+                        dataTable.Rows.Add(totalRow);
+
+                        // Get the DataGridViewRow for the total row
+                        DataGridViewRow totalDataGridViewRow = dataGridView5.Rows[dataTable.Rows.Count - 1];
+
+                        // Set the cell style for the new row
+                        totalDataGridViewRow.DefaultCellStyle.BackColor = Color.YellowGreen;
+                    }
+                    // full
+                    if (radioButton3.Checked)
+                    {
+                        dataGridView5.Columns[0].Width = 150;
+
+                        // Check if the DataGridView has a data source
+                        // Calculate the sum of the column
+                        int sum = 0;
+                        foreach (DataGridViewRow row in dataGridView5.Rows)
+                        {
+                            if (row.Cells[12].Value != null)
+                            {
+                                int quantity;
+                                if (int.TryParse(row.Cells[12].Value.ToString(), out quantity))
+                                {
+                                    sum += quantity;
+                                }
+                            }
+                        }
+
+                        // Create a new DataRow for the total row
+                        DataTable dataTable = (DataTable)dataGridView5.DataSource;
+                        DataRow totalRow = dataTable.NewRow();
+                        totalRow[0] = "Total";
+                        totalRow[12] = sum;
+                        // Add the total row to the DataTable
+                        dataTable.Rows.Add(totalRow);
+
+                        // Get the DataGridViewRow for the total row
+                        DataGridViewRow totalDataGridViewRow = dataGridView5.Rows[dataTable.Rows.Count - 1];
+
+                        // Set the cell style for the new row
+                        totalDataGridViewRow.DefaultCellStyle.BackColor = Color.YellowGreen;
+
+                        // Refresh the DataGridView to reflect the changes
+                    }
+                    if (radioButton4.Checked)
+                    {
+                        dataGridView5.Columns[2].Width = 300;
+                    }
+
+                    // Refresh the DataGridView
+                }
+
+
+                dataGridView5.Refresh();
+
+
+
+                SQLCONN4.CloseConnection();
+            
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            using (var package = new ExcelPackage())
+            {
+                ExcelWorksheet worksheet1 = package.Workbook.Worksheets.Add("Report");
+
+                ExportDataGridViewToExcel(dataGridView5, worksheet1);
+
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Excel Files|*.xlsx";
+                saveFileDialog.Title = "Save as Excel File";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    package.SaveAs(new System.IO.FileInfo(saveFileDialog.FileName));
+                }
+            }
         }
     }
 }

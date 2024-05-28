@@ -30,12 +30,11 @@ namespace Delmon_Managment_System.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.userTap = new System.Windows.Forms.TabPage();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
@@ -57,73 +56,90 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.permissionstab = new System.Windows.Forms.TabPage();
             this.groupBox20 = new System.Windows.Forms.GroupBox();
+            this.radioButton19 = new System.Windows.Forms.RadioButton();
+            this.radioButton20 = new System.Windows.Forms.RadioButton();
             this.DeleteCountriesTabx = new System.Windows.Forms.CheckBox();
             this.label50 = new System.Windows.Forms.Label();
             this.EditCountriesTabx = new System.Windows.Forms.CheckBox();
             this.AddCountriesTabx = new System.Windows.Forms.CheckBox();
             this.ViewCountriesTabx = new System.Windows.Forms.CheckBox();
             this.groupBox19 = new System.Windows.Forms.GroupBox();
+            this.radioButton21 = new System.Windows.Forms.RadioButton();
+            this.radioButton22 = new System.Windows.Forms.RadioButton();
             this.label49 = new System.Windows.Forms.Label();
             this.DeleteCompaniesTabx = new System.Windows.Forms.CheckBox();
             this.EditCompaniesTabx = new System.Windows.Forms.CheckBox();
             this.AddCompaniesTabx = new System.Windows.Forms.CheckBox();
             this.ViewCompaniesTabx = new System.Windows.Forms.CheckBox();
-            this.button18 = new System.Windows.Forms.Button();
             this.label40 = new System.Windows.Forms.Label();
-            this.button33 = new System.Windows.Forms.Button();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
+            this.radioButton17 = new System.Windows.Forms.RadioButton();
+            this.radioButton18 = new System.Windows.Forms.RadioButton();
             this.DeleteAgenciesTabx = new System.Windows.Forms.CheckBox();
             this.label51 = new System.Windows.Forms.Label();
             this.EditAgenciesTabx = new System.Windows.Forms.CheckBox();
             this.AddAgenciesTabx = new System.Windows.Forms.CheckBox();
             this.ViewAgenciesTabx = new System.Windows.Forms.CheckBox();
-            this.button32 = new System.Windows.Forms.Button();
             this.cmbUserPermission = new System.Windows.Forms.ComboBox();
-            this.button31 = new System.Windows.Forms.Button();
             this.groupBox17 = new System.Windows.Forms.GroupBox();
+            this.radioButton15 = new System.Windows.Forms.RadioButton();
+            this.radioButton16 = new System.Windows.Forms.RadioButton();
             this.label48 = new System.Windows.Forms.Label();
             this.ViewJobTabx = new System.Windows.Forms.CheckBox();
             this.AddJobTabx = new System.Windows.Forms.CheckBox();
             this.editJobTabx = new System.Windows.Forms.CheckBox();
             this.DeleteJobTabx = new System.Windows.Forms.CheckBox();
-            this.dataGridView9 = new System.Windows.Forms.DataGridView();
             this.groupBox16 = new System.Windows.Forms.GroupBox();
+            this.radioButton13 = new System.Windows.Forms.RadioButton();
+            this.radioButton14 = new System.Windows.Forms.RadioButton();
             this.label42 = new System.Windows.Forms.Label();
             this.AddUserTabx = new System.Windows.Forms.CheckBox();
             this.EditUserTabx = new System.Windows.Forms.CheckBox();
             this.ViewUserTabx = new System.Windows.Forms.CheckBox();
             this.DeleteUserTabx = new System.Windows.Forms.CheckBox();
             this.groupBox15 = new System.Windows.Forms.GroupBox();
+            this.radioButton11 = new System.Windows.Forms.RadioButton();
+            this.radioButton12 = new System.Windows.Forms.RadioButton();
             this.label41 = new System.Windows.Forms.Label();
             this.DeleteAlertsBx = new System.Windows.Forms.CheckBox();
             this.EditAlertsbx = new System.Windows.Forms.CheckBox();
             this.AddAlertsbx = new System.Windows.Forms.CheckBox();
             this.ViewAlertsbx = new System.Windows.Forms.CheckBox();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.radioButton9 = new System.Windows.Forms.RadioButton();
+            this.radioButton10 = new System.Windows.Forms.RadioButton();
             this.DeleteAssetsbx = new System.Windows.Forms.CheckBox();
             this.EditAssetsbx = new System.Windows.Forms.CheckBox();
             this.AddAssetsbx = new System.Windows.Forms.CheckBox();
             this.ViewAssetsbx = new System.Windows.Forms.CheckBox();
             this.label47 = new System.Windows.Forms.Label();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.radioButton7 = new System.Windows.Forms.RadioButton();
+            this.radioButton8 = new System.Windows.Forms.RadioButton();
             this.DeleteBillsbx = new System.Windows.Forms.CheckBox();
             this.EditBillsbx = new System.Windows.Forms.CheckBox();
             this.AddBillsbx = new System.Windows.Forms.CheckBox();
             this.ViewBillsbx = new System.Windows.Forms.CheckBox();
             this.label46 = new System.Windows.Forms.Label();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.ViewVisaReportbx = new System.Windows.Forms.CheckBox();
             this.ViewAssetReportbx = new System.Windows.Forms.CheckBox();
             this.label45 = new System.Windows.Forms.Label();
             this.ViewCandidatesReportbx = new System.Windows.Forms.CheckBox();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.ViewPersonalInformationbx = new System.Windows.Forms.CheckBox();
             this.AddPersonalInformationbx = new System.Windows.Forms.CheckBox();
             this.EditPersonalInformationbx = new System.Windows.Forms.CheckBox();
             this.DeletePersonalInformationbx = new System.Windows.Forms.CheckBox();
             this.label44 = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.DeleteVisabx = new System.Windows.Forms.CheckBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.label43 = new System.Windows.Forms.Label();
             this.EditVisabx = new System.Windows.Forms.CheckBox();
             this.ViewVisabx = new System.Windows.Forms.CheckBox();
@@ -247,7 +263,6 @@ namespace Delmon_Managment_System.Forms
             this.groupBox19.SuspendLayout();
             this.groupBox18.SuspendLayout();
             this.groupBox17.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView9)).BeginInit();
             this.groupBox16.SuspendLayout();
             this.groupBox15.SuspendLayout();
             this.groupBox14.SuspendLayout();
@@ -536,15 +551,10 @@ namespace Delmon_Managment_System.Forms
             this.permissionstab.BackColor = System.Drawing.Color.White;
             this.permissionstab.Controls.Add(this.groupBox20);
             this.permissionstab.Controls.Add(this.groupBox19);
-            this.permissionstab.Controls.Add(this.button18);
             this.permissionstab.Controls.Add(this.label40);
-            this.permissionstab.Controls.Add(this.button33);
             this.permissionstab.Controls.Add(this.groupBox18);
-            this.permissionstab.Controls.Add(this.button32);
             this.permissionstab.Controls.Add(this.cmbUserPermission);
-            this.permissionstab.Controls.Add(this.button31);
             this.permissionstab.Controls.Add(this.groupBox17);
-            this.permissionstab.Controls.Add(this.dataGridView9);
             this.permissionstab.Controls.Add(this.groupBox16);
             this.permissionstab.Controls.Add(this.groupBox15);
             this.permissionstab.Controls.Add(this.groupBox14);
@@ -556,26 +566,54 @@ namespace Delmon_Managment_System.Forms
             this.permissionstab.Name = "permissionstab";
             this.permissionstab.Size = new System.Drawing.Size(1161, 597);
             this.permissionstab.TabIndex = 9;
-            this.permissionstab.Text = "Permissions";
+            this.permissionstab.Text = "Permission";
             this.permissionstab.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // groupBox20
             // 
+            this.groupBox20.Controls.Add(this.radioButton19);
+            this.groupBox20.Controls.Add(this.radioButton20);
             this.groupBox20.Controls.Add(this.DeleteCountriesTabx);
             this.groupBox20.Controls.Add(this.label50);
             this.groupBox20.Controls.Add(this.EditCountriesTabx);
             this.groupBox20.Controls.Add(this.AddCountriesTabx);
             this.groupBox20.Controls.Add(this.ViewCountriesTabx);
-            this.groupBox20.Location = new System.Drawing.Point(451, 495);
+            this.groupBox20.Location = new System.Drawing.Point(401, 495);
             this.groupBox20.Name = "groupBox20";
-            this.groupBox20.Size = new System.Drawing.Size(570, 52);
+            this.groupBox20.Size = new System.Drawing.Size(712, 52);
             this.groupBox20.TabIndex = 231;
             this.groupBox20.TabStop = false;
+            // 
+            // radioButton19
+            // 
+            this.radioButton19.AutoSize = true;
+            this.radioButton19.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.radioButton19.Location = new System.Drawing.Point(627, 26);
+            this.radioButton19.Name = "radioButton19";
+            this.radioButton19.Size = new System.Drawing.Size(77, 18);
+            this.radioButton19.TabIndex = 235;
+            this.radioButton19.TabStop = true;
+            this.radioButton19.Text = "UnSelect";
+            this.radioButton19.UseVisualStyleBackColor = true;
+            // 
+            // radioButton20
+            // 
+            this.radioButton20.AutoSize = true;
+            this.radioButton20.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.radioButton20.Location = new System.Drawing.Point(551, 26);
+            this.radioButton20.Name = "radioButton20";
+            this.radioButton20.Size = new System.Drawing.Size(79, 18);
+            this.radioButton20.TabIndex = 234;
+            this.radioButton20.TabStop = true;
+            this.radioButton20.Text = "Select All";
+            this.radioButton20.UseVisualStyleBackColor = true;
             // 
             // DeleteCountriesTabx
             // 
             this.DeleteCountriesTabx.AutoSize = true;
-            this.DeleteCountriesTabx.Location = new System.Drawing.Point(476, 17);
+            this.DeleteCountriesTabx.Location = new System.Drawing.Point(447, 21);
             this.DeleteCountriesTabx.Name = "DeleteCountriesTabx";
             this.DeleteCountriesTabx.Size = new System.Drawing.Size(74, 21);
             this.DeleteCountriesTabx.TabIndex = 211;
@@ -586,7 +624,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label50.AutoSize = true;
             this.label50.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label50.ForeColor = System.Drawing.Color.Black;
+            this.label50.ForeColor = System.Drawing.Color.Firebrick;
             this.label50.Location = new System.Drawing.Point(10, 21);
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(156, 17);
@@ -596,7 +634,7 @@ namespace Delmon_Managment_System.Forms
             // EditCountriesTabx
             // 
             this.EditCountriesTabx.AutoSize = true;
-            this.EditCountriesTabx.Location = new System.Drawing.Point(381, 21);
+            this.EditCountriesTabx.Location = new System.Drawing.Point(381, 23);
             this.EditCountriesTabx.Name = "EditCountriesTabx";
             this.EditCountriesTabx.Size = new System.Drawing.Size(55, 21);
             this.EditCountriesTabx.TabIndex = 210;
@@ -606,7 +644,7 @@ namespace Delmon_Managment_System.Forms
             // AddCountriesTabx
             // 
             this.AddCountriesTabx.AutoSize = true;
-            this.AddCountriesTabx.Location = new System.Drawing.Point(274, 20);
+            this.AddCountriesTabx.Location = new System.Drawing.Point(274, 21);
             this.AddCountriesTabx.Name = "AddCountriesTabx";
             this.AddCountriesTabx.Size = new System.Drawing.Size(56, 21);
             this.AddCountriesTabx.TabIndex = 209;
@@ -625,32 +663,61 @@ namespace Delmon_Managment_System.Forms
             // 
             // groupBox19
             // 
+            this.groupBox19.Controls.Add(this.radioButton21);
+            this.groupBox19.Controls.Add(this.radioButton22);
             this.groupBox19.Controls.Add(this.label49);
             this.groupBox19.Controls.Add(this.DeleteCompaniesTabx);
             this.groupBox19.Controls.Add(this.EditCompaniesTabx);
             this.groupBox19.Controls.Add(this.AddCompaniesTabx);
             this.groupBox19.Controls.Add(this.ViewCompaniesTabx);
-            this.groupBox19.Location = new System.Drawing.Point(451, 545);
+            this.groupBox19.Location = new System.Drawing.Point(401, 545);
             this.groupBox19.Name = "groupBox19";
-            this.groupBox19.Size = new System.Drawing.Size(570, 45);
+            this.groupBox19.Size = new System.Drawing.Size(712, 45);
             this.groupBox19.TabIndex = 230;
             this.groupBox19.TabStop = false;
+            // 
+            // radioButton21
+            // 
+            this.radioButton21.AutoSize = true;
+            this.radioButton21.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.radioButton21.Location = new System.Drawing.Point(629, 20);
+            this.radioButton21.Name = "radioButton21";
+            this.radioButton21.Size = new System.Drawing.Size(77, 18);
+            this.radioButton21.TabIndex = 235;
+            this.radioButton21.TabStop = true;
+            this.radioButton21.Text = "UnSelect";
+            this.radioButton21.UseVisualStyleBackColor = true;
+            // 
+            // radioButton22
+            // 
+            this.radioButton22.AutoSize = true;
+            this.radioButton22.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.radioButton22.Location = new System.Drawing.Point(553, 20);
+            this.radioButton22.Name = "radioButton22";
+            this.radioButton22.Size = new System.Drawing.Size(79, 18);
+            this.radioButton22.TabIndex = 234;
+            this.radioButton22.TabStop = true;
+            this.radioButton22.Text = "Select All";
+            this.radioButton22.UseVisualStyleBackColor = true;
             // 
             // label49
             // 
             this.label49.AutoSize = true;
             this.label49.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label49.ForeColor = System.Drawing.Color.Black;
-            this.label49.Location = new System.Drawing.Point(11, 22);
+            this.label49.ForeColor = System.Drawing.Color.Firebrick;
+            this.label49.Location = new System.Drawing.Point(11, 15);
             this.label49.Name = "label49";
             this.label49.Size = new System.Drawing.Size(89, 17);
             this.label49.TabIndex = 203;
             this.label49.Text = "Companies";
+            this.label49.Click += new System.EventHandler(this.label49_Click);
             // 
             // DeleteCompaniesTabx
             // 
             this.DeleteCompaniesTabx.AutoSize = true;
-            this.DeleteCompaniesTabx.Location = new System.Drawing.Point(476, 20);
+            this.DeleteCompaniesTabx.Location = new System.Drawing.Point(447, 19);
             this.DeleteCompaniesTabx.Name = "DeleteCompaniesTabx";
             this.DeleteCompaniesTabx.Size = new System.Drawing.Size(74, 21);
             this.DeleteCompaniesTabx.TabIndex = 207;
@@ -660,7 +727,7 @@ namespace Delmon_Managment_System.Forms
             // EditCompaniesTabx
             // 
             this.EditCompaniesTabx.AutoSize = true;
-            this.EditCompaniesTabx.Location = new System.Drawing.Point(383, 21);
+            this.EditCompaniesTabx.Location = new System.Drawing.Point(383, 19);
             this.EditCompaniesTabx.Name = "EditCompaniesTabx";
             this.EditCompaniesTabx.Size = new System.Drawing.Size(55, 21);
             this.EditCompaniesTabx.TabIndex = 206;
@@ -670,7 +737,7 @@ namespace Delmon_Managment_System.Forms
             // AddCompaniesTabx
             // 
             this.AddCompaniesTabx.AutoSize = true;
-            this.AddCompaniesTabx.Location = new System.Drawing.Point(274, 20);
+            this.AddCompaniesTabx.Location = new System.Drawing.Point(274, 19);
             this.AddCompaniesTabx.Name = "AddCompaniesTabx";
             this.AddCompaniesTabx.Size = new System.Drawing.Size(56, 21);
             this.AddCompaniesTabx.TabIndex = 205;
@@ -680,27 +747,12 @@ namespace Delmon_Managment_System.Forms
             // ViewCompaniesTabx
             // 
             this.ViewCompaniesTabx.AutoSize = true;
-            this.ViewCompaniesTabx.Location = new System.Drawing.Point(174, 21);
+            this.ViewCompaniesTabx.Location = new System.Drawing.Point(174, 19);
             this.ViewCompaniesTabx.Name = "ViewCompaniesTabx";
             this.ViewCompaniesTabx.Size = new System.Drawing.Size(62, 21);
             this.ViewCompaniesTabx.TabIndex = 204;
             this.ViewCompaniesTabx.Text = "View";
             this.ViewCompaniesTabx.UseVisualStyleBackColor = true;
-            // 
-            // button18
-            // 
-            this.button18.BackColor = System.Drawing.Color.White;
-            this.button18.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button18.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.button18.ForeColor = System.Drawing.Color.Firebrick;
-            this.button18.Location = new System.Drawing.Point(12, 544);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(70, 26);
-            this.button18.TabIndex = 216;
-            this.button18.Text = "New";
-            this.button18.UseVisualStyleBackColor = false;
-            this.button18.Click += new System.EventHandler(this.button18_Click_1);
             // 
             // label40
             // 
@@ -713,39 +765,51 @@ namespace Delmon_Managment_System.Forms
             this.label40.TabIndex = 138;
             this.label40.Text = "User";
             // 
-            // button33
-            // 
-            this.button33.BackColor = System.Drawing.Color.White;
-            this.button33.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button33.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button33.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.button33.ForeColor = System.Drawing.Color.Firebrick;
-            this.button33.Location = new System.Drawing.Point(101, 545);
-            this.button33.Name = "button33";
-            this.button33.Size = new System.Drawing.Size(70, 26);
-            this.button33.TabIndex = 213;
-            this.button33.Text = "Add";
-            this.button33.UseVisualStyleBackColor = false;
-            this.button33.Visible = false;
-            this.button33.Click += new System.EventHandler(this.button33_Click);
-            // 
             // groupBox18
             // 
+            this.groupBox18.Controls.Add(this.radioButton17);
+            this.groupBox18.Controls.Add(this.radioButton18);
             this.groupBox18.Controls.Add(this.DeleteAgenciesTabx);
             this.groupBox18.Controls.Add(this.label51);
             this.groupBox18.Controls.Add(this.EditAgenciesTabx);
             this.groupBox18.Controls.Add(this.AddAgenciesTabx);
             this.groupBox18.Controls.Add(this.ViewAgenciesTabx);
-            this.groupBox18.Location = new System.Drawing.Point(452, 437);
+            this.groupBox18.Location = new System.Drawing.Point(402, 437);
             this.groupBox18.Name = "groupBox18";
-            this.groupBox18.Size = new System.Drawing.Size(570, 52);
+            this.groupBox18.Size = new System.Drawing.Size(712, 52);
             this.groupBox18.TabIndex = 229;
             this.groupBox18.TabStop = false;
+            // 
+            // radioButton17
+            // 
+            this.radioButton17.AutoSize = true;
+            this.radioButton17.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.radioButton17.Location = new System.Drawing.Point(626, 22);
+            this.radioButton17.Name = "radioButton17";
+            this.radioButton17.Size = new System.Drawing.Size(77, 18);
+            this.radioButton17.TabIndex = 235;
+            this.radioButton17.TabStop = true;
+            this.radioButton17.Text = "UnSelect";
+            this.radioButton17.UseVisualStyleBackColor = true;
+            // 
+            // radioButton18
+            // 
+            this.radioButton18.AutoSize = true;
+            this.radioButton18.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.radioButton18.Location = new System.Drawing.Point(550, 22);
+            this.radioButton18.Name = "radioButton18";
+            this.radioButton18.Size = new System.Drawing.Size(79, 18);
+            this.radioButton18.TabIndex = 234;
+            this.radioButton18.TabStop = true;
+            this.radioButton18.Text = "Select All";
+            this.radioButton18.UseVisualStyleBackColor = true;
             // 
             // DeleteAgenciesTabx
             // 
             this.DeleteAgenciesTabx.AutoSize = true;
-            this.DeleteAgenciesTabx.Location = new System.Drawing.Point(475, 20);
+            this.DeleteAgenciesTabx.Location = new System.Drawing.Point(446, 20);
             this.DeleteAgenciesTabx.Name = "DeleteAgenciesTabx";
             this.DeleteAgenciesTabx.Size = new System.Drawing.Size(74, 21);
             this.DeleteAgenciesTabx.TabIndex = 217;
@@ -756,7 +820,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label51.AutoSize = true;
             this.label51.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label51.ForeColor = System.Drawing.Color.Black;
+            this.label51.ForeColor = System.Drawing.Color.Firebrick;
             this.label51.Location = new System.Drawing.Point(11, 20);
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(76, 17);
@@ -793,22 +857,6 @@ namespace Delmon_Managment_System.Forms
             this.ViewAgenciesTabx.Text = "View";
             this.ViewAgenciesTabx.UseVisualStyleBackColor = true;
             // 
-            // button32
-            // 
-            this.button32.BackColor = System.Drawing.Color.White;
-            this.button32.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button32.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button32.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.button32.ForeColor = System.Drawing.Color.Firebrick;
-            this.button32.Location = new System.Drawing.Point(189, 545);
-            this.button32.Name = "button32";
-            this.button32.Size = new System.Drawing.Size(70, 26);
-            this.button32.TabIndex = 214;
-            this.button32.Text = "Update";
-            this.button32.UseVisualStyleBackColor = false;
-            this.button32.Visible = false;
-            this.button32.Click += new System.EventHandler(this.button32_Click);
-            // 
             // cmbUserPermission
             // 
             this.cmbUserPermission.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
@@ -820,40 +868,52 @@ namespace Delmon_Managment_System.Forms
             this.cmbUserPermission.TabIndex = 139;
             this.cmbUserPermission.SelectionChangeCommitted += new System.EventHandler(this.cmbUserPermission_SelectionChangeCommitted);
             // 
-            // button31
-            // 
-            this.button31.BackColor = System.Drawing.Color.White;
-            this.button31.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button31.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button31.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.button31.ForeColor = System.Drawing.Color.Firebrick;
-            this.button31.Location = new System.Drawing.Point(273, 545);
-            this.button31.Name = "button31";
-            this.button31.Size = new System.Drawing.Size(70, 26);
-            this.button31.TabIndex = 215;
-            this.button31.Text = "Delete";
-            this.button31.UseVisualStyleBackColor = false;
-            this.button31.Visible = false;
-            this.button31.Click += new System.EventHandler(this.button31_Click);
-            // 
             // groupBox17
             // 
+            this.groupBox17.Controls.Add(this.radioButton15);
+            this.groupBox17.Controls.Add(this.radioButton16);
             this.groupBox17.Controls.Add(this.label48);
             this.groupBox17.Controls.Add(this.ViewJobTabx);
             this.groupBox17.Controls.Add(this.AddJobTabx);
             this.groupBox17.Controls.Add(this.editJobTabx);
             this.groupBox17.Controls.Add(this.DeleteJobTabx);
-            this.groupBox17.Location = new System.Drawing.Point(451, 379);
+            this.groupBox17.Location = new System.Drawing.Point(401, 379);
             this.groupBox17.Name = "groupBox17";
-            this.groupBox17.Size = new System.Drawing.Size(567, 52);
+            this.groupBox17.Size = new System.Drawing.Size(709, 52);
             this.groupBox17.TabIndex = 228;
             this.groupBox17.TabStop = false;
+            // 
+            // radioButton15
+            // 
+            this.radioButton15.AutoSize = true;
+            this.radioButton15.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.radioButton15.Location = new System.Drawing.Point(627, 28);
+            this.radioButton15.Name = "radioButton15";
+            this.radioButton15.Size = new System.Drawing.Size(77, 18);
+            this.radioButton15.TabIndex = 235;
+            this.radioButton15.TabStop = true;
+            this.radioButton15.Text = "UnSelect";
+            this.radioButton15.UseVisualStyleBackColor = true;
+            // 
+            // radioButton16
+            // 
+            this.radioButton16.AutoSize = true;
+            this.radioButton16.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.radioButton16.Location = new System.Drawing.Point(551, 28);
+            this.radioButton16.Name = "radioButton16";
+            this.radioButton16.Size = new System.Drawing.Size(79, 18);
+            this.radioButton16.TabIndex = 234;
+            this.radioButton16.TabStop = true;
+            this.radioButton16.Text = "Select All";
+            this.radioButton16.UseVisualStyleBackColor = true;
             // 
             // label48
             // 
             this.label48.AutoSize = true;
             this.label48.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label48.ForeColor = System.Drawing.Color.Black;
+            this.label48.ForeColor = System.Drawing.Color.Firebrick;
             this.label48.Location = new System.Drawing.Point(15, 21);
             this.label48.Name = "label48";
             this.label48.Size = new System.Drawing.Size(43, 17);
@@ -893,45 +953,59 @@ namespace Delmon_Managment_System.Forms
             // DeleteJobTabx
             // 
             this.DeleteJobTabx.AutoSize = true;
-            this.DeleteJobTabx.Location = new System.Drawing.Point(479, 24);
+            this.DeleteJobTabx.Location = new System.Drawing.Point(447, 24);
             this.DeleteJobTabx.Name = "DeleteJobTabx";
             this.DeleteJobTabx.Size = new System.Drawing.Size(74, 21);
             this.DeleteJobTabx.TabIndex = 202;
             this.DeleteJobTabx.Text = "Delete";
             this.DeleteJobTabx.UseVisualStyleBackColor = true;
             // 
-            // dataGridView9
-            // 
-            this.dataGridView9.AllowUserToAddRows = false;
-            this.dataGridView9.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView9.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView9.Location = new System.Drawing.Point(7, 61);
-            this.dataGridView9.Name = "dataGridView9";
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView9.RowsDefaultCellStyle = dataGridViewCellStyle7;
-            this.dataGridView9.Size = new System.Drawing.Size(386, 472);
-            this.dataGridView9.TabIndex = 218;
-            this.dataGridView9.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView9_CellClick_1);
-            this.dataGridView9.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView9_CellFormatting);
-            // 
             // groupBox16
             // 
+            this.groupBox16.Controls.Add(this.radioButton13);
+            this.groupBox16.Controls.Add(this.radioButton14);
             this.groupBox16.Controls.Add(this.label42);
             this.groupBox16.Controls.Add(this.AddUserTabx);
             this.groupBox16.Controls.Add(this.EditUserTabx);
             this.groupBox16.Controls.Add(this.ViewUserTabx);
             this.groupBox16.Controls.Add(this.DeleteUserTabx);
-            this.groupBox16.Location = new System.Drawing.Point(452, 321);
+            this.groupBox16.Location = new System.Drawing.Point(402, 321);
             this.groupBox16.Name = "groupBox16";
-            this.groupBox16.Size = new System.Drawing.Size(570, 52);
+            this.groupBox16.Size = new System.Drawing.Size(712, 52);
             this.groupBox16.TabIndex = 227;
             this.groupBox16.TabStop = false;
+            // 
+            // radioButton13
+            // 
+            this.radioButton13.AutoSize = true;
+            this.radioButton13.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.radioButton13.Location = new System.Drawing.Point(628, 20);
+            this.radioButton13.Name = "radioButton13";
+            this.radioButton13.Size = new System.Drawing.Size(77, 18);
+            this.radioButton13.TabIndex = 235;
+            this.radioButton13.TabStop = true;
+            this.radioButton13.Text = "UnSelect";
+            this.radioButton13.UseVisualStyleBackColor = true;
+            // 
+            // radioButton14
+            // 
+            this.radioButton14.AutoSize = true;
+            this.radioButton14.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.radioButton14.Location = new System.Drawing.Point(552, 20);
+            this.radioButton14.Name = "radioButton14";
+            this.radioButton14.Size = new System.Drawing.Size(79, 18);
+            this.radioButton14.TabIndex = 234;
+            this.radioButton14.TabStop = true;
+            this.radioButton14.Text = "Select All";
+            this.radioButton14.UseVisualStyleBackColor = true;
             // 
             // label42
             // 
             this.label42.AutoSize = true;
             this.label42.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label42.ForeColor = System.Drawing.Color.Black;
+            this.label42.ForeColor = System.Drawing.Color.Firebrick;
             this.label42.Location = new System.Drawing.Point(11, 21);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(51, 17);
@@ -971,7 +1045,7 @@ namespace Delmon_Managment_System.Forms
             // DeleteUserTabx
             // 
             this.DeleteUserTabx.AutoSize = true;
-            this.DeleteUserTabx.Location = new System.Drawing.Point(475, 20);
+            this.DeleteUserTabx.Location = new System.Drawing.Point(444, 20);
             this.DeleteUserTabx.Name = "DeleteUserTabx";
             this.DeleteUserTabx.Size = new System.Drawing.Size(74, 21);
             this.DeleteUserTabx.TabIndex = 199;
@@ -980,22 +1054,51 @@ namespace Delmon_Managment_System.Forms
             // 
             // groupBox15
             // 
+            this.groupBox15.Controls.Add(this.radioButton11);
+            this.groupBox15.Controls.Add(this.radioButton12);
             this.groupBox15.Controls.Add(this.label41);
             this.groupBox15.Controls.Add(this.DeleteAlertsBx);
             this.groupBox15.Controls.Add(this.EditAlertsbx);
             this.groupBox15.Controls.Add(this.AddAlertsbx);
             this.groupBox15.Controls.Add(this.ViewAlertsbx);
-            this.groupBox15.Location = new System.Drawing.Point(451, 263);
+            this.groupBox15.Location = new System.Drawing.Point(401, 263);
             this.groupBox15.Name = "groupBox15";
-            this.groupBox15.Size = new System.Drawing.Size(570, 52);
+            this.groupBox15.Size = new System.Drawing.Size(712, 52);
             this.groupBox15.TabIndex = 225;
             this.groupBox15.TabStop = false;
+            this.groupBox15.Enter += new System.EventHandler(this.groupBox15_Enter);
+            // 
+            // radioButton11
+            // 
+            this.radioButton11.AutoSize = true;
+            this.radioButton11.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.radioButton11.Location = new System.Drawing.Point(632, 23);
+            this.radioButton11.Name = "radioButton11";
+            this.radioButton11.Size = new System.Drawing.Size(77, 18);
+            this.radioButton11.TabIndex = 235;
+            this.radioButton11.TabStop = true;
+            this.radioButton11.Text = "UnSelect";
+            this.radioButton11.UseVisualStyleBackColor = true;
+            // 
+            // radioButton12
+            // 
+            this.radioButton12.AutoSize = true;
+            this.radioButton12.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.radioButton12.Location = new System.Drawing.Point(556, 23);
+            this.radioButton12.Name = "radioButton12";
+            this.radioButton12.Size = new System.Drawing.Size(79, 18);
+            this.radioButton12.TabIndex = 234;
+            this.radioButton12.TabStop = true;
+            this.radioButton12.Text = "Select All";
+            this.radioButton12.UseVisualStyleBackColor = true;
             // 
             // label41
             // 
             this.label41.AutoSize = true;
             this.label41.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label41.ForeColor = System.Drawing.Color.Black;
+            this.label41.ForeColor = System.Drawing.Color.Firebrick;
             this.label41.Location = new System.Drawing.Point(13, 24);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(52, 17);
@@ -1005,7 +1108,7 @@ namespace Delmon_Managment_System.Forms
             // DeleteAlertsBx
             // 
             this.DeleteAlertsBx.AutoSize = true;
-            this.DeleteAlertsBx.Location = new System.Drawing.Point(476, 20);
+            this.DeleteAlertsBx.Location = new System.Drawing.Point(445, 20);
             this.DeleteAlertsBx.Name = "DeleteAlertsBx";
             this.DeleteAlertsBx.Size = new System.Drawing.Size(74, 21);
             this.DeleteAlertsBx.TabIndex = 195;
@@ -1044,21 +1147,49 @@ namespace Delmon_Managment_System.Forms
             // 
             // groupBox14
             // 
+            this.groupBox14.Controls.Add(this.radioButton9);
+            this.groupBox14.Controls.Add(this.radioButton10);
             this.groupBox14.Controls.Add(this.DeleteAssetsbx);
             this.groupBox14.Controls.Add(this.EditAssetsbx);
             this.groupBox14.Controls.Add(this.AddAssetsbx);
             this.groupBox14.Controls.Add(this.ViewAssetsbx);
             this.groupBox14.Controls.Add(this.label47);
-            this.groupBox14.Location = new System.Drawing.Point(451, 208);
+            this.groupBox14.Location = new System.Drawing.Point(401, 208);
             this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Size = new System.Drawing.Size(570, 52);
+            this.groupBox14.Size = new System.Drawing.Size(712, 52);
             this.groupBox14.TabIndex = 224;
             this.groupBox14.TabStop = false;
+            // 
+            // radioButton9
+            // 
+            this.radioButton9.AutoSize = true;
+            this.radioButton9.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.radioButton9.Location = new System.Drawing.Point(629, 24);
+            this.radioButton9.Name = "radioButton9";
+            this.radioButton9.Size = new System.Drawing.Size(77, 18);
+            this.radioButton9.TabIndex = 235;
+            this.radioButton9.TabStop = true;
+            this.radioButton9.Text = "UnSelect";
+            this.radioButton9.UseVisualStyleBackColor = true;
+            // 
+            // radioButton10
+            // 
+            this.radioButton10.AutoSize = true;
+            this.radioButton10.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.radioButton10.Location = new System.Drawing.Point(553, 24);
+            this.radioButton10.Name = "radioButton10";
+            this.radioButton10.Size = new System.Drawing.Size(79, 18);
+            this.radioButton10.TabIndex = 234;
+            this.radioButton10.TabStop = true;
+            this.radioButton10.Text = "Select All";
+            this.radioButton10.UseVisualStyleBackColor = true;
             // 
             // DeleteAssetsbx
             // 
             this.DeleteAssetsbx.AutoSize = true;
-            this.DeleteAssetsbx.Location = new System.Drawing.Point(476, 17);
+            this.DeleteAssetsbx.Location = new System.Drawing.Point(445, 17);
             this.DeleteAssetsbx.Name = "DeleteAssetsbx";
             this.DeleteAssetsbx.Size = new System.Drawing.Size(74, 21);
             this.DeleteAssetsbx.TabIndex = 186;
@@ -1099,7 +1230,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label47.AutoSize = true;
             this.label47.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label47.ForeColor = System.Drawing.Color.Black;
+            this.label47.ForeColor = System.Drawing.Color.Firebrick;
             this.label47.Location = new System.Drawing.Point(12, 21);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(57, 17);
@@ -1108,21 +1239,49 @@ namespace Delmon_Managment_System.Forms
             // 
             // groupBox13
             // 
+            this.groupBox13.Controls.Add(this.radioButton7);
+            this.groupBox13.Controls.Add(this.radioButton8);
             this.groupBox13.Controls.Add(this.DeleteBillsbx);
             this.groupBox13.Controls.Add(this.EditBillsbx);
             this.groupBox13.Controls.Add(this.AddBillsbx);
             this.groupBox13.Controls.Add(this.ViewBillsbx);
             this.groupBox13.Controls.Add(this.label46);
-            this.groupBox13.Location = new System.Drawing.Point(451, 152);
+            this.groupBox13.Location = new System.Drawing.Point(401, 153);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(570, 52);
+            this.groupBox13.Size = new System.Drawing.Size(712, 52);
             this.groupBox13.TabIndex = 223;
             this.groupBox13.TabStop = false;
+            // 
+            // radioButton7
+            // 
+            this.radioButton7.AutoSize = true;
+            this.radioButton7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.radioButton7.Location = new System.Drawing.Point(629, 21);
+            this.radioButton7.Name = "radioButton7";
+            this.radioButton7.Size = new System.Drawing.Size(77, 18);
+            this.radioButton7.TabIndex = 235;
+            this.radioButton7.TabStop = true;
+            this.radioButton7.Text = "UnSelect";
+            this.radioButton7.UseVisualStyleBackColor = true;
+            // 
+            // radioButton8
+            // 
+            this.radioButton8.AutoSize = true;
+            this.radioButton8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.radioButton8.Location = new System.Drawing.Point(553, 21);
+            this.radioButton8.Name = "radioButton8";
+            this.radioButton8.Size = new System.Drawing.Size(79, 18);
+            this.radioButton8.TabIndex = 234;
+            this.radioButton8.TabStop = true;
+            this.radioButton8.Text = "Select All";
+            this.radioButton8.UseVisualStyleBackColor = true;
             // 
             // DeleteBillsbx
             // 
             this.DeleteBillsbx.AutoSize = true;
-            this.DeleteBillsbx.Location = new System.Drawing.Point(476, 19);
+            this.DeleteBillsbx.Location = new System.Drawing.Point(445, 19);
             this.DeleteBillsbx.Name = "DeleteBillsbx";
             this.DeleteBillsbx.Size = new System.Drawing.Size(74, 21);
             this.DeleteBillsbx.TabIndex = 182;
@@ -1163,7 +1322,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label46.AutoSize = true;
             this.label46.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label46.ForeColor = System.Drawing.Color.Black;
+            this.label46.ForeColor = System.Drawing.Color.Firebrick;
             this.label46.Location = new System.Drawing.Point(12, 23);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(39, 17);
@@ -1172,20 +1331,49 @@ namespace Delmon_Managment_System.Forms
             // 
             // groupBox12
             // 
+            this.groupBox12.Controls.Add(this.radioButton5);
+            this.groupBox12.Controls.Add(this.radioButton6);
             this.groupBox12.Controls.Add(this.ViewVisaReportbx);
             this.groupBox12.Controls.Add(this.ViewAssetReportbx);
             this.groupBox12.Controls.Add(this.label45);
             this.groupBox12.Controls.Add(this.ViewCandidatesReportbx);
-            this.groupBox12.Location = new System.Drawing.Point(452, 100);
+            this.groupBox12.Location = new System.Drawing.Point(402, 100);
             this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(570, 52);
+            this.groupBox12.Size = new System.Drawing.Size(711, 52);
             this.groupBox12.TabIndex = 222;
             this.groupBox12.TabStop = false;
+            this.groupBox12.Enter += new System.EventHandler(this.groupBox12_Enter);
+            // 
+            // radioButton5
+            // 
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.radioButton5.Location = new System.Drawing.Point(628, 20);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(77, 18);
+            this.radioButton5.TabIndex = 235;
+            this.radioButton5.TabStop = true;
+            this.radioButton5.Text = "UnSelect";
+            this.radioButton5.UseVisualStyleBackColor = true;
+            // 
+            // radioButton6
+            // 
+            this.radioButton6.AutoSize = true;
+            this.radioButton6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.radioButton6.Location = new System.Drawing.Point(552, 20);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(79, 18);
+            this.radioButton6.TabIndex = 234;
+            this.radioButton6.TabStop = true;
+            this.radioButton6.Text = "Select All";
+            this.radioButton6.UseVisualStyleBackColor = true;
             // 
             // ViewVisaReportbx
             // 
             this.ViewVisaReportbx.AutoSize = true;
-            this.ViewVisaReportbx.Location = new System.Drawing.Point(173, 24);
+            this.ViewVisaReportbx.Location = new System.Drawing.Point(174, 24);
             this.ViewVisaReportbx.Name = "ViewVisaReportbx";
             this.ViewVisaReportbx.Size = new System.Drawing.Size(58, 21);
             this.ViewVisaReportbx.TabIndex = 209;
@@ -1206,7 +1394,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label45.AutoSize = true;
             this.label45.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label45.ForeColor = System.Drawing.Color.Black;
+            this.label45.ForeColor = System.Drawing.Color.Firebrick;
             this.label45.Location = new System.Drawing.Point(12, 21);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(58, 17);
@@ -1216,25 +1404,54 @@ namespace Delmon_Managment_System.Forms
             // ViewCandidatesReportbx
             // 
             this.ViewCandidatesReportbx.AutoSize = true;
-            this.ViewCandidatesReportbx.Location = new System.Drawing.Point(273, 20);
+            this.ViewCandidatesReportbx.Location = new System.Drawing.Point(273, 21);
             this.ViewCandidatesReportbx.Name = "ViewCandidatesReportbx";
             this.ViewCandidatesReportbx.Size = new System.Drawing.Size(101, 21);
             this.ViewCandidatesReportbx.TabIndex = 210;
             this.ViewCandidatesReportbx.Text = "Candidate";
             this.ViewCandidatesReportbx.UseVisualStyleBackColor = true;
+            this.ViewCandidatesReportbx.CheckedChanged += new System.EventHandler(this.ViewCandidatesReportbx_CheckedChanged);
             // 
             // groupBox11
             // 
+            this.groupBox11.Controls.Add(this.radioButton3);
+            this.groupBox11.Controls.Add(this.radioButton4);
             this.groupBox11.Controls.Add(this.ViewPersonalInformationbx);
             this.groupBox11.Controls.Add(this.AddPersonalInformationbx);
             this.groupBox11.Controls.Add(this.EditPersonalInformationbx);
             this.groupBox11.Controls.Add(this.DeletePersonalInformationbx);
             this.groupBox11.Controls.Add(this.label44);
-            this.groupBox11.Location = new System.Drawing.Point(451, 49);
+            this.groupBox11.Location = new System.Drawing.Point(401, 49);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(570, 52);
+            this.groupBox11.Size = new System.Drawing.Size(712, 52);
             this.groupBox11.TabIndex = 221;
             this.groupBox11.TabStop = false;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.radioButton3.Location = new System.Drawing.Point(632, 21);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(77, 18);
+            this.radioButton3.TabIndex = 235;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "UnSelect";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.radioButton4.Location = new System.Drawing.Point(556, 21);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(79, 18);
+            this.radioButton4.TabIndex = 234;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "Select All";
+            this.radioButton4.UseVisualStyleBackColor = true;
             // 
             // ViewPersonalInformationbx
             // 
@@ -1269,7 +1486,7 @@ namespace Delmon_Managment_System.Forms
             // DeletePersonalInformationbx
             // 
             this.DeletePersonalInformationbx.AutoSize = true;
-            this.DeletePersonalInformationbx.Location = new System.Drawing.Point(476, 24);
+            this.DeletePersonalInformationbx.Location = new System.Drawing.Point(445, 24);
             this.DeletePersonalInformationbx.Name = "DeletePersonalInformationbx";
             this.DeletePersonalInformationbx.Size = new System.Drawing.Size(74, 21);
             this.DeletePersonalInformationbx.TabIndex = 179;
@@ -1280,46 +1497,77 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label44.AutoSize = true;
             this.label44.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label44.ForeColor = System.Drawing.Color.Black;
+            this.label44.ForeColor = System.Drawing.Color.Firebrick;
             this.label44.Location = new System.Drawing.Point(12, 21);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(105, 17);
             this.label44.TabIndex = 175;
             this.label44.Text = "Personal Info";
+            this.label44.Click += new System.EventHandler(this.label44_Click);
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.radioButton2);
             this.groupBox7.Controls.Add(this.DeleteVisabx);
+            this.groupBox7.Controls.Add(this.radioButton1);
             this.groupBox7.Controls.Add(this.label43);
             this.groupBox7.Controls.Add(this.EditVisabx);
             this.groupBox7.Controls.Add(this.ViewVisabx);
             this.groupBox7.Controls.Add(this.AddVisabx);
-            this.groupBox7.Location = new System.Drawing.Point(451, 3);
+            this.groupBox7.Location = new System.Drawing.Point(401, 3);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(570, 46);
+            this.groupBox7.Size = new System.Drawing.Size(712, 46);
             this.groupBox7.TabIndex = 220;
             this.groupBox7.TabStop = false;
+            this.groupBox7.Enter += new System.EventHandler(this.groupBox7_Enter);
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.radioButton2.Location = new System.Drawing.Point(632, 21);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(77, 18);
+            this.radioButton2.TabIndex = 233;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "UnSelect";
+            this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // DeleteVisabx
             // 
             this.DeleteVisabx.AutoSize = true;
-            this.DeleteVisabx.Location = new System.Drawing.Point(476, 19);
+            this.DeleteVisabx.Location = new System.Drawing.Point(445, 19);
             this.DeleteVisabx.Name = "DeleteVisabx";
             this.DeleteVisabx.Size = new System.Drawing.Size(74, 21);
             this.DeleteVisabx.TabIndex = 170;
             this.DeleteVisabx.Text = "Delete";
             this.DeleteVisabx.UseVisualStyleBackColor = true;
             // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.radioButton1.Location = new System.Drawing.Point(556, 21);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(79, 18);
+            this.radioButton1.TabIndex = 232;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Select All";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
             // label43
             // 
             this.label43.AutoSize = true;
             this.label43.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label43.ForeColor = System.Drawing.Color.Black;
+            this.label43.ForeColor = System.Drawing.Color.Firebrick;
             this.label43.Location = new System.Drawing.Point(13, 21);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(39, 17);
             this.label43.TabIndex = 157;
             this.label43.Text = "Visa";
+            this.label43.Click += new System.EventHandler(this.label43_Click);
             // 
             // EditVisabx
             // 
@@ -1559,15 +1807,15 @@ namespace Delmon_Managment_System.Forms
             // dataGridView3
             // 
             this.dataGridView3.AllowUserToAddRows = false;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView3.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView3.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView3.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView3.Location = new System.Drawing.Point(419, 27);
             this.dataGridView3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView3.Name = "dataGridView3";
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridView3.Size = new System.Drawing.Size(637, 274);
             this.dataGridView3.TabIndex = 89;
             this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick_1);
@@ -1726,8 +1974,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView2.Location = new System.Drawing.Point(421, 4);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView2.Name = "dataGridView2";
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView2.Size = new System.Drawing.Size(576, 241);
             this.dataGridView2.TabIndex = 138;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick_1);
@@ -1866,8 +2114,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView7.Location = new System.Drawing.Point(440, 404);
             this.dataGridView7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView7.Name = "dataGridView7";
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView7.RowsDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView7.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridView7.Size = new System.Drawing.Size(614, 193);
             this.dataGridView7.TabIndex = 171;
             this.dataGridView7.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView7_CellClick);
@@ -2384,8 +2632,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView5.Location = new System.Drawing.Point(459, 221);
             this.dataGridView5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView5.Name = "dataGridView5";
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView5.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView5.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridView5.Size = new System.Drawing.Size(342, 210);
             this.dataGridView5.TabIndex = 175;
             this.dataGridView5.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView5_CellClick);
@@ -2778,7 +3026,6 @@ namespace Delmon_Managment_System.Forms
             this.groupBox18.PerformLayout();
             this.groupBox17.ResumeLayout(false);
             this.groupBox17.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView9)).EndInit();
             this.groupBox16.ResumeLayout(false);
             this.groupBox16.PerformLayout();
             this.groupBox15.ResumeLayout(false);
@@ -2973,11 +3220,6 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.CheckBox EditVisabx;
         private System.Windows.Forms.CheckBox AddVisabx;
         private System.Windows.Forms.CheckBox ViewVisabx;
-        private System.Windows.Forms.Button button18;
-        private System.Windows.Forms.Button button31;
-        private System.Windows.Forms.Button button32;
-        private System.Windows.Forms.Button button33;
-        private System.Windows.Forms.DataGridView dataGridView9;
         private System.Windows.Forms.GroupBox groupBox20;
         private System.Windows.Forms.CheckBox DeleteCountriesTabx;
         private System.Windows.Forms.Label label50;
@@ -3028,5 +3270,27 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.CheckBox DeletePersonalInformationbx;
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioButton19;
+        private System.Windows.Forms.RadioButton radioButton20;
+        private System.Windows.Forms.RadioButton radioButton21;
+        private System.Windows.Forms.RadioButton radioButton22;
+        private System.Windows.Forms.RadioButton radioButton17;
+        private System.Windows.Forms.RadioButton radioButton18;
+        private System.Windows.Forms.RadioButton radioButton15;
+        private System.Windows.Forms.RadioButton radioButton16;
+        private System.Windows.Forms.RadioButton radioButton13;
+        private System.Windows.Forms.RadioButton radioButton14;
+        private System.Windows.Forms.RadioButton radioButton11;
+        private System.Windows.Forms.RadioButton radioButton12;
+        private System.Windows.Forms.RadioButton radioButton9;
+        private System.Windows.Forms.RadioButton radioButton10;
+        private System.Windows.Forms.RadioButton radioButton7;
+        private System.Windows.Forms.RadioButton radioButton8;
+        private System.Windows.Forms.RadioButton radioButton5;
+        private System.Windows.Forms.RadioButton radioButton6;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton4;
     }
 }
