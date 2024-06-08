@@ -252,6 +252,7 @@ namespace Delmon_Managment_System.Forms
             this.ClientSize = new System.Drawing.Size(573, 241);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.closebtn);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmMoreinfo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "More Info";

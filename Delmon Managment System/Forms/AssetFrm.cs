@@ -591,8 +591,13 @@ WHERE
     A.Model LIKE '%' + @C1 + '%' OR 
     A.AssetID LIKE '%' + @C1 + '%' OR
     AT.AssettypeValue LIKE '%' + @C1 + '%' OR
-    AB.AssetBrandValue LIKE '%' + @C1 + '%' or
- REPLACE(CONCAT_WS(' ', firstname, secondname, thirdname, lastname), ' ', '') LIKE '%' + REPLACE(@C1, ' ', '') + '%' ";
+    AB.AssetBrandValue LIKE '%' + @C1 + '%' OR
+    REPLACE(CONCAT_WS(' ', E.FirstName, E.SecondName, E.ThirdName, E.LastName), ' ', '') LIKE '%' + REPLACE(@C1, ' ', '') + '%'
+ORDER BY 
+    A.AssetID;"
+
+;
+
 
 
 

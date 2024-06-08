@@ -125,7 +125,6 @@ namespace Delmon_Managment_System.Forms
             if (hasView == false)
             {
                 MessageBox.Show("Sorry, You are not allowed to view this Module/Screen , kindly contact the administrator !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                Visanumtxt.Enabled = false;
                 groupBox2.Enabled = false;
                 groupBox3.Enabled = false;
             }
@@ -158,24 +157,6 @@ namespace Delmon_Managment_System.Forms
             }
 
             SQLCONN.CloseConnection();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1168,6 +1149,8 @@ namespace Delmon_Managment_System.Forms
             TotalVisastxt.BackColor = Color.White;
             cmbReservedTo.Enabled = cmbCompany.Enabled = cmbcandidates.Enabled = cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = cmbAgency.Enabled = true;
             txtCRNumber.Enabled= txtsponserID.Enabled= TotalVisastxt.Enabled = RemarksTxt.Enabled = true;
+            cmbReservedTo.Text = cmbCompany.Text = cmbcandidates.Text = cmbStatus.Text = cmbJob.Text = cmbConsulate.Text = cmbAgency.Text = "Select";
+
             ReceviedPicker.Enabled = true;
             // set the hint text for the TextBox control
             Visanumtxt.Focus();
@@ -1416,7 +1399,8 @@ namespace Delmon_Managment_System.Forms
 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-       
+            cmbReservedTo.Enabled = cmbCompany.Enabled = cmbcandidates.Enabled = cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = cmbAgency.Enabled = true;
+
             SQLCONN.OpenConection();
 
             string query = "SELECT COMPID,COMPName_EN FROM Companies";
@@ -1524,29 +1508,7 @@ namespace Delmon_Managment_System.Forms
                         }
 
 
-                        /*update job consule for Mr.saleem/Amin*/
-                        //    if (CommonClass.EmployeeID == 179 || CommonClass.EmployeeID ==248)
-                        //    {
-
-                        //    VisaFileNumberID.Text = FileNumberID.ToString();
-                        //    cmbConsulate.Enabled = cmbJob.Enabled = true;
-                        //    cmbReservedTo.Enabled = cmbStatus.Enabled = cmbcandidates.Enabled = cmbAgency.Enabled = true;
-                        //    btnnewJob.Enabled = false;
-                        //    btnUpdate.Visible = true;
-                        //}
-                        //else
-                        //{
-                        //    VisaFileNumberID.Text = FileNumberID.ToString();
-                        //    cmbConsulate.Enabled = cmbJob.Enabled = false;
-                        //    cmbReservedTo.Enabled = cmbStatus.Enabled = cmbcandidates.Enabled = cmbAgency.Enabled = true;
-
-                        //    btnnewJob.Enabled = false;
-                        //    if (hasAdd)
-                        //    {
-                        //        btnUpdate.Visible = true;
-                        //    }
-                        //}
-
+                  
 
 
 

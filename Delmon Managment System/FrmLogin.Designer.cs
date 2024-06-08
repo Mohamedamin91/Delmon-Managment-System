@@ -64,7 +64,7 @@ namespace Delmon_Managment_System
             this.remembercheck.AutoSize = true;
             this.remembercheck.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.remembercheck.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.remembercheck.Location = new System.Drawing.Point(48, 307);
+            this.remembercheck.Location = new System.Drawing.Point(12, 314);
             this.remembercheck.Name = "remembercheck";
             this.remembercheck.Size = new System.Drawing.Size(133, 21);
             this.remembercheck.TabIndex = 1;
@@ -129,9 +129,9 @@ namespace Delmon_Managment_System
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.button2.ForeColor = System.Drawing.Color.Firebrick;
-            this.button2.Location = new System.Drawing.Point(187, 303);
+            this.button2.Location = new System.Drawing.Point(168, 303);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(152, 26);
+            this.button2.Size = new System.Drawing.Size(183, 40);
             this.button2.TabIndex = 7;
             this.button2.Text = "Forgot password?";
             this.button2.UseVisualStyleBackColor = false;
@@ -183,6 +183,7 @@ namespace Delmon_Managment_System
             this.Controls.Add(this.remembercheck);
             this.Controls.Add(this.loginbtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmLogin";

@@ -20,15 +20,14 @@ namespace Delmon_Managment_System.Forms
         int EmployeeID;
         int LoggedEmployeeID;
         int agaencyid;
+        int contactID;
         int jobid;
         int CompID;
         int DeptID;
         int countryID;
         int CounslateID;
         double num1, num2;
-        int Select, Add, Edit, Delete;
         int userpermissionID;
-        int PermissiondID;
 
         bool hasViewcountr = false;
         bool hasEditcountr = false;
@@ -330,6 +329,25 @@ namespace Delmon_Managment_System.Forms
                 {
                     btnnew.Enabled = addbtn.Enabled = true;
 
+                      dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
+                     (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID    ");
+
+
+                    //if (CommonClass.Usertype == "SuperAdmin")
+                    //{
+                    //    dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
+                    // (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID    ");
+
+                    //}
+                    //else
+
+                    //{
+                    //    dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
+                    //      (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID and tblUser.EmployeeID=" + LoggedEmployeeID + " ");
+
+                    //}
+
+
                 }
                 else
                 {
@@ -339,6 +357,9 @@ namespace Delmon_Managment_System.Forms
                 if (hasEditUser)
                 {
                     updatebtn.Enabled = true;
+                    dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
+                    (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID    ");
+
                 }
                 else
                 {
@@ -348,6 +369,9 @@ namespace Delmon_Managment_System.Forms
                 if (hasDeleteUser)
                 {
                     deletebtn.Enabled = true;
+                    dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
+                    (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID    ");
+
                 }
                 else
                 {
@@ -461,20 +485,7 @@ order by EmployeeID  ");
 
           
 
-            if (CommonClass.Usertype == "SuperAdmin")
-            {
-                dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
-             (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID    ");
-
-            }
-            else
-
-            {
-                dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
-                  (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID and tblUser.EmployeeID=" + LoggedEmployeeID + " ");
-
-            }
-
+      
             dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox
               (" SELECT * from jobs   ");
 
@@ -637,7 +648,10 @@ order by EmployeeID  ");
                         usernametxt.Text = passwordtxt.Text = "";
                         isactivecheck.Checked = false;
 
-                        dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from tblUser where EmployeeID= @C1 order by EmployeeID ", paramemployee);
+                        //   dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from tblUser where EmployeeID= @C1 order by EmployeeID ", paramemployee);
+                        dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
+                         (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive " +
+                         "from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID  and Employees.EmployeeID= @C1    ", paramemployee);
 
 
                         dr.Dispose();
@@ -847,8 +861,9 @@ order by EmployeeID  ");
 
 
                         MessageBox.Show("Record Updated Successfully");
-                        // dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT id_History,[EmployeeID],NewID,StatusTBL.StatusValue,[JOBS].JobTitleEN, DeptTypes.Dept_Type_Name,[StartDate],[EndDate],[UserID],[DatetimeLog]  FROM[DelmonGroupDB].[dbo].[EmploymentStatus], JOBS, DEPARTMENTS, StatusTBL, DeptTypes  where   StatusTBL.StatusID = EmploymentStatus.EmploymentStatusID and DEPARTMENTS.DeptName = EmploymentStatus.DeptID   and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID  and JOBS.JobID = EmploymentStatus.JobID  and  NEWID = @C14  ", paramNewID);
-                        dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from tblUser where    userid=@id", paramPID);
+                         dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
+               (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive " +
+               "from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID  and tblUser.userid=@id   ", paramPID);
 
 
 
@@ -954,7 +969,9 @@ order by EmployeeID  ");
                     SQLCONN.OpenConection();
                     SQLCONN.ExecuteQueries("delete  tblUser where userid=@id", paramPID);
                     SQLCONN.ExecuteQueries(" declare @max int select @max = max([UserID]) from [tblUser] if @max IS NULL    SET @max = 0 DBCC CHECKIDENT('[tblUser]', RESEED, @max)");
-                    dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from tblUser ");
+                    dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
+                                      (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive " +
+                                      "from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID  and Employees.EmployeeID= @C1    ", paramemployee);
                     MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('User Info',@id ,'#','#',@datetime,@pc,@user,'Delete')", paramPID, paramdatetimeLOG, parampc, paramuser);
@@ -1038,6 +1055,10 @@ order by EmployeeID  ");
             SqlParameter paramRefrenceID = new SqlParameter("@C7", SqlDbType.Int);
             paramRefrenceID.Value = 3;
             SQLCONN.OpenConection();
+      
+            
+            /*adding contact info */
+            
             if (checkContact.Checked == true)
             {
 
@@ -1074,62 +1095,64 @@ order by EmployeeID  ");
                         {
                         }
                     }
-
-                    else if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-                    {
-
-
-                        dr.Dispose();
-                        dr.Close();
-                        dr3.Dispose();
-                        dr3.Close();
-
-                        SQLCONN.ExecuteQueries("insert into Agencies (  [AgenceName] ,[LicenseNumber],[CountryID],[CityID]) values (@C1,@C2,@C3,@C4)",
-                                                       paramagencyname, paramlicensenumber, paramcountry, paramcity);
-
-                        SqlDataReader dr2 = SQLCONN.DataReader("Select max (AgencID) 'ID' from Agencies ");
-                        if (dr2.Read())
-                        {
-                            agaencyid = int.Parse(dr2["ID"].ToString());
-                            paramAgencyid.Value = agaencyid;
-                        }
-
-
-
-
-                        else { paramAgencyid.Value = 0; }
-                        dr2.Close();
-                        dr.Dispose();
-                        SQLCONN.ExecuteQueries("insert into Contacts ( ContTypeID,ContValue,RefrenceID,CR_ID) values (@C5,@C6,@C7,@id)",
-                                                 paramContactType, paramContact, paramRefrenceID, paramAgencyid);
-
-
-                        MessageBox.Show("Record saved Successfully");
-                        BtnnewAgaency.Visible = true;
-
-                        SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Agency Info',@id ,'#','#',@datetime,@pc,@user,'Insert')", paramAgencyid, paramdatetimeLOG, parampc, paramuser);
-                        SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Contact Agency Info , @id ,'#','#',@datetime,@pc,@user,'Insert')", paramContactType, paramAgencyid, paramdatetimeLOG, parampc, paramuser);
-
-
-                        dr2.Dispose();
-                        dr2.Close();
-                        dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Agencies where AgencID= @id order by AgencID ", paramAgencyid);
-                        dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =  " + agaencyid + " ");
-
-
-                        AgencyNametxt.Text = LicenseNumbertxt.Text = "";
-                        cmbCountry.SelectedValue = cmbCity.SelectedValue = 0;
-
-
-
-                    }
                     else
                     {
-                        dr.Dispose();
-                        dr.Close();
-                        dr3.Dispose();
-                        dr3.Close();
+                        if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                        {
 
+
+                            dr.Dispose();
+                            dr.Close();
+                            dr3.Dispose();
+                            dr3.Close();
+
+                            SQLCONN.ExecuteQueries("insert into Agencies (  [AgenceName] ,[LicenseNumber],[CountryID],[CityID]) values (@C1,@C2,@C3,@C4)",
+                                                           paramagencyname, paramlicensenumber, paramcountry, paramcity);
+
+                            SqlDataReader dr2 = SQLCONN.DataReader("Select max (AgencID) 'ID' from Agencies ");
+                            if (dr2.Read())
+                            {
+                                agaencyid = int.Parse(dr2["ID"].ToString());
+                                paramAgencyid.Value = agaencyid;
+                            }
+
+
+
+
+                            else { paramAgencyid.Value = 0; }
+                            dr2.Close();
+                            dr.Dispose();
+                            SQLCONN.ExecuteQueries("insert into Contacts ( ContTypeID,ContValue,RefrenceID,CR_ID) values (@C5,@C6,@C7,@id)",
+                                                     paramContactType, paramContact, paramRefrenceID, paramAgencyid);
+
+
+                            MessageBox.Show("Record saved Successfully");
+                            BtnnewAgaency.Visible = true;
+
+                            SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Agency Info',@id ,'#','#',@datetime,@pc,@user,'Insert')", paramAgencyid, paramdatetimeLOG, parampc, paramuser);
+                            SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Contact Agency Info , @id ,'#','#',@datetime,@pc,@user,'Insert')", paramContactType, paramAgencyid, paramdatetimeLOG, parampc, paramuser);
+
+
+                            dr2.Dispose();
+                            dr2.Close();
+                            dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Agencies where AgencID= @id order by AgencID ", paramAgencyid);
+                            dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =  " + agaencyid + " ");
+
+
+                            AgencyNametxt.Text = LicenseNumbertxt.Text = "";
+                            cmbCountry.SelectedValue = cmbCity.SelectedValue = 0;
+
+
+
+                        }
+                        else
+                        {
+                            dr.Dispose();
+                            dr.Close();
+                            dr3.Dispose();
+                            dr3.Close();
+
+                        }
                     }
 
                 }
@@ -1158,47 +1181,47 @@ order by EmployeeID  ");
 
                     }
 
-
-                    else if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-                    {
-
-
-                        dr.Dispose();
-                        dr.Close();
-                        SQLCONN.ExecuteQueries("insert into Agencies (  [AgenceName] ,[LicenseNumber],[CountryID],[CityID]) values (@C1,@C2,@C3,@C4)",
-                                                       paramagencyname, paramlicensenumber, paramcountry, paramcity);
-                        MessageBox.Show("Record saved Successfully");
-
-                        SqlDataReader dr2 = SQLCONN.DataReader("Select max (AgencID) 'ID' from Agencies ");
-                        if (dr2.Read())
+                    else {
+                     if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                         {
-                            agaencyid = int.Parse(dr2["ID"].ToString());
-                            paramAgencyid.Value = agaencyid;
+
+
+                            dr.Dispose();
+                            dr.Close();
+                            SQLCONN.ExecuteQueries("insert into Agencies (  [AgenceName] ,[LicenseNumber],[CountryID],[CityID]) values (@C1,@C2,@C3,@C4)",
+                                                           paramagencyname, paramlicensenumber, paramcountry, paramcity);
+                            MessageBox.Show("Record saved Successfully");
+
+                            SqlDataReader dr2 = SQLCONN.DataReader("Select max (AgencID) 'ID' from Agencies ");
+                            if (dr2.Read())
+                            {
+                                agaencyid = int.Parse(dr2["ID"].ToString());
+                                paramAgencyid.Value = agaencyid;
+                            }
+
+                            else { paramAgencyid.Value = 0; }
+                            dr2.Close();
+                            SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Agency Info',@id ,'#','#',@datetime,@pc,@user,'Insert')", paramAgencyid, paramdatetimeLOG, parampc, paramuser);
+
+
+                            dr2.Dispose();
+                            dr2.Close();
+                            dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Agencies where AgencID= @id order by AgencID ", paramAgencyid);
+
+
+                            AgencyNametxt.Text = LicenseNumbertxt.Text = "";
+                            cmbCountry.SelectedValue = cmbCity.SelectedValue = 0;
+
+
+
                         }
+                        else
+                        {
+                            dr.Dispose();
+                            dr.Close();
 
-                        else { paramAgencyid.Value = 0; }
-                        dr2.Close();
-                        SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Agency Info',@id ,'#','#',@datetime,@pc,@user,'Insert')", paramAgencyid, paramdatetimeLOG, parampc, paramuser);
-
-
-                        dr2.Dispose();
-                        dr2.Close();
-                        dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Agencies where AgencID= @id order by AgencID ", paramAgencyid);
-
-
-                        AgencyNametxt.Text = LicenseNumbertxt.Text = "";
-                        cmbCountry.SelectedValue = cmbCity.SelectedValue = 0;
-
-
-
+                        }
                     }
-                    else
-                    {
-                        dr.Dispose();
-                        dr.Close();
-
-                    }
-
                 }
                 else
                 {
@@ -1499,6 +1522,8 @@ order by EmployeeID  ");
                 }
 
             }
+            dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =  " + agaencyid + " ");
+
 
             SQLCONN.CloseConnection();
 
@@ -2109,6 +2134,8 @@ order by EmployeeID  ");
         {
             addbtn.Visible = true;
             ClearTextBoxes();
+            usernametxt.Text = passwordtxt.Text = "";
+            cmbusertype.Text = cmbemployee.Text = "Select ";
 
 
         }
@@ -2123,7 +2150,13 @@ order by EmployeeID  ");
         private void BtnnewAgaency_Click(object sender, EventArgs e)
         {
             button1.Visible = true;
+            button3.Visible = button2.Visible = false;
+            button19.Visible = button18.Visible = button24.Visible = false ;
+
             ClearTextBoxes();
+            cmbcontact.Text = cmbCountry.Text = cmbCity.Text = "Select";
+            dataGridView2.DataSource = dataGridView4.DataSource = null;
+            AgencyNametxt.Text = LicenseNumbertxt.Text = Contacttxt.Text = string.Empty;
 
         }
 
@@ -4439,7 +4472,32 @@ ORDER BY
 
         }
 
-     
+        private void dataGridView4_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            button19.Visible = button18.Visible = button24.Visible = true;
+            SQLCONN.OpenConection();
+         
+            if (e.RowIndex == -1) return;
+
+
+            if (e.RowIndex >= 0 && e.RowIndex < dataGridView4.Rows.Count && e.ColumnIndex >= 0 && e.ColumnIndex < dataGridView2.Columns.Count)
+            {
+                DataGridViewRow row = dataGridView4.Rows[e.RowIndex];
+                if (row.Cells[0].Value != null)
+                {
+                    contactID = Convert.ToInt32(row.Cells[0].Value.ToString());
+                    agaencyid = Convert.ToInt32(row.Cells[1].Value.ToString());
+                    cmbcontact.Text = row.Cells[2].Value?.ToString();
+                    Contacttxt.Text = row.Cells[3].Value?.ToString();
+                   
+                }
+
+            }
+           // dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =  " + agaencyid + " ");
+
+
+            SQLCONN.CloseConnection();
+        }
 
         private void tabPage1_Click(object sender, EventArgs e)
         {
@@ -4499,6 +4557,170 @@ ORDER BY
             cmbworkfield.DisplayMember = "Name";
             cmbworkfield.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT WorkID,Name FROM [WorkLocations]");
             SQLCONN.CloseConnection();
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            SqlParameter paramContactType = new SqlParameter("@C1", SqlDbType.Int);
+            paramContactType.Value = cmbcontact.SelectedValue;
+            SqlParameter paramContact = new SqlParameter("@C2", SqlDbType.NVarChar);
+            paramContact.Value = Contacttxt.Text;
+            SqlParameter paramRefrenceID = new SqlParameter("@C3", SqlDbType.Int);
+            paramRefrenceID.Value = 3;
+            SqlParameter paramPID = new SqlParameter("@C4", SqlDbType.Int);
+            paramPID.Value = agaencyid;
+
+            if (agaencyid != 0)
+            {
+                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+
+                    SQLCONN.OpenConection();
+                    if ((int)cmbcontact.SelectedValue == 2)
+                    {
+                        if (validate_emailaddress.IsMatch(Contacttxt.Text) != true)
+                        {
+                            MessageBox.Show("Invalid Email Address!", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            Contacttxt.Focus();
+                            return;
+                        }
+                        else
+                        {
+                        }
+                    }
+                    SqlDataReader dr = SQLCONN.DataReader("select  ContValue from Contacts where  ContValue= @C2  ", paramContact);
+                    dr.Read();
+
+                    if (dr.HasRows)
+                    {
+                        dr.Dispose();
+                        dr.Close();
+                        MessageBox.Show("Contact Value already there, kindly check again.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+
+                    }
+
+                    else
+                    {
+                        dr.Dispose();
+                        dr.Close();
+                        SQLCONN.ExecuteQueries("insert into Contacts ( ContTypeID,ContValue,RefrenceID,CR_ID) values (@C1,@C2,@C3,@C4)",
+                                                       paramContactType, paramContact, paramRefrenceID, paramPID);
+                        MessageBox.Show("Record saved Successfully.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID] ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =  " + agaencyid + " ");
+                        Contacttxt.Text = "";
+                        cmbcontact.Text = "Select";
+                        SQLCONN.CloseConnection();
+
+                    }
+                }
+                else
+                {
+
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Please Select Record !");
+
+            }
+
+            paramPID.Value = EmployeeID;
+        }
+
+        private void button19_Click_1(object sender, EventArgs e)
+        {
+            SqlParameter paramContactType = new SqlParameter("@C1", SqlDbType.Int);
+            paramContactType.Value = cmbcontact.SelectedValue;
+            SqlParameter paramContact = new SqlParameter("@C2", SqlDbType.NVarChar);
+            paramContact.Value = Contacttxt.Text;
+            SqlParameter paramRefrenceID = new SqlParameter("@C3", SqlDbType.Int);
+            paramRefrenceID.Value = 3;
+            SqlParameter paramPID = new SqlParameter("@C4", SqlDbType.Int);
+            paramPID.Value = contactID;
+
+            string userInput = Contacttxt.Text;
+            if (decimal.TryParse(userInput, out decimal inputValue)) // Try to parse input as decimal
+            {
+                string formattedValue = inputValue.ToString("N2"); // Format decimal as string with 2 decimal places and thousands separator
+                Contacttxt.Text = formattedValue; // Set the second text box to the formatted value
+            }
+
+
+            if (contactID != 0)
+            {
+                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+
+                    SQLCONN.OpenConection();
+
+                    SQLCONN.ExecuteQueries("update  Contacts set ContTypeID=@C1,ContValue=@C2 where Contact_ID=@C4",
+                                                           paramContactType, paramContact, paramPID);
+                    MessageBox.Show("Record Updated Successfully");
+
+                  
+                    dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID]  FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =  " + agaencyid + " ");
+                    // ClearTextBoxes();
+                    Contacttxt.Text = "";
+                    cmbcontact.Text = "Select";
+                    SQLCONN.CloseConnection();
+
+                }
+                else
+                {
+
+                }
+
+
+            }
+            else
+            {
+                MessageBox.Show("Please Select Record to Update");
+            }
+            paramPID.Value = EmployeeID;
+        }
+
+        private void button18_Click_1(object sender, EventArgs e)
+        {
+            SqlParameter paramPID = new SqlParameter("@ID", SqlDbType.Int);
+            paramPID.Value = contactID;
+            if (contactID != 0)
+            {
+
+                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    SQLCONN.OpenConection();
+                    SQLCONN.ExecuteQueries("delete from Contacts where Contact_ID=@ID", paramPID);
+                    SQLCONN.ExecuteQueries(" declare @max int select @max = max(Contact_ID) from[Contacts] if @max IS NULL SET @max = 0 DBCC CHECKIDENT('[Contacts]', RESEED, @max)");
+                    MessageBox.Show("Record Deleted Successfully");
+
+
+                    SQLCONN.CloseConnection();
+                    dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =  " + EmployeeID + " ");
+                    Contacttxt.Text = "";
+                    cmbcontact.Text = "Select";
+                    //    ClearTextBoxes();
+
+
+
+                }
+                else
+                {
+
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Please Select Record to Delete");
+            }
+        }
+
+        private void cmbcontact_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            Contacttxt.Text = "";
         }
 
         private void maxtxt_KeyPress(object sender, KeyPressEventArgs e)

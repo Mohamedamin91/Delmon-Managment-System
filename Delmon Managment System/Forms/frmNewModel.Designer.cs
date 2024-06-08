@@ -29,6 +29,7 @@ namespace Delmon_Managment_System.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmNewModel));
             this.label1 = new System.Windows.Forms.Label();
             this.addbtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -142,6 +143,7 @@ namespace Delmon_Managment_System.Forms
             this.Controls.Add(this.cmbtype);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.addbtn);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmNewModel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmNewModel";

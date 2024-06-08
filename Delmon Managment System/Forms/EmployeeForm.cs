@@ -23,6 +23,10 @@ namespace Delmon_Managment_System.Forms
         SQLCONNECTION SQLCONN = new SQLCONNECTION();
         OpenFileDialog opf = new OpenFileDialog();
 
+        // for check datagridview1
+        private bool isUpdating = false;
+
+
         //  JobOfferLTR OfferLTR = new JobOfferLTR();
         public int EMPID;
         public int EmployeeID;
@@ -41,6 +45,10 @@ namespace Delmon_Managment_System.Forms
         bool hasDelete = false;
         bool hasAdd = false;
 
+        private byte[] fileContent;
+        private string fileNames;
+        private int currentRowIndex;
+
 
 
 
@@ -49,6 +57,9 @@ namespace Delmon_Managment_System.Forms
         {
 
             InitializeComponent();
+            //next and previous
+
+
             //  Font newFont = new Font("Times New Roman", 10);
             cmbEmployJobHistory.KeyDown += new KeyEventHandler(cmbEmployJobHistory_KeyDown);
             cmbCompany.KeyDown += new KeyEventHandler(cmbCompany_KeyDown);
@@ -100,7 +111,9 @@ namespace Delmon_Managment_System.Forms
         private void EmployeeForm_Load(object sender, EventArgs e)
         {
 
+
             SQLCONN.OpenConection();
+
             SqlDataReader dr = SQLCONN.DataReader(@"
         SELECT ps.PermissionName
         FROM UserPermissions us
@@ -114,7 +127,7 @@ namespace Delmon_Managment_System.Forms
             {
                 string permissionName = dr["PermissionName"].ToString();
                 if (permissionName.Contains("ViewPersonalInformation"))
-                    
+
                 {
                     hasView = true;
                 }
@@ -134,16 +147,18 @@ namespace Delmon_Managment_System.Forms
             dr.Close();
             SQLCONN.CloseConnection();
             if (hasView == false)
-            {   
+            {
                 MessageBox.Show("Sorry, You are not allowed to view this Module/Screen , kindly contact the administrator !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Employeetxt.Enabled = false;
                 groupBox2.Enabled = false;
                 tabControl1.Enabled = false;
-              
+
             }
             else
 
             {
+                PopulateDataGridView();
+
                 groupBox2.Enabled = true;
                 tabControl1.Enabled = true;
                 Employeetxt.Enabled = true;
@@ -158,7 +173,7 @@ namespace Delmon_Managment_System.Forms
                 }
                 if (hasDelete)
                 {
-                  DeleteBTN.Enabled=  btndeletecontact.Enabled = btndeletedoc.Enabled = button4.Enabled = button1.Enabled = true;
+                    DeleteBTN.Enabled = btndeletecontact.Enabled = btndeletedoc.Enabled = button4.Enabled = button1.Enabled = true;
                 }
                 else
                 {
@@ -167,8 +182,8 @@ namespace Delmon_Managment_System.Forms
                 }
                 if (hasAdd)
                 {
-                   btnCancel.Enabled= AddBtn.Enabled = true;
-                     btnNew.Enabled = true;
+                    btnCancel.Enabled = AddBtn.Enabled = true;
+                    btnNew.Enabled = true;
 
                 }
                 else
@@ -205,7 +220,7 @@ namespace Delmon_Managment_System.Forms
 
 
 
-              
+
 
                 this.timer1.Interval = 1000;
                 timer1.Start();
@@ -276,8 +291,239 @@ namespace Delmon_Managment_System.Forms
 
         }
 
+        //next
+
+        private DataTable employeeDataTable = new DataTable();
+        private void PopulateDataGridView(string filter = "")
+        {
+            using (SqlConnection connection = new SqlConnection(SQLCONN.ConnectionString))
+            {
+                string query = @"
+            SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus, s.StatusValue, j.JobTitleEN, dt.Dept_Type_Name, c.COMPName_EN, e.startdate, e.enddate, cn.NationalityName, v.FileNumber, v.VISANumber
+            FROM Employees e
+            INNER JOIN StatusTBL s ON e.EmploymentStatusID = s.StatusID
+            INNER JOIN JOBS j ON e.JobID = j.JobID
+            INNER JOIN DEPARTMENTS d ON e.DeptID = d.DEPTID
+            INNER JOIN DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
+            INNER JOIN Companies c ON d.COMPID = c.COMPID
+            INNER JOIN Countries cn ON e.NationalityID = cn.CountryId
+            LEFT JOIN VISAJobList v ON e.EmployeeID = v.EmployeeID
+            WHERE (e.EmployeeID = @filter OR @filter = '')
+            AND (e.EmployeeID != 0)
+            ORDER BY e.EmployeeID";
+
+                SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+                if (!string.IsNullOrWhiteSpace(filter))
+                {
+                    adapter.SelectCommand.Parameters.AddWithValue("@filter", filenumbertxt.Text);
+                }
+                else
+                {
+                    adapter.SelectCommand.Parameters.AddWithValue("@filter", filter);
+                }
+
+                employeeDataTable.Clear();
+                adapter.Fill(employeeDataTable);
+
+                dataGridView1.DataSource = employeeDataTable;
+
+                if (employeeDataTable.Rows.Count > 0)
+                {
+                    DisplayEmployeeData(currentRowIndex);
+                }
+                else
+                {
+                    // Clear text boxes if no data found
+                    ClearEmployeeData();
+                }
+            }
+        }
+        private void DisplayEmployeeData(int rowIndex)
+        {
+            if (employeeDataTable.Rows.Count == 0 || rowIndex < 0 || rowIndex >= employeeDataTable.Rows.Count)
+            {
+                return;
+            }
+
+            DataRow row = employeeDataTable.Rows[rowIndex];
+
+            filenumbertxt.Text = row["EmployeeID"].ToString();
+            CurrentEmployeeIDtxt.Text = row["CurrentEmpID"].ToString();
+            firstnametxt.Text = row["FirstName"].ToString();
+            secondnametxt.Text = row["SecondName"].ToString();
+            thirdnametxt.Text = row["ThirdName"].ToString();
+            lastnametxt.Text = row["LastName"].ToString();
+            cmbGender.Text = row["Gender"].ToString();
+            cmbMartialStatus.Text = row["MartialStatus"].ToString();
+            cmbPersonalStatusStatus.Text = row["StatusValue"].ToString();
+            cmbEmployJobHistory.Text = row["JobTitleEN"].ToString();
+            cmbempdepthistory.Text = row["Dept_Type_Name"].ToString();
+            cmbCompany.Text = row["COMPName_EN"].ToString();
+
+            if (row["enddate"] == DBNull.Value)
+            {
+                EndDatePicker.Value = DateTime.Now;
+            }
+            else
+            {
+                EndDatePicker.Value = Convert.ToDateTime(row["enddate"]);
+            }
+
+            if (row["startdate"] == DBNull.Value)
+            {
+                StartDatePicker.Value = DateTime.Now;
+            }
+            else
+            {
+                StartDatePicker.Value = Convert.ToDateTime(row["startdate"]);
+            }
+
+            cmbnationality.Text = row["NationalityName"].ToString();
+            txtFileNumber.Text = row["FileNumber"].ToString();
+            txtvisanumber.Text = row["VISANumber"].ToString();
+            // Set the DataGridView's current cell to the corresponding row
+            dataGridView1.ClearSelection();
+            // dataGridView1.CurrentCell = dataGridView1.Rows[rowIndex].Cells[0]; // Assuming the first column is always visible
+            //dataGridView1.Rows[rowIndex].Selected = true;
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            EMPID = EmployeeID;
+            AddBtn.Visible = false;
+            btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = true;
+            firstnametxt.Enabled = secondnametxt.Enabled = thirdnametxt.Enabled = lastnametxt.Enabled = true;
+            cmbMartialStatus.Enabled = cmbGender.Enabled = cmbCompany.Enabled = cmbempdepthistory.Enabled = cmbEmployJobHistory.Enabled = cmbPersonalStatusStatus.Enabled = cmbnationality.Enabled = true;
+            StartDatePicker.Enabled = true;
+
+
+
+            if (employeeDataTable.Rows.Count == 0)
+            {
+                return;
+            }
+
+            if (string.IsNullOrEmpty(filenumbertxt.Text))
+            {
+                // Increment the currentRowIndex if filenumbertxt is empty
+                if (currentRowIndex < employeeDataTable.Rows.Count - 1)
+                {
+                    currentRowIndex++;
+                    DisplayEmployeeData(currentRowIndex);
+                }
+            }
+            else
+            {
+                // Try to find the index corresponding to filenumbertxt.Text
+                int requestedRowIndex = FindRowIndexByEmployeeID(filenumbertxt.Text);
+
+                // If found and not the last row, move to the next row
+                if (requestedRowIndex != -1 && requestedRowIndex < employeeDataTable.Rows.Count - 1)
+                {
+                    currentRowIndex = requestedRowIndex + 1;
+                    DisplayEmployeeData(currentRowIndex);
+               
+                }
+
+                SQLCONN.OpenConection();
+                SqlParameter paramwemployeeID = new SqlParameter("@C1", SqlDbType.NVarChar);
+                paramwemployeeID.Value = filenumbertxt.Text.Trim();
+                dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@" SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus, s.StatusValue, j.JobTitleEN, dt.Dept_Type_Name, c.COMPName_EN, e.startdate, e.enddate, cn.NationalityName, v.FileNumber, v.VISANumber
+            FROM Employees e
+            INNER JOIN StatusTBL s ON e.EmploymentStatusID = s.StatusID
+            INNER JOIN JOBS j ON e.JobID = j.JobID
+            INNER JOIN DEPARTMENTS d ON e.DeptID = d.DEPTID
+            INNER JOIN DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
+            INNER JOIN Companies c ON d.COMPID = c.COMPID
+            INNER JOIN Countries cn ON e.NationalityID = cn.CountryId
+            LEFT JOIN VISAJobList v ON e.EmployeeID = v.EmployeeID
+            WHERE  e.EmployeeID  != 0  AND e.EmployeeID =@C1 ORDER BY e.EmployeeID ",paramwemployeeID );
+                SQLCONN.CloseConnection();
+
+
+            }
+        }
+
+        private int FindRowIndexByEmployeeID(string employeeID)
+        {
+            // Iterate through the DataTable to find the row index based on the EmployeeID
+            for (int i = 0; i < employeeDataTable.Rows.Count; i++)
+            {
+                if (employeeDataTable.Rows[i]["EmployeeID"].ToString() == employeeID)
+                {
+                    return i;
+                }
+            }
+            // Return -1 if the EmployeeID is not found
+            return -1;
+        }
+
+
+    
+
+    
+
+    private void btnPrevious_Click(object sender, EventArgs e)
+        {
+            EMPID = EmployeeID;
+            AddBtn.Visible = false;
+            btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = true;
+            firstnametxt.Enabled = secondnametxt.Enabled = thirdnametxt.Enabled = lastnametxt.Enabled = true;
+            cmbMartialStatus.Enabled = cmbGender.Enabled = cmbCompany.Enabled = cmbempdepthistory.Enabled = cmbEmployJobHistory.Enabled = cmbPersonalStatusStatus.Enabled = cmbnationality.Enabled = true;
+            StartDatePicker.Enabled = true;
+
+            if (employeeDataTable.Rows.Count == 0)
+            {
+                return;
+            }
+
+            // Decrement the currentRowIndex only if it is greater than 0
+            if (currentRowIndex > 0)
+            {
+                currentRowIndex--;
+                DisplayEmployeeData(currentRowIndex);
+            }
+            SQLCONN.OpenConection();
+            SqlParameter paramwemployeeID = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramwemployeeID.Value = filenumbertxt.Text.Trim();
+            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@" SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus, s.StatusValue, j.JobTitleEN, dt.Dept_Type_Name, c.COMPName_EN, e.startdate, e.enddate, cn.NationalityName, v.FileNumber, v.VISANumber
+            FROM Employees e
+            INNER JOIN StatusTBL s ON e.EmploymentStatusID = s.StatusID
+            INNER JOIN JOBS j ON e.JobID = j.JobID
+            INNER JOIN DEPARTMENTS d ON e.DeptID = d.DEPTID
+            INNER JOIN DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
+            INNER JOIN Companies c ON d.COMPID = c.COMPID
+            INNER JOIN Countries cn ON e.NationalityID = cn.CountryId
+            LEFT JOIN VISAJobList v ON e.EmployeeID = v.EmployeeID
+            WHERE  e.EmployeeID  != 0  AND e.EmployeeID =@C1 ORDER BY e.EmployeeID ", paramwemployeeID);
+            SQLCONN.CloseConnection();
+        }
+        private void ClearEmployeeData()
+        {
+            filenumbertxt.Clear();
+            CurrentEmployeeIDtxt.Clear();
+            firstnametxt.Clear();
+            secondnametxt.Clear();
+            thirdnametxt.Clear();
+            lastnametxt.Clear();
+            cmbGender.SelectedIndex = -1;
+            cmbMartialStatus.SelectedIndex = -1;
+            cmbPersonalStatusStatus.SelectedIndex = -1;
+            cmbEmployJobHistory.SelectedIndex = -1;
+            cmbempdepthistory.SelectedIndex = -1;
+            cmbCompany.SelectedIndex = -1;
+            EndDatePicker.Value = DateTime.Now;
+            StartDatePicker.Value = DateTime.Now;
+            cmbnationality.SelectedIndex = -1;
+            txtFileNumber.Clear();
+            txtvisanumber.Clear();
+        }
+
+
         private void Employeetxt_TextChanged(object sender, EventArgs e)
         {
+            dataGridView1.Visible = true;
+
             try
             {
                 string searchText = Employeetxt.Text.Trim();
@@ -295,7 +541,8 @@ namespace Delmon_Managment_System.Forms
 
                 SQLCONN.OpenConection();
 
-                if (lblusertype.Text == "Admin")
+                // if employess belong to IT showes all employee else show for the certian department 
+                if (CommonClass.DeptID == 10103)
                 {
                     string query = @"SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus, s.StatusValue, j.JobTitleEN, dt.Dept_Type_Name, c.COMPName_EN, e.startdate, e.enddate, cn.NationalityName, v.FileNumber, v.VISANumber
     FROM Employees e
@@ -317,7 +564,6 @@ namespace Delmon_Managment_System.Forms
            )))
     ORDER BY e.EmployeeID";
 
-                    dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramEmployeenameSearch);
 
                     dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramEmployeenameSearch);
                 }
@@ -1110,83 +1356,78 @@ ORDER BY e.EmployeeID";
         {
             if (EMPID != 0)
             {
-
                 if (cmbDocuments.Text == "Select" || cmbDocuments.Text == string.Empty)
                 {
-                    MessageBox.Show("Please select a  document type.");
-
+                    MessageBox.Show("Please select a document type.");
                 }
                 else
                 {
-                    //Create the documents folder if it doesn't exist
-                    //string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                    //string documentFolder = Path.Combine(documentsPath, "HR SW Documents");
-                    //////Directory.CreateDirectory(documentFolder);
+                    SqlParameter paramFilename = new SqlParameter("@C0", SqlDbType.NVarChar);
+                    SqlParameter paramFileContent = new SqlParameter("@C1", SqlDbType.VarBinary);
+                    SqlParameter paramPID = new SqlParameter("@C2", SqlDbType.Int);
+                    SqlParameter paramDocType = new SqlParameter("@C3", SqlDbType.Int);
+                    SqlParameter paramRefrenceID = new SqlParameter("@C4", SqlDbType.Int);
+                    SqlParameter paramFileNumber = new SqlParameter("@C5", SqlDbType.NVarChar);
+                    SqlParameter paramFileIssuePlace = new SqlParameter("@C6", SqlDbType.NVarChar);
+                    SqlParameter paramFileIssueDate = new SqlParameter("@C7", SqlDbType.Date);
+                    SqlParameter paramFileExpiryDate = new SqlParameter("@C8", SqlDbType.Date);
 
-                    //// Copy the file to the documents folder
-                    //string filePath = Path.Combine(documentFolder, filename);
-                    //System.IO.File.Copy(opf.FileName, filePath, true);
-
-                    // Execute the query to insert the document into the database
-                    SqlParameter paramfilename = new SqlParameter("@C0", SqlDbType.NVarChar);
-                    SqlParameter paramnameOFfile = new SqlParameter("@C1", SqlDbType.NVarChar);
-
-                    if (fileName == null || destinationFilePath == string.Empty)
+                    if (fileName == null || fileContent == null)
                     {
-                        paramfilename.Value = "";
-                        paramnameOFfile.Value = "";
-
-
+                        paramFilename.Value = "";
+                        paramFileContent.Value = DBNull.Value;
                     }
-
                     else
                     {
-                        paramfilename.Value = fileName;
-                        paramnameOFfile.Value = destinationFilePath;
+                        paramFilename.Value = fileName;
+                        paramFileContent.Value = fileContent;
                     }
 
-
-
-                    SqlParameter paramPID = new SqlParameter("@C2", SqlDbType.Int);
                     paramPID.Value = EmployeeID;
-                    SqlParameter paramDocType = new SqlParameter("@C3", SqlDbType.Int);
                     paramDocType.Value = cmbDocuments.SelectedValue;
-                    SqlParameter paramRefrenceID = new SqlParameter("@C4", SqlDbType.Int);
                     paramRefrenceID.Value = 2;
+                    paramFileNumber.Value = numbertextbox.Text;
+                    paramFileIssuePlace.Value = issueplacetext.Text;
+                    paramFileIssueDate.Value = docissueplacepicker.Value;
+                    paramFileExpiryDate.Value = docexpirefatepicker.Value;
 
-                    // Add extra fields for visa file
-                    SqlParameter paramfilenumber = new SqlParameter("@C5", SqlDbType.NVarChar);
-                    paramfilenumber.Value = numbertextbox.Text;
-                    SqlParameter paramnafileissueplace = new SqlParameter("@C6", SqlDbType.NVarChar);
-                    paramnafileissueplace.Value = issueplacetext.Text;
-                    SqlParameter paramfileissuedate = new SqlParameter("@C7", SqlDbType.Date);
-                    paramfileissuedate.Value = docissueplacepicker.Value;
-                    SqlParameter paramfileexpiraydate = new SqlParameter("@C8", SqlDbType.Date);
-                    paramfileexpiraydate.Value = docexpirefatepicker.Value;
-                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    if (DialogResult.Yes == MessageBox.Show("Do you want to perform this operation?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     {
                         if (cmbDocuments.Text == "Select")
                         {
-                            MessageBox.Show("Please Select Document Type  . !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                            MessageBox.Show("Please select Document Type.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
-                        if (numbertextbox.Text == "")
+                        else if (string.IsNullOrEmpty(numbertextbox.Text))
                         {
-                            MessageBox.Show("Please insert Document  Number. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                            MessageBox.Show("Please insert Document Number.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
-                        if (issueplacetext.Text == "")
+                        else if (string.IsNullOrEmpty(issueplacetext.Text))
                         {
-                            MessageBox.Show("Please insert Document Issue Place. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                            MessageBox.Show("Please insert Document Issue Place.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                         else
                         {
-
                             SQLCONN.OpenConection();
-                            SQLCONN.ExecuteQueries("insert into Documents (name,documentValue,CR_ID,DocTypeID,RefrenceID,Number,DocIssueplace,docissuedate,docexpiredate)values(@C0,@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8)", paramfilename, paramnameOFfile, paramPID, paramDocType, paramRefrenceID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate);
-                            // SQLCONN.ExecuteQueries("insert into Documents (CR_ID,DocTypeID,RefrenceID,Number,DocIssueplace,docissuedate,docexpiredate)values(@C2,@C3,@C4,@C5,@C6,@C7,@C8)", paramPID, paramDocType, paramRefrenceID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate);
-                            dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Documents where CR_ID =  " + EmployeeID + " ");
+                            SQLCONN.ExecuteQueries("INSERT INTO Documents" +
+                                " (name, documentValue, CR_ID, DocTypeID, RefrenceID, Number, DocIssueplace, docissuedate, docexpiredate)" +
+                                " VALUES (@C0, @C1, @C2, @C3, @C4, @C5, @C6, @C7, @C8)",
+                                  paramFilename, paramFileContent, paramPID, paramDocType, paramRefrenceID, paramFileNumber, paramFileIssuePlace, paramFileIssueDate, paramFileExpiryDate);
+                            dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT  [Doc_id]
+      ,[CR_ID]
+      ,[name]
+      ,[documentValue]
+      , Doc_Type
+      ,[RefrenceID]
+      ,[Number]
+      ,[DocIssueplace]
+      ,[docissuedate]
+      ,[docexpiredate]
+  FROM [DelmonGroupDB].[dbo].[Documents],DocumentType
+  where DocumentType.DocType_ID=Documents.DocTypeID AND CR_ID = " + EmployeeID);
+                            dataGridView3.Columns["documentValue"].Visible = false;
+                            dataGridView3.Columns["name"].Visible = false;
+
+
                             SQLCONN.CloseConnection();
                             MessageBox.Show("Document Saved.");
                             cmbDocuments.Text = "Select";
@@ -1197,18 +1438,12 @@ ORDER BY e.EmployeeID";
                             docexpirefatepicker.Value = DateTime.Now;
                         }
                     }
-
-                    paramPID.Value = EmployeeID;
-
                 }
-
             }
             else
             {
-                MessageBox.Show("Please Select Record !");
-
+                MessageBox.Show("Please select a record!");
             }
-
 
 
 
@@ -1221,46 +1456,79 @@ ORDER BY e.EmployeeID";
         private void button5_Click(object sender, EventArgs e)
         {
 
-            string directoryPath = @"\\192.168.1.8\HR SW Documents\";
-            string variable = cmbCompany.Text;
+            // Open file dialog to select a file to insert into the subfolder
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Select a file to upload";
 
-            // Get all subfolder names in the directory
-            string[] subfolderNames = Directory.GetDirectories(directoryPath)
-                                                .Select(Path.GetFileName)
-                                                .ToArray();
-            // Check if the variable matches any of the subfolder names
-            if (subfolderNames.Contains(variable))
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                // Open file dialog to select a text file to insert into the subfolder
-                OpenFileDialog openFileDialog = new OpenFileDialog();
-                //  openFileDialog.Filter = "Text Files (*.txt)|*.txt";
-                openFileDialog.Title = "Select a text file to insert into the subfolder";
+                // Check if the selected file exceeds 2 MB
+                FileInfo fileInfo = new FileInfo(openFileDialog.FileName);
+                const long twoMB = 2 * 1024 * 1024; // 2 MB in bytes
 
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                if (fileInfo.Length > twoMB)
                 {
-                    // Insert the selected text file into the matching subfolder
-                    string subfolderPath = Path.Combine(directoryPath, variable);
-                    textFilePath = openFileDialog.FileName;
-                    fileName = Path.GetFileName(textFilePath);
-                    destinationFilePath = Path.Combine(subfolderPath, fileName);
-
-                    File.Copy(textFilePath, destinationFilePath);
-                    Doctxt.Text = textFilePath;
-                    // MessageBox.Show(" Uploded Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                    MessageBox.Show("The selected file exceeds 2 MB. Please select a smaller file.", "File Size Exceeded", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
+                else
+                {
+                    // Read the selected file into a byte array
+                    fileContent = File.ReadAllBytes(openFileDialog.FileName);
+                    fileName = Path.GetFileName(openFileDialog.FileName);
+                    Doctxt.Text = openFileDialog.FileName;
+                }
+
+
+                ///* old methode save to sharea folder //
+                //string directoryPath = @"\\192.168.1.8\HR SW Documents\";
+                //string variable = cmbCompany.Text;
+
+                //// Get all subfolder names in the directory
+                //string[] subfolderNames = Directory.GetDirectories(directoryPath)
+                //                                    .Select(Path.GetFileName)
+                //                                    .ToArray();
+
+                //// Check if the variable matches any of the subfolder names
+                //if (subfolderNames.Contains(variable))
+                //{
+                //    // Open file dialog to select a file to insert into the subfolder
+                //    OpenFileDialog openFileDialog = new OpenFileDialog();
+                //    openFileDialog.Title = "Select a file to insert into the subfolder";
+
+                //    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                //    {
+                //        // Check if the selected file exceeds 2 MB
+                //        FileInfo fileInfo = new FileInfo(openFileDialog.FileName);
+                //        const long twoMB = 2 * 1024 * 1024; // 2 MB in bytes
+
+                //        if (fileInfo.Length > twoMB)
+                //        {
+                //            MessageBox.Show("The selected file exceeds 2 MB. Please select a smaller file.", "File Size Exceeded", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //            return;
+                //        }
+                //        else
+                //        {
+                //            // Insert the selected file into the matching subfolder
+                //            string subfolderPath = Path.Combine(directoryPath, variable);
+                //            textFilePath = openFileDialog.FileName;
+                //            fileName = Path.GetFileName(textFilePath);
+                //            destinationFilePath = Path.Combine(subfolderPath, fileName);
+
+                //            byte[] fileContent = File.ReadAllBytes(textFilePath);
+
+                //            Doctxt.Text = textFilePath;
+                //            // MessageBox.Show("Uploaded Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //        }
+                //    }
+                //}
+                //else
+                //{
+                //    MessageBox.Show("There is no folder in the server with company name " + cmbCompany.Text + " ", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                //}
             }
-
-            else {
-                MessageBox.Show("Their is no folder in the server with company name " + cmbCompany.Text + " ", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-
-
-
-
-
-
         }
+
 
 
         private void btnaddcontact_Click(object sender, EventArgs e)
@@ -1458,7 +1726,20 @@ ORDER BY e.EmployeeID";
                     docissueplacepicker.Value = DateTime.Now;
                     docexpirefatepicker.Value = DateTime.Now; cmbDocuments.Text = "Select";
                     EmployeeID = EMPID;
-                    dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue] ,[DocumentType].Doc_Type ,[RefrenceID]FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =  " + EmployeeID + " ");
+                    dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT  [Doc_id]
+      ,[CR_ID]
+      ,[name]
+      ,[documentValue]
+      , Doc_Type
+      ,[RefrenceID]
+      ,[Number]
+      ,[DocIssueplace]
+      ,[docissuedate]
+      ,[docexpiredate]
+  FROM [DelmonGroupDB].[dbo].[Documents],DocumentType
+  where DocumentType.DocType_ID=Documents.DocTypeID AND CR_ID = " + EmployeeID);
+                    dataGridView3.Columns["documentValue"].Visible = false;
+                    dataGridView3.Columns["name"].Visible = false;
                 }
                 else
                 {
@@ -1540,8 +1821,11 @@ ORDER BY e.EmployeeID";
 
             SqlParameter paramfilename = new SqlParameter("@C0", SqlDbType.NVarChar);
             paramfilename.Value = fileName;
-            SqlParameter paramnameOFfile = new SqlParameter("@C1", SqlDbType.NVarChar);
-            paramnameOFfile.Value = destinationFilePath;
+            //SqlParameter paramnameOFfile = new SqlParameter("@C1", SqlDbType.NVarChar);
+            //paramnameOFfile.Value = destinationFilePath;
+
+            SqlParameter paramFileContent = new SqlParameter("@C1", SqlDbType.VarBinary);
+
             SqlParameter paramPID = new SqlParameter("@C2", SqlDbType.Int);
             paramPID.Value = EmployeeID;
             SqlParameter paramDocType = new SqlParameter("@C3", SqlDbType.Int);
@@ -1585,14 +1869,41 @@ ORDER BY e.EmployeeID";
                     }
                     else
                     {
+
+                        if (fileName == null || fileContent == null)
+                        {
+                            paramfilename.Value = "";
+                            paramFileContent.Value = DBNull.Value;
+                        }
+                        else
+                        {
+                            paramfilename.Value = fileName;
+                            paramFileContent.Value = fileContent;
+                        }
+
                         SQLCONN.OpenConection();
-                        SQLCONN.ExecuteQueries("update  Documents set documentValue=@C1,name=@C0,DocTypeID=@C3,Number=@C5,DocIssueplace=@C6,docissuedate=@C7,docexpiredate=@C8,CR_ID=@C2  where Doc_id = @ID ", paramfilename, paramnameOFfile, paramDocType, paramPID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate, paramDoc);
+                        SQLCONN.ExecuteQueries("update  Documents set documentValue=@C1,name=@C0,DocTypeID=@C3,Number=@C5,DocIssueplace=@C6,docissuedate=@C7,docexpiredate=@C8,CR_ID=@C2  where Doc_id = @ID ", paramfilename, paramFileContent, paramDocType, paramPID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate, paramDoc);
                         //  SQLCONN.ExecuteQueries("update  Documents set DocTypeID=@C3,Number=@C5,DocIssueplace=@C6,docissuedate=@C7,docexpiredate=@C8,CR_ID=@C2  where Doc_id = @ID ", paramDocType, paramPID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate, paramDoc);
 
 
                         MessageBox.Show("Record Updated Successfully");
                         EmployeeID = EMPID;
-                        dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue]  ,[DocumentType].Doc_Type ,[RefrenceID],[Number] ,[DocIssueplace]  ,[docissuedate]  ,[docexpiredate] FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =  " + EmployeeID + " ");
+                        dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT  [Doc_id]
+      ,[CR_ID]
+      ,[name]
+      ,[documentValue]
+      , Doc_Type
+      ,[RefrenceID]
+      ,[Number]
+      ,[DocIssueplace]
+      ,[docissuedate]
+      ,[docexpiredate]
+  FROM [DelmonGroupDB].[dbo].[Documents],DocumentType
+  where DocumentType.DocType_ID=Documents.DocTypeID  and CR_ID =  " + EmployeeID + " ");
+                        dataGridView3.Columns["documentValue"].Visible = false;
+                        dataGridView3.Columns["name"].Visible = false;
+
+
 
                         //    ClearTextBoxes();
                         SQLCONN.CloseConnection();
@@ -1630,13 +1941,15 @@ ORDER BY e.EmployeeID";
             {
                 AddBtn.Visible = true;
             }
+            filenumbertxt.Text = "";
             btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = false;
             firstnametxt.Enabled = secondnametxt.Enabled = thirdnametxt.Enabled = lastnametxt.Enabled = true;
+            dataGridView2.DataSource = dataGridView3.DataSource = dataGridView4.DataSource = dataGridView5.DataSource = null;
             cmbMartialStatus.Enabled = cmbGender.Enabled = cmbempdepthistory.Enabled = cmbEmployJobHistory.Enabled = cmbPersonalStatusStatus.Enabled = cmbCompany.Enabled = cmbnationality.Enabled = true;
             StartDatePicker.Enabled = true;
             EndDatePicker.Enabled = false;
             dataGridView1.DataSource = null;
-            cmbCompany.Text = cmbEmployJobHistory.Text = cmbempdepthistory.Text = cmbPersonalStatusStatus.Text = "Select";
+            cmbCompany.Text = cmbEmployJobHistory.Text = cmbempdepthistory.Text = cmbPersonalStatusStatus.Text = cmbnationality.Text=cmbMartialStatus.Text = "Select";
             StartDatePicker.Value = EndDatePicker.Value = DateTime.Now;
             ClearTextBoxes();
 
@@ -1670,7 +1983,21 @@ ORDER BY e.EmployeeID";
 
 
 
-                    dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue]  ,[DocumentType].Doc_Type ,[RefrenceID],[Number] ,[DocIssueplace]  ,[docissuedate]  ,[docexpiredate] FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =@ID ", paramEmployeeID);
+                    dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT  [Doc_id]
+      ,[CR_ID]
+      ,[name]
+      ,[documentValue]
+      , Doc_Type
+      ,[RefrenceID]
+      ,[Number]
+      ,[DocIssueplace]
+      ,[docissuedate]
+      ,[docexpiredate]
+  FROM [DelmonGroupDB].[dbo].[Documents],DocumentType
+  where DocumentType.DocType_ID=Documents.DocTypeID  and CR_ID =@ID ", paramEmployeeID);
+                    dataGridView3.Columns["documentValue"].Visible = false;
+                    dataGridView3.Columns["name"].Visible = false;
+
 
                     cmbDocuments.Text = "Select";
                     Doctxt.Text = "";
@@ -1701,6 +2028,8 @@ ORDER BY e.EmployeeID";
                     txtvalue.Text = "";
                     dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  select SalaryDetID , SalaryTypeName 'Salary Type' ,SalaryDetails.Value from SalaryDetails,SalaryTypes where SalaryDetails.SalaryTypeID = SalaryTypes.SalaryTypeID and SalaryDetails.EmployeeID = @ID ", paramEmployeeID);
                     //  this.dataGridView5.Columns["SalaryDetID"].Visible = false;
+                    dataGridView5.Columns["Salary Type"].Width = 200;
+
 
                 }
 
@@ -1713,130 +2042,94 @@ ORDER BY e.EmployeeID";
         {
             if (e.RowIndex == -1) return;
 
-            foreach (DataGridViewRow rw in this.dataGridView1.Rows)
+            if (isUpdating) return;  // Prevent reentrant call
+
+            isUpdating = true;
+
+            try
             {
-                for (int i = 0; i < rw.Cells.Count; i++)
+                currentRowIndex = e.RowIndex; // Update the currentRowIndex
+
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+
+                filenumbertxt.Text = row.Cells["EmployeeID"].Value?.ToString() ?? string.Empty;
+                CurrentEmployeeIDtxt.Text = row.Cells["CurrentEmpID"].Value?.ToString() ?? string.Empty;
+                firstnametxt.Text = row.Cells["FirstName"].Value?.ToString() ?? string.Empty;
+                secondnametxt.Text = row.Cells["SecondName"].Value?.ToString() ?? string.Empty;
+                thirdnametxt.Text = row.Cells["ThirdName"].Value?.ToString() ?? string.Empty;
+                lastnametxt.Text = row.Cells["LastName"].Value?.ToString() ?? string.Empty;
+                cmbGender.Text = row.Cells["Gender"].Value?.ToString() ?? string.Empty;
+                cmbMartialStatus.Text = row.Cells["MartialStatus"].Value?.ToString() ?? string.Empty;
+                cmbPersonalStatusStatus.Text = row.Cells["StatusValue"].Value?.ToString() ?? string.Empty;
+                cmbEmployJobHistory.Text = row.Cells["JobTitleEN"].Value?.ToString() ?? string.Empty;
+                cmbempdepthistory.Text = row.Cells["Dept_Type_Name"].Value?.ToString() ?? string.Empty;
+                cmbCompany.Text = row.Cells["COMPName_EN"].Value?.ToString() ?? string.Empty;
+
+                if (row.Cells["enddate"].Value == DBNull.Value)
                 {
-                    if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
-                    {
-                        //   MessageBox.Show("ogg");       
-                    }
-                    else
-                    {
-
-                        filenumbertxt.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-                        //EMPID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
-                        CurrentEmployeeIDtxt.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                        firstnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                        secondnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                        thirdnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-                        lastnametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-                        cmbGender.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-                        cmbMartialStatus.Text = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
-                        cmbPersonalStatusStatus.Text = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
-                        cmbEmployJobHistory.Text = dataGridView1.Rows[e.RowIndex].Cells[9].Value.ToString();
-                        cmbempdepthistory.Text = dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString();
-                        cmbCompany.Text = dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString();
-                        if (dataGridView1.CurrentRow.Cells[13].Value == null || dataGridView1.CurrentRow.Cells[13].Value == DBNull.Value || String.IsNullOrWhiteSpace(dataGridView1.CurrentRow.Cells[13].Value.ToString()))
-                        {
-                            EndDatePicker.Value = DateTime.Now;
-
-                        }
-                        else
-                        {
-                            EndDatePicker.Value = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[13].Value.ToString());
-
-                        }
-
-                        if (dataGridView1.CurrentRow.Cells[12].Value == null || dataGridView1.CurrentRow.Cells[12].Value == DBNull.Value || String.IsNullOrWhiteSpace(dataGridView1.CurrentRow.Cells[12].Value.ToString()))
-                        {
-                            StartDatePicker.Value = DateTime.Now;
-
-                        }
-
-                        else
-                        {
-                            StartDatePicker.Value = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[12].Value.ToString());
-
-                        }
-
-                        cmbnationality.Text = dataGridView1.Rows[e.RowIndex].Cells[14].Value.ToString();
-                        txtFileNumber.Text = dataGridView1.Rows[e.RowIndex].Cells[15].Value.ToString();
-                        txtvisanumber.Text = dataGridView1.Rows[e.RowIndex].Cells[16].Value.ToString();
-
-
-
-
-
-
-                        if (hasEdit)
-                        {
-                            // btnUpdate.Visible = true;
-                            Updatebtn.Enabled = true;
-                        }
-                        else
-                        {
-                            Updatebtn.Enabled = false;
-                        }
-                        if (hasDelete)
-                        {
-                            DeleteBTN.Enabled = btndeletecontact.Enabled = btndeletedoc.Enabled = button4.Enabled = button1.Enabled = true;
-                        }
-                        else
-                        {
-                            DeleteBTN.Enabled = btndeletecontact.Enabled = btndeletedoc.Enabled = button4.Enabled = button1.Enabled = false;
-
-                        }
-                        if (hasAdd)
-                        {
-                            btnCancel.Enabled = AddBtn.Enabled = true;
-                            btnNew.Enabled = true;
-
-                        }
-                        else
-                        {
-                            btnCancel.Enabled = AddBtn.Enabled = false;
-                            btnNew.Enabled = false;
-
-
-                        }
-
-
-
-
-
-
-
-                      
-
-
-
-
-                        EmployeeID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-                        EMPID = EmployeeID;
-                        //CurrentEmployeeIDtxt.Text = EmployeeID.ToString();
-                        AddBtn.Visible = false;
-                        btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = true;
-                        firstnametxt.Enabled = secondnametxt.Enabled = thirdnametxt.Enabled = lastnametxt.Enabled = true;
-                        cmbMartialStatus.Enabled = cmbGender.Enabled = cmbCompany.Enabled = cmbempdepthistory.Enabled = cmbEmployJobHistory.Enabled = cmbPersonalStatusStatus.Enabled = cmbnationality.Enabled = true;
-                        StartDatePicker.Enabled = true;
-                        //dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[EmployeeID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] ,[EmployeeID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and EmployeeID =  " + EmployeeID + " ");
-                        //dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue] ,[url] ,[last_update] ,[DocumentType].Doc_Type ,[RefrenceID]FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =  " + EmployeeID + " ");
-
-                    }
+                    EndDatePicker.Value = DateTime.Now;
+                }
+                else
+                {
+                    EndDatePicker.Value = Convert.ToDateTime(row.Cells["enddate"].Value);
                 }
 
+                if (row.Cells["startdate"].Value == DBNull.Value)
+                {
+                    StartDatePicker.Value = DateTime.Now;
+                }
+                else
+                {
+                    StartDatePicker.Value = Convert.ToDateTime(row.Cells["startdate"].Value);
+                }
+
+                cmbnationality.Text = row.Cells["NationalityName"].Value?.ToString() ?? string.Empty;
+                txtFileNumber.Text = row.Cells["FileNumber"].Value?.ToString() ?? string.Empty;
+                txtvisanumber.Text = row.Cells["VISANumber"].Value?.ToString() ?? string.Empty;
+
+                if (hasEdit)
+                {
+                    Updatebtn.Enabled = true;
+                }
+                else
+                {
+                    Updatebtn.Enabled = false;
+                }
+
+                if (hasDelete)
+                {
+                    DeleteBTN.Enabled = btndeletecontact.Enabled = btndeletedoc.Enabled = button4.Enabled = button1.Enabled = true;
+                }
+                else
+                {
+                    DeleteBTN.Enabled = btndeletecontact.Enabled = btndeletedoc.Enabled = button4.Enabled = button1.Enabled = false;
+                }
+
+                if (hasAdd)
+                {
+                    btnCancel.Enabled = AddBtn.Enabled = true;
+                    btnNew.Enabled = true;
+                }
+                else
+                {
+                    btnCancel.Enabled = AddBtn.Enabled = false;
+                    btnNew.Enabled = false;
+                }
+
+                EmployeeID = Convert.ToInt32(row.Cells["EmployeeID"].Value);
+                EMPID = EmployeeID;
+                AddBtn.Visible = false;
+                btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = true;
+                firstnametxt.Enabled = secondnametxt.Enabled = thirdnametxt.Enabled = lastnametxt.Enabled = true;
+                cmbMartialStatus.Enabled = cmbGender.Enabled = cmbCompany.Enabled = cmbempdepthistory.Enabled = cmbEmployJobHistory.Enabled = cmbPersonalStatusStatus.Enabled = cmbnationality.Enabled = true;
+                StartDatePicker.Enabled = true;
+
+                // Selection will be handled by the SelectionChanged event
             }
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-        }
-
-        private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            finally
+            {
+                isUpdating = false;  // Reset the flag
+            }
         }
 
         private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -2768,6 +3061,9 @@ ORDER BY e.EmployeeID";
                     dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT   [Doc_id] ,[CR_ID] ,[name],[documentValue]  ,[DocumentType].Doc_Type ,[RefrenceID],[Number] ,[DocIssueplace]  ,[docissuedate]  ,[docexpiredate] FROM [DelmonGroupDB].[dbo].[Documents], DocumentType where DocumentType.DocType_ID = Documents.DocTypeID  and CR_ID =@ID ", paramEmployeeID);
 
                     cmbDocuments.Text = "Select";
+                    dataGridView3.Columns["name"].Visible = false;
+                    dataGridView3.Columns["documentValue"].Visible = false;
+
                     Doctxt.Text = "";
                     numbertextbox.Text = "";
                     issueplacetext.Text = "";
@@ -3029,31 +3325,70 @@ ORDER BY e.EmployeeID";
         private void btnshowDoc_Click(object sender, EventArgs e)
         {
 
-             string fileName = CommonClass.DocPath;
-       
-            try
-            {
+            // Check if a row is selected
 
-                if (File.Exists(fileName))
+            if (dOCID == 0)
+            {
+                MessageBox.Show("Please select a record.");
+
+            }
+            else
+            {
+                // Check if a row is selected
+                if (dataGridView3.CurrentRow != null)
                 {
-                    // Open the PDF document using the default PDF viewer application
-                    Process.Start(fileName);
+                    try
+                    {
+                        // Get the selected document's ID (assuming the column contains the ID)
+                        DataGridViewRow selectedRow = dataGridView3.CurrentRow;
+                        int selectedDocId = Convert.ToInt32(selectedRow.Cells["Doc_id"].Value);
+
+                        // Fetch the document data from the database
+                        byte[] documentBinary = null;
+                        string fileName = string.Empty;
+                        using (SqlConnection connection = new SqlConnection(SQLCONN.ConnectionString))
+                        {
+                            string query = "SELECT name, documentValue FROM Documents WHERE Doc_id = @DocumentID";
+                            SqlCommand command = new SqlCommand(query, connection);
+                            command.Parameters.AddWithValue("@DocumentID", selectedDocId);
+
+                            connection.Open();
+                            using (SqlDataReader reader = command.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    fileName = reader["name"].ToString();
+                                    documentBinary = (byte[])reader["documentValue"];
+                                }
+                            }
+                        }
+
+                        // Check if document data is fetched
+                        if (documentBinary != null)
+                        {
+                            // Save the binary data to a temporary file
+                            string tempFilePath = Path.Combine(Path.GetTempPath(), fileName);
+                            File.WriteAllBytes(tempFilePath, documentBinary);
+
+                            // Open the file using the default viewer
+                            Process.Start(tempFilePath);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Document not found.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("An error occurred: " + ex.Message);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("File not found.");
+                    MessageBox.Show("Please select a document.");
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred: " + ex.Message);
-            }
-
-
-
-
         }
-
         private void btnnewJob_Click_1(object sender, EventArgs e)
         {
             FrmJobsNew frmJobs = new FrmJobsNew();
@@ -3160,6 +3495,7 @@ ORDER BY e.EmployeeID";
             // this.Hide();
             visaform.Show();
         }
+
     }
 }
 

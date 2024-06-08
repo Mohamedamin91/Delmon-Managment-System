@@ -30,11 +30,12 @@ namespace Delmon_Managment_System.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingFrm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.userTap = new System.Windows.Forms.TabPage();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
@@ -175,6 +176,9 @@ namespace Delmon_Managment_System.Forms
             this.BtnnewAgaency = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button18 = new System.Windows.Forms.Button();
+            this.button19 = new System.Windows.Forms.Button();
+            this.button24 = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.label15 = new System.Windows.Forms.Label();
@@ -466,7 +470,6 @@ namespace Delmon_Managment_System.Forms
             this.isactivecheck.TabIndex = 54;
             this.isactivecheck.Text = "IsActive";
             this.isactivecheck.UseVisualStyleBackColor = true;
-            this.isactivecheck.Visible = false;
             // 
             // Generatebtn
             // 
@@ -602,7 +605,7 @@ namespace Delmon_Managment_System.Forms
             this.radioButton20.AutoSize = true;
             this.radioButton20.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.radioButton20.Location = new System.Drawing.Point(551, 26);
+            this.radioButton20.Location = new System.Drawing.Point(550, 26);
             this.radioButton20.Name = "radioButton20";
             this.radioButton20.Size = new System.Drawing.Size(79, 18);
             this.radioButton20.TabIndex = 234;
@@ -694,7 +697,7 @@ namespace Delmon_Managment_System.Forms
             this.radioButton22.AutoSize = true;
             this.radioButton22.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.radioButton22.Location = new System.Drawing.Point(553, 20);
+            this.radioButton22.Location = new System.Drawing.Point(552, 20);
             this.radioButton22.Name = "radioButton22";
             this.radioButton22.Size = new System.Drawing.Size(79, 18);
             this.radioButton22.TabIndex = 234;
@@ -798,7 +801,7 @@ namespace Delmon_Managment_System.Forms
             this.radioButton18.AutoSize = true;
             this.radioButton18.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.radioButton18.Location = new System.Drawing.Point(550, 22);
+            this.radioButton18.Location = new System.Drawing.Point(545, 22);
             this.radioButton18.Name = "radioButton18";
             this.radioButton18.Size = new System.Drawing.Size(79, 18);
             this.radioButton18.TabIndex = 234;
@@ -901,7 +904,7 @@ namespace Delmon_Managment_System.Forms
             this.radioButton16.AutoSize = true;
             this.radioButton16.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.radioButton16.Location = new System.Drawing.Point(551, 28);
+            this.radioButton16.Location = new System.Drawing.Point(546, 28);
             this.radioButton16.Name = "radioButton16";
             this.radioButton16.Size = new System.Drawing.Size(79, 18);
             this.radioButton16.TabIndex = 234;
@@ -993,7 +996,7 @@ namespace Delmon_Managment_System.Forms
             this.radioButton14.AutoSize = true;
             this.radioButton14.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.radioButton14.Location = new System.Drawing.Point(552, 20);
+            this.radioButton14.Location = new System.Drawing.Point(547, 20);
             this.radioButton14.Name = "radioButton14";
             this.radioButton14.Size = new System.Drawing.Size(79, 18);
             this.radioButton14.TabIndex = 234;
@@ -1086,7 +1089,7 @@ namespace Delmon_Managment_System.Forms
             this.radioButton12.AutoSize = true;
             this.radioButton12.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.radioButton12.Location = new System.Drawing.Point(556, 23);
+            this.radioButton12.Location = new System.Drawing.Point(551, 23);
             this.radioButton12.Name = "radioButton12";
             this.radioButton12.Size = new System.Drawing.Size(79, 18);
             this.radioButton12.TabIndex = 234;
@@ -1178,7 +1181,7 @@ namespace Delmon_Managment_System.Forms
             this.radioButton10.AutoSize = true;
             this.radioButton10.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.radioButton10.Location = new System.Drawing.Point(553, 24);
+            this.radioButton10.Location = new System.Drawing.Point(548, 24);
             this.radioButton10.Name = "radioButton10";
             this.radioButton10.Size = new System.Drawing.Size(79, 18);
             this.radioButton10.TabIndex = 234;
@@ -1270,7 +1273,7 @@ namespace Delmon_Managment_System.Forms
             this.radioButton8.AutoSize = true;
             this.radioButton8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.radioButton8.Location = new System.Drawing.Point(553, 21);
+            this.radioButton8.Location = new System.Drawing.Point(548, 21);
             this.radioButton8.Name = "radioButton8";
             this.radioButton8.Size = new System.Drawing.Size(79, 18);
             this.radioButton8.TabIndex = 234;
@@ -1362,7 +1365,7 @@ namespace Delmon_Managment_System.Forms
             this.radioButton6.AutoSize = true;
             this.radioButton6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.radioButton6.Location = new System.Drawing.Point(552, 20);
+            this.radioButton6.Location = new System.Drawing.Point(547, 20);
             this.radioButton6.Name = "radioButton6";
             this.radioButton6.Size = new System.Drawing.Size(79, 18);
             this.radioButton6.TabIndex = 234;
@@ -1385,9 +1388,9 @@ namespace Delmon_Managment_System.Forms
             this.ViewAssetReportbx.AutoSize = true;
             this.ViewAssetReportbx.Location = new System.Drawing.Point(380, 21);
             this.ViewAssetReportbx.Name = "ViewAssetReportbx";
-            this.ViewAssetReportbx.Size = new System.Drawing.Size(68, 21);
+            this.ViewAssetReportbx.Size = new System.Drawing.Size(134, 21);
             this.ViewAssetReportbx.TabIndex = 211;
-            this.ViewAssetReportbx.Text = "Asset";
+            this.ViewAssetReportbx.Text = "Printing Usage";
             this.ViewAssetReportbx.UseVisualStyleBackColor = true;
             // 
             // label45
@@ -1445,7 +1448,7 @@ namespace Delmon_Managment_System.Forms
             this.radioButton4.AutoSize = true;
             this.radioButton4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.radioButton4.Location = new System.Drawing.Point(556, 21);
+            this.radioButton4.Location = new System.Drawing.Point(551, 21);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(79, 18);
             this.radioButton4.TabIndex = 234;
@@ -1549,7 +1552,7 @@ namespace Delmon_Managment_System.Forms
             this.radioButton1.AutoSize = true;
             this.radioButton1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.radioButton1.Location = new System.Drawing.Point(556, 21);
+            this.radioButton1.Location = new System.Drawing.Point(551, 21);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(79, 18);
             this.radioButton1.TabIndex = 232;
@@ -1807,15 +1810,15 @@ namespace Delmon_Managment_System.Forms
             // dataGridView3
             // 
             this.dataGridView3.AllowUserToAddRows = false;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView3.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView3.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView3.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView3.Location = new System.Drawing.Point(419, 27);
             this.dataGridView3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView3.Name = "dataGridView3";
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView3.Size = new System.Drawing.Size(637, 274);
             this.dataGridView3.TabIndex = 89;
             this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick_1);
@@ -1958,7 +1961,7 @@ namespace Delmon_Managment_System.Forms
             this.BtnnewAgaency.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnnewAgaency.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.BtnnewAgaency.ForeColor = System.Drawing.Color.Firebrick;
-            this.BtnnewAgaency.Location = new System.Drawing.Point(11, 431);
+            this.BtnnewAgaency.Location = new System.Drawing.Point(7, 496);
             this.BtnnewAgaency.Name = "BtnnewAgaency";
             this.BtnnewAgaency.Size = new System.Drawing.Size(70, 31);
             this.BtnnewAgaency.TabIndex = 139;
@@ -1974,14 +1977,17 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView2.Location = new System.Drawing.Point(421, 4);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView2.Name = "dataGridView2";
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView2.Size = new System.Drawing.Size(576, 241);
             this.dataGridView2.TabIndex = 138;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick_1);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button18);
+            this.groupBox2.Controls.Add(this.button19);
+            this.groupBox2.Controls.Add(this.button24);
             this.groupBox2.Controls.Add(this.label16);
             this.groupBox2.Controls.Add(this.dataGridView4);
             this.groupBox2.Controls.Add(this.label15);
@@ -1991,9 +1997,57 @@ namespace Delmon_Managment_System.Forms
             this.groupBox2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.groupBox2.Location = new System.Drawing.Point(3, 221);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(412, 204);
+            this.groupBox2.Size = new System.Drawing.Size(412, 248);
             this.groupBox2.TabIndex = 137;
             this.groupBox2.TabStop = false;
+            // 
+            // button18
+            // 
+            this.button18.BackColor = System.Drawing.Color.White;
+            this.button18.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.button18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button18.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.button18.Location = new System.Drawing.Point(175, 208);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(70, 31);
+            this.button18.TabIndex = 138;
+            this.button18.Text = "Delete";
+            this.button18.UseVisualStyleBackColor = false;
+            this.button18.Visible = false;
+            this.button18.Click += new System.EventHandler(this.button18_Click_1);
+            // 
+            // button19
+            // 
+            this.button19.BackColor = System.Drawing.Color.White;
+            this.button19.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.button19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button19.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.button19.Location = new System.Drawing.Point(93, 208);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(73, 31);
+            this.button19.TabIndex = 137;
+            this.button19.Text = "Update";
+            this.button19.UseVisualStyleBackColor = false;
+            this.button19.Visible = false;
+            this.button19.Click += new System.EventHandler(this.button19_Click_1);
+            // 
+            // button24
+            // 
+            this.button24.BackColor = System.Drawing.Color.White;
+            this.button24.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.button24.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button24.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button24.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.button24.Location = new System.Drawing.Point(9, 208);
+            this.button24.Name = "button24";
+            this.button24.Size = new System.Drawing.Size(78, 31);
+            this.button24.TabIndex = 136;
+            this.button24.Text = "Add";
+            this.button24.UseVisualStyleBackColor = false;
+            this.button24.Visible = false;
+            this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
             // label16
             // 
@@ -2007,12 +2061,15 @@ namespace Delmon_Managment_System.Forms
             // 
             // dataGridView4
             // 
+            this.dataGridView4.AllowUserToAddRows = false;
+            this.dataGridView4.AllowUserToDeleteRows = false;
             this.dataGridView4.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView4.Location = new System.Drawing.Point(8, 73);
             this.dataGridView4.Name = "dataGridView4";
             this.dataGridView4.Size = new System.Drawing.Size(379, 114);
             this.dataGridView4.TabIndex = 61;
+            this.dataGridView4.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellClick);
             // 
             // label15
             // 
@@ -2042,6 +2099,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbcontact.Name = "cmbcontact";
             this.cmbcontact.Size = new System.Drawing.Size(124, 25);
             this.cmbcontact.TabIndex = 132;
+            this.cmbcontact.SelectionChangeCommitted += new System.EventHandler(this.cmbcontact_SelectionChangeCommitted);
             // 
             // button2
             // 
@@ -2050,7 +2108,7 @@ namespace Delmon_Managment_System.Forms
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.button2.ForeColor = System.Drawing.Color.Firebrick;
-            this.button2.Location = new System.Drawing.Point(252, 431);
+            this.button2.Location = new System.Drawing.Point(248, 496);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(70, 31);
             this.button2.TabIndex = 60;
@@ -2066,7 +2124,7 @@ namespace Delmon_Managment_System.Forms
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.button3.ForeColor = System.Drawing.Color.Firebrick;
-            this.button3.Location = new System.Drawing.Point(170, 431);
+            this.button3.Location = new System.Drawing.Point(166, 496);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(73, 31);
             this.button3.TabIndex = 59;
@@ -2082,7 +2140,7 @@ namespace Delmon_Managment_System.Forms
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.button1.ForeColor = System.Drawing.Color.Firebrick;
-            this.button1.Location = new System.Drawing.Point(86, 431);
+            this.button1.Location = new System.Drawing.Point(82, 496);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(78, 31);
             this.button1.TabIndex = 44;
@@ -2114,8 +2172,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView7.Location = new System.Drawing.Point(440, 404);
             this.dataGridView7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView7.Name = "dataGridView7";
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView7.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView7.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView7.Size = new System.Drawing.Size(614, 193);
             this.dataGridView7.TabIndex = 171;
             this.dataGridView7.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView7_CellClick);
@@ -2632,8 +2690,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView5.Location = new System.Drawing.Point(459, 221);
             this.dataGridView5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView5.Name = "dataGridView5";
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView5.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView5.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView5.Size = new System.Drawing.Size(342, 210);
             this.dataGridView5.TabIndex = 175;
             this.dataGridView5.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView5_CellClick);
@@ -3008,6 +3066,7 @@ namespace Delmon_Managment_System.Forms
             this.ClientSize = new System.Drawing.Size(1341, 718);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SettingFrm";
             this.Text = "Setting ";
             this.Load += new System.EventHandler(this.SettingFrm_Load);
@@ -3292,5 +3351,8 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.RadioButton radioButton6;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.Button button24;
     }
 }

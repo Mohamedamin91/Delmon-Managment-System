@@ -58,7 +58,7 @@ namespace Delmon_Managment_System.Forms
             this.label3 = new System.Windows.Forms.Label();
             this.cmbAssetModel = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.btnnewJob = new System.Windows.Forms.Button();
+            this.btnnewmodel = new System.Windows.Forms.Button();
             this.AssetIDTXT = new System.Windows.Forms.TextBox();
             this.PurchasingDtp = new System.Windows.Forms.DateTimePicker();
             this.txtsapid = new System.Windows.Forms.TextBox();
@@ -178,7 +178,7 @@ namespace Delmon_Managment_System.Forms
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.cmbAssetModel);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.btnnewJob);
+            this.groupBox1.Controls.Add(this.btnnewmodel);
             this.groupBox1.Controls.Add(this.AssetIDTXT);
             this.groupBox1.Controls.Add(this.PurchasingDtp);
             this.groupBox1.Controls.Add(this.txtsapid);
@@ -253,9 +253,9 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(470, 69);
+            this.dataGridView1.Location = new System.Drawing.Point(541, 92);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(906, 304);
+            this.dataGridView1.Size = new System.Drawing.Size(835, 304);
             this.dataGridView1.TabIndex = 58;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
@@ -446,7 +446,7 @@ namespace Delmon_Managment_System.Forms
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.label12.ForeColor = System.Drawing.Color.Black;
-            this.label12.Location = new System.Drawing.Point(6, 383);
+            this.label12.Location = new System.Drawing.Point(6, 387);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(75, 17);
             this.label12.TabIndex = 174;
@@ -487,22 +487,22 @@ namespace Delmon_Managment_System.Forms
             this.label4.Text = "Asset ID";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
-            // btnnewJob
+            // btnnewmodel
             // 
-            this.btnnewJob.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnnewJob.BackColor = System.Drawing.Color.White;
-            this.btnnewJob.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.btnnewJob.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnnewJob.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.btnnewJob.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnnewJob.Location = new System.Drawing.Point(784, 206);
-            this.btnnewJob.Margin = new System.Windows.Forms.Padding(4);
-            this.btnnewJob.Name = "btnnewJob";
-            this.btnnewJob.Size = new System.Drawing.Size(52, 30);
-            this.btnnewJob.TabIndex = 172;
-            this.btnnewJob.Text = "New";
-            this.btnnewJob.UseVisualStyleBackColor = false;
-            this.btnnewJob.Click += new System.EventHandler(this.btnnewJob_Click);
+            this.btnnewmodel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnnewmodel.BackColor = System.Drawing.Color.White;
+            this.btnnewmodel.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.btnnewmodel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnnewmodel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.btnnewmodel.ForeColor = System.Drawing.Color.Firebrick;
+            this.btnnewmodel.Location = new System.Drawing.Point(431, 215);
+            this.btnnewmodel.Margin = new System.Windows.Forms.Padding(4);
+            this.btnnewmodel.Name = "btnnewmodel";
+            this.btnnewmodel.Size = new System.Drawing.Size(52, 30);
+            this.btnnewmodel.TabIndex = 172;
+            this.btnnewmodel.Text = "New";
+            this.btnnewmodel.UseVisualStyleBackColor = false;
+            this.btnnewmodel.Click += new System.EventHandler(this.btnnewJob_Click);
             // 
             // AssetIDTXT
             // 
@@ -1182,6 +1182,7 @@ namespace Delmon_Managment_System.Forms
             this.Controls.Add(this.lblusername);
             this.Controls.Add(this.lblemail);
             this.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AssetFrm";
             this.Text = "AssetFrm";
@@ -1251,7 +1252,7 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Button addbtn;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DateTimePicker PurchasingDtp;
-        private System.Windows.Forms.Button btnnewJob;
+        private System.Windows.Forms.Button btnnewmodel;
         private System.Windows.Forms.ComboBox cmbVersion;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.DateTimePicker AssignDtp;

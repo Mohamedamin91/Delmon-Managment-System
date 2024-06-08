@@ -1324,6 +1324,9 @@ namespace Delmon_Managment_System.Forms
 
         private void btnuplode_Click(object sender, EventArgs e)
         {
+            SqlParameter ParamUserPrinter = new SqlParameter("@C0", SqlDbType.NVarChar) { Value = cmbPrinter.SelectedValue };
+
+
             if (cmbPrinter.Text == "Select")
             {
                 MessageBox.Show("Please select Printer !.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1522,7 +1525,35 @@ namespace Delmon_Managment_System.Forms
                                 if (dataInserted)
                                 {
                                     MessageBox.Show("Data uploaded successfully!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"Select * from LogReport");
+                                    dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT * FROM LogReport WHERE AssetId=@C0 ;", ParamUserPrinter);
+                                    // calculate sum
+                                    int sum = 0;
+
+                                    foreach (DataGridViewRow row in dataGridView5.Rows)
+                                    {
+                                        if (row.Cells[12].Value != null)
+                                        {
+                                            int quantity;
+                                            if (int.TryParse(row.Cells[12].Value.ToString(), out quantity))
+                                            {
+                                                sum += quantity;
+                                            }
+                                        }
+                                    }
+
+                                    // Create a new DataRow for the total row
+                                    DataTable dataTable = (DataTable)dataGridView5.DataSource;
+                                    DataRow totalRow = dataTable.NewRow();
+                                    totalRow[0] = "Total";
+                                    totalRow[12] = sum;
+                                    // Add the total row to the DataTable
+                                    dataTable.Rows.Add(totalRow);
+
+                                    // Get the DataGridViewRow for the total row
+                                    DataGridViewRow totalDataGridViewRow = dataGridView5.Rows[dataTable.Rows.Count - 1];
+
+                                    // Set the cell style for the new row
+                                    totalDataGridViewRow.DefaultCellStyle.BackColor = Color.YellowGreen;
                                 }
 
                                 if (duplicatesFound)
