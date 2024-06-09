@@ -647,16 +647,20 @@ namespace Delmon_Managment_System.Forms
             // Add conditions based on checkbox filters
             List<int> selectedStatus = new List<int>();
 
-            if (cbNotused.Checked)
-            {
-                query += " AND J.StatusID = @statusNotUsed";
-                selectedStatus.Add(2);
-            }
+            // check boxes
+            if (cbNotused.Checked) selectedStatus.Add(2);
+            if (cbReserved.Checked) selectedStatus.Add(3);
+            if (cbUnderProcess.Checked) selectedStatus.Add(4);
+            if (cbVISAStamped.Checked) selectedStatus.Add(5);
+            if (cbUsed.Checked) selectedStatus.Add(6);
+            if (cbExpired.Checked) selectedStatus.Add(7);
+            if (cbRefunded.Checked) selectedStatus.Add(8);
+            if (cbVISAExpiredAfterStamped.Checked) selectedStatus.Add(9);
 
-            if (cbReserved.Checked)
+            if (selectedStatus.Count > 0)
             {
-                query += " AND J.StatusID = @statusReserved";
-                selectedStatus.Add(3);
+                string statusFilter = string.Join(",", selectedStatus);
+                query += $" AND J.StatusID IN ({statusFilter})";
             }
 
             // Add conditions based on combobox selections
@@ -691,17 +695,6 @@ namespace Delmon_Managment_System.Forms
                 // Add parameters
                 command.Parameters.AddWithValue("@fromDate", dtpfrom.Value);
                 command.Parameters.AddWithValue("@toDate", dtpto.Value);
-
-                // Add parameters for checkbox filters
-                if (selectedStatus.Contains(2))
-                {
-                    command.Parameters.AddWithValue("@statusNotUsed", 2);
-                }
-
-                if (selectedStatus.Contains(3))
-                {
-                    command.Parameters.AddWithValue("@statusReserved", 3);
-                }
 
                 // Add parameters for combobox selections
                 if ((int)cmbCompany.SelectedValue != 0)
@@ -1005,19 +998,14 @@ namespace Delmon_Managment_System.Forms
             // Set the query parameters
             SqlParameter paramDateFrom = new SqlParameter("@param3", SqlDbType.Date);
             paramDateFrom.Value = dtpfrom.Value;
-
             SqlParameter paramDateTo = new SqlParameter("@param4", SqlDbType.Date);
             paramDateTo.Value = dtpto.Value;
-
-           
-
-
-            
-
             SqlParameter paramCompany2 = new SqlParameter("@param8", SqlDbType.NVarChar);
             paramCompany2.Value = cmbCompany.SelectedValue;
             SqlParameter paramReservedTo2 = new SqlParameter("@param9", SqlDbType.NVarChar);
             paramReservedTo2.Value = cmbReservedTo.SelectedValue;
+            SqlParameter paramConsulate = new SqlParameter("@param10", SqlDbType.NVarChar);
+            paramConsulate.Value = cmbConsulate.SelectedValue;
 
 
             if (e.RowIndex == dataGridView2.Rows.Count - 1) // Total row
@@ -1070,10 +1058,15 @@ namespace Delmon_Managment_System.Forms
                     {
                         queryTotal += " AND J.ReservedTo = @param9";
                     }
+                    if (cmbConsulate.Text != "Select")
+                    {
+                        queryTotal += " AND J.ConsulateID = @param10";
+                    }
+                   
 
-                 
-                    
-                    
+
+
+
                     using (SqlCommand command = new SqlCommand(queryTotal, connection))
                     {
                         command.Parameters.Add(paramDateFrom);
@@ -1086,6 +1079,11 @@ namespace Delmon_Managment_System.Forms
                         if (cmbReservedTo.Text != "Select")
                         {
                             command.Parameters.Add(paramReservedTo2);
+                        }
+                        if (cmbConsulate.Text != "Select")
+                        {
+                            command.Parameters.Add(paramConsulate);
+
                         }
 
                         using (SqlDataAdapter adapter = new SqlDataAdapter(command))
@@ -1774,6 +1772,13 @@ namespace Delmon_Managment_System.Forms
                     package.SaveAs(new System.IO.FileInfo(saveFileDialog.FileName));
                 }
             }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            dataGridView2.DataSource = dataGridView4.DataSource = null;
+            cmbCompany.Text = cmbReservedTo.Text = cmbConsulate.Text = "Select";
+            dtpfrom.Value =dtpto.Value= DateTime.Now;
         }
     }
 }
