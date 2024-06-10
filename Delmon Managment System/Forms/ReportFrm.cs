@@ -44,6 +44,20 @@ namespace Delmon_Managment_System.Forms
 
         }
 
+        private void UncheckAllCheckboxes(Control parent)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                if (control is CheckBox checkBox)
+                {
+                    checkBox.Checked = false;
+                }
+                else if (control.HasChildren)
+                {
+                    UncheckAllCheckboxes(control);
+                }
+            }
+        }
         private void PrintingFrm_Load(object sender, EventArgs e)
         {
             SQLCONN.OpenConection();
@@ -1779,6 +1793,7 @@ namespace Delmon_Managment_System.Forms
             dataGridView2.DataSource = dataGridView4.DataSource = null;
             cmbCompany.Text = cmbReservedTo.Text = cmbConsulate.Text = "Select";
             dtpfrom.Value =dtpto.Value= DateTime.Now;
+            UncheckAllCheckboxes(this);
         }
     }
 }

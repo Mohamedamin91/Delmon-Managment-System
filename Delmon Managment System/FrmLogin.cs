@@ -167,6 +167,18 @@ namespace Delmon_Managment_System
             }
             SQLCONN.CloseConnection();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+
+        }
+
+        private void BTNcLOSE_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
         //public static string GetLatestVersionNumber(string filePath)
         //{
         //    try

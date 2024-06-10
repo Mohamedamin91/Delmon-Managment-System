@@ -35,10 +35,10 @@ namespace Delmon_Managment_System.Forms
         CultureInfo SA = new CultureInfo("ar-SA");
         CultureInfo US = new CultureInfo("en-US");
         FrmLogin frmLogin = new FrmLogin();
-       // System.Timers.Timer tmr = null;
+        // System.Timers.Timer tmr = null;
         SqlParameter paramcomapany = new SqlParameter("@Comp", SqlDbType.Int);
         SqlParameter paramReservedTo = new SqlParameter("@CompReservedTo", SqlDbType.Int);
-        public bool btnExpireChk =false;
+        public bool btnExpireChk = false;
         public bool Dgv3CHK = false;
 
         bool hasView = false;
@@ -60,7 +60,7 @@ namespace Delmon_Managment_System.Forms
 
 
             InitializeComponent();
-      
+
 
 
 
@@ -92,6 +92,11 @@ namespace Delmon_Managment_System.Forms
             this.timer1.Interval = 1000;
             timer1.Start();
             SQLCONN.OpenConection();
+            string query = "SELECT COMPID, COMPName_EN FROM Companies";
+            cmbCompany.ValueMember = "COMPID";
+            cmbCompany.DisplayMember = "COMPName_EN";
+            cmbCompany.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query);
+
             SqlDataReader dr = SQLCONN.DataReader(@"
         SELECT ps.PermissionName
         FROM UserPermissions us
@@ -100,7 +105,7 @@ namespace Delmon_Managment_System.Forms
                WHERE u.EmployeeID = @UserID",
                        new SqlParameter("@UserID", SqlDbType.NVarChar) { Value = CommonClass.EmployeeID });
 
-        
+
             while (dr.Read())
             {
                 string permissionName = dr["PermissionName"].ToString();
@@ -125,27 +130,27 @@ namespace Delmon_Managment_System.Forms
             if (hasView == false)
             {
                 MessageBox.Show("Sorry, You are not allowed to view this Module/Screen , kindly contact the administrator !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                groupBox2.Enabled = false;
+                groupbox.Enabled = false;
                 groupBox3.Enabled = false;
             }
-            else 
+            else
 
             {
-                groupBox2.Enabled = true;
+                groupbox.Enabled = true;
                 groupBox3.Enabled = true;
 
-                this.ActiveControl = Visanumtxt;
+                this.ActiveControl = Searchtxt;
 
 
                 if (hasEdit)
                 {
 
-                   // btnUpdate.Visible = true;
+                    // btnUpdate.Visible = true;
                     btnUpdate.Enabled = true;
                 }
                 if (hasDelete)
                 {
-                   // DeleteBtn.Visible = true;
+                    // DeleteBtn.Visible = true;
                     DeleteBtn.Enabled = true;
                 }
                 if (hasAdd)
@@ -252,7 +257,7 @@ namespace Delmon_Managment_System.Forms
 
 
             }
-            else if (cmbCompany.Text == "Select" || cmbCompany.Text=="")
+            else if (cmbCompany.Text == "Select" || cmbCompany.Text == "")
             {
                 MessageBox.Show("Please Select ' Company ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
@@ -268,7 +273,7 @@ namespace Delmon_Managment_System.Forms
 
 
             }
-            else if (cmbConsulate.Text == "Select" || cmbConsulate.Text == "" )
+            else if (cmbConsulate.Text == "Select" || cmbConsulate.Text == "")
             {
                 MessageBox.Show("Please Select ' Consulate ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
@@ -276,7 +281,7 @@ namespace Delmon_Managment_System.Forms
 
 
             }
-            else if (cmbJob.Text == "Select" || cmbJob.Text == "" )
+            else if (cmbJob.Text == "Select" || cmbJob.Text == "")
             {
                 MessageBox.Show("Please Select ' Job ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
@@ -385,7 +390,7 @@ namespace Delmon_Managment_System.Forms
 
                                 SQLCONN.ExecuteQueries("insert into VISAJobList (VisaNumber,statusid,ConsulateID,JobID,ReservedTo,AgencyID,EmployeeID,Remarks) " +
                                     " values (@C1,@C2,@C3,@C4,@CompReservedTo,@C5,@cand,@C6) ",
-                                    paramVisanumber, paramstatusID, ParamConsulate, paramJob, paramReservedTo, paramCandidate,paramRemarks);
+                                    paramVisanumber, paramstatusID, ParamConsulate, paramJob, paramReservedTo, paramCandidate, paramRemarks);
 
                             }
                             MessageBox.Show("Jobs has been added successfully to Visa", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -423,7 +428,7 @@ namespace Delmon_Managment_System.Forms
                             cmbAgency.SelectedValue = 0;
                             paramAgency.Value = 0;
                         }
-                        else 
+                        else
                         {
                             paramAgency.Value = cmbAgency.SelectedValue;
 
@@ -479,7 +484,7 @@ namespace Delmon_Managment_System.Forms
                             btnFinish.Enabled = true;
 
                             // Show a message to the user if necessary
-                         //  MessageBox.Show("Please click Finish Button after clicking Add Button", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            //  MessageBox.Show("Please click Finish Button after clicking Add Button", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             btnFinish.PerformClick();
                             btnFinish.Enabled = false;
                             dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber=" + Visanumtxt.Text + " ");
@@ -494,7 +499,7 @@ namespace Delmon_Managment_System.Forms
 
 
                     }
-                   
+
 
 
                     SQLCONN.CloseConnection();
@@ -584,35 +589,59 @@ namespace Delmon_Managment_System.Forms
 
         private void Visanumtxt_TextChanged(object sender, EventArgs e)
         {
-            
-                Visanumtxt.BackColor = Color.White;
-                SQLCONN.OpenConection();
-                dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT  [VisaNumber]
-      ,[ComapnyID]
-      ,[ReceviedDate]
-      ,[IssueDateHijri]
-      ,[IssueDateEN]
-      ,[ExpiryDateHijri]
-      ,[ExpiryDateEN]
-      ,[TotalVisas]
-      ,[Remarks]
-      ,[UserID]
-      ,[DatetimeLOG]
-      ,[CRNumber]
-      ,[ID_Number]
-       FROM [DelmonGroupDB].[dbo].[VISA], [Companies] where Companies.COMPID=VISA.ComapnyID and VisaNumber LIKE '%" + Visanumtxt.Text + "%'");
-                SQLCONN.CloseConnection();
-                //this.dataGridView1.Columns[2].Visible = false;
-                //this.dataGridView1.Columns[4].Visible = false;
-                //this.dataGridView1.Columns[5].Visible = false;
-                //this.dataGridView1.Columns[6].Visible = false;
-                //this.dataGridView1.Columns[8].Visible = false;
 
+            //SQLCONN.OpenConection();
+            //SqlParameter paramID = new SqlParameter("@ID", SqlDbType.NVarChar);
+            //paramID.Value = Visanumtxt.Text;
 
-                dataGridView1.Visible = true;
-            }
-            
         
+
+            //if (VisaNumberID == 0 && Visanumtxt.Text == string.Empty)
+            //{
+            //    MessageBox.Show("Please Choose A Record !");
+            //}
+            //else
+            //{
+            //    if (btnExpireChk && Dgv3CHK == true)
+            //    {
+            //        dataGridView2.Visible = true;
+            //        dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber= @ID and  VISAJobList.StatusID != 6 ",paramID);
+
+
+            //    }
+
+            //    else 
+            //    {
+                
+            //        dataGridView2.Visible = true;
+
+            //        string query = "SELECT COMPID,COMPName_EN FROM Companies";
+            //        cmbCompany.ValueMember = "COMPID";
+            //        cmbCompany.DisplayMember = "COMPName_EN";
+            //        cmbCompany.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query);
+
+            //        dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber = @ID ", paramID);
+
+            // //       Visanumtxt.Text = VisaNumberID.ToString();
+
+
+
+
+               
+
+            //    }
+
+            //}
+
+            //dataGridView1.Visible = true;
+
+            //SQLCONN.CloseConnection();
+
+
+
+        }
+
+
 
         private void Visanumtxt_Leave(object sender, EventArgs e)
         {
@@ -1135,12 +1164,12 @@ namespace Delmon_Managment_System.Forms
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            if (hasAdd==true)
+            if (hasAdd == true)
             {
                 AddBtn.Visible = btnFinish.Visible = true;
             }
 
-           
+
             btnNew.Visible = Findbtn.Visible = false;
             ClearTextBoxes();
             VisaFrm_Load(sender, e);
@@ -1148,7 +1177,7 @@ namespace Delmon_Managment_System.Forms
             Visanumtxt.BackColor = Color.White;
             TotalVisastxt.BackColor = Color.White;
             cmbReservedTo.Enabled = cmbCompany.Enabled = cmbcandidates.Enabled = cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = cmbAgency.Enabled = true;
-            txtCRNumber.Enabled= txtsponserID.Enabled= TotalVisastxt.Enabled = RemarksTxt.Enabled = true;
+            txtCRNumber.Enabled = txtsponserID.Enabled = TotalVisastxt.Enabled = RemarksTxt.Enabled = true;
             cmbReservedTo.Text = cmbCompany.Text = cmbcandidates.Text = cmbStatus.Text = cmbJob.Text = cmbConsulate.Text = cmbAgency.Text = "Select";
 
             ReceviedPicker.Enabled = true;
@@ -1176,12 +1205,6 @@ namespace Delmon_Managment_System.Forms
 
         }
 
-        private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-
-
-        }
-
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -1197,7 +1220,7 @@ namespace Delmon_Managment_System.Forms
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
 
-            
+
 
 
 
@@ -1498,7 +1521,7 @@ namespace Delmon_Managment_System.Forms
                         }
                         if (hasDelete)
                         {
-                             DeleteBtn.Visible = true;
+                            DeleteBtn.Visible = true;
                             DeleteBtn.Enabled = true;
                         }
                         if (hasAdd)
@@ -1508,7 +1531,7 @@ namespace Delmon_Managment_System.Forms
                         }
 
 
-                  
+
 
 
 
@@ -1517,8 +1540,8 @@ namespace Delmon_Managment_System.Forms
             }
             SQLCONN.CloseConnection();
         }
-    
-        
+
+
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -1810,7 +1833,7 @@ namespace Delmon_Managment_System.Forms
 
         private void btnAssign_Click(object sender, EventArgs e)
         {
-            
+
             SqlParameter paramPID = new SqlParameter("@C1", SqlDbType.Int);
             paramPID.Value = cmbcandidates.SelectedValue;
 
@@ -1818,7 +1841,7 @@ namespace Delmon_Managment_System.Forms
             paramFilenumber.Value = FileNumberID;
             SqlParameter paramAgency = new SqlParameter("@C3", SqlDbType.NVarChar);
             paramAgency.Value = cmbAgency.SelectedValue;
-         
+
 
 
 
@@ -1826,7 +1849,7 @@ namespace Delmon_Managment_System.Forms
             {
                 SQLCONN.OpenConection();
                 SQLCONN.ExecuteQueries("update  VISAJobList set EmployeeID=@C1,AgencyID=@C3 where FileNumber=@C2",
-                                              paramPID, paramFilenumber,paramAgency);
+                                              paramPID, paramFilenumber, paramAgency);
                 MessageBox.Show("File Number / Agency Has been Assigned Successfully   ");
                 VisaFileNumberID.Text = "";
                 //cmbcandidates.Text = "Select";
@@ -1836,7 +1859,7 @@ namespace Delmon_Managment_System.Forms
                 dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber=" + VisaNumberID + " ");
                 // ClearTextBoxes();
                 SQLCONN.CloseConnection();
-                
+
             }
             else
             {
@@ -1852,23 +1875,23 @@ namespace Delmon_Managment_System.Forms
         private void btnnewJob_Click(object sender, EventArgs e)
         {
             FrmJobsNew frmJobs = new FrmJobsNew();
-           // this.Hide();
+            // this.Hide();
             frmJobs.Show();
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-       
+
 
             SqlParameter paramRecevidDate = new SqlParameter("@C1", SqlDbType.Date);
             paramRecevidDate.Value = ReceviedPicker.Value;
-        
+
             SqlParameter paramIssHIJriDate = new SqlParameter("@C2", SqlDbType.NVarChar);
             paramIssHIJriDate.Value = issuhijritxt.Text;
 
-       
 
-           
+
+
             SqlParameter paramVisaID = new SqlParameter("@id", SqlDbType.Int);
             paramVisaID.Value = VisaNumberID;
 
@@ -1906,8 +1929,8 @@ namespace Delmon_Managment_System.Forms
             if (VisaNumberID != 0 & FileNumberID != 0)
             {
 
-               
-         
+
+
                 if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
 
@@ -1931,7 +1954,7 @@ namespace Delmon_Managment_System.Forms
                     {
 
                         SQLCONN.ExecuteQueries("update VISAJobList set StatusID=@C4,[EmployeeID]=@C9,AgencyID=@C7 ,[ConsulateID] = @C5,[JobID] = @C6 ,ReservedTo=@CompReservedTo  where FileNumber=@FileNumberid",
-                       paramstatusID, paramCandidate2, paramAgency, ParamConsulate, paramJob, paramReservedTo, paramFileNumberID,paramRemarks);
+                       paramstatusID, paramCandidate2, paramAgency, ParamConsulate, paramJob, paramReservedTo, paramFileNumberID, paramRemarks);
 
                     }
                     else
@@ -1941,7 +1964,7 @@ namespace Delmon_Managment_System.Forms
 
                     }
 
-                       MessageBox.Show("Record Updated Successfully");
+                    MessageBox.Show("Record Updated Successfully");
 
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {
@@ -1975,7 +1998,7 @@ namespace Delmon_Managment_System.Forms
                                     object originalValue = originalData.Rows[0][columnName];
                                     object updatedValue = updatedData.Rows[0][columnName];
                                     command.Parameters.Clear();
-                                    command.Parameters.AddWithValue("@FileNumberid", FileNumberID +" - " + "Visa");
+                                    command.Parameters.AddWithValue("@FileNumberid", FileNumberID + " - " + "Visa");
                                     command.Parameters.AddWithValue("@ColumnName", columnName);
                                     command.Parameters.AddWithValue("@OldValue", originalValue);
                                     command.Parameters.AddWithValue("@NewValue", updatedValue);
@@ -2009,7 +2032,7 @@ namespace Delmon_Managment_System.Forms
             {
                 MessageBox.Show("Please Select Record to Update");
             }
-           
+
         }
 
         private void groupBox2_Enter_1(object sender, EventArgs e)
@@ -2082,33 +2105,33 @@ namespace Delmon_Managment_System.Forms
         private void cmbCompany_SelectionChangeCommitted(object sender, EventArgs e)
         {
 
-          SQLCONN.OpenConection();
-          SqlDataReader  dr = SQLCONN.DataReader("SELECT ID_Number,CRNumber FROM [DelmonGroupDB].[dbo].[Companies] where  COMPID=" + cmbCompany.SelectedValue +" ");
+            SQLCONN.OpenConection();
+            SqlDataReader dr = SQLCONN.DataReader("SELECT ID_Number,CRNumber FROM [DelmonGroupDB].[dbo].[Companies] where  COMPID=" + cmbCompany.SelectedValue + " ");
             if (dr.Read())
             {
                 txtsponserID.Text = dr["ID_Number"].ToString();
                 txtCRNumber.Text = dr["CRNumber"].ToString();
             }
-            SQLCONN.CloseConnection();   
+            SQLCONN.CloseConnection();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
 
 
-          
+
 
 
         }
 
         private void cmbcandidates2_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void cmbcandidates_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void cmbcandidates_DropDown(object sender, EventArgs e)
@@ -2132,8 +2155,8 @@ namespace Delmon_Managment_System.Forms
             cmbJob.ValueMember = "JobID";
             cmbJob.DisplayMember = "JobTitleEN";
             cmbJob.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query2);
-          //  cmbJob.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-          //  cmbJob.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //  cmbJob.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //  cmbJob.AutoCompleteSource = AutoCompleteSource.ListItems;
             SQLCONN.CloseConnection();
 
         }
@@ -2146,8 +2169,8 @@ namespace Delmon_Managment_System.Forms
             cmbAgency.ValueMember = "AgencID";
             cmbAgency.DisplayMember = "AgenceName";
             cmbAgency.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select AgencID,AgenceName  from Agencies /*order by AgencID*/ ");
-          //  cmbAgency.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-         //   cmbAgency.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //  cmbAgency.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //   cmbAgency.AutoCompleteSource = AutoCompleteSource.ListItems;
             SQLCONN.CloseConnection();
 
 
@@ -2163,8 +2186,8 @@ namespace Delmon_Managment_System.Forms
             cmbStatus.ValueMember = "statusid";
             cmbStatus.DisplayMember = "status";
             cmbStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query4);
-           // cmbStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-           // cmbStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
+            // cmbStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            // cmbStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
             SQLCONN.CloseConnection();
         }
 
@@ -2179,8 +2202,8 @@ namespace Delmon_Managment_System.Forms
             cmbConsulate.ValueMember = "Consulates.ConsulateID";
             cmbConsulate.DisplayMember = "ConsulateCity";
             cmbConsulate.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query3);
-           // cmbConsulate.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-           // cmbConsulate.AutoCompleteSource = AutoCompleteSource.ListItems;
+            // cmbConsulate.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            // cmbConsulate.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             SQLCONN.CloseConnection();
 
@@ -2342,7 +2365,7 @@ GROUP BY
             if (dataGridView3.Rows.Count == 0)
             {
                 // Display your message
-                MessageBox.Show("There are No visas that will expire within one month.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("There are No Visas that will expire within one month.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -2355,21 +2378,21 @@ GROUP BY
             {
                 for (int i = 0; i < rw.Cells.Count; i++)
                 {
-                  VisaNumberID = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString());
-                 }
-                    Visanumtxt.Text = VisaNumberID.ToString();    
+                    VisaNumberID = Convert.ToInt32(dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString());
                 }
+                Visanumtxt.Text = VisaNumberID.ToString();
             }
+        }
 
         private void cmbcandidates_KeyPress(object sender, KeyPressEventArgs e)
         {
-           // cmbcandidates.DroppedDown = false;
+            // cmbcandidates.DroppedDown = false;
 
         }
 
         private void cmbAgency_KeyPress(object sender, KeyPressEventArgs e)
         {
-           // cmbAgency.DroppedDown = false;
+            // cmbAgency.DroppedDown = false;
 
         }
 
@@ -2381,7 +2404,7 @@ GROUP BY
 
         private void cmbConsulate_KeyPress(object sender, KeyPressEventArgs e)
         {
-           // cmbConsulate.DroppedDown = false;
+            // cmbConsulate.DroppedDown = false;
 
         }
 
@@ -2413,8 +2436,240 @@ GROUP BY
         {
             Dgv3CHK = true;
         }
+
+        private void Searchtxt_TextChanged(object sender, EventArgs e)
+        {
+
+            SQLCONN.OpenConection();
+            SqlParameter paramAssetSearch = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramAssetSearch.Value = Searchtxt.Text;
+            string query = @"SELECT  [VisaNumber]
+      ,[ComapnyID]
+      ,[ReceviedDate]
+      ,[IssueDateHijri]
+      ,[IssueDateEN]
+      ,[ExpiryDateHijri]
+      ,[ExpiryDateEN]
+      ,[TotalVisas]
+      ,[Remarks]
+      ,[UserID]
+      ,[DatetimeLOG]
+      ,[CRNumber]
+      ,[ID_Number]
+       FROM [DelmonGroupDB].[dbo].[VISA], [Companies] where Companies.COMPID=VISA.ComapnyID and VisaNumber LIKE '%' + @C1 + '%' ORDER BY VisaNumber ";
+
+            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramAssetSearch);
+
+            SQLCONN.CloseConnection();
+
+
+
+            dataGridView1.Visible = true;
+        }
+
+        private async void dataGridView1_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 1 || e.RowIndex >= 0)
+            {
+                try
+                {
+                    // Load company data asynchronously
+                    await LoadCompanyDataAsync();
+
+                    DataGridViewRow selectedRow = dataGridView1.Rows[e.RowIndex];
+
+                    // Populate fields asynchronously
+                    await PopulateFieldsAsync(selectedRow);
+                }
+                catch (Exception ex)
+                {
+                    // Handle any exceptions
+                    MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private async Task LoadCompanyDataAsync()
+        {
+            try
+            {
+                SQLCONN.OpenConection();
+                string query = "SELECT COMPID, COMPName_EN FROM Companies";
+                var dataSource = await Task.Run(() => SQLCONN.ShowDataInGridViewORCombobox(query));
+
+                // Set combo box data source on the UI thread
+                this.Invoke((Action)(() =>
+                {
+                    cmbCompany.ValueMember = "COMPID";
+                    cmbCompany.DisplayMember = "COMPName_EN";
+                    cmbCompany.DataSource = dataSource;
+                }));
+            }
+            finally
+            {
+                SQLCONN.CloseConnection();
+            }
+        }
+
+        private async Task PopulateFieldsAsync(DataGridViewRow selectedRow)
+        {
+            // Perform field population on the UI thread
+            await Task.Run(() =>
+            {
+                this.Invoke((Action)(() =>
+                {
+                    // Populate fields from selected row
+                    SetFieldValues(selectedRow);
+
+                    // Load VISA job list data
+                    LoadVisaJobListAsync(VisaNumberID);
+
+                    // Calculate dates
+                    CalculateDates();
+                }));
+            });
+        }
+
+        private void SetFieldValues(DataGridViewRow selectedRow)
+        {
+            // Cell values
+            object cell1Value = selectedRow.Cells[1].Value;
+            object cell2Value = selectedRow.Cells[2].Value;
+            object cell3Value = selectedRow.Cells[3].Value;
+            object cell4Value = selectedRow.Cells[4].Value;
+            object cell5Value = selectedRow.Cells[5].Value;
+            object cell6Value = selectedRow.Cells[6].Value;
+            object cell7Value = selectedRow.Cells[7].Value;
+            object cell8Value = selectedRow.Cells[8].Value;
+            object cell11Value = selectedRow.Cells[11].Value;
+            object cell12Value = selectedRow.Cells[12].Value;
+
+            if (DateTime.TryParse(cell2Value?.ToString(), out DateTime parsedDate2))
+            {
+                ReceviedPicker.Value = parsedDate2;
+            }
+            if (cell3Value != null && !string.IsNullOrEmpty(cell3Value.ToString()))
+            {
+                issuhijritxt.Text = cell3Value.ToString();
+            }
+            if (cell4Value != null && !string.IsNullOrEmpty(cell4Value.ToString()))
+            {
+                IssueDateENTxt.Text = cell4Value.ToString();
+            }
+            if (cell5Value != null && !string.IsNullOrEmpty(cell5Value.ToString()))
+            {
+                ExpiaryHijritxt.Text = cell5Value.ToString();
+            }
+            if (cell6Value != null && !string.IsNullOrEmpty(cell6Value.ToString()))
+            {
+                expairENDATEtxt.Text = cell6Value.ToString();
+            }
+
+            if (int.TryParse(selectedRow.Cells[0].Value?.ToString(), out int parsedVisaNumberID))
+            {
+                VisaNumberID = parsedVisaNumberID;
+            }
+
+            if (cell1Value != null && !string.IsNullOrEmpty(cell1Value.ToString()))
+            {
+                cmbCompany.SelectedValue = cell1Value;
+            }
+            if (cell7Value != null && !string.IsNullOrEmpty(cell7Value.ToString()))
+            {
+                TotalVisastxt.Text = cell7Value.ToString();
+            }
+            if (cell8Value != null && !string.IsNullOrEmpty(cell8Value.ToString()))
+            {
+                RemarksTxt.Text = cell8Value.ToString();
+            }
+            if (cell11Value != null && !string.IsNullOrEmpty(cell11Value.ToString()))
+            {
+                txtCRNumber.Text = cell11Value.ToString();
+            }
+            if (cell12Value != null && !string.IsNullOrEmpty(cell12Value.ToString()))
+            {
+                txtsponserID.Text = cell12Value.ToString();
+            }
+
+            Visanumtxt.Text = VisaNumberID.ToString();
+        }
+
+        private async void LoadVisaJobListAsync(int visaNumberID)
+        {
+            await Task.Run(() =>
+            {
+                SQLCONN.OpenConection();
+                var dataSource = SQLCONN.ShowDataInGridViewORCombobox($"SELECT * FROM VISAJobList WHERE visanumber = {visaNumberID} AND VISAJobList.StatusID != 6");
+
+                this.Invoke((Action)(() =>
+                {
+                    dataGridView2.DataSource = dataSource;
+                    SQLCONN.CloseConnection();
+                }));
+            });
+        }
+
+        private void CalculateDates()
+        {
+            string a = issuhijritxt.Text.Trim();
+            DateTime toGregorian;
+            DateTime b, b2, dtNOW;
+
+            if (!string.IsNullOrEmpty(a))
+            {
+                if (DateTime.TryParseExact(a, "dd/MM/yyyy", SA, System.Globalization.DateTimeStyles.None, out toGregorian))
+                {
+                    b = toGregorian;
+                    b2 = toGregorian;
+                    dtNOW = DateTime.Now;
+
+                    issuhijritxt.Text = b.ToString("f");
+                    IssueDateHijri = b.ToString("dd/MM/yyyy");
+                    issuhijritxt.Text = IssueDateHijri;
+
+                    b2 = b2.AddDays(709);
+                    ExpiryDateHijri = b2.ToString("dd/MM/yyyy");
+                    ExpiaryHijritxt.Text = ExpiryDateHijri;
+
+                    IssueDateEN = toGregorian.ToString("dd/MM/yyyy");
+                    IssueDateENTxt.Text = IssueDateEN;
+
+                    toGregorian = toGregorian.AddDays(709);
+                    ExpiryDateENP = toGregorian.ToString("dd/MM/yyyy");
+                    expairENDATEtxt.Text = ExpiryDateENP;
+
+                    if (DateTime.TryParseExact(ExpiryDateENP, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime futurDate))
+                    {
+                        var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
+
+                        if (numberOfDays <= 0)
+                        {
+                            Remaininglbl.Text = "Expired";
+                        }
+                        else
+                        {
+                            Remaininglbl.Text = numberOfDays.ToString();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                toGregorian = DateTime.Now;
+                b = DateTime.Now;
+                b2 = DateTime.Now;
+                dtNOW = DateTime.Now;
+            }
+        }
+
+
+
+
+
+
+
     }
-    }
+}
     
 
 

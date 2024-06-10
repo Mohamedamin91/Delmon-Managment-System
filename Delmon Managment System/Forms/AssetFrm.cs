@@ -1476,10 +1476,6 @@ where
 
             dr.Close();
 
-
-
-
-
             if (AssetID == null && AssetIDTXT.Text == string.Empty)
             {
                 MessageBox.Show("Please Choose A Record !");
@@ -1526,6 +1522,7 @@ where
                     dataGridView2.Columns[1].Width = 300;
 
                 }
+                //assign history 
                 if (tabControl2.SelectedTab == tabControl2.TabPages[1])
                 {
                     dataGridView2.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(@"
@@ -2090,6 +2087,20 @@ where
 //                }
 
 //            }
+        }
+
+        private void picVisa_Click(object sender, EventArgs e)
+        {
+            if (AssetIDTXT.Text != string.Empty)
+            {
+                Clipboard.SetText(AssetIDTXT.Text);
+                txtvisa.Visible = true;
+                txtvisa.Text = "Copied !";
+            }
+            else
+            {
+
+            }
         }
 
         private void cmbbrand_KeyDown(object sender, KeyEventArgs e)

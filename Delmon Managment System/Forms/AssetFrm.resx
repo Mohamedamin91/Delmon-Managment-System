@@ -118,6 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="picVisa.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EwAACxMBAJqcGAAAANJJREFUOE9jwAXMDfs1TU16/2Pinq/mRj3GFha90lCl+AE+g0xMuoNMjHvum5v3
+        K0CVMzCYmPQpYcNmZhP5gJqO4DIIyr4NdxmmQgg2M+51NDbuDsE0DNkgMB9iGKoiJGza62Fi3Psd07Ce
+        ryCNQItCYdjYuNcMr0EgGtOwnn8mJr3v0DFBg6D4p4lJTziQ3o8khoJxGgRyLjDQXWDY2LjHxsSkXx2b
+        WhDG7SJsGNWVKHjUICgevgYB05YuLFOjY5IMAhUt4JyODWDTgAvjNoiBAQCJaxSiSTQVFAAAAABJRU5E
+        rkJggg==
+</value>
+  </data>
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAALGPC/xhBQAACJtJREFUaEPt
