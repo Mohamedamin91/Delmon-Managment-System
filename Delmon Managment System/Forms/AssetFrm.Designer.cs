@@ -30,12 +30,14 @@ namespace Delmon_Managment_System.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AssetFrm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AssetFrm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtvisa = new System.Windows.Forms.Label();
+            this.picVisa = new System.Windows.Forms.PictureBox();
             this.btnDelete = new System.Windows.Forms.Button();
             this.updatebtn = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
@@ -72,6 +74,7 @@ namespace Delmon_Managment_System.Forms
             this.label6 = new System.Windows.Forms.Label();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.labl = new System.Windows.Forms.TabPage();
+            this.btnDownload2 = new System.Windows.Forms.Button();
             this.btnuplode2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
@@ -112,11 +115,12 @@ namespace Delmon_Managment_System.Forms
             this.lblemail = new System.Windows.Forms.Label();
             this.lblusername = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.txtvisa = new System.Windows.Forms.Label();
-            this.picVisa = new System.Windows.Forms.PictureBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.PriceTXT = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picVisa)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl2.SuspendLayout();
@@ -127,7 +131,6 @@ namespace Delmon_Managment_System.Forms
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picVisa)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -159,6 +162,8 @@ namespace Delmon_Managment_System.Forms
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label18);
+            this.groupBox1.Controls.Add(this.PriceTXT);
             this.groupBox1.Controls.Add(this.txtvisa);
             this.groupBox1.Controls.Add(this.picVisa);
             this.groupBox1.Controls.Add(this.btnDelete);
@@ -202,6 +207,29 @@ namespace Delmon_Managment_System.Forms
             this.groupBox1.TabIndex = 181;
             this.groupBox1.TabStop = false;
             // 
+            // txtvisa
+            // 
+            this.txtvisa.AutoSize = true;
+            this.txtvisa.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtvisa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.txtvisa.Location = new System.Drawing.Point(456, 24);
+            this.txtvisa.Name = "txtvisa";
+            this.txtvisa.Size = new System.Drawing.Size(35, 15);
+            this.txtvisa.TabIndex = 183;
+            this.txtvisa.Text = "Text";
+            this.txtvisa.Visible = false;
+            // 
+            // picVisa
+            // 
+            this.picVisa.Image = ((System.Drawing.Image)(resources.GetObject("picVisa.Image")));
+            this.picVisa.Location = new System.Drawing.Point(429, 23);
+            this.picVisa.Name = "picVisa";
+            this.picVisa.Size = new System.Drawing.Size(18, 18);
+            this.picVisa.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picVisa.TabIndex = 182;
+            this.picVisa.TabStop = false;
+            this.picVisa.Click += new System.EventHandler(this.picVisa_Click);
+            // 
             // btnDelete
             // 
             this.btnDelete.BackColor = System.Drawing.Color.White;
@@ -244,7 +272,7 @@ namespace Delmon_Managment_System.Forms
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.button6.ForeColor = System.Drawing.Color.Firebrick;
-            this.button6.Location = new System.Drawing.Point(431, 380);
+            this.button6.Location = new System.Drawing.Point(431, 393);
             this.button6.Margin = new System.Windows.Forms.Padding(4);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(103, 27);
@@ -258,7 +286,7 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(541, 92);
+            this.dataGridView1.Location = new System.Drawing.Point(532, 59);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(835, 304);
             this.dataGridView1.TabIndex = 58;
@@ -380,7 +408,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.AssignDtp.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.AssignDtp.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.AssignDtp.Location = new System.Drawing.Point(134, 416);
+            this.AssignDtp.Location = new System.Drawing.Point(134, 429);
             this.AssignDtp.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.AssignDtp.Name = "AssignDtp";
             this.AssignDtp.Size = new System.Drawing.Size(291, 25);
@@ -401,7 +429,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label13.Location = new System.Drawing.Point(6, 422);
+            this.label13.Location = new System.Drawing.Point(6, 435);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(95, 17);
@@ -427,7 +455,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbemployee.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.cmbemployee.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.cmbemployee.FormattingEnabled = true;
-            this.cmbemployee.Location = new System.Drawing.Point(132, 382);
+            this.cmbemployee.Location = new System.Drawing.Point(132, 395);
             this.cmbemployee.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbemployee.Name = "cmbemployee";
             this.cmbemployee.Size = new System.Drawing.Size(291, 25);
@@ -451,7 +479,7 @@ namespace Delmon_Managment_System.Forms
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.label12.ForeColor = System.Drawing.Color.Black;
-            this.label12.Location = new System.Drawing.Point(6, 387);
+            this.label12.Location = new System.Drawing.Point(6, 400);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(75, 17);
             this.label12.TabIndex = 174;
@@ -523,7 +551,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.PurchasingDtp.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.PurchasingDtp.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.PurchasingDtp.Location = new System.Drawing.Point(134, 299);
+            this.PurchasingDtp.Location = new System.Drawing.Point(134, 295);
             this.PurchasingDtp.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.PurchasingDtp.Name = "PurchasingDtp";
             this.PurchasingDtp.Size = new System.Drawing.Size(289, 25);
@@ -542,7 +570,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label8.Location = new System.Drawing.Point(6, 347);
+            this.label8.Location = new System.Drawing.Point(6, 362);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(99, 17);
@@ -564,7 +592,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.cmbAssetStatus.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.cmbAssetStatus.FormattingEnabled = true;
-            this.cmbAssetStatus.Location = new System.Drawing.Point(134, 344);
+            this.cmbAssetStatus.Location = new System.Drawing.Point(134, 360);
             this.cmbAssetStatus.Margin = new System.Windows.Forms.Padding(4);
             this.cmbAssetStatus.Name = "cmbAssetStatus";
             this.cmbAssetStatus.Size = new System.Drawing.Size(289, 25);
@@ -574,7 +602,7 @@ namespace Delmon_Managment_System.Forms
             // txtSN
             // 
             this.txtSN.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.txtSN.Location = new System.Drawing.Point(134, 261);
+            this.txtSN.Location = new System.Drawing.Point(134, 257);
             this.txtSN.Name = "txtSN";
             this.txtSN.Size = new System.Drawing.Size(289, 25);
             this.txtSN.TabIndex = 164;
@@ -595,7 +623,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label5.Location = new System.Drawing.Point(14, 269);
+            this.label5.Location = new System.Drawing.Point(7, 269);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 17);
@@ -617,7 +645,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label6.Location = new System.Drawing.Point(3, 305);
+            this.label6.Location = new System.Drawing.Point(4, 301);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(129, 17);
@@ -639,6 +667,7 @@ namespace Delmon_Managment_System.Forms
             // labl
             // 
             this.labl.BackColor = System.Drawing.Color.White;
+            this.labl.Controls.Add(this.btnDownload2);
             this.labl.Controls.Add(this.btnuplode2);
             this.labl.Controls.Add(this.button1);
             this.labl.Controls.Add(this.label11);
@@ -657,6 +686,21 @@ namespace Delmon_Managment_System.Forms
             this.labl.TabIndex = 0;
             this.labl.Text = "Device Details";
             this.labl.Click += new System.EventHandler(this.tabPage3_Click);
+            // 
+            // btnDownload2
+            // 
+            this.btnDownload2.BackColor = System.Drawing.Color.White;
+            this.btnDownload2.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.btnDownload2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDownload2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.btnDownload2.ForeColor = System.Drawing.Color.Firebrick;
+            this.btnDownload2.Location = new System.Drawing.Point(1165, 43);
+            this.btnDownload2.Name = "btnDownload2";
+            this.btnDownload2.Size = new System.Drawing.Size(178, 38);
+            this.btnDownload2.TabIndex = 180;
+            this.btnDownload2.Text = "Details Template";
+            this.btnDownload2.UseVisualStyleBackColor = false;
+            this.btnDownload2.Click += new System.EventHandler(this.btnDownload2_Click);
             // 
             // btnuplode2
             // 
@@ -1174,28 +1218,26 @@ namespace Delmon_Managment_System.Forms
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // txtvisa
+            // label18
             // 
-            this.txtvisa.AutoSize = true;
-            this.txtvisa.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtvisa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.txtvisa.Location = new System.Drawing.Point(456, 24);
-            this.txtvisa.Name = "txtvisa";
-            this.txtvisa.Size = new System.Drawing.Size(35, 15);
-            this.txtvisa.TabIndex = 183;
-            this.txtvisa.Text = "Text";
-            this.txtvisa.Visible = false;
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label18.ForeColor = System.Drawing.Color.Firebrick;
+            this.label18.Location = new System.Drawing.Point(6, 332);
+            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(47, 17);
+            this.label18.TabIndex = 185;
+            this.label18.Text = "Price";
             // 
-            // picVisa
+            // PriceTXT
             // 
-            this.picVisa.Image = ((System.Drawing.Image)(resources.GetObject("picVisa.Image")));
-            this.picVisa.Location = new System.Drawing.Point(429, 23);
-            this.picVisa.Name = "picVisa";
-            this.picVisa.Size = new System.Drawing.Size(18, 18);
-            this.picVisa.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.picVisa.TabIndex = 182;
-            this.picVisa.TabStop = false;
-            this.picVisa.Click += new System.EventHandler(this.picVisa_Click);
+            this.PriceTXT.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.PriceTXT.Location = new System.Drawing.Point(134, 326);
+            this.PriceTXT.Margin = new System.Windows.Forms.Padding(4);
+            this.PriceTXT.Name = "PriceTXT";
+            this.PriceTXT.Size = new System.Drawing.Size(289, 25);
+            this.PriceTXT.TabIndex = 184;
             // 
             // AssetFrm
             // 
@@ -1219,6 +1261,7 @@ namespace Delmon_Managment_System.Forms
             this.tabPage1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picVisa)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabControl2.ResumeLayout(false);
@@ -1231,7 +1274,6 @@ namespace Delmon_Managment_System.Forms
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picVisa)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1320,5 +1362,8 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Label txtvisa;
         private System.Windows.Forms.PictureBox picVisa;
+        private System.Windows.Forms.Button btnDownload2;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox PriceTXT;
     }
 }
