@@ -117,6 +117,7 @@ namespace Delmon_Managment_System
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
             sqlconn.OpenConection();
             SqlDataReader dr=sqlconn.DataReader(@"SELECT
     visa.VisaNumber,
@@ -286,7 +287,7 @@ GROUP BY
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-          //  this.lbldatetime.Text = DateTime.Now.ToString("dd-MMM-yyyy  hh:mm:ss tt");
+           this.lbldatetime.Text = DateTime.Now.ToString("dd-MMM-yyyy  hh:mm:ss tt");
 
         }
 

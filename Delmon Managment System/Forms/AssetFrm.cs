@@ -47,6 +47,8 @@ namespace Delmon_Managment_System.Forms
             cmbdevicerpt.SelectedIndexChanged += FilterData;
             cmbmodelrpt.SelectedIndexChanged += FilterData;
             cmbstatusrpt.SelectedIndexChanged += FilterData;
+            AssignDtp.Format = DateTimePickerFormat.Custom;
+            AssignDtp.CustomFormat = "yyyy-MM-dd HH:mm:ss";
         }
 
         private void Generatebtn_Click(object sender, EventArgs e)
@@ -662,8 +664,9 @@ ORDER BY
 
             DateTime.TryParse(selectedRow.Cells[11].Value?.ToString(), out DateTime assignDate);
             AssignDtp.Value = assignDate == DateTime.MinValue ? DateTime.Now : assignDate;
-            PriceTXT.Text = selectedRow.Cells[12].Value?.ToString() ?? string.Empty;
+            PriceTXT.Text = string.IsNullOrEmpty(selectedRow.Cells[12].Value?.ToString()) ? "0" : selectedRow.Cells[12].Value.ToString();
 
+           
         }
 
         private async Task LoadComboBoxDataAsync()
@@ -730,6 +733,8 @@ ORDER BY
 
             try
             {
+              
+
                 // Prepare parameters
                 var parameters = new List<SqlParameter>
         {
@@ -739,34 +744,59 @@ ORDER BY
             new SqlParameter("@C4", SqlDbType.NVarChar) { Value = txtsapid.Text },
             new SqlParameter("@C5", SqlDbType.NVarChar) { Value = txtSN.Text },
             new SqlParameter("@idd", SqlDbType.NVarChar) { Value = AssetID },
-            new SqlParameter("@C6", SqlDbType.Date) { Value = PurchasingDtp.Value },
+            new SqlParameter("@C6", SqlDbType.DateTime) { Value = PurchasingDtp.Value },
             new SqlParameter("@C7", SqlDbType.NVarChar) { Value = cmbDevice.SelectedValue },
             new SqlParameter("@C8", SqlDbType.NVarChar) { Value = cmbAssetStatus.SelectedValue },
             new SqlParameter("@C9", SqlDbType.NVarChar) { Value = cmbemployee.SelectedValue },
-            new SqlParameter("@C10", SqlDbType.Date) { Value = AssignDtp.Value },
+            new SqlParameter("@C10", SqlDbType.DateTime) { Value = AssignDtp.Value },
             new SqlParameter("@C11", SqlDbType.Decimal) { Value = decimal.Parse(PriceTXT.Text) },
             new SqlParameter("@id", SqlDbType.NVarChar) { Value = CommonClass.EmployeeID },
             new SqlParameter("@user", SqlDbType.NVarChar) { Value = lblusername.Text },
             new SqlParameter("@datetime", SqlDbType.DateTime) { Value = DateTime.Parse(lbldatetime.Text) },
             new SqlParameter("@pc", SqlDbType.NVarChar) { Value = lblPC.Text }
-        };
 
+        };
+               
                 SQLCONN3.OpenConection3();
                 SQLCONN.OpenConection3();
+
+                // Query the current values for the asset assignment
+                string checkQuery = @"
+            SELECT TOP 1 EmployeeID, AssginDate 
+            FROM AssetAssign 
+            WHERE AssetID = @idd 
+            ORDER BY AssginDate DESC";
+
+                SqlDataReader dr = SQLCONN3.DataReader(checkQuery, new SqlParameter("@idd", AssetID));
+
+                bool valuesChanged = true;
+
+                if (dr.Read())
+                {
+                    string currentEmployeeID = dr["EmployeeID"].ToString();
+                    DateTime currentAssignDate = DateTime.Parse(dr["AssginDate"].ToString());
+
+                    valuesChanged = currentEmployeeID != cmbemployee.SelectedValue.ToString() ||
+                                    currentAssignDate != AssignDtp.Value;
+                }
+                dr.Close();
 
                 // Update Assets
                 string updateQuery = "UPDATE Assets SET AssetTypeID=@C1, Brand=@C2, Model=@C3, SAPAssetId=@C4, Sn=@C5, PurchasingDate=@C6, DeviceTypeID=@C7, AssetStatusID=@C8, Price=@C11 WHERE AssetID=@idd";
                 SQLCONN3.ExecuteQueries(updateQuery, parameters.ToArray());
 
-                // Insert into AssetAssign
-                string insertQuery = "INSERT INTO AssetAssign (AssetID, EmployeeID, AssginDate) VALUES (@idd, @C9, @C10)";
-                SQLCONN3.ExecuteQueries(insertQuery, parameters.ToArray());
+                // Insert into AssetAssign only if values have changed
+                if (valuesChanged)
+                {
+                    string insertQuery = "INSERT INTO AssetAssign (AssetID, EmployeeID, AssginDate) VALUES (@idd, @C9, @C10)";
+                    SQLCONN3.ExecuteQueries(insertQuery, parameters.ToArray());
+                }
 
                 MessageBox.Show("Record Updated Successfully");
 
                 // Refresh DataGridView
                 string selectQuery = @"
-            SELECT distinct
+            SELECT DISTINCT
                 Assets.AssetID, 
                 Assets.SapAssetId, 
                 Assets.sn, 
@@ -789,6 +819,12 @@ ORDER BY
                 SQLCONN3.CloseConnection();
                 SQLCONN.CloseConnection();
             }
+            catch (FormatException ex)
+            {
+                MessageBox.Show($"Format Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SQLCONN3.CloseConnection();
+                SQLCONN.CloseConnection();
+            }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -796,7 +832,6 @@ ORDER BY
                 SQLCONN.CloseConnection();
             }
         }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             this.lbldatetime.Text = DateTime.Now.ToString("dd-MMM-yyyy  hh:mm:ss tt");
@@ -868,8 +903,10 @@ WHERE
     A.[AssetID] = @ID
 ORDER BY 
     A.[ID] DESC;", paramID);
+                    dataGridView2.Columns[1].Width = 100;
                     dataGridView2.Columns[2].Width = 300;
                     dataGridView2.Columns["ID"].Visible = false;
+                    dataGridView2.Columns["AssginDate"].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";
 
 
                 }
@@ -1442,7 +1479,10 @@ where
             INNER JOIN 
                 [DelmonGroupDB].[dbo].[Employees] E ON A.[EmployeeID] = E.[EmployeeID] AND assetid = @ID", paramID);
                 }
-                dataGridView2.Columns[1].Width = 300;
+                dataGridView2.Columns[1].Width = 100;
+                dataGridView2.Columns[2].Width = 300;
+                dataGridView2.Columns["AssginDate"].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";
+
 
             }
 
