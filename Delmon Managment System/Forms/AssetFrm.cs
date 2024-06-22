@@ -72,9 +72,12 @@ namespace Delmon_Managment_System.Forms
             generteModel(); // Assuming generteModel is responsible for populating combobox data
         }
 
+       
 
         public async void AssetFrm_Load(object sender, EventArgs e)
         {
+          
+
             await Task.Run(() =>
             {
                 // Load user permissions asynchronously
@@ -454,10 +457,15 @@ namespace Delmon_Managment_System.Forms
             paramAssigndate.Value = AssignDtp.Value;
             /*Asset Assign*/
 
-            /**/
+            /*price*/
             SqlParameter paramAssestPrice = new SqlParameter("@C11", SqlDbType.Date);
             paramAssestPrice.Value = PriceTXT.Text;
-            /**/
+            /*price*/
+
+            /*username*/
+            SqlParameter paramAssinedBy = new SqlParameter("@C12", SqlDbType.NVarChar);
+            paramAssinedBy.Value = CommonClass.LoginUserName;
+            /*username*/
 
 
 
@@ -503,16 +511,17 @@ namespace Delmon_Managment_System.Forms
 
                         dr.Dispose();
                         dr.Close();
-                      
 
+
+                     
 
                         SQLCONN3.ExecuteQueries("insert into Assets ( [AssetID],[AssetTypeID],[brand],[model],[SapAssetID],[SN],[PurchasingDate],[DeviceTypeID],[AssetStatusID],Price) " +
                             "values (@C0,@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8,@C11)",
                                                      paramgeneratedAssetID, paramcmbtype, paramcmbrand, paramassetmodel,
                                                      paramSAPAssetid, paramSN, paramPurchasingdate, paramcmbDevice, paramcmbAssetStatus,paramAssestPrice);
-                        SQLCONN3.ExecuteQueries("insert into AssetAssign ([AssetID],[EmployeeID],[AssginDate]) " +
-                           "values (@C0,@C9,@C10)",
-                                                    paramgeneratedAssetID, paramcmbAssignto, paramAssigndate);
+                        SQLCONN3.ExecuteQueries("insert into AssetAssign ([AssetID],[EmployeeID],[AssginDate],AssignedBy) " +
+                           "values (@C0,@C9,@C10,@C12)",
+                                                    paramgeneratedAssetID, paramcmbAssignto, paramAssigndate, paramAssinedBy);
                         MessageBox.Show("Record saved Successfully");
 
                         btnnew.Visible = true;
@@ -520,7 +529,8 @@ namespace Delmon_Managment_System.Forms
     SELECT 
         Assets.AssetID, Assets.SapAssetId, Assets.sn, AssetType.AssettypeValue, 
         AssetBrand.AssetBrandValue, Assets.Model, [PurchasingDate],
-        [DeviceTypeID], [AssetStatusID], [EmployeeID], [AssginDate],Price
+        [DeviceTypeID], [AssetStatusID], [EmployeeID], [AssginDate],Price,AssignedBy
+
     FROM 
         Assets
     INNER JOIN 
@@ -572,6 +582,7 @@ WITH LastAssignments AS (
         asi.AssetID, 
         asi.EmployeeID, 
         asi.AssginDate,
+        asi.AssignedBy,
         ROW_NUMBER() OVER (PARTITION BY asi.AssetID ORDER BY asi.ID DESC) AS RowNum
     FROM
         AssetAssign asi
@@ -590,6 +601,7 @@ SELECT
     LA.EmployeeID AS LastEmployeeID,
     LA.AssginDate AS LastAssignDate,
     A.Price
+
 FROM
     Assets A
 INNER JOIN 
@@ -753,9 +765,11 @@ ORDER BY
             new SqlParameter("@id", SqlDbType.NVarChar) { Value = CommonClass.EmployeeID },
             new SqlParameter("@user", SqlDbType.NVarChar) { Value = lblusername.Text },
             new SqlParameter("@datetime", SqlDbType.DateTime) { Value = DateTime.Parse(lbldatetime.Text) },
-            new SqlParameter("@pc", SqlDbType.NVarChar) { Value = lblPC.Text }
+            new SqlParameter("@pc", SqlDbType.NVarChar) { Value = lblPC.Text },
+            new SqlParameter("@C12", SqlDbType.NVarChar) { Value = CommonClass.LoginUserName }
+            
 
-        };
+            };
                
                 SQLCONN3.OpenConection3();
                 SQLCONN.OpenConection3();
@@ -788,7 +802,7 @@ ORDER BY
                 // Insert into AssetAssign only if values have changed
                 if (valuesChanged)
                 {
-                    string insertQuery = "INSERT INTO AssetAssign (AssetID, EmployeeID, AssginDate) VALUES (@idd, @C9, @C10)";
+                    string insertQuery = "INSERT INTO AssetAssign (AssetID, EmployeeID, AssginDate,AssignedBy) VALUES (@idd, @C9, @C10,@C12)";
                     SQLCONN3.ExecuteQueries(insertQuery, parameters.ToArray());
                 }
 
@@ -808,7 +822,8 @@ ORDER BY
                 AssetStatusID,
                 EmployeeID,
                 AssginDate,
-                Price
+                Price,
+                AssignedBy
             FROM Assets
             INNER JOIN AssetBrand ON Assets.Brand = AssetBrand.AssetBrandID
             INNER JOIN AssetAssign ON Assets.AssetID = AssetAssign.AssetID
@@ -894,7 +909,7 @@ WHERE
          SELECT  A.ID,
     A.[AssetID], 
     CONCAT(E.[FirstName], ' ', E.[SecondName], ' ', E.[ThirdName], ' ', E.[LastName]) AS 'FullName',  
-    A.[AssginDate]
+    A.[AssginDate],A.[AssignedBy]
 FROM 
     [AssetAssign] A  
 INNER JOIN 
@@ -907,6 +922,8 @@ ORDER BY
                     dataGridView2.Columns[2].Width = 300;
                     dataGridView2.Columns["ID"].Visible = false;
                     dataGridView2.Columns["AssginDate"].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";
+                    dataGridView2.Columns["AssignedBy"].Width = 120;
+
 
 
                 }
@@ -1432,7 +1449,7 @@ where
             SELECT  
                 A.[AssetID], 
               
-                CONCAT(E.[FirstName], ' ', E.[SecondName], ' ', E.[ThirdName], ' ', E.[LastName]) AS 'FullName',  A.[AssginDate] 
+                CONCAT(E.[FirstName], ' ', E.[SecondName], ' ', E.[ThirdName], ' ', E.[LastName]) AS 'FullName',  A.[AssginDate] ,A.[AssignedBy]
             FROM
                 [DelmonGroupAssests].[dbo].[AssetAssign] A
             INNER JOIN 
@@ -1473,7 +1490,7 @@ where
             SELECT  
                 A.[AssetID], 
               
-                CONCAT(E.[FirstName], ' ', E.[SecondName], ' ', E.[ThirdName], ' ', E.[LastName]) AS 'FullName',  A.[AssginDate]
+                CONCAT(E.[FirstName], ' ', E.[SecondName], ' ', E.[ThirdName], ' ', E.[LastName]) AS 'FullName',  A.[AssginDate],A.[AssignedBy]
             FROM
                 [DelmonGroupAssests].[dbo].[AssetAssign] A
             INNER JOIN 
@@ -2104,6 +2121,11 @@ where
                 // Handle any errors that occurred during the file copy
                 MessageBox.Show($"An error occurred while downloading the file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void txtsapid_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void cmbbrand_KeyDown(object sender, KeyEventArgs e)

@@ -5,6 +5,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +29,7 @@ namespace Delmon_Managment_System
         public FormMainMenu()
         {
             InitializeComponent();
+
             Font newFont = new Font("Times New Roman", 12);
 
             // Loop through all controls on the form and change their font properties
@@ -115,6 +118,8 @@ namespace Delmon_Managment_System
 
         }
 
+     
+       
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -369,14 +374,20 @@ GROUP BY
 
         private void btnNotifications_Click_1(object sender, EventArgs e)
         {
-          //  OpenChildForm(new Forms.NotificationFrm(), sender);
+            MessageBox.Show("1- 'Assigned By' in Assign History Has been added Successfully!", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            //  OpenChildForm(new Forms.NotificationFrm(), sender);
 
         }
 
         private void button4_Click_1(object sender, EventArgs e)
         {
-            Application.Restart();
+          
 
+            Application.Restart();
+            
+            
         }
+      
     }
 }

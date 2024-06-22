@@ -65,7 +65,7 @@ namespace Delmon_Managment_System
             // 
             this.remembercheck.AutoSize = true;
             this.remembercheck.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.remembercheck.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.remembercheck.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
             this.remembercheck.Location = new System.Drawing.Point(14, 343);
             this.remembercheck.Name = "remembercheck";
             this.remembercheck.Size = new System.Drawing.Size(133, 21);
@@ -97,7 +97,7 @@ namespace Delmon_Managment_System
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label2.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
             this.label2.Location = new System.Drawing.Point(36, 231);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(83, 17);
@@ -108,7 +108,7 @@ namespace Delmon_Managment_System
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label3.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
             this.label3.Location = new System.Drawing.Point(39, 280);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 17);
@@ -152,8 +152,8 @@ namespace Delmon_Managment_System
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label4.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label4.Location = new System.Drawing.Point(36, 191);
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.label4.Location = new System.Drawing.Point(42, 180);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(48, 17);
             this.label4.TabIndex = 10;
@@ -174,7 +174,7 @@ namespace Delmon_Managment_System
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.Firebrick;
-            this.button1.Location = new System.Drawing.Point(248, 3);
+            this.button1.Location = new System.Drawing.Point(244, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(55, 36);
             this.button1.TabIndex = 12;
@@ -189,7 +189,7 @@ namespace Delmon_Managment_System
             this.BTNcLOSE.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNcLOSE.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTNcLOSE.ForeColor = System.Drawing.Color.Firebrick;
-            this.BTNcLOSE.Location = new System.Drawing.Point(291, 3);
+            this.BTNcLOSE.Location = new System.Drawing.Point(287, 3);
             this.BTNcLOSE.Name = "BTNcLOSE";
             this.BTNcLOSE.Size = new System.Drawing.Size(48, 36);
             this.BTNcLOSE.TabIndex = 11;
@@ -202,7 +202,7 @@ namespace Delmon_Managment_System
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(344, 432);
+            this.ClientSize = new System.Drawing.Size(340, 426);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.BTNcLOSE);
             this.Controls.Add(this.label4);

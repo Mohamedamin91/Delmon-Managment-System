@@ -30,13 +30,13 @@ namespace Delmon_Managment_System.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle67 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle68 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeeForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle69 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle70 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle71 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle72 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Employeetxt = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -160,6 +160,11 @@ namespace Delmon_Managment_System.Forms
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrevious = new System.Windows.Forms.Button();
+            this.dtpDOB = new System.Windows.Forms.DateTimePicker();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.lblage = new System.Windows.Forms.Label();
+            this.lblyears = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -202,15 +207,15 @@ namespace Delmon_Managment_System.Forms
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle67.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle67;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(944, 25);
+            this.dataGridView1.Location = new System.Drawing.Point(944, 31);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle68.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle68;
             this.dataGridView1.Size = new System.Drawing.Size(785, 320);
             this.dataGridView1.TabIndex = 88;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
@@ -225,7 +230,7 @@ namespace Delmon_Managment_System.Forms
             this.AddBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AddBtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.AddBtn.ForeColor = System.Drawing.Color.Firebrick;
-            this.AddBtn.Location = new System.Drawing.Point(496, 383);
+            this.AddBtn.Location = new System.Drawing.Point(496, 404);
             this.AddBtn.Margin = new System.Windows.Forms.Padding(4);
             this.AddBtn.Name = "AddBtn";
             this.AddBtn.Size = new System.Drawing.Size(98, 50);
@@ -243,7 +248,7 @@ namespace Delmon_Managment_System.Forms
             this.Updatebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Updatebtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.Updatebtn.ForeColor = System.Drawing.Color.Firebrick;
-            this.Updatebtn.Location = new System.Drawing.Point(618, 383);
+            this.Updatebtn.Location = new System.Drawing.Point(618, 404);
             this.Updatebtn.Margin = new System.Windows.Forms.Padding(4);
             this.Updatebtn.Name = "Updatebtn";
             this.Updatebtn.Size = new System.Drawing.Size(98, 50);
@@ -261,7 +266,7 @@ namespace Delmon_Managment_System.Forms
             this.DeleteBTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DeleteBTN.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.DeleteBTN.ForeColor = System.Drawing.Color.Firebrick;
-            this.DeleteBTN.Location = new System.Drawing.Point(739, 383);
+            this.DeleteBTN.Location = new System.Drawing.Point(739, 404);
             this.DeleteBTN.Margin = new System.Windows.Forms.Padding(4);
             this.DeleteBTN.Name = "DeleteBTN";
             this.DeleteBTN.Size = new System.Drawing.Size(98, 50);
@@ -296,7 +301,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label3.Location = new System.Drawing.Point(414, 125);
+            this.label3.Location = new System.Drawing.Point(414, 129);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(109, 17);
@@ -307,7 +312,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label6.Location = new System.Drawing.Point(23, 161);
+            this.label6.Location = new System.Drawing.Point(23, 166);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(92, 17);
@@ -329,7 +334,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.cmbPersonalStatusStatus.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.cmbPersonalStatusStatus.FormattingEnabled = true;
-            this.cmbPersonalStatusStatus.Location = new System.Drawing.Point(530, 245);
+            this.cmbPersonalStatusStatus.Location = new System.Drawing.Point(530, 271);
             this.cmbPersonalStatusStatus.Margin = new System.Windows.Forms.Padding(4);
             this.cmbPersonalStatusStatus.Name = "cmbPersonalStatusStatus";
             this.cmbPersonalStatusStatus.Size = new System.Drawing.Size(275, 25);
@@ -342,7 +347,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label5.Location = new System.Drawing.Point(376, 248);
+            this.label5.Location = new System.Drawing.Point(376, 275);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(147, 17);
@@ -447,7 +452,7 @@ namespace Delmon_Managment_System.Forms
             this.EndDatePicker.Enabled = false;
             this.EndDatePicker.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.EndDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.EndDatePicker.Location = new System.Drawing.Point(511, 351);
+            this.EndDatePicker.Location = new System.Drawing.Point(511, 371);
             this.EndDatePicker.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.EndDatePicker.Name = "EndDatePicker";
             this.EndDatePicker.Size = new System.Drawing.Size(229, 25);
@@ -458,7 +463,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label15.Location = new System.Drawing.Point(463, 357);
+            this.label15.Location = new System.Drawing.Point(463, 375);
             this.label15.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(40, 17);
@@ -470,7 +475,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.StartDatePicker.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.StartDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.StartDatePicker.Location = new System.Drawing.Point(128, 346);
+            this.StartDatePicker.Location = new System.Drawing.Point(128, 372);
             this.StartDatePicker.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.StartDatePicker.Name = "StartDatePicker";
             this.StartDatePicker.Size = new System.Drawing.Size(228, 25);
@@ -482,7 +487,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label13.Location = new System.Drawing.Point(73, 348);
+            this.label13.Location = new System.Drawing.Point(73, 374);
             this.label13.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(42, 17);
@@ -493,7 +498,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.cmbempdepthistory.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.cmbempdepthistory.FormattingEnabled = true;
-            this.cmbempdepthistory.Location = new System.Drawing.Point(128, 312);
+            this.cmbempdepthistory.Location = new System.Drawing.Point(128, 338);
             this.cmbempdepthistory.Margin = new System.Windows.Forms.Padding(4);
             this.cmbempdepthistory.Name = "cmbempdepthistory";
             this.cmbempdepthistory.Size = new System.Drawing.Size(228, 25);
@@ -505,7 +510,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label12.Location = new System.Drawing.Point(21, 313);
+            this.label12.Location = new System.Drawing.Point(21, 339);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(94, 17);
@@ -516,7 +521,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.cmbEmployJobHistory.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.cmbEmployJobHistory.FormattingEnabled = true;
-            this.cmbEmployJobHistory.Location = new System.Drawing.Point(511, 312);
+            this.cmbEmployJobHistory.Location = new System.Drawing.Point(511, 338);
             this.cmbEmployJobHistory.Margin = new System.Windows.Forms.Padding(4);
             this.cmbEmployJobHistory.Name = "cmbEmployJobHistory";
             this.cmbEmployJobHistory.Size = new System.Drawing.Size(365, 25);
@@ -529,7 +534,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label11.Location = new System.Drawing.Point(467, 315);
+            this.label11.Location = new System.Drawing.Point(467, 341);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(35, 17);
@@ -545,7 +550,7 @@ namespace Delmon_Managment_System.Forms
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnNew.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnNew.Location = new System.Drawing.Point(240, 383);
+            this.btnNew.Location = new System.Drawing.Point(240, 404);
             this.btnNew.Margin = new System.Windows.Forms.Padding(4);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(98, 50);
@@ -561,7 +566,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbMartialStatus.Items.AddRange(new object[] {
             "Single",
             "Marriage"});
-            this.cmbMartialStatus.Location = new System.Drawing.Point(128, 242);
+            this.cmbMartialStatus.Location = new System.Drawing.Point(128, 268);
             this.cmbMartialStatus.Margin = new System.Windows.Forms.Padding(4);
             this.cmbMartialStatus.Name = "cmbMartialStatus";
             this.cmbMartialStatus.Size = new System.Drawing.Size(229, 25);
@@ -572,7 +577,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label16.Location = new System.Drawing.Point(7, 240);
+            this.label16.Location = new System.Drawing.Point(7, 265);
             this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(108, 17);
@@ -653,7 +658,7 @@ namespace Delmon_Managment_System.Forms
             this.groupBox1.Controls.Add(this.lblPC);
             this.groupBox1.Controls.Add(this.lblemail);
             this.groupBox1.Controls.Add(this.lblusertype);
-            this.groupBox1.Location = new System.Drawing.Point(15, 889);
+            this.groupBox1.Location = new System.Drawing.Point(15, 914);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -807,15 +812,15 @@ namespace Delmon_Managment_System.Forms
             // dataGridView4
             // 
             this.dataGridView4.AllowUserToAddRows = false;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView4.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle69.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView4.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle69;
             this.dataGridView4.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView4.Location = new System.Drawing.Point(132, 200);
             this.dataGridView4.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView4.Name = "dataGridView4";
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView4.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle70.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView4.RowsDefaultCellStyle = dataGridViewCellStyle70;
             this.dataGridView4.Size = new System.Drawing.Size(1003, 180);
             this.dataGridView4.TabIndex = 133;
             this.dataGridView4.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellClick);
@@ -1040,15 +1045,15 @@ namespace Delmon_Managment_System.Forms
             // dataGridView3
             // 
             this.dataGridView3.AllowUserToAddRows = false;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView3.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle71.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView3.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle71;
             this.dataGridView3.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView3.Location = new System.Drawing.Point(233, 266);
             this.dataGridView3.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView3.Name = "dataGridView3";
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle72.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle72;
             this.dataGridView3.Size = new System.Drawing.Size(656, 141);
             this.dataGridView3.TabIndex = 134;
             this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick);
@@ -1174,7 +1179,7 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(33, 114);
+            this.dataGridView2.Location = new System.Drawing.Point(27, 114);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.Size = new System.Drawing.Size(801, 258);
@@ -1186,7 +1191,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label8.Location = new System.Drawing.Point(30, 67);
+            this.label8.Location = new System.Drawing.Point(25, 67);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(65, 17);
@@ -1198,7 +1203,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label4.Location = new System.Drawing.Point(30, 22);
+            this.label4.Location = new System.Drawing.Point(25, 22);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(104, 17);
@@ -1236,7 +1241,7 @@ namespace Delmon_Managment_System.Forms
             this.tabControl1.Controls.Add(this.SalaryTab);
             this.tabControl1.Enabled = false;
             this.tabControl1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.tabControl1.Location = new System.Drawing.Point(15, 466);
+            this.tabControl1.Location = new System.Drawing.Point(15, 491);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -1401,7 +1406,7 @@ namespace Delmon_Managment_System.Forms
             this.btnprtjoboffer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnprtjoboffer.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnprtjoboffer.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnprtjoboffer.Location = new System.Drawing.Point(876, 383);
+            this.btnprtjoboffer.Location = new System.Drawing.Point(876, 404);
             this.btnprtjoboffer.Margin = new System.Windows.Forms.Padding(4);
             this.btnprtjoboffer.Name = "btnprtjoboffer";
             this.btnprtjoboffer.Size = new System.Drawing.Size(139, 50);
@@ -1418,7 +1423,7 @@ namespace Delmon_Managment_System.Forms
             this.btnprtvisareq.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnprtvisareq.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnprtvisareq.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnprtvisareq.Location = new System.Drawing.Point(1045, 383);
+            this.btnprtvisareq.Location = new System.Drawing.Point(1045, 404);
             this.btnprtvisareq.Margin = new System.Windows.Forms.Padding(4);
             this.btnprtvisareq.Name = "btnprtvisareq";
             this.btnprtvisareq.Size = new System.Drawing.Size(192, 50);
@@ -1432,7 +1437,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbCompany.Enabled = false;
             this.cmbCompany.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.cmbCompany.FormattingEnabled = true;
-            this.cmbCompany.Location = new System.Drawing.Point(128, 278);
+            this.cmbCompany.Location = new System.Drawing.Point(128, 304);
             this.cmbCompany.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.cmbCompany.Name = "cmbCompany";
             this.cmbCompany.Size = new System.Drawing.Size(748, 25);
@@ -1445,7 +1450,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label23.Location = new System.Drawing.Point(39, 281);
+            this.label23.Location = new System.Drawing.Point(39, 307);
             this.label23.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(76, 17);
@@ -1484,7 +1489,7 @@ namespace Delmon_Managment_System.Forms
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnCancel.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnCancel.Location = new System.Drawing.Point(362, 383);
+            this.btnCancel.Location = new System.Drawing.Point(362, 404);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(98, 50);
@@ -1497,7 +1502,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label25.Location = new System.Drawing.Point(30, 202);
+            this.label25.Location = new System.Drawing.Point(23, 208);
             this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(85, 17);
@@ -1511,7 +1516,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbnationality.Items.AddRange(new object[] {
             "Male",
             "Female"});
-            this.cmbnationality.Location = new System.Drawing.Point(128, 202);
+            this.cmbnationality.Location = new System.Drawing.Point(128, 205);
             this.cmbnationality.Margin = new System.Windows.Forms.Padding(4);
             this.cmbnationality.Name = "cmbnationality";
             this.cmbnationality.Size = new System.Drawing.Size(229, 25);
@@ -1526,7 +1531,7 @@ namespace Delmon_Managment_System.Forms
             this.btnnewJob.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnnewJob.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnnewJob.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnnewJob.Location = new System.Drawing.Point(882, 308);
+            this.btnnewJob.Location = new System.Drawing.Point(882, 337);
             this.btnnewJob.Margin = new System.Windows.Forms.Padding(4);
             this.btnnewJob.Name = "btnnewJob";
             this.btnnewJob.Size = new System.Drawing.Size(54, 29);
@@ -1626,7 +1631,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label26.Location = new System.Drawing.Point(422, 98);
+            this.label26.Location = new System.Drawing.Point(422, 96);
             this.label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(101, 17);
@@ -1661,7 +1666,7 @@ namespace Delmon_Managment_System.Forms
             this.label31.AutoSize = true;
             this.label31.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label31.ForeColor = System.Drawing.Color.Firebrick;
-            this.label31.Location = new System.Drawing.Point(4, 204);
+            this.label31.Location = new System.Drawing.Point(4, 212);
             this.label31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(18, 22);
@@ -1673,7 +1678,7 @@ namespace Delmon_Managment_System.Forms
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label32.ForeColor = System.Drawing.Color.Firebrick;
-            this.label32.Location = new System.Drawing.Point(362, 248);
+            this.label32.Location = new System.Drawing.Point(362, 276);
             this.label32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(18, 22);
@@ -1709,7 +1714,7 @@ namespace Delmon_Managment_System.Forms
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label35.ForeColor = System.Drawing.Color.Firebrick;
-            this.label35.Location = new System.Drawing.Point(22, 281);
+            this.label35.Location = new System.Drawing.Point(22, 307);
             this.label35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(18, 22);
@@ -1721,7 +1726,7 @@ namespace Delmon_Managment_System.Forms
             this.label36.AutoSize = true;
             this.label36.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label36.ForeColor = System.Drawing.Color.Firebrick;
-            this.label36.Location = new System.Drawing.Point(3, 315);
+            this.label36.Location = new System.Drawing.Point(3, 321);
             this.label36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(18, 22);
@@ -1733,7 +1738,7 @@ namespace Delmon_Managment_System.Forms
             this.label37.AutoSize = true;
             this.label37.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label37.ForeColor = System.Drawing.Color.Firebrick;
-            this.label37.Location = new System.Drawing.Point(446, 315);
+            this.label37.Location = new System.Drawing.Point(446, 341);
             this.label37.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(18, 22);
@@ -1776,6 +1781,11 @@ namespace Delmon_Managment_System.Forms
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.lblyears);
+            this.groupBox2.Controls.Add(this.lblage);
+            this.groupBox2.Controls.Add(this.label40);
+            this.groupBox2.Controls.Add(this.dtpDOB);
+            this.groupBox2.Controls.Add(this.label39);
             this.groupBox2.Controls.Add(this.btnNext);
             this.groupBox2.Controls.Add(this.btnPrevious);
             this.groupBox2.Controls.Add(this.txtvisa);
@@ -1838,9 +1848,10 @@ namespace Delmon_Managment_System.Forms
             this.groupBox2.Enabled = false;
             this.groupBox2.Location = new System.Drawing.Point(12, -9);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1909, 451);
+            this.groupBox2.Size = new System.Drawing.Size(1909, 493);
             this.groupBox2.TabIndex = 183;
             this.groupBox2.TabStop = false;
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // btnNext
             // 
@@ -1850,7 +1861,7 @@ namespace Delmon_Managment_System.Forms
             this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNext.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnNext.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.btnNext.Location = new System.Drawing.Point(116, 384);
+            this.btnNext.Location = new System.Drawing.Point(116, 405);
             this.btnNext.Margin = new System.Windows.Forms.Padding(4);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(98, 50);
@@ -1867,7 +1878,7 @@ namespace Delmon_Managment_System.Forms
             this.btnPrevious.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrevious.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnPrevious.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.btnPrevious.Location = new System.Drawing.Point(10, 384);
+            this.btnPrevious.Location = new System.Drawing.Point(10, 405);
             this.btnPrevious.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(98, 50);
@@ -1875,6 +1886,66 @@ namespace Delmon_Managment_System.Forms
             this.btnPrevious.Text = "Previous ";
             this.btnPrevious.UseVisualStyleBackColor = false;
             this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
+            // 
+            // dtpDOB
+            // 
+            this.dtpDOB.Enabled = false;
+            this.dtpDOB.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dtpDOB.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDOB.Location = new System.Drawing.Point(128, 233);
+            this.dtpDOB.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.dtpDOB.Name = "dtpDOB";
+            this.dtpDOB.Size = new System.Drawing.Size(229, 25);
+            this.dtpDOB.TabIndex = 186;
+            this.dtpDOB.ValueChanged += new System.EventHandler(this.dtpDOB_ValueChanged);
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label39.ForeColor = System.Drawing.Color.Firebrick;
+            this.label39.Location = new System.Drawing.Point(18, 239);
+            this.label39.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(98, 17);
+            this.label39.TabIndex = 185;
+            this.label39.Text = "Date of birth";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.ForeColor = System.Drawing.Color.Firebrick;
+            this.label40.Location = new System.Drawing.Point(4, 239);
+            this.label40.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(18, 22);
+            this.label40.TabIndex = 187;
+            this.label40.Text = "*";
+            // 
+            // lblage
+            // 
+            this.lblage.AutoSize = true;
+            this.lblage.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.lblage.Location = new System.Drawing.Point(368, 239);
+            this.lblage.Name = "lblage";
+            this.lblage.Size = new System.Drawing.Size(35, 15);
+            this.lblage.TabIndex = 188;
+            this.lblage.Text = "Text";
+            this.lblage.Visible = false;
+            // 
+            // lblyears
+            // 
+            this.lblyears.AutoSize = true;
+            this.lblyears.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblyears.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.lblyears.Location = new System.Drawing.Point(390, 239);
+            this.lblyears.Name = "lblyears";
+            this.lblyears.Size = new System.Drawing.Size(74, 15);
+            this.lblyears.TabIndex = 189;
+            this.lblyears.Text = "Years old !";
+            this.lblyears.Visible = false;
             // 
             // EmployeeForm
             // 
@@ -2048,5 +2119,10 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Button btnPrevious;
         public System.Windows.Forms.TextBox Doctxt;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblyears;
+        private System.Windows.Forms.Label lblage;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.DateTimePicker dtpDOB;
+        private System.Windows.Forms.Label label39;
     }
 }

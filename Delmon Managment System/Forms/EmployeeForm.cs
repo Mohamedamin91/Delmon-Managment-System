@@ -64,6 +64,8 @@ namespace Delmon_Managment_System.Forms
             cmbEmployJobHistory.KeyDown += new KeyEventHandler(cmbEmployJobHistory_KeyDown);
             cmbCompany.KeyDown += new KeyEventHandler(cmbCompany_KeyDown);
             cmbPersonalStatusStatus.KeyDown += new KeyEventHandler(cmbPersonalStatusStatus_KeyDown);
+            dtpDOB.ValueChanged += dtpDOB_ValueChanged;
+
             //  cmbPersonalStatusStatus.KeyPress += cmbPersonalStatusStatus_KeyPress;
 
             // Loop through all controls on the form and change their font properties
@@ -76,6 +78,14 @@ namespace Delmon_Managment_System.Forms
 
         }
 
+        private int CalculateAge(DateTime dateOfBirth)
+        {
+            DateTime today = DateTime.Today;
+            int age = today.Year - dateOfBirth.Year;
+            if (dateOfBirth.Date > today.AddYears(-age)) age--;
+            return age;
+        }
+
 
         public void ClearTextBoxes()
         {
@@ -84,19 +94,31 @@ namespace Delmon_Managment_System.Forms
             func = (controls) =>
             {
                 foreach (Control control in controls)
-                    if (control is TextBox)
+                {
+                    if (control is TextBox && control != filenumbertxt)
+                    {
                         (control as TextBox).Clear();
+                    }
                     else
+                    {
                         func(control.Controls);
+                    }
+                }
             };
 
             func(Controls);
-            cmbGender.Text = cmbPersonalStatusStatus.Text = "";
-            //    dataGridView1.DataSource = null;
 
+            // Clear combo boxes
+            cmbGender.Text = "";
+            cmbPersonalStatusStatus.Text = "";
 
+            // Set filenumbertxt to its default value
+            filenumbertxt.Text = "-";
 
+            // Uncomment if you need to clear the DataGridView
+            // dataGridView1.DataSource = null;
         }
+
         public static Regex email_validation()
         {
             string pattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|"
@@ -157,7 +179,7 @@ namespace Delmon_Managment_System.Forms
             else
 
             {
-                PopulateDataGridView();
+                //PopulateDataGridView();
 
                 groupBox2.Enabled = true;
                 tabControl1.Enabled = true;
@@ -299,7 +321,7 @@ namespace Delmon_Managment_System.Forms
             using (SqlConnection connection = new SqlConnection(SQLCONN.ConnectionString))
             {
                 string query = @"
-            SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus, s.StatusValue, j.JobTitleEN, dt.Dept_Type_Name, c.COMPName_EN, e.startdate, e.enddate, cn.NationalityName, v.FileNumber, v.VISANumber
+            SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus, s.StatusValue, j.JobTitleEN, dt.Dept_Type_Name, c.COMPName_EN, e.startdate, e.enddate, cn.NationalityName, v.FileNumber, v.VISANumber,e.DOB
             FROM Employees e
             INNER JOIN StatusTBL s ON e.EmploymentStatusID = s.StatusID
             INNER JOIN JOBS j ON e.JobID = j.JobID
@@ -377,6 +399,14 @@ namespace Delmon_Managment_System.Forms
             {
                 StartDatePicker.Value = Convert.ToDateTime(row["startdate"]);
             }
+            if (row["DOB"] == DBNull.Value)
+            {
+                dtpDOB.Value = DateTime.Now;
+            }
+            else
+            {
+                dtpDOB.Value = Convert.ToDateTime(row["DOB"]);
+            }
 
             cmbnationality.Text = row["NationalityName"].ToString();
             txtFileNumber.Text = row["FileNumber"].ToString();
@@ -389,6 +419,8 @@ namespace Delmon_Managment_System.Forms
 
         private void btnNext_Click(object sender, EventArgs e)
         {
+            PopulateDataGridView();
+
             EMPID = EmployeeID;
             AddBtn.Visible = false;
             btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = true;
@@ -544,7 +576,7 @@ namespace Delmon_Managment_System.Forms
                 // if employess belong to IT showes all employee else show for the certian department 
                 if (CommonClass.DeptID == 10103)
                 {
-                    string query = @"SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus, s.StatusValue, j.JobTitleEN, dt.Dept_Type_Name, c.COMPName_EN, e.startdate, e.enddate, cn.NationalityName, v.FileNumber, v.VISANumber
+                    string query = @"SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus, s.StatusValue, j.JobTitleEN, dt.Dept_Type_Name, c.COMPName_EN, e.startdate, e.enddate, cn.NationalityName, v.FileNumber, v.VISANumber,e.DOB
     FROM Employees e
     INNER JOIN StatusTBL s ON e.EmploymentStatusID = s.StatusID
     INNER JOIN JOBS j ON e.JobID = j.JobID
@@ -678,6 +710,9 @@ namespace Delmon_Managment_System.Forms
             SqlParameter paramNationality = new SqlParameter("@C19", SqlDbType.NVarChar);
             paramNationality.Value = cmbnationality.SelectedValue;
 
+            SqlParameter paramDOB = new SqlParameter("@C20", SqlDbType.Date);
+            paramDOB.Value = dtpDOB.Value;
+
 
 
 
@@ -719,6 +754,14 @@ namespace Delmon_Managment_System.Forms
 
                         DateTime enter_date = DateTime.Now.Date;
                         EndDatePicker.Value = enter_date;
+
+
+                    }
+                    else if (dtpDOB.Checked == false)
+                    {
+
+                        DateTime enter_date = DateTime.Now.Date;
+                        dtpDOB.Value = enter_date;
 
 
                     }
@@ -771,13 +814,13 @@ namespace Delmon_Managment_System.Forms
                         {
                             if ((int)cmbPersonalStatusStatus.SelectedValue == 25 || (int)cmbPersonalStatusStatus.SelectedValue == 26 || (int)cmbPersonalStatusStatus.SelectedValue == 27)
                             {
-                                SQLCONN.ExecuteQueries("update Employees set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,StartDate=@C16,EndDate=@C17,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc,NationalityID=@C19 where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, paramstartdate, paramenddate, paramEmployeeID, paramuser, parampc, paramNationality);
+                                SQLCONN.ExecuteQueries("update Employees set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,StartDate=@C16,EndDate=@C17,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc,NationalityID=@C19,DOB=@C20 where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, paramstartdate, paramenddate, paramEmployeeID, paramuser, parampc, paramNationality,paramDOB);
 
                             }
 
                             else
                             {
-                                SQLCONN.ExecuteQueries("update Employees set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,StartDate=@C16,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc,NationalityID=@C19 where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, paramstartdate, paramEmployeeID, paramuser, parampc, paramNationality);
+                                SQLCONN.ExecuteQueries("update Employees set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,StartDate=@C16,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc,NationalityID=@C19 , DOB=@C20 where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, paramstartdate, paramEmployeeID, paramuser, parampc, paramNationality, paramDOB);
 
                             }
 
@@ -788,13 +831,13 @@ namespace Delmon_Managment_System.Forms
                         {
                             if ((int)cmbPersonalStatusStatus.SelectedValue == 25 || (int)cmbPersonalStatusStatus.SelectedValue == 26 || (int)cmbPersonalStatusStatus.SelectedValue == 27)
                             {
-                                SQLCONN.ExecuteQueries("update Employees set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,DeptID=@C15,StartDate=@C16,EndDate=@C17,COMPID=@C18,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc,NationalityID=@C19 where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany, paramEmployeeID, paramuser, parampc, paramNationality);
+                                SQLCONN.ExecuteQueries("update Employees set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,DeptID=@C15,StartDate=@C16,EndDate=@C17,COMPID=@C18,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc,NationalityID=@C19,DOB=@C20 where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany, paramEmployeeID, paramuser, parampc, paramNationality, paramDOB);
 
                             }
 
                             else
                             {
-                                SQLCONN.ExecuteQueries("update Employees set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,DeptID=@C15,StartDate=@C16,COMPID=@C18,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc,NationalityID=@C19 where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramcompany, paramEmployeeID, paramuser, parampc, paramNationality);
+                                SQLCONN.ExecuteQueries("update Employees set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,DeptID=@C15,StartDate=@C16,COMPID=@C18,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc,NationalityID=@C19 , DOB=@C20 where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramcompany, paramEmployeeID, paramuser, parampc, paramNationality, paramDOB);
 
                             }
 
@@ -856,7 +899,7 @@ namespace Delmon_Managment_System.Forms
                         //  dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Employees where  EmployeeID = '" + EMPID + "'");
                         string query = @"SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus,
        s.StatusValue, j.JobTitleEN, dt.Dept_Type_Name, c.COMPName_EN, e.startdate, e.enddate,
-       cn.NationalityName, v.FileNumber, v.VISANumber
+       cn.NationalityName, v.FileNumber, v.VISANumber,e.DOB
 FROM Employees e
 INNER JOIN StatusTBL s ON e.EmploymentStatusID = s.StatusID
 INNER JOIN JOBS j ON e.JobID = j.JobID
@@ -1042,7 +1085,8 @@ ORDER BY e.EmployeeID";
                 SqlParameter paramNationality = new SqlParameter("@C19", SqlDbType.NVarChar);
                 paramNationality.Value = cmbnationality.SelectedValue;
 
-
+                SqlParameter paramDOB= new SqlParameter("@C20", SqlDbType.Date);
+                paramDOB.Value = dtpDOB.Value;
 
                 SqlParameter paramPID = new SqlParameter("@id", SqlDbType.Int);
                 paramPID.Value = EMPID;
@@ -1090,6 +1134,12 @@ ORDER BY e.EmployeeID";
                             EndDatePicker.Value = enter_date;
 
 
+                        }
+                        
+                        else if (dtpDOB.Checked==false)
+                            {
+                            DateTime enter_date = DateTime.Now.Date;
+                            dtpDOB.Value = enter_date;
                         }
                         else if (cmbEmployJobHistory.Text == "Select")
 
@@ -1141,16 +1191,16 @@ ORDER BY e.EmployeeID";
 
                             if ((int)cmbPersonalStatusStatus.SelectedValue == 25 || (int)cmbPersonalStatusStatus.SelectedValue == 26 || (int)cmbPersonalStatusStatus.SelectedValue == 27)
                             {
-                                SQLCONN.ExecuteQueries("insert into Employees (EmployeeID, firstname,secondname,thirdname,lastname,Gender,MartialStatus,[PCNAME], EmploymentStatusID,JobID,DeptID,StartDate,EndDate,COMPID,UserID,CurrentEmpID,NationalityID)" +
-                          " values (@EmployeeID,@C1,@C2,@C3,@C4,@C5,@C6,@pc,@C13,@C14,@C15,@C16,@C17,@C18,@C10,@CurrentEmployeeID,@C19)",
-                                                     paramEmployeeID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, parampc, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany, paramUserID, paramCurrentEmployeeID, paramNationality);
+                                SQLCONN.ExecuteQueries("insert into Employees (EmployeeID, firstname,secondname,thirdname,lastname,Gender,MartialStatus,[PCNAME], EmploymentStatusID,JobID,DeptID,StartDate,EndDate,COMPID,UserID,CurrentEmpID,NationalityID,DOB)" +
+                          " values (@EmployeeID,@C1,@C2,@C3,@C4,@C5,@C6,@pc,@C13,@C14,@C15,@C16,@C17,@C18,@C10,@CurrentEmployeeID,@C19,@C20)",
+                                                     paramEmployeeID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, parampc, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany, paramUserID, paramCurrentEmployeeID, paramNationality,paramDOB);
 
                             }
                             else
                             {
-                                SQLCONN.ExecuteQueries("insert into Employees (EmployeeID, firstname,secondname,thirdname,lastname,Gender,MartialStatus,[PCNAME], EmploymentStatusID,JobID,DeptID,StartDate,COMPID,UserID,CurrentEmpID,NationalityID)" +
-                          " values (@EmployeeID,@C1,@C2,@C3,@C4,@C5,@C6,@pc,@C13,@C14,@C15,@C16,@C18,@C10,@CurrentEmployeeID,@C19)",
-                                                     paramEmployeeID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, parampc, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramcompany, paramUserID, paramCurrentEmployeeID, paramNationality);
+                                SQLCONN.ExecuteQueries("insert into Employees (EmployeeID, firstname,secondname,thirdname,lastname,Gender,MartialStatus,[PCNAME], EmploymentStatusID,JobID,DeptID,StartDate,COMPID,UserID,CurrentEmpID,NationalityID,DOB)" +
+                          " values (@EmployeeID,@C1,@C2,@C3,@C4,@C5,@C6,@pc,@C13,@C14,@C15,@C16,@C18,@C10,@CurrentEmployeeID,@C19,@C20)",
+                                                     paramEmployeeID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, parampc, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramcompany, paramUserID, paramCurrentEmployeeID, paramNationality,paramDOB);
 
                             }
 
@@ -1168,7 +1218,7 @@ ORDER BY e.EmployeeID";
 
                             string query = @"SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus,
        s.StatusValue, j.JobTitleEN, dt.Dept_Type_Name, c.COMPName_EN, e.startdate, e.enddate,
-       cn.NationalityName, v.FileNumber, v.VISANumber
+       cn.NationalityName, v.FileNumber, v.VISANumber, e.DOB
 FROM Employees e
 INNER JOIN StatusTBL s ON e.EmploymentStatusID = s.StatusID
 INNER JOIN JOBS j ON e.JobID = j.JobID
@@ -1941,21 +1991,21 @@ ORDER BY e.EmployeeID";
             {
                 AddBtn.Visible = true;
             }
-            filenumbertxt.Text = "";
+            this.ActiveControl = firstnametxt;
             btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = false;
             firstnametxt.Enabled = secondnametxt.Enabled = thirdnametxt.Enabled = lastnametxt.Enabled = true;
             dataGridView2.DataSource = dataGridView3.DataSource = dataGridView4.DataSource = dataGridView5.DataSource = null;
             cmbMartialStatus.Enabled = cmbGender.Enabled = cmbempdepthistory.Enabled = cmbEmployJobHistory.Enabled = cmbPersonalStatusStatus.Enabled = cmbCompany.Enabled = cmbnationality.Enabled = true;
             StartDatePicker.Enabled = true;
+            dtpDOB.Enabled = true;
             EndDatePicker.Enabled = false;
             dataGridView1.DataSource = null;
             cmbCompany.Text = cmbEmployJobHistory.Text = cmbempdepthistory.Text = cmbPersonalStatusStatus.Text = cmbnationality.Text=cmbMartialStatus.Text = "Select";
-            StartDatePicker.Value = EndDatePicker.Value = DateTime.Now;
+            dtpDOB.Value= StartDatePicker.Value = EndDatePicker.Value = DateTime.Now;
             ClearTextBoxes();
-
+            filenumbertxt.Text = "-";
             // EmployeeForm_Load(sender, e);
-            this.ActiveControl = firstnametxt;
-
+            EmployeeID = 0;
 
         }
 
@@ -1966,7 +2016,7 @@ ORDER BY e.EmployeeID";
             paramEmployeeID.Value = EmployeeID;
             if (EmployeeID == 0 || filenumbertxt.Text == string.Empty)
             {
-                MessageBox.Show("Please Choose A Record !  ");
+                MessageBox.Show(" Please Choose A Record !  ");
 
             }
             else
@@ -2082,6 +2132,14 @@ ORDER BY e.EmployeeID";
                 {
                     StartDatePicker.Value = Convert.ToDateTime(row.Cells["startdate"].Value);
                 }
+                if (row.Cells["DOB"].Value == DBNull.Value)
+                {
+                    dtpDOB.Value = DateTime.Now;
+                }
+                else
+                {
+                    dtpDOB.Value = Convert.ToDateTime(row.Cells["DOB"].Value);
+                }
 
                 cmbnationality.Text = row.Cells["NationalityName"].Value?.ToString() ?? string.Empty;
                 txtFileNumber.Text = row.Cells["FileNumber"].Value?.ToString() ?? string.Empty;
@@ -2122,7 +2180,7 @@ ORDER BY e.EmployeeID";
                 btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = true;
                 firstnametxt.Enabled = secondnametxt.Enabled = thirdnametxt.Enabled = lastnametxt.Enabled = true;
                 cmbMartialStatus.Enabled = cmbGender.Enabled = cmbCompany.Enabled = cmbempdepthistory.Enabled = cmbEmployJobHistory.Enabled = cmbPersonalStatusStatus.Enabled = cmbnationality.Enabled = true;
-                StartDatePicker.Enabled = true;
+                StartDatePicker.Enabled = dtpDOB.Enabled=true ;
 
                 // Selection will be handled by the SelectionChanged event
             }
@@ -3039,7 +3097,7 @@ ORDER BY e.EmployeeID";
             EmployeeID = EMPID;
             SqlParameter paramEmployeeID = new SqlParameter("@ID", SqlDbType.NVarChar);
             paramEmployeeID.Value = filenumbertxt.Text;
-            if (EmployeeID == 0 && filenumbertxt.Text==string.Empty)
+            if (EmployeeID==0&& filenumbertxt.Text == string.Empty)
             {
                 MessageBox.Show("Please Choose A Record !  ");
 
@@ -3496,6 +3554,19 @@ ORDER BY e.EmployeeID";
             visaform.Show();
         }
 
+        private void dtpDOB_ValueChanged(object sender, EventArgs e)
+        {
+            // Calculate the age and update the lblAge label
+            DateTime selectedDate = dtpDOB.Value;
+            int age = CalculateAge(selectedDate);
+            lblage.Visible=lblyears.Visible = true;
+            lblage.Text = age.ToString();
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

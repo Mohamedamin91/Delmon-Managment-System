@@ -134,6 +134,7 @@ namespace Delmon_Managment_System
             // 
             // btnNotifications
             // 
+            this.btnNotifications.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnNotifications.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnNotifications.FlatAppearance.BorderSize = 0;
             this.btnNotifications.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -146,10 +147,10 @@ namespace Delmon_Managment_System
             this.btnNotifications.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.btnNotifications.Size = new System.Drawing.Size(200, 60);
             this.btnNotifications.TabIndex = 172;
-            this.btnNotifications.Text = "Alerts";
+            this.btnNotifications.Text = " Tips / News";
             this.btnNotifications.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnNotifications.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnNotifications.UseVisualStyleBackColor = true;
+            this.btnNotifications.UseVisualStyleBackColor = false;
             this.btnNotifications.Click += new System.EventHandler(this.btnNotifications_Click_1);
             // 
             // button3

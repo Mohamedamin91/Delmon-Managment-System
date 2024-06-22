@@ -1608,165 +1608,122 @@ namespace Delmon_Managment_System.Forms
 
         private void button2_Click_1(object sender, EventArgs e)
         {
+            // Open the database connection
             SQLCONN4.OpenConection4();
+
+            // Create the SQL parameters
             SqlParameter ParamUserPrinter = new SqlParameter("@C0", SqlDbType.NVarChar) { Value = cmbPrinter.SelectedValue };
-            SqlParameter Paramfrom = new SqlParameter("@C1", SqlDbType.Date) { Value = dateTimePicker1.Value };
+            SqlParameter ParamFrom = new SqlParameter("@C1", SqlDbType.Date) { Value = dateTimePicker1.Value };
             SqlParameter ParamTo = new SqlParameter("@C2", SqlDbType.Date) { Value = dateTimePicker2.Value };
 
-            if ((!radioButton1.Checked && !radioButton2.Checked && !radioButton3.Checked && !radioButton4.Checked))
+            // Ensure a radio button is selected
+            if (!radioButton1.Checked && !radioButton2.Checked && !radioButton3.Checked && !radioButton4.Checked)
             {
                 MessageBox.Show("Kindly select one of the Radio buttons! / Printer", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                return;
             }
-            else
+
+            // Ensure a printer is selected if needed
+            if ((radioButton1.Checked || radioButton2.Checked || radioButton3.Checked || radioButton4.Checked) && cmbPrinter.Text == "Select")
             {
-                //by user 
-                if (radioButton1.Checked)
+                MessageBox.Show("Kindly select one of the Printers", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Execute the appropriate query based on the selected radio button
+            if (radioButton1.Checked) // By user
+            {
+                dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT Username, SUM(Total) AS Count FROM LogReport WHERE 
+            CONVERT(DATE, Printdate, 120) BETWEEN @C1 AND @C2 AND AssetId=@C0 GROUP BY Username ORDER BY Count;", ParamFrom, ParamTo, ParamUserPrinter);
+            }
+            else if (radioButton2.Checked) // By department
+            {
+                dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT Department, SUM(Total) AS Count FROM LogReport WHERE 
+            CONVERT(DATE, Printdate, 120) BETWEEN @C1 AND @C2 AND AssetId=@C0 GROUP BY Department ORDER BY Count;", ParamFrom, ParamTo, ParamUserPrinter);
+            }
+            else if (radioButton3.Checked) // Full report
+            {
+                if (cmbPrinter.Text == "Select")
                 {
-                    if (cmbPrinter.Text == "Select")
-                    {
-                        MessageBox.Show("Kindly select one of the Printers", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                    }
-                    else
-                    {
-                        dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT Username, SUM(Total) AS Count FROM  LogReport WHERE 
-    CONVERT(DATE, Printdate, 120) between @C1 and  @C2 and AssetId=@C0 GROUP BY Username ORDER BY Count;", Paramfrom, ParamTo, ParamUserPrinter);
-                    }
+                    dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT * FROM LogReport WHERE 
+                CONVERT(DATE, Printdate, 120) BETWEEN @C1 AND @C2;", ParamFrom, ParamTo);
                 }
-
-                // bydepartment
-                if (radioButton2.Checked)
+                else
                 {
-                    if (cmbPrinter.Text == "Select")
-                    {
-                        MessageBox.Show("Kindly select one of the Printers", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                    }
-                    else
-                    {
-
-                        dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT Department, SUM(Total) AS Count FROM LogReport WHERE 
-    CONVERT(DATE, Printdate, 120) between @C1 and @C2 and AssetId=@C0 GROUP BY Department ORDER BY Count;", Paramfrom, ParamTo, ParamUserPrinter);
-                    }
+                    dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT * FROM LogReport WHERE 
+                CONVERT(DATE, Printdate, 120) BETWEEN @C1 AND @C2 AND AssetId=@C0;", ParamFrom, ParamTo, ParamUserPrinter);
                 }
-                // full
-                if (radioButton3.Checked)
+            }
+            else if (radioButton4.Checked) // Duplicate log
+            {
+                if (cmbPrinter.Text == "Select")
                 {
-
-                    if (cmbPrinter.Text == "Select")
-                    {
-                        dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT * FROM LogReport WHERE 
-    CONVERT(DATE, Printdate, 120) between @C1 and @C2  ;", Paramfrom, ParamTo);
-                    }
-                    else
-                    {
-            
-                        dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT * FROM LogReport WHERE 
-    CONVERT(DATE, Printdate, 120) between @C1 and @C2 and AssetId=@C0 ;", Paramfrom, ParamTo, ParamUserPrinter);
-                    }
-
-
-
+                    dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT * FROM [DuplicateLog] WHERE 
+                CONVERT(DATE, Printdate, 120) BETWEEN @C1 AND @C2;", ParamFrom, ParamTo);
                 }
-                //Duplicate
-                if (radioButton4.Checked)
+                else
                 {
-                    if (cmbPrinter.Text == "Select")
-                    {
-                        dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT * FROM  [DuplicateLog]  WHERE 
-    CONVERT(DATE, Printdate, 120) between @C1 and  @C2  ;", Paramfrom, ParamTo);
-                    }
-                    else
-                    {
+                    dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT * FROM [DuplicateLog] WHERE 
+                CONVERT(DATE, Printdate, 120) BETWEEN @C1 AND @C2 AND AssetId=@C0;", ParamFrom, ParamTo, ParamUserPrinter);
+                }
+            }
 
-                        dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT * FROM  [DuplicateLog]  WHERE 
-    CONVERT(DATE, Printdate, 120) between @C1 and  @C2 and AssetId=@C0 ;", Paramfrom, ParamTo, ParamUserPrinter);
+            // Adjust DataGridView settings and add total row if applicable
+            AdjustDataGridView();
+
+            // Close the database connection
+            SQLCONN4.CloseConnection();
+        }
+
+        private void AdjustDataGridView()
+        {
+            // Common adjustments for the DataGridView
+            dataGridView5.Columns[0].Width = 150;
+
+            if (radioButton1.Checked || radioButton2.Checked) // By user or by department
+            {
+                int sum = 0;
+                foreach (DataGridViewRow row in dataGridView5.Rows)
+                {
+                    if (row.Cells[1].Value != null && int.TryParse(row.Cells[1].Value.ToString(), out int quantity))
+                    {
+                        sum += quantity;
                     }
                 }
-                    // bu user //by department
-                    if (radioButton1.Checked || radioButton2.Checked)
+
+                AddTotalRow(sum, 1);
+            }
+            else if (radioButton3.Checked) // Full report
+            {
+                int sum = 0;
+                foreach (DataGridViewRow row in dataGridView5.Rows)
+                {
+                    if (row.Cells[12].Value != null && int.TryParse(row.Cells[12].Value.ToString(), out int quantity))
                     {
-                        dataGridView5.Columns[0].Width = 150;
-
-                        // Calculate total
-                        int sum = 0;
-                        foreach (DataGridViewRow row in dataGridView5.Rows)
-                        {
-                            if (row.Cells[1].Value != null)
-                            {
-                                int quantity;
-                                if (int.TryParse(row.Cells[1].Value.ToString(), out quantity))
-                                {
-                                    sum += quantity;
-                                }
-                            }
-                        }
-
-                        // Add total row
-                        DataTable dataTable = (DataTable)dataGridView5.DataSource;
-                        DataRow totalRow = dataTable.NewRow();
-                        totalRow[0] = "Total";
-                        totalRow[1] = sum;
-                        dataTable.Rows.Add(totalRow);
-
-                        // Get the DataGridViewRow for the total row
-                        DataGridViewRow totalDataGridViewRow = dataGridView5.Rows[dataTable.Rows.Count - 1];
-
-                        // Set the cell style for the new row
-                        totalDataGridViewRow.DefaultCellStyle.BackColor = Color.YellowGreen;
+                        sum += quantity;
                     }
-                    // full
-                    if (radioButton3.Checked)
-                    {
-                        dataGridView5.Columns[0].Width = 150;
-
-                        // Check if the DataGridView has a data source
-                        // Calculate the sum of the column
-                        int sum = 0;
-                        foreach (DataGridViewRow row in dataGridView5.Rows)
-                        {
-                            if (row.Cells[12].Value != null)
-                            {
-                                int quantity;
-                                if (int.TryParse(row.Cells[12].Value.ToString(), out quantity))
-                                {
-                                    sum += quantity;
-                                }
-                            }
-                        }
-
-                        // Create a new DataRow for the total row
-                        DataTable dataTable = (DataTable)dataGridView5.DataSource;
-                        DataRow totalRow = dataTable.NewRow();
-                        totalRow[0] = "Total";
-                        totalRow[12] = sum;
-                        // Add the total row to the DataTable
-                        dataTable.Rows.Add(totalRow);
-
-                        // Get the DataGridViewRow for the total row
-                        DataGridViewRow totalDataGridViewRow = dataGridView5.Rows[dataTable.Rows.Count - 1];
-
-                        // Set the cell style for the new row
-                        totalDataGridViewRow.DefaultCellStyle.BackColor = Color.YellowGreen;
-
-                        // Refresh the DataGridView to reflect the changes
-                    }
-                    if (radioButton4.Checked)
-                    {
-                        dataGridView5.Columns[2].Width = 300;
-                    }
-
-                    // Refresh the DataGridView
                 }
 
+                AddTotalRow(sum, 12);
+            }
+            else if (radioButton4.Checked) // Duplicate log
+            {
+                dataGridView5.Columns[2].Width = 300;
+            }
 
-                dataGridView5.Refresh();
+            dataGridView5.Refresh();
+        }
 
+        private void AddTotalRow(int sum, int columnIndex)
+        {
+            DataTable dataTable = (DataTable)dataGridView5.DataSource;
+            DataRow totalRow = dataTable.NewRow();
+            totalRow[0] = "Total";
+            totalRow[columnIndex] = sum;
+            dataTable.Rows.Add(totalRow);
 
-
-                SQLCONN4.CloseConnection();
-            
+            DataGridViewRow totalDataGridViewRow = dataGridView5.Rows[dataTable.Rows.Count - 1];
+            totalDataGridViewRow.DefaultCellStyle.BackColor = Color.YellowGreen;
         }
 
         private void button5_Click(object sender, EventArgs e)
