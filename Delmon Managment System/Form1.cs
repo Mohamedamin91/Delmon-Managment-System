@@ -374,7 +374,7 @@ GROUP BY
 
         private void btnNotifications_Click_1(object sender, EventArgs e)
         {
-            MessageBox.Show("1- 'Assigned By' in Assign History Has been added Successfully!", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("There is no notifications !", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             //  OpenChildForm(new Forms.NotificationFrm(), sender);
 

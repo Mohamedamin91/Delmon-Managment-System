@@ -661,7 +661,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label5.Location = new System.Drawing.Point(7, 269);
+            this.label5.Location = new System.Drawing.Point(7, 262);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 17);
@@ -1260,6 +1260,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1574, 853);
             this.Controls.Add(this.lblFullname);

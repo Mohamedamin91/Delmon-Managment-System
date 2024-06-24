@@ -458,8 +458,16 @@ namespace Delmon_Managment_System.Forms
             /*Asset Assign*/
 
             /*price*/
-            SqlParameter paramAssestPrice = new SqlParameter("@C11", SqlDbType.Date);
-            paramAssestPrice.Value = PriceTXT.Text;
+            SqlParameter paramAssestPrice = new SqlParameter("@C11", SqlDbType.NVarChar);
+            if (PriceTXT.Text == string.Empty)
+            {
+                paramAssestPrice.Value = "0";
+            }
+            else
+            {
+                paramAssestPrice.Value = PriceTXT.Text;
+            }
+
             /*price*/
 
             /*username*/
