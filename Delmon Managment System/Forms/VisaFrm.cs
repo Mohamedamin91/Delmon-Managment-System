@@ -2596,18 +2596,28 @@ GROUP BY
 
         private async void LoadVisaJobListAsync(int visaNumberID)
         {
-            await Task.Run(() =>
+            var dataSource = await Task.Run(() =>
             {
-                SQLCONN.OpenConection();
-                var dataSource = SQLCONN.ShowDataInGridViewORCombobox($"SELECT * FROM VISAJobList WHERE visanumber = {visaNumberID} AND VISAJobList.StatusID != 6");
+                SQLCONN.OpenConection(); // Open the database connection
 
-                this.Invoke((Action)(() =>
+                object data;
+                if (ChkUsedbx.Checked==true)
                 {
-                    dataGridView2.DataSource = dataSource;
-                    SQLCONN.CloseConnection();
-                }));
+                    data = SQLCONN.ShowDataInGridViewORCombobox($"SELECT * FROM VISAJobList WHERE visanumber = {visaNumberID}");
+                }
+                else
+                {
+                    data = SQLCONN.ShowDataInGridViewORCombobox($"SELECT * FROM VISAJobList WHERE visanumber = {visaNumberID} AND VISAJobList.StatusID != 6");
+                }
+
+                SQLCONN.CloseConnection(); // Close the database connection
+                return data;
             });
+
+            // Update the DataGridView on the main thread
+            dataGridView2.DataSource = dataSource;
         }
+
 
         private void CalculateDates()
         {

@@ -43,7 +43,7 @@ namespace Delmon_Managment_System.Forms
             this.addbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addbtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.addbtn.ForeColor = System.Drawing.Color.White;
-            this.addbtn.Location = new System.Drawing.Point(-8, 177);
+            this.addbtn.Location = new System.Drawing.Point(-3, 157);
             this.addbtn.Name = "addbtn";
             this.addbtn.Size = new System.Drawing.Size(261, 28);
             this.addbtn.TabIndex = 32;
@@ -54,7 +54,7 @@ namespace Delmon_Managment_System.Forms
             // txtWorklocation
             // 
             this.txtWorklocation.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.txtWorklocation.Location = new System.Drawing.Point(23, 86);
+            this.txtWorklocation.Location = new System.Drawing.Point(23, 101);
             this.txtWorklocation.Multiline = true;
             this.txtWorklocation.Name = "txtWorklocation";
             this.txtWorklocation.Size = new System.Drawing.Size(193, 24);
@@ -65,7 +65,7 @@ namespace Delmon_Managment_System.Forms
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(30, 66);
+            this.label3.Location = new System.Drawing.Point(20, 81);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(114, 17);
             this.label3.TabIndex = 30;
@@ -76,7 +76,7 @@ namespace Delmon_Managment_System.Forms
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.label1.Location = new System.Drawing.Point(20, 23);
+            this.label1.Location = new System.Drawing.Point(26, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(183, 17);
             this.label1.TabIndex = 29;
@@ -87,7 +87,7 @@ namespace Delmon_Managment_System.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(249, 204);
+            this.ClientSize = new System.Drawing.Size(252, 185);
             this.Controls.Add(this.addbtn);
             this.Controls.Add(this.txtWorklocation);
             this.Controls.Add(this.label3);

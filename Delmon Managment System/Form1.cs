@@ -374,7 +374,8 @@ GROUP BY
 
         private void btnNotifications_Click_1(object sender, EventArgs e)
         {
-            MessageBox.Show("There is no notifications !", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
+         //   MessageBox.Show("There is no notifications !", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Check box for used visa has been added !", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             //  OpenChildForm(new Forms.NotificationFrm(), sender);
 
