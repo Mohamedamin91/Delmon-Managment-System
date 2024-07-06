@@ -14,9 +14,15 @@ namespace Delmon_Managment_System.Forms
     public partial class BillsFrm : Form
     {
         SQLCONNECTION SQLCONN = new SQLCONNECTION();
+        SQLCONNECTION SQLCONN2 = new SQLCONNECTION();
         int EmployeeID;
         int LoggedEmployeeID;
         int PackageID;
+        bool hasView = false;
+        bool hasEdit = false;
+        bool hasDelete = false;
+        bool hasAdd = false;
+
 
         public BillsFrm()
         {
@@ -42,6 +48,8 @@ namespace Delmon_Managment_System.Forms
             lblPC.Text = Environment.MachineName;
 
             SQLCONN.OpenConection();
+            SQLCONN2.OpenConection2();
+
             cmbemployee.ValueMember = "EmployeeID";
             cmbemployee.DisplayMember = "FullName";
             cmbemployee.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT EmployeeID ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName' from Employees   order by EmployeeID ");
@@ -104,11 +112,10 @@ namespace Delmon_Managment_System.Forms
             cmbMedia.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbMedia.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-            SQLCONN.OpenConection2();
             string query2 = "SELECT OwnerID,OwnerName FROM Owners";
             cmbOwner.ValueMember = "OwnerID";
             cmbOwner.DisplayMember = "OwnerName";
-            cmbOwner.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query2);
+            cmbOwner.DataSource = SQLCONN2.ShowDataInGridViewORCombobox(query2);
             cmbOwner.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbOwner.AutoCompleteSource = AutoCompleteSource.ListItems;
 
@@ -123,7 +130,88 @@ namespace Delmon_Managment_System.Forms
 
 
 
+            /*permissions*/
+            SqlDataReader dr = SQLCONN.DataReader(@"
+        SELECT ps.PermissionName
+        FROM UserPermissions us
+        	JOIN tblUser u ON us.UserID = u.EmployeeID
+        JOIN Permissions ps ON us.PermissionID = ps.PermissionID
+               WHERE u.EmployeeID = @UserID",
+                 new SqlParameter("@UserID", SqlDbType.NVarChar) { Value = CommonClass.EmployeeID });
+
+
+            while (dr.Read())
+            {
+                string permissionName = dr["PermissionName"].ToString();
+                if (permissionName.Contains("ViewBills"))
+                {
+                    hasView = true;
+                }
+                if (permissionName.Contains("EditBills"))
+                {
+                    hasEdit = true;
+                }
+                if (permissionName.Contains("DeleteBills"))
+                {
+                    hasDelete = true;
+                }
+                if (permissionName.Contains("AddBills"))
+                {
+                    hasAdd = true;
+                }
+            }
+            dr.Close();
+            if (hasView == false)
+            {
+                MessageBox.Show("Sorry, You are not allowed to view this Module/Screen , kindly contact the administrator !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                tabControl1.Enabled = false;
+                
+             
+            }
+            else
+
+            {
+                tabControl1.Enabled = true;
+
+
+                if (hasEdit)
+                {
+                     //btnUpdate.Visible = button2.Visible = button6.Visible = button10.Visible = true;
+                    btnUpdate.Enabled = button2.Enabled = button6.Enabled = button10.Enabled = true;
+                }
+                else
+                {
+                    btnUpdate.Enabled = button2.Enabled = button6.Enabled = button10.Enabled = false;
+                }
+                if (hasDelete)
+                {
+                    // DeleteBtn.Visible = true;
+                    DeleteBtn.Enabled = button3.Enabled = button7.Enabled = button11.Enabled = true;
+                }
+                else 
+                {
+                    DeleteBtn.Enabled = button3.Enabled = button7.Enabled = button11.Enabled = false;
+
+                }
+                if (hasAdd)
+                {
+                    btn.Visible = button1.Visible = button5.Visible = button9.Visible = true;
+                    AddBtn.Enabled = button4.Enabled = button8.Enabled = button12.Enabled = true;
+                }
+                else 
+                {
+                    btn.Visible = button1.Visible = button5.Visible = button9.Visible = false;
+                    AddBtn.Enabled = button4.Enabled = button8.Enabled = button12.Enabled = false;
+                }
+
+            }
+
+            /*permissions*/
+
+
+
             SQLCONN.CloseConnection();
+            SQLCONN2.CloseConnection();
 
         }
 
@@ -1688,6 +1776,11 @@ namespace Delmon_Managment_System.Forms
                 cmbemployee2.Enabled =cmbempdepthistory.Enabled =cmbRegisterUnder.Enabled= false;
 
             }
+        }
+
+        private void tabPage3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

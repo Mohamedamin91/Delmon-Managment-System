@@ -603,7 +603,7 @@ SELECT
     AB.AssetBrandValue, 
     A.Model,
     A.PurchasingDate,
-    A.DeviceTypeID,
+    DT.DeviceType,
     A.AssetStatusID,
     CONCAT(E.FirstName, ' ', E.SecondName, ' ', E.ThirdName, ' ', E.LastName) AS FullName,
     LA.EmployeeID AS LastEmployeeID,
@@ -613,6 +613,8 @@ SELECT
 FROM
     Assets A
 INNER JOIN 
+    DeviceTypes DT ON A.DeviceTypeID = DT.DeviceTypeID
+INNER JOIN 
     AssetBrand AB ON A.Brand = AB.AssetBrandID
 INNER JOIN 
     AssetType AT ON A.AssetTypeID = AT.AssetTypeID
@@ -621,7 +623,8 @@ LEFT JOIN
 LEFT JOIN
     [DelmonGroupDB].[dbo].[Employees] E ON LA.EmployeeID = E.EmployeeID
 WHERE 
-    A.sn LIKE '%' + @C1 + '%' OR 
+    A.sn LIKE '%' + @C1 + '%' OR
+    DT.DeviceType LIKE '%' + @C1 + '%' OR
     A.Model LIKE '%' + @C1 + '%' OR 
     A.AssetID LIKE '%' + @C1 + '%' OR
     AT.AssettypeValue LIKE '%' + @C1 + '%' OR
@@ -670,7 +673,7 @@ ORDER BY
             DateTime.TryParse(selectedRow.Cells[6].Value?.ToString(), out DateTime purchasingDate);
             PurchasingDtp.Value = purchasingDate == DateTime.MinValue ? DateTime.Now : purchasingDate;
 
-            cmbDevice.SelectedValue = selectedRow.Cells[7].Value?.ToString() ?? string.Empty;
+            cmbDevice.Text = selectedRow.Cells[7].Value?.ToString() ?? string.Empty;
             cmbAssetStatus.SelectedValue = selectedRow.Cells[8].Value?.ToString() ?? string.Empty;
 
             if (selectedRow.Cells[10].Value != null && !string.IsNullOrEmpty(selectedRow.Cells[10].Value.ToString()))
@@ -2134,6 +2137,20 @@ where
         private void txtsapid_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            if (txtSN.Text != string.Empty)
+            {
+                Clipboard.SetText(txtSN.Text);
+                label26.Visible = true;
+                label26.Text = "Copied !";
+            }
+            else
+            {
+
+            }
         }
 
         private void cmbbrand_KeyDown(object sender, KeyEventArgs e)

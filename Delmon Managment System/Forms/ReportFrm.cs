@@ -1705,13 +1705,19 @@ namespace Delmon_Managment_System.Forms
                 }
 
                 AddTotalRow(sum, 12);
+                lblSum.Text = sum.ToString();
             }
             else if (radioButton4.Checked) // Duplicate log
             {
                 dataGridView5.Columns[2].Width = 300;
-            }
+                int rowCount = dataGridView5.RowCount;
+                lblSum.Text = rowCount.ToString();
 
+            }
+           
             dataGridView5.Refresh();
+           
+
         }
 
         private void AddTotalRow(int sum, int columnIndex)
