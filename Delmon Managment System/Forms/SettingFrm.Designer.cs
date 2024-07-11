@@ -35,6 +35,7 @@ namespace Delmon_Managment_System.Forms
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingFrm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.userTap = new System.Windows.Forms.TabPage();
@@ -258,6 +259,24 @@ namespace Delmon_Managment_System.Forms
             this.lblusername = new System.Windows.Forms.Label();
             this.lblusertype = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.radioButton23 = new System.Windows.Forms.RadioButton();
+            this.radioButton24 = new System.Windows.Forms.RadioButton();
+            this.radioButton25 = new System.Windows.Forms.RadioButton();
+            this.radioButton26 = new System.Windows.Forms.RadioButton();
+            this.button29 = new System.Windows.Forms.Button();
+            this.button30 = new System.Windows.Forms.Button();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label25 = new System.Windows.Forms.Label();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.label30 = new System.Windows.Forms.Label();
+            this.dataGridView9 = new System.Windows.Forms.DataGridView();
+            this.cmbUserLog = new System.Windows.Forms.ComboBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.groupBox21 = new System.Windows.Forms.GroupBox();
+            this.radioButton27 = new System.Windows.Forms.RadioButton();
+            this.radioButton28 = new System.Windows.Forms.RadioButton();
+            this.label34 = new System.Windows.Forms.Label();
+            this.ViewEmployeelogs = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.userTap.SuspendLayout();
             this.groupBox10.SuspendLayout();
@@ -292,7 +311,10 @@ namespace Delmon_Managment_System.Forms
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView8)).BeginInit();
+            this.EmployeeLogTap.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView9)).BeginInit();
+            this.groupBox21.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -306,10 +328,10 @@ namespace Delmon_Managment_System.Forms
             this.tabControl1.Controls.Add(this.EmployeeLogTap);
             this.tabControl1.Controls.Add(this.notificationsTap);
             this.tabControl1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.tabControl1.Location = new System.Drawing.Point(1, -2);
+            this.tabControl1.Location = new System.Drawing.Point(1, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1169, 627);
+            this.tabControl1.Size = new System.Drawing.Size(1232, 750);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.TabStop = false;
             this.tabControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseClick);
@@ -552,6 +574,8 @@ namespace Delmon_Managment_System.Forms
             // permissionstab
             // 
             this.permissionstab.BackColor = System.Drawing.Color.White;
+            this.permissionstab.Controls.Add(this.groupBox1);
+            this.permissionstab.Controls.Add(this.groupBox21);
             this.permissionstab.Controls.Add(this.groupBox20);
             this.permissionstab.Controls.Add(this.groupBox19);
             this.permissionstab.Controls.Add(this.label40);
@@ -567,7 +591,7 @@ namespace Delmon_Managment_System.Forms
             this.permissionstab.Controls.Add(this.groupBox7);
             this.permissionstab.Location = new System.Drawing.Point(4, 26);
             this.permissionstab.Name = "permissionstab";
-            this.permissionstab.Size = new System.Drawing.Size(1161, 597);
+            this.permissionstab.Size = new System.Drawing.Size(1224, 720);
             this.permissionstab.TabIndex = 9;
             this.permissionstab.Text = "Permission";
             this.permissionstab.Click += new System.EventHandler(this.tabPage1_Click);
@@ -1559,6 +1583,7 @@ namespace Delmon_Managment_System.Forms
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Select All";
             this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // label43
             // 
@@ -1591,6 +1616,7 @@ namespace Delmon_Managment_System.Forms
             this.ViewVisabx.TabIndex = 167;
             this.ViewVisabx.Text = "View";
             this.ViewVisabx.UseVisualStyleBackColor = true;
+            this.ViewVisabx.CheckedChanged += new System.EventHandler(this.ViewVisabx_CheckedChanged);
             // 
             // AddVisabx
             // 
@@ -2952,18 +2978,31 @@ namespace Delmon_Managment_System.Forms
             // 
             // EmployeeLogTap
             // 
+            this.EmployeeLogTap.BackColor = System.Drawing.Color.White;
+            this.EmployeeLogTap.Controls.Add(this.radioButton23);
+            this.EmployeeLogTap.Controls.Add(this.radioButton24);
+            this.EmployeeLogTap.Controls.Add(this.radioButton25);
+            this.EmployeeLogTap.Controls.Add(this.radioButton26);
+            this.EmployeeLogTap.Controls.Add(this.button29);
+            this.EmployeeLogTap.Controls.Add(this.button30);
+            this.EmployeeLogTap.Controls.Add(this.dateTimePicker1);
+            this.EmployeeLogTap.Controls.Add(this.label25);
+            this.EmployeeLogTap.Controls.Add(this.dateTimePicker2);
+            this.EmployeeLogTap.Controls.Add(this.label30);
+            this.EmployeeLogTap.Controls.Add(this.dataGridView9);
+            this.EmployeeLogTap.Controls.Add(this.cmbUserLog);
+            this.EmployeeLogTap.Controls.Add(this.label32);
             this.EmployeeLogTap.Location = new System.Drawing.Point(4, 26);
             this.EmployeeLogTap.Name = "EmployeeLogTap";
-            this.EmployeeLogTap.Size = new System.Drawing.Size(1161, 597);
+            this.EmployeeLogTap.Size = new System.Drawing.Size(1224, 720);
             this.EmployeeLogTap.TabIndex = 6;
             this.EmployeeLogTap.Text = "Employee Log";
-            this.EmployeeLogTap.UseVisualStyleBackColor = true;
             // 
             // notificationsTap
             // 
             this.notificationsTap.Location = new System.Drawing.Point(4, 26);
             this.notificationsTap.Name = "notificationsTap";
-            this.notificationsTap.Size = new System.Drawing.Size(1161, 597);
+            this.notificationsTap.Size = new System.Drawing.Size(1224, 720);
             this.notificationsTap.TabIndex = 3;
             this.notificationsTap.Text = "Notifications";
             this.notificationsTap.UseVisualStyleBackColor = true;
@@ -2976,11 +3015,12 @@ namespace Delmon_Managment_System.Forms
             this.groupBox1.Controls.Add(this.lblemail);
             this.groupBox1.Controls.Add(this.lblusername);
             this.groupBox1.Controls.Add(this.lblusertype);
-            this.groupBox1.Location = new System.Drawing.Point(182, 631);
+            this.groupBox1.Location = new System.Drawing.Point(7, 651);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(705, 37);
+            this.groupBox1.Size = new System.Drawing.Size(39, 37);
             this.groupBox1.TabIndex = 146;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Visible = false;
             // 
             // lblFullname
             // 
@@ -3058,6 +3098,221 @@ namespace Delmon_Managment_System.Forms
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // radioButton23
+            // 
+            this.radioButton23.AutoSize = true;
+            this.radioButton23.Enabled = false;
+            this.radioButton23.Location = new System.Drawing.Point(382, 92);
+            this.radioButton23.Name = "radioButton23";
+            this.radioButton23.Size = new System.Drawing.Size(73, 21);
+            this.radioButton23.TabIndex = 218;
+            this.radioButton23.TabStop = true;
+            this.radioButton23.Text = "Delete";
+            this.radioButton23.UseVisualStyleBackColor = true;
+            // 
+            // radioButton24
+            // 
+            this.radioButton24.AutoSize = true;
+            this.radioButton24.Enabled = false;
+            this.radioButton24.Location = new System.Drawing.Point(99, 91);
+            this.radioButton24.Name = "radioButton24";
+            this.radioButton24.Size = new System.Drawing.Size(127, 21);
+            this.radioButton24.TabIndex = 217;
+            this.radioButton24.TabStop = true;
+            this.radioButton24.Text = "All operations";
+            this.radioButton24.UseVisualStyleBackColor = true;
+            // 
+            // radioButton25
+            // 
+            this.radioButton25.AutoSize = true;
+            this.radioButton25.Enabled = false;
+            this.radioButton25.Location = new System.Drawing.Point(305, 92);
+            this.radioButton25.Name = "radioButton25";
+            this.radioButton25.Size = new System.Drawing.Size(78, 21);
+            this.radioButton25.TabIndex = 216;
+            this.radioButton25.TabStop = true;
+            this.radioButton25.Text = "Update";
+            this.radioButton25.UseVisualStyleBackColor = true;
+            // 
+            // radioButton26
+            // 
+            this.radioButton26.AutoSize = true;
+            this.radioButton26.Enabled = false;
+            this.radioButton26.Location = new System.Drawing.Point(234, 91);
+            this.radioButton26.Name = "radioButton26";
+            this.radioButton26.Size = new System.Drawing.Size(69, 21);
+            this.radioButton26.TabIndex = 215;
+            this.radioButton26.TabStop = true;
+            this.radioButton26.Text = "Insert";
+            this.radioButton26.UseVisualStyleBackColor = true;
+            // 
+            // button29
+            // 
+            this.button29.BackColor = System.Drawing.Color.White;
+            this.button29.Enabled = false;
+            this.button29.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.button29.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button29.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button29.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.button29.Location = new System.Drawing.Point(520, 132);
+            this.button29.Name = "button29";
+            this.button29.Size = new System.Drawing.Size(76, 37);
+            this.button29.TabIndex = 214;
+            this.button29.Text = "Export";
+            this.button29.UseVisualStyleBackColor = false;
+            // 
+            // button30
+            // 
+            this.button30.BackColor = System.Drawing.Color.White;
+            this.button30.Enabled = false;
+            this.button30.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.button30.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button30.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button30.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.button30.Location = new System.Drawing.Point(438, 132);
+            this.button30.Name = "button30";
+            this.button30.Size = new System.Drawing.Size(76, 37);
+            this.button30.TabIndex = 213;
+            this.button30.Text = "Display";
+            this.button30.UseVisualStyleBackColor = false;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Enabled = false;
+            this.dateTimePicker1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(80, 144);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(158, 25);
+            this.dateTimePicker1.TabIndex = 210;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label25.Location = new System.Drawing.Point(81, 123);
+            this.label25.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(51, 17);
+            this.label25.TabIndex = 209;
+            this.label25.Text = "From:";
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Enabled = false;
+            this.dateTimePicker2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker2.Location = new System.Drawing.Point(263, 144);
+            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(170, 25);
+            this.dateTimePicker2.TabIndex = 212;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label30.Location = new System.Drawing.Point(260, 123);
+            this.label30.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(31, 17);
+            this.label30.TabIndex = 211;
+            this.label30.Text = "To:";
+            // 
+            // dataGridView9
+            // 
+            this.dataGridView9.AllowUserToAddRows = false;
+            this.dataGridView9.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView9.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView9.Location = new System.Drawing.Point(8, 198);
+            this.dataGridView9.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView9.Name = "dataGridView9";
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView9.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.dataGridView9.Size = new System.Drawing.Size(1082, 381);
+            this.dataGridView9.TabIndex = 208;
+            // 
+            // cmbUserLog
+            // 
+            this.cmbUserLog.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.cmbUserLog.FormattingEnabled = true;
+            this.cmbUserLog.Location = new System.Drawing.Point(136, 34);
+            this.cmbUserLog.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbUserLog.Name = "cmbUserLog";
+            this.cmbUserLog.Size = new System.Drawing.Size(289, 25);
+            this.cmbUserLog.TabIndex = 205;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label32.Location = new System.Drawing.Point(85, 37);
+            this.label32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(43, 17);
+            this.label32.TabIndex = 206;
+            this.label32.Text = "User";
+            // 
+            // groupBox21
+            // 
+            this.groupBox21.Controls.Add(this.radioButton27);
+            this.groupBox21.Controls.Add(this.radioButton28);
+            this.groupBox21.Controls.Add(this.label34);
+            this.groupBox21.Controls.Add(this.ViewEmployeelogs);
+            this.groupBox21.Location = new System.Drawing.Point(401, 592);
+            this.groupBox21.Name = "groupBox21";
+            this.groupBox21.Size = new System.Drawing.Size(712, 45);
+            this.groupBox21.TabIndex = 232;
+            this.groupBox21.TabStop = false;
+            // 
+            // radioButton27
+            // 
+            this.radioButton27.AutoSize = true;
+            this.radioButton27.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton27.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.radioButton27.Location = new System.Drawing.Point(629, 20);
+            this.radioButton27.Name = "radioButton27";
+            this.radioButton27.Size = new System.Drawing.Size(77, 18);
+            this.radioButton27.TabIndex = 235;
+            this.radioButton27.TabStop = true;
+            this.radioButton27.Text = "UnSelect";
+            this.radioButton27.UseVisualStyleBackColor = true;
+            // 
+            // radioButton28
+            // 
+            this.radioButton28.AutoSize = true;
+            this.radioButton28.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton28.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.radioButton28.Location = new System.Drawing.Point(552, 20);
+            this.radioButton28.Name = "radioButton28";
+            this.radioButton28.Size = new System.Drawing.Size(79, 18);
+            this.radioButton28.TabIndex = 234;
+            this.radioButton28.TabStop = true;
+            this.radioButton28.Text = "Select All";
+            this.radioButton28.UseVisualStyleBackColor = true;
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label34.ForeColor = System.Drawing.Color.Firebrick;
+            this.label34.Location = new System.Drawing.Point(11, 15);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(114, 17);
+            this.label34.TabIndex = 203;
+            this.label34.Text = "EmployeeLogs";
+            // 
+            // ViewEmployeelogs
+            // 
+            this.ViewEmployeelogs.AutoSize = true;
+            this.ViewEmployeelogs.Location = new System.Drawing.Point(174, 19);
+            this.ViewEmployeelogs.Name = "ViewEmployeelogs";
+            this.ViewEmployeelogs.Size = new System.Drawing.Size(62, 21);
+            this.ViewEmployeelogs.TabIndex = 204;
+            this.ViewEmployeelogs.Text = "View";
+            this.ViewEmployeelogs.UseVisualStyleBackColor = true;
+            // 
             // SettingFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3065,7 +3320,6 @@ namespace Delmon_Managment_System.Forms
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1341, 718);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SettingFrm";
@@ -3125,8 +3379,13 @@ namespace Delmon_Managment_System.Forms
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView8)).EndInit();
+            this.EmployeeLogTap.ResumeLayout(false);
+            this.EmployeeLogTap.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView9)).EndInit();
+            this.groupBox21.ResumeLayout(false);
+            this.groupBox21.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3355,5 +3614,23 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button button24;
+        private System.Windows.Forms.RadioButton radioButton23;
+        private System.Windows.Forms.RadioButton radioButton24;
+        private System.Windows.Forms.RadioButton radioButton25;
+        private System.Windows.Forms.RadioButton radioButton26;
+        private System.Windows.Forms.Button button29;
+        private System.Windows.Forms.Button button30;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.DataGridView dataGridView9;
+        private System.Windows.Forms.ComboBox cmbUserLog;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.GroupBox groupBox21;
+        private System.Windows.Forms.RadioButton radioButton27;
+        private System.Windows.Forms.RadioButton radioButton28;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.CheckBox ViewEmployeelogs;
     }
 }

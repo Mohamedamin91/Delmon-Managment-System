@@ -375,7 +375,7 @@ GROUP BY
         private void btnNotifications_Click_1(object sender, EventArgs e)
         {
          //   MessageBox.Show("There is no notifications !", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            MessageBox.Show(" Search by Device Type in Asset Module Has been added!", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(" All Asset operations have been monitered by System  Administrator !", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             //  OpenChildForm(new Forms.NotificationFrm(), sender);
 

@@ -57,6 +57,10 @@ namespace Delmon_Managment_System.Forms
         bool hasAddUser = false;
 
 
+        bool hasViewEmployeelog = false;
+
+
+
         string encryptionKey = "0pqnU2X00mf+i8mDTzyPVw==", iv = "0pqnU2X00mf+i8mDTzyPVw==";
 
 
@@ -147,6 +151,8 @@ namespace Delmon_Managment_System.Forms
             EditAgenciesTabx.Tag = 33;
             DeleteAgenciesTabx.Tag = 34;
 
+            ViewEmployeelogs.Tag = 44;
+
 
 
 
@@ -194,6 +200,7 @@ namespace Delmon_Managment_System.Forms
             AddAgenciesTabx.CheckedChanged += CheckBox_CheckedChanged;
             EditAgenciesTabx.CheckedChanged += CheckBox_CheckedChanged;
             DeleteAgenciesTabx.CheckedChanged += CheckBox_CheckedChanged;
+            ViewEmployeelogs.CheckedChanged += CheckBox_CheckedChanged;
 
 
         }
@@ -431,6 +438,16 @@ order by EmployeeID  ");
             cmbUserPermission.AutoCompleteSource = AutoCompleteSource.ListItems;
             cmbUserPermission.Text = "Select";
 
+
+            cmbUserLog.ValueMember = "EmployeeID";
+            cmbUserLog.DisplayMember = "FullName";
+            cmbUserLog.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT u.EmployeeID ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName' 
+from Employees e,tblUser u  
+where u.EmployeeID= e.EmployeeID
+order by EmployeeID  ");
+            cmbUserLog.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbUserLog.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbUserLog.Text = "Select";
 
 
 
@@ -2265,6 +2282,12 @@ order by EmployeeID  ");
                 {
                     hasDeleteUser = true;
                 }
+                if (permissionName.Contains("ViewEmployeeLog"))
+                {
+                    hasViewEmployeelog = true;
+                }
+
+                
             }
             dr.Close();
 
@@ -2534,7 +2557,27 @@ order by EmployeeID  ");
             }
             if (tabControl1.SelectedTab == tabControl1.TabPages[6])
             {
-                MessageBox.Show("Comming Soon  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (hasViewEmployeelog)
+                {
+                    cmbUserLog.Text = "Select";
+                    cmbUserLog.Enabled = true;
+                    button30.Enabled = button29.Enabled = true;
+                    radioButton23.Enabled = radioButton24.Enabled = radioButton25.Enabled = radioButton26.Enabled = true;
+                    dateTimePicker1.Enabled = dateTimePicker2.Enabled = true;
+
+                }
+                else
+                { 
+                    cmbUserLog.Enabled = false;
+                    cmbUserLog.Text = "Select";
+                    button30.Enabled = button29.Enabled = false;
+                    radioButton23.Enabled = radioButton24.Enabled = radioButton25.Enabled = radioButton26.Enabled = false;
+                    dateTimePicker1.Enabled = dateTimePicker2.Enabled = false;
+
+                }
+
+
+                //  MessageBox.Show("Comming Soon  !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             if (tabControl1.SelectedTab == tabControl1.TabPages[7])
@@ -4079,7 +4122,8 @@ ORDER BY
             { ViewAgenciesTabx, 31 },
             { AddAgenciesTabx, 32 },
             { EditAgenciesTabx, 33 },
-            { DeleteAgenciesTabx, 34 }
+            { DeleteAgenciesTabx, 34 },
+            { ViewEmployeelogs, 44 }
         };
 
                 foreach (var permission in permissions)
@@ -4323,6 +4367,9 @@ ORDER BY
                 case "DeleteCountriesTab":
                     DeleteCountriesTabx.Checked = !DeleteCountriesTabx.Checked;
                     break;
+                case "ViewEmployeelogs":
+                    ViewEmployeelogs.Checked = !ViewEmployeelogs.Checked;
+                    break;
                 default:
                     MessageBox.Show($"Permission '{permissionName}' not recognized.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
@@ -4389,7 +4436,8 @@ ORDER BY
         ViewAgenciesTabx,
         AddAgenciesTabx,
         EditAgenciesTabx,
-        DeleteAgenciesTabx
+        DeleteAgenciesTabx,
+        ViewEmployeelogs
     };
 
             // Uncheck all checkboxes initially
@@ -4721,6 +4769,16 @@ ORDER BY
         private void cmbcontact_SelectionChangeCommitted(object sender, EventArgs e)
         {
             Contacttxt.Text = "";
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ViewVisabx_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void maxtxt_KeyPress(object sender, KeyPressEventArgs e)
