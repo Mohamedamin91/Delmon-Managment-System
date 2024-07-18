@@ -374,8 +374,9 @@ GROUP BY
 
         private void btnNotifications_Click_1(object sender, EventArgs e)
         {
+            //successfully
          //   MessageBox.Show("There is no notifications !", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            MessageBox.Show(" All Asset operations have been monitered by System  Administrator !", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Employee Log report has been worked successfully !", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             //  OpenChildForm(new Forms.NotificationFrm(), sender);
 

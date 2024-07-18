@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -377,8 +378,11 @@ namespace Delmon_Managment_System.Forms
                 {
                     deletebtn.Enabled = true;
                     dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
-                    (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID    ");
+                    (
 
+                        " SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive from Employees,tblUserType ,tblUser  " +
+                        "where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID    "
+                        );
                 }
                 else
                 {
@@ -439,12 +443,9 @@ order by EmployeeID  ");
             cmbUserPermission.Text = "Select";
 
 
-            cmbUserLog.ValueMember = "EmployeeID";
-            cmbUserLog.DisplayMember = "FullName";
-            cmbUserLog.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT u.EmployeeID ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName' 
-from Employees e,tblUser u  
-where u.EmployeeID= e.EmployeeID
-order by EmployeeID  ");
+            cmbUserLog.ValueMember = "UserID";
+            cmbUserLog.DisplayMember = "Username";
+            cmbUserLog.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@" SELECT tblUser.[UserID], tblUser.Username from tblUser  ");
             cmbUserLog.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbUserLog.AutoCompleteSource = AutoCompleteSource.ListItems;
             cmbUserLog.Text = "Select";
@@ -2559,19 +2560,19 @@ order by EmployeeID  ");
             {
                 if (hasViewEmployeelog)
                 {
-                    cmbUserLog.Text = "Select";
-                    cmbUserLog.Enabled = true;
+                    cmbUserLog.Text =  cmbsection.Text = "Select";
+                    cmbUserLog.Enabled =cmbsection.Enabled = true;
                     button30.Enabled = button29.Enabled = true;
-                    radioButton23.Enabled = radioButton24.Enabled = radioButton25.Enabled = radioButton26.Enabled = true;
+                    deleterb.Enabled = allrb.Enabled = updaterb.Enabled = insertrb.Enabled = true;
                     dateTimePicker1.Enabled = dateTimePicker2.Enabled = true;
 
                 }
                 else
                 { 
-                    cmbUserLog.Enabled = false;
-                    cmbUserLog.Text = "Select";
+                    cmbUserLog.Enabled = cmbsection.Enabled = false;
+                    cmbUserLog.Text = cmbsection.Text = "Select";
                     button30.Enabled = button29.Enabled = false;
-                    radioButton23.Enabled = radioButton24.Enabled = radioButton25.Enabled = radioButton26.Enabled = false;
+                    deleterb.Enabled = allrb.Enabled = updaterb.Enabled = insertrb.Enabled = false;
                     dateTimePicker1.Enabled = dateTimePicker2.Enabled = false;
 
                 }
@@ -4779,6 +4780,118 @@ ORDER BY
         private void ViewVisabx_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+        //SELECT*
+        //    FROM EmployeeLog
+        //    WHERE CONVERT(DATETIME, LogDatetime, 120) BETWEEN CONVERT(DATETIME, @C1, 120) AND CONVERT(DATETIME, @C2, 120)
+        //    and UserID = @C0";
+        private void button30_Click(object sender, EventArgs e)
+        {
+            // Open the database connection
+            SQLCONN.OpenConection();
+
+            // Create the SQL parameters
+            SqlParameter ParamUserLog = new SqlParameter("@C0", SqlDbType.NVarChar) { Value = cmbUserLog.Text.Trim() };
+            SqlParameter ParamFrom = new SqlParameter("@C1", SqlDbType.Date) { Value = dateTimePicker1.Value };
+            SqlParameter ParamTo = new SqlParameter("@C2", SqlDbType.Date) { Value = dateTimePicker2.Value };
+            SqlParameter ParamScreen = new SqlParameter("@C3", SqlDbType.NVarChar) { Value = cmbsection.Text?.ToString() };
+
+            // Ensure a radio button is selected
+            if (!allrb.Checked && !insertrb.Checked && !updaterb.Checked && !deleterb.Checked)
+            {
+                MessageBox.Show("Kindly select one of the Radio buttons! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Ensure a user is selected if needed
+            if ((allrb.Checked || insertrb.Checked || updaterb.Checked || deleterb.Checked) && cmbUserLog.Text == "Select")
+            {
+                MessageBox.Show("Kindly select one of users", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Build the base query
+            string baseQuery = @"SELECT * FROM EmployeeLog WHERE CONVERT(DATE, LogDatetime, 120) BETWEEN @C1 AND @C2";
+
+            // Add the screen filter if selected
+            if (!string.IsNullOrEmpty(ParamScreen.Value.ToString()) && cmbsection.Text != "Select")
+            {
+                baseQuery += " AND LogValueID LIKE '%' + @C3 + '%'";
+            }
+
+            // Append additional conditions based on selected radio buttons
+            if (allrb.Checked)
+            {
+                baseQuery += " AND Userid=@C0 ";
+            }
+            else if (insertrb.Checked)
+            {
+                baseQuery += " AND Userid=@C0 AND Type='Insert' ";
+            }
+            else if (updaterb.Checked)
+            {
+                baseQuery += " AND Userid=@C0 AND Type='Update'";
+            }
+            else if (deleterb.Checked)
+            {
+                baseQuery += " AND Userid=@C0 AND Type='Delete'";
+            }
+
+            // Prepare the parameters based on the selected radio button
+            List<SqlParameter> parameters = new List<SqlParameter> { ParamFrom, ParamTo };
+
+            if (!allrb.Checked || !string.IsNullOrEmpty(ParamUserLog.Value.ToString()))
+            {
+                parameters.Add(ParamUserLog);
+            }
+
+            if (!string.IsNullOrEmpty(ParamScreen.Value.ToString()));
+            {
+                parameters.Add(ParamScreen);
+            }
+
+            // Execute the query and populate the DataGridView
+            dataGridView9.DataSource = SQLCONN.ShowDataInGridViewORCombobox(baseQuery, parameters.ToArray());
+
+            // Adjust DataGridView settings and add total row if applicable
+            // AdjustDataGridView();
+
+            // Close the database connection
+            SQLCONN.CloseConnection();
+        }
+        private void ExportDataGridViewToExcel(DataGridView dataGridView, ExcelWorksheet worksheet)
+        {
+            for (int i = 1; i <= dataGridView.ColumnCount; i++)
+            {
+                worksheet.Cells[1, i].Value = dataGridView.Columns[i - 1].HeaderText;
+            }
+
+            for (int i = 0; i < dataGridView.RowCount; i++)
+            {
+                for (int j = 0; j < dataGridView.ColumnCount; j++)
+                {
+                    worksheet.Cells[i + 2, j + 1].Value = dataGridView.Rows[i].Cells[j].Value;
+                }
+            }
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+            using (var package = new ExcelPackage())
+            {
+                ExcelWorksheet worksheet1 = package.Workbook.Worksheets.Add("Report");
+
+                ExportDataGridViewToExcel(dataGridView9, worksheet1);
+
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Excel Files|*.xlsx";
+                saveFileDialog.Title = "Save as Excel File";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    package.SaveAs(new System.IO.FileInfo(saveFileDialog.FileName));
+                }
+            }
         }
 
         private void maxtxt_KeyPress(object sender, KeyPressEventArgs e)
