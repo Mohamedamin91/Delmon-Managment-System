@@ -339,6 +339,7 @@ namespace Delmon_Managment_System.Forms
 
                       dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
                      (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID    ");
+                    dataGridView1.Columns["password"].Visible = false;
 
 
                     //if (CommonClass.Usertype == "SuperAdmin")

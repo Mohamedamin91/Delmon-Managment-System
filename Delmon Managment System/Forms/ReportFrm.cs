@@ -101,6 +101,8 @@ namespace Delmon_Managment_System.Forms
                 groupBox2.Enabled = false;
                 groupBox3.Enabled = false;
                 picvisascreen.Enabled = false;
+                groupBox5.Enabled = groupBox6.Enabled = false;
+
 
             }
             else
@@ -110,6 +112,7 @@ namespace Delmon_Managment_System.Forms
                 button3.Enabled = true;
                 groupBox3.Enabled = true;
                 groupBox2.Enabled = true;
+                groupBox5.Enabled = groupBox6.Enabled = true;
 
 
             }

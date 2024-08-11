@@ -333,7 +333,7 @@ namespace Delmon_Managment_System.Forms
             this.tabControl1.Location = new System.Drawing.Point(1, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1232, 750);
+            this.tabControl1.Size = new System.Drawing.Size(1232, 763);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.TabStop = false;
             this.tabControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseClick);
@@ -371,7 +371,7 @@ namespace Delmon_Managment_System.Forms
             this.groupBox10.Controls.Add(this.deletebtn);
             this.groupBox10.Controls.Add(this.label5);
             this.groupBox10.Enabled = false;
-            this.groupBox10.Location = new System.Drawing.Point(7, 6);
+            this.groupBox10.Location = new System.Drawing.Point(22, 6);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(436, 362);
             this.groupBox10.TabIndex = 190;
@@ -567,9 +567,9 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(449, 14);
+            this.dataGridView1.Location = new System.Drawing.Point(471, 14);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(695, 354);
+            this.dataGridView1.Size = new System.Drawing.Size(663, 354);
             this.dataGridView1.TabIndex = 57;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
@@ -593,7 +593,7 @@ namespace Delmon_Managment_System.Forms
             this.permissionstab.Controls.Add(this.groupBox7);
             this.permissionstab.Location = new System.Drawing.Point(4, 26);
             this.permissionstab.Name = "permissionstab";
-            this.permissionstab.Size = new System.Drawing.Size(1224, 720);
+            this.permissionstab.Size = new System.Drawing.Size(1224, 733);
             this.permissionstab.TabIndex = 9;
             this.permissionstab.Text = "Permission";
             this.permissionstab.Click += new System.EventHandler(this.tabPage1_Click);
@@ -2010,7 +2010,7 @@ namespace Delmon_Managment_System.Forms
             this.agenciesTap.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.agenciesTap.Location = new System.Drawing.Point(4, 26);
             this.agenciesTap.Name = "agenciesTap";
-            this.agenciesTap.Size = new System.Drawing.Size(1224, 720);
+            this.agenciesTap.Size = new System.Drawing.Size(1224, 733);
             this.agenciesTap.TabIndex = 2;
             this.agenciesTap.Text = "Agencies";
             this.agenciesTap.Click += new System.EventHandler(this.agenciesTap_Click);
@@ -2333,7 +2333,7 @@ namespace Delmon_Managment_System.Forms
             this.Companiestap.Location = new System.Drawing.Point(4, 26);
             this.Companiestap.Name = "Companiestap";
             this.Companiestap.Padding = new System.Windows.Forms.Padding(3);
-            this.Companiestap.Size = new System.Drawing.Size(1224, 720);
+            this.Companiestap.Size = new System.Drawing.Size(1224, 733);
             this.Companiestap.TabIndex = 5;
             this.Companiestap.Text = "Companies";
             this.Companiestap.Click += new System.EventHandler(this.Companiestap_Click);
@@ -2852,7 +2852,7 @@ namespace Delmon_Managment_System.Forms
             this.ConsulatesTAB.Location = new System.Drawing.Point(4, 26);
             this.ConsulatesTAB.Name = "ConsulatesTAB";
             this.ConsulatesTAB.Padding = new System.Windows.Forms.Padding(3);
-            this.ConsulatesTAB.Size = new System.Drawing.Size(1224, 720);
+            this.ConsulatesTAB.Size = new System.Drawing.Size(1224, 733);
             this.ConsulatesTAB.TabIndex = 7;
             this.ConsulatesTAB.Text = "Countries/Consulates";
             // 
@@ -3144,7 +3144,7 @@ namespace Delmon_Managment_System.Forms
             this.EmployeeLogTap.Controls.Add(this.label32);
             this.EmployeeLogTap.Location = new System.Drawing.Point(4, 26);
             this.EmployeeLogTap.Name = "EmployeeLogTap";
-            this.EmployeeLogTap.Size = new System.Drawing.Size(1224, 720);
+            this.EmployeeLogTap.Size = new System.Drawing.Size(1224, 733);
             this.EmployeeLogTap.TabIndex = 6;
             this.EmployeeLogTap.Text = "Employee Log";
             // 
@@ -3156,7 +3156,8 @@ namespace Delmon_Managment_System.Forms
             "Select",
             "Visa",
             "Employee",
-            "Asset"});
+            "Asset",
+            "Bills"});
             this.cmbsection.Location = new System.Drawing.Point(175, 58);
             this.cmbsection.Margin = new System.Windows.Forms.Padding(4);
             this.cmbsection.Name = "cmbsection";
@@ -3336,7 +3337,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.notificationsTap.Location = new System.Drawing.Point(4, 26);
             this.notificationsTap.Name = "notificationsTap";
-            this.notificationsTap.Size = new System.Drawing.Size(1224, 720);
+            this.notificationsTap.Size = new System.Drawing.Size(1224, 733);
             this.notificationsTap.TabIndex = 3;
             this.notificationsTap.Text = "Notifications";
             this.notificationsTap.UseVisualStyleBackColor = true;

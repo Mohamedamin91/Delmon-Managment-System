@@ -714,9 +714,9 @@ ORDER BY
             cmbDevice.Text = selectedRow.Cells[7].Value?.ToString() ?? string.Empty;
             cmbAssetStatus.SelectedValue = selectedRow.Cells[8].Value?.ToString() ?? string.Empty;
 
-            if (selectedRow.Cells[10].Value != null && !string.IsNullOrEmpty(selectedRow.Cells[10].Value.ToString()))
+            if (selectedRow.Cells[9].Value != null && !string.IsNullOrEmpty(selectedRow.Cells[9].Value.ToString()))
             {
-                cmbemployee.SelectedValue = selectedRow.Cells[10].Value.ToString();
+                cmbemployee.Text = selectedRow.Cells[9].Value.ToString();
             }
             else
             {
@@ -920,25 +920,45 @@ ORDER BY
            
                 // Refresh DataGridView
                 string selectQuery = @"
-            SELECT DISTINCT
-                Assets.AssetID, 
-                Assets.SapAssetId, 
-                Assets.sn, 
-                AssetType.AssettypeValue, 
-                AssetBrand.AssetBrandValue, 
-                Assets.Model, 
-                PurchasingDate,
-                DeviceTypeID,
-                AssetStatusID,
-                EmployeeID,
-                AssginDate,
-                Price,
-                AssignedBy
-            FROM Assets
-            INNER JOIN AssetBrand ON Assets.Brand = AssetBrand.AssetBrandID
-            INNER JOIN AssetAssign ON Assets.AssetID = AssetAssign.AssetID
-            INNER JOIN AssetType ON Assets.AssetTypeID = AssetType.AssetTypeID 
-            WHERE AssetBrand.AssetBrandID = Assets.Brand AND Assets.AssetID = @idd";
+ 
+WITH LastAssignments AS (
+    SELECT 
+        asi.AssetID, 
+        asi.EmployeeID, 
+        asi.AssginDate,
+        asi.AssignedBy,
+        ROW_NUMBER() OVER (PARTITION BY asi.AssetID ORDER BY asi.ID DESC) AS RowNum
+    FROM
+        AssetAssign asi
+)
+SELECT 
+    A.AssetID, 
+    A.SapAssetId, 
+    A.sn, 
+    AT.AssettypeValue, 
+    AB.AssetBrandValue, 
+    A.Model,
+    A.PurchasingDate,
+    DT.DeviceType,
+    A.AssetStatusID,
+    CONCAT(E.FirstName, ' ', E.SecondName, ' ', E.ThirdName, ' ', E.LastName) AS FullName,
+    LA.EmployeeID AS LastEmployeeID,
+    LA.AssginDate AS LastAssignDate,
+    A.Price
+
+FROM
+    Assets A
+INNER JOIN 
+    DeviceTypes DT ON A.DeviceTypeID = DT.DeviceTypeID
+INNER JOIN 
+    AssetBrand AB ON A.Brand = AB.AssetBrandID
+INNER JOIN 
+    AssetType AT ON A.AssetTypeID = AT.AssetTypeID
+LEFT JOIN 
+    LastAssignments LA ON A.AssetID = LA.AssetID AND LA.RowNum = 1
+LEFT JOIN
+    [DelmonGroupDB].[dbo].[Employees] E ON LA.EmployeeID = E.EmployeeID
+WHERE A.AssetID = @idd";
                 dataGridView1.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(selectQuery, new SqlParameter("@idd", AssetID));
 
                 SQLCONN3.CloseConnection();

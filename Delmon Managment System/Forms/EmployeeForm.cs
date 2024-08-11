@@ -277,13 +277,13 @@ namespace Delmon_Managment_System.Forms
 
                 cmbEmployJobHistory.ValueMember = "JobID";
                 cmbEmployJobHistory.DisplayMember = "JobTitleEN";
-                cmbEmployJobHistory.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS");
+                cmbEmployJobHistory.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS ORDER BY JobTitleEN;");
                 cmbEmployJobHistory.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 cmbEmployJobHistory.AutoCompleteSource = AutoCompleteSource.ListItems;
 
                 cmbissueplace.ValueMember = "Consulates.ConsulateID";
                 cmbissueplace.DisplayMember = "ConsulateCity";
-                cmbissueplace.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select Consulates.ConsulateID,ConsulateCity from Countries,Consulates where Countries.CountryId = Consulates.CountryId");
+                cmbissueplace.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select Consulates.ConsulateID,ConsulateCity from Countries,Consulates where Countries.CountryId = Consulates.CountryId ORDER BY ConsulateCity;");
                 cmbissueplace.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 cmbissueplace.AutoCompleteSource = AutoCompleteSource.ListItems;
 
@@ -296,7 +296,7 @@ namespace Delmon_Managment_System.Forms
 
                 cmbnationality.ValueMember = "CountryId";
                 cmbnationality.DisplayMember = "NationalityName";
-                cmbnationality.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select CountryId,NationalityName from Countries");
+                cmbnationality.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select CountryId,NationalityName from Countries ORDER BY NationalityName;");
                 cmbnationality.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 cmbnationality.AutoCompleteSource = AutoCompleteSource.ListItems;
 
@@ -1188,25 +1188,27 @@ ORDER BY e.EmployeeID";
                             dr.Dispose();
                             dr.Close();
                             paramEmployeeID.Value = EmployeeID;
-
-                            if ((int)cmbPersonalStatusStatus.SelectedValue == 25 || (int)cmbPersonalStatusStatus.SelectedValue == 26 || (int)cmbPersonalStatusStatus.SelectedValue == 27)
+                            if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                             {
-                                SQLCONN.ExecuteQueries("insert into Employees (EmployeeID, firstname,secondname,thirdname,lastname,Gender,MartialStatus,[PCNAME], EmploymentStatusID,JobID,DeptID,StartDate,EndDate,COMPID,UserID,CurrentEmpID,NationalityID,DOB)" +
-                          " values (@EmployeeID,@C1,@C2,@C3,@C4,@C5,@C6,@pc,@C13,@C14,@C15,@C16,@C17,@C18,@C10,@CurrentEmployeeID,@C19,@C20)",
-                                                     paramEmployeeID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, parampc, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany, paramUserID, paramCurrentEmployeeID, paramNationality,paramDOB);
 
+                                if ((int)cmbPersonalStatusStatus.SelectedValue == 25 || (int)cmbPersonalStatusStatus.SelectedValue == 26 || (int)cmbPersonalStatusStatus.SelectedValue == 27)
+                                {
+                                    SQLCONN.ExecuteQueries("insert into Employees (EmployeeID, firstname,secondname,thirdname,lastname,Gender,MartialStatus,[PCNAME], EmploymentStatusID,JobID,DeptID,StartDate,EndDate,COMPID,UserID,CurrentEmpID,NationalityID,DOB)" +
+                              " values (@EmployeeID,@C1,@C2,@C3,@C4,@C5,@C6,@pc,@C13,@C14,@C15,@C16,@C17,@C18,@C10,@CurrentEmployeeID,@C19,@C20)",
+                                                         paramEmployeeID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, parampc, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany, paramUserID, paramCurrentEmployeeID, paramNationality, paramDOB);
+
+                                }
+                                else
+                                {
+                                    SQLCONN.ExecuteQueries("insert into Employees (EmployeeID, firstname,secondname,thirdname,lastname,Gender,MartialStatus,[PCNAME], EmploymentStatusID,JobID,DeptID,StartDate,COMPID,UserID,CurrentEmpID,NationalityID,DOB)" +
+                              " values (@EmployeeID,@C1,@C2,@C3,@C4,@C5,@C6,@pc,@C13,@C14,@C15,@C16,@C18,@C10,@CurrentEmployeeID,@C19,@C20)",
+                                                         paramEmployeeID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, parampc, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramcompany, paramUserID, paramCurrentEmployeeID, paramNationality, paramDOB);
+
+                                }
+
+
+                                MessageBox.Show("Record saved Successfully");
                             }
-                            else
-                            {
-                                SQLCONN.ExecuteQueries("insert into Employees (EmployeeID, firstname,secondname,thirdname,lastname,Gender,MartialStatus,[PCNAME], EmploymentStatusID,JobID,DeptID,StartDate,COMPID,UserID,CurrentEmpID,NationalityID,DOB)" +
-                          " values (@EmployeeID,@C1,@C2,@C3,@C4,@C5,@C6,@pc,@C13,@C14,@C15,@C16,@C18,@C10,@CurrentEmployeeID,@C19,@C20)",
-                                                     paramEmployeeID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, parampc, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramcompany, paramUserID, paramCurrentEmployeeID, paramNationality,paramDOB);
-
-                            }
-
-
-                            MessageBox.Show("Record saved Successfully");
-
 
                             SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (Logvalueid, logvalue ,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES (@EmployeeID, 'User Info' ,'#','#',@datetime,@pc,@user,'Insert')", paramEmployeeID, paramdatetimeLOG, parampc, paramuser);
 
@@ -3021,22 +3023,22 @@ ORDER BY e.EmployeeID";
         private void cmbEmployJobHistory_KeyDown(object sender, KeyEventArgs e)
         {
 
-            if (e.KeyCode == Keys.Enter)
-            {
-                // Handle the Enter key press
-                var selectedItem = cmbEmployJobHistory.SelectedItem as DataRowView;
+            //if (e.KeyCode == Keys.Enter)
+            //{
+            //    // Handle the Enter key press
+            //    var selectedItem = cmbEmployJobHistory.SelectedItem as DataRowView;
 
-                if (selectedItem != null)
-                {
-                    // Access the selected item's properties
-                    var JobID = selectedItem["JobID"].ToString();
-                    var JobTitleEN = selectedItem["JobTitleEN"].ToString();
-                }
+            //    if (selectedItem != null)
+            //    {
+            //        // Access the selected item's properties
+            //        var JobID = selectedItem["JobID"].ToString();
+            //        var JobTitleEN = selectedItem["JobTitleEN"].ToString();
+            //    }
 
-                // Prevent the ComboBox from processing the Enter key
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-            }
+            //    // Prevent the ComboBox from processing the Enter key
+            //    e.Handled = true;
+            //    e.SuppressKeyPress = true;
+            //}
 
         }
 
