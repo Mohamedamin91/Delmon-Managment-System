@@ -47,26 +47,11 @@ namespace Delmon_Managment_System.Forms
         bool hasAdd = false;
 
 
-
-
-
-
-
-
-
-
         public VisaFrm()
         {
 
 
             InitializeComponent();
-
-
-
-
-
-
-
 
         }
 
@@ -82,8 +67,6 @@ namespace Delmon_Managment_System.Forms
             this.ActiveControl = Visanumtxt;
             btnNew.Enabled = Findbtn.Enabled = true;
             ExpiaryHijritxt.Enabled = IssueDateENTxt.Enabled = expairENDATEtxt.Enabled = false;
-
-
 
         }
 
@@ -163,11 +146,7 @@ namespace Delmon_Managment_System.Forms
 
             SQLCONN.CloseConnection();
 
-
-
-
         }
-
 
         private void visasToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -179,7 +158,7 @@ namespace Delmon_Managment_System.Forms
 
         }
 
-        private void IssueDateENPicker_ValueChanged(object sender, EventArgs e)
+       private void IssueDateENPicker_ValueChanged(object sender, EventArgs e)
         {
             CultureInfo ci = new CultureInfo("en-US");
 
@@ -192,7 +171,6 @@ namespace Delmon_Managment_System.Forms
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-
 
         }
 
@@ -1449,7 +1427,7 @@ namespace Delmon_Managment_System.Forms
             cmbAgency.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbAgency.ValueMember = "AgencID";
             cmbAgency.DisplayMember = "AgenceName";
-            cmbAgency.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select AgencID,AgenceName  from Agencies /*order by AgencID*/ ");
+            cmbAgency.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" select AgencID , AgenceName from  Agencies ");
             string query3 = "select Consulates.ConsulateID,ConsulateCity from Countries,Consulates where Countries.CountryId = Consulates.CountryId";
             cmbConsulate.ValueMember = "Consulates.ConsulateID";
             cmbConsulate.DisplayMember = "ConsulateCity";
@@ -2168,9 +2146,8 @@ namespace Delmon_Managment_System.Forms
             SQLCONN.OpenConection();
             cmbAgency.ValueMember = "AgencID";
             cmbAgency.DisplayMember = "AgenceName";
-            cmbAgency.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select AgencID,AgenceName  from Agencies order by AgenceName ");
-            //  cmbAgency.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //   cmbAgency.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbAgency.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select AgencID,AgenceName from Agencies ");
+            
             SQLCONN.CloseConnection();
 
 
@@ -2321,7 +2298,7 @@ namespace Delmon_Managment_System.Forms
             SQLCONN.OpenConection();
             cmbAgency.ValueMember = "AgencID";
             cmbAgency.DisplayMember = "AgenceName";
-            cmbAgency.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select AgencID,AgenceName  from Agencies*order by AgenceName ");
+            cmbAgency.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select AgencID,AgenceName  from Agencies  ");
             //  cmbAgency.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             //   cmbAgency.AutoCompleteSource = AutoCompleteSource.ListItems;
             SQLCONN.CloseConnection();

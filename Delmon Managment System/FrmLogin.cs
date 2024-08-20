@@ -161,7 +161,8 @@ namespace Delmon_Managment_System
 
             else
             {
-                MessageBox.Show("Invalid Login please check username and password / Contact administrator to activate your user");
+                MessageBox.Show("Please check username and password / Contact administrator to activate your user !", "Invalid Login", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
             }
             SQLCONN.CloseConnection();
         }

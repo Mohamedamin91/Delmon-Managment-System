@@ -29,7 +29,7 @@
     <ProductName>Delmon Managment System</ProductName>
     <PublisherName>Delmon Group Of Companies - IT</PublisherName>
     <MinimumRequiredVersion>1.0.0.9</MinimumRequiredVersion>
-    <ApplicationRevision>57</ApplicationRevision>
+    <ApplicationRevision>65</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -210,6 +210,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\BillsReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BillsReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SQLCONNECTION.cs" />
     <Compile Include="ThemeColor.cs" />
     <Compile Include="VersionFrm.cs">
@@ -284,6 +290,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Reports\BillsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BillsReport.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="VersionFrm.resx">
       <DependentUpon>VersionFrm.cs</DependentUpon>
     </EmbeddedResource>
@@ -355,11 +365,10 @@
       <Version>1.1.38</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Document\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

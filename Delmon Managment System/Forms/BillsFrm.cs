@@ -36,6 +36,7 @@ namespace Delmon_Managment_System.Forms
 
         private void BillsFrm_Load(object sender, EventArgs e)
         {
+            cmbendusertype.SelectedItem = "Select";
             button5.Visible = true;
             button1.Visible = true;
             btn.Visible = true;
@@ -61,14 +62,6 @@ namespace Delmon_Managment_System.Forms
             cmbemployee.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbemployee.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-            cmbemployee2.ValueMember = "EmployeeID";
-            cmbemployee2.DisplayMember = "FullName";
-            cmbemployee2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT EmployeeID ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName' from Employees   order by EmployeeID ");
-            cmbemployee2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbemployee2.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-
-
             string query = "select COMPID,COMPName_EN from Companies";
             cmbRegisterUnder.ValueMember = "COMPID";
             cmbRegisterUnder.DisplayMember = "COMPName_EN";
@@ -77,6 +70,21 @@ namespace Delmon_Managment_System.Forms
             cmbRegisterUnder.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
+            cmbmeterlocation.ValueMember = "MeterLocationID";
+            cmbmeterlocation.DisplayMember = "Meterlocation";
+            cmbmeterlocation.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT  [MeterLocationID]
+      ,[Meterlocation]
+  FROM [DelmonGroupDB].[dbo].[Meterlocations] order by MeterLocationID ");
+            cmbmeterlocation.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbmeterlocation.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+            string query1 = "select COMPID,COMPName_EN from Companies";
+            cmbbillscompany.ValueMember = "COMPID";
+            cmbbillscompany.DisplayMember = "COMPName_EN";
+            cmbbillscompany.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query1);
+            cmbbillscompany.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbbillscompany.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
             cmbservice.ValueMember = "ServiceStatusID";
@@ -117,10 +125,18 @@ namespace Delmon_Managment_System.Forms
             cmbMedia.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbMedia.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-            string query2 = "SELECT OwnerID,OwnerName FROM Owners";
+            // string query2 = "SELECT OwnerID, OwnerName FROM Owners";
+            string query2 = "SELECT CONVERT(VARCHAR, OwnerID) AS OwnerID, OwnerName FROM Owners";
             cmbOwner.ValueMember = "OwnerID";
             cmbOwner.DisplayMember = "OwnerName";
             cmbOwner.DataSource = SQLCONN2.ShowDataInGridViewORCombobox(query2);
+            cmbOwner.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbOwner.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            string query3 = @"SELECT CONVERT(VARCHAR, OwnerID) AS OwnerID, OwnerName FROM Owners";
+            cmbOwner.ValueMember = "OwnerID";
+            cmbOwner.DisplayMember = "OwnerName";
+            cmbOwner.DataSource = SQLCONN2.ShowDataInGridViewORCombobox(query3);
             cmbOwner.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbOwner.AutoCompleteSource = AutoCompleteSource.ListItems;
 
@@ -254,11 +270,11 @@ namespace Delmon_Managment_System.Forms
             if (dt != null && dt.Rows.Count >= 0)
             {
 
-                cmbDepartment.ValueMember = "DEPTID";
-                cmbDepartment.DisplayMember = "Dept_Type_Name";
-                cmbDepartment.DataSource = dt;
-                cmbDepartment.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                cmbDepartment.AutoCompleteSource = AutoCompleteSource.ListItems;
+                //cmbDepartment.ValueMember = "DEPTID";
+                //cmbDepartment.DisplayMember = "Dept_Type_Name";
+                //cmbDepartment.DataSource = dt;
+                //cmbDepartment.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                //cmbDepartment.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             }
 
@@ -279,7 +295,7 @@ namespace Delmon_Managment_System.Forms
 
 
             cmd.Parameters.Add(new SqlParameter("@C1", SqlDbType.Int));
-            cmd.Parameters["@C1"].Value = cmbDepartment.SelectedValue;
+           // cmd.Parameters["@C1"].Value = cmbDepartment.SelectedValue;
 
 
             //Creating Sql Data Adapter
@@ -293,11 +309,11 @@ namespace Delmon_Managment_System.Forms
             if (dt != null && dt.Rows.Count >= 0)
             {
 
-                cmbworkfield.ValueMember = "WorkID";
-                cmbworkfield.DisplayMember = "Name";
-                cmbworkfield.DataSource = dt;
-                cmbworkfield.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                cmbworkfield.AutoCompleteSource = AutoCompleteSource.ListItems;
+                cmbmeterlocation.ValueMember = "WorkID";
+                cmbmeterlocation.DisplayMember = "Name";
+                cmbmeterlocation.DataSource = dt;
+                cmbmeterlocation.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cmbmeterlocation.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             }
 
@@ -306,94 +322,128 @@ namespace Delmon_Managment_System.Forms
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
-            SqlParameter paramaccount = new SqlParameter( "@C1", SqlDbType.NVarChar);
-            paramaccount.Value =  txtaccountno.Text;
-            SqlParameter paramsubscrip = new SqlParameter("@C2", SqlDbType.NVarChar);
-            paramsubscrip.Value = txtsubscription.Text;
-            SqlParameter parammetersn = new SqlParameter("@C3", SqlDbType.NVarChar);
-            parammetersn.Value = txtmetersn.Text;
-            SqlParameter paramDepart = new SqlParameter("@C4", SqlDbType.NVarChar);
-            paramDepart.Value = cmbDepartment.SelectedValue;
-            SqlParameter paramWorkloc = new SqlParameter("@C5", SqlDbType.NVarChar);
-            paramWorkloc.Value = cmbworkfield.SelectedValue;
-            SqlParameter paramHeadofDept = new SqlParameter("@C6", SqlDbType.NVarChar);
-            paramHeadofDept.Value = cmbemployee.SelectedValue;
-            SqlParameter paramOwner = new SqlParameter("@C7", SqlDbType.NVarChar);
+            // Create SQL parameters
+            SqlParameter paramaccount = new SqlParameter("@C1", SqlDbType.NVarChar) { Value = txtaccountno.Text };
+            SqlParameter paramsubscrip = new SqlParameter("@C2", SqlDbType.NVarChar) { Value = txtsubscription.Text };
+            SqlParameter parammetersn = new SqlParameter("@C3", SqlDbType.NVarChar) { Value = txtmetersn.Text };
+            SqlParameter paramWorkloc = new SqlParameter("@C4", SqlDbType.NVarChar) { Value = cmbmeterlocation.SelectedValue };
+            SqlParameter paramHeadofDept = new SqlParameter("@C5", SqlDbType.NVarChar) { Value = cmbemployee.SelectedValue };
+
+
+            SqlParameter paramOwner = new SqlParameter("@C6", SqlDbType.BigInt);
             paramOwner.Value = cmbOwner.SelectedValue;
-            SqlParameter paramService = new SqlParameter("@C8", SqlDbType.NVarChar);
-            paramService.Value = cmbservice.SelectedValue;
-            SqlParameter paramNote = new SqlParameter("@C9", SqlDbType.NVarChar);
-            paramNote.Value = RemarksTxt.Text;
 
+            SqlParameter paramService = new SqlParameter("@C7", SqlDbType.NVarChar) { Value = cmbservice.SelectedValue };
+            SqlParameter paramNote = new SqlParameter("@C8", SqlDbType.NVarChar) { Value = RemarksTxt.Text };
+            SqlParameter paramCmbendusertpe = new SqlParameter("@C9", SqlDbType.NVarChar) { Value = cmbendusertype.SelectedItem };
+            SqlParameter paramcompanybills = new SqlParameter("@C10", SqlDbType.NVarChar) { Value = cmbbillscompany.SelectedValue };
 
-            SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
-            paramPID.Value = EmployeeID;
-            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
-            paramuser.Value = lblusername.Text;
-            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
-            paramdatetimeLOG.Value = lbldatetime.Text;
-            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
-            parampc.Value = lblPC.Text;
-            SqlDataReader dr;
+            SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar) { Value = EmployeeID };
+            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar) { Value = lblusername.Text };
+            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar) { Value = lbldatetime.Text };
+            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar) { Value = lblPC.Text };
 
-
-            if ((int)cmbemployee.SelectedValue == 0 || (int)cmbservice.SelectedValue == 0 || txtaccountno.Text == "" || txtsubscription.Text == "" || txtmetersn.Text == "")
+            // Check for missing fields
+            if ( (int)cmbservice.SelectedValue == 0 ||
+                string.IsNullOrEmpty(txtaccountno.Text) || string.IsNullOrEmpty(txtsubscription.Text) || string.IsNullOrEmpty(txtmetersn.Text))
             {
                 MessageBox.Show("Please Fill the missing fields  ");
+                return;
             }
-            else
+
+            // Open database connection
+            SQLCONN.OpenConection();
+
+            // Check if subscription number already exists
+            SqlDataReader dr = SQLCONN.DataReader("select  AccountNo from ElectrcityBills  where AccountNo=  @C1 ", paramaccount);
+            dr.Read();
+
+            if (dr.HasRows)
             {
-                SQLCONN.OpenConection();
-                dr = SQLCONN.DataReader("select  SubscriptionNo from ElectrcityBills  where " +
-                    " SubscriptionNo=  @C2 ", paramsubscrip);
-                dr.Read();
-
-                if (dr.HasRows)
-                {
-                    MessageBox.Show("This 'SubscriptionNo'  Already Exists.!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                else
-                {
-                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-                    {
-                        dr.Dispose();
-                        dr.Close();
-
-                        SQLCONN.ExecuteQueries(@"INSERT INTO [dbo].[ElectrcityBills]
-           ([AccountNo]
-          ,[SubscriptionNo]
-          ,[MeterSN]
-          ,[DEPTID]
-          ,[workID]
-          ,[HeadOfDept]
-          ,[OwnerId]
-          ,[ServiceStatusD]
-          ,[Notes])
-     VALUES
-           (@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8,@C9)", paramaccount, paramsubscrip, parammetersn, paramDepart, paramWorkloc, paramHeadofDept, paramOwner, paramService, paramNote);
-
-                        SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('ElectrcityBills',@C2,'#','#',@datetime,@pc,@user,'Insert')", paramsubscrip, paramdatetimeLOG, parampc, paramuser);
-
-                        MessageBox.Show("Record saved Successfully");
-
-                        dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT  [AccountNo]
-     ,[SubscriptionNo]
-     ,[MeterSN]
-     ,[DEPTID]
-     ,[workID]
-     ,[HeadOfDept]
-     ,[OwnerId]
-     ,[ServiceStatusD]
-     ,[Notes]
-  FROM [DelmonGroupDB].[dbo].[ElectrcityBills] WHERE SubscriptionNo = @C2 ", paramsubscrip);
-                    }
-                }
+                MessageBox.Show("This 'AccountNo' " + txtaccount.Text +" Already Exists.!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
-            btn.Visible = true;
-            SQLCONN.CloseConnection();
-        }
+            // Ask for confirmation
+            if (DialogResult.Yes != MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            {
+                return;
+            }
 
+            // Dispose and close data reader
+            dr.Dispose();
+            dr.Close();
+
+            // Insert data into ElectrcityBills table
+            string query = string.Empty;
+            SqlParameter[] parameters = null;
+
+            if (cmbendusertype.SelectedItem.ToString() == "Company")
+            {
+                query = @"INSERT INTO [dbo].[ElectrcityBills]
+           ([AccountNo]
+        ,[SubscriptionNo]
+        ,[MeterSN]
+        ,[MeterLocationID]
+        ,[Ownerid]
+        ,[EnduserType]
+        ,[EndUserID]
+        ,[ServiceStatusD]
+        ,[Notes])
+     VALUES
+           (@C1,@C2,@C3,@C4,@C6,@C9,@C10,@C7,@C8)";
+                parameters = new SqlParameter[] { paramaccount, paramsubscrip, parammetersn, paramWorkloc, paramOwner, paramCmbendusertpe, paramcompanybills, paramService, paramNote };
+            }
+            else if (cmbendusertype.SelectedItem.ToString() == "Personal")
+            {
+                query = @"INSERT INTO [dbo].[ElectrcityBills]
+           ([AccountNo]
+        ,[SubscriptionNo]
+        ,[MeterSN]
+        ,[MeterLocationID]
+        ,[Ownerid]
+        ,[EnduserType]
+        ,[EndUserID]
+        ,[ServiceStatusD]
+        ,[Notes])
+     VALUES
+           (@C1,@C2,@C3,@C4,@C6,@C9,@C5,@C7,@C8)";
+                parameters = new SqlParameter[] { paramaccount, paramsubscrip, parammetersn, paramWorkloc, paramOwner, paramCmbendusertpe, paramHeadofDept, paramService, paramNote };
+            }
+
+            SQLCONN.ExecuteQueries(query, parameters);
+
+            // Insert data into EmployeeLog table
+            SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('ElectrcityBills',@C2,'#','#',@datetime,@pc,@user,'Insert')",
+                paramsubscrip, paramdatetimeLOG, parampc, paramuser);
+
+            // Show success message
+            MessageBox.Show("Record saved Successfully");
+
+            // Refresh data grid view
+
+
+   // Refresh data grid view
+dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT  [AccountNo]
+   ,[SubscriptionNo]
+   ,[MeterSN]
+   ,[MeterLocationID]
+   ,[Ownerid]
+   ,[EnduserType]
+   ,[EndUserID]
+   ,[ServiceStatusD]
+   ,[Notes]
+  FROM [DelmonGroupDB].[dbo].[ElectrcityBills] WHERE SubscriptionNo = @C2 ", paramsubscrip);
+
+            // Show button
+            btn.Visible = true;
+
+            // Close database connection
+            SQLCONN.CloseConnection();
+            ClearItems();
+            btnUpdate.Visible = DeleteBtn.Visible = btn.Visible = true;
+            AddBtn.Visible = false;
+        }
         private void timer1_Tick(object sender, EventArgs e)
         {
             this.lbldatetime.Text = DateTime.Now.ToString("dd-MMM-yyyy  hh:mm:ss tt");
@@ -404,36 +454,49 @@ namespace Delmon_Managment_System.Forms
         {
             SqlParameter paramSearch = new SqlParameter("@C0", SqlDbType.NVarChar);
             paramSearch.Value = txtSearch.Text;
-            
+
             SQLCONN.OpenConection();
             if (lblusertype.Text == "Admin")
             {
                 string query = @"SELECT  [AccountNo]
-      ,[SubscriptionNo]
-      ,[MeterSN]
-      ,Dept_Type_Name
-      ,WorkLocations.Name
-      ,[HeadOfDept]
-      ,[OwnerId]
-      ,[ServiceStatusD]
-      ,[Notes]
-  FROM [DelmonGroupDB].[dbo].[ElectrcityBills],DEPARTMENTS,WorkLocations,DeptTypes
-  where DEPARTMENTS.DEPTID=ElectrcityBills.DEPTID
-  and WorkLocations.WorkID=ElectrcityBills.workID
-  and DeptTypes.Dept_Type_ID=DEPARTMENTS.DeptName 
-  and (AccountNo LIKE '%' + REPLACE(@C0, ' ', '') + '%'
-       OR SubscriptionNo LIKE '%' + REPLACE(@C0, ' ', '') + '%' ) ";
+     ,[SubscriptionNo]
+     ,[MeterSN]
+     ,[MeterLocationID]
+     ,[OwnerId]
+     ,[EnduserType]
+     ,[EndUserID]
+     ,[ServiceStatusD]
+     ,[Notes]
+  FROM [DelmonGroupDB].[dbo].[ElectrcityBills]
+  where (AccountNo LIKE '%' + REPLACE(@C0,'', '') + '%'
+       OR SubscriptionNo LIKE '%' + REPLACE(@C0,'', '') + '%'
+       OR MeterSN LIKE '%' + REPLACE(@C0,'', '') + '%'
+       OR EndUserID LIKE '%' + REPLACE(@C0,'', '') + '%'
+       OR EnduserType LIKE '%' + REPLACE(@C0,'', '') + '%'
+       OR ServiceStatusD LIKE '%' + REPLACE(@C0,'', '') + '%'
+       OR Notes LIKE '%' + REPLACE(@C0,'', '') + '%')";
 
-       //         string query = @"SELECT *  from [ElectrcityBills] WHERE AccountNo LIKE '%' + REPLACE(@C0, ' ', '') + '%'
-       //OR SubscriptionNo LIKE '%' + REPLACE(@C0, ' ', '') + '%'";
                 dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramSearch);
-
-
             }
             else
             {
-
-                string query = "";
+                string query = @"SELECT  [AccountNo]
+     ,[SubscriptionNo]
+     ,[MeterSN]
+     ,[MeterLocationID]
+     ,[OwnerId]
+     ,[EnduserType]
+     ,[EndUserID]
+     ,[ServiceStatusD]
+     ,[Notes]
+  FROM [DelmonGroupDB].[dbo].[ElectrcityBills]
+  where (AccountNo LIKE '%' + REPLACE(@C0,'', '') + '%'
+       OR SubscriptionNo LIKE '%' + REPLACE(@C0,'', '') + '%'
+       OR MeterSN LIKE '%' + REPLACE(@C0,'', '') + '%'
+       OR EndUserID LIKE '%' + REPLACE(@C0,'', '') + '%'
+       OR EnduserType LIKE '%' + REPLACE(@C0,'', '') + '%'
+       OR ServiceStatusD LIKE '%' + REPLACE(@C0,'', '') + '%'
+       OR Notes LIKE '%' + REPLACE(@C0,'', '') + '%')";
 
                 dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramSearch);
             }
@@ -441,108 +504,166 @@ namespace Delmon_Managment_System.Forms
             btn.Visible = true;
 
             SQLCONN.CloseConnection();
-            //firstnametxt.Text = secondnametxt.Text = thirdnametxt.Text = lastnametxt.Text = "";
-            //cmbMartialStatus.Text = cmbGender.Text = "";
-            //ClearAllControls();
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             txtsubscription.Enabled = false;
             AddBtn.Visible = false;
-            //btnnew.Visible = updatebtn.Visible = deletebtn.Visible = true;
+            btnUpdate.Visible = DeleteBtn.Visible = true;
 
             if (e.RowIndex == -1) return;
 
             txtaccountno.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
             txtsubscription.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
             txtmetersn.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-            cmbDepartment.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-            cmbworkfield.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-            cmbemployee.SelectedValue = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString());
-            cmbOwner.SelectedValue = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString());
+            cmbmeterlocation.SelectedValue = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+           // cmbOwner.Text = (dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
+            cmbOwner.SelectedValue = (dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
+
+
+            string endUserType = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+            cmbendusertype.SelectedItem = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+
+
+
+            if (endUserType == "Personal")
+            {
+                cmbemployee.SelectedValue = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString());
+                cmbbillscompany.Visible = true;
+                cmbbillscompany.Enabled = cmbemployee.Enabled=true;
+                cmbbillscompany.SelectedValue = 0;
+            }
+            else if (endUserType == "Company")
+            {
+                cmbbillscompany.SelectedValue = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString());
+                cmbemployee.Visible = true;
+                cmbbillscompany.Enabled = cmbemployee.Enabled = true;
+                cmbemployee.SelectedValue = 0;
+
+            }
+
+            cmbendusertype.SelectedValue = endUserType;
             cmbservice.SelectedValue = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString());
             RemarksTxt.Text = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
         }
-
         private void btnUpdate_Click(object sender, EventArgs e)
         {
 
 
-            SqlParameter paramaccount = new SqlParameter("@C1", SqlDbType.NVarChar);
-            paramaccount.Value = txtaccountno.Text;
-            SqlParameter paramsubscrip = new SqlParameter("@C2", SqlDbType.NVarChar);
-            paramsubscrip.Value = txtsubscription.Text;
-            SqlParameter parammetersn = new SqlParameter("@C3", SqlDbType.NVarChar);
-            parammetersn.Value = txtmetersn.Text;
-            SqlParameter paramDepart = new SqlParameter("@C4", SqlDbType.NVarChar);
-            paramDepart.Value = cmbDepartment.SelectedValue;
-            SqlParameter paramWorkloc = new SqlParameter("@C5", SqlDbType.NVarChar);
-            paramWorkloc.Value = cmbworkfield.SelectedValue;
-            SqlParameter paramHeadofDept = new SqlParameter("@C6", SqlDbType.NVarChar);
-            paramHeadofDept.Value = cmbemployee.SelectedValue;
-            SqlParameter paramOwner = new SqlParameter("@C7", SqlDbType.NVarChar);
+            SqlParameter paramaccount = new SqlParameter("@C1", SqlDbType.NVarChar) { Value = txtaccountno.Text };
+            SqlParameter paramsubscrip = new SqlParameter("@C2", SqlDbType.NVarChar) { Value = txtsubscription.Text };
+            SqlParameter parammetersn = new SqlParameter("@C3", SqlDbType.NVarChar) { Value = txtmetersn.Text };
+            SqlParameter paramWorkloc = new SqlParameter("@C4", SqlDbType.NVarChar) { Value = cmbmeterlocation.SelectedValue };
+            SqlParameter paramHeadofDept = new SqlParameter("@C5", SqlDbType.NVarChar) { Value = cmbemployee.SelectedValue };
+
+            SqlParameter paramOwner = new SqlParameter("@C6", SqlDbType.BigInt);
             paramOwner.Value = cmbOwner.SelectedValue;
-            SqlParameter paramService = new SqlParameter("@C8", SqlDbType.NVarChar);
-            paramService.Value = cmbservice.SelectedValue;
-            SqlParameter paramNote = new SqlParameter("@C9", SqlDbType.NVarChar);
-            paramNote.Value = RemarksTxt.Text;
 
-            SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
-            paramPID.Value = EmployeeID;
-            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
-            paramuser.Value = lblusername.Text;
-            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
-            paramdatetimeLOG.Value = lbldatetime.Text;
-            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
-            parampc.Value = lblPC.Text;
+            SqlParameter paramService = new SqlParameter("@C7", SqlDbType.NVarChar) { Value = cmbservice.SelectedValue };
+            SqlParameter paramNote = new SqlParameter("@C8", SqlDbType.NVarChar) { Value = RemarksTxt.Text };
+            SqlParameter paramCmbendusertpe = new SqlParameter("@C9", SqlDbType.NVarChar) { Value = cmbendusertype.SelectedItem };
+            SqlParameter paramcompanybills = new SqlParameter("@C10", SqlDbType.NVarChar) { Value = cmbbillscompany.SelectedValue };
 
-            if ((int)cmbemployee.SelectedValue == 0 || (int)cmbservice.SelectedValue == 0 || txtaccountno.Text == "" || txtsubscription.Text == "" || txtmetersn.Text == "")
+            SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar) { Value = EmployeeID };
+            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar) { Value = lblusername.Text };
+            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar) { Value = lbldatetime.Text };
+            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar) { Value = lblPC.Text };
+
+            // Check for missing fields
+            if ( (int)cmbservice.SelectedValue == 0 ||
+                string.IsNullOrEmpty(txtaccountno.Text) || string.IsNullOrEmpty(txtsubscription.Text) || string.IsNullOrEmpty(txtmetersn.Text))
             {
                 MessageBox.Show("Please Fill the missing fields  ");
+                return;
             }
-            else
+
+            // Open database connection
+            SQLCONN.OpenConection();
+
+            // Check if subscription number already exists
+            SqlDataReader dr = SQLCONN.DataReader("select  AccountNo from ElectrcityBills  where AccountNo=  @C1  ", paramaccount);
+            dr.Read();
+
+            if (dr.HasRows==false)
             {
-                SQLCONN.OpenConection();
-
-                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-                {
-                    // Update existing record
-                    SQLCONN.ExecuteQueries(@"UPDATE [dbo].[ElectrcityBills] SET
-               [AccountNo] = @C1
-             ,[SubscriptionNo] = @C2
-             ,[MeterSN] = @C3
-             ,[DEPTID] = @C4
-             ,[workID] = @C5
-             ,[HeadOfDept] = @C6
-             ,[OwnerId] = @C7
-             ,[ServiceStatusD] = @C8
-             ,[Notes] = @C9
-              WHERE SubscriptionNo = @C2", paramaccount, paramsubscrip, parammetersn, paramDepart, paramWorkloc, paramHeadofDept, paramOwner, paramService, paramNote);
-
-                    // Log the update operation
-                    SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (logvalue, LogValueID, Oldvalue, newvalue, logdatetime, PCNAME, UserId, type) VALUES ('ElectrcityBills', @C2, '#', '#', @datetime, @pc, @user, 'Update')", paramsubscrip, paramdatetimeLOG, parampc, paramuser);
-
-                    MessageBox.Show("Record Updated Successfully");
-
-                    // Refresh the data grid view
-                    dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT  [AccountNo]
-     ,[SubscriptionNo]
-     ,[MeterSN]
-     ,Dept_Type_Name
-     ,WorkLocations.Name
-     ,[HeadOfDept]
-     ,[OwnerId]
-     ,[ServiceID]
-     ,[Notes]
-  FROM [DelmonGroupDB].[dbo].[ElectrcityBills], DEPARTMENTS, WorkLocations, DeptTypes
-  WHERE DEPARTMENTS.DEPTID = ElectrcityBills.DEPTID
-  AND WorkLocations.WorkID = ElectrcityBills.workID
-  AND DeptTypes.Dept_Type_ID = DEPARTMENTS.DeptName AND SubscriptionNo = @C2", paramsubscrip);
-                }
+                MessageBox.Show("This 'AccountNo' " + txtaccount.Text + " Not Exists.!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
+            // Ask for confirmation
+            if (DialogResult.Yes != MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            {
+                return;
+            }
+
+            // Dispose and close data reader
+            dr.Dispose();
+            dr.Close();
+
+            // Update data in ElectrcityBills table
+            string query = string.Empty;
+            SqlParameter[] parameters = null;
+
+            if (cmbendusertype.SelectedItem.ToString() == "Company")
+            {
+                query = @"UPDATE [dbo].[ElectrcityBills]
+SET [AccountNo] = @C1
+   ,[SubscriptionNo] = @C2
+   ,[MeterSN] = @C3
+   ,[MeterLocationID] = @C4
+   ,[Ownerid] = @C6
+   ,[EnduserType] = @C9
+   ,[EndUserID] = @C10
+   ,[ServiceStatusD] = @C7
+   ,[Notes] = @C8
+WHERE [SubscriptionNo] = @C2";
+                parameters = new SqlParameter[] { paramaccount, paramsubscrip, parammetersn, paramWorkloc, paramOwner, paramCmbendusertpe, paramcompanybills, paramService, paramNote };
+            }
+            else if (cmbendusertype.SelectedItem.ToString() == "Personal")
+            {
+                query = @"UPDATE [dbo].[ElectrcityBills]
+SET [AccountNo] = @C1
+   ,[SubscriptionNo] = @C2
+   ,[MeterSN] = @C3
+   ,[MeterLocationID] = @C4
+   ,[Ownerid] = @C6
+   ,[EnduserType] = @C9
+   ,[EndUserID] = @C5
+   ,[ServiceStatusD] = @C7
+   ,[Notes] = @C8
+WHERE [SubscriptionNo] = @C2";
+                parameters = new SqlParameter[] { paramaccount, paramsubscrip, parammetersn, paramWorkloc, paramOwner, paramCmbendusertpe, paramHeadofDept, paramService, paramNote };
+            }
+
+            SQLCONN.ExecuteQueries(query, parameters);
+
+            SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('ElectrcityBills',@C2,'#','#',@datetime,@pc,@user,'Update')",
+     paramsubscrip, paramdatetimeLOG, parampc, paramuser);
+
+            // Show success message
+            MessageBox.Show("Record updated Successfully");
+
+            // Refresh data grid view
+            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT  [AccountNo]
+  ,[SubscriptionNo]
+  ,[MeterSN]
+  ,[MeterLocationID]
+  ,[Ownerid]
+  ,[EnduserType]
+  ,[EndUserID]
+  ,[ServiceStatusD]
+  ,[Notes]
+  FROM [DelmonGroupDB].[dbo].[ElectrcityBills] WHERE SubscriptionNo = @C2 ", paramsubscrip);
+
+            // Show button
+            btn.Visible = true;
+
+            // Close database connection
             SQLCONN.CloseConnection();
+
+
+
         }
 
 
@@ -560,16 +681,24 @@ namespace Delmon_Managment_System.Forms
             SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
             parampc.Value = lblPC.Text;
 
-            if (txtsubscription.Text == string.Empty)
-            {
-                MessageBox.Show("Please select Record first! " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
+            // Check if subscription number already exists
+            SQLCONN.OpenConection();
+            SqlDataReader dr = SQLCONN.DataReader("select SubscriptionNo from ElectrcityBills  where  SubscriptionNo = @C2 ", paramsubscrip);
+            dr.Read();
+
+            if (!dr.HasRows)
+            {
+                MessageBox.Show("This 'AccountNo' " + txtsubscription.Text + " Not Exists.!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
             else
             {
+                dr.Dispose();
+                dr.Close();
                 if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
-                    SQLCONN.OpenConection();
+                  
                     SQLCONN.ExecuteQueries("delete  ElectrcityBills where SubscriptionNo=@C2", paramsubscrip);
 
                     SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (logvalue, LogValueID, Oldvalue, newvalue, logdatetime, PCNAME, UserId, type) VALUES ('ElectrcityBills', @C2, '#', '#', @datetime, @pc, @user, 'Delete')", paramsubscrip, paramdatetimeLOG, parampc, paramuser);
@@ -577,23 +706,35 @@ namespace Delmon_Managment_System.Forms
                     MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT  [AccountNo]
-     ,[SubscriptionNo]
-     ,[MeterSN]
-     ,Dept_Type_Name
-     ,WorkLocations.Name
-     ,[HeadOfDept]
-     ,[OwnerId]
-     ,[ServiceID]
-     ,[Notes]
-  FROM [DelmonGroupDB].[dbo].[ElectrcityBills],DEPARTMENTS,WorkLocations,DeptTypes
-  where DEPARTMENTS.DEPTID=ElectrcityBills.DEPTID
-  and WorkLocations.WorkID=ElectrcityBills.workID
-  and DeptTypes.Dept_Type_ID=DEPARTMENTS.DeptName ");
+    ,[SubscriptionNo]
+    ,[MeterSN]
+    ,[MeterLocationID]
+    ,[Ownerid]
+    ,[EnduserType]
+    ,[EndUserID]
+    ,[ServiceStatusD]
+    ,[Notes]
+  FROM [DelmonGroupDB].[dbo].[ElectrcityBills] WHERE SubscriptionNo = @C2 ", paramsubscrip);
 
                     SQLCONN.CloseConnection();
+                    ClearItems(); 
                 }
             }
         }
+        private void ClearItems()
+        {
+            txtaccountno.Text = string.Empty;
+            txtsubscription.Text = string.Empty;
+            txtmetersn.Text = string.Empty;
+            cmbmeterlocation.SelectedIndex = -1;
+            cmbemployee.SelectedIndex = -1;
+            cmbOwner.SelectedIndex = -1;
+            cmbendusertype.SelectedIndex = -1;
+            cmbbillscompany.SelectedIndex = -1;
+            cmbservice.SelectedIndex = -1;
+            RemarksTxt.Text = string.Empty;
+        }
+
         private void button4_Click(object sender, EventArgs e)
         {
             SqlParameter paramaccount = new SqlParameter("@C1", SqlDbType.NVarChar);
@@ -644,7 +785,7 @@ namespace Delmon_Managment_System.Forms
             else
             {
                 SQLCONN.OpenConection();
-                dr = SQLCONN.DataReader("select  ServiceNo from CommunicationsBills  where " +
+                dr = SQLCONN.DataReader("select  ServiceNo from CommunicationsBills where " +
                     " ServiceNo=  @C2 ", paramserviceNo);
                 dr.Read();
 
@@ -683,7 +824,7 @@ namespace Delmon_Managment_System.Forms
   where  ServiceNo = @C2 ", paramserviceNo);
 
                     txtaccountno.Text = txtsubscription.Text = txtNotes.Text = txtmetersn.Text = string.Empty;
-                    cmbservice.Text = cmbemployee.Text = cmbpackage.Text = cmbDepartment.Text = cmbOwner.Text = cmbworkfield.Text = "Select";
+                    cmbservice.Text = cmbemployee.Text = cmbpackage.Text /*cmbDepartment.Text*/ = cmbOwner.Text = cmbmeterlocation.Text = "Select";
                 }
             }
             button1.Visible = true;
@@ -1201,7 +1342,8 @@ namespace Delmon_Managment_System.Forms
         private void btn_Click(object sender, EventArgs e)
         {
             AddBtn.Visible = true;
-            btn.Visible = false;
+         btnUpdate.Visible=DeleteBtn.Visible= btn.Visible = false;
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -1600,6 +1742,12 @@ namespace Delmon_Managment_System.Forms
 
         private void tabControl1_MouseClick(object sender, MouseEventArgs e)
         {
+            if (tabControl1.SelectedTab == tabControl1.TabPages[0])
+            {
+
+                cmbendusertype.SelectedItem = "Select";
+            }
+
             if (tabControl1.SelectedTab == tabControl1.TabPages[1])
             {
 
@@ -1626,57 +1774,123 @@ namespace Delmon_Managment_System.Forms
                 return;
             }
 
-            try
+            /*Communication*/
+            if (cmbReportType.Text == "Communication")
             {
-                // Open file dialog to select file
-                OpenFileDialog openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm;*.csv";
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                try
                 {
-                    string filePath = openFileDialog.FileName;
-                    string fileExtension = Path.GetExtension(filePath).ToLower();
-
-                    // Read data from file
-                    DataTable table = ReadDataFromFile(filePath, fileExtension);
-
-                    // Check for existing records
-                    Dictionary<string, DateTime> existingRecords = GetExistingRecords();
-
-                    // Iterate through each row in the DataTable
-
-
-                    foreach (DataRow row in table.Rows)
+                    // Open file dialog to select file
+                    OpenFileDialog openFileDialog = new OpenFileDialog();
+                    openFileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm;*.csv";
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
                     {
-                        string accountNo = row["Billing Account Number"].ToString();
-                        string billType = GetBillType(cmbReportType.Text);
-                        DateTime billDateGregorian = Convert.ToDateTime(row["Bill Date Gregorian (Last issued bill)"].ToString());
-                        DateTime disconnectDate = billDateGregorian.AddMonths(1).AddDays(-1);
-                        string balance = row["Balance"].ToString();
+                        string filePath = openFileDialog.FileName;
+                        string fileExtension = Path.GetExtension(filePath).ToLower();
 
-                        // Check for duplicates
-                        if (existingRecords.ContainsKey(accountNo) && existingRecords[accountNo].ToString("yyyy-MM-dd") == billDateGregorian.ToString("yyyy-MM-dd"))
+                        // Read data from file
+                        DataTable table = ReadDataFromFile(filePath, fileExtension);
+
+                        // Check for existing records
+                        Dictionary<string, DateTime> existingRecords = GetExistingRecords();
+
+                        // Iterate through each row in the DataTable
+
+
+                        foreach (DataRow row in table.Rows)
                         {
-                            MessageBox.Show($"Duplicate found for Account No: {accountNo} and Bill Date: {billDateGregorian}. Stopping the operation.", "Duplicate Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            break;
+                            string accountNo = row["Billing Account Number"].ToString();
+                            string billType = GetBillType(cmbReportType.Text);
+                            DateTime billDateGregorian = Convert.ToDateTime(row["Bill Date Gregorian (Last issued bill)"].ToString());
+                            DateTime disconnectDate = billDateGregorian.AddMonths(1).AddDays(-1);
+                            string balance = row["Balance"].ToString();
+
+                            // Check for duplicates
+                            if (existingRecords.ContainsKey(accountNo) && existingRecords[accountNo].ToString("yyyy-MM-dd") == billDateGregorian.ToString("yyyy-MM-dd"))
+                            {
+                                MessageBox.Show($"Duplicate found for Account No: {accountNo} and Bill Date: {billDateGregorian}. Stopping the operation.", "Duplicate Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                break;
+                            }
+                            else
+                            {
+                                // Insert data into database
+                                InsertDataIntoDatabase(accountNo, billType, billDateGregorian.ToString("yyyy-MM-dd"), disconnectDate.ToString("yyyy-MM-dd"), balance);
+                            }
                         }
-                        else
-                        {
-                            // Insert data into database
-                            InsertDataIntoDatabase(accountNo, billType, billDateGregorian.ToString("yyyy-MM-dd"), disconnectDate.ToString("yyyy-MM-dd"), balance);
-                        }
+                        MessageBox.Show("Records saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT  * FROM [DelmonGroupDB].[dbo].[BillsPaymentStatus] ");
+
                     }
-                    MessageBox.Show("Records saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT  * FROM [DelmonGroupDB].[dbo].[BillsPaymentStatus] ");
 
                 }
 
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            
-            catch (Exception ex)
+            /*Communication*/
+
+            /*Electrcity*/
+            if (cmbReportType.Text == "Electrcity")
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                try
+                {
+                    // Open file dialog to select file
+                    OpenFileDialog openFileDialog = new OpenFileDialog();
+                    openFileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm;*.csv";
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string filePath = openFileDialog.FileName;
+                        string fileExtension = Path.GetExtension(filePath).ToLower();
+
+                        // Read data from file
+                        DataTable table = ReadDataFromFile(filePath, fileExtension);
+
+                        // Check for existing records
+                        Dictionary<string, DateTime> existingRecords = GetExistingRecords();
+
+                        // Iterate through each row in the DataTable
+
+
+                        foreach (DataRow row in table.Rows)
+                        {
+                            string accountNo = row["AccountNo"].ToString();
+                            string billType = GetBillType(cmbReportType.Text);
+                            DateTime billDateGregorian = Convert.ToDateTime(row["DisconnectDate"].ToString());
+                            DateTime disconnectDate = Convert.ToDateTime(row["DisconnectDate"].ToString());
+
+                           // DateTime disconnectDate = billDateGregorian.AddMonths(1).AddDays(-1);
+                            //DisconnectDate
+                            string balance = row["BillAmount"].ToString();
+
+                            // Check for duplicates
+                            if (existingRecords.ContainsKey(accountNo) && existingRecords[accountNo].ToString("yyyy-MM-dd") == billDateGregorian.ToString("yyyy-MM-dd"))
+                            {
+                                MessageBox.Show($"Duplicate found for Account No: {accountNo} and Bill Date: {billDateGregorian}. Stopping the operation.", "Duplicate Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                break;
+                            }
+                            else
+                            {
+                                // Insert data into database
+                                InsertDataIntoDatabase(accountNo, billType, billDateGregorian.ToString("yyyy-MM-dd"), disconnectDate.ToString("yyyy-MM-dd"), balance);
+                            }
+                        }
+                        MessageBox.Show("Records saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT  * FROM [DelmonGroupDB].[dbo].[BillsPaymentStatus] ");
+
+                    }
+
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
+            /*Electrcity*/
+
         }
 
 
@@ -1873,6 +2087,39 @@ namespace Delmon_Managment_System.Forms
         private void txtAccountNumbe_TextChanged(object sender, EventArgs e)
         {
            
+        }
+
+        private void cmbendusertype_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbendusertype.Text == "Company")
+            {
+                cmbemployee.Enabled = false;
+                cmbbillscompany.Enabled = true;
+            }
+            if (cmbendusertype.Text == "Personal")
+            {
+                cmbemployee.Enabled = true;
+                cmbbillscompany.Enabled = false;
+            }
+        }
+
+        private void txtaccountno_TextChanged(object sender, EventArgs e)
+        {
+            txtsubscription.Text = txtaccountno.Text;
+
+        }
+
+        private void cmbOwner_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void cmbOwner_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (cmbOwner.SelectedValue != null)
+            {
+                cmbOwner.SelectedValue = Convert.ToInt64(cmbOwner.SelectedValue);
+            }
         }
     }
 }

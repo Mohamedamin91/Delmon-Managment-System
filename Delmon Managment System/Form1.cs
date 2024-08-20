@@ -374,10 +374,11 @@ GROUP BY
 
         private void btnNotifications_Click_1(object sender, EventArgs e)
         {
+            
             //successfully
             // MessageBox.Show("Bills have been added successfully to the log Report  !\n", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            MessageBox.Show("There is no notifications !\n", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //  MessageBox.Show("1- Employee Log report has been worked successfully !\n", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //  MessageBox.Show("There is no notifications !\n", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("1-Electrcity Bills has been wroking successfully !\n2-Bills Module has been ready for use !", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //  OpenChildForm(new Forms.NotificationFrm(), sender);
 
         }
