@@ -1,4 +1,7 @@
-﻿using CsvHelper;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
+using CsvHelper;
+using Delmon_Managment_System.Reports;
 using ExcelDataReader;
 using System;
 using System.Collections.Generic;
@@ -12,6 +15,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Reflection;
+using CrystalDecisions.CrystalReports.Engine;
+
 
 namespace Delmon_Managment_System.Forms
 {
@@ -133,13 +140,24 @@ namespace Delmon_Managment_System.Forms
             cmbOwner.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbOwner.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-            string query3 = @"SELECT CONVERT(VARCHAR, OwnerID) AS OwnerID, OwnerName FROM Owners";
-            cmbOwner.ValueMember = "OwnerID";
-            cmbOwner.DisplayMember = "OwnerName";
-            cmbOwner.DataSource = SQLCONN2.ShowDataInGridViewORCombobox(query3);
-            cmbOwner.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbOwner.AutoCompleteSource = AutoCompleteSource.ListItems;
 
+            //string query3 = @"SELECT CONVERT(VARCHAR, OwnerID) AS OwnerID, OwnerName FROM Owners";
+            //cmbOwner.ValueMember = "OwnerID";
+            //cmbOwner.DisplayMember = "OwnerName";
+            //cmbOwner.DataSource = SQLCONN2.ShowDataInGridViewORCombobox(query3);
+            //cmbOwner.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //cmbOwner.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+            string query3 = @"SELECT [Dept_Type_ID]
+     ,[Dept_Type_Name]
+FROM DeptTypes
+WHERE Dept_Type_ID BETWEEN 0 AND 17";
+            cmbDvision.ValueMember = "[Dept_Type_ID]";
+            cmbDvision.DisplayMember = "Dept_Type_Name";
+            cmbDvision.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query3);
+            cmbDvision.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbDvision.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             cmbemployee2.Enabled = false;
 
@@ -148,6 +166,7 @@ namespace Delmon_Managment_System.Forms
             cmbRegisterType.Text = "Select";
             cmbBillType.Text = "Select";
             cmbservice2.Text = "Select";
+            cmbDvision.Text = "Select";
 
 
 
@@ -186,7 +205,7 @@ namespace Delmon_Managment_System.Forms
             {
                 MessageBox.Show("Sorry, You are not allowed to view this Module/Screen , kindly contact the administrator !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 tabControl1.Enabled = false;
-                groupBox3.Enabled = groupBox6.Enabled = false;
+               groupBox4.Enabled= groupBox3.Enabled = groupBox6.Enabled = false;
 
 
             }
@@ -194,7 +213,7 @@ namespace Delmon_Managment_System.Forms
 
             {
                 tabControl1.Enabled = true;
-                groupBox3.Enabled = groupBox6.Enabled = true;
+                groupBox4.Enabled= groupBox3.Enabled = groupBox6.Enabled = true;
 
                 if (hasEdit)
                 {
@@ -1746,6 +1765,7 @@ WHERE [SubscriptionNo] = @C2";
             {
 
                 cmbendusertype.SelectedItem = "Select";
+              
             }
 
             if (tabControl1.SelectedTab == tabControl1.TabPages[1])
@@ -1757,6 +1777,10 @@ WHERE [SubscriptionNo] = @C2";
             if (tabControl1.SelectedTab == tabControl1.TabPages[2])
             {
                 textBox2.Focus();
+            }
+            if (tabControl1.SelectedTab == tabControl1.TabPages[5])
+            {
+                comboBox2.Text = "Select";
             }
         }
 
@@ -2120,6 +2144,152 @@ WHERE [SubscriptionNo] = @C2";
             {
                 cmbOwner.SelectedValue = Convert.ToInt64(cmbOwner.SelectedValue);
             }
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            if (comboBox2.Text == "Select")
+            {
+                MessageBox.Show("Please select the type of report ! ", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+            else
+            {
+                ShowCrystalReport1();
+
+            }
+           
+        }
+
+        private void ShowCrystalReport1()
+        {
+            string query = "";
+            DateTime startDate = dateTimePicker1.Value.Date;
+            DateTime endDate = dateTimePicker2.Value.Date;
+           
+            
+            
+            ReportDocument report = new ReportDocument();
+            string reportName = "Delmon_Managment_System.Reports.BillsReport.rpt"; // Replace with your actual namespace
+
+            if (cmbDvision.Text == "Select")
+            {
+                query = @"
+            SELECT 
+                bps.AccountNo,
+                cb.ServiceNo,
+                e.FirstName + ' ' + e.LastName AS EndUser,
+                bps.IssuedDate,
+                bps.DisconnectDate,
+                bps.BillAmount,
+                dt.Dept_Type_Name AS Division,
+                hod.FirstName + ' ' + hod.LastName AS HeadOFDepartment
+            FROM 
+                BillsPaymentStatus bps
+                INNER JOIN CommunicationsBills cb ON bps.AccountNo = cb.AccountNo
+                INNER JOIN Employees e ON cb.Employeeid = e.EmployeeID
+                INNER JOIN DEPARTMENTS d ON e.DeptID = d.DEPTID 
+                INNER JOIN DeptTypes dt ON dt.Dept_Type_ID = d.DeptName
+                INNER JOIN Employees hod ON d.DeptHeadID = hod.EmployeeID
+            WHERE
+                (bps.BillType = @param0) AND
+                CONVERT(DATE, bps.DisconnectDate) >= @param1 AND
+                CONVERT(DATE, bps.DisconnectDate) <= @param2";
+            }
+            else
+            {
+                query = @"
+            SELECT 
+                bps.AccountNo,
+                cb.ServiceNo,
+                e.FirstName + ' ' + e.LastName AS EndUser,
+                bps.IssuedDate,
+                bps.DisconnectDate,
+                bps.BillAmount,
+                dt.Dept_Type_Name AS Division,
+                hod.FirstName + ' ' + hod.LastName AS HeadOFDepartment
+            FROM 
+                BillsPaymentStatus bps
+                INNER JOIN CommunicationsBills cb ON bps.AccountNo = cb.AccountNo
+                INNER JOIN Employees e ON cb.Employeeid = e.EmployeeID
+                INNER JOIN DEPARTMENTS d ON e.DeptID = d.DEPTID 
+                INNER JOIN DeptTypes dt ON dt.Dept_Type_ID = d.DeptName
+                INNER JOIN Employees hod ON d.DeptHeadID = hod.EmployeeID
+            WHERE
+                (dt.Dept_Type_Name = @param) AND
+                (bps.BillType = @param0) AND
+                CONVERT(DATE, bps.DisconnectDate) >= @param1 AND
+                CONVERT(DATE, bps.DisconnectDate) <= @param2";
+            }
+
+            DataTable dataTable = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection(SQLCONN.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                cmd.Parameters.AddWithValue("@param", cmbDvision.Text);
+                cmd.Parameters.AddWithValue("@param0", comboBox2.SelectedItem);
+                cmd.Parameters.AddWithValue("@param1", startDate);
+                cmd.Parameters.AddWithValue("@param2", endDate);
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dataTable);
+
+             
+                // Format dates in DataTable
+             
+            }
+            using (Stream rptStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(reportName))
+            {
+                if (rptStream != null)
+                {
+                    string tempReportPath = Path.GetTempFileName(); // Create a temporary file
+                    using (FileStream tempFileStream = new FileStream(tempReportPath, FileMode.Create))
+                    {
+                        rptStream.CopyTo(tempFileStream); // Copy the stream to the temporary file
+                        tempFileStream.Flush();
+                    }
+
+                    report.Load(tempReportPath); // Load the report from the temporary file
+
+                    // Delete the temporary file after loading the report
+                    if (File.Exists(tempReportPath))
+                    {
+                        File.Delete(tempReportPath);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Could not find the embedded report resource.");
+                    return;
+                }
+            }
+
+
+                //ReportDocument report = new ReportDocument();
+                // report.Load(@"C:\Users\amin\Source\Repos\Delmon-Managment-System\Delmon Managment System\Reports\BillsReport.rpt"); // Replace with your report's path
+                //   report.Load(@"\\192.168.1.15\Software\Delmon HR\Reports\BillsReport.rpt");
+
+
+
+
+                // Use the formatted date columns in the report
+                report.SetDataSource(dataTable);
+
+            // Setting parameter values programmatically to avoid the prompt
+            report.SetParameterValue("param", cmbDvision.Text);
+            report.SetParameterValue("param0", comboBox2.SelectedItem);
+            report.SetParameterValue("param1", startDate);
+            report.SetParameterValue("param2", endDate);
+
+            crystalReportViewer1.ReportSource = report;
+            crystalReportViewer1.Refresh();
+        }
+
+        private void crystalReportViewer1_Load(object sender, EventArgs e)
+        {
+            //ShowCrystalReport1();
         }
     }
 }
