@@ -43,6 +43,8 @@ namespace Delmon_Managment_System.Forms
 
         private void BillsFrm_Load(object sender, EventArgs e)
         {
+            
+
             cmbendusertype.SelectedItem = "Select";
             button5.Visible = true;
             button1.Visible = true;
@@ -68,6 +70,11 @@ namespace Delmon_Managment_System.Forms
             cmbemployee.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT EmployeeID ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName' from Employees   order by EmployeeID ");
             cmbemployee.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbemployee.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+            cmbCompany.ValueMember = "COMPID";
+            cmbCompany.DisplayMember = "COMPName_EN";
+            cmbCompany.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT COMPID,COMPName_EN FROM Companies");
 
             string query = "select COMPID,COMPName_EN from Companies";
             cmbRegisterUnder.ValueMember = "COMPID";
@@ -149,15 +156,15 @@ namespace Delmon_Managment_System.Forms
             //cmbOwner.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
-            string query3 = @"SELECT [Dept_Type_ID]
-     ,[Dept_Type_Name]
-FROM DeptTypes
-WHERE Dept_Type_ID BETWEEN 0 AND 17";
-            cmbDvision.ValueMember = "[Dept_Type_ID]";
-            cmbDvision.DisplayMember = "Dept_Type_Name";
-            cmbDvision.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query3);
-            cmbDvision.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbDvision.AutoCompleteSource = AutoCompleteSource.ListItems;
+//            string query3 = @"SELECT [Dept_Type_ID]
+//     ,[Dept_Type_Name]
+//FROM DeptTypes
+//WHERE Dept_Type_ID BETWEEN 0 AND 17";
+//            cmbDvision.ValueMember = "[Dept_Type_ID]";
+//            cmbDvision.DisplayMember = "Dept_Type_Name";
+//            cmbDvision.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query3);
+//            cmbDvision.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+//            cmbDvision.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             cmbemployee2.Enabled = false;
 
@@ -263,41 +270,7 @@ WHERE Dept_Type_ID BETWEEN 0 AND 17";
 
         private void cmbCompany_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            DataRow dr;
-            SqlConnection conn = new SqlConnection(@"Data Source=192.168.1.8;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@");
-            // SqlConnection conn = new SqlConnection(@"Data Source=AMIN-PC;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@");
 
-
-            conn.Open();
-            SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT [DEPTID],Dept_Type_Name FROM [DelmonGroupDB].[dbo].[DEPARTMENTS], DeptTypes where DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID and COMPID=@C1 ";
-
-
-            cmd.Parameters.Add(new SqlParameter("@C1", SqlDbType.Int));
-            cmd.Parameters["@C1"].Value = cmbOwner.SelectedValue;
-
-
-            //Creating Sql Data Adapter
-            cmd.ExecuteNonQuery();
-            DataTable dt = new DataTable();
-            SqlDataAdapter Da = new SqlDataAdapter(cmd);
-            Da.Fill(dt);
-            dr = dt.NewRow();
-
-
-            if (dt != null && dt.Rows.Count >= 0)
-            {
-
-                //cmbDepartment.ValueMember = "DEPTID";
-                //cmbDepartment.DisplayMember = "Dept_Type_Name";
-                //cmbDepartment.DataSource = dt;
-                //cmbDepartment.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                //cmbDepartment.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-            }
-
-            conn.Close();
         }
 
         private void cmbDepartment_SelectionChangeCommitted(object sender, EventArgs e)
@@ -338,6 +311,20 @@ WHERE Dept_Type_ID BETWEEN 0 AND 17";
 
             conn.Close();
         }
+        private void ClearItems()
+        {
+            txtaccountno.Text = string.Empty;
+            txtsubscription.Text = string.Empty;
+            txtmetersn.Text = string.Empty;
+            cmbmeterlocation.SelectedIndex = -1;
+            cmbemployee.SelectedIndex = -1;
+            cmbOwner.SelectedIndex = -1;
+            cmbservice.SelectedIndex = -1;
+            RemarksTxt.Text = string.Empty;
+            cmbendusertype.SelectedIndex = -1;
+            cmbbillscompany.SelectedIndex = -1;
+        }
+
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
@@ -740,19 +727,7 @@ WHERE [SubscriptionNo] = @C2";
                 }
             }
         }
-        private void ClearItems()
-        {
-            txtaccountno.Text = string.Empty;
-            txtsubscription.Text = string.Empty;
-            txtmetersn.Text = string.Empty;
-            cmbmeterlocation.SelectedIndex = -1;
-            cmbemployee.SelectedIndex = -1;
-            cmbOwner.SelectedIndex = -1;
-            cmbendusertype.SelectedIndex = -1;
-            cmbbillscompany.SelectedIndex = -1;
-            cmbservice.SelectedIndex = -1;
-            RemarksTxt.Text = string.Empty;
-        }
+       
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -1362,9 +1337,10 @@ WHERE [SubscriptionNo] = @C2";
         {
             AddBtn.Visible = true;
          btnUpdate.Visible=DeleteBtn.Visible= btn.Visible = false;
+            ClearItems();
 
         }
-
+   
         private void button1_Click(object sender, EventArgs e)
         {
             button4.Visible = true;
@@ -1781,6 +1757,9 @@ WHERE [SubscriptionNo] = @C2";
             if (tabControl1.SelectedTab == tabControl1.TabPages[5])
             {
                 comboBox2.Text = "Select";
+
+              
+
             }
         }
 
@@ -2166,12 +2145,8 @@ WHERE [SubscriptionNo] = @C2";
             string query = "";
             DateTime startDate = dateTimePicker1.Value.Date;
             DateTime endDate = dateTimePicker2.Value.Date;
-           
-            
-            
-            ReportDocument report = new ReportDocument();
-            string reportName = "Delmon_Managment_System.Reports.BillsReport.rpt"; // Replace with your actual namespace
 
+            // Determine the base query
             if (cmbDvision.Text == "Select")
             {
                 query = @"
@@ -2183,15 +2158,18 @@ WHERE [SubscriptionNo] = @C2";
                 bps.DisconnectDate,
                 bps.BillAmount,
                 dt.Dept_Type_Name AS Division,
-                hod.FirstName + ' ' + hod.LastName AS HeadOFDepartment
-            FROM 
+                hod.FirstName + ' ' + hod.LastName AS HeadOFDepartment,
+				c.COMPName_EN
+                FROM 
                 BillsPaymentStatus bps
                 INNER JOIN CommunicationsBills cb ON bps.AccountNo = cb.AccountNo
                 INNER JOIN Employees e ON cb.Employeeid = e.EmployeeID
                 INNER JOIN DEPARTMENTS d ON e.DeptID = d.DEPTID 
                 INNER JOIN DeptTypes dt ON dt.Dept_Type_ID = d.DeptName
                 INNER JOIN Employees hod ON d.DeptHeadID = hod.EmployeeID
+				INNER JOIN Companies c ON d.COMPID = c.COMPID
             WHERE
+                (c.COMPID=@param3) AND
                 (bps.BillType = @param0) AND
                 CONVERT(DATE, bps.DisconnectDate) >= @param1 AND
                 CONVERT(DATE, bps.DisconnectDate) <= @param2";
@@ -2207,53 +2185,65 @@ WHERE [SubscriptionNo] = @C2";
                 bps.DisconnectDate,
                 bps.BillAmount,
                 dt.Dept_Type_Name AS Division,
-                hod.FirstName + ' ' + hod.LastName AS HeadOFDepartment
-            FROM 
+                hod.FirstName + ' ' + hod.LastName AS HeadOFDepartment,
+				c.COMPName_EN
+                FROM 
                 BillsPaymentStatus bps
                 INNER JOIN CommunicationsBills cb ON bps.AccountNo = cb.AccountNo
                 INNER JOIN Employees e ON cb.Employeeid = e.EmployeeID
                 INNER JOIN DEPARTMENTS d ON e.DeptID = d.DEPTID 
                 INNER JOIN DeptTypes dt ON dt.Dept_Type_ID = d.DeptName
                 INNER JOIN Employees hod ON d.DeptHeadID = hod.EmployeeID
-            WHERE
+				INNER JOIN Companies c ON d.COMPID = c.COMPID
+
+            WHERE 
+                (c.COMPID=@param3) AND
                 (dt.Dept_Type_Name = @param) AND
                 (bps.BillType = @param0) AND
                 CONVERT(DATE, bps.DisconnectDate) >= @param1 AND
                 CONVERT(DATE, bps.DisconnectDate) <= @param2";
             }
 
-            DataTable dataTable = new DataTable();
+            // Modify query based on the selected filter option
+            if (rbTop5Amount.Checked)
+            {
+                query += " ORDER BY bps.BillAmount DESC OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY";
+            }
+            else if (rbTop5DisconnectDate.Checked)
+            {
+                query += " ORDER BY bps.DisconnectDate DESC OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY";
+            }
 
+            // Continue with the rest of your code
+            DataTable dataTable = new DataTable();
             using (SqlConnection conn = new SqlConnection(SQLCONN.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(query, conn);
-
                 cmd.Parameters.AddWithValue("@param", cmbDvision.Text);
                 cmd.Parameters.AddWithValue("@param0", comboBox2.SelectedItem);
                 cmd.Parameters.AddWithValue("@param1", startDate);
                 cmd.Parameters.AddWithValue("@param2", endDate);
-
+                cmd.Parameters.AddWithValue("@param3", cmbCompany.SelectedValue);
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 adapter.Fill(dataTable);
-
-             
-                // Format dates in DataTable
-             
             }
+
+            // Set up the report
+            ReportDocument report = new ReportDocument();
+            string reportName = "Delmon_Managment_System.Reports.BillsReport.rpt";
             using (Stream rptStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(reportName))
             {
                 if (rptStream != null)
                 {
-                    string tempReportPath = Path.GetTempFileName(); // Create a temporary file
+                    string tempReportPath = Path.GetTempFileName();
                     using (FileStream tempFileStream = new FileStream(tempReportPath, FileMode.Create))
                     {
-                        rptStream.CopyTo(tempFileStream); // Copy the stream to the temporary file
+                        rptStream.CopyTo(tempFileStream);
                         tempFileStream.Flush();
                     }
 
-                    report.Load(tempReportPath); // Load the report from the temporary file
+                    report.Load(tempReportPath);
 
-                    // Delete the temporary file after loading the report
                     if (File.Exists(tempReportPath))
                     {
                         File.Delete(tempReportPath);
@@ -2266,22 +2256,15 @@ WHERE [SubscriptionNo] = @C2";
                 }
             }
 
-
-                //ReportDocument report = new ReportDocument();
-                // report.Load(@"C:\Users\amin\Source\Repos\Delmon-Managment-System\Delmon Managment System\Reports\BillsReport.rpt"); // Replace with your report's path
-                //   report.Load(@"\\192.168.1.15\Software\Delmon HR\Reports\BillsReport.rpt");
+            report.SetDataSource(dataTable);
 
 
 
-
-                // Use the formatted date columns in the report
-                report.SetDataSource(dataTable);
-
-            // Setting parameter values programmatically to avoid the prompt
             report.SetParameterValue("param", cmbDvision.Text);
             report.SetParameterValue("param0", comboBox2.SelectedItem);
             report.SetParameterValue("param1", startDate);
             report.SetParameterValue("param2", endDate);
+            report.SetParameterValue("param3", cmbCompany.SelectedValue);
 
             crystalReportViewer1.ReportSource = report;
             crystalReportViewer1.Refresh();
@@ -2290,6 +2273,50 @@ WHERE [SubscriptionNo] = @C2";
         private void crystalReportViewer1_Load(object sender, EventArgs e)
         {
             //ShowCrystalReport1();
+        }
+
+        private void cmbCompany_SelectionChangeCommitted_1(object sender, EventArgs e)
+        {
+            DataRow dr;
+            SqlConnection conn = new SqlConnection(@"Data Source=192.168.1.8;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@");
+            // SqlConnection conn = new SqlConnection(@"Data Source=AMIN-PC;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@");
+
+
+            conn.Open();
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "SELECT [DEPTID],Dept_Type_Name FROM [DelmonGroupDB].[dbo].[DEPARTMENTS], DeptTypes where DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID and COMPID=@C1 ";
+
+
+            cmd.Parameters.Add(new SqlParameter("@C1", SqlDbType.Int));
+            cmd.Parameters["@C1"].Value = cmbCompany.SelectedValue;
+
+
+            //Creating Sql Data Adapter
+            cmd.ExecuteNonQuery();
+            DataTable dt = new DataTable();
+            SqlDataAdapter Da = new SqlDataAdapter(cmd);
+            Da.Fill(dt);
+            dr = dt.NewRow();
+
+
+            if (dt != null && dt.Rows.Count >= 0)
+            {
+
+                cmbDvision.ValueMember = "DEPTID";
+                cmbDvision.DisplayMember = "Dept_Type_Name";
+                cmbDvision.DataSource = dt;
+                cmbDvision.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cmbDvision.AutoCompleteSource = AutoCompleteSource.ListItems;
+                cmbDvision.Text="Select";
+
+
+
+
+
+            }
+
+            conn.Close();
         }
     }
 }
