@@ -7,8 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Delmon Managment System", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{418B9A98-6BE0-42C9-AF6B-44F45599A407}"
 	ProjectSection(SolutionItems) = preProject
-		Delmon Managment System\Reports\BillsReport.cs = Delmon Managment System\Reports\BillsReport.cs
 		Delmon Managment System\Reports\BillsReport.rpt = Delmon Managment System\Reports\BillsReport.rpt
+		Delmon Managment System\Reports\BillsReportElec.rpt = Delmon Managment System\Reports\BillsReportElec.rpt
 	EndProjectSection
 EndProject
 Global

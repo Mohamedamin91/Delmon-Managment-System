@@ -16,14 +16,14 @@ namespace Delmon_Managment_System.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class BillsReport : ReportClass {
+    public class BillsReportElec : ReportClass {
         
-        public BillsReport() {
+        public BillsReportElec() {
         }
         
         public override string ResourceName {
             get {
-                return "BillsReport.rpt";
+                return "BillsReportElec.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace Delmon_Managment_System.Reports {
         
         public override string FullResourceName {
             get {
-                return "Delmon_Managment_System.Reports.BillsReport.rpt";
+                return "Delmon_Managment_System.Reports.BillsReportElec.rpt";
             }
             set {
                 // Do nothing
@@ -90,7 +90,7 @@ namespace Delmon_Managment_System.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_paramFrom {
+        public CrystalDecisions.Shared.IParameterField Parameter_Rpttype {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -98,7 +98,7 @@ namespace Delmon_Managment_System.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_paramTo {
+        public CrystalDecisions.Shared.IParameterField Parameter_From {
             get {
                 return this.DataDefinition.ParameterFields[1];
             }
@@ -106,7 +106,7 @@ namespace Delmon_Managment_System.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_paramEnduserID {
+        public CrystalDecisions.Shared.IParameterField Parameter_To {
             get {
                 return this.DataDefinition.ParameterFields[2];
             }
@@ -114,7 +114,7 @@ namespace Delmon_Managment_System.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_paramAccount {
+        public CrystalDecisions.Shared.IParameterField Parameter_EndUserType {
             get {
                 return this.DataDefinition.ParameterFields[3];
             }
@@ -122,17 +122,25 @@ namespace Delmon_Managment_System.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_paramBillType {
+        public CrystalDecisions.Shared.IParameterField Parameter_RptUsertype {
             get {
                 return this.DataDefinition.ParameterFields[4];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_Div {
+            get {
+                return this.DataDefinition.ParameterFields[5];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedBillsReport : Component, ICachedReport {
+    public class CachedBillsReportElec : Component, ICachedReport {
         
-        public CachedBillsReport() {
+        public CachedBillsReportElec() {
         }
         
         [Browsable(false)]
@@ -169,7 +177,7 @@ namespace Delmon_Managment_System.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            BillsReport rpt = new BillsReport();
+            BillsReportElec rpt = new BillsReportElec();
             rpt.Site = this.Site;
             return rpt;
         }
