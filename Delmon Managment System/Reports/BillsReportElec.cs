@@ -90,7 +90,7 @@ namespace Delmon_Managment_System.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Rpttype {
+        public CrystalDecisions.Shared.IParameterField Parameter_paramFrom {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -98,7 +98,7 @@ namespace Delmon_Managment_System.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_From {
+        public CrystalDecisions.Shared.IParameterField Parameter_paramTo {
             get {
                 return this.DataDefinition.ParameterFields[1];
             }
@@ -106,7 +106,7 @@ namespace Delmon_Managment_System.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_To {
+        public CrystalDecisions.Shared.IParameterField Parameter_paramBillType {
             get {
                 return this.DataDefinition.ParameterFields[2];
             }
@@ -114,7 +114,7 @@ namespace Delmon_Managment_System.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_EndUserType {
+        public CrystalDecisions.Shared.IParameterField Parameter_paramEnduserID {
             get {
                 return this.DataDefinition.ParameterFields[3];
             }
@@ -122,17 +122,9 @@ namespace Delmon_Managment_System.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_RptUsertype {
+        public CrystalDecisions.Shared.IParameterField Parameter_paramAccount {
             get {
                 return this.DataDefinition.ParameterFields[4];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Div {
-            get {
-                return this.DataDefinition.ParameterFields[5];
             }
         }
     }

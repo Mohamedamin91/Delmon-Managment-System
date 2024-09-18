@@ -1810,6 +1810,8 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
         /*Uplode-import**/
         private void btnuplode_Click(object sender, EventArgs e)
         {
+            SQLCONN.OpenConection();
+            SqlParameter paramaccount = new SqlParameter("@C1", SqlDbType.NVarChar);
             if (cmbReportType.Text == "Select")
             {
                 MessageBox.Show("Please select report type!.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1841,6 +1843,8 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
                         foreach (DataRow row in table.Rows)
                         {
                             string accountNo = row["Billing Account Number"].ToString();
+                            paramaccount.Value =accountNo;
+
                             string billType = GetBillType(cmbReportType.Text);
                             DateTime billDateGregorian = Convert.ToDateTime(row["Bill Date Gregorian (Last issued bill)"].ToString());
                             DateTime disconnectDate = billDateGregorian.AddMonths(1).AddDays(-1);
@@ -1854,6 +1858,10 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
                             }
                             else
                             {
+                                // update previous status for spcific account number 
+
+                                SQLCONN.ExecuteQueries("UPDATE BillsPaymentStatus SET PaymentStatus = 1 WHERE AccountNo = @C1 AND PaymentStatus = 0", paramaccount);
+
                                 // Insert data into database
                                 InsertDataIntoDatabase(accountNo, billType, billDateGregorian.ToString("yyyy-MM-dd"), disconnectDate.ToString("yyyy-MM-dd"), balance);
                             }
@@ -1898,6 +1906,9 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
                         foreach (DataRow row in table.Rows)
                         {
                             string accountNo = row["AccountNo"].ToString();
+                            paramaccount.Value = accountNo;
+
+
                             string billType = GetBillType(cmbReportType.Text);
                             DateTime billDateGregorian = Convert.ToDateTime(row["DisconnectDate"].ToString());
                             DateTime disconnectDate = Convert.ToDateTime(row["DisconnectDate"].ToString());
@@ -1914,6 +1925,9 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
                             }
                             else
                             {
+                                // update previous status for spcific account number 
+                                SQLCONN.ExecuteQueries("UPDATE BillsPaymentStatus SET PaymentStatus = 1 WHERE AccountNo = @C1 AND PaymentStatus = 0", paramaccount);
+
                                 // Insert data into database
                                 InsertDataIntoDatabase(accountNo, billType, billDateGregorian.ToString("yyyy-MM-dd"), disconnectDate.ToString("yyyy-MM-dd"), balance);
                             }
@@ -1932,6 +1946,10 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
                 }
             }
             /*Electrcity*/
+            SQLCONN.CloseConnection();
+
+
+
         }
 
         private DataTable ReadDataFromFile(string filePath, string fileExtension)
@@ -2115,6 +2133,7 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
     bps.IssuedDate,
     CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
     bps.BillAmount,
+	dt.Dept_Type_Name as Divison,
     COALESCE(
         CASE 
             WHEN eu.EndUserType = 'Company' THEN hod.FirstName +'' + hod.SecondName+''+hod.ThirdName+''+hod.LastName
@@ -2132,10 +2151,11 @@ FROM
   LEFT JOIN CommunicationsBills cb ON bps.AccountNo = cb.AccountNo AND cb.EndUserID IS NOT NULL
   LEFT JOIN EndUsers eu ON cb.EndUserID = eu.ID
   LEFT JOIN Employees e ON eu.ID = e.EmployeeID
-  LEFT JOIN DEPARTMENTS d ON eu.EndUserType = 'Company' AND eu.ID = d.DeptID
-  LEFT JOIN DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
-  LEFT JOIN Companies c ON d.COMPID = c.COMPID
-  LEFT JOIN Employees hod ON eu.EndUserType = 'Company' AND d.DeptHeadID = hod.EmployeeID
+  LEFT JOIN DEPARTMENTS d1 ON eu.EndUserType = 'Company' AND eu.ID = d1.DeptID
+  LEFT JOIN DEPARTMENTS d2 ON eu.EndUserType = 'Personal' AND e.DeptID = d2.DeptID
+  LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
+  LEFT JOIN Companies c ON d1.COMPID = c.COMPID
+  LEFT JOIN Employees hod ON eu.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
 
   where 
 
@@ -2167,6 +2187,7 @@ FROM
     bps.IssuedDate,
     CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
     bps.BillAmount,
+	dt.Dept_Type_Name as Divison,
     COALESCE(
         CASE 
             WHEN eu.EndUserType = 'Company' THEN hod.FirstName +'' + hod.SecondName+''+hod.ThirdName+''+hod.LastName
@@ -2184,10 +2205,11 @@ FROM
   LEFT JOIN ElectrcityBills eb ON bps.AccountNo = eb.AccountNo AND eb.EndUserID IS NOT NULL
   LEFT JOIN EndUsers eu ON eb.EndUserID = eu.ID
   LEFT JOIN Employees e ON eu.ID = e.EmployeeID
-  LEFT JOIN DEPARTMENTS d ON eu.EndUserType = 'Company' AND eu.ID = d.DeptID
-  LEFT JOIN DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
-  LEFT JOIN Companies c ON d.COMPID = c.COMPID
-  LEFT JOIN Employees hod ON eu.EndUserType = 'Company' AND d.DeptHeadID = hod.EmployeeID
+  LEFT JOIN DEPARTMENTS d1 ON eu.EndUserType = 'Company' AND eu.ID = d1.DeptID
+  LEFT JOIN DEPARTMENTS d2 ON eu.EndUserType = 'Personal' AND e.DeptID = d2.DeptID
+  LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
+  LEFT JOIN Companies c ON d1.COMPID = c.COMPID
+  LEFT JOIN Employees hod ON eu.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
 
   where 
 
@@ -2215,14 +2237,26 @@ FROM
                 //paid
                 else
                 {
-                    // Communication
-                    if (cmbBillType1.Text == "Communication")
+
+                    if (txtAccountNumbe.Text == string.Empty)
                     {
-                        string queryCommuni = @"SELECT 
+                        MessageBox.Show(" Please fill the account number field ! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
+                    else
+                    {
+
+
+                        // Communication
+                        if (cmbBillType1.Text == "Communication")
+                        {
+                            string queryCommuni = @"SELECT 
     bps.AccountNo,
     bps.IssuedDate,
     CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
     bps.BillAmount,
+	dt.Dept_Type_Name as Divison,
+
     COALESCE(
         CASE 
             WHEN eu.EndUserType = 'Company' THEN hod.FirstName +'' + hod.SecondName+''+hod.ThirdName+''+hod.LastName
@@ -2240,10 +2274,11 @@ FROM
   LEFT JOIN ElectrcityBills eb ON bps.AccountNo = eb.AccountNo AND eb.EndUserID IS NOT NULL
   LEFT JOIN EndUsers eu ON eb.EndUserID = eu.ID
   LEFT JOIN Employees e ON eu.ID = e.EmployeeID
-  LEFT JOIN DEPARTMENTS d ON eu.EndUserType = 'Company' AND eu.ID = d.DeptID
-  LEFT JOIN DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
-  LEFT JOIN Companies c ON d.COMPID = c.COMPID
-  LEFT JOIN Employees hod ON eu.EndUserType = 'Company' AND d.DeptHeadID = hod.EmployeeID
+  LEFT JOIN DEPARTMENTS d1 ON eu.EndUserType = 'Company' AND eu.ID = d1.DeptID
+  LEFT JOIN DEPARTMENTS d2 ON eu.EndUserType = 'Personal' AND e.DeptID = d2.DeptID
+  LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
+  LEFT JOIN Companies c ON d1.COMPID = c.COMPID
+  LEFT JOIN Employees hod ON eu.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
 
   where 
 
@@ -2253,26 +2288,28 @@ FROM
   AND CONVERT(DATE, bps.DisconnectDate) <= @paramTo
   AND bps.AccountNo= @paramAccount 
 "
-; 
-                        if (txtAccountNumbe.Text == "")
-                        {
-                            MessageBox.Show("please Fill the missing fields");
+    ;
+                            if (txtAccountNumbe.Text == "")
+                            {
+                                MessageBox.Show("please Fill the missing fields");
+                            }
+                            else
+                            {
+                                dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(queryCommuni, paramBillType, paramEnduserID, paramFrom, paramTo, paramAccount);
+                            }
                         }
-                        else
-                        {
-                            dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(queryCommuni, paramBillType, paramEnduserID, paramFrom, paramTo, paramAccount);
-                        }
-                    }
 
-                    // Electrcity
-                    if (cmbBillType1.Text == "Electrcity")
-                    {
-                        string queryElectrcity = @"SELECT 
+                        // Electrcity
+                        if (cmbBillType1.Text == "Electrcity")
+                        {
+                            string queryElectrcity = @"SELECT 
     bps.AccountNo,
     cb.ServiceNo,
     bps.IssuedDate,
     CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
     bps.BillAmount,
+	dt.Dept_Type_Name as Divison,
+
     COALESCE(
         CASE 
             WHEN eu.EndUserType = 'Company' THEN hod.FirstName +'' + hod.SecondName+''+hod.ThirdName+''+hod.LastName
@@ -2290,10 +2327,11 @@ FROM
   LEFT JOIN CommunicationsBills cb ON bps.AccountNo = cb.AccountNo AND cb.EndUserID IS NOT NULL
   LEFT JOIN EndUsers eu ON cb.EndUserID = eu.ID
   LEFT JOIN Employees e ON eu.ID = e.EmployeeID
-  LEFT JOIN DEPARTMENTS d ON eu.EndUserType = 'Company' AND eu.ID = d.DeptID
-  LEFT JOIN DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
-  LEFT JOIN Companies c ON d.COMPID = c.COMPID
-  LEFT JOIN Employees hod ON eu.EndUserType = 'Company' AND d.DeptHeadID = hod.EmployeeID
+  LEFT JOIN DEPARTMENTS d1 ON eu.EndUserType = 'Company' AND eu.ID = d1.DeptID
+  LEFT JOIN DEPARTMENTS d2 ON eu.EndUserType = 'Personal' AND e.DeptID = d2.DeptID
+  LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
+  LEFT JOIN Companies c ON d1.COMPID = c.COMPID
+  LEFT JOIN Employees hod ON eu.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
 
   where 
 
@@ -2302,20 +2340,21 @@ FROM
   AND CONVERT(DATE, bps.DisconnectDate) >= @paramFrom 
   AND CONVERT(DATE, bps.DisconnectDate) <= @paramTo
   AND bps.AccountNo= @paramAccount 
-";       
-                        if (txtAccountNumbe.Text == "")
-                        {
-                            MessageBox.Show("please Fill the missing fields");
+";
+                            if (txtAccountNumbe.Text == "")
+                            {
+                                MessageBox.Show("please Fill the missing fields");
+                            }
+                            else
+                            {
+                                dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(queryElectrcity, paramBillType, paramEnduserID, paramFrom, paramTo, paramAccount);
+                            }
                         }
-                        else
-                        {
-                            dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(queryElectrcity, paramBillType, paramEnduserID, paramFrom, paramTo, paramAccount);
-                        }
+
                     }
+                  }
 
-                }
-
- 
+           //     cmbBillType1.Text = cmbbillenduser.Text = "Select";
 
             }
 
@@ -3098,6 +3137,8 @@ FROM
     bps.IssuedDate,
     CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
     bps.BillAmount,
+	dt.Dept_Type_Name as Divison,
+
     COALESCE(
         CASE 
             WHEN eu.EndUserType = 'Company' THEN hod.FirstName +'' + hod.SecondName+''+hod.ThirdName+''+hod.LastName
@@ -3115,10 +3156,11 @@ FROM
   LEFT JOIN CommunicationsBills cb ON bps.AccountNo = cb.AccountNo AND cb.EndUserID IS NOT NULL
   LEFT JOIN EndUsers eu ON cb.EndUserID = eu.ID
   LEFT JOIN Employees e ON eu.ID = e.EmployeeID
-  LEFT JOIN DEPARTMENTS d ON eu.EndUserType = 'Company' AND eu.ID = d.DeptID
-  LEFT JOIN DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
-  LEFT JOIN Companies c ON d.COMPID = c.COMPID
-  LEFT JOIN Employees hod ON eu.EndUserType = 'Company' AND d.DeptHeadID = hod.EmployeeID
+  LEFT JOIN DEPARTMENTS d1 ON eu.EndUserType = 'Company' AND eu.ID = d1.DeptID
+  LEFT JOIN DEPARTMENTS d2 ON eu.EndUserType = 'Personal' AND e.DeptID = d2.DeptID
+  LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
+  LEFT JOIN Companies c ON d1.COMPID = c.COMPID
+  LEFT JOIN Employees hod ON eu.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
 
   where 
 
@@ -3136,6 +3178,8 @@ FROM
     bps.IssuedDate,
     CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
     bps.BillAmount,
+	dt.Dept_Type_Name as Divison,
+
     COALESCE(
         CASE 
             WHEN eu.EndUserType = 'Company' THEN hod.FirstName +'' + hod.SecondName+''+hod.ThirdName+''+hod.LastName
@@ -3153,10 +3197,11 @@ FROM
   LEFT JOIN ElectrcityBills eb ON bps.AccountNo = eb.AccountNo AND eb.EndUserID IS NOT NULL
   LEFT JOIN EndUsers eu ON eb.EndUserID = eu.ID
   LEFT JOIN Employees e ON eu.ID = e.EmployeeID
-  LEFT JOIN DEPARTMENTS d ON eu.EndUserType = 'Company' AND eu.ID = d.DeptID
-  LEFT JOIN DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
-  LEFT JOIN Companies c ON d.COMPID = c.COMPID
-  LEFT JOIN Employees hod ON eu.EndUserType = 'Company' AND d.DeptHeadID = hod.EmployeeID
+  LEFT JOIN DEPARTMENTS d1 ON eu.EndUserType = 'Company' AND eu.ID = d1.DeptID
+  LEFT JOIN DEPARTMENTS d2 ON eu.EndUserType = 'Personal' AND e.DeptID = d2.DeptID
+  LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
+  LEFT JOIN Companies c ON d1.COMPID = c.COMPID
+  LEFT JOIN Employees hod ON eu.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
 
   where 
 
@@ -3170,15 +3215,24 @@ FROM
                 //paid
                 else
                 {
-                    // Communication
-                    if (cmbBillType1.Text == "Communication")
+                    if (txtAccountNumbe.Text == string.Empty)
                     {
-                         query = @"SELECT 
+                        MessageBox.Show(" Please fill the account number field ! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
+                    else
+                    {
+                        // Communication
+                        if (cmbBillType1.Text == "Communication")
+                        {
+                            query = @"SELECT 
     bps.AccountNo,
     bps.BillType,
     bps.IssuedDate,
     CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
     bps.BillAmount,
+	dt.Dept_Type_Name as Divison,
+
     COALESCE(
         CASE 
             WHEN eu.EndUserType = 'Company' THEN hod.FirstName +'' + hod.SecondName+''+hod.ThirdName+''+hod.LastName
@@ -3196,10 +3250,11 @@ FROM
   LEFT JOIN ElectrcityBills eb ON bps.AccountNo = eb.AccountNo AND eb.EndUserID IS NOT NULL
   LEFT JOIN EndUsers eu ON eb.EndUserID = eu.ID
   LEFT JOIN Employees e ON eu.ID = e.EmployeeID
-  LEFT JOIN DEPARTMENTS d ON eu.EndUserType = 'Company' AND eu.ID = d.DeptID
-  LEFT JOIN DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
-  LEFT JOIN Companies c ON d.COMPID = c.COMPID
-  LEFT JOIN Employees hod ON eu.EndUserType = 'Company' AND d.DeptHeadID = hod.EmployeeID
+  LEFT JOIN DEPARTMENTS d1 ON eu.EndUserType = 'Company' AND eu.ID = d1.DeptID
+  LEFT JOIN DEPARTMENTS d2 ON eu.EndUserType = 'Personal' AND e.DeptID = d2.DeptID
+  LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
+  LEFT JOIN Companies c ON d1.COMPID = c.COMPID
+  LEFT JOIN Employees hod ON eu.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
 
   where 
 
@@ -3209,20 +3264,22 @@ FROM
   AND CONVERT(DATE, bps.DisconnectDate) <= @paramTo
   AND bps.AccountNo= @paramAccount 
 "
-;
-                       
-                    }
+   ;
 
-                    // Electrcity
-                    if (cmbBillType1.Text == "Electrcity")
-                    {
-                         query = @"SELECT 
+                        }
+
+                        // Electrcity
+                        if (cmbBillType1.Text == "Electrcity")
+                        {
+                            query = @"SELECT 
     bps.AccountNo,
     bps.BillType,
     cb.ServiceNo,
     bps.IssuedDate,
     CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
     bps.BillAmount,
+	dt.Dept_Type_Name as Divison,
+
     COALESCE(
         CASE 
             WHEN eu.EndUserType = 'Company' THEN hod.FirstName +'' + hod.SecondName+''+hod.ThirdName+''+hod.LastName
@@ -3240,10 +3297,11 @@ FROM
   LEFT JOIN CommunicationsBills cb ON bps.AccountNo = cb.AccountNo AND cb.EndUserID IS NOT NULL
   LEFT JOIN EndUsers eu ON cb.EndUserID = eu.ID
   LEFT JOIN Employees e ON eu.ID = e.EmployeeID
-  LEFT JOIN DEPARTMENTS d ON eu.EndUserType = 'Company' AND eu.ID = d.DeptID
-  LEFT JOIN DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
-  LEFT JOIN Companies c ON d.COMPID = c.COMPID
-  LEFT JOIN Employees hod ON eu.EndUserType = 'Company' AND d.DeptHeadID = hod.EmployeeID
+  LEFT JOIN DEPARTMENTS d1 ON eu.EndUserType = 'Company' AND eu.ID = d1.DeptID
+  LEFT JOIN DEPARTMENTS d2 ON eu.EndUserType = 'Personal' AND e.DeptID = d2.DeptID
+  LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
+  LEFT JOIN Companies c ON d1.COMPID = c.COMPID
+  LEFT JOIN Employees hod ON eu.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
 
   where 
 
@@ -3253,10 +3311,11 @@ FROM
   AND CONVERT(DATE, bps.DisconnectDate) <= @paramTo
   AND bps.AccountNo= @paramAccount 
 ";
-                      
-                    }
 
-                }
+                        }
+
+                    }
+                    }
 
                 // Modify query based on the selected filter option
                 if (rbTop5Amount.Checked)
@@ -3382,17 +3441,22 @@ FROM
                     // Display the report in the viewer
                     crystalReportViewer1.ReportSource = report;
                 }
-                else
-                {
-                    MessageBox.Show("Please specify the filter criteria.");
-                }
+                //else
+                //{
+                //    MessageBox.Show("Please specify the filter criteria.");
+                //}
 
 
             }
-        
+
+
+   //         cmbBillType1.Text = cmbbillenduser.Text = "Select";
+
+
+
         }
 
-     
+
 
 
 
