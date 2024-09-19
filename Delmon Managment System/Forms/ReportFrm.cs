@@ -1328,10 +1328,13 @@ namespace Delmon_Managment_System.Forms
                     button2.Enabled= button5.Enabled = btnuplode.Enabled = false;
                     radioButton1.Enabled = radioButton2.Enabled = radioButton3.Enabled =radioButton4.Enabled= false;
                     dateTimePicker1.Enabled = dateTimePicker2.Enabled = false;
+                    groupBox5.Enabled = groupBox6.Enabled = false;
+
 
                 }
                 else
                 {
+                    groupBox5.Enabled = groupBox6.Enabled = true;
                     dateTimePicker1.Enabled = dateTimePicker2.Enabled = true;
                           btnuplode.Enabled = true;
                          button2.Enabled = button5.Enabled = true;

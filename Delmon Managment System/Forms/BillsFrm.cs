@@ -2608,40 +2608,42 @@ FROM
         {
             //SQLCONN.OpenConection();
 
-            //cmbbillenduser.DataSource = null; // Clear the data source
-            //cmbbillenduser.Enabled = false;
-            //cmbDvision.Enabled = false;
+            cmbbillenduser.DataSource = null; // Clear the data source
+            cmbbillenduser.Enabled = false;
+            cmbbillenduserdvision.Enabled = false;
 
-            //switch (cmbbillendusertype.SelectedItem.ToString())
-            //{
-            //    case "Company":
-            //        label56.Text = "EndUser- Company";
-            //        cmbbillenduser.Enabled = true;
-            //        cmbDvision.Enabled = true;
+            switch (cmbbillendusertype.SelectedItem.ToString())
+            {
+                case "Company":
+                    label56.Text = "EndUser- Company";
+                    cmbbillenduser.Enabled = true;
+                    cmbbillenduserdvision.Enabled = true;
 
-            //        cmbbillenduser.ValueMember = "COMPID";
-            //        cmbbillenduser.DisplayMember = "COMPName_EN";
-            //        cmbbillenduser.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT COMPID, COMPName_EN FROM Companies");
-            //        break;
+                    cmbbillenduser.ValueMember = "COMPID";
+                    cmbbillenduser.DisplayMember = "COMPName_EN";
+                    cmbbillenduser.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT COMPID, COMPName_EN FROM Companies");
+                    cmbbillenduser.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                    cmbbillenduser.AutoCompleteSource = AutoCompleteSource.ListItems;
+                    break;
 
-            //    case "Personal":
-            //        label56.Text = "EndUser- Employee";
-            //        cmbbillenduser.Enabled = true;
-            //        cmbDvision.Enabled = false;
+                case "Personal":
+                    label56.Text = "EndUser- Employee";
+                    cmbbillenduser.Enabled = true;
+                    cmbbillenduserdvision.Enabled = false;
 
-            //        cmbbillenduser.ValueMember = "EmployeeID";
-            //        cmbbillenduser.DisplayMember = "FullName";
-            //        cmbbillenduser.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT EmployeeID, CONCAT(FirstName,' ', SecondName,' ', ThirdName,' ', LastName) AS 'FullName' FROM Employees ORDER BY EmployeeID");
-            //        cmbbillenduser.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //        cmbbillenduser.AutoCompleteSource = AutoCompleteSource.ListItems;
-            //        break;
+                    cmbbillenduser.ValueMember = "EmployeeID";
+                    cmbbillenduser.DisplayMember = "FullName";
+                    cmbbillenduser.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT EmployeeID, CONCAT(FirstName,' ', SecondName,' ', ThirdName,' ', LastName) AS 'FullName' FROM Employees ORDER BY EmployeeID");
+                    cmbbillenduser.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                    cmbbillenduser.AutoCompleteSource = AutoCompleteSource.ListItems;
+                    break;
 
-            //    default:
-            //        label56.Text = "Type";
-            //        break;
-            //}
+                default:
+                    label56.Text = "Type";
+                    break;
+            }
 
-            //SQLCONN.CloseConnection();
+            SQLCONN.CloseConnection();
         }
 
         private void cmbbillenduser_SelectionChangeCommitted(object sender, EventArgs e)
