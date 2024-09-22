@@ -225,7 +225,7 @@ namespace Delmon_Managment_System.Forms
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1461, 884);
+            this.tabControl1.Size = new System.Drawing.Size(1578, 884);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseClick);
             // 
@@ -259,7 +259,7 @@ namespace Delmon_Managment_System.Forms
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage1.Size = new System.Drawing.Size(1453, 854);
+            this.tabPage1.Size = new System.Drawing.Size(1570, 854);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Electrcity & Water Bills";
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
@@ -425,7 +425,7 @@ namespace Delmon_Managment_System.Forms
             this.btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btn.ForeColor = System.Drawing.Color.Firebrick;
-            this.btn.Location = new System.Drawing.Point(41, 421);
+            this.btn.Location = new System.Drawing.Point(41, 417);
             this.btn.Margin = new System.Windows.Forms.Padding(4);
             this.btn.Name = "btn";
             this.btn.Size = new System.Drawing.Size(63, 28);
@@ -442,7 +442,7 @@ namespace Delmon_Managment_System.Forms
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdate.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnUpdate.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnUpdate.Location = new System.Drawing.Point(187, 421);
+            this.btnUpdate.Location = new System.Drawing.Point(187, 417);
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 28);
@@ -459,7 +459,7 @@ namespace Delmon_Managment_System.Forms
             this.DeleteBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DeleteBtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.DeleteBtn.ForeColor = System.Drawing.Color.Firebrick;
-            this.DeleteBtn.Location = new System.Drawing.Point(270, 421);
+            this.DeleteBtn.Location = new System.Drawing.Point(270, 417);
             this.DeleteBtn.Margin = new System.Windows.Forms.Padding(4);
             this.DeleteBtn.Name = "DeleteBtn";
             this.DeleteBtn.Size = new System.Drawing.Size(67, 28);
@@ -476,7 +476,7 @@ namespace Delmon_Managment_System.Forms
             this.AddBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AddBtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.AddBtn.ForeColor = System.Drawing.Color.Firebrick;
-            this.AddBtn.Location = new System.Drawing.Point(116, 421);
+            this.AddBtn.Location = new System.Drawing.Point(116, 417);
             this.AddBtn.Margin = new System.Windows.Forms.Padding(4);
             this.AddBtn.Name = "AddBtn";
             this.AddBtn.Size = new System.Drawing.Size(63, 28);
@@ -645,7 +645,7 @@ namespace Delmon_Managment_System.Forms
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(1453, 854);
+            this.tabPage2.Size = new System.Drawing.Size(1570, 854);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "CommunicationsBills";
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
@@ -1072,7 +1072,7 @@ namespace Delmon_Managment_System.Forms
             this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage3.Size = new System.Drawing.Size(1453, 854);
+            this.tabPage3.Size = new System.Drawing.Size(1570, 854);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "BillsPaymentStatus";
             this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
@@ -1345,7 +1345,7 @@ namespace Delmon_Managment_System.Forms
             this.Packages.Location = new System.Drawing.Point(4, 26);
             this.Packages.Name = "Packages";
             this.Packages.Padding = new System.Windows.Forms.Padding(3);
-            this.Packages.Size = new System.Drawing.Size(1453, 854);
+            this.Packages.Size = new System.Drawing.Size(1570, 854);
             this.Packages.TabIndex = 4;
             this.Packages.Text = "Packages";
             this.Packages.Click += new System.EventHandler(this.Packages_Click);
@@ -1587,7 +1587,7 @@ namespace Delmon_Managment_System.Forms
             this.tabPage6.Location = new System.Drawing.Point(4, 26);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(1453, 854);
+            this.tabPage6.Size = new System.Drawing.Size(1570, 854);
             this.tabPage6.TabIndex = 7;
             this.tabPage6.Text = "EndUsers";
             this.tabPage6.Click += new System.EventHandler(this.tabPage6_Click);
@@ -1787,7 +1787,7 @@ namespace Delmon_Managment_System.Forms
             this.tabPage4.Location = new System.Drawing.Point(4, 26);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1453, 854);
+            this.tabPage4.Size = new System.Drawing.Size(1570, 854);
             this.tabPage4.TabIndex = 5;
             this.tabPage4.Text = "Report";
             this.tabPage4.Click += new System.EventHandler(this.tabPage4_Click);
@@ -1797,9 +1797,9 @@ namespace Delmon_Managment_System.Forms
             this.crystalReportViewer1.ActiveViewIndex = -1;
             this.crystalReportViewer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.crystalReportViewer1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.crystalReportViewer1.Location = new System.Drawing.Point(294, 19);
+            this.crystalReportViewer1.Location = new System.Drawing.Point(351, 11);
             this.crystalReportViewer1.Name = "crystalReportViewer1";
-            this.crystalReportViewer1.Size = new System.Drawing.Size(1148, 719);
+            this.crystalReportViewer1.Size = new System.Drawing.Size(1208, 872);
             this.crystalReportViewer1.TabIndex = 210;
             this.crystalReportViewer1.Visible = false;
             // 
@@ -1821,7 +1821,7 @@ namespace Delmon_Managment_System.Forms
             this.groupBox3.Enabled = false;
             this.groupBox3.Location = new System.Drawing.Point(6, 11);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(258, 574);
+            this.groupBox3.Size = new System.Drawing.Size(344, 574);
             this.groupBox3.TabIndex = 206;
             this.groupBox3.TabStop = false;
             // 
@@ -1832,7 +1832,7 @@ namespace Delmon_Managment_System.Forms
             this.cmbenduserrpt.Location = new System.Drawing.Point(11, 105);
             this.cmbenduserrpt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbenduserrpt.Name = "cmbenduserrpt";
-            this.cmbenduserrpt.Size = new System.Drawing.Size(210, 25);
+            this.cmbenduserrpt.Size = new System.Drawing.Size(327, 25);
             this.cmbenduserrpt.TabIndex = 219;
             // 
             // label29
@@ -1842,9 +1842,9 @@ namespace Delmon_Managment_System.Forms
             this.label29.ForeColor = System.Drawing.Color.Black;
             this.label29.Location = new System.Drawing.Point(11, 85);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(75, 17);
+            this.label29.Size = new System.Drawing.Size(102, 17);
             this.label29.TabIndex = 218;
-            this.label29.Text = "End User";
+            this.label29.Text = "Approved By";
             // 
             // cbunpaid
             // 
@@ -2062,7 +2062,7 @@ namespace Delmon_Managment_System.Forms
             this.groupBox6.Enabled = false;
             this.groupBox6.Location = new System.Drawing.Point(6, 579);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(258, 158);
+            this.groupBox6.Size = new System.Drawing.Size(344, 158);
             this.groupBox6.TabIndex = 205;
             this.groupBox6.TabStop = false;
             // 
@@ -2111,12 +2111,12 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView5.AllowUserToAddRows = false;
             this.dataGridView5.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView5.Location = new System.Drawing.Point(294, 18);
+            this.dataGridView5.Location = new System.Drawing.Point(351, 11);
             this.dataGridView5.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView5.Name = "dataGridView5";
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.dataGridView5.RowsDefaultCellStyle = dataGridViewCellStyle6;
-            this.dataGridView5.Size = new System.Drawing.Size(1148, 719);
+            this.dataGridView5.Size = new System.Drawing.Size(1066, 767);
             this.dataGridView5.TabIndex = 194;
             // 
             // timer1
