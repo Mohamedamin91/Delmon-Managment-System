@@ -70,10 +70,30 @@ namespace Delmon_Managment_System.Forms
 
 
 
+           
+
+
+
+
+            cmbenduserrpt.ValueMember = "Value";
+            cmbenduserrpt.DisplayMember = "DisplayValue";
+            cmbenduserrpt.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT 
+  distinct  CONCAT(e.FirstName,' ', e.SecondName,' ', e.ThirdName,' ', e.LastName) AS DisplayValue, d.DeptHeadID As Value
+	from Employees e, DEPARTMENTS d
+	where e.EmployeeID = d.DeptHeadID
+	and CONCAT(e.FirstName,' ', e.SecondName,' ', e.ThirdName,' ', e.LastName) != 'Select'; ");
+            cmbenduserrpt.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbenduserrpt.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbenduserrpt.Text = "Select";
+
+
+
+
+
             cmbcommenduser.ValueMember = "Value";
             cmbcommenduser.DisplayMember = "DisplayValue";
             cmbcommenduser.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT 
-    CONCAT(c.ShortCompName,'/ ', dt.Dept_Type_Name) AS DisplayValue,
+    CONCAT(c.ShortCompName,' / ', dt.Dept_Type_Name) AS DisplayValue,
     eu.ID AS Value
 FROM 
     EndUsers eu
@@ -99,29 +119,10 @@ WHERE
             cmbcommenduser.AutoCompleteSource = AutoCompleteSource.ListItems;
             cmbcommenduser.Text = "Select";
 
-
-
-
-            cmbenduserrpt.ValueMember = "Value";
-            cmbenduserrpt.DisplayMember = "DisplayValue";
-            cmbenduserrpt.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT 
-  distinct  CONCAT(e.FirstName,' ', e.SecondName,' ', e.ThirdName,' ', e.LastName) AS DisplayValue, d.DeptHeadID As Value
-	from Employees e, DEPARTMENTS d
-	where e.EmployeeID = d.DeptHeadID
-	and CONCAT(e.FirstName,' ', e.SecondName,' ', e.ThirdName,' ', e.LastName) != 'Select'; ");
-            cmbenduserrpt.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbenduserrpt.AutoCompleteSource = AutoCompleteSource.ListItems;
-            cmbenduserrpt.Text = "Select";
-
-
-
-
-
-
             cmbElecEnduser.ValueMember = "Value";
             cmbElecEnduser.DisplayMember = "DisplayValue";
             cmbElecEnduser.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT 
-    CONCAT(c.ShortCompName,'/ ', dt.Dept_Type_Name) AS DisplayValue,
+    CONCAT(c.ShortCompName,' / ', dt.Dept_Type_Name) AS DisplayValue,
     eu.ID AS Value
 FROM 
     EndUsers eu
@@ -1757,13 +1758,78 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
             if (tabControl1.SelectedTab == tabControl1.TabPages[0])
             {
 
+                SQLCONN.OpenConection();
+               
 
+                cmbElecEnduser.ValueMember = "Value";
+                cmbElecEnduser.DisplayMember = "DisplayValue";
+                cmbElecEnduser.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT 
+    CONCAT(c.ShortCompName,'/ ', dt.Dept_Type_Name) AS DisplayValue,
+    eu.ID AS Value
+FROM 
+    EndUsers eu
+INNER JOIN 
+    DEPARTMENTS d ON eu.ID = d.DeptID
+INNER JOIN 
+    Companies c ON d.COMPID = c.COMPID
+INNER JOIN 
+    DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
+WHERE 
+    eu.EndUserType = 'Company'
+UNION ALL
+SELECT 
+    CONCAT(e.FirstName,' ', e.SecondName,' ', e.ThirdName,' ', e.LastName) AS DisplayValue,
+    e.EmployeeID AS Value
+FROM 
+    EndUsers eu
+INNER JOIN 
+    Employees e ON eu.ID = e.EmployeeID
+WHERE 
+    eu.EndUserType = 'Personal' ");
+                cmbElecEnduser.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cmbElecEnduser.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+                SQLCONN.CloseConnection();
+                cmbElecEnduser.Text = "Select";
             }
 
             if (tabControl1.SelectedTab == tabControl1.TabPages[1])
             {
 
+                SQLCONN.OpenConection();
+                cmbcommenduser.ValueMember = "Value";
+                cmbcommenduser.DisplayMember = "DisplayValue";
+                cmbcommenduser.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT 
+    CONCAT(c.ShortCompName,'/ ', dt.Dept_Type_Name) AS DisplayValue,
+    eu.ID AS Value
+FROM 
+    EndUsers eu
+INNER JOIN 
+    DEPARTMENTS d ON eu.ID = d.DeptID
+INNER JOIN 
+    Companies c ON d.COMPID = c.COMPID
+INNER JOIN 
+    DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
+WHERE 
+    eu.EndUserType = 'Company'
+UNION ALL
+SELECT 
+    CONCAT(e.FirstName,' ', e.SecondName,' ', e.ThirdName,' ', e.LastName) AS DisplayValue,
+    e.EmployeeID AS Value
+FROM 
+    EndUsers eu
+INNER JOIN 
+    Employees e ON eu.ID = e.EmployeeID
+WHERE 
+    eu.EndUserType = 'Personal' ");
+                cmbcommenduser.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cmbcommenduser.AutoCompleteSource = AutoCompleteSource.ListItems;
+                cmbcommenduser.Text = "Select";
+
+
                 cmbReportType.Text = "Select";
+                SQLCONN.CloseConnection();
+                cmbcommenduser.Text = "Select";
             }
             if (tabControl1.SelectedTab == tabControl1.TabPages[2])
             {
