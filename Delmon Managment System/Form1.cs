@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net.Http;
@@ -43,11 +44,11 @@ namespace Delmon_Managment_System
             this.ControlBox = false;
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
         }
-        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
-        private extern static void ReleaseCapture();
+        //[DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        //private extern static void ReleaseCapture();
 
-        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
-        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
+        //[DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        //private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
 
         //Methods
         private Color SelectThemeColor()
@@ -74,32 +75,33 @@ namespace Delmon_Managment_System
         }
         private void DisableButton()
         {
-            foreach (Control previousBtn in panelMenu.Controls)
-            {
-                if (previousBtn.GetType() == typeof(Button))
-                {
-                  //  previousBtn.BackColor = Color.FromArgb(53, 52, 141);
-                    previousBtn.BackColor = Color.White;
-                    previousBtn.ForeColor = Color.FromArgb(53, 52, 141);
-                 //   previousBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                }
-            }
+        //    foreach (Control previousBtn in panelMenu.Controls)
+        //    {
+        //        if (previousBtn.GetType() == typeof(Button))
+        //        {
+        //          //  previousBtn.BackColor = Color.FromArgb(53, 52, 141);
+        //            previousBtn.BackColor = Color.White;
+        //            previousBtn.ForeColor = Color.FromArgb(53, 52, 141);
+        //         //   previousBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        //        }
+        //    }
         }
-        private void OpenChildForm(Form childForm, object btnSender)
+
+        private void OpenChildForm(Form childForm, object sender)
         {
             if (activeForm != null)
                 activeForm.Close();
-            ActivateButton(btnSender);
             activeForm = childForm;
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
             childForm.Dock = DockStyle.Fill;
-            this.panelDesktopPanel.Controls.Add(childForm);
-            this.panelDesktopPanel.Tag = childForm;
+            panelDesktopPanel.Controls.Add(childForm);
+            panelDesktopPanel.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
             lblTitle.Text = childForm.Text;
         }
+
         public void ShowNotification()
         {
             PopupNotifier Popup = new PopupNotifier();
@@ -214,7 +216,7 @@ GROUP BY
             lblTitle.Text = "HOME";
             panelTitleBar.BackColor = Color.FromArgb(178,34,34);
             lblTitle.BackColor = Color.FromArgb(178,34,34);
-            panelLogo.BackColor = Color.FromArgb(39, 39, 58);
+           // panelLogo.BackColor = Color.FromArgb(39, 39, 58);
             currentButton = null;
             btnCloseChildForm.Visible = false;
         }
@@ -224,11 +226,11 @@ GROUP BY
 
         }
 
-        private void panelTitleBar_MouseDown(object sender, MouseEventArgs e)
-        {
-            ReleaseCapture();
-            SendMessage(this.Handle, 0x112, 0xf012, 0);
-        }
+        //private void panelTitleBar_MouseDown(object sender, MouseEventArgs e)
+        //{
+        //    ReleaseCapture();
+        //    SendMessage(this.Handle, 0x112, 0xf012, 0);
+        //}
 
         private void BTNcLOSE_Click(object sender, EventArgs e)
         {
@@ -391,6 +393,58 @@ GROUP BY
             
             
         }
-      
+
+        private void visaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.VisaFrm(), sender);
+
+        }
+
+        private void personalInformationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.EmployeeForm(), sender);
+
+        }
+
+        private void reportsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.ReportFrm(), sender);
+
+        }
+
+        private void billsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.BillsFrm(), sender);
+
+        }
+
+        private void assetsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.AssetFrm(), sender);
+
+        }
+
+        private void tipsNewsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //successfully
+            // MessageBox.Show("Bills have been added successfully to the log Report  !\n", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //  MessageBox.Show("There is no notifications !\n", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("1-Design has been updated successfully !\n2- Asset Template uploded has been updated successfully !", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //  OpenChildForm(new Forms.NotificationFrm(), sender);
+
+        }
+
+        private void settingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.SettingFrm(), sender);
+        }
+
+        
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+
+        }
     }
 }

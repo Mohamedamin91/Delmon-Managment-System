@@ -1987,7 +1987,7 @@ ORDER BY
         private void btnDownload_Click(object sender, EventArgs e)
         {
             // Source file path
-            string sourceFilePath = @"\\192.168.1.15\Development\AssetImport.xlsx";
+            string sourceFilePath = @"\\192.168.1.15\Development\Temp\AssetImport.xlsx";
 
             // Destination file path in the Downloads folder
             string downloadsPath = GetDownloadsPath();
@@ -2420,7 +2420,7 @@ ORDER BY
         private void btnDownload2_Click(object sender, EventArgs e)
         {
             // Source file path
-            string sourceFilePath = @"\\192.168.1.15\Development\DetailsImport.xlsx";
+            string sourceFilePath = @"\\192.168.1.15\Development\Temp\DetailsImport.xlsx";
 
             // Destination file path in the Downloads folder
             string downloadsPath = GetDownloadsPath();

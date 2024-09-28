@@ -31,16 +31,6 @@ namespace Delmon_Managment_System
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMainMenu));
-            this.panelLogo = new System.Windows.Forms.Panel();
-            this.panelMenu = new System.Windows.Forms.Panel();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.btnNotifications = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.btnBilling = new System.Windows.Forms.Button();
-            this.btnprinting = new System.Windows.Forms.Button();
-            this.btnemployee = new System.Windows.Forms.Button();
-            this.btnvisa = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblFullname = new System.Windows.Forms.Label();
             this.lblPC = new System.Windows.Forms.Label();
@@ -56,201 +46,22 @@ namespace Delmon_Managment_System
             this.lblTitle = new System.Windows.Forms.Label();
             this.panelDesktopPanel = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.visaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.personalInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.billsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.assetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tipsNewsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.panelMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panelTitleBar.SuspendLayout();
             this.panelDesktopPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panelLogo
-            // 
-            this.panelLogo.BackColor = System.Drawing.Color.Firebrick;
-            this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelLogo.Location = new System.Drawing.Point(0, 0);
-            this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(200, 49);
-            this.panelLogo.TabIndex = 0;
-            // 
-            // panelMenu
-            // 
-            this.panelMenu.BackColor = System.Drawing.Color.White;
-            this.panelMenu.Controls.Add(this.button4);
-            this.panelMenu.Controls.Add(this.button2);
-            this.panelMenu.Controls.Add(this.btnNotifications);
-            this.panelMenu.Controls.Add(this.button3);
-            this.panelMenu.Controls.Add(this.btnBilling);
-            this.panelMenu.Controls.Add(this.btnprinting);
-            this.panelMenu.Controls.Add(this.btnemployee);
-            this.panelMenu.Controls.Add(this.btnvisa);
-            this.panelMenu.Controls.Add(this.panelLogo);
-            this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelMenu.Location = new System.Drawing.Point(0, 0);
-            this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(200, 1016);
-            this.panelMenu.TabIndex = 0;
-            // 
-            // button4
-            // 
-            this.button4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.button4.ForeColor = System.Drawing.Color.Navy;
-            this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
-            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.Location = new System.Drawing.Point(0, 487);
-            this.button4.Name = "button4";
-            this.button4.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.button4.Size = new System.Drawing.Size(200, 60);
-            this.button4.TabIndex = 174;
-            this.button4.Text = "Logout";
-            this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click_1);
-            // 
-            // button2
-            // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.button2.ForeColor = System.Drawing.Color.Navy;
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(0, 427);
-            this.button2.Name = "button2";
-            this.button2.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.button2.Size = new System.Drawing.Size(200, 60);
-            this.button2.TabIndex = 173;
-            this.button2.Text = "Setting";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_2);
-            // 
-            // btnNotifications
-            // 
-            this.btnNotifications.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnNotifications.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnNotifications.FlatAppearance.BorderSize = 0;
-            this.btnNotifications.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNotifications.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.btnNotifications.ForeColor = System.Drawing.Color.Navy;
-            this.btnNotifications.Image = ((System.Drawing.Image)(resources.GetObject("btnNotifications.Image")));
-            this.btnNotifications.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNotifications.Location = new System.Drawing.Point(0, 367);
-            this.btnNotifications.Name = "btnNotifications";
-            this.btnNotifications.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnNotifications.Size = new System.Drawing.Size(200, 60);
-            this.btnNotifications.TabIndex = 172;
-            this.btnNotifications.Text = " Tips / News";
-            this.btnNotifications.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNotifications.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnNotifications.UseVisualStyleBackColor = false;
-            this.btnNotifications.Click += new System.EventHandler(this.btnNotifications_Click_1);
-            // 
-            // button3
-            // 
-            this.button3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.button3.ForeColor = System.Drawing.Color.Navy;
-            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(0, 292);
-            this.button3.Name = "button3";
-            this.button3.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.button3.Size = new System.Drawing.Size(200, 75);
-            this.button3.TabIndex = 171;
-            this.button3.Text = "Asset";
-            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // btnBilling
-            // 
-            this.btnBilling.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnBilling.FlatAppearance.BorderSize = 0;
-            this.btnBilling.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBilling.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.btnBilling.ForeColor = System.Drawing.Color.Navy;
-            this.btnBilling.Image = ((System.Drawing.Image)(resources.GetObject("btnBilling.Image")));
-            this.btnBilling.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBilling.Location = new System.Drawing.Point(0, 232);
-            this.btnBilling.Name = "btnBilling";
-            this.btnBilling.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnBilling.Size = new System.Drawing.Size(200, 60);
-            this.btnBilling.TabIndex = 170;
-            this.btnBilling.Text = "  Bills";
-            this.btnBilling.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBilling.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnBilling.UseVisualStyleBackColor = true;
-            this.btnBilling.Click += new System.EventHandler(this.btnBilling_Click_1);
-            // 
-            // btnprinting
-            // 
-            this.btnprinting.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnprinting.FlatAppearance.BorderSize = 0;
-            this.btnprinting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnprinting.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.btnprinting.ForeColor = System.Drawing.Color.Navy;
-            this.btnprinting.Image = ((System.Drawing.Image)(resources.GetObject("btnprinting.Image")));
-            this.btnprinting.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnprinting.Location = new System.Drawing.Point(0, 171);
-            this.btnprinting.Name = "btnprinting";
-            this.btnprinting.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnprinting.Size = new System.Drawing.Size(200, 61);
-            this.btnprinting.TabIndex = 169;
-            this.btnprinting.Text = "Reports";
-            this.btnprinting.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnprinting.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnprinting.UseVisualStyleBackColor = true;
-            this.btnprinting.Click += new System.EventHandler(this.btnprinting_Click_1);
-            // 
-            // btnemployee
-            // 
-            this.btnemployee.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnemployee.FlatAppearance.BorderSize = 0;
-            this.btnemployee.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnemployee.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.btnemployee.ForeColor = System.Drawing.Color.Navy;
-            this.btnemployee.Image = ((System.Drawing.Image)(resources.GetObject("btnemployee.Image")));
-            this.btnemployee.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnemployee.Location = new System.Drawing.Point(0, 111);
-            this.btnemployee.Name = "btnemployee";
-            this.btnemployee.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnemployee.Size = new System.Drawing.Size(200, 60);
-            this.btnemployee.TabIndex = 168;
-            this.btnemployee.Text = "Personal Information";
-            this.btnemployee.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnemployee.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnemployee.UseVisualStyleBackColor = true;
-            this.btnemployee.Click += new System.EventHandler(this.btnemployee_Click_1);
-            // 
-            // btnvisa
-            // 
-            this.btnvisa.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnvisa.FlatAppearance.BorderSize = 0;
-            this.btnvisa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnvisa.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.btnvisa.ForeColor = System.Drawing.Color.Navy;
-            this.btnvisa.Image = ((System.Drawing.Image)(resources.GetObject("btnvisa.Image")));
-            this.btnvisa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnvisa.Location = new System.Drawing.Point(0, 49);
-            this.btnvisa.Name = "btnvisa";
-            this.btnvisa.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnvisa.Size = new System.Drawing.Size(200, 62);
-            this.btnvisa.TabIndex = 167;
-            this.btnvisa.Text = "  Visa";
-            this.btnvisa.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnvisa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnvisa.UseVisualStyleBackColor = true;
-            this.btnvisa.Click += new System.EventHandler(this.btnvisa_Click_1);
             // 
             // groupBox1
             // 
@@ -348,11 +159,10 @@ namespace Delmon_Managment_System
             this.panelTitleBar.Controls.Add(this.btnCloseChildForm);
             this.panelTitleBar.Controls.Add(this.lblTitle);
             this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTitleBar.Location = new System.Drawing.Point(200, 0);
+            this.panelTitleBar.Location = new System.Drawing.Point(0, 0);
             this.panelTitleBar.Name = "panelTitleBar";
-            this.panelTitleBar.Size = new System.Drawing.Size(961, 49);
+            this.panelTitleBar.Size = new System.Drawing.Size(1161, 49);
             this.panelTitleBar.TabIndex = 1;
-            this.panelTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitleBar_MouseDown);
             // 
             // btnMinum
             // 
@@ -361,7 +171,7 @@ namespace Delmon_Managment_System
             this.btnMinum.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMinum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMinum.ForeColor = System.Drawing.Color.White;
-            this.btnMinum.Location = new System.Drawing.Point(885, 1);
+            this.btnMinum.Location = new System.Drawing.Point(1085, 1);
             this.btnMinum.Name = "btnMinum";
             this.btnMinum.Size = new System.Drawing.Size(28, 40);
             this.btnMinum.TabIndex = 3;
@@ -376,7 +186,7 @@ namespace Delmon_Managment_System
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(836, 9);
+            this.button1.Location = new System.Drawing.Point(1036, 9);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(43, 24);
             this.button1.TabIndex = 2;
@@ -391,7 +201,7 @@ namespace Delmon_Managment_System
             this.BTNcLOSE.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNcLOSE.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTNcLOSE.ForeColor = System.Drawing.Color.White;
-            this.BTNcLOSE.Location = new System.Drawing.Point(919, 9);
+            this.BTNcLOSE.Location = new System.Drawing.Point(1119, 9);
             this.BTNcLOSE.Name = "BTNcLOSE";
             this.BTNcLOSE.Size = new System.Drawing.Size(43, 24);
             this.BTNcLOSE.TabIndex = 1;
@@ -418,7 +228,7 @@ namespace Delmon_Managment_System
             this.lblTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.lblTitle.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(306, 10);
+            this.lblTitle.Location = new System.Drawing.Point(406, 10);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(53, 17);
             this.lblTitle.TabIndex = 0;
@@ -429,10 +239,11 @@ namespace Delmon_Managment_System
             this.panelDesktopPanel.BackColor = System.Drawing.Color.White;
             this.panelDesktopPanel.Controls.Add(this.pictureBox1);
             this.panelDesktopPanel.Controls.Add(this.groupBox1);
+            this.panelDesktopPanel.Controls.Add(this.menuStrip1);
             this.panelDesktopPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelDesktopPanel.Location = new System.Drawing.Point(200, 49);
+            this.panelDesktopPanel.Location = new System.Drawing.Point(0, 49);
             this.panelDesktopPanel.Name = "panelDesktopPanel";
-            this.panelDesktopPanel.Size = new System.Drawing.Size(961, 967);
+            this.panelDesktopPanel.Size = new System.Drawing.Size(1161, 967);
             this.panelDesktopPanel.TabIndex = 2;
             this.panelDesktopPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panelDesktopPanel_Paint);
             // 
@@ -446,6 +257,88 @@ namespace Delmon_Managment_System
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.visaToolStripMenuItem,
+            this.personalInformationToolStripMenuItem,
+            this.reportsToolStripMenuItem,
+            this.billsToolStripMenuItem,
+            this.assetsToolStripMenuItem,
+            this.tipsNewsToolStripMenuItem,
+            this.settingToolStripMenuItem,
+            this.logoutToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1161, 25);
+            this.menuStrip1.TabIndex = 147;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // visaToolStripMenuItem
+            // 
+            this.visaToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
+            this.visaToolStripMenuItem.Name = "visaToolStripMenuItem";
+            this.visaToolStripMenuItem.Size = new System.Drawing.Size(51, 21);
+            this.visaToolStripMenuItem.Text = "Visa";
+            this.visaToolStripMenuItem.Click += new System.EventHandler(this.visaToolStripMenuItem_Click);
+            // 
+            // personalInformationToolStripMenuItem
+            // 
+            this.personalInformationToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
+            this.personalInformationToolStripMenuItem.Name = "personalInformationToolStripMenuItem";
+            this.personalInformationToolStripMenuItem.Size = new System.Drawing.Size(173, 21);
+            this.personalInformationToolStripMenuItem.Text = "Personal Information";
+            this.personalInformationToolStripMenuItem.Click += new System.EventHandler(this.personalInformationToolStripMenuItem_Click);
+            // 
+            // reportsToolStripMenuItem
+            // 
+            this.reportsToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
+            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(78, 21);
+            this.reportsToolStripMenuItem.Text = "Reports";
+            this.reportsToolStripMenuItem.Click += new System.EventHandler(this.reportsToolStripMenuItem_Click);
+            // 
+            // billsToolStripMenuItem
+            // 
+            this.billsToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
+            this.billsToolStripMenuItem.Name = "billsToolStripMenuItem";
+            this.billsToolStripMenuItem.Size = new System.Drawing.Size(51, 21);
+            this.billsToolStripMenuItem.Text = "Bills";
+            this.billsToolStripMenuItem.Click += new System.EventHandler(this.billsToolStripMenuItem_Click);
+            // 
+            // assetsToolStripMenuItem
+            // 
+            this.assetsToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
+            this.assetsToolStripMenuItem.Name = "assetsToolStripMenuItem";
+            this.assetsToolStripMenuItem.Size = new System.Drawing.Size(69, 21);
+            this.assetsToolStripMenuItem.Text = "Assets";
+            this.assetsToolStripMenuItem.Click += new System.EventHandler(this.assetsToolStripMenuItem_Click);
+            // 
+            // tipsNewsToolStripMenuItem
+            // 
+            this.tipsNewsToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
+            this.tipsNewsToolStripMenuItem.Name = "tipsNewsToolStripMenuItem";
+            this.tipsNewsToolStripMenuItem.Size = new System.Drawing.Size(102, 21);
+            this.tipsNewsToolStripMenuItem.Text = "Tips / News";
+            this.tipsNewsToolStripMenuItem.Click += new System.EventHandler(this.tipsNewsToolStripMenuItem_Click);
+            // 
+            // settingToolStripMenuItem
+            // 
+            this.settingToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
+            this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
+            this.settingToolStripMenuItem.Size = new System.Drawing.Size(71, 21);
+            this.settingToolStripMenuItem.Text = "Setting";
+            this.settingToolStripMenuItem.Click += new System.EventHandler(this.settingToolStripMenuItem_Click);
+            // 
+            // logoutToolStripMenuItem
+            // 
+            this.logoutToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
+            this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(70, 21);
+            this.logoutToolStripMenuItem.Text = "Logout";
+            this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
+            // 
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
@@ -454,33 +347,32 @@ namespace Delmon_Managment_System
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1161, 1016);
             this.Controls.Add(this.panelDesktopPanel);
             this.Controls.Add(this.panelTitleBar);
-            this.Controls.Add(this.panelMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.IsMdiContainer = true;
+            this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(900, 500);
             this.Name = "FormMainMenu";
             this.Text = "Main Menu";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.panelMenu.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panelTitleBar.ResumeLayout(false);
             this.panelTitleBar.PerformLayout();
             this.panelDesktopPanel.ResumeLayout(false);
+            this.panelDesktopPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panelLogo;
-        private System.Windows.Forms.Panel panelMenu;
         private System.Windows.Forms.Panel panelTitleBar;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Panel panelDesktopPanel;
@@ -497,14 +389,15 @@ namespace Delmon_Managment_System
         private System.Windows.Forms.Label lblusertype;
         private System.Windows.Forms.Timer timer1;
         public System.Windows.Forms.Label lblFullname;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button btnNotifications;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button btnBilling;
-        private System.Windows.Forms.Button btnprinting;
-        private System.Windows.Forms.Button btnemployee;
-        private System.Windows.Forms.Button btnvisa;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem visaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem personalInformationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem billsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem assetsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tipsNewsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem settingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
     }
 }
 

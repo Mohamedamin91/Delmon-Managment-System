@@ -347,7 +347,7 @@ namespace Delmon_Managment_System.Forms
             this.userTap.Location = new System.Drawing.Point(4, 26);
             this.userTap.Name = "userTap";
             this.userTap.Padding = new System.Windows.Forms.Padding(3);
-            this.userTap.Size = new System.Drawing.Size(1224, 720);
+            this.userTap.Size = new System.Drawing.Size(1224, 733);
             this.userTap.TabIndex = 0;
             this.userTap.Text = "Users";
             this.userTap.Click += new System.EventHandler(this.userTap_Click);
@@ -1785,7 +1785,7 @@ namespace Delmon_Managment_System.Forms
             this.jobsTap.Location = new System.Drawing.Point(4, 26);
             this.jobsTap.Name = "jobsTap";
             this.jobsTap.Padding = new System.Windows.Forms.Padding(3);
-            this.jobsTap.Size = new System.Drawing.Size(1224, 720);
+            this.jobsTap.Size = new System.Drawing.Size(1224, 733);
             this.jobsTap.TabIndex = 1;
             this.jobsTap.Text = "Jobs";
             this.jobsTap.Click += new System.EventHandler(this.jobsTap_Click);
@@ -3350,12 +3350,12 @@ namespace Delmon_Managment_System.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1358, 718);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SettingFrm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Setting ";
             this.Load += new System.EventHandler(this.SettingFrm_Load);
             this.tabControl1.ResumeLayout(false);
