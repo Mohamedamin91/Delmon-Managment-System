@@ -30,8 +30,8 @@ namespace Delmon_Managment_System.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VisaFrm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
@@ -48,30 +48,18 @@ namespace Delmon_Managment_System.Forms
             this.expairENDATEtxt = new System.Windows.Forms.TextBox();
             this.cmbCompany = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.cmbJob = new System.Windows.Forms.ComboBox();
-            this.label44 = new System.Windows.Forms.Label();
-            this.cmbConsulate = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.btnFinish = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.Remaininglbl = new System.Windows.Forms.Label();
             this.btnNew = new System.Windows.Forms.Button();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.DeleteBtn = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.ExpiaryHijritxt = new System.Windows.Forms.TextBox();
             this.issuhijritxt = new System.Windows.Forms.TextBox();
             this.ReceviedPicker = new System.Windows.Forms.DateTimePicker();
             this.Findbtn = new System.Windows.Forms.Button();
-            this.btnAssign = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.cmbcandidates = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.VisaFileNumberID = new System.Windows.Forms.TextBox();
             this.groupbox = new System.Windows.Forms.GroupBox();
             this.ChkUsedbx = new System.Windows.Forms.CheckBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -82,35 +70,40 @@ namespace Delmon_Managment_System.Forms
             this.picVisa = new System.Windows.Forms.PictureBox();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.btnwexpire = new System.Windows.Forms.Button();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.txtCRNumber = new System.Windows.Forms.TextBox();
             this.txtsponserID = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.cmbReservedTo = new System.Windows.Forms.ComboBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.cmbcandidates2 = new System.Windows.Forms.ComboBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
-            this.cmbAgency = new System.Windows.Forms.ComboBox();
-            this.btnnewJob = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.button3 = new System.Windows.Forms.Button();
             this.lbldatetime = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.VisaFileNumberID = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cmbcandidates = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.cmbConsulate = new System.Windows.Forms.ComboBox();
+            this.cmbJob = new System.Windows.Forms.ComboBox();
+            this.cmbStatus = new System.Windows.Forms.ComboBox();
+            this.btnAssign = new System.Windows.Forms.Button();
+            this.btnnewJob = new System.Windows.Forms.Button();
+            this.cmbAgency = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
+            this.cmbcandidates2 = new System.Windows.Forms.ComboBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.cmbReservedTo = new System.Windows.Forms.ComboBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picVisa)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -118,7 +111,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label1.Location = new System.Drawing.Point(18, 58);
+            this.label1.Location = new System.Drawing.Point(7, 58);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(101, 17);
@@ -129,7 +122,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label25.Location = new System.Drawing.Point(13, 167);
+            this.label25.Location = new System.Drawing.Point(7, 168);
             this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(176, 17);
@@ -198,7 +191,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label7.Location = new System.Drawing.Point(18, 195);
+            this.label7.Location = new System.Drawing.Point(7, 195);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(110, 17);
@@ -209,7 +202,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label9.Location = new System.Drawing.Point(18, 233);
+            this.label9.Location = new System.Drawing.Point(7, 233);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(74, 17);
@@ -286,113 +279,29 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label2.Location = new System.Drawing.Point(18, 85);
+            this.label2.Location = new System.Drawing.Point(7, 85);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(76, 17);
             this.label2.TabIndex = 35;
             this.label2.Text = "Company";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label5.Location = new System.Drawing.Point(18, 166);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(54, 17);
-            this.label5.TabIndex = 43;
-            this.label5.Text = "Status";
-            // 
-            // cmbStatus
-            // 
-            this.cmbStatus.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbStatus.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.cmbStatus.Enabled = false;
-            this.cmbStatus.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Location = new System.Drawing.Point(185, 163);
-            this.cmbStatus.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(277, 25);
-            this.cmbStatus.TabIndex = 42;
-            this.cmbStatus.DropDown += new System.EventHandler(this.cmbStatus_DropDown);
-            this.cmbStatus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cmbStatus_MouseDown);
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label10.Location = new System.Drawing.Point(18, 282);
+            this.label10.Location = new System.Drawing.Point(7, 282);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(83, 17);
             this.label10.TabIndex = 41;
             this.label10.Text = "Total Jobs";
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label8.Location = new System.Drawing.Point(20, 130);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(70, 17);
-            this.label8.TabIndex = 39;
-            this.label8.Text = "Visa Job";
-            // 
-            // cmbJob
-            // 
-            this.cmbJob.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbJob.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.cmbJob.Enabled = false;
-            this.cmbJob.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.cmbJob.FormattingEnabled = true;
-            this.cmbJob.Location = new System.Drawing.Point(185, 129);
-            this.cmbJob.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbJob.Name = "cmbJob";
-            this.cmbJob.Size = new System.Drawing.Size(278, 25);
-            this.cmbJob.TabIndex = 38;
-            this.cmbJob.DropDown += new System.EventHandler(this.cmbJob_DropDown);
-            this.cmbJob.SelectedIndexChanged += new System.EventHandler(this.cmbJob_SelectedIndexChanged);
-            this.cmbJob.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbAgency_KeyDown);
-            this.cmbJob.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbJob_KeyPress);
-            this.cmbJob.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cmbJob_MouseDown);
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label44.Location = new System.Drawing.Point(20, 101);
-            this.label44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(113, 17);
-            this.label44.TabIndex = 37;
-            this.label44.Text = "Consulate City";
-            this.label44.Click += new System.EventHandler(this.label4_Click);
-            // 
-            // cmbConsulate
-            // 
-            this.cmbConsulate.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbConsulate.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.cmbConsulate.Enabled = false;
-            this.cmbConsulate.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.cmbConsulate.FormattingEnabled = true;
-            this.cmbConsulate.Location = new System.Drawing.Point(185, 100);
-            this.cmbConsulate.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbConsulate.Name = "cmbConsulate";
-            this.cmbConsulate.Size = new System.Drawing.Size(155, 25);
-            this.cmbConsulate.TabIndex = 36;
-            this.cmbConsulate.DropDown += new System.EventHandler(this.cmbConsulate_DropDown);
-            this.cmbConsulate.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbConsulate_KeyDown);
-            this.cmbConsulate.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbConsulate_KeyPress);
-            this.cmbConsulate.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cmbConsulate_MouseDown);
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label12.Location = new System.Drawing.Point(18, 140);
+            this.label12.Location = new System.Drawing.Point(7, 140);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(105, 17);
@@ -450,7 +359,7 @@ namespace Delmon_Managment_System.Forms
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnNew.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnNew.Location = new System.Drawing.Point(465, 42);
+            this.btnNew.Location = new System.Drawing.Point(422, 42);
             this.btnNew.Margin = new System.Windows.Forms.Padding(4);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(55, 27);
@@ -458,21 +367,6 @@ namespace Delmon_Managment_System.Forms
             this.btnNew.Text = "New";
             this.btnNew.UseVisualStyleBackColor = false;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(674, 26);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView2.Name = "dataGridView2";
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView2.Size = new System.Drawing.Size(629, 190);
-            this.dataGridView2.TabIndex = 83;
-            this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
-            this.dataGridView2.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView2_RowHeaderMouseClick);
             // 
             // DeleteBtn
             // 
@@ -554,7 +448,7 @@ namespace Delmon_Managment_System.Forms
             this.Findbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Findbtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.Findbtn.ForeColor = System.Drawing.Color.Firebrick;
-            this.Findbtn.Location = new System.Drawing.Point(547, 42);
+            this.Findbtn.Location = new System.Drawing.Point(504, 42);
             this.Findbtn.Margin = new System.Windows.Forms.Padding(4);
             this.Findbtn.Name = "Findbtn";
             this.Findbtn.Size = new System.Drawing.Size(54, 27);
@@ -563,75 +457,6 @@ namespace Delmon_Managment_System.Forms
             this.Findbtn.UseVisualStyleBackColor = false;
             this.Findbtn.Visible = false;
             this.Findbtn.Click += new System.EventHandler(this.Findbtn_Click);
-            // 
-            // btnAssign
-            // 
-            this.btnAssign.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnAssign.BackColor = System.Drawing.Color.White;
-            this.btnAssign.Enabled = false;
-            this.btnAssign.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.btnAssign.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAssign.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.btnAssign.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnAssign.Location = new System.Drawing.Point(575, 233);
-            this.btnAssign.Margin = new System.Windows.Forms.Padding(4);
-            this.btnAssign.Name = "btnAssign";
-            this.btnAssign.Size = new System.Drawing.Size(67, 27);
-            this.btnAssign.TabIndex = 83;
-            this.btnAssign.Text = "Assign";
-            this.btnAssign.UseVisualStyleBackColor = false;
-            this.btnAssign.Visible = false;
-            this.btnAssign.Click += new System.EventHandler(this.btnAssign_Click);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label13.Location = new System.Drawing.Point(20, 241);
-            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(82, 17);
-            this.label13.TabIndex = 45;
-            this.label13.Text = "Candidate";
-            // 
-            // cmbcandidates
-            // 
-            this.cmbcandidates.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbcandidates.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.cmbcandidates.Enabled = false;
-            this.cmbcandidates.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.cmbcandidates.FormattingEnabled = true;
-            this.cmbcandidates.Location = new System.Drawing.Point(185, 233);
-            this.cmbcandidates.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbcandidates.Name = "cmbcandidates";
-            this.cmbcandidates.Size = new System.Drawing.Size(277, 25);
-            this.cmbcandidates.TabIndex = 44;
-            this.cmbcandidates.DropDown += new System.EventHandler(this.cmbcandidates_DropDown);
-            this.cmbcandidates.SelectedIndexChanged += new System.EventHandler(this.cmbcandidates_SelectedIndexChanged);
-            this.cmbcandidates.Click += new System.EventHandler(this.cmbcandidates_Click);
-            this.cmbcandidates.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbcandidates_KeyPress);
-            this.cmbcandidates.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cmbcandidates_MouseDown);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label4.Location = new System.Drawing.Point(20, 29);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(96, 17);
-            this.label4.TabIndex = 43;
-            this.label4.Text = "File Number";
-            // 
-            // VisaFileNumberID
-            // 
-            this.VisaFileNumberID.Enabled = false;
-            this.VisaFileNumberID.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.VisaFileNumberID.Location = new System.Drawing.Point(185, 26);
-            this.VisaFileNumberID.Margin = new System.Windows.Forms.Padding(4);
-            this.VisaFileNumberID.Name = "VisaFileNumberID";
-            this.VisaFileNumberID.Size = new System.Drawing.Size(116, 25);
-            this.VisaFileNumberID.TabIndex = 42;
             // 
             // groupbox
             // 
@@ -644,10 +469,6 @@ namespace Delmon_Managment_System.Forms
             this.groupbox.Controls.Add(this.picVisa);
             this.groupbox.Controls.Add(this.dataGridView3);
             this.groupbox.Controls.Add(this.btnwexpire);
-            this.groupbox.Controls.Add(this.label26);
-            this.groupbox.Controls.Add(this.label24);
-            this.groupbox.Controls.Add(this.label23);
-            this.groupbox.Controls.Add(this.label22);
             this.groupbox.Controls.Add(this.label18);
             this.groupbox.Controls.Add(this.txtCRNumber);
             this.groupbox.Controls.Add(this.txtsponserID);
@@ -712,7 +533,7 @@ namespace Delmon_Managment_System.Forms
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.label27.ForeColor = System.Drawing.Color.Black;
-            this.label27.Location = new System.Drawing.Point(18, 24);
+            this.label27.Location = new System.Drawing.Point(7, 24);
             this.label27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(61, 17);
@@ -773,8 +594,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView3.Location = new System.Drawing.Point(1311, 42);
             this.dataGridView3.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView3.Name = "dataGridView3";
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView3.Size = new System.Drawing.Size(257, 225);
             this.dataGridView3.TabIndex = 105;
             this.dataGridView3.Visible = false;
@@ -789,7 +610,7 @@ namespace Delmon_Managment_System.Forms
             this.btnwexpire.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnwexpire.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnwexpire.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnwexpire.Location = new System.Drawing.Point(528, 42);
+            this.btnwexpire.Location = new System.Drawing.Point(485, 42);
             this.btnwexpire.Margin = new System.Windows.Forms.Padding(4);
             this.btnwexpire.Name = "btnwexpire";
             this.btnwexpire.Size = new System.Drawing.Size(126, 27);
@@ -797,54 +618,6 @@ namespace Delmon_Managment_System.Forms
             this.btnwexpire.Text = "Expired soon";
             this.btnwexpire.UseVisualStyleBackColor = false;
             this.btnwexpire.Click += new System.EventHandler(this.btnwexpire_Click);
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.ForeColor = System.Drawing.Color.Firebrick;
-            this.label26.Location = new System.Drawing.Point(1, 85);
-            this.label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(18, 22);
-            this.label26.TabIndex = 103;
-            this.label26.Text = "*";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.ForeColor = System.Drawing.Color.Firebrick;
-            this.label24.Location = new System.Drawing.Point(1, 58);
-            this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(18, 22);
-            this.label24.TabIndex = 102;
-            this.label24.Text = "*";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.ForeColor = System.Drawing.Color.Firebrick;
-            this.label23.Location = new System.Drawing.Point(1, 167);
-            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(18, 22);
-            this.label23.TabIndex = 101;
-            this.label23.Text = "*";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.ForeColor = System.Drawing.Color.Firebrick;
-            this.label22.Location = new System.Drawing.Point(1, 281);
-            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(18, 22);
-            this.label22.TabIndex = 99;
-            this.label22.Text = "*";
             // 
             // label18
             // 
@@ -883,199 +656,12 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label17.Location = new System.Drawing.Point(18, 114);
+            this.label17.Location = new System.Drawing.Point(7, 114);
             this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(89, 17);
             this.label17.TabIndex = 87;
             this.label17.Text = "Sponser ID";
-            // 
-            // cmbReservedTo
-            // 
-            this.cmbReservedTo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbReservedTo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.cmbReservedTo.Enabled = false;
-            this.cmbReservedTo.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.cmbReservedTo.FormattingEnabled = true;
-            this.cmbReservedTo.Location = new System.Drawing.Point(185, 61);
-            this.cmbReservedTo.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbReservedTo.Name = "cmbReservedTo";
-            this.cmbReservedTo.Size = new System.Drawing.Size(322, 25);
-            this.cmbReservedTo.TabIndex = 87;
-            this.cmbReservedTo.DropDown += new System.EventHandler(this.cmbReservedTo_DropDown);
-            this.cmbReservedTo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cmbReservedTo_MouseDown);
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label16.Location = new System.Drawing.Point(20, 66);
-            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(100, 17);
-            this.label16.TabIndex = 88;
-            this.label16.Text = "Reserved To";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.label19);
-            this.groupBox3.Controls.Add(this.label20);
-            this.groupBox3.Controls.Add(this.label21);
-            this.groupBox3.Controls.Add(this.cmbReservedTo);
-            this.groupBox3.Controls.Add(this.label16);
-            this.groupBox3.Controls.Add(this.cmbcandidates2);
-            this.groupBox3.Controls.Add(this.label15);
-            this.groupBox3.Controls.Add(this.button2);
-            this.groupBox3.Controls.Add(this.label14);
-            this.groupBox3.Controls.Add(this.cmbAgency);
-            this.groupBox3.Controls.Add(this.btnnewJob);
-            this.groupBox3.Controls.Add(this.btnAssign);
-            this.groupBox3.Controls.Add(this.cmbStatus);
-            this.groupBox3.Controls.Add(this.cmbJob);
-            this.groupBox3.Controls.Add(this.cmbConsulate);
-            this.groupBox3.Controls.Add(this.label13);
-            this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Controls.Add(this.cmbcandidates);
-            this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Controls.Add(this.VisaFileNumberID);
-            this.groupBox3.Controls.Add(this.label8);
-            this.groupBox3.Controls.Add(this.label44);
-            this.groupBox3.Controls.Add(this.dataGridView2);
-            this.groupBox3.Enabled = false;
-            this.groupBox3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.groupBox3.Location = new System.Drawing.Point(12, 338);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1619, 333);
-            this.groupBox3.TabIndex = 90;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Visa JobList";
-            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.ForeColor = System.Drawing.Color.Firebrick;
-            this.label19.Location = new System.Drawing.Point(1, 169);
-            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(18, 22);
-            this.label19.TabIndex = 98;
-            this.label19.Text = "*";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.ForeColor = System.Drawing.Color.Firebrick;
-            this.label20.Location = new System.Drawing.Point(1, 133);
-            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(18, 22);
-            this.label20.TabIndex = 99;
-            this.label20.Text = "*";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.ForeColor = System.Drawing.Color.Firebrick;
-            this.label21.Location = new System.Drawing.Point(1, 104);
-            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(18, 22);
-            this.label21.TabIndex = 100;
-            this.label21.Text = "*";
-            // 
-            // cmbcandidates2
-            // 
-            this.cmbcandidates2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbcandidates2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.cmbcandidates2.Enabled = false;
-            this.cmbcandidates2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.cmbcandidates2.FormattingEnabled = true;
-            this.cmbcandidates2.Location = new System.Drawing.Point(185, 269);
-            this.cmbcandidates2.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbcandidates2.Name = "cmbcandidates2";
-            this.cmbcandidates2.Size = new System.Drawing.Size(277, 25);
-            this.cmbcandidates2.TabIndex = 89;
-            this.cmbcandidates2.Click += new System.EventHandler(this.cmbcandidates2_Click);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label15.Location = new System.Drawing.Point(20, 274);
-            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(150, 17);
-            this.label15.TabIndex = 88;
-            this.label15.Text = "Selected Candidate";
-            // 
-            // button2
-            // 
-            this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.Enabled = false;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.button2.ForeColor = System.Drawing.Color.Firebrick;
-            this.button2.Location = new System.Drawing.Point(575, 196);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(52, 29);
-            this.button2.TabIndex = 87;
-            this.button2.Text = "New";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label14.Location = new System.Drawing.Point(20, 197);
-            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(63, 17);
-            this.label14.TabIndex = 86;
-            this.label14.Text = "Agency";
-            // 
-            // cmbAgency
-            // 
-            this.cmbAgency.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbAgency.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.cmbAgency.Enabled = false;
-            this.cmbAgency.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.cmbAgency.FormattingEnabled = true;
-            this.cmbAgency.Location = new System.Drawing.Point(185, 196);
-            this.cmbAgency.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbAgency.Name = "cmbAgency";
-            this.cmbAgency.Size = new System.Drawing.Size(277, 25);
-            this.cmbAgency.TabIndex = 85;
-            this.cmbAgency.DropDown += new System.EventHandler(this.cmbAgency_DropDown);
-            this.cmbAgency.SelectedIndexChanged += new System.EventHandler(this.cmbAgency_SelectedIndexChanged);
-            this.cmbAgency.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbAgency_KeyDown);
-            this.cmbAgency.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbAgency_KeyPress);
-            this.cmbAgency.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cmbAgency_MouseDown);
-            // 
-            // btnnewJob
-            // 
-            this.btnnewJob.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnnewJob.BackColor = System.Drawing.Color.White;
-            this.btnnewJob.Enabled = false;
-            this.btnnewJob.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.btnnewJob.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnnewJob.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.btnnewJob.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnnewJob.Location = new System.Drawing.Point(576, 127);
-            this.btnnewJob.Margin = new System.Windows.Forms.Padding(4);
-            this.btnnewJob.Name = "btnnewJob";
-            this.btnnewJob.Size = new System.Drawing.Size(51, 32);
-            this.btnnewJob.TabIndex = 84;
-            this.btnnewJob.Text = "New";
-            this.btnnewJob.UseVisualStyleBackColor = false;
-            this.btnnewJob.Click += new System.EventHandler(this.btnnewJob_Click);
             // 
             // btnUpdate
             // 
@@ -1131,6 +717,322 @@ namespace Delmon_Managment_System.Forms
             this.lbldatetime.Text = "Date&Time";
             this.lbldatetime.Visible = false;
             // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(674, 26);
+            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView2.Name = "dataGridView2";
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridView2.Size = new System.Drawing.Size(629, 190);
+            this.dataGridView2.TabIndex = 83;
+            this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
+            this.dataGridView2.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView2_RowHeaderMouseClick);
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label44.Location = new System.Drawing.Point(7, 101);
+            this.label44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(113, 17);
+            this.label44.TabIndex = 37;
+            this.label44.Text = "Consulate City";
+            this.label44.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label8.Location = new System.Drawing.Point(7, 130);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(70, 17);
+            this.label8.TabIndex = 39;
+            this.label8.Text = "Visa Job";
+            // 
+            // VisaFileNumberID
+            // 
+            this.VisaFileNumberID.Enabled = false;
+            this.VisaFileNumberID.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.VisaFileNumberID.Location = new System.Drawing.Point(180, 26);
+            this.VisaFileNumberID.Margin = new System.Windows.Forms.Padding(4);
+            this.VisaFileNumberID.Name = "VisaFileNumberID";
+            this.VisaFileNumberID.Size = new System.Drawing.Size(116, 25);
+            this.VisaFileNumberID.TabIndex = 42;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label5.Location = new System.Drawing.Point(7, 166);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(54, 17);
+            this.label5.TabIndex = 43;
+            this.label5.Text = "Status";
+            // 
+            // cmbcandidates
+            // 
+            this.cmbcandidates.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbcandidates.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.cmbcandidates.Enabled = false;
+            this.cmbcandidates.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.cmbcandidates.FormattingEnabled = true;
+            this.cmbcandidates.Location = new System.Drawing.Point(180, 233);
+            this.cmbcandidates.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbcandidates.Name = "cmbcandidates";
+            this.cmbcandidates.Size = new System.Drawing.Size(277, 25);
+            this.cmbcandidates.TabIndex = 44;
+            this.cmbcandidates.DropDown += new System.EventHandler(this.cmbcandidates_DropDown);
+            this.cmbcandidates.SelectedIndexChanged += new System.EventHandler(this.cmbcandidates_SelectedIndexChanged);
+            this.cmbcandidates.Click += new System.EventHandler(this.cmbcandidates_Click);
+            this.cmbcandidates.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbcandidates_KeyPress);
+            this.cmbcandidates.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cmbcandidates_MouseDown);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label4.Location = new System.Drawing.Point(7, 29);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(96, 17);
+            this.label4.TabIndex = 43;
+            this.label4.Text = "File Number";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label13.Location = new System.Drawing.Point(7, 241);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(82, 17);
+            this.label13.TabIndex = 45;
+            this.label13.Text = "Candidate";
+            // 
+            // cmbConsulate
+            // 
+            this.cmbConsulate.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbConsulate.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.cmbConsulate.Enabled = false;
+            this.cmbConsulate.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.cmbConsulate.FormattingEnabled = true;
+            this.cmbConsulate.Location = new System.Drawing.Point(180, 100);
+            this.cmbConsulate.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbConsulate.Name = "cmbConsulate";
+            this.cmbConsulate.Size = new System.Drawing.Size(155, 25);
+            this.cmbConsulate.TabIndex = 36;
+            this.cmbConsulate.DropDown += new System.EventHandler(this.cmbConsulate_DropDown);
+            this.cmbConsulate.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbConsulate_KeyDown);
+            this.cmbConsulate.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbConsulate_KeyPress);
+            this.cmbConsulate.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cmbConsulate_MouseDown);
+            // 
+            // cmbJob
+            // 
+            this.cmbJob.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbJob.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.cmbJob.Enabled = false;
+            this.cmbJob.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.cmbJob.FormattingEnabled = true;
+            this.cmbJob.Location = new System.Drawing.Point(180, 129);
+            this.cmbJob.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbJob.Name = "cmbJob";
+            this.cmbJob.Size = new System.Drawing.Size(278, 25);
+            this.cmbJob.TabIndex = 38;
+            this.cmbJob.DropDown += new System.EventHandler(this.cmbJob_DropDown);
+            this.cmbJob.SelectedIndexChanged += new System.EventHandler(this.cmbJob_SelectedIndexChanged);
+            this.cmbJob.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbAgency_KeyDown);
+            this.cmbJob.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbJob_KeyPress);
+            this.cmbJob.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cmbJob_MouseDown);
+            // 
+            // cmbStatus
+            // 
+            this.cmbStatus.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbStatus.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.cmbStatus.Enabled = false;
+            this.cmbStatus.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.cmbStatus.FormattingEnabled = true;
+            this.cmbStatus.Location = new System.Drawing.Point(180, 163);
+            this.cmbStatus.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbStatus.Name = "cmbStatus";
+            this.cmbStatus.Size = new System.Drawing.Size(277, 25);
+            this.cmbStatus.TabIndex = 42;
+            this.cmbStatus.DropDown += new System.EventHandler(this.cmbStatus_DropDown);
+            this.cmbStatus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cmbStatus_MouseDown);
+            // 
+            // btnAssign
+            // 
+            this.btnAssign.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnAssign.BackColor = System.Drawing.Color.White;
+            this.btnAssign.Enabled = false;
+            this.btnAssign.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.btnAssign.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAssign.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.btnAssign.ForeColor = System.Drawing.Color.Firebrick;
+            this.btnAssign.Location = new System.Drawing.Point(469, 233);
+            this.btnAssign.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAssign.Name = "btnAssign";
+            this.btnAssign.Size = new System.Drawing.Size(67, 27);
+            this.btnAssign.TabIndex = 83;
+            this.btnAssign.Text = "Assign";
+            this.btnAssign.UseVisualStyleBackColor = false;
+            this.btnAssign.Visible = false;
+            this.btnAssign.Click += new System.EventHandler(this.btnAssign_Click);
+            // 
+            // btnnewJob
+            // 
+            this.btnnewJob.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnnewJob.BackColor = System.Drawing.Color.White;
+            this.btnnewJob.Enabled = false;
+            this.btnnewJob.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.btnnewJob.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnnewJob.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.btnnewJob.ForeColor = System.Drawing.Color.Firebrick;
+            this.btnnewJob.Location = new System.Drawing.Point(470, 127);
+            this.btnnewJob.Margin = new System.Windows.Forms.Padding(4);
+            this.btnnewJob.Name = "btnnewJob";
+            this.btnnewJob.Size = new System.Drawing.Size(51, 32);
+            this.btnnewJob.TabIndex = 84;
+            this.btnnewJob.Text = "New";
+            this.btnnewJob.UseVisualStyleBackColor = false;
+            this.btnnewJob.Click += new System.EventHandler(this.btnnewJob_Click);
+            // 
+            // cmbAgency
+            // 
+            this.cmbAgency.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbAgency.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.cmbAgency.Enabled = false;
+            this.cmbAgency.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.cmbAgency.FormattingEnabled = true;
+            this.cmbAgency.Location = new System.Drawing.Point(180, 196);
+            this.cmbAgency.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbAgency.Name = "cmbAgency";
+            this.cmbAgency.Size = new System.Drawing.Size(277, 25);
+            this.cmbAgency.TabIndex = 85;
+            this.cmbAgency.DropDown += new System.EventHandler(this.cmbAgency_DropDown);
+            this.cmbAgency.SelectedIndexChanged += new System.EventHandler(this.cmbAgency_SelectedIndexChanged);
+            this.cmbAgency.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbAgency_KeyDown);
+            this.cmbAgency.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbAgency_KeyPress);
+            this.cmbAgency.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cmbAgency_MouseDown);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label14.Location = new System.Drawing.Point(7, 197);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(63, 17);
+            this.label14.TabIndex = 86;
+            this.label14.Text = "Agency";
+            // 
+            // button2
+            // 
+            this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button2.BackColor = System.Drawing.Color.White;
+            this.button2.Enabled = false;
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button2.ForeColor = System.Drawing.Color.Firebrick;
+            this.button2.Location = new System.Drawing.Point(469, 196);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(52, 29);
+            this.button2.TabIndex = 87;
+            this.button2.Text = "New";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label15.Location = new System.Drawing.Point(7, 272);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(150, 17);
+            this.label15.TabIndex = 88;
+            this.label15.Text = "Selected Candidate";
+            // 
+            // cmbcandidates2
+            // 
+            this.cmbcandidates2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbcandidates2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.cmbcandidates2.Enabled = false;
+            this.cmbcandidates2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.cmbcandidates2.FormattingEnabled = true;
+            this.cmbcandidates2.Location = new System.Drawing.Point(180, 269);
+            this.cmbcandidates2.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbcandidates2.Name = "cmbcandidates2";
+            this.cmbcandidates2.Size = new System.Drawing.Size(277, 25);
+            this.cmbcandidates2.TabIndex = 89;
+            this.cmbcandidates2.Click += new System.EventHandler(this.cmbcandidates2_Click);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label16.Location = new System.Drawing.Point(7, 66);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(100, 17);
+            this.label16.TabIndex = 88;
+            this.label16.Text = "Reserved To";
+            // 
+            // cmbReservedTo
+            // 
+            this.cmbReservedTo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbReservedTo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.cmbReservedTo.Enabled = false;
+            this.cmbReservedTo.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.cmbReservedTo.FormattingEnabled = true;
+            this.cmbReservedTo.Location = new System.Drawing.Point(180, 61);
+            this.cmbReservedTo.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbReservedTo.Name = "cmbReservedTo";
+            this.cmbReservedTo.Size = new System.Drawing.Size(322, 25);
+            this.cmbReservedTo.TabIndex = 87;
+            this.cmbReservedTo.DropDown += new System.EventHandler(this.cmbReservedTo_DropDown);
+            this.cmbReservedTo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cmbReservedTo_MouseDown);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.cmbReservedTo);
+            this.groupBox3.Controls.Add(this.label16);
+            this.groupBox3.Controls.Add(this.cmbcandidates2);
+            this.groupBox3.Controls.Add(this.label15);
+            this.groupBox3.Controls.Add(this.button2);
+            this.groupBox3.Controls.Add(this.label14);
+            this.groupBox3.Controls.Add(this.cmbAgency);
+            this.groupBox3.Controls.Add(this.btnnewJob);
+            this.groupBox3.Controls.Add(this.btnAssign);
+            this.groupBox3.Controls.Add(this.cmbStatus);
+            this.groupBox3.Controls.Add(this.cmbJob);
+            this.groupBox3.Controls.Add(this.cmbConsulate);
+            this.groupBox3.Controls.Add(this.label13);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.cmbcandidates);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.VisaFileNumberID);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.label44);
+            this.groupBox3.Controls.Add(this.dataGridView2);
+            this.groupBox3.Enabled = false;
+            this.groupBox3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.groupBox3.Location = new System.Drawing.Point(12, 338);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(1619, 333);
+            this.groupBox3.TabIndex = 90;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Visa JobList";
+            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
+            // 
             // VisaFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1155,12 +1057,12 @@ namespace Delmon_Managment_System.Forms
             this.Text = "Search";
             this.Load += new System.EventHandler(this.VisaFrm_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.VisaFrm_KeyUp);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.groupbox.ResumeLayout(false);
             this.groupbox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picVisa)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
@@ -1185,55 +1087,27 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.ComboBox cmbCompany;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox cmbJob;
-        private System.Windows.Forms.Label label44;
-        private System.Windows.Forms.ComboBox cmbConsulate;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button btnFinish;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox cmbStatus;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label Remaininglbl;
         private System.Windows.Forms.Button btnNew;
-        private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Button DeleteBtn;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox ExpiaryHijritxt;
         private System.Windows.Forms.TextBox issuhijritxt;
         private System.Windows.Forms.DateTimePicker ReceviedPicker;
         private System.Windows.Forms.Button Findbtn;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ComboBox cmbcandidates;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox VisaFileNumberID;
-        private System.Windows.Forms.Button btnAssign;
         private System.Windows.Forms.GroupBox groupbox;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button btnnewJob;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.ComboBox cmbAgency;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.ComboBox cmbcandidates2;
-        private System.Windows.Forms.ComboBox cmbReservedTo;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox txtsponserID;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox txtCRNumber;
         private System.Windows.Forms.Button button3;
         public System.Windows.Forms.Label lbldatetime;
-        private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Button btnwexpire;
         private System.Windows.Forms.DataGridView dataGridView3;
         private System.Windows.Forms.Label txtvisa;
@@ -1243,5 +1117,26 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.TextBox Searchtxt;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.CheckBox ChkUsedbx;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox VisaFileNumberID;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cmbcandidates;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox cmbConsulate;
+        private System.Windows.Forms.ComboBox cmbJob;
+        private System.Windows.Forms.ComboBox cmbStatus;
+        private System.Windows.Forms.Button btnAssign;
+        private System.Windows.Forms.Button btnnewJob;
+        private System.Windows.Forms.ComboBox cmbAgency;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ComboBox cmbcandidates2;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ComboBox cmbReservedTo;
+        private System.Windows.Forms.GroupBox groupBox3;
     }
 }

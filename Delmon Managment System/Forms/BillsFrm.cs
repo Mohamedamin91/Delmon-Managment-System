@@ -78,10 +78,10 @@ namespace Delmon_Managment_System.Forms
             cmbenduserrpt.ValueMember = "Value";
             cmbenduserrpt.DisplayMember = "DisplayValue";
             cmbenduserrpt.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT 
-  distinct  CONCAT(e.FirstName,' ', e.SecondName,' ', e.ThirdName,' ', e.LastName) AS DisplayValue, d.DeptHeadID As Value
+  distinct  CONCAT(e.FirstName,' ',e.LastName) AS DisplayValue, d.DeptHeadID As Value
 	from Employees e, DEPARTMENTS d
 	where e.EmployeeID = d.DeptHeadID
-	and CONCAT(e.FirstName,' ', e.SecondName,' ', e.ThirdName,' ', e.LastName) != 'Select'; ");
+	and CONCAT(e.FirstName,' ',e.LastName) != 'Select'; ");
             cmbenduserrpt.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbenduserrpt.AutoCompleteSource = AutoCompleteSource.ListItems;
             cmbenduserrpt.Text = "Select";
@@ -2185,13 +2185,13 @@ WHERE
 	dt.Dept_Type_Name as Divison,
     COALESCE(
         CASE 
-            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +'' + hod.SecondName+''+hod.ThirdName+''+hod.LastName
-            WHEN eu.EndUserType = 'Personal' THEN (SELECT FirstName +' ' + SecondName+' '+ThirdName+' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
+            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +''+hod.LastName
+            WHEN eu.EndUserType = 'Personal' THEN (SELECT FirstName +' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
         END, 'Unknown') AS Approvedby,
 
     CASE 
         WHEN eu.EndUserType = 'Company' THEN concat (c.ShortCompName,' / ',dt.Dept_Type_Name)
-        WHEN eu.EndUserType = 'Personal' THEN concat (e.FirstName,' ', e.SecondName,' ', e.ThirdName,' ', e.LastName)
+        WHEN eu.EndUserType = 'Personal' THEN concat (e.FirstName,' ', e.LastName)
     END AS EndUserName,
     eu.ID AS EndUserID
 
@@ -2235,19 +2235,21 @@ FROM
     bps.AccountNo,
     bps.BillType,
     bps.IssuedDate,
+	Ml.Meterlocation as Location,
+
     CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
     bps.BillAmount,
     dt.Dept_Type_Name as Divison,
 
     COALESCE(
         CASE 
-            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +'' + hod.SecondName+''+hod.ThirdName+''+hod.LastName
-            WHEN eu.EndUserType = 'Personal' THEN (SELECT FirstName +' ' + SecondName+' '+ThirdName+' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
+            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +''+hod.LastName
+            WHEN eu.EndUserType = 'Personal' THEN (SELECT FirstName +' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
         END, 'Unknown') AS Approvedby,
 
     CASE 
         WHEN eu.EndUserType = 'Company' THEN concat (c.ShortCompName,' / ',dt.Dept_Type_Name)
-        WHEN eu.EndUserType = 'Personal' THEN concat (e.FirstName,' ', e.SecondName,' ', e.ThirdName,' ', e.LastName)
+        WHEN eu.EndUserType = 'Personal' THEN concat (e.FirstName,' ', e.LastName)
     END AS EndUserName,
     eu.ID AS EndUserID
 
@@ -2261,6 +2263,7 @@ FROM
   LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
   LEFT JOIN Companies c ON d1.COMPID = c.COMPID
   LEFT JOIN Employees hod ON eu.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
+  LEFT JOIN Meterlocations ML ON eb.MeterLocationID = ML.MeterLocationID
 
   where 
 
@@ -2311,13 +2314,13 @@ FROM
 	dt.Dept_Type_Name as Divison,
     COALESCE(
         CASE 
-            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +'' + hod.SecondName+''+hod.ThirdName+''+hod.LastName
-            WHEN eu.EndUserType = 'Personal' THEN (SELECT FirstName +' ' + SecondName+' '+ThirdName+' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
+            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +''+hod.LastName
+            WHEN eu.EndUserType = 'Personal' THEN (SELECT FirstName +' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
         END, 'Unknown') AS Approvedby,
 
     CASE 
         WHEN eu.EndUserType = 'Company' THEN concat (c.ShortCompName,' / ',dt.Dept_Type_Name)
-        WHEN eu.EndUserType = 'Personal' THEN concat (e.FirstName,' ', e.SecondName,' ', e.ThirdName,' ', e.LastName)
+        WHEN eu.EndUserType = 'Personal' THEN concat (e.FirstName,' ', e.LastName)
     END AS EndUserName,
     eu.ID AS EndUserID
 
@@ -2358,19 +2361,21 @@ FROM
     bps.AccountNo,
     bps.BillType,
     bps.IssuedDate,
+	Ml.Meterlocation as Location,
+
     CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
     bps.BillAmount,
     dt.Dept_Type_Name as Divison,
 
     COALESCE(
         CASE 
-            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +'' + hod.SecondName+''+hod.ThirdName+''+hod.LastName
-            WHEN eu.EndUserType = 'Personal' THEN (SELECT FirstName +' ' + SecondName+' '+ThirdName+' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
+            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +''+hod.LastName
+            WHEN eu.EndUserType = 'Personal' THEN (SELECT FirstName +' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
         END, 'Unknown') AS Approvedby,
 
     CASE 
         WHEN eu.EndUserType = 'Company' THEN concat (c.ShortCompName,' / ',dt.Dept_Type_Name)
-        WHEN eu.EndUserType = 'Personal' THEN concat (e.FirstName,' ', e.SecondName,' ', e.ThirdName,' ', e.LastName)
+        WHEN eu.EndUserType = 'Personal' THEN concat (e.FirstName,' ', e.LastName)
     END AS EndUserName,
     eu.ID AS EndUserID
 
@@ -2384,6 +2389,7 @@ FROM
   LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
   LEFT JOIN Companies c ON d1.COMPID = c.COMPID
   LEFT JOIN Employees hod ON eu.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
+  LEFT JOIN Meterlocations ML ON eb.MeterLocationID = ML.MeterLocationID
 
   where 
 
@@ -3197,13 +3203,13 @@ FROM
 	dt.Dept_Type_Name as Divison,
     COALESCE(
         CASE 
-            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +'' + hod.SecondName+''+hod.ThirdName+''+hod.LastName
-            WHEN eu.EndUserType = 'Personal' THEN (SELECT FirstName +' ' + SecondName+' '+ThirdName+' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
+            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +''+hod.LastName
+            WHEN eu.EndUserType = 'Personal' THEN (SELECT FirstName +' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
         END, 'Unknown') AS Approvedby,
 
     CASE 
         WHEN eu.EndUserType = 'Company' THEN concat (c.ShortCompName,' / ',dt.Dept_Type_Name)
-        WHEN eu.EndUserType = 'Personal' THEN concat (e.FirstName,' ', e.SecondName,' ', e.ThirdName,' ', e.LastName)
+        WHEN eu.EndUserType = 'Personal' THEN concat (e.FirstName,' ', e.LastName)
     END AS EndUserName,
     eu.ID AS EndUserID
 
@@ -3233,19 +3239,20 @@ FROM
     bps.AccountNo,
     bps.BillType,
     bps.IssuedDate,
+	Ml.Meterlocation as Location,
     CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
     bps.BillAmount,
     dt.Dept_Type_Name as Divison,
 
     COALESCE(
         CASE 
-            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +'' + hod.SecondName+''+hod.ThirdName+''+hod.LastName
-            WHEN eu.EndUserType = 'Personal' THEN (SELECT FirstName +' ' + SecondName+' '+ThirdName+' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
+            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +''+hod.LastName
+            WHEN eu.EndUserType = 'Personal' THEN (SELECT FirstName +' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
         END, 'Unknown') AS Approvedby,
 
     CASE 
         WHEN eu.EndUserType = 'Company' THEN concat (c.ShortCompName,' / ',dt.Dept_Type_Name)
-        WHEN eu.EndUserType = 'Personal' THEN concat (e.FirstName,' ', e.SecondName,' ', e.ThirdName,' ', e.LastName)
+        WHEN eu.EndUserType = 'Personal' THEN concat (e.FirstName,' ',e.LastName)
     END AS EndUserName,
     eu.ID AS EndUserID
 
@@ -3259,6 +3266,7 @@ FROM
   LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
   LEFT JOIN Companies c ON d1.COMPID = c.COMPID
   LEFT JOIN Employees hod ON eu.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
+  LEFT JOIN Meterlocations ML ON eb.MeterLocationID = ML.MeterLocationID
 
   where 
 
@@ -3292,13 +3300,13 @@ FROM
 	dt.Dept_Type_Name as Divison,
     COALESCE(
         CASE 
-            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +'' + hod.SecondName+''+hod.ThirdName+''+hod.LastName
-            WHEN eu.EndUserType = 'Personal' THEN (SELECT FirstName +' ' + SecondName+' '+ThirdName+' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
+            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +''+hod.LastName
+            WHEN eu.EndUserType = 'Personal' THEN (SELECT FirstName +' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
         END, 'Unknown') AS Approvedby,
 
     CASE 
         WHEN eu.EndUserType = 'Company' THEN concat (c.ShortCompName,' / ',dt.Dept_Type_Name)
-        WHEN eu.EndUserType = 'Personal' THEN concat (e.FirstName,' ', e.SecondName,' ', e.ThirdName,' ', e.LastName)
+        WHEN eu.EndUserType = 'Personal' THEN concat (e.FirstName,' ', e.LastName)
     END AS EndUserName,
     eu.ID AS EndUserID
 
@@ -3332,19 +3340,20 @@ FROM
     bps.AccountNo,
     bps.BillType,
     bps.IssuedDate,
+	Ml.Meterlocation as Location,
     CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
     bps.BillAmount,
     dt.Dept_Type_Name as Divison,
 
     COALESCE(
         CASE 
-            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +'' + hod.SecondName+''+hod.ThirdName+''+hod.LastName
-            WHEN eu.EndUserType = 'Personal' THEN (SELECT FirstName +' ' + SecondName+' '+ThirdName+' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
+            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +''+hod.LastName
+            WHEN eu.EndUserType = 'Personal' THEN (SELECT FirstName +' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
         END, 'Unknown') AS Approvedby,
 
     CASE 
         WHEN eu.EndUserType = 'Company' THEN concat (c.ShortCompName,' / ',dt.Dept_Type_Name)
-        WHEN eu.EndUserType = 'Personal' THEN concat (e.FirstName,' ', e.SecondName,' ', e.ThirdName,' ', e.LastName)
+        WHEN eu.EndUserType = 'Personal' THEN concat (e.FirstName,' ',e.LastName)
     END AS EndUserName,
     eu.ID AS EndUserID
 
@@ -3358,6 +3367,7 @@ FROM
   LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
   LEFT JOIN Companies c ON d1.COMPID = c.COMPID
   LEFT JOIN Employees hod ON eu.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
+  LEFT JOIN Meterlocations ML ON eb.MeterLocationID = ML.MeterLocationID
 
   where 
 

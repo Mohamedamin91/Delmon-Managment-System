@@ -68,11 +68,7 @@ namespace Delmon_Managment_System.Forms
 
             //  cmbPersonalStatusStatus.KeyPress += cmbPersonalStatusStatus_KeyPress;
 
-            // Loop through all controls on the form and change their font properties
-            foreach (Control control in Controls)
-            {
-                //     control.Font = newFont;
-            }
+         
 
 
 

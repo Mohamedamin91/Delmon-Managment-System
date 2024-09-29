@@ -91,7 +91,7 @@ namespace Delmon_Managment_System.Forms
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.label1.Location = new System.Drawing.Point(75, 9);
+            this.label1.Location = new System.Drawing.Point(84, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(104, 17);
             this.label1.TabIndex = 13;
