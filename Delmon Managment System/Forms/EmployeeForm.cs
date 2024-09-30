@@ -57,6 +57,9 @@ namespace Delmon_Managment_System.Forms
         {
 
             InitializeComponent();
+            this.Dock = DockStyle.Fill;
+            this.TopLevel = false;
+
             //next and previous
 
 
@@ -300,6 +303,7 @@ namespace Delmon_Managment_System.Forms
 
 
                 cmbPersonalStatusStatus.Text = "Select";
+                cmbnationality.Text = "Select";
                 cmbempdepthistory.Text = "Select";
                 CurrentEmployeeIDtxt.Enabled = true;
 

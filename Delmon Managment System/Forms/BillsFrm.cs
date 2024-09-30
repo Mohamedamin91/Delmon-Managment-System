@@ -1846,6 +1846,8 @@ WHERE
                 
                 cmbBillType1.Text = "Select";
                 cmbenduserrpt.Text = "Select";
+                cmbendtype.Text = "All";
+
 
             }
         }
@@ -2143,6 +2145,9 @@ WHERE
             SqlParameter paramPaymentStauts = new SqlParameter("@paramPaymentStauts", SqlDbType.NVarChar);
             SqlParameter paramEnduserID = new SqlParameter("@paramEnduserID", SqlDbType.NVarChar);
             paramEnduserID.Value = cmbenduserrpt.SelectedValue;
+            SqlParameter paramEnduserType = new SqlParameter("@paramEnduserType", SqlDbType.NVarChar);
+            paramEnduserType.Value = cmbendtype.SelectedItem;
+
 
             SqlParameter paramFrom = new SqlParameter("@paramFrom", SqlDbType.Date);
             paramFrom.Value = dtpfromreport.Value.ToString("yyyy-MM-dd");
@@ -2165,6 +2170,7 @@ WHERE
                     MessageBox.Show("Please Select Enduser ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+               
 
                 //unpaid
                 if (cbunpaid.Checked == true)
@@ -2175,7 +2181,7 @@ WHERE
 
                     if (cmbBillType1.Text == "Communication")
                     {
-                        string queryCommuni = @"  SELECT 
+                        string queryCommuni = @" SELECT 
      bps.AccountNo,
      bps.BillType,
     cb.ServiceNo,
@@ -2210,7 +2216,17 @@ FROM
 
   bps.BillType=@paramBillType
   AND bps.PaymentStatus=0
-  AND d2.DeptHeadID= @paramEnduserID ";
+  AND CASE 
+        WHEN eu.EndUserType = 'Company' THEN d1.DeptHeadID
+        WHEN eu.EndUserType = 'Personal' THEN d2.DeptHeadID
+        ELSE d2.DeptHeadID
+      END = @paramEnduserID
+";
+
+                        if (cmbendtype.SelectedItem.ToString() != "All")
+                        {
+                            queryCommuni += " AND eu.EndUserType = @paramEnduserType";
+                        }
                         // Modify query based on the selected filter option
                         if (rbTop5Amount.Checked)
                         {
@@ -2269,7 +2285,21 @@ FROM
 
   bps.BillType=@paramBillType
   AND bps.PaymentStatus=0
-  AND d2.DeptHeadID=  @paramEnduserID ";
+  AND CASE 
+        WHEN eu.EndUserType = 'Company' THEN d1.DeptHeadID
+        WHEN eu.EndUserType = 'Personal' THEN d2.DeptHeadID
+        ELSE d2.DeptHeadID
+      END = @paramEnduserID
+   ";
+
+
+                        if (cmbendtype.SelectedItem.ToString() != "All")
+                        {
+                            queryElectrcity += " AND eu.EndUserType = @paramEnduserType";
+                        }
+                        
+
+
                         if (rbTop5Amount.Checked)
                         {
                             queryElectrcity += " ORDER BY bps.BillAmount DESC OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY";
@@ -2282,12 +2312,22 @@ FROM
                         // Check if the query is not empty before executing it
                         if (!string.IsNullOrWhiteSpace(queryElectrcity))
                         {
-                            dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(queryElectrcity, paramBillType, paramPaymentStauts, paramEnduserID);
+                            if (cmbendtype.SelectedItem.ToString() != "All")
+                            {
+                                dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(queryElectrcity, paramBillType, paramPaymentStauts, paramEnduserID, paramEnduserType);
+                            }
+                            else 
+                            {
+                                dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(queryElectrcity, paramBillType, paramPaymentStauts, paramEnduserID);
 
+                            }
                         }
                     }
 
                 }
+        
+                
+                
                 //paid
                 else
                 {
@@ -2338,12 +2378,20 @@ FROM
   where 
 
   bps.BillType=@paramBillType
-  AND d2.DeptHeadID =  @paramEnduserID
   AND CONVERT(DATE, bps.DisconnectDate) >= @paramFrom 
   AND CONVERT(DATE, bps.DisconnectDate) <= @paramTo
   AND bps.AccountNo= @paramAccount 
+  AND CASE 
+        WHEN eu.EndUserType = 'Company' THEN d1.DeptHeadID
+        WHEN eu.EndUserType = 'Personal' THEN d2.DeptHeadID
+        ELSE d2.DeptHeadID
+      END = @paramEnduserID
 "
     ;
+                            if (cmbendtype.SelectedItem.ToString() != "All")
+                            {
+                                queryCommuni += " AND eu.EndUserType = @paramEnduserType";
+                            }
                             if (txtAccountNumbe.Text == "")
                             {
                                 MessageBox.Show("please Fill the missing fields");
@@ -2394,11 +2442,19 @@ FROM
   where 
 
   bps.BillType=@paramBillType
-  AND d2.DeptHeadID
   AND CONVERT(DATE, bps.DisconnectDate) >= @paramFrom 
   AND CONVERT(DATE, bps.DisconnectDate) <= @paramTo
-  AND bps.AccountNo= @paramAccount 
+  AND bps.AccountNo= @paramAccount
+ AND CASE 
+        WHEN eu.EndUserType = 'Company' THEN d1.DeptHeadID
+        WHEN eu.EndUserType = 'Personal' THEN d2.DeptHeadID
+        ELSE d2.DeptHeadID
+      END = @paramEnduserID
 ";
+                            if (cmbendtype.SelectedItem.ToString() != "All")
+                            {
+                                queryElectrcity += " AND eu.EndUserType = @paramEnduserType";
+                            }
                             if (txtAccountNumbe.Text == "")
                             {
                                 MessageBox.Show("please Fill the missing fields");
@@ -2412,7 +2468,6 @@ FROM
                     }
                   }
 
-           //     cmbBillType1.Text = cmbbillenduser.Text = "Select";
 
             }
 
@@ -3148,7 +3203,7 @@ FROM
             }
 
         }
-
+     //   I want to add this line for the queries   eu.EndUserType = @paramEnduserType and if cmbendtype.SelectedItem = 'Select' remove the condition
         private void button20_Click(object sender, EventArgs e)
         {
             dataGridView5.Visible = false;
@@ -3162,6 +3217,8 @@ FROM
             SqlParameter paramPaymentStauts = new SqlParameter("@paramPaymentStauts", SqlDbType.NVarChar);
             SqlParameter paramEnduserID = new SqlParameter("@paramEnduserID", SqlDbType.NVarChar);
             paramEnduserID.Value = cmbenduserrpt.SelectedValue;
+            SqlParameter paramEnduserType = new SqlParameter("@paramEnduserType", SqlDbType.NVarChar);
+            paramEnduserType.Value = cmbendtype.SelectedItem;
 
             SqlParameter paramFrom = new SqlParameter("@paramFrom", SqlDbType.Date);
             paramFrom.Value = dtpfromreport.Value.ToString("yyyy-MM-dd");
@@ -3229,7 +3286,11 @@ FROM
 
   bps.BillType=@paramBillType
   AND bps.PaymentStatus=0
-  AND d2.DeptHeadID =  @paramEnduserID ";
+ AND CASE 
+        WHEN eu.EndUserType = 'Company' THEN d1.DeptHeadID
+        WHEN eu.EndUserType = 'Personal' THEN d2.DeptHeadID
+        ELSE d2.DeptHeadID
+      END = @paramEnduserID ";
 
                     }
                     //Electrcity
@@ -3251,7 +3312,7 @@ FROM
         END, 'Unknown') AS Approvedby,
 
     CASE 
-        WHEN eu.EndUserType = 'Company' THEN concat (c.ShortCompName,' / ',dt.Dept_Type_Name)
+        WHEN eu.EndUserType = 'Company' THEN concat (c.ShortCompName,'/',dt.Dept_Type_Name)
         WHEN eu.EndUserType = 'Personal' THEN concat (e.FirstName,' ',e.LastName)
     END AS EndUserName,
     eu.ID AS EndUserID
@@ -3272,7 +3333,12 @@ FROM
 
   bps.BillType=@paramBillType
   AND bps.PaymentStatus=0
-  AND d2.DeptHeadID =  @paramEnduserID ";
+ AND CASE 
+        WHEN eu.EndUserType = 'Company' THEN d1.DeptHeadID
+        WHEN eu.EndUserType = 'Personal' THEN d2.DeptHeadID
+        ELSE d2.DeptHeadID
+      END = @paramEnduserID 
+";
 
                     }
                 }
@@ -3324,10 +3390,14 @@ FROM
   where 
 
   bps.BillType=@paramBillType
-  AND d2.DeptHeadID=  @paramEnduserID
   AND CONVERT(DATE, bps.DisconnectDate) >= @paramFrom 
   AND CONVERT(DATE, bps.DisconnectDate) <= @paramTo
-  AND bps.AccountNo= @paramAccount 
+  AND bps.AccountNo= @paramAccount
+ AND CASE 
+        WHEN eu.EndUserType = 'Company' THEN d1.DeptHeadID
+        WHEN eu.EndUserType = 'Personal' THEN d2.DeptHeadID
+        ELSE d2.DeptHeadID
+      END = @paramEnduserID
 "
    ;
 
@@ -3372,10 +3442,14 @@ FROM
   where 
 
   bps.BillType=@paramBillType
-  AND d2.DeptHeadID=  @paramEnduserID
   AND CONVERT(DATE, bps.DisconnectDate) >= @paramFrom 
   AND CONVERT(DATE, bps.DisconnectDate) <= @paramTo
   AND bps.AccountNo= @paramAccount 
+ AND CASE 
+        WHEN eu.EndUserType = 'Company' THEN d1.DeptHeadID
+        WHEN eu.EndUserType = 'Personal' THEN d2.DeptHeadID
+        ELSE d2.DeptHeadID
+      END = @paramEnduserID
 ";
 
                         }
@@ -3383,6 +3457,10 @@ FROM
                     }
                     }
 
+                if (cmbendtype.SelectedItem.ToString() != "All")
+                {
+                    query += " AND eu.EndUserType = @paramEnduserType";
+                }
                 // Modify query based on the selected filter option
                 if (rbTop5Amount.Checked)
                 {
@@ -3430,6 +3508,18 @@ FROM
                             {
                                 cmd.Parameters.AddWithValue("@paramEnduserID", cmbenduserrpt.SelectedValue);
                             }
+
+                            if (query.Contains("@paramEnduserType"))
+                            {
+                                cmd.Parameters.AddWithValue("@paramEnduserType", cmbendtype.SelectedItem);
+                            }
+
+
+                         
+
+
+
+
 
                             SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                             adapter.Fill(dataTable);
@@ -3502,6 +3592,14 @@ FROM
                         report.SetParameterValue("@paramEnduserID", cmbenduserrpt.SelectedValue);
                     }
 
+
+                    if (query.Contains("@paramEnduserType"))
+                    {
+                        report.SetParameterValue("@paramEnduserType", cmbendtype.SelectedItem.ToString());
+                    }
+
+
+                   
 
 
                     // Display the report in the viewer

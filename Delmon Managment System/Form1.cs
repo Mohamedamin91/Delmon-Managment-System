@@ -30,6 +30,10 @@ namespace Delmon_Managment_System
         public FormMainMenu()
         {
             InitializeComponent();
+            menuStrip1.Location = new Point(0, 0);
+
+            panelDesktopPanel.Dock = DockStyle.Fill;
+            menuStrip1.Dock = DockStyle.Top;
 
             Font newFont = new Font("Times New Roman", 12);
 
