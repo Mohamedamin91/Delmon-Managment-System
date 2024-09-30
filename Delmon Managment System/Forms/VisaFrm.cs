@@ -1931,12 +1931,19 @@ namespace Delmon_Managment_System.Forms
                     if ((int)cmbcandidates.SelectedIndex == -1)
                     {
 
+
+                        SQLCONN.ExecuteQueries("update VISA set Remarks=@C10 where VisaNumber=@C3", paramRemarks,paramVisanumber);
+
+
                         SQLCONN.ExecuteQueries("update VISAJobList set StatusID=@C4,[EmployeeID]=@C9,AgencyID=@C7 ,[ConsulateID] = @C5,[JobID] = @C6 ,ReservedTo=@CompReservedTo  where FileNumber=@FileNumberid",
                        paramstatusID, paramCandidate2, paramAgency, ParamConsulate, paramJob, paramReservedTo, paramFileNumberID, paramRemarks);
 
                     }
                     else
+
                     {
+                        SQLCONN.ExecuteQueries("update VISA set Remarks=@C10 where VisaNumber=@C3", paramRemarks, paramVisanumber);
+
                         SQLCONN.ExecuteQueries("update VISAJobList set StatusID=@C4,[EmployeeID]=@C8,AgencyID=@C7 ,[ConsulateID] = @C5,[JobID] = @C6 ,ReservedTo=@CompReservedTo where FileNumber=@FileNumberid",
                      paramstatusID, paramCandidate, paramAgency, ParamConsulate, paramJob, paramReservedTo, paramFileNumberID, paramRemarks);
 
@@ -1991,8 +1998,24 @@ namespace Delmon_Managment_System.Forms
                     }
 
 
+                    string query = @"SELECT  [VisaNumber]
+      ,[ComapnyID]
+      ,[ReceviedDate]
+      ,[IssueDateHijri]
+      ,[IssueDateEN]
+      ,[ExpiryDateHijri]
+      ,[ExpiryDateEN]
+      ,[TotalVisas]
+      ,[Remarks]
+      ,[UserID]
+      ,[DatetimeLOG]
+      ,[CRNumber]
+      ,[ID_Number]
+       FROM [DelmonGroupDB].[dbo].[VISA], [Companies] where Companies.COMPID=VISA.ComapnyID and VisaNumber=@C3  ";
 
-                    dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from VISAJobList where FileNumber = '" + FileNumberID + "'");
+                    dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramVisanumber);
+
+                    dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from VISAJobList where FileNumber = '" + FileNumberID + "'");
                     SQLCONN.CloseConnection();
                     /**logtable */
 

@@ -568,7 +568,7 @@ namespace Delmon_Managment_System.Forms
             this.txtvisa.AutoSize = true;
             this.txtvisa.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtvisa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.txtvisa.Location = new System.Drawing.Point(373, 54);
+            this.txtvisa.Location = new System.Drawing.Point(364, 54);
             this.txtvisa.Name = "txtvisa";
             this.txtvisa.Size = new System.Drawing.Size(35, 15);
             this.txtvisa.TabIndex = 180;

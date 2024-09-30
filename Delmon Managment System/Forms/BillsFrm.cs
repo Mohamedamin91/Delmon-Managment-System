@@ -3260,7 +3260,7 @@ FROM
 	dt.Dept_Type_Name as Divison,
     COALESCE(
         CASE 
-            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +''+hod.LastName
+            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +' '+hod.LastName
             WHEN eu.EndUserType = 'Personal' THEN (SELECT FirstName +' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
         END, 'Unknown') AS Approvedby,
 
@@ -3307,7 +3307,7 @@ FROM
 
     COALESCE(
         CASE 
-            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +''+hod.LastName
+            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +' '+hod.LastName
             WHEN eu.EndUserType = 'Personal' THEN (SELECT FirstName +' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
         END, 'Unknown') AS Approvedby,
 
@@ -3366,7 +3366,7 @@ FROM
 	dt.Dept_Type_Name as Divison,
     COALESCE(
         CASE 
-            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +''+hod.LastName
+            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +' '+hod.LastName
             WHEN eu.EndUserType = 'Personal' THEN (SELECT FirstName +' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
         END, 'Unknown') AS Approvedby,
 
@@ -3417,7 +3417,7 @@ FROM
 
     COALESCE(
         CASE 
-            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +''+hod.LastName
+            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +' '+hod.LastName
             WHEN eu.EndUserType = 'Personal' THEN (SELECT FirstName +' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
         END, 'Unknown') AS Approvedby,
 
