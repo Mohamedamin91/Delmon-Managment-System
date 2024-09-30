@@ -1178,10 +1178,10 @@ ORDER BY
                                 paramValue.Value = txtvalue.Text;
                             }
 
-                            if ((int)cmbdeviceatt.SelectedValue == 20)
+                            if ((cmbdeviceatt.SelectedValue as int?) == 20)
                             {
                                 SQLCONN3.ExecuteQueries("insert into AssetsDetials (AssetID, DeviceDetilasID, Value) values (@ID, @C1, @C3)", paramID, paramDeviceatt, paramcmbOS);
-                                LogAssetDetailChanges(AssetID,(int)cmbVersion.SelectedValue,txtvalue.Text);
+                                LogAssetDetailChanges(AssetID, (int)cmbdeviceatt.SelectedValue, cmbVersion.SelectedText);
                             }
                             else
                             {
@@ -1249,7 +1249,7 @@ ORDER BY
             using (SqlConnection assetDbConnection = new SqlConnection(assetDbConnectionString))
             {
                 assetDbConnection.Open();
-                string sql = "SELECT * FROM AssetsDetials WHERE AssetID = @AssetDetailsID";
+                string sql = "SELECT * FROM AssetsDetials WHERE AssetID = @AssetDetailsID ";
                 SqlDataAdapter da = new SqlDataAdapter(sql, assetDbConnection);
                 da.SelectCommand.Parameters.AddWithValue("@AssetDetailsID", assetDetailsID);
                 da.Fill(assetDetailsData);
@@ -1263,19 +1263,22 @@ ORDER BY
                     logDbConnection.Open();
                     using (SqlCommand command = new SqlCommand("INSERT INTO EmployeeLog (Logvalueid, logvalue, OldValue, NewValue, logdatetime, PCNAME, UserId, type) VALUES (@FileNumberid, @ColumnName, @OldValue, @NewValue, @datetime, @pc, @user, @type)", logDbConnection))
                     {
-                       
-                            //object value = assetDetailsData.Rows[0][column.ColumnName];
-                            command.Parameters.Clear();
-                            command.Parameters.AddWithValue("@FileNumberid", assetDetailsID + " - " + "AssetsDetials");
-                            command.Parameters.AddWithValue("@ColumnName", cmbdeviceatt.SelectedValue);
-                            command.Parameters.AddWithValue("@OldValue", DBNull.Value); // No old value since it's a new insert
-                            command.Parameters.AddWithValue("@NewValue", txtvalue.Text);
-                            command.Parameters.AddWithValue("@datetime", DateTime.Parse(lbldatetime.Text));
-                            command.Parameters.AddWithValue("@pc", Environment.MachineName);
-                            command.Parameters.AddWithValue("@user", CommonClass.LoginUserName);
-                            command.Parameters.AddWithValue("@type", "Insert");
 
-                            command.ExecuteNonQuery();
+                        //object value = assetDetailsData.Rows[0][column.ColumnName];
+                        command.Parameters.AddWithValue("@FileNumberid", string.Format("{0} - AssetsDetials", assetDetailsID));
+                        //if ((cmbdeviceatt.SelectedValue as int?) == 20)
+                        //{ }
+                        //else
+                        //{ }
+                        command.Parameters.AddWithValue("@ColumnName", Deviceattribute);
+                        command.Parameters.AddWithValue("@OldValue", DBNull.Value); // No old value since it's a new insert
+                        command.Parameters.AddWithValue("@NewValue", value);
+                        command.Parameters.AddWithValue("@datetime", DateTime.Parse(lbldatetime.Text));
+                        command.Parameters.AddWithValue("@pc", Environment.MachineName);
+                        command.Parameters.AddWithValue("@user", CommonClass.LoginUserName);
+                        command.Parameters.AddWithValue("@type", "Insert");
+
+                        command.ExecuteNonQuery();
                         
                     }
                 }
@@ -1808,7 +1811,7 @@ ORDER BY
                     // Log the deleted asset details
                     if ((int)cmbdeviceatt.SelectedValue == 20)
                     {
-                        LogAssetDetailDeleted(AssetID, (int)cmbVersion.SelectedValue, txtvalue.Text);
+                        LogAssetDetailDeleted(AssetID, (int)cmbdeviceatt.SelectedValue, cmbVersion.Text);
 
                     }
                     else 
