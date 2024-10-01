@@ -104,6 +104,8 @@ namespace Delmon_Managment_System
             childForm.BringToFront();
             childForm.Show();
             lblTitle.Text = childForm.Text;
+            menuStrip1.BringToFront(); // Ensure MenuStrip stays visible
+
         }
 
         public void ShowNotification()
@@ -406,7 +408,10 @@ GROUP BY
 
         private void personalInformationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.EmployeeForm(), sender);
+            var employeeForm = new Forms.EmployeeForm();
+            employeeForm.TopLevel = false; // Make sure it's not treated as a top-level form
+            OpenChildForm(employeeForm, sender);
+          //  OpenChildForm(new Forms.EmployeeForm(), sender);
 
         }
 
