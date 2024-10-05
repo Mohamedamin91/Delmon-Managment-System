@@ -34,12 +34,130 @@ namespace Delmon_Managment_System.Forms
         bool hasEdit = false;
         bool hasDelete = false;
         bool hasAdd = false;
+        DataTable originalDataElecend, originalDataCommend, originalDataPack, originalDataendrpt;
+
 
 
         public BillsFrm()
         {
             InitializeComponent();
+            cmbElecEnduser.TextChanged += new EventHandler(cmbElecEnduser_TextChanged);
+            cmbcommenduser.TextChanged += new EventHandler(cmbcommenduser_TextChanged);
+            cmbpackage.TextChanged += new EventHandler(cmbpackage_TextChanged);
+            cmbenduserrpt.TextChanged += new EventHandler(cmbenduserrpt_TextChanged);
 
+            LoadComboBoxDataElecen();
+            LoadComboBoxDataCommend();
+            LoadComboBoxDataPack();
+            LoadComboBoxDataEndrpt();
+
+        }
+        private void LoadComboBoxDataEndrpt()
+        {
+
+            SQLCONN.OpenConection();
+
+             originalDataendrpt = SQLCONN.ShowDataInGridViewORCombobox(@" SELECT 
+  distinct  CONCAT(e.FirstName,' ',e.LastName) AS DisplayValue, d.DeptHeadID As Value
+	from Employees e, DEPARTMENTS d
+	where e.EmployeeID = d.DeptHeadID
+	and CONCAT(e.FirstName,' ',e.LastName) != 'Select'; ");
+            if (originalDataendrpt != null)
+            {
+                cmbenduserrpt.DataSource = originalDataendrpt;
+                cmbenduserrpt.DisplayMember = "DisplayValue";
+                cmbenduserrpt.ValueMember = "Value";
+            }
+            SQLCONN.CloseConnection();
+        }
+
+        private void LoadComboBoxDataElecen()
+        {
+
+            SQLCONN.OpenConection();
+
+             originalDataElecend = SQLCONN.ShowDataInGridViewORCombobox(@" SELECT 
+    CONCAT(c.ShortCompName,' / ', dt.Dept_Type_Name) AS DisplayValue,
+    eu.ID AS Value
+FROM 
+    EndUsers eu
+INNER JOIN 
+    DEPARTMENTS d ON eu.ID = d.DeptID
+INNER JOIN 
+    Companies c ON d.COMPID = c.COMPID
+INNER JOIN 
+    DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
+WHERE 
+    eu.EndUserType = 'Company'
+UNION ALL
+SELECT 
+    CONCAT(e.FirstName,' ', e.SecondName,' ', e.ThirdName,' ', e.LastName) AS DisplayValue,
+    e.EmployeeID AS Value
+FROM 
+    EndUsers eu
+INNER JOIN 
+    Employees e ON eu.ID = e.EmployeeID
+WHERE 
+    eu.EndUserType = 'Personal'");
+            if (originalDataElecend != null)
+            {
+                cmbElecEnduser.DataSource = originalDataElecend;
+                cmbElecEnduser.DisplayMember = "DisplayValue";
+                cmbElecEnduser.ValueMember = "Value";
+            }
+            SQLCONN.CloseConnection();
+        }
+
+        private void LoadComboBoxDataCommend()
+        {
+
+            SQLCONN.OpenConection();
+
+            originalDataCommend = SQLCONN.ShowDataInGridViewORCombobox(@" SELECT 
+    CONCAT(c.ShortCompName,' / ', dt.Dept_Type_Name) AS DisplayValue,
+    eu.ID AS Value
+FROM 
+    EndUsers eu
+INNER JOIN 
+    DEPARTMENTS d ON eu.ID = d.DeptID
+INNER JOIN 
+    Companies c ON d.COMPID = c.COMPID
+INNER JOIN 
+    DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
+WHERE 
+    eu.EndUserType = 'Company'
+UNION ALL
+SELECT 
+    CONCAT(e.FirstName,' ', e.SecondName,' ', e.ThirdName,' ', e.LastName) AS DisplayValue,
+    e.EmployeeID AS Value
+FROM 
+    EndUsers eu
+INNER JOIN 
+    Employees e ON eu.ID = e.EmployeeID
+WHERE 
+    eu.EndUserType = 'Personal'");
+            if (originalDataCommend != null)
+            {
+                cmbcommenduser.DataSource = originalDataCommend;
+                cmbcommenduser.DisplayMember = "DisplayValue";
+                cmbcommenduser.ValueMember = "Value";
+            }
+            SQLCONN.CloseConnection();
+        }
+
+        private void LoadComboBoxDataPack()
+        {
+
+            SQLCONN.OpenConection();
+
+            originalDataPack = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT PackageID,PackageName FROM [Packages] where PackageID !=0  ");
+            if (originalDataPack != null)
+            {
+                cmbpackage.DataSource = originalDataPack;
+                cmbpackage.DisplayMember = "PackageName";
+                cmbpackage.ValueMember = "PackageID";
+            }
+            SQLCONN.CloseConnection();
         }
 
         private void BillsFrm_Load(object sender, EventArgs e)
@@ -75,98 +193,8 @@ namespace Delmon_Managment_System.Forms
 
 
 
-            cmbenduserrpt.ValueMember = "Value";
-            cmbenduserrpt.DisplayMember = "DisplayValue";
-            cmbenduserrpt.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT 
-  distinct  CONCAT(e.FirstName,' ',e.LastName) AS DisplayValue, d.DeptHeadID As Value
-	from Employees e, DEPARTMENTS d
-	where e.EmployeeID = d.DeptHeadID
-	and CONCAT(e.FirstName,' ',e.LastName) != 'Select'; ");
-            cmbenduserrpt.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbenduserrpt.AutoCompleteSource = AutoCompleteSource.ListItems;
+         
             cmbenduserrpt.Text = "Select";
-
-
-
-
-
-            cmbcommenduser.ValueMember = "Value";
-            cmbcommenduser.DisplayMember = "DisplayValue";
-            cmbcommenduser.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT 
-    CONCAT(c.ShortCompName,' / ', dt.Dept_Type_Name) AS DisplayValue,
-    eu.ID AS Value
-FROM 
-    EndUsers eu
-INNER JOIN 
-    DEPARTMENTS d ON eu.ID = d.DeptID
-INNER JOIN 
-    Companies c ON d.COMPID = c.COMPID
-INNER JOIN 
-    DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
-WHERE 
-    eu.EndUserType = 'Company'
-UNION ALL
-SELECT 
-    CONCAT(e.FirstName,' ', e.SecondName,' ', e.ThirdName,' ', e.LastName) AS DisplayValue,
-    e.EmployeeID AS Value
-FROM 
-    EndUsers eu
-INNER JOIN 
-    Employees e ON eu.ID = e.EmployeeID
-WHERE 
-    eu.EndUserType = 'Personal' ");
-            cmbcommenduser.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbcommenduser.AutoCompleteSource = AutoCompleteSource.ListItems;
-            cmbcommenduser.Text = "Select";
-
-            cmbElecEnduser.ValueMember = "Value";
-            cmbElecEnduser.DisplayMember = "DisplayValue";
-            cmbElecEnduser.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT 
-    CONCAT(c.ShortCompName,' / ', dt.Dept_Type_Name) AS DisplayValue,
-    eu.ID AS Value
-FROM 
-    EndUsers eu
-INNER JOIN 
-    DEPARTMENTS d ON eu.ID = d.DeptID
-INNER JOIN 
-    Companies c ON d.COMPID = c.COMPID
-INNER JOIN 
-    DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
-WHERE 
-    eu.EndUserType = 'Company'
-UNION ALL
-SELECT 
-    CONCAT(e.FirstName,' ', e.SecondName,' ', e.ThirdName,' ', e.LastName) AS DisplayValue,
-    e.EmployeeID AS Value
-FROM 
-    EndUsers eu
-INNER JOIN 
-    Employees e ON eu.ID = e.EmployeeID
-WHERE 
-    eu.EndUserType = 'Personal' ");
-            cmbElecEnduser.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbElecEnduser.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-
-
-            //cmbdeptelectry.ValueMember = "DEPTID";
-            //cmbdeptelectry.DisplayMember = "Dept_Type_Name";
-            //cmbdeptelectry.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT [DEPTID],Dept_Type_Name FROM [DelmonGroupDB].[dbo].[DEPARTMENTS], DeptTypes where DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID");
-            //cmbdeptelectry.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //cmbdeptelectry.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-
-
-
-
-
-
-            //string query = "select COMPID,COMPName_EN from Companies";
-            //cmbRegisterUnder.ValueMember = "COMPID";
-            //cmbRegisterUnder.DisplayMember = "COMPName_EN";
-            //cmbRegisterUnder.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query);
-            //cmbRegisterUnder.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //cmbRegisterUnder.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
 
@@ -198,12 +226,7 @@ WHERE
             cmbservice2.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
-            cmbpackage.ValueMember = "PackageID";
-            cmbpackage.DisplayMember = "PackageName";
-            cmbpackage.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT PackageID,PackageName FROM [Packages] where PackageID !=0");
-            cmbpackage.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbpackage.AutoCompleteSource = AutoCompleteSource.ListItems;
-
+           
 
             cmbConnectiontype.ValueMember = "ConnectionTypeID";
             cmbConnectiontype.DisplayMember = "ConnectionTypename";
@@ -1797,39 +1820,13 @@ WHERE
             {
 
                 SQLCONN.OpenConection();
-                cmbcommenduser.ValueMember = "Value";
-                cmbcommenduser.DisplayMember = "DisplayValue";
-                cmbcommenduser.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT 
-    CONCAT(c.ShortCompName,'/ ', dt.Dept_Type_Name) AS DisplayValue,
-    eu.ID AS Value
-FROM 
-    EndUsers eu
-INNER JOIN 
-    DEPARTMENTS d ON eu.ID = d.DeptID
-INNER JOIN 
-    Companies c ON d.COMPID = c.COMPID
-INNER JOIN 
-    DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
-WHERE 
-    eu.EndUserType = 'Company'
-UNION ALL
-SELECT 
-    CONCAT(e.FirstName,' ', e.SecondName,' ', e.ThirdName,' ', e.LastName) AS DisplayValue,
-    e.EmployeeID AS Value
-FROM 
-    EndUsers eu
-INNER JOIN 
-    Employees e ON eu.ID = e.EmployeeID
-WHERE 
-    eu.EndUserType = 'Personal' ");
-                cmbcommenduser.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                cmbcommenduser.AutoCompleteSource = AutoCompleteSource.ListItems;
-                cmbcommenduser.Text = "Select";
+
 
 
                 cmbReportType.Text = "Select";
                 SQLCONN.CloseConnection();
                 cmbcommenduser.Text = "Select";
+                cmbpackage.Text = "Select";
             }
             if (tabControl1.SelectedTab == tabControl1.TabPages[2])
             {
@@ -2240,9 +2237,17 @@ FROM
                         // Check if the query is not empty before executing it
                         if (!string.IsNullOrWhiteSpace(queryCommuni))
                         {
+                            if (cmbendtype.SelectedItem.ToString() != "All")
+                            {
+                                dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(queryCommuni, paramBillType, paramPaymentStauts, paramEnduserID, paramEnduserType);
+                            }
+                            else 
+                            {
+                                dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(queryCommuni, paramBillType, paramPaymentStauts, paramEnduserID);
 
-                            dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(queryCommuni, paramBillType, paramPaymentStauts, paramEnduserID);
+                            }
                         }
+
                     }
                     //Electrcity
                     else
@@ -2747,7 +2752,7 @@ FROM
                     cmbbillenduser.ValueMember = "EmployeeID";
                     cmbbillenduser.DisplayMember = "FullName";
                     cmbbillenduser.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT EmployeeID, CONCAT(FirstName,' ', SecondName,' ', ThirdName,' ', LastName) AS 'FullName' FROM Employees ORDER BY EmployeeID");
-                    cmbbillenduser.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                  cmbbillenduser.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                     cmbbillenduser.AutoCompleteSource = AutoCompleteSource.ListItems;
                     break;
 
@@ -3620,10 +3625,60 @@ FROM
 
         }
 
+        private void cmbenduserrpt_TextChanged(object sender, EventArgs e)
+        {
+            // Simple debugging log to see when this event gets triggered
 
+            // This is just to check if the ComboBox is working without filtering
+            if (originalDataendrpt != null)
+            {
+                // Set DataSource to original data to check for any issues
+                cmbenduserrpt.DataSource = originalDataendrpt;
+                cmbenduserrpt.ValueMember = "Value";
+                cmbenduserrpt.DisplayMember = "DisplayValue";
+            }
+        }
 
+        private void cmbpackage_TextChanged(object sender, EventArgs e)
+        {
+            // Simple debugging log to see when this event gets triggered
 
+            // This is just to check if the ComboBox is working without filtering
+            if (originalDataPack != null)
+            {
+                // Set DataSource to original data to check for any issues
+                cmbpackage.DataSource = originalDataPack;
+                cmbpackage.ValueMember = "PackageID";
+                cmbpackage.DisplayMember = "PackageName";
+            }
+        }
 
+        private void cmbcommenduser_TextChanged(object sender, EventArgs e)
+        {
+            // Simple debugging log to see when this event gets triggered
 
+            // This is just to check if the ComboBox is working without filtering
+            if (originalDataCommend != null)
+            {
+                // Set DataSource to original data to check for any issues
+                cmbcommenduser.DataSource = originalDataCommend;
+                cmbcommenduser.ValueMember = "Value";
+                cmbcommenduser.DisplayMember = "DisplayValue";
+            }
+        }
+
+        private void cmbElecEnduser_TextChanged(object sender, EventArgs e)
+        {
+            // Simple debugging log to see when this event gets triggered
+
+            // This is just to check if the ComboBox is working without filtering
+            if (originalDataElecend != null)
+            {
+                // Set DataSource to original data to check for any issues
+                cmbElecEnduser.DataSource = originalDataElecend;
+                cmbElecEnduser.ValueMember = "Value";
+                cmbElecEnduser.DisplayMember = "DisplayValue";
+            }
+        }
     }
 }

@@ -29,7 +29,7 @@ namespace Delmon_Managment_System
         private void JobOfferLTR_Load(object sender, EventArgs e)
         {
             sql.OpenConection();
-            EmpIDRPT = CommonClass.EmployeeID;
+            EmpIDRPT = CommonClass.EmployeeIDRPT;
             EmployeeName = CommonClass.LoginEmployeeName;
 
             SqlParameter paramEmployeeID = new SqlParameter("@EmployeeID", SqlDbType.NVarChar);

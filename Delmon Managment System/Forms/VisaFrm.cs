@@ -45,6 +45,8 @@ namespace Delmon_Managment_System.Forms
         bool hasEdit = false;
         bool hasDelete = false;
         bool hasAdd = false;
+        DataTable originalDataJob, originalDataAgency, originalDataCand;
+
 
 
         public VisaFrm()
@@ -52,9 +54,57 @@ namespace Delmon_Managment_System.Forms
 
 
             InitializeComponent();
+            cmbJob.TextChanged += new EventHandler(cmbJob_TextChanged);
+            cmbAgency.TextChanged += new EventHandler(cmbAgency_TextChanged_1);
+            cmbcandidates.TextChanged += new EventHandler(cmbcandidates_TextChanged);
+            LoadComboBoxDataJob();
+            LoadComboBoxDataAgency();
+            LoadComboBoxDataCand();
 
         }
 
+        private void LoadComboBoxDataCand()
+        {
+        
+            SQLCONN.OpenConection();
+
+            var data = SQLCONN.ShowDataInGridViewORCombobox("SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees] , StatusTBL where Employees.EmploymentStatusID = StatusTBL.StatusID and RefrenceID=2 and StatusTBL.StatusID = 23 order by EmployeeID");
+            if (data != null)
+            {
+                cmbcandidates.DataSource = data;
+                cmbcandidates.DisplayMember = "Name";
+                cmbcandidates.ValueMember = "EmployeeID";
+            }
+            SQLCONN.CloseConnection();
+        }
+        private void LoadComboBoxDataAgency()
+        {
+
+            SQLCONN.OpenConection();
+
+            var data = SQLCONN.ShowDataInGridViewORCombobox("select AgencID,AgenceName from Agencies order by AgencID");
+            if (data != null)
+            {
+                cmbAgency.DataSource = data;
+                cmbAgency.DisplayMember = "AgenceName";
+                cmbAgency.ValueMember = "AgencID";
+            }
+            SQLCONN.CloseConnection();
+        }
+        private void LoadComboBoxDataJob()
+        {
+            SQLCONN.OpenConection();
+            // Fetch data using the same method
+            DataTable dataTable = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID, JobTitleEN FROM JOBS ORDER BY JobID  ;");
+
+            if (dataTable != null)
+            {
+                cmbJob.DataSource = dataTable;
+                cmbJob.DisplayMember = "JobTitleEN";  // What to show in the dropdown
+                cmbJob.ValueMember = "JobID";  // The actual value behind each item
+            }
+            SQLCONN.CloseConnection();
+        }
         void ChangeEnabled(bool enabled)
         {
             foreach (Control c in this.Controls)
@@ -75,6 +125,7 @@ namespace Delmon_Managment_System.Forms
             this.timer1.Interval = 1000;
             timer1.Start();
             SQLCONN.OpenConection();
+
             string query = "SELECT COMPID, COMPName_EN FROM Companies";
             cmbCompany.ValueMember = "COMPID";
             cmbCompany.DisplayMember = "COMPName_EN";
@@ -494,15 +545,6 @@ namespace Delmon_Managment_System.Forms
 
 
         }
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cmbJob_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -515,11 +557,6 @@ namespace Delmon_Managment_System.Forms
         }
 
         private void cmbCompany_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -1393,11 +1430,6 @@ namespace Delmon_Managment_System.Forms
             }
         }
 
-        private void cmbcandidates_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             cmbReservedTo.Enabled = cmbCompany.Enabled = cmbcandidates.Enabled = cmbStatus.Enabled = cmbJob.Enabled = cmbConsulate.Enabled = cmbAgency.Enabled = true;
@@ -1412,22 +1444,12 @@ namespace Delmon_Managment_System.Forms
             cmbcandidates2.ValueMember = "EmployeeID";
             cmbcandidates2.DisplayMember = "Name";
             cmbcandidates2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees]       order by EmployeeID");
-            cmbcandidates.ValueMember = "EmployeeID";
-            cmbcandidates.DisplayMember = "Name";
-            cmbcandidates.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees] , StatusTBL where Employees.EmploymentStatusID = StatusTBL.StatusID and RefrenceID=2 and StatusTBL.StatusID = 23 order by EmployeeID");
             string query4 = "select statusid,status  from Visastatus where RefrenceID =1 or RefrenceID = 0 order by statusid";
             cmbStatus.ValueMember = "statusid";
             cmbStatus.DisplayMember = "status";
             cmbStatus.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query4);
-            string query2 = "SELECT JobID, JobTitleEN FROM JOBS cmbJob";
 
-            cmbJob.ValueMember = "JobID";
-            cmbJob.DisplayMember = "JobTitleEN";
-            cmbJob.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query2);
-            cmbAgency.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbAgency.ValueMember = "AgencID";
-            cmbAgency.DisplayMember = "AgenceName";
-            cmbAgency.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" select AgencID , AgenceName from  Agencies ");
+
             string query3 = "select Consulates.ConsulateID,ConsulateCity from Countries,Consulates where Countries.CountryId = Consulates.CountryId";
             cmbConsulate.ValueMember = "Consulates.ConsulateID";
             cmbConsulate.DisplayMember = "ConsulateCity";
@@ -2074,33 +2096,11 @@ namespace Delmon_Managment_System.Forms
 
         private void cmbAgency_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                e.Handled = true;
-                e.SuppressKeyPress = true;
 
-                string searchText = cmbAgency.Text.Trim();
-
-                if (!string.IsNullOrEmpty(searchText))
-                {
-                    foreach (var item in cmbAgency.Items)
-                    {
-                        if (item.ToString().Equals(searchText, StringComparison.OrdinalIgnoreCase))
-                        {
-                            cmbAgency.SelectedItem = item;
-                            break;
-                        }
-                    }
-                }
-            }
         }
 
         private void cmbAgency_TextChanged(object sender, EventArgs e)
         {
-        }
-        private void cmbAgency_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void cmbCompany_SelectionChangeCommitted(object sender, EventArgs e)
@@ -2164,15 +2164,7 @@ namespace Delmon_Managment_System.Forms
 
         private void cmbAgency_DropDown(object sender, EventArgs e)
         {
-            cmbAgency.DropDownStyle = ComboBoxStyle.DropDownList;
-
-            SQLCONN.OpenConection();
-            cmbAgency.ValueMember = "AgencID";
-            cmbAgency.DisplayMember = "AgenceName";
-            cmbAgency.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select AgencID,AgenceName from Agencies ");
-            
-            SQLCONN.CloseConnection();
-
+           
 
         }
 
@@ -2284,21 +2276,6 @@ namespace Delmon_Managment_System.Forms
             SQLCONN.CloseConnection();
         }
 
-        private void cmbJob_MouseDown(object sender, MouseEventArgs e)
-        {
-            cmbJob.DropDownStyle = ComboBoxStyle.DropDownList;
-
-            string query2 = "SELECT JobID, JobTitleEN FROM JOBS order by JobTitleEN";
-            SQLCONN.OpenConection();
-
-            cmbJob.ValueMember = "JobID";
-            cmbJob.DisplayMember = "JobTitleEN";
-            cmbJob.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query2);
-            //  cmbJob.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //  cmbJob.AutoCompleteSource = AutoCompleteSource.ListItems;
-            SQLCONN.CloseConnection();
-        }
-
         private void cmbStatus_MouseDown(object sender, MouseEventArgs e)
         {
             cmbStatus.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -2312,20 +2289,6 @@ namespace Delmon_Managment_System.Forms
             // cmbStatus.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             // cmbStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
             SQLCONN.CloseConnection();
-        }
-
-        private void cmbAgency_MouseDown(object sender, MouseEventArgs e)
-        {
-            cmbAgency.DropDownStyle = ComboBoxStyle.DropDownList;
-
-            SQLCONN.OpenConection();
-            cmbAgency.ValueMember = "AgencID";
-            cmbAgency.DisplayMember = "AgenceName";
-            cmbAgency.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select AgencID,AgenceName  from Agencies  ");
-            //  cmbAgency.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //   cmbAgency.AutoCompleteSource = AutoCompleteSource.ListItems;
-            SQLCONN.CloseConnection();
-
         }
 
         private void cmbcandidates_MouseDown(object sender, MouseEventArgs e)
@@ -2390,11 +2353,7 @@ GROUP BY
 
         }
 
-        private void cmbAgency_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // cmbAgency.DroppedDown = false;
-
-        }
+      
 
         private void cmbJob_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -2520,12 +2479,13 @@ GROUP BY
                 {
                     // Populate fields from selected row
                     SetFieldValues(selectedRow);
+                    // Calculate dates
+                    //CalculateDates();
 
                     // Load VISA job list data
                     LoadVisaJobListAsync(VisaNumberID);
 
-                    // Calculate dates
-                    CalculateDates();
+                  
                 }));
             });
         }
@@ -2543,6 +2503,10 @@ GROUP BY
             object cell8Value = selectedRow.Cells[8].Value;
             object cell11Value = selectedRow.Cells[11].Value;
             object cell12Value = selectedRow.Cells[12].Value;
+
+          
+
+
 
             if (DateTime.TryParse(cell2Value?.ToString(), out DateTime parsedDate2))
             {
@@ -2563,6 +2527,8 @@ GROUP BY
             if (cell6Value != null && !string.IsNullOrEmpty(cell6Value.ToString()))
             {
                 expairENDATEtxt.Text = cell6Value.ToString();
+
+
             }
 
             if (int.TryParse(selectedRow.Cells[0].Value?.ToString(), out int parsedVisaNumberID))
@@ -2591,7 +2557,7 @@ GROUP BY
                 txtsponserID.Text = cell12Value.ToString();
             }
 
-            Visanumtxt.Text = VisaNumberID.ToString();
+          
         }
 
         private async void LoadVisaJobListAsync(int visaNumberID)
@@ -2672,14 +2638,56 @@ GROUP BY
             }
         }
 
+        private void cmbJob_TextChanged(object sender, EventArgs e)
+        {
+            // Simple debugging log to see when this event gets triggered
 
+            // This is just to check if the ComboBox is working without filtering
+            if (originalDataJob != null)
+            {
+                // Set DataSource to original data to check for any issues
+                cmbJob.DataSource = originalDataJob;
+                cmbJob.DisplayMember = "JobTitleEN";
+                cmbJob.ValueMember = "JobID";
+            }
+        }
 
+        private void cmbcandidates_TextChanged(object sender, EventArgs e)
+        {
+             // Simple debugging log to see when this event gets triggered
 
+            // This is just to check if the ComboBox is working without filtering
+            if (originalDataCand != null)
+            {
+                // Set DataSource to original data to check for any issues
+                cmbcandidates.DataSource = originalDataCand;
+                cmbcandidates.ValueMember = "EmployeeID";
+                cmbcandidates.DisplayMember = "Name";
+            }
 
+        }
 
+        private void cmbAgency_TextChanged_1(object sender, EventArgs e)
+        {
+
+            // Simple debugging log to see when this event gets triggered
+
+            // This is just to check if the ComboBox is working without filtering
+            if (originalDataAgency != null)
+            {
+                // Set DataSource to original data to check for any issues
+                cmbAgency.DataSource = originalDataAgency;
+                cmbAgency.DisplayMember = "AgenceName";
+                cmbAgency.ValueMember = "AgencID";
+            }
+        }
+       
 
     }
-}
+  
+    }
+    
+
     
 
 

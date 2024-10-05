@@ -36,9 +36,10 @@ namespace Delmon_Managment_System.Forms
         //  int ID = 0;
         int loggedEmpolyeeID;
         int dOCID;
-        string textFilePath;
-        string destinationFilePath;
+  
         string fileName;
+        DataTable originalData;
+
 
         bool hasView = false;
         bool hasEdit = false;
@@ -58,6 +59,7 @@ namespace Delmon_Managment_System.Forms
         public EmployeeForm()
         {
 
+
             InitializeComponent();
             this.Dock = DockStyle.Fill;
             this.TopLevel = false;
@@ -70,10 +72,12 @@ namespace Delmon_Managment_System.Forms
             cmbCompany.KeyDown += new KeyEventHandler(cmbCompany_KeyDown);
             cmbPersonalStatusStatus.KeyDown += new KeyEventHandler(cmbPersonalStatusStatus_KeyDown);
             dtpDOB.ValueChanged += dtpDOB_ValueChanged;
+            cmbEmployJobHistory.TextChanged += new EventHandler(cmbEmployJobHistory_TextChanged);
+            LoadComboBoxData();
 
             //  cmbPersonalStatusStatus.KeyPress += cmbPersonalStatusStatus_KeyPress;
 
-         
+
 
 
 
@@ -131,6 +135,22 @@ namespace Delmon_Managment_System.Forms
 
 
 
+        // Load the ComboBox data
+        private void LoadComboBoxData()
+        {
+            SQLCONN.OpenConection();
+            // Fetch the DataTable directly without casting
+            originalData = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID, JobTitleEN FROM JOBS ORDER BY JobID ;");
+
+            if (originalData != null)
+            {
+                cmbEmployJobHistory.DataSource = originalData;
+                cmbEmployJobHistory.DisplayMember = "JobTitleEN";
+                cmbEmployJobHistory.ValueMember = "JobID";
+                cmbEmployJobHistory.Text = "Select";
+            }
+            SQLCONN.CloseConnection();
+        }
         private void EmployeeForm_Load(object sender, EventArgs e)
         {
 
@@ -276,13 +296,13 @@ namespace Delmon_Managment_System.Forms
                 cmbPersonalStatusStatus.AutoCompleteMode = AutoCompleteMode.Suggest;
                 cmbPersonalStatusStatus.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-                cmbEmployJobHistory.ValueMember = "JobID";
-                cmbEmployJobHistory.DisplayMember = "JobTitleEN";
-                cmbEmployJobHistory.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS ORDER BY JobTitleEN;");
-                cmbEmployJobHistory.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                cmbEmployJobHistory.AutoCompleteSource = AutoCompleteSource.ListItems;
+                //cmbEmployJobHistory.ValueMember = "JobID";
+                //cmbEmployJobHistory.DisplayMember = "JobTitleEN";
+                //cmbEmployJobHistory.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID,JobTitleEN FROM JOBS ORDER BY JobTitleEN;");
+                //cmbEmployJobHistory.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                //cmbEmployJobHistory.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-                cmbissueplace.ValueMember = "Consulates.ConsulateID";
+                //cmbissueplace.ValueMember = "Consulates.ConsulateID";
                 cmbissueplace.DisplayMember = "ConsulateCity";
                 cmbissueplace.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select Consulates.ConsulateID,ConsulateCity from Countries,Consulates where Countries.CountryId = Consulates.CountryId ORDER BY ConsulateCity;");
                 cmbissueplace.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -3056,7 +3076,7 @@ ORDER BY e.EmployeeID";
 
         private void btnprtjoboffer_Click(object sender, EventArgs e)
         {
-            CommonClass.EmployeeID = EmployeeID;
+            CommonClass.EmployeeIDRPT = EmployeeID;
             if
                 (EmployeeID == 0)
             {
@@ -3075,7 +3095,7 @@ ORDER BY e.EmployeeID";
 
         private void btnprtvisareq_Click(object sender, EventArgs e)
         {
-            CommonClass.EmployeeID = EmployeeID;
+            CommonClass.EmployeeIDRPT = EmployeeID;
             if
                 (EmployeeID == 0)
             {
@@ -3233,7 +3253,7 @@ ORDER BY e.EmployeeID";
 
         private void cmbEmployJobHistory_KeyPress(object sender, KeyPressEventArgs e)
         {
-            cmbEmployJobHistory.DroppedDown = false;
+           // cmbEmployJobHistory.DroppedDown = false;
 
 
         }
@@ -3475,23 +3495,23 @@ ORDER BY e.EmployeeID";
 
         private void cmbEmployJobHistory_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                // Handle the Enter key press
-                var selectedItem = cmbEmployJobHistory.SelectedItem as DataRowView;
+            //if (e.KeyCode == Keys.Enter)
+            //{
+            //    // Handle the Enter key press
+            //    var selectedItem = cmbEmployJobHistory.SelectedItem as DataRowView;
 
-                if (selectedItem != null)
-                {
-                    // Access the selected item's properties
-                    var JobID = selectedItem["JobID"].ToString();
-                    var JobTitleEN = selectedItem["JobTitleEN"].ToString();
+            //    if (selectedItem != null)
+            //    {
+            //        // Access the selected item's properties
+            //        var JobID = selectedItem["JobID"].ToString();
+            //        var JobTitleEN = selectedItem["JobTitleEN"].ToString();
 
-                    // Use the selected item for further processing or display
-                }
+            //        // Use the selected item for further processing or display
+            //    }
 
-                // Prevent the ComboBox from processing the Enter key
-                e.IsInputKey = true;
-            }
+            //    // Prevent the ComboBox from processing the Enter key
+            //    e.IsInputKey = true;
+            //}
         }
 
         private void label24_Click(object sender, EventArgs e)
@@ -3571,8 +3591,25 @@ ORDER BY e.EmployeeID";
         {
 
         }
+
+        private void cmbEmployJobHistory_TextChanged(object sender, EventArgs e)
+        {
+            // Simple debugging log to see when this event gets triggered
+
+            // This is just to check if the ComboBox is working without filtering
+            if (originalData != null)
+            {
+                // Set DataSource to original data to check for any issues
+                cmbEmployJobHistory.DataSource = originalData;
+                cmbEmployJobHistory.DisplayMember = "JobTitleEN";
+                cmbEmployJobHistory.ValueMember = "JobID";
+            }
+        }
+
+
     }
 }
+
 
     
 

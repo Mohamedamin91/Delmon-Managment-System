@@ -78,25 +78,28 @@ namespace Delmon_Managment_System
         }
 
 
-        public object ShowDataInGridViewORCombobox(string Query_, params SqlParameter[] parameters)
+        public DataTable ShowDataInGridViewORCombobox(string Query_, params SqlParameter[] parameters)
         {
-            SqlCommand cmd = new SqlCommand(Query_, con);
-            foreach (SqlParameter parm in parameters)
+            using (SqlCommand cmd = new SqlCommand(Query_, con))
             {
-                cmd.Parameters.Add(parm);
+                foreach (SqlParameter parm in parameters)
+                {
+                    cmd.Parameters.Add(parm);
+                }
+
+                SqlDataAdapter adapt = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adapt.Fill(ds);
+
+                cmd.Parameters.Clear();
+
+                // Return the DataTable directly
+                return ds.Tables[0];
             }
-            SqlDataAdapter adapt = new SqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            adapt.Fill(ds);
-            object dataum = ds.Tables[0];
-            cmd.Parameters.Clear();
-            return dataum;
-           
-
-
         }
 
+
     }
-   
+
 
 }

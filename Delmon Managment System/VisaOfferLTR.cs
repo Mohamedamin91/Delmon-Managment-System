@@ -19,6 +19,8 @@ namespace Delmon_Managment_System
         string EmployeeName;
         SQLCONNECTION sql = new SQLCONNECTION();
 
+        bool hasView = false;
+      
         public VisaOfferLTR()
         {
             InitializeComponent();
@@ -27,27 +29,53 @@ namespace Delmon_Managment_System
         private void VisaOfferLTR_Load(object sender, EventArgs e)
         {
 
-            ///***/
-            //EmpIDRPT = CommonClass.EmployeeID;
-            //// TODO: This line of code loads data into the 'Delmon.DataTable1' table. You can move, or remove it, as needed.
-            //this.dataTable2TableAdapter.Fill(this.delmon.DataTable2, EmpIDRPT);
-            //// reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
-            //this.reportViewer1.RefreshReport();
-            ///****/
+
 
             sql.OpenConection();
-            EmpIDRPT = CommonClass.EmployeeID;
-            EmployeeName = CommonClass.LoginEmployeeName;
 
-            SqlParameter paramEmployeeID = new SqlParameter("@EmployeeID", SqlDbType.NVarChar);
-            paramEmployeeID.Value = EmpIDRPT;
+            SqlDataReader dr = sql.DataReader(@"
+        SELECT ps.PermissionName
+        FROM UserPermissions us
+        	JOIN tblUser u ON us.UserID = u.EmployeeID
+        JOIN Permissions ps ON us.PermissionID = ps.PermissionID
+               WHERE u.EmployeeID = @UserID",
+            new SqlParameter("@UserID", SqlDbType.NVarChar) { Value = CommonClass.EmployeeIDRPT });
 
-            DataTable employeeVisaTable = new DataTable();
 
-            using (SqlConnection connection = new SqlConnection(sql.ConnectionString))
+            while (dr.Read())
             {
-                connection.Open();
-                string query = @"SELECT 
+                string permissionName = dr["PermissionName"].ToString();
+                if (permissionName.Contains("ViewPersonalInformation"))
+
+                {
+                    hasView = true;
+                }
+               
+            }
+            dr.Close();
+            if (hasView == false)
+            {
+
+///***/
+                //EmpIDRPT = CommonClass.EmployeeID;
+                //// TODO: This line of code loads data into the 'Delmon.DataTable1' table. You can move, or remove it, as needed.
+                //this.dataTable2TableAdapter.Fill(this.delmon.DataTable2, EmpIDRPT);
+                //// reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+                //this.reportViewer1.RefreshReport();
+                ///****/
+
+                EmpIDRPT = CommonClass.EmployeeID;
+                EmployeeName = CommonClass.LoginEmployeeName;
+
+                SqlParameter paramEmployeeID = new SqlParameter("@EmployeeID", SqlDbType.NVarChar);
+                paramEmployeeID.Value = EmpIDRPT;
+
+                DataTable employeeVisaTable = new DataTable();
+
+                using (SqlConnection connection = new SqlConnection(sql.ConnectionString))
+                {
+                    connection.Open();
+                    string query = @"SELECT 
     VISAJobList.FileNumber,
     VISA.IssueDateEN,
     visa.VisaNumber,
@@ -94,39 +122,35 @@ FROM
 WHERE 
   Employees.EmployeeID = @EmployeeID;";
 
-                //SqlDataReader dr = sql.DataReader(query, paramEmployeeID);
-                //if (dr.Read())
-                //{
-                //    //  EmployeeID = int.Parse(dr["ID"].ToString());
-                //    CandidateName = (dr["FullName"].ToString());
-                //}
 
 
 
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@EmployeeID", EmpIDRPT); // set the employee ID parameter
-                SqlDataAdapter adapter = new SqlDataAdapter(command);
-                adapter.Fill(employeeVisaTable);
-                connection.Close();
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@EmployeeID", EmpIDRPT); // set the employee ID parameter
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    adapter.Fill(employeeVisaTable);
+                    connection.Close();
+                }
+
+                ReportDataSource dataSource = new ReportDataSource("DataSet3", employeeVisaTable);
+                reportViewer1.LocalReport.DataSources.Clear();
+                reportViewer1.LocalReport.DataSources.Add(dataSource);
+                this.reportViewer1.RefreshReport();
+
+
+
+
+
+
+
+
+
+                sql.CloseConnection();
+
+
+
             }
-
-            ReportDataSource dataSource = new ReportDataSource("DataSet3", employeeVisaTable);
-            reportViewer1.LocalReport.DataSources.Clear();
-            reportViewer1.LocalReport.DataSources.Add(dataSource);
-            this.reportViewer1.RefreshReport();
-            sql.CloseConnection();
-
-
-
-
-
-
-
-
-
-
-
-
         }
+
     }
 }

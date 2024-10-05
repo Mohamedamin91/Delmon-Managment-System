@@ -59,6 +59,10 @@ namespace Delmon_Managment_System.Forms
 
 
         bool hasViewEmployeelog = false;
+        DataTable originalDataEmployee, originalDataGeneralManager,
+            originalDataDepartment, originalDataHeadOFDepartment, originalDataWorkField, originalDataCountry;
+
+
 
 
 
@@ -72,6 +76,18 @@ namespace Delmon_Managment_System.Forms
         public SettingFrm()
         {
             InitializeComponent();
+            LoadComboBoxDataEmployee();
+            LoadComboBoxDataGenralManager();
+            LoadComboBoxDataDepartment();
+            LoadComboBoxDataHeadofdepartment();
+            LoadComboBoxDataworkfield();
+            LoadComboBoxDataCountry();
+            cmbemployee.TextChanged += new EventHandler(cmbemployee_TextChanged);
+            cmbemployee2.TextChanged += new EventHandler(cmbemployee2_TextChanged);
+            cmbDepartment.TextChanged += new EventHandler(cmbDepartment_TextChanged);
+            cmbemployee1.TextChanged += new EventHandler(cmbemployee1_TextChanged);
+            cmbworkfield.TextChanged += new EventHandler(cmbworkfield_TextChanged);
+            cmbcont.TextChanged += new EventHandler(cmbcont_TextChanged);
 
             // Attach the CheckedChanged event handler to each radio button
             radioButton1.CheckedChanged += RadioButton_CheckedChanged;
@@ -206,6 +222,104 @@ namespace Delmon_Managment_System.Forms
 
         }
 
+        private void LoadComboBoxDataEmployee()
+        {
+           
+        
+
+            SQLCONN.OpenConection();
+
+            originalDataEmployee = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT EmployeeID ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName' from Employees   order by EmployeeID ");
+            if (originalDataEmployee != null)
+            {
+                cmbemployee.DataSource = originalDataEmployee;
+                cmbemployee.ValueMember = "EmployeeID";
+                cmbemployee.DisplayMember = "FullName";
+            }
+            SQLCONN.CloseConnection();
+        }
+
+        private void LoadComboBoxDataGenralManager()
+        {
+
+            SQLCONN.OpenConection();
+
+            originalDataGeneralManager = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT EmployeeID ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName' from Employees   order by EmployeeID ");
+            if (originalDataGeneralManager != null)
+            {
+                cmbemployee2.DataSource = originalDataGeneralManager;
+                cmbemployee2.ValueMember = "EmployeeID";
+                cmbemployee2.DisplayMember = "FullName";
+            }
+            SQLCONN.CloseConnection();
+        }
+
+        
+         private void LoadComboBoxDataworkfield()
+        {
+       
+              SQLCONN.OpenConection();
+              originalDataWorkField = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT WorkID,Name FROM [WorkLocations]");
+            if (originalDataWorkField != null)
+            {
+                cmbworkfield.DataSource = originalDataWorkField;
+                cmbworkfield.ValueMember = "WorkID";
+                cmbworkfield.DisplayMember = "Name";
+            }
+
+            SQLCONN.CloseConnection();
+        }
+
+        private void LoadComboBoxDataHeadofdepartment()
+        {
+
+            SQLCONN.OpenConection();
+
+            originalDataHeadOFDepartment = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT EmployeeID ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName' from Employees   order by EmployeeID ");
+            if (originalDataHeadOFDepartment != null)
+            {
+                cmbemployee1.DataSource = originalDataHeadOFDepartment;
+                cmbemployee1.ValueMember = "EmployeeID";
+                cmbemployee1.DisplayMember = "FullName";
+            }
+            SQLCONN.CloseConnection();
+        }
+
+        private void LoadComboBoxDataCountry()
+        {
+
+        
+            SQLCONN.OpenConection();
+
+            originalDataCountry = SQLCONN.ShowDataInGridViewORCombobox(@" SELECT CountryId,CountryName FROM Countries ");
+            if (originalDataCountry != null)
+            {
+                cmbcont.DataSource = originalDataCountry;
+                cmbcont.ValueMember = "CountryId";
+                cmbcont.DisplayMember = "CountryName";
+            }
+
+            SQLCONN.CloseConnection();
+
+        }
+
+
+        private void LoadComboBoxDataDepartment()
+        {
+       SQLCONN.OpenConection();
+
+            originalDataDepartment = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT Dept_Type_ID,Dept_Type_Name FROM [DeptTypes] ");
+            if (originalDataDepartment != null)
+            {
+                cmbDepartment.DataSource = originalDataDepartment;
+                cmbDepartment.ValueMember = "Dept_Type_ID";
+                cmbDepartment.DisplayMember = "Dept_Type_Name";
+
+            }
+            SQLCONN.CloseConnection();
+        }
+
+
         public static Regex email_validation()
         {
             string pattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|"
@@ -277,12 +391,10 @@ namespace Delmon_Managment_System.Forms
                 cmbusertype.Enabled = true;
             }
             else
-
             {
                 cmbusertype.Enabled = false;
                 cmbusertype.SelectedValue = 2;
             }
-
             SQLCONN.OpenConection();
             SqlDataReader dr = SQLCONN.DataReader(@"
         SELECT ps.PermissionName
@@ -342,21 +454,6 @@ namespace Delmon_Managment_System.Forms
                     dataGridView1.Columns["password"].Visible = false;
 
 
-                    //if (CommonClass.Usertype == "SuperAdmin")
-                    //{
-                    //    dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
-                    // (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID    ");
-
-                    //}
-                    //else
-
-                    //{
-                    //    dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox
-                    //      (" SELECT tblUser.[UserID]  ,tblUser.EmployeeID  ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName', [tblUserType].UserType ,[UserName] ,[Password],isactive from Employees,tblUserType ,tblUser  where tblUser.EmployeeID = Employees.EmployeeID and tblUser.UserTypeID = tblUserType.UserTypeID and tblUser.EmployeeID=" + LoggedEmployeeID + " ");
-
-                    //}
-
-
                 }
                 else
                 {
@@ -394,12 +491,6 @@ namespace Delmon_Managment_System.Forms
 
 
 
-
-
-
-
-
-
             SqlParameter paramloggedemployee = new SqlParameter("@LoggedEmployeeid", SqlDbType.NVarChar);
             paramloggedemployee.Value = LoggedEmployeeID;
             this.timer1.Interval = 1000;
@@ -411,28 +502,10 @@ namespace Delmon_Managment_System.Forms
             LoggedEmployeeID = CommonClass.EmployeeID;
             lblFullname.Text = CommonClass.LoginEmployeeName;
             lblPC.Text = Environment.MachineName;
-            cmbemployee.ValueMember = "EmployeeID";
-            cmbemployee.DisplayMember = "FullName";
-            cmbemployee.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT EmployeeID ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName' from Employees   order by EmployeeID ");
-            cmbemployee.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbemployee.AutoCompleteSource = AutoCompleteSource.ListItems;
 
+    
 
-            cmbemployee2.ValueMember = "EmployeeID";
-            cmbemployee2.DisplayMember = "FullName";
-            cmbemployee2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT EmployeeID ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName' from Employees   order by EmployeeID ");
-            cmbemployee2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbemployee2.AutoCompleteSource = AutoCompleteSource.ListItems;
-            cmbemployee2.KeyDown += cmbemployee1_KeyDown;
-
-
-            cmbemployee1.ValueMember = "EmployeeID";
-            cmbemployee1.DisplayMember = "FullName";
-            cmbemployee1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT EmployeeID ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName' from Employees   order by EmployeeID ");
-            cmbemployee1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbemployee1.AutoCompleteSource = AutoCompleteSource.ListItems;
-            cmbemployee1.KeyDown += cmbemployee1_KeyDown;
-
+        
             cmbUserPermission.ValueMember = "EmployeeID";
             cmbUserPermission.DisplayMember = "FullName";
             cmbUserPermission.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT u.EmployeeID ,CONCAT(FirstName , ' ', SecondName, ' ' ,ThirdName , ' ', LastName)  'FullName' 
@@ -481,26 +554,7 @@ order by EmployeeID  ");
             cmbCountry.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
-            cmbcont.ValueMember = "CountryId";
-            cmbcont.DisplayMember = "CountryName";
-            cmbcont.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT CountryId,CountryName FROM Countries");
-            cmbcont.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbcont.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-
-            cmbworkfield.ValueMember = "WorkID";
-            cmbworkfield.DisplayMember = "Name";
-            cmbworkfield.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT WorkID,Name FROM [WorkLocations]");
-            cmbworkfield.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbworkfield.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-
-
-            cmbDepartment.ValueMember = "Dept_Type_ID";
-            cmbDepartment.DisplayMember = "Dept_Type_Name";
-            cmbDepartment.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Dept_Type_ID,Dept_Type_Name FROM [DeptTypes]");
-            cmbDepartment.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cmbDepartment.AutoCompleteSource = AutoCompleteSource.ListItems;
+           
 
           
 
@@ -3446,15 +3500,7 @@ WHERE (COMPName_EN LIKE '%' + @C1 + '%')
 
         }
 
-        private void cmbDepartment_DropDown(object sender, EventArgs e)
-        {
-            cmbDepartment.DropDownStyle = ComboBoxStyle.DropDown;
-            SQLCONN.OpenConection();
-            cmbDepartment.ValueMember = "Dept_Type_ID";
-            cmbDepartment.DisplayMember = "Dept_Type_Name";
-            cmbDepartment.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Dept_Type_ID,Dept_Type_Name FROM [DeptTypes]");
-            SQLCONN.CloseConnection();
-        }
+        
 
         private void cmbemployee_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -3474,18 +3520,9 @@ WHERE (COMPName_EN LIKE '%' + @C1 + '%')
 
         }
 
-        private void cmbworkfield_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            cmbworkfield.DroppedDown = false;
+       
 
-        }
-
-        private void cmbemployee1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            cmbemployee1.DroppedDown = false;
-
-        }
-
+      
         private void button26_Click(object sender, EventArgs e)
         {
             button28.Visible = true;
@@ -4595,19 +4632,7 @@ ORDER BY
       
 
 
-        private void cmbworkfield_DropDown(object sender, EventArgs e)
-        {
-            cmbworkfield.DropDownStyle = ComboBoxStyle.DropDown;
-            SQLCONN.OpenConection();
-            cmbDepartment.ValueMember = "Dept_Type_ID";
-            cmbDepartment.DisplayMember = "Dept_Type_Name";
-            cmbDepartment.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT Dept_Type_ID,Dept_Type_Name FROM [DeptTypes]");
-
-            cmbworkfield.ValueMember = "WorkID";
-            cmbworkfield.DisplayMember = "Name";
-            cmbworkfield.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT WorkID,Name FROM [WorkLocations]");
-            SQLCONN.CloseConnection();
-        }
+      
 
         private void button24_Click(object sender, EventArgs e)
         {
@@ -4892,6 +4917,79 @@ ORDER BY
                 {
                     package.SaveAs(new System.IO.FileInfo(saveFileDialog.FileName));
                 }
+            }
+        }
+
+        private void cmbcont_TextChanged(object sender, EventArgs e)
+        {
+            if (originalDataCountry != null)
+            {
+                cmbcont.DataSource = originalDataCountry;
+                cmbcont.ValueMember = "CountryId";
+                cmbcont.DisplayMember = "CountryName";
+            }
+        }
+
+        private void cmbworkfield_TextChanged(object sender, EventArgs e)
+        {
+            if (originalDataWorkField != null)
+            {
+                cmbworkfield.DataSource = originalDataWorkField;
+                cmbworkfield.ValueMember = "WorkID";
+                cmbworkfield.DisplayMember = "Name";
+            }
+        }
+
+        private void cmbDepartment_TextChanged(object sender, EventArgs e)
+        {
+            if (originalDataDepartment != null)
+            {
+                cmbDepartment.DataSource = originalDataDepartment;
+                cmbDepartment.ValueMember = "Dept_Type_ID";
+                cmbDepartment.DisplayMember = "Dept_Type_Name";
+            }
+        }
+
+        private void cmbemployee1_TextChanged(object sender, EventArgs e)
+        {
+
+            // Simple debugging log to see when this event gets triggered
+
+            // This is just to check if the ComboBox is working without filtering
+            if (originalDataHeadOFDepartment != null)
+            {
+                // Set DataSource to original data to check for any issues
+                cmbemployee1.DataSource = originalDataHeadOFDepartment;
+                cmbemployee1.ValueMember = "EmployeeID";
+                cmbemployee1.DisplayMember = "FullName";
+            }
+        }
+
+        private void cmbemployee2_TextChanged(object sender, EventArgs e)
+        {
+            // Simple debugging log to see when this event gets triggered
+
+            // This is just to check if the ComboBox is working without filtering
+            if (originalDataGeneralManager != null)
+            {
+                // Set DataSource to original data to check for any issues
+                cmbemployee2.DataSource = originalDataGeneralManager;
+                cmbemployee2.ValueMember = "EmployeeID";
+                cmbemployee2.DisplayMember = "FullName";
+            }
+        }
+
+        private void cmbemployee_TextChanged(object sender, EventArgs e)
+        {
+            // Simple debugging log to see when this event gets triggered
+
+            // This is just to check if the ComboBox is working without filtering
+            if (originalDataEmployee != null)
+            {
+                // Set DataSource to original data to check for any issues
+                cmbemployee.DataSource = originalDataEmployee;
+                cmbemployee.ValueMember = "EmployeeID";
+                cmbemployee.DisplayMember = "FullName";
             }
         }
 

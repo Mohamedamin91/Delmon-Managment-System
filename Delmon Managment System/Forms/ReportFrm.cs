@@ -34,6 +34,7 @@ namespace Delmon_Managment_System.Forms
         bool hasViewVISA = false;
         bool hasViewCANDIDATES = false;
         bool hasViewAssets = false;
+        DataTable originalDataCand;
 
 
 
@@ -41,7 +42,25 @@ namespace Delmon_Managment_System.Forms
         {
             InitializeComponent();
             dataGridView2.CellClick += dataGridView2_CellClick;
+            cmbcandidates2.TextChanged += new EventHandler(cmbcandidates2_TextChanged);
 
+            LoadComboBoxDataCand();
+
+        }
+
+        private void LoadComboBoxDataCand()
+        {
+
+            SQLCONN.OpenConection();
+
+            var data = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees]  order by EmployeeID");
+            if (data != null)
+            {
+                cmbcandidates2.DataSource = data;
+                cmbcandidates2.DisplayMember = "Name";
+                cmbcandidates2.ValueMember = "EmployeeID";
+            }
+            SQLCONN.CloseConnection();
         }
 
         private void UncheckAllCheckboxes(Control parent)
@@ -100,6 +119,7 @@ namespace Delmon_Managment_System.Forms
                 button3.Enabled = false;
                 groupBox2.Enabled = false;
                 groupBox3.Enabled = false;
+                groupBox4.Enabled = false;
                 picvisascreen.Enabled = false;
                 groupBox5.Enabled = groupBox6.Enabled = false;
 
@@ -112,6 +132,7 @@ namespace Delmon_Managment_System.Forms
                 button3.Enabled = true;
                 groupBox3.Enabled = true;
                 groupBox2.Enabled = true;
+                groupBox4.Enabled = true;
                 groupBox5.Enabled = groupBox6.Enabled = true;
 
 
@@ -160,12 +181,12 @@ namespace Delmon_Managment_System.Forms
 
 
 
-                cmbcandidates2.ValueMember = "EmployeeID";
-                cmbcandidates2.DisplayMember = "Name";
-                cmbcandidates2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees]       order by EmployeeID");
-                cmbcandidates2.Text = "Select";
-                cmbcandidates2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                cmbcandidates2.AutoCompleteSource = AutoCompleteSource.ListItems;
+                //cmbcandidates2.ValueMember = "EmployeeID";
+                //cmbcandidates2.DisplayMember = "Name";
+                //cmbcandidates2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees]       order by EmployeeID");
+                //cmbcandidates2.Text = "Select";
+                //cmbcandidates2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                //cmbcandidates2.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
             // Retrieve data from the database
@@ -424,11 +445,6 @@ namespace Delmon_Managment_System.Forms
                 default:
                     break;
             }
-        }
-
-        private void cmbcandidates2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void cmbPersonalStatusStatus_SelectedIndexChanged(object sender, EventArgs e)
@@ -1763,6 +1779,20 @@ namespace Delmon_Managment_System.Forms
             cmbCompany.Text = cmbReservedTo.Text = cmbConsulate.Text = "Select";
             dtpfrom.Value =dtpto.Value= DateTime.Now;
             UncheckAllCheckboxes(this);
+        }
+
+        private void cmbcandidates2_TextChanged(object sender, EventArgs e)
+        {
+            // Simple debugging log to see when this event gets triggered
+
+            // This is just to check if the ComboBox is working without filtering
+            if (originalDataCand != null)
+            {
+                // Set DataSource to original data to check for any issues
+                cmbcandidates2.DataSource = originalDataCand;
+                cmbcandidates2.ValueMember = "EmployeeID";
+                cmbcandidates2.DisplayMember = "Name";
+            }
         }
     }
 }
