@@ -1862,6 +1862,13 @@ WHERE
 
         private void btnuplode_Click(object sender, EventArgs e)
         {
+            SqlDataReader dr2;
+
+            SQLCONN.OpenConection();
+
+            SqlParameter paramaccount = new SqlParameter("@C1", SqlDbType.NVarChar);
+            SqlParameter paramissuedate = new SqlParameter("@C3", SqlDbType.Date);
+
             if (cmbReportType.Text == "Select")
             {
                 MessageBox.Show("Please select report type!.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1894,26 +1901,44 @@ WHERE
                         // Get the column values
                         string accountNo = row["Billing Account Number"].ToString();
                         string billType = GetBillType(cmbReportType.Text);
-
                         DateTime billDateGregorian = Convert.ToDateTime(row["Bill Date Gregorian (Last issued bill)"].ToString());
                         DateTime disconnectDate = billDateGregorian.AddMonths(1).AddDays(-1);
                         string balance = row["Balance"].ToString();
 
+
+
+                        paramaccount.Value = accountNo;
+                        paramissuedate.Value = billDateGregorian;
+
+
+
                         // Check for duplicates
-                        if (existingRecords.ContainsKey($"{accountNo}_{billDateGregorian.ToString("yyyy-MM-dd")}"))
+                         dr2 = SQLCONN.DataReader("select  IssuedDate,AccountNo from BillsPaymentStatus  where " +
+                      " IssuedDate=@C3  and AccountNo= @C1 ", paramaccount,paramissuedate );
+                        dr2.Read();
+
+                        if (dr2.HasRows)
                         {
-                            MessageBox.Show($"Duplicate found for Account No: {accountNo} and Bill Date: {billDateGregorian.ToString("yyyy-MM-dd")}. Stopping the operation.", "Duplicate Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            break;
+                            MessageBox.Show("This 'Bill'  Already Exists.!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
                         }
+                        
+                           
                         else
                         {
+                            dr2.Close();
+                            dr2.Dispose();
                             // Insert data into database
                             InsertDataIntoDatabase(accountNo, billType, billDateGregorian.ToString("yyyy-MM-dd"), disconnectDate.ToString("yyyy-MM-dd"), balance);
+                           
                         }
+                      
                     }
+                   
                     MessageBox.Show("Records saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                     dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT  * FROM [DelmonGroupDB].[dbo].[BillsPaymentStatus] ");
+
+
 
                 }
 
@@ -1923,6 +1948,7 @@ WHERE
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            SQLCONN.CloseConnection();
         }
 
         private DataTable ReadDataFromFile(string filePath, string fileExtension)
@@ -1996,7 +2022,8 @@ WHERE
             SqlParameter ParamBillDateGregorian = new SqlParameter("@IssuedDate", SqlDbType.DateTime) { Value = DateTime.ParseExact(billDateGregorian, "yyyy-MM-dd", CultureInfo.InvariantCulture) };
             SqlParameter ParamBillDisconnectDate = new SqlParameter("@DisconnectDate", SqlDbType.DateTime) { Value = DateTime.ParseExact(disconnectDate, "yyyy-MM-dd", CultureInfo.InvariantCulture) };
             SqlParameter ParamBalance = new SqlParameter("@BillAmount", SqlDbType.NVarChar) { Value = balance };
-            SQLCONN.ExecuteQueries(" INSERT INTO BillsPaymentStatus (AccountNo, BillType, IssuedDate, DisconnectDate, BillAmount) VALUES (@AccountNo, @BillType, @IssuedDate, @DisconnectDate, @BillAmount)", ParamAccountNo, ParamBillType, ParamBillDateGregorian, ParamBillDisconnectDate, ParamBalance);
+            SQLCONN.ExecuteQueries("UPDATE BillsPaymentStatus SET PaymentStatus = 1 WHERE AccountNo = @AccountNo AND PaymentStatus = 0", ParamAccountNo);
+            SQLCONN.ExecuteQueries(" INSERT INTO BillsPaymentStatus (AccountNo, BillType, IssuedDate, DisconnectDate, BillAmount,PaymentStatus) VALUES (@AccountNo, @BillType, @IssuedDate, @DisconnectDate, @BillAmount,0)", ParamAccountNo, ParamBillType, ParamBillDateGregorian, ParamBillDisconnectDate, ParamBalance);
             /*Uplode-import**/
 
         }
@@ -2048,46 +2075,58 @@ WHERE
 
                     if (cmbBillType1.Text == "Communication")
                     {
-                        string queryCommuni = @" SELECT 
-     bps.AccountNo,
-     bps.BillType,
-    cb.ServiceNo,
-    bps.IssuedDate,
-    CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
-    bps.BillAmount,
-	dt.Dept_Type_Name as Divison,
-    COALESCE(
+                        string queryCommuni = @" SELECT *
+FROM (
+    SELECT   
+        bps.AccountNo,
+        bps.BillType,
+        cb.ServiceNo,
+        bps.IssuedDate,
+        CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
+        bps.BillAmount,
+        dt.Dept_Type_Name as Division,
+        COALESCE(
+            CASE 
+                WHEN eu.EndUserType = 'Company' THEN hod.FirstName + ' ' + hod.LastName
+                WHEN eu.EndUserType = 'Personal' THEN 
+                    (SELECT FirstName +' '+ LastName 
+                     FROM Employees 
+                     WHERE EmployeeID = 
+                        (SELECT DeptHeadID 
+                         FROM DEPARTMENTS 
+                         WHERE DeptID = (SELECT DeptID 
+                                         FROM Employees 
+                                         WHERE EmployeeID = e.EmployeeID)))
+            END, 'Unknown') AS Approvedby,
         CASE 
-            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +''+hod.LastName
-            WHEN eu.EndUserType = 'Personal' THEN (SELECT FirstName +' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
-        END, 'Unknown') AS Approvedby,
+            WHEN eu.EndUserType = 'Company' THEN CONCAT(c.ShortCompName, ' / ', dt.Dept_Type_Name)
+            WHEN eu.EndUserType = 'Personal' THEN CONCAT(e.FirstName, ' ', e.LastName)
+        END AS EndUserName,
+        eu.ID AS EndUserID,
+        -- Use ROW_NUMBER to remove duplicates
+        ROW_NUMBER() OVER (PARTITION BY bps.AccountNo, bps.BillAmount ORDER BY bps.IssuedDate) AS RowNum
+    FROM 
+        BillsPaymentStatus bps
+        LEFT JOIN CommunicationsBills cb ON bps.AccountNo = cb.AccountNo AND cb.EndUserID IS NOT NULL
+        LEFT JOIN EndUsers eu ON cb.EndUserID = eu.ID
+        LEFT JOIN Employees e ON eu.ID = e.EmployeeID
+        LEFT JOIN DEPARTMENTS d1 ON eu.EndUserType = 'Company' AND eu.ID = d1.DeptID
+        LEFT JOIN DEPARTMENTS d2 ON eu.EndUserType = 'Personal' AND e.DeptID = d2.DeptID
+        LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
+        LEFT JOIN Companies c ON d1.COMPID = c.COMPID
+        LEFT JOIN Employees hod ON eu.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
+    WHERE 
+        bps.BillType = @paramBillType
+        AND bps.PaymentStatus = 0
+        AND CASE 
+            WHEN eu.EndUserType = 'Company' THEN d1.DeptHeadID
+            WHEN eu.EndUserType = 'Personal' THEN d2.DeptHeadID
+            ELSE d2.DeptHeadID
+        END = @paramEnduserID
+) AS TempTable
+WHERE RowNum = 1
 
-    CASE 
-        WHEN eu.EndUserType = 'Company' THEN concat (c.ShortCompName,' / ',dt.Dept_Type_Name)
-        WHEN eu.EndUserType = 'Personal' THEN concat (e.FirstName,' ', e.LastName)
-    END AS EndUserName,
-    eu.ID AS EndUserID
 
-FROM 
-    BillsPaymentStatus bps
-  LEFT JOIN CommunicationsBills cb ON bps.AccountNo = cb.AccountNo AND cb.EndUserID IS NOT NULL
-  LEFT JOIN EndUsers eu ON cb.EndUserID = eu.ID
-  LEFT JOIN Employees e ON eu.ID = e.EmployeeID
-  LEFT JOIN DEPARTMENTS d1 ON eu.EndUserType = 'Company' AND eu.ID = d1.DeptID
-  LEFT JOIN DEPARTMENTS d2 ON eu.EndUserType = 'Personal' AND e.DeptID = d2.DeptID
-  LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
-  LEFT JOIN Companies c ON d1.COMPID = c.COMPID
-  LEFT JOIN Employees hod ON eu.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
-
-  where 
-
-  bps.BillType=@paramBillType
-  AND bps.PaymentStatus=0
-  AND CASE 
-        WHEN eu.EndUserType = 'Company' THEN d1.DeptHeadID
-        WHEN eu.EndUserType = 'Personal' THEN d2.DeptHeadID
-        ELSE d2.DeptHeadID
-      END = @paramEnduserID
 ";
 
                         if (cmbendtype.SelectedItem.ToString() != "All")
@@ -2119,6 +2158,13 @@ FROM
                         }
 
                     }
+   
+                    
+                    
+                    
+                    
+                    
+                    
                     //Electrcity
                     else
                     {
@@ -3126,47 +3172,58 @@ FROM
                     //coummunication
                     if (cmbBillType1.Text == "Communication")
                     {
-                        query = @"SELECT 
-     bps.AccountNo,
-     bps.BillType,
-    cb.ServiceNo,
-    bps.IssuedDate,
-    CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
-    bps.BillAmount,
-	dt.Dept_Type_Name as Divison,
-    COALESCE(
+                        query = @"  SELECT *
+FROM (
+    SELECT   
+        bps.AccountNo,
+        bps.BillType,
+        cb.ServiceNo,
+        bps.IssuedDate,
+        CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
+        bps.BillAmount,
+        dt.Dept_Type_Name as Division,
+        COALESCE(
+            CASE 
+                WHEN eu.EndUserType = 'Company' THEN hod.FirstName + ' ' + hod.LastName
+                WHEN eu.EndUserType = 'Personal' THEN 
+                    (SELECT FirstName +' '+ LastName 
+                     FROM Employees 
+                     WHERE EmployeeID = 
+                        (SELECT DeptHeadID 
+                         FROM DEPARTMENTS 
+                         WHERE DeptID = (SELECT DeptID 
+                                         FROM Employees 
+                                         WHERE EmployeeID = e.EmployeeID)))
+            END, 'Unknown') AS Approvedby,
         CASE 
-            WHEN eu.EndUserType = 'Company' THEN hod.FirstName +' '+hod.LastName
-            WHEN eu.EndUserType = 'Personal' THEN (SELECT FirstName +' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
-        END, 'Unknown') AS Approvedby,
+            WHEN eu.EndUserType = 'Company' THEN CONCAT(c.ShortCompName, ' / ', dt.Dept_Type_Name)
+            WHEN eu.EndUserType = 'Personal' THEN CONCAT(e.FirstName, ' ', e.LastName)
+        END AS EndUserName,
+        eu.ID AS EndUserID,
+        -- Use ROW_NUMBER to remove duplicates
+        ROW_NUMBER() OVER (PARTITION BY bps.AccountNo, bps.BillAmount ORDER BY bps.IssuedDate) AS RowNum
+    FROM 
+        BillsPaymentStatus bps
+        LEFT JOIN CommunicationsBills cb ON bps.AccountNo = cb.AccountNo AND cb.EndUserID IS NOT NULL
+        LEFT JOIN EndUsers eu ON cb.EndUserID = eu.ID
+        LEFT JOIN Employees e ON eu.ID = e.EmployeeID
+        LEFT JOIN DEPARTMENTS d1 ON eu.EndUserType = 'Company' AND eu.ID = d1.DeptID
+        LEFT JOIN DEPARTMENTS d2 ON eu.EndUserType = 'Personal' AND e.DeptID = d2.DeptID
+        LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
+        LEFT JOIN Companies c ON d1.COMPID = c.COMPID
+        LEFT JOIN Employees hod ON eu.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
+    WHERE 
+        bps.BillType = @paramBillType
+        AND bps.PaymentStatus = 0
+        AND CASE 
+            WHEN eu.EndUserType = 'Company' THEN d1.DeptHeadID
+            WHEN eu.EndUserType = 'Personal' THEN d2.DeptHeadID
+            ELSE d2.DeptHeadID
+        END = @paramEnduserID
+) AS TempTable
+WHERE RowNum = 1
 
-    CASE 
-        WHEN eu.EndUserType = 'Company' THEN concat (c.ShortCompName,' / ',dt.Dept_Type_Name)
-        WHEN eu.EndUserType = 'Personal' THEN concat (e.FirstName,' ', e.LastName)
-    END AS EndUserName,
-    eu.ID AS EndUserID
-
-FROM 
-    BillsPaymentStatus bps
-  LEFT JOIN CommunicationsBills cb ON bps.AccountNo = cb.AccountNo AND cb.EndUserID IS NOT NULL
-  LEFT JOIN EndUsers eu ON cb.EndUserID = eu.ID
-  LEFT JOIN Employees e ON eu.ID = e.EmployeeID
-  LEFT JOIN DEPARTMENTS d1 ON eu.EndUserType = 'Company' AND eu.ID = d1.DeptID
-  LEFT JOIN DEPARTMENTS d2 ON eu.EndUserType = 'Personal' AND e.DeptID = d2.DeptID
-  LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
-  LEFT JOIN Companies c ON d1.COMPID = c.COMPID
-  LEFT JOIN Employees hod ON eu.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
-
-
-  where 
-
-  bps.BillType=@paramBillType
-  AND bps.PaymentStatus=0
- AND CASE 
-        WHEN eu.EndUserType = 'Company' THEN d1.DeptHeadID
-        WHEN eu.EndUserType = 'Personal' THEN d2.DeptHeadID
-        ELSE d2.DeptHeadID
-      END = @paramEnduserID ";
+";
 
                     }
                     //Electrcity
@@ -3219,6 +3276,13 @@ FROM
                     }
                 }
 
+         
+                
+                
+                
+                
+                
+                
                 //paid
                 else
                 {
@@ -3508,6 +3572,11 @@ FROM
                 cmbenduserrpt.ValueMember = "Value";
                 cmbenduserrpt.DisplayMember = "DisplayValue";
             }
+        }
+
+        private void groupBox6_Enter(object sender, EventArgs e)
+        {
+
         }
 
         private void cmbpackage_TextChanged(object sender, EventArgs e)

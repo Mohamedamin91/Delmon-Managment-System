@@ -2042,6 +2042,7 @@ namespace Delmon_Managment_System.Forms
             this.groupBox6.Size = new System.Drawing.Size(256, 158);
             this.groupBox6.TabIndex = 205;
             this.groupBox6.TabStop = false;
+            this.groupBox6.Enter += new System.EventHandler(this.groupBox6_Enter);
             // 
             // btnuplode
             // 
