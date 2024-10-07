@@ -65,7 +65,7 @@ namespace Delmon_Managment_System.Forms
 
         private void LoadComboBoxDataCand()
         {
-        
+
             SQLCONN.OpenConection();
 
             var data = SQLCONN.ShowDataInGridViewORCombobox("SELECT Employees.EmployeeID, RTRIM(LTRIM(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE([SecondName] + ' ', '') ,COALESCE(ThirdName + ' ', ''), COALESCE(Lastname, '')))) AS Name  FROM [DelmonGroupDB].[dbo].[Employees] , StatusTBL where Employees.EmploymentStatusID = StatusTBL.StatusID and RefrenceID=2 and StatusTBL.StatusID = 23 order by EmployeeID");
@@ -209,7 +209,7 @@ namespace Delmon_Managment_System.Forms
 
         }
 
-       private void IssueDateENPicker_ValueChanged(object sender, EventArgs e)
+        private void IssueDateENPicker_ValueChanged(object sender, EventArgs e)
         {
             CultureInfo ci = new CultureInfo("en-US");
 
@@ -609,7 +609,7 @@ namespace Delmon_Managment_System.Forms
             //SqlParameter paramID = new SqlParameter("@ID", SqlDbType.NVarChar);
             //paramID.Value = Visanumtxt.Text;
 
-        
+
 
             //if (VisaNumberID == 0 && Visanumtxt.Text == string.Empty)
             //{
@@ -627,7 +627,7 @@ namespace Delmon_Managment_System.Forms
 
             //    else 
             //    {
-                
+
             //        dataGridView2.Visible = true;
 
             //        string query = "SELECT COMPID,COMPName_EN FROM Companies";
@@ -642,7 +642,7 @@ namespace Delmon_Managment_System.Forms
 
 
 
-               
+
 
             //    }
 
@@ -1954,20 +1954,20 @@ namespace Delmon_Managment_System.Forms
                     {
 
 
-                        SQLCONN.ExecuteQueries("update VISA set Remarks=@C10 where VisaNumber=@C3", paramRemarks,paramVisanumber);
+                        SQLCONN.ExecuteQueries("update VISA set Remarks=@C10 where VisaNumber=@id", paramRemarks, paramVisaID);
 
 
-                        SQLCONN.ExecuteQueries("update VISAJobList set StatusID=@C4,[EmployeeID]=@C9,AgencyID=@C7 ,[ConsulateID] = @C5,[JobID] = @C6 ,ReservedTo=@CompReservedTo  where FileNumber=@FileNumberid",
+                       SQLCONN.ExecuteQueries("update VISAJobList set StatusID=@C4,[EmployeeID]=@C9,AgencyID=@C7 ,[ConsulateID] = @C5,[JobID] = @C6 ,ReservedTo=@CompReservedTo  where FileNumber=@FileNumberid",
                        paramstatusID, paramCandidate2, paramAgency, ParamConsulate, paramJob, paramReservedTo, paramFileNumberID, paramRemarks);
 
                     }
                     else
 
                     {
-                        SQLCONN.ExecuteQueries("update VISA set Remarks=@C10 where VisaNumber=@C3", paramRemarks, paramVisanumber);
+                        SQLCONN.ExecuteQueries("update VISA  set Remarks=@C10 where VisaNumber=@id", paramRemarks, paramVisaID);
 
                         SQLCONN.ExecuteQueries("update VISAJobList set StatusID=@C4,[EmployeeID]=@C8,AgencyID=@C7 ,[ConsulateID] = @C5,[JobID] = @C6 ,ReservedTo=@CompReservedTo where FileNumber=@FileNumberid",
-                     paramstatusID, paramCandidate, paramAgency, ParamConsulate, paramJob, paramReservedTo, paramFileNumberID, paramRemarks);
+                     paramstatusID, paramCandidate, paramAgency, ParamConsulate, paramJob, paramReservedTo, paramFileNumberID);
 
                     }
 
@@ -2033,9 +2033,9 @@ namespace Delmon_Managment_System.Forms
       ,[DatetimeLOG]
       ,[CRNumber]
       ,[ID_Number]
-       FROM [DelmonGroupDB].[dbo].[VISA], [Companies] where Companies.COMPID=VISA.ComapnyID and VisaNumber=@C3  ";
+       FROM [DelmonGroupDB].[dbo].[VISA], [Companies] where Companies.COMPID=VISA.ComapnyID and VisaNumber =  '" + VisaNumberID + "'";
 
-                    dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramVisanumber);
+                    dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query);
 
                     dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from VISAJobList where FileNumber = '" + FileNumberID + "'");
                     SQLCONN.CloseConnection();
@@ -2164,7 +2164,7 @@ namespace Delmon_Managment_System.Forms
 
         private void cmbAgency_DropDown(object sender, EventArgs e)
         {
-           
+
 
         }
 
@@ -2353,7 +2353,7 @@ GROUP BY
 
         }
 
-      
+
 
         private void cmbJob_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -2439,6 +2439,7 @@ GROUP BY
 
                     // Populate fields asynchronously
                     await PopulateFieldsAsync(selectedRow);
+
                 }
                 catch (Exception ex)
                 {
@@ -2446,7 +2447,9 @@ GROUP BY
                     MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+      
         }
+    
 
         private async Task LoadCompanyDataAsync()
         {
@@ -2480,7 +2483,8 @@ GROUP BY
                     // Populate fields from selected row
                     SetFieldValues(selectedRow);
                     // Calculate dates
-                    //CalculateDates();
+                    CalculateDates2();
+
 
                     // Load VISA job list data
                     LoadVisaJobListAsync(VisaNumberID);
@@ -2613,6 +2617,58 @@ GROUP BY
                     toGregorian = toGregorian.AddDays(709);
                     ExpiryDateENP = toGregorian.ToString("dd/MM/yyyy");
                     expairENDATEtxt.Text = ExpiryDateENP;
+
+                    if (DateTime.TryParseExact(ExpiryDateENP, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime futurDate))
+                    {
+                        var numberOfDays = Math.Round((futurDate - dtNOW).TotalDays);
+
+                        if (numberOfDays <= 0)
+                        {
+                            Remaininglbl.Text = "Expired";
+                        }
+                        else
+                        {
+                            Remaininglbl.Text = numberOfDays.ToString();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                toGregorian = DateTime.Now;
+                b = DateTime.Now;
+                b2 = DateTime.Now;
+                dtNOW = DateTime.Now;
+            }
+        }
+        private void CalculateDates2()
+        {
+            string a = issuhijritxt.Text.Trim();
+            DateTime toGregorian;
+            DateTime b, b2, dtNOW;
+
+            if (!string.IsNullOrEmpty(a))
+            {
+                if (DateTime.TryParseExact(a, "dd/MM/yyyy", SA, System.Globalization.DateTimeStyles.None, out toGregorian))
+                {
+                    b = toGregorian;
+                    b2 = toGregorian;
+                    dtNOW = DateTime.Now;
+
+                    //issuhijritxt.Text = b.ToString("f");
+                    //IssueDateHijri = b.ToString("dd/MM/yyyy");
+                    //issuhijritxt.Text = IssueDateHijri;
+
+                    //b2 = b2.AddDays(709);
+                    //ExpiryDateHijri = b2.ToString("dd/MM/yyyy");
+                    //ExpiaryHijritxt.Text = ExpiryDateHijri;
+
+                    //IssueDateEN = toGregorian.ToString("dd/MM/yyyy");
+                    //IssueDateENTxt.Text = IssueDateEN;
+
+                    //toGregorian = toGregorian.AddDays(709);
+                    //ExpiryDateENP = toGregorian.ToString("dd/MM/yyyy");
+                    //expairENDATEtxt.Text = ExpiryDateENP;
 
                     if (DateTime.TryParseExact(ExpiryDateENP, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime futurDate))
                     {

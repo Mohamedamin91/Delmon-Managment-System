@@ -1096,7 +1096,7 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
             paramdisconnectdate.Value = dtpdisconnect.Value;
 
             SqlParameter paramBillAmount = new SqlParameter("@C5", SqlDbType.NVarChar);
-            paramBillAmount.Value = txtBillAmount.Text;
+            paramBillAmount.Value = float.Parse(txtBillAmount.Text);
             SqlParameter paramPaymentstaus = new SqlParameter("@C6", SqlDbType.NVarChar);
             paramPaymentstaus.Value = 0;
 
@@ -1142,7 +1142,7 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
       ,[BillType]
       ,[IssuedDate]
       ,[DisconnectDate]
-      ,[BillAmount]  where " +
+      ,[BillAmount] FROM [DelmonGroupDB].[dbo].[BillsPaymentStatus] where " +
                     " IssuedDate = @C3 and AccountNo = @C1  ", paramissuedate, paramaccount);
             }
 
@@ -1164,7 +1164,10 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
             paramdisconnectdate.Value = dtpdisconnect.Value;
 
             SqlParameter paramBillAmount = new SqlParameter("@C5", SqlDbType.NVarChar);
-            paramBillAmount.Value = txtBillAmount.Text;
+            paramBillAmount.Value = float.Parse(txtBillAmount.Text);
+
+
+          
 
             SqlParameter paramPaymentstaus = new SqlParameter("@C6", SqlDbType.NVarChar);
             paramPaymentstaus.Value = 0;
@@ -1854,199 +1857,125 @@ WHERE
 
         }
 
+
         /*Uplode-import**/
+
         private void btnuplode_Click(object sender, EventArgs e)
         {
-            SQLCONN.OpenConection();
-            SqlParameter paramaccount = new SqlParameter("@C1", SqlDbType.NVarChar);
             if (cmbReportType.Text == "Select")
             {
                 MessageBox.Show("Please select report type!.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            /*Communication*/
-            if (cmbReportType.Text == "Communication")
+            try
             {
-                try
+                // Open file dialog to select file
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm;*.csv";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    // Open file dialog to select file
-                    OpenFileDialog openFileDialog = new OpenFileDialog();
-                    openFileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm;*.csv";
-                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    string filePath = openFileDialog.FileName;
+                    string fileExtension = Path.GetExtension(filePath).ToLower();
+
+                    // Read data from file
+                    DataTable table = ReadDataFromFile(filePath, fileExtension);
+
+                    // Check for existing records
+                    Dictionary<string, string> existingRecords = GetExistingRecords();
+
+                    // Iterate through each row in the DataTable
+                    foreach (DataRow row in table.Rows)
                     {
-                        string filePath = openFileDialog.FileName;
-                        string fileExtension = Path.GetExtension(filePath).ToLower();
-
-                        // Read data from file
-                        DataTable table = ReadDataFromFile(filePath, fileExtension);
-
-                        // Check for existing records
-                        Dictionary<string, DateTime> existingRecords = GetExistingRecords();
-
-                        // Iterate through each row in the DataTable
 
 
-                        foreach (DataRow row in table.Rows)
+
+
+                        // Get the column values
+                        string accountNo = row["Billing Account Number"].ToString();
+                        string billType = GetBillType(cmbReportType.Text);
+
+                        DateTime billDateGregorian = Convert.ToDateTime(row["Bill Date Gregorian (Last issued bill)"].ToString());
+                        DateTime disconnectDate = billDateGregorian.AddMonths(1).AddDays(-1);
+                        string balance = row["Balance"].ToString();
+
+                        // Check for duplicates
+                        if (existingRecords.ContainsKey($"{accountNo}_{billDateGregorian.ToString("yyyy-MM-dd")}"))
                         {
-                            string accountNo = row["Billing Account Number"].ToString();
-                            paramaccount.Value =accountNo;
-
-                            string billType = GetBillType(cmbReportType.Text);
-                            DateTime billDateGregorian = Convert.ToDateTime(row["Bill Date Gregorian (Last issued bill)"].ToString());
-                            DateTime disconnectDate = billDateGregorian.AddMonths(1).AddDays(-1);
-                            string balance = row["Balance"].ToString();
-
-                            // Check for duplicates
-                            if (existingRecords.ContainsKey(accountNo) && existingRecords[accountNo].ToString("yyyy-MM-dd") == billDateGregorian.ToString("yyyy-MM-dd"))
-                            {
-                                MessageBox.Show($"Duplicate found for Account No: {accountNo} and Bill Date: {billDateGregorian}. Stopping the operation.", "Duplicate Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                break;
-                            }
-                            else
-                            {
-                                // update previous status for spcific account number 
-
-                                SQLCONN.ExecuteQueries("UPDATE BillsPaymentStatus SET PaymentStatus = 1 WHERE AccountNo = @C1 AND PaymentStatus = 0", paramaccount);
-
-                                // Insert data into database
-                                InsertDataIntoDatabase(accountNo, billType, billDateGregorian.ToString("yyyy-MM-dd"), disconnectDate.ToString("yyyy-MM-dd"), balance);
-                            }
+                            MessageBox.Show($"Duplicate found for Account No: {accountNo} and Bill Date: {billDateGregorian.ToString("yyyy-MM-dd")}. Stopping the operation.", "Duplicate Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            break;
                         }
-                        MessageBox.Show("Records saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT  * FROM [DelmonGroupDB].[dbo].[BillsPaymentStatus] ");
-
+                        else
+                        {
+                            // Insert data into database
+                            InsertDataIntoDatabase(accountNo, billType, billDateGregorian.ToString("yyyy-MM-dd"), disconnectDate.ToString("yyyy-MM-dd"), balance);
+                        }
                     }
+                    MessageBox.Show("Records saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT  * FROM [DelmonGroupDB].[dbo].[BillsPaymentStatus] ");
 
                 }
 
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
             }
-            /*Communication*/
 
-            /*Electrcity*/
-            if (cmbReportType.Text == "Electrcity")
+            catch (Exception ex)
             {
-                try
-                {
-                    // Open file dialog to select file
-                    OpenFileDialog openFileDialog = new OpenFileDialog();
-                    openFileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm;*.csv";
-                    if (openFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        string filePath = openFileDialog.FileName;
-                        string fileExtension = Path.GetExtension(filePath).ToLower();
-
-                        // Read data from file
-                        DataTable table = ReadDataFromFile(filePath, fileExtension);
-
-                        // Check for existing records
-                        Dictionary<string, DateTime> existingRecords = GetExistingRecords();
-
-                        // Iterate through each row in the DataTable
-
-
-                        foreach (DataRow row in table.Rows)
-                        {
-                            string accountNo = row["AccountNo"].ToString();
-                            paramaccount.Value = accountNo;
-
-
-                            string billType = GetBillType(cmbReportType.Text);
-                            DateTime billDateGregorian = Convert.ToDateTime(row["DisconnectDate"].ToString());
-                            DateTime disconnectDate = Convert.ToDateTime(row["DisconnectDate"].ToString());
-
-                            // DateTime disconnectDate = billDateGregorian.AddMonths(1).AddDays(-1);
-                            //DisconnectDate
-                            string balance = row["BillAmount"].ToString();
-
-                            // Check for duplicates
-                            if (existingRecords.ContainsKey(accountNo) && existingRecords[accountNo].ToString("yyyy-MM-dd") == billDateGregorian.ToString("yyyy-MM-dd"))
-                            {
-                                MessageBox.Show($"Duplicate found for Account No: {accountNo} and Bill Date: {billDateGregorian}. Stopping the operation.", "Duplicate Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                break;
-                            }
-                            else
-                            {
-                                // update previous status for spcific account number 
-                                SQLCONN.ExecuteQueries("UPDATE BillsPaymentStatus SET PaymentStatus = 1 WHERE AccountNo = @C1 AND PaymentStatus = 0", paramaccount);
-
-                                // Insert data into database
-                                InsertDataIntoDatabase(accountNo, billType, billDateGregorian.ToString("yyyy-MM-dd"), disconnectDate.ToString("yyyy-MM-dd"), balance);
-                            }
-                        }
-                        MessageBox.Show("Records saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT  * FROM [DelmonGroupDB].[dbo].[BillsPaymentStatus] ");
-
-                    }
-
-                }
-
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            /*Electrcity*/
-            SQLCONN.CloseConnection();
-
-
-
         }
 
         private DataTable ReadDataFromFile(string filePath, string fileExtension)
         {
             DataTable table = new DataTable();
 
-            if (fileExtension == ".csv")
+            if (fileExtension == ".xls" || fileExtension == ".xlsx" || fileExtension == ".xlsm")
             {
-                using (var reader = new StreamReader(filePath))
-                using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                using (var package = new ExcelPackage(new FileInfo(filePath)))
                 {
-                    using (var dr1 = new CsvDataReader(csv))
+                    var worksheet = package.Workbook.Worksheets.First();
+                    var rows = worksheet.Dimension.Rows;
+                    var columns = worksheet.Dimension.Columns;
+
+                    for (int i = 1; i <= columns; i++)
                     {
-                        table.Load(dr1);
+                        table.Columns.Add(worksheet.Cells[1, i].Value.ToString());
                     }
-                }
-            }
-            else if (fileExtension == ".xls" || fileExtension == ".xlsx" || fileExtension == ".xlsm")
-            {
-                using (var stream = System.IO.File.Open(filePath, System.IO.FileMode.Open, System.IO.FileAccess.Read))
-                {
-                    using (var reader = ExcelReaderFactory.CreateReader(stream))
+
+                    for (int i = 2; i <= rows; i++)
                     {
-                        var result = reader.AsDataSet();
-                        table = result.Tables[0]; // Assuming data is in first sheet
+                        DataRow row = table.NewRow();
+                        for (int j = 1; j <= columns; j++)
+                        {
+                            row[j - 1] = worksheet.Cells[i, j].Value;
+                        }
+                        table.Rows.Add(row);
                     }
                 }
             }
             else
             {
-                throw new Exception("Unsupported file format. Please select a CSV or Excel file.");
+                throw new Exception("Unsupported file format. Please select an Excel file.");
             }
 
             return table;
         }
 
-        private Dictionary<string, DateTime> GetExistingRecords()
+
+        private Dictionary<string, string> GetExistingRecords()
         {
             SQLCONN.OpenConection();
-            Dictionary<string, DateTime> existingRecords = new Dictionary<string, DateTime>();
+            Dictionary<string, string> existingRecords = new Dictionary<string, string>();
             SqlDataReader dr = SQLCONN.DataReader("SELECT AccountNo, IssuedDate FROM BillsPaymentStatus");
             while (dr.Read())
             {
-                string dateStr = dr["IssuedDate"].ToString();
-                DateTime billDateGregorian = Convert.ToDateTime(dateStr);
-                existingRecords.Add(dr["AccountNo"].ToString(), billDateGregorian);
+                string key = $"{dr["AccountNo"]}_{dr["IssuedDate"]}";
+                existingRecords.Add(key, dr["IssuedDate"].ToString());
             }
             dr.Close();
             return existingRecords;
         }
+
         private string GetBillType(string reportType)
         {
             switch (reportType)
@@ -2067,73 +1996,14 @@ WHERE
             SqlParameter ParamBillDateGregorian = new SqlParameter("@IssuedDate", SqlDbType.DateTime) { Value = DateTime.ParseExact(billDateGregorian, "yyyy-MM-dd", CultureInfo.InvariantCulture) };
             SqlParameter ParamBillDisconnectDate = new SqlParameter("@DisconnectDate", SqlDbType.DateTime) { Value = DateTime.ParseExact(disconnectDate, "yyyy-MM-dd", CultureInfo.InvariantCulture) };
             SqlParameter ParamBalance = new SqlParameter("@BillAmount", SqlDbType.NVarChar) { Value = balance };
+            SQLCONN.ExecuteQueries(" INSERT INTO BillsPaymentStatus (AccountNo, BillType, IssuedDate, DisconnectDate, BillAmount) VALUES (@AccountNo, @BillType, @IssuedDate, @DisconnectDate, @BillAmount)", ParamAccountNo, ParamBillType, ParamBillDateGregorian, ParamBillDisconnectDate, ParamBalance);
+            /*Uplode-import**/
 
-            SQLCONN.ExecuteQueries("INSERT INTO BillsPaymentStatus (AccountNo, BillType, IssuedDate, DisconnectDate, BillAmount) VALUES (@AccountNo, @BillType, @IssuedDate, @DisconnectDate, @BillAmount)", ParamAccountNo, ParamBillType, ParamBillDateGregorian, ParamBillDisconnectDate, ParamBalance);
         }
-        /*Uplode-import**/
 
-       
-        
-        
-        /*Display*/
-        private DataTable GetFilteredData(DateTime? fromDate, DateTime? toDate, string billType, string accountNumber)
-        {
-            // Create a query to get the filtered data
-            string query = "SELECT * FROM BillsPaymentStatus WHERE 1=1";
 
-            // Add filters if values are provided
-            if (fromDate.HasValue)
-            {
-                query += " AND IssuedDate >= @fromDate";
-            }
-            if (toDate.HasValue)
-            {
-                query += " AND IssuedDate <= @toDate";
-            }
-            if (!string.IsNullOrEmpty(billType))
-            {
-                query += " AND BillType = @billType";
-            }
-            if (!string.IsNullOrEmpty(accountNumber))
-            {
-                query += " AND AccountNo LIKE @accountNumber";
-            }
-
-            // Create a DataTable to store the filtered data
-            DataTable dt = new DataTable();
-
-            // Execute the query and fill the DataTable
-            using (SqlConnection conn = new SqlConnection(SQLCONN.ConnectionString))
-            {
-                conn.Open();
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    if (fromDate.HasValue)
-                    {
-                        cmd.Parameters.AddWithValue("@fromDate", fromDate);
-                    }
-                    if (toDate.HasValue)
-                    {
-                        cmd.Parameters.AddWithValue("@toDate", toDate);
-                    }
-                    if (!string.IsNullOrEmpty(billType))
-                    {
-                        cmd.Parameters.AddWithValue("@billType", billType);
-                    }
-                    if (!string.IsNullOrEmpty(accountNumber))
-                    {
-                        cmd.Parameters.AddWithValue("@accountNumber", "%" + accountNumber + "%");
-                    }
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        dt.Load(reader);
-                    }
-                }
-            }
-
-            return dt;
-        }
-        private void button14_Click(object sender, EventArgs e)
+            /*Display*/
+            private void button14_Click(object sender, EventArgs e)
         {
             dataGridView5.Visible = true;
             crystalReportViewer1.Visible = false;
@@ -2479,9 +2349,10 @@ FROM
 
          
         }
-      
-        
-        
+        /*Display*/
+
+
+
         private void GenerateReport(DataTable dt)
         {
             // Bind the data to the DataGridView5

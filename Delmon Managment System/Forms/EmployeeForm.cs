@@ -29,7 +29,8 @@ namespace Delmon_Managment_System.Forms
 
         //  JobOfferLTR OfferLTR = new JobOfferLTR();
         public int EMPID;
-        public int EmployeeID;
+        public int EmployeeID, EmployeeIDRPT;
+        
         int SalaryID = 0;
         static Regex validate_emailaddress = email_validation();
         int id_History = 0;
@@ -2199,6 +2200,7 @@ ORDER BY e.EmployeeID";
                 }
 
                 EmployeeID = Convert.ToInt32(row.Cells["EmployeeID"].Value);
+                EmployeeIDRPT = Convert.ToInt32(row.Cells["EmployeeID"].Value);
                 EMPID = EmployeeID;
                 AddBtn.Visible = false;
                 btnNew.Visible = DeleteBTN.Visible = Updatebtn.Visible = true;
@@ -3095,7 +3097,7 @@ ORDER BY e.EmployeeID";
 
         private void btnprtvisareq_Click(object sender, EventArgs e)
         {
-            CommonClass.EmployeeIDRPT = EmployeeID;
+            CommonClass.EmployeeIDRPT = EmployeeIDRPT;
             if
                 (EmployeeID == 0)
             {

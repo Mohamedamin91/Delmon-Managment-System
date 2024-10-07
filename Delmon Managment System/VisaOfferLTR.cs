@@ -64,7 +64,7 @@ namespace Delmon_Managment_System
                 //this.reportViewer1.RefreshReport();
                 ///****/
 
-                EmpIDRPT = CommonClass.EmployeeID;
+                EmpIDRPT = CommonClass.EmployeeIDRPT;
                 EmployeeName = CommonClass.LoginEmployeeName;
 
                 SqlParameter paramEmployeeID = new SqlParameter("@EmployeeID", SqlDbType.NVarChar);
