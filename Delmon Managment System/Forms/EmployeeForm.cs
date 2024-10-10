@@ -54,9 +54,6 @@ namespace Delmon_Managment_System.Forms
 
 
 
-
-
-
         public EmployeeForm()
         {
 
@@ -78,10 +75,6 @@ namespace Delmon_Managment_System.Forms
 
             //  cmbPersonalStatusStatus.KeyPress += cmbPersonalStatusStatus_KeyPress;
 
-
-
-
-
         }
 
         private int CalculateAge(DateTime dateOfBirth)
@@ -91,7 +84,6 @@ namespace Delmon_Managment_System.Forms
             if (dateOfBirth.Date > today.AddYears(-age)) age--;
             return age;
         }
-
 
         public void ClearTextBoxes()
         {
@@ -139,9 +131,12 @@ namespace Delmon_Managment_System.Forms
         // Load the ComboBox data
         private void LoadComboBoxData()
         {
+            SqlParameter paramSearch = new SqlParameter("@C0", SqlDbType.NVarChar);
+            paramSearch.Value = cmbEmployJobHistory.Text.Trim();
             SQLCONN.OpenConection();
             // Fetch the DataTable directly without casting
-            originalData = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID, JobTitleEN FROM JOBS ORDER BY JobID ;");
+        //    originalData = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID, JobTitleEN FROM JOBS WHERE JobTitleEN LIKE @C0 + '%' ORDER BY JobTitleEN", paramSearch);
+            originalData = SQLCONN.ShowDataInGridViewORCombobox("SELECT JobID, JobTitleEN FROM JOBS ORDER BY JobTitleEN");
 
             if (originalData != null)
             {
