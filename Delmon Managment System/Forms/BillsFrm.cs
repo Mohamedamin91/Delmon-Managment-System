@@ -2326,7 +2326,21 @@ FROM (
         cb.EndUserID AS EndUserID,
         cb.EndUserType, -- Make sure to select this column for the outer query
         -- Use ROW_NUMBER to remove duplicates
-        ROW_NUMBER() OVER (PARTITION BY bps.AccountNo, bps.BillAmount ORDER BY bps.IssuedDate) AS RowNum
+        ROW_NUMBER() OVER (PARTITION BY bps.AccountNo, bps.BillAmount ORDER BY bps.IssuedDate) AS RowNum,
+  -- Adding a new column to display all divisions managed by the department head, separated by '/'
+        CASE 
+            WHEN cb.EndUserType = 'Company' THEN 
+                (SELECT STRING_AGG(dt2.Dept_Type_Name, ' / ') 
+                 FROM DEPARTMENTS d2
+                 INNER JOIN DeptTypes dt2 ON d2.DeptName = dt2.Dept_Type_ID
+                 WHERE d2.DeptHeadID = hod.EmployeeID)
+            WHEN cb.EndUserType = 'Personal' THEN 
+                (SELECT STRING_AGG(dt2.Dept_Type_Name, ' / ') 
+                 FROM DEPARTMENTS d2
+                 INNER JOIN DeptTypes dt2 ON d2.DeptName = dt2.Dept_Type_ID
+                 WHERE d2.DeptHeadID = e.EmployeeID)
+            ELSE NULL
+        END AS Divisions
     FROM 
         BillsPaymentStatus bps
         LEFT JOIN CommunicationsBills cb ON bps.AccountNo = cb.AccountNo AND cb.EndUserID IS NOT NULL
@@ -2351,7 +2365,7 @@ WHERE RowNum = 1
 
 ";
 
-                        if (cmbendtype.SelectedItem.ToString() != "All" && (int)cmbenduserrptbill.SelectedValue != 0)
+                        if (cmbendtype.SelectedItem.ToString() != "All" )
                         {
                             queryCommuni += " AND EndUserType = @paramEnduserType"; // Reference the correct column
                         }
@@ -2359,7 +2373,6 @@ WHERE RowNum = 1
                         {
                             queryCommuni += " AND EnduserID= @paramEnduserBillID"; // Reference the correct column
                         }
-                        // Modify query based on the selected filter option
                         if (rbTop5Amount.Checked)
                         {
                             queryCommuni += " ORDER BY bps.BillAmount DESC OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY";
@@ -2372,7 +2385,7 @@ WHERE RowNum = 1
                         // Check if the query is not empty before executing it
                         if (!string.IsNullOrWhiteSpace(queryCommuni))
                         {
-                            if (cmbendtype.SelectedItem.ToString() != "All" && (int) cmbenduserrptbill.SelectedValue != 0)
+                            if (cmbendtype.SelectedItem.ToString() != "All" )
                             {
                                 dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(queryCommuni, paramBillType, paramPaymentStauts, paramApprovedBy, paramEnduserType, paramEnduserBillID, paramPaidBy);
 
@@ -2399,64 +2412,84 @@ WHERE RowNum = 1
                     //Electrcity
                     else
                     {
-                        string queryElectrcity = @" SELECT 
-    bps.AccountNo,
-    bps.BillType,
-    bps.IssuedDate,
-	Ml.Meterlocation as Location,
+                        string queryElectrcity = @" 
+    SELECT 
+        bps.AccountNo,
+        bps.BillType,
+        bps.IssuedDate,
+        Ml.Meterlocation as Location,
+        CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
+        bps.BillAmount,
+        dt.Dept_Type_Name as Division,
 
-    CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
-    bps.BillAmount,
-    dt.Dept_Type_Name as Divison,
+        COALESCE(
+            CASE 
+                WHEN eb.EndUserType = 'Company' THEN hod.FirstName + ' ' + hod.LastName
+                WHEN eb.EndUserType = 'Personal' THEN 
+                    (SELECT FirstName +' '+ LastName 
+                     FROM Employees 
+                     WHERE EmployeeID = 
+                        (SELECT DeptHeadID 
+                         FROM DEPARTMENTS 
+                         WHERE DeptID = 
+                            (SELECT DeptID 
+                             FROM Employees 
+                             WHERE EmployeeID = e.EmployeeID)))
+            END, 'Unknown') AS Approvedby,
 
-    COALESCE(
+        -- Display all divisions managed by the department head, separated by '/'
         CASE 
-            WHEN eb.EndUserType  = 'Company' THEN hod.FirstName +''+hod.LastName
-            WHEN eb.EndUserType  = 'Personal' THEN (SELECT FirstName +' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
-        END, 'Unknown') AS Approvedby,
+            WHEN eb.EndUserType = 'Company' THEN 
+                (SELECT STRING_AGG(dt2.Dept_Type_Name, ' / ') 
+                 FROM DEPARTMENTS d2
+                 INNER JOIN DeptTypes dt2 ON d2.DeptName = dt2.Dept_Type_ID
+                 WHERE d2.DeptHeadID = hod.EmployeeID)
+            WHEN eb.EndUserType = 'Personal' THEN 
+                (SELECT STRING_AGG(dt2.Dept_Type_Name, ' / ') 
+                 FROM DEPARTMENTS d2
+                 INNER JOIN DeptTypes dt2 ON d2.DeptName = dt2.Dept_Type_ID
+                 WHERE d2.DeptHeadID = e.EmployeeID)
+            ELSE NULL
+        END AS Divisions,
 
-    CASE 
-        WHEN eb.EndUserType = 'Company' THEN concat (c.ShortCompName,' / ',dt.Dept_Type_Name)
-        WHEN eb.EndUserType = 'Personal' THEN concat (e.FirstName,' ', e.LastName)
-    END AS EndUserName,
-    eb.EndUserID AS EndUserID
+        CASE 
+            WHEN eb.EndUserType = 'Company' THEN CONCAT(c.ShortCompName,' / ', dt.Dept_Type_Name)
+            WHEN eb.EndUserType = 'Personal' THEN CONCAT(e.FirstName, ' ', e.LastName)
+        END AS EndUserName,
+        eb.EndUserID AS EndUserID
 
-FROM 
-    BillsPaymentStatus bps
-  LEFT JOIN ElectrcityBills eb ON bps.AccountNo = eb.AccountNo AND eb.EndUserID IS NOT NULL
-  LEFT JOIN Employees e ON eb.EndUserID = e.EmployeeID
-  LEFT JOIN DEPARTMENTS d1 ON eb.EndUserType = 'Company' AND eb.EndUserID = d1.DeptID
-  LEFT JOIN DEPARTMENTS d2 ON eb.EndUserType = 'Personal' AND e.DeptID = d2.DeptID
-  LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
-  LEFT JOIN Companies c ON d1.COMPID = c.COMPID
-  LEFT JOIN Employees hod ON eb.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
-  LEFT JOIN Meterlocations ML ON eb.MeterLocationID = ML.MeterLocationID
+    FROM 
+        BillsPaymentStatus bps
+        LEFT JOIN ElectrcityBills eb ON bps.AccountNo = eb.AccountNo AND eb.EndUserID IS NOT NULL
+        LEFT JOIN Employees e ON eb.EndUserID = e.EmployeeID
+        LEFT JOIN DEPARTMENTS d1 ON eb.EndUserType = 'Company' AND eb.EndUserID = d1.DeptID
+        LEFT JOIN DEPARTMENTS d2 ON eb.EndUserType = 'Personal' AND e.DeptID = d2.DeptID
+        LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
+        LEFT JOIN Companies c ON d1.COMPID = c.COMPID
+        LEFT JOIN Employees hod ON eb.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
+        LEFT JOIN Meterlocations ML ON eb.MeterLocationID = ML.MeterLocationID
 
-  where 
+    WHERE 
+        bps.BillType = @paramBillType
+        AND bps.PaymentStatus = 0
+        AND CASE 
+                WHEN eb.EndUserType = 'Company' THEN d1.DeptHeadID
+                WHEN eb.EndUserType = 'Personal' THEN d2.DeptHeadID
+                ELSE d2.DeptHeadID
+            END = @paramEnduserID
+        AND eb.PaidBy = @paramPaidBy
+";
 
-  bps.BillType=@paramBillType
-  AND bps.PaymentStatus=0
-  AND CASE 
-        WHEN eb.EndUserType = 'Company' THEN d1.DeptHeadID
-        WHEN eb.EndUserType = 'Personal' THEN d2.DeptHeadID
-        ELSE d2.DeptHeadID
-      END = @paramEnduserID
-	  AND eb.PaidBy=@paramPaidBy
-
-   ";
-
-
-
-
-                             if (cmbendtype.SelectedItem.ToString() != "All" && (int)cmbenduserrptbill.SelectedValue != 0)
+                        if (cmbendtype.SelectedItem.ToString() != "All")
                         {
-                            queryElectrcity += " AND EndUserType = @paramEnduserType"; // Reference the correct column
+                            queryElectrcity += " AND eb.EndUserType = @paramEnduserType"; // Fixed alias reference
                         }
-                        if (cmbenduserrptbill.Text.ToString() != "Select" && (int)cmbenduserrptbill.SelectedValue != 0/*&& cmbendtype.SelectedItem.ToString() != "Company"*/)
+                        if (cmbenduserrptbill.Text.ToString() != "Select" && (int)cmbenduserrptbill.SelectedValue != 0)
                         {
-                            queryElectrcity += " AND EnduserID= @paramEnduserBillID"; // Reference the correct column
+                            queryElectrcity += " AND eb.EndUserID = @paramEnduserBillID"; // Fixed alias reference
                         }
-                        // Modify query based on the selected filter option
+
+                        // Modify query based on the selected filter option for Top 5
                         if (rbTop5Amount.Checked)
                         {
                             queryElectrcity += " ORDER BY bps.BillAmount DESC OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY";
@@ -2469,24 +2502,16 @@ FROM
                         // Check if the query is not empty before executing it
                         if (!string.IsNullOrWhiteSpace(queryElectrcity))
                         {
-                            if (cmbendtype.SelectedItem.ToString() != "All" && (int)cmbenduserrptbill.SelectedValue != 0)
+                            if (cmbendtype.SelectedItem.ToString() != "All")
                             {
                                 dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(queryElectrcity, paramBillType, paramPaymentStauts, paramApprovedBy, paramEnduserType, paramEnduserBillID, paramPaidBy);
-
                             }
-                            else if (cmbendtype.SelectedItem.ToString() != "All")
-                            {
-                                dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(queryElectrcity, paramBillType, paramPaymentStauts, paramApprovedBy, paramPaidBy);
-
-                            }
-
                             else
                             {
-                                dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(queryElectrcity, paramBillType, paramPaymentStauts, paramApprovedBy, paramEnduserBillID, paramPaidBy);
-
+                                dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(queryElectrcity, paramBillType, paramPaymentStauts, paramApprovedBy, paramPaidBy);
                             }
-
                         }
+
 
 
                     }
@@ -2511,7 +2536,7 @@ FROM
                         // Communication
                         if (cmbBillType1.Text == "Communication")
                         {
-                            string queryCommuni = @" 	  SELECT *
+                            string queryCommuni = @" SELECT *
 FROM (
     SELECT   
         bps.AccountNo,
@@ -2541,7 +2566,22 @@ FROM (
         cb.EndUserID AS EndUserID,
         cb.EndUserType, -- Make sure to select this column for the outer query
         -- Use ROW_NUMBER to remove duplicates
-        ROW_NUMBER() OVER (PARTITION BY bps.AccountNo, bps.BillAmount ORDER BY bps.IssuedDate) AS RowNum
+        ROW_NUMBER() OVER (PARTITION BY bps.AccountNo, bps.BillAmount ORDER BY bps.IssuedDate) AS RowNum,
+
+  -- Adding a new column to display all divisions managed by the department head, separated by '/'
+        CASE 
+            WHEN cb.EndUserType = 'Company' THEN 
+                (SELECT STRING_AGG(dt2.Dept_Type_Name, ' / ') 
+                 FROM DEPARTMENTS d2
+                 INNER JOIN DeptTypes dt2 ON d2.DeptName = dt2.Dept_Type_ID
+                 WHERE d2.DeptHeadID = hod.EmployeeID)
+            WHEN cb.EndUserType = 'Personal' THEN 
+                (SELECT STRING_AGG(dt2.Dept_Type_Name, ' / ') 
+                 FROM DEPARTMENTS d2
+                 INNER JOIN DeptTypes dt2 ON d2.DeptName = dt2.Dept_Type_ID
+                 WHERE d2.DeptHeadID = e.EmployeeID)
+            ELSE NULL
+        END AS Divisions
     FROM 
         BillsPaymentStatus bps
         LEFT JOIN CommunicationsBills cb ON bps.AccountNo = cb.AccountNo AND cb.EndUserID IS NOT NULL
@@ -2571,7 +2611,7 @@ WHERE RowNum = 1
 "
     ;
 
-                            if (cmbendtype.SelectedItem.ToString() != "All" && (int)cmbenduserrptbill.SelectedValue != 0)
+                            if (cmbendtype.SelectedItem.ToString() != "All")
                             {
                                 queryCommuni += " AND EndUserType = @paramEnduserType"; // Reference the correct column
                             }
@@ -2579,7 +2619,6 @@ WHERE RowNum = 1
                             {
                                 queryCommuni += " AND EnduserID= @paramEnduserBillID"; // Reference the correct column
                             }
-                            // Modify query based on the selected filter option
                             if (rbTop5Amount.Checked)
                             {
                                 queryCommuni += " ORDER BY bps.BillAmount DESC OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY";
@@ -2589,10 +2628,11 @@ WHERE RowNum = 1
                                 queryCommuni += " ORDER BY bps.DisconnectDate DESC OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY";
                             }
 
+
                             // Check if the query is not empty before executing it
                             if (!string.IsNullOrWhiteSpace(queryCommuni))
                             {
-                                if (cmbendtype.SelectedItem.ToString() != "All" && (int)cmbenduserrptbill.SelectedValue != 0)
+                                if (cmbendtype.SelectedItem.ToString() != "All" )
                                 {
                                     dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(queryCommuni, paramBillType, paramPaymentStauts, paramApprovedBy, paramEnduserType, paramEnduserBillID, paramPaidBy, paramFrom, paramTo, paramAccount);
 
@@ -2633,6 +2673,21 @@ WHERE RowNum = 1
             WHEN eb.EndUserType  = 'Personal' THEN (SELECT FirstName +' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
         END, 'Unknown') AS Approvedby,
 
+  -- Adding a new column to display all divisions managed by the department head, separated by '/'
+        CASE 
+            WHEN cb.EndUserType = 'Company' THEN 
+                (SELECT STRING_AGG(dt2.Dept_Type_Name, ' / ') 
+                 FROM DEPARTMENTS d2
+                 INNER JOIN DeptTypes dt2 ON d2.DeptName = dt2.Dept_Type_ID
+                 WHERE d2.DeptHeadID = hod.EmployeeID)
+            WHEN cb.EndUserType = 'Personal' THEN 
+                (SELECT STRING_AGG(dt2.Dept_Type_Name, ' / ') 
+                 FROM DEPARTMENTS d2
+                 INNER JOIN DeptTypes dt2 ON d2.DeptName = dt2.Dept_Type_ID
+                 WHERE d2.DeptHeadID = e.EmployeeID)
+            ELSE NULL
+        END AS Divisions,
+
    CASE 
         WHEN eb.EndUserType = 'Company' THEN concat (c.ShortCompName,' / ',dt.Dept_Type_Name)
         WHEN eb.EndUserType = 'Personal' THEN concat (e.FirstName,' ', e.LastName)
@@ -2664,7 +2719,7 @@ FROM
 	  AND eb.PaidBy=@paramPaidBy
 
 
-";                          if (cmbendtype.SelectedItem.ToString() != "All" && (int)cmbenduserrptbill.SelectedValue != 0)
+";                          if (cmbendtype.SelectedItem.ToString() != "All" )
                             {
                                 queryElectrcity += " AND EndUserType = @paramEnduserType"; // Reference the correct column
                             }
@@ -2672,7 +2727,7 @@ FROM
                             {
                                 queryElectrcity += " AND EnduserID= @paramEnduserBillID"; // Reference the correct column
                             }
-                            // Modify query based on the selected filter option
+                            // Modify query based on the selected filter option for Top 5
                             if (rbTop5Amount.Checked)
                             {
                                 queryElectrcity += " ORDER BY bps.BillAmount DESC OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY";
@@ -2685,7 +2740,7 @@ FROM
                             // Check if the query is not empty before executing it
                             if (!string.IsNullOrWhiteSpace(queryElectrcity))
                             {
-                                if (cmbendtype.SelectedItem.ToString() != "All" && (int)cmbenduserrptbill.SelectedValue != 0)
+                                if (cmbendtype.SelectedItem.ToString() != "All" )
                                 {
                                     dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(queryElectrcity, paramBillType, paramPaymentStauts, paramApprovedBy, paramEnduserType, paramEnduserBillID, paramPaidBy, paramFrom, paramTo, paramAccount);
 
@@ -3491,7 +3546,7 @@ FROM
                     //coummunication
                     if (cmbBillType1.Text == "Communication")
                     {
-                        query = @"  SELECT *
+                        query = @" SELECT *
 FROM (
     SELECT   
         bps.AccountNo,
@@ -3521,7 +3576,21 @@ FROM (
         cb.EndUserID AS EndUserID,
         cb.EndUserType, -- Make sure to select this column for the outer query
         -- Use ROW_NUMBER to remove duplicates
-        ROW_NUMBER() OVER (PARTITION BY bps.AccountNo, bps.BillAmount ORDER BY bps.IssuedDate) AS RowNum
+        ROW_NUMBER() OVER (PARTITION BY bps.AccountNo, bps.BillAmount ORDER BY bps.IssuedDate) AS RowNum,
+  -- Adding a new column to display all divisions managed by the department head, separated by '/'
+        CASE 
+            WHEN cb.EndUserType = 'Company' THEN 
+                (SELECT STRING_AGG(dt2.Dept_Type_Name, ' / ') 
+                 FROM DEPARTMENTS d2
+                 INNER JOIN DeptTypes dt2 ON d2.DeptName = dt2.Dept_Type_ID
+                 WHERE d2.DeptHeadID = hod.EmployeeID)
+            WHEN cb.EndUserType = 'Personal' THEN 
+                (SELECT STRING_AGG(dt2.Dept_Type_Name, ' / ') 
+                 FROM DEPARTMENTS d2
+                 INNER JOIN DeptTypes dt2 ON d2.DeptName = dt2.Dept_Type_ID
+                 WHERE d2.DeptHeadID = e.EmployeeID)
+            ELSE NULL
+        END AS Divisions
     FROM 
         BillsPaymentStatus bps
         LEFT JOIN CommunicationsBills cb ON bps.AccountNo = cb.AccountNo AND cb.EndUserID IS NOT NULL
@@ -3544,7 +3613,6 @@ FROM (
 ) AS TempTable
 WHERE RowNum = 1
 
-
 ";
 
                     }
@@ -3552,48 +3620,70 @@ WHERE RowNum = 1
                     else
                     {
                         query = @" SELECT 
-    bps.AccountNo,
-    bps.BillType,
-    bps.IssuedDate,
-	Ml.Meterlocation as Location,
+        bps.AccountNo,
+        bps.BillType,
+        bps.IssuedDate,
+        Ml.Meterlocation as Location,
+        CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
+        bps.BillAmount,
+        dt.Dept_Type_Name as Division,
 
-    CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
-    bps.BillAmount,
-    dt.Dept_Type_Name as Divison,
+        COALESCE(
+            CASE 
+                WHEN eb.EndUserType = 'Company' THEN hod.FirstName + ' ' + hod.LastName
+                WHEN eb.EndUserType = 'Personal' THEN 
+                    (SELECT FirstName +' '+ LastName 
+                     FROM Employees 
+                     WHERE EmployeeID = 
+                        (SELECT DeptHeadID 
+                         FROM DEPARTMENTS 
+                         WHERE DeptID = 
+                            (SELECT DeptID 
+                             FROM Employees 
+                             WHERE EmployeeID = e.EmployeeID)))
+            END, 'Unknown') AS Approvedby,
 
-    COALESCE(
+        -- Display all divisions managed by the department head, separated by '/'
         CASE 
-            WHEN eb.EndUserType  = 'Company' THEN hod.FirstName +''+hod.LastName
-            WHEN eb.EndUserType  = 'Personal' THEN (SELECT FirstName +' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
-        END, 'Unknown') AS Approvedby,
+            WHEN eb.EndUserType = 'Company' THEN 
+                (SELECT STRING_AGG(dt2.Dept_Type_Name, ' / ') 
+                 FROM DEPARTMENTS d2
+                 INNER JOIN DeptTypes dt2 ON d2.DeptName = dt2.Dept_Type_ID
+                 WHERE d2.DeptHeadID = hod.EmployeeID)
+            WHEN eb.EndUserType = 'Personal' THEN 
+                (SELECT STRING_AGG(dt2.Dept_Type_Name, ' / ') 
+                 FROM DEPARTMENTS d2
+                 INNER JOIN DeptTypes dt2 ON d2.DeptName = dt2.Dept_Type_ID
+                 WHERE d2.DeptHeadID = e.EmployeeID)
+            ELSE NULL
+        END AS Divisions,
 
-    CASE 
-        WHEN eb.EndUserType = 'Company' THEN concat (c.ShortCompName,' / ',dt.Dept_Type_Name)
-        WHEN eb.EndUserType = 'Personal' THEN concat (e.FirstName,' ', e.LastName)
-    END AS EndUserName,
-    eb.EndUserID AS EndUserID
+        CASE 
+            WHEN eb.EndUserType = 'Company' THEN CONCAT(c.ShortCompName,' / ', dt.Dept_Type_Name)
+            WHEN eb.EndUserType = 'Personal' THEN CONCAT(e.FirstName, ' ', e.LastName)
+        END AS EndUserName,
+        eb.EndUserID AS EndUserID
 
-FROM 
-    BillsPaymentStatus bps
-  LEFT JOIN ElectrcityBills eb ON bps.AccountNo = eb.AccountNo AND eb.EndUserID IS NOT NULL
-  LEFT JOIN Employees e ON eb.EndUserID = e.EmployeeID
-  LEFT JOIN DEPARTMENTS d1 ON eb.EndUserType = 'Company' AND eb.EndUserID = d1.DeptID
-  LEFT JOIN DEPARTMENTS d2 ON eb.EndUserType = 'Personal' AND e.DeptID = d2.DeptID
-  LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
-  LEFT JOIN Companies c ON d1.COMPID = c.COMPID
-  LEFT JOIN Employees hod ON eb.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
-  LEFT JOIN Meterlocations ML ON eb.MeterLocationID = ML.MeterLocationID
+    FROM 
+        BillsPaymentStatus bps
+        LEFT JOIN ElectrcityBills eb ON bps.AccountNo = eb.AccountNo AND eb.EndUserID IS NOT NULL
+        LEFT JOIN Employees e ON eb.EndUserID = e.EmployeeID
+        LEFT JOIN DEPARTMENTS d1 ON eb.EndUserType = 'Company' AND eb.EndUserID = d1.DeptID
+        LEFT JOIN DEPARTMENTS d2 ON eb.EndUserType = 'Personal' AND e.DeptID = d2.DeptID
+        LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
+        LEFT JOIN Companies c ON d1.COMPID = c.COMPID
+        LEFT JOIN Employees hod ON eb.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
+        LEFT JOIN Meterlocations ML ON eb.MeterLocationID = ML.MeterLocationID
 
-  where 
-
-  bps.BillType=@paramBillType
-  AND bps.PaymentStatus=0
-  AND CASE 
-        WHEN eb.EndUserType = 'Company' THEN d1.DeptHeadID
-        WHEN eb.EndUserType = 'Personal' THEN d2.DeptHeadID
-        ELSE d2.DeptHeadID
-      END = @paramEnduserID
-	  AND eb.PaidBy=@paramPaidBy
+    WHERE 
+        bps.BillType = @paramBillType
+        AND bps.PaymentStatus = 0
+        AND CASE 
+                WHEN eb.EndUserType = 'Company' THEN d1.DeptHeadID
+                WHEN eb.EndUserType = 'Personal' THEN d2.DeptHeadID
+                ELSE d2.DeptHeadID
+            END = @paramEnduserID
+        AND eb.PaidBy = @paramPaidBy
 
 ";
 
