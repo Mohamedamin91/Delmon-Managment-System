@@ -3319,7 +3319,7 @@ WHERE (COMPName_EN LIKE '%' + @C1 + '%')
 
 
 
-            if (DeptID != 0 && CompID != 0)
+            if (DeptID != 0 || CompID != 0)
             {
 
 

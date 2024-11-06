@@ -72,7 +72,7 @@ namespace Delmon_Managment_System
             this.groupBox1.Controls.Add(this.lblusername);
             this.groupBox1.Controls.Add(this.lblusertype);
             this.groupBox1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.groupBox1.Location = new System.Drawing.Point(6, 909);
+            this.groupBox1.Location = new System.Drawing.Point(637, 958);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(756, 69);
             this.groupBox1.TabIndex = 146;
@@ -357,7 +357,7 @@ namespace Delmon_Managment_System
             this.MinimumSize = new System.Drawing.Size(900, 500);
             this.Name = "FormMainMenu";
             this.Text = "Main Menu";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

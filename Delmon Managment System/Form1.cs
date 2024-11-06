@@ -27,27 +27,38 @@ namespace Delmon_Managment_System
         private Random random;
         private int tempIndex;
         private Form activeForm;
+
         public FormMainMenu()
         {
             InitializeComponent();
-            menuStrip1.Location = new Point(0, 0);
 
+            // Set the form to borderless to handle custom resizing and control box.
+            this.FormBorderStyle = FormBorderStyle.None;
+
+            // Set the form to maximize manually to fill the working area, excluding the taskbar.
+            this.Bounds = Screen.PrimaryScreen.WorkingArea;
+
+            menuStrip1.Location = new Point(0, 0);
             panelDesktopPanel.Dock = DockStyle.Fill;
             menuStrip1.Dock = DockStyle.Top;
 
             Font newFont = new Font("Times New Roman", 12);
-
             // Loop through all controls on the form and change their font properties
             foreach (Control control in Controls)
             {
                 control.Font = newFont;
             }
+
             random = new Random();
             btnCloseChildForm.Visible = false;
             this.Text = string.Empty;
-            this.ControlBox = false;
-            this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+
+     
         }
+
+        
+
+
         //[DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         //private extern static void ReleaseCapture();
 
@@ -55,40 +66,18 @@ namespace Delmon_Managment_System
         //private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
 
         //Methods
-        private Color SelectThemeColor()
+        protected override CreateParams CreateParams
         {
-            int index = random.Next(ThemeColor.ColorList.Count);
-            while (tempIndex == index)
+            get
             {
-                index = random.Next(ThemeColor.ColorList.Count);
-            }
-            tempIndex = index;
-            string color = ThemeColor.ColorList[index];
-            return ColorTranslator.FromHtml(color);
-        }
-        private void ActivateButton(object btnSender)
-        {
-            if (btnSender != null)
-            {
-                if (currentButton != (Button)btnSender)
-                {
-                    DisableButton();
-                       btnCloseChildForm.Visible = true;
-                }
+                CreateParams cp = base.CreateParams;
+                cp.Style &= ~0xC00000; // Remove WS_CAPTION
+                return cp;
             }
         }
         private void DisableButton()
         {
-        //    foreach (Control previousBtn in panelMenu.Controls)
-        //    {
-        //        if (previousBtn.GetType() == typeof(Button))
-        //        {
-        //          //  previousBtn.BackColor = Color.FromArgb(53, 52, 141);
-        //            previousBtn.BackColor = Color.White;
-        //            previousBtn.ForeColor = Color.FromArgb(53, 52, 141);
-        //         //   previousBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        //        }
-        //    }
+       
         }
 
         private void OpenChildForm(Form childForm, object sender)
@@ -130,7 +119,8 @@ namespace Delmon_Managment_System
        
         private void Form1_Load(object sender, EventArgs e)
         {
-
+           // base.OnLoad(e);
+            this.WindowState = FormWindowState.Maximized;
             sqlconn.OpenConection();
             SqlDataReader dr=sqlconn.DataReader(@"SELECT
     visa.VisaNumber,
@@ -438,7 +428,7 @@ GROUP BY
             //successfully
             // MessageBox.Show("Bills have been added successfully to the log Report  !\n", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //  MessageBox.Show("There is no notifications !\n", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            MessageBox.Show("1-Bill Report has been Fixed successfully  !\n", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("1-Design has been Updated successfully  !\n", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //  OpenChildForm(new Forms.NotificationFrm(), sender);
 
         }
