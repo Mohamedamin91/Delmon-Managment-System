@@ -120,7 +120,7 @@ namespace Delmon_Managment_System
         private void Form1_Load(object sender, EventArgs e)
         {
            // base.OnLoad(e);
-            this.WindowState = FormWindowState.Maximized;
+          //  this.WindowState = FormWindowState.Maximized;
             sqlconn.OpenConection();
             SqlDataReader dr=sqlconn.DataReader(@"SELECT
     visa.VisaNumber,

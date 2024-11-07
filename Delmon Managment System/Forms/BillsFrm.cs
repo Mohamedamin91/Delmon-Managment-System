@@ -3245,25 +3245,99 @@ FROM
                 {
                     paramPaymentStauts.Value = 0;
 
-                    //coummunication
+                    // Communication Section
                     if (cmbBillType1.Text == "Communication")
                     {
                         query = @"
-    SELECT *
+        SELECT *
+        FROM (
+            SELECT   
+                bps.AccountNo,
+                bps.BillType,
+                cb.ServiceNo,
+                bps.IssuedDate,
+                CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
+                bps.BillAmount,
+                dt.Dept_Type_Name AS Division,
+                COALESCE(
+                    CASE 
+                        WHEN cb.EndUserType = 'Company' THEN hod.FirstName + ' ' + hod.LastName
+                        WHEN cb.EndUserType = 'Personal' THEN 
+                            (SELECT FirstName + ' ' + LastName 
+                             FROM Employees 
+                             WHERE EmployeeID = 
+                                (SELECT DeptHeadID 
+                                 FROM DEPARTMENTS 
+                                 WHERE DeptID = (SELECT DeptID 
+                                                 FROM Employees 
+                                                 WHERE EmployeeID = e.EmployeeID)))
+                    END, 'Unknown') AS ApprovedBy,
+                CASE 
+                    WHEN cb.EndUserType = 'Company' THEN c.ShortCompName
+                    WHEN cb.EndUserType = 'Personal' THEN e.FirstName
+                END AS EndUserFirstName,
+                CASE 
+                    WHEN cb.EndUserType = 'Company' THEN CONCAT(c.ShortCompName, ' / ', dt.Dept_Type_Name)
+                    WHEN cb.EndUserType = 'Personal' THEN CONCAT(e.FirstName, ' ', e.LastName)
+                END AS EndUserName,
+                cb.EndUserID AS EndUserID,
+                cb.EndUserType,
+                COALESCE(
+                    CASE 
+                        WHEN cb.EndUserType = 'Company' THEN hodCompany.ShortCompName
+                        WHEN cb.EndUserType = 'Personal' THEN 
+                            (SELECT ShortCompName 
+                             FROM Companies 
+                             WHERE COMPID = (SELECT COMPID 
+                                             FROM Employees 
+                                             WHERE EmployeeID = 
+                                                 (SELECT DeptHeadID 
+                                                  FROM DEPARTMENTS 
+                                                  WHERE DeptID = e.DeptID)))
+                    END, 'Unknown') AS HeadOfDepartmentCompany,
+                ROW_NUMBER() OVER (PARTITION BY bps.AccountNo, bps.BillAmount ORDER BY bps.IssuedDate) AS RowNum
+            FROM 
+                BillsPaymentStatus bps
+                LEFT JOIN CommunicationsBills cb ON bps.AccountNo = cb.AccountNo AND cb.EndUserID IS NOT NULL
+                LEFT JOIN Employees e ON cb.EndUserID = e.EmployeeID
+                LEFT JOIN DEPARTMENTS d1 ON cb.EndUserType = 'Company' AND cb.EndUserID = d1.DeptID
+                LEFT JOIN DEPARTMENTS d2 ON cb.EndUserType = 'Personal' AND e.DeptID = d2.DeptID
+                LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
+                LEFT JOIN Companies c ON d1.COMPID = c.COMPID
+                LEFT JOIN Employees hod ON cb.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
+                LEFT JOIN Companies hodCompany ON hod.COMPID = hodCompany.COMPID
+            WHERE 
+                bps.BillType = @paramBillType
+                AND bps.PaymentStatus = 0
+                AND (
+                    (cb.EndUserType = 'Company' AND d1.DeptHeadID = @paramEnduserID) OR
+                    (cb.EndUserType = 'Personal' AND d2.DeptHeadID = @paramEnduserID)
+                )
+                AND cb.PaidBy = @paramPaidBy 
+";
+                   
+                    }
+
+                    // Electricity Section
+                    else
+                    {
+                        query = @"
+      SELECT *
     FROM (
-        SELECT   
-            bps.AccountNo,
-            bps.BillType,
-            cb.ServiceNo,
-            bps.IssuedDate,
-            CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
-            bps.BillAmount,
-            dt.Dept_Type_Name AS Division,
-            
+        SELECT 
+        bps.AccountNo,
+        bps.BillType,
+        bps.IssuedDate,
+        Ml.Meterlocation as Location,
+        CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
+        bps.BillAmount,
+        dt.Dept_Type_Name as Division,
+
+         -- Get the name of the person who approved it based on EndUserType
             COALESCE(
                 CASE 
-                    WHEN cb.EndUserType = 'Company' THEN hod.FirstName + ' ' + hod.LastName
-                    WHEN cb.EndUserType = 'Personal' THEN 
+                    WHEN eb.EndUserType = 'Company' THEN hod.FirstName + ' ' + hod.LastName
+                    WHEN eb.EndUserType = 'Personal' THEN 
                         (SELECT FirstName + ' ' + LastName 
                          FROM Employees 
                          WHERE EmployeeID = 
@@ -3274,23 +3348,26 @@ FROM
                                              WHERE EmployeeID = e.EmployeeID)))
                 END, 'Unknown') AS ApprovedBy,
             
+            -- Extract only the first name for ordering purposes
             CASE 
-                WHEN cb.EndUserType = 'Company' THEN c.ShortCompName
-                WHEN cb.EndUserType = 'Personal' THEN e.FirstName
+                WHEN eb.EndUserType = 'Company' THEN c.ShortCompName
+                WHEN eb.EndUserType = 'Personal' THEN e.FirstName
             END AS EndUserFirstName,
             
+            -- Display full EndUserName for display
             CASE 
-                WHEN cb.EndUserType = 'Company' THEN CONCAT(c.ShortCompName, ' / ', dt.Dept_Type_Name)
-                WHEN cb.EndUserType = 'Personal' THEN CONCAT(e.FirstName, ' ', e.LastName)
+                WHEN eb.EndUserType = 'Company' THEN CONCAT(c.ShortCompName, ' / ', dt.Dept_Type_Name)
+                WHEN eb.EndUserType = 'Personal' THEN CONCAT(e.FirstName, ' ', e.LastName)
             END AS EndUserName,
             
-            cb.EndUserID AS EndUserID,
-            cb.EndUserType,
+            eb.EndUserID AS EndUserID,
+            eb.EndUserType,
             
+            -- New column for head of department's company
             COALESCE(
                 CASE 
-                    WHEN cb.EndUserType = 'Company' THEN hodCompany.ShortCompName
-                    WHEN cb.EndUserType = 'Personal' THEN 
+                    WHEN eb.EndUserType = 'Company' THEN hodCompany.ShortCompName
+                    WHEN eb.EndUserType = 'Personal' THEN 
                         (SELECT ShortCompName 
                          FROM Companies 
                          WHERE COMPID = (SELECT COMPID 
@@ -3301,255 +3378,198 @@ FROM
                                               WHERE DeptID = e.DeptID)))
                 END, 'Unknown') AS HeadOfDepartmentCompany,
 
+            -- Use ROW_NUMBER to remove duplicates
             ROW_NUMBER() OVER (PARTITION BY bps.AccountNo, bps.BillAmount ORDER BY bps.IssuedDate) AS RowNum
-     
-        FROM 
-            BillsPaymentStatus bps
-            LEFT JOIN CommunicationsBills cb ON bps.AccountNo = cb.AccountNo AND cb.EndUserID IS NOT NULL
-            LEFT JOIN Employees e ON cb.EndUserID = e.EmployeeID
-            LEFT JOIN DEPARTMENTS d1 ON cb.EndUserType = 'Company' AND cb.EndUserID = d1.DeptID
-            LEFT JOIN DEPARTMENTS d2 ON cb.EndUserType = 'Personal' AND e.DeptID = d2.DeptID
-            LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
-            LEFT JOIN Companies c ON d1.COMPID = c.COMPID
-            LEFT JOIN Employees hod ON cb.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
-            LEFT JOIN Companies hodCompany ON hod.COMPID = hodCompany.COMPID
-            
-        WHERE 
-            bps.BillType = @paramBillType
-            AND bps.PaymentStatus = 0";
 
-                    }
-                  
-                    
-                    
-                    
-                    //Electrcity
-                    else
-                    {
-                        query = @"
-SELECT *
-FROM (
-    SELECT   
-        bps.AccountNo,
-        bps.BillType,
-        cb.ServiceNo,
-        bps.IssuedDate,
-        CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
-        bps.BillAmount,
-        dt.Dept_Type_Name AS Division,
-        
-        -- Get the name of the person who approved it based on EndUserType
-        COALESCE(
-            CASE 
-                WHEN cb.EndUserType = 'Company' THEN hod.FirstName + ' ' + hod.LastName
-                WHEN cb.EndUserType = 'Personal' THEN 
-                    (SELECT FirstName + ' ' + LastName 
-                     FROM Employees 
-                     WHERE EmployeeID = 
-                        (SELECT DeptHeadID 
-                         FROM DEPARTMENTS 
-                         WHERE DeptID = (SELECT DeptID 
-                                         FROM Employees 
-                                         WHERE EmployeeID = e.EmployeeID)))
-            END, 'Unknown') AS ApprovedBy,
-        
-        -- Display EndUserName based on EndUserType
-        CASE 
-            WHEN cb.EndUserType = 'Company' THEN CONCAT(c.ShortCompName, ' / ', dt.Dept_Type_Name)
-            WHEN cb.EndUserType = 'Personal' THEN CONCAT(e.FirstName, ' ', e.LastName)
-        END AS EndUserName,
-        
-        cb.EndUserID AS EndUserID,
-        cb.EndUserType,
-        
-        -- New column for head of department's company
-        COALESCE(
-            CASE 
-                WHEN cb.EndUserType = 'Company' THEN hodCompany.ShortCompName
-                WHEN cb.EndUserType = 'Personal' THEN 
-                    (SELECT ShortCompName 
-                     FROM Companies 
-                     WHERE COMPID = (SELECT COMPID 
-                                     FROM Employees 
-                                     WHERE EmployeeID = 
-                                         (SELECT DeptHeadID 
-                                          FROM DEPARTMENTS 
-                                          WHERE DeptID = e.DeptID)))
-            END, 'Unknown') AS HeadOfDepartmentCompany,
-
-        -- Use ROW_NUMBER to remove duplicates
-        ROW_NUMBER() OVER (PARTITION BY bps.AccountNo, bps.BillAmount ORDER BY bps.IssuedDate) AS RowNum
- 
     FROM 
         BillsPaymentStatus bps
-        LEFT JOIN CommunicationsBills cb ON bps.AccountNo = cb.AccountNo AND cb.EndUserID IS NOT NULL
-        LEFT JOIN Employees e ON cb.EndUserID = e.EmployeeID
-        LEFT JOIN DEPARTMENTS d1 ON cb.EndUserType = 'Company' AND cb.EndUserID = d1.DeptID
-        LEFT JOIN DEPARTMENTS d2 ON cb.EndUserType = 'Personal' AND e.DeptID = d2.DeptID
-        LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
-        LEFT JOIN Companies c ON d1.COMPID = c.COMPID
-        LEFT JOIN Employees hod ON cb.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
-        LEFT JOIN Companies hodCompany ON hod.COMPID = hodCompany.COMPID  -- Company of the head of department for Company end users
-        
-    WHERE 
-        bps.BillType = @paramBillType
-        AND bps.PaymentStatus = 0
-        AND (
-            (cb.EndUserType = 'Company' AND d1.DeptHeadID = @paramEnduserID) OR
-            (cb.EndUserType = 'Personal' AND d2.DeptHeadID = @paramEnduserID)
-        )
-        AND cb.PaidBy = @paramPaidBy
-) AS TempTable
-WHERE RowNum = 1
-ORDER BY EndUserName;  -- Order by EndUserName (first and last name)
-";
+            LEFT JOIN ElectrcityBills eb ON bps.AccountNo = eb.AccountNo AND eb.EndUserID IS NOT NULL
+            LEFT JOIN Employees e ON eb.EndUserID = e.EmployeeID
+            LEFT JOIN DEPARTMENTS d1 ON eb.EndUserType = 'Company' AND eb.EndUserID = d1.DeptID
+            LEFT JOIN DEPARTMENTS d2 ON eb.EndUserType = 'Personal' AND e.DeptID = d2.DeptID
+            LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
+            LEFT JOIN Companies c ON d1.COMPID = c.COMPID
+            LEFT JOIN Employees hod ON eb.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
+            LEFT JOIN Companies hodCompany ON hod.COMPID = hodCompany.COMPID  -- Company of the head of department for Company end users
+            LEFT JOIN Meterlocations ML ON eb.MeterLocationID = ML.MeterLocationID
+	  
 
+ 
+
+   
+        WHERE 
+                bps.BillType = @paramBillType
+                AND bps.PaymentStatus = 0
+                AND (
+                    (eb.EndUserType = 'Company' AND d1.DeptHeadID = @paramEnduserID) OR
+                    (eb.EndUserType = 'Personal' AND d2.DeptHeadID = @paramEnduserID)
+                )
+                AND eb.PaidBy = @paramPaidBy
+
+
+";
                     }
                 }
 
                 //paid
-                else
-                {
-                    if (txtAccountNumbe.Text == string.Empty)
-                    {
-                        MessageBox.Show(" Please fill the account number field ! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //                else
+                //                {
+                //                    if (txtAccountNumbe.Text == string.Empty)
+                //                    {
+                //                        MessageBox.Show(" Please fill the account number field ! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                    }
-                    else
-                    {
-                        // Communication
-                        if (cmbBillType1.Text == "Communication")
-                        {
-                            query = @"  SELECT *
-FROM (
-    SELECT   
-        bps.AccountNo,
-        bps.BillType,
-        cb.ServiceNo,
-        bps.IssuedDate,
-        CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
-        bps.BillAmount,
-        dt.Dept_Type_Name as Division,
-        COALESCE(
-            CASE 
-                WHEN cb.EndUserType = 'Company' THEN hod.FirstName + ' ' + hod.LastName
-                WHEN cb.EndUserType = 'Personal' THEN 
-                    (SELECT FirstName +' '+ LastName 
-                     FROM Employees 
-                     WHERE EmployeeID = 
-                        (SELECT DeptHeadID 
-                         FROM DEPARTMENTS 
-                         WHERE DeptID = (SELECT DeptID 
-                                         FROM Employees 
-                                         WHERE EmployeeID = e.EmployeeID)))
-            END, 'Unknown') AS Approvedby,
-        CASE 
-            WHEN cb.EndUserType = 'Company' THEN CONCAT(c.ShortCompName, ' / ', dt.Dept_Type_Name)
-            WHEN cb.EndUserType = 'Personal' THEN CONCAT(e.FirstName, ' ', e.LastName)
-        END AS EndUserName,
-        cb.EndUserID AS EndUserID,
-        cb.EndUserType, -- Make sure to select this column for the outer query
-        -- Use ROW_NUMBER to remove duplicates
-        ROW_NUMBER() OVER (PARTITION BY bps.AccountNo, bps.BillAmount ORDER BY bps.IssuedDate) AS RowNum
-    FROM 
-        BillsPaymentStatus bps
-        LEFT JOIN CommunicationsBills cb ON bps.AccountNo = cb.AccountNo AND cb.EndUserID IS NOT NULL
-        LEFT JOIN Employees e ON cb.EndUserID = e.EmployeeID
-        LEFT JOIN DEPARTMENTS d1 ON cb.EndUserType = 'Company' AND cb.EndUserID = d1.DeptID
-        LEFT JOIN DEPARTMENTS d2 ON cb.EndUserType = 'Personal' AND e.DeptID = d2.DeptID
-        LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
-        LEFT JOIN Companies c ON d1.COMPID = c.COMPID
-        LEFT JOIN Employees hod ON cb.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
+                //                    }
+                //                    else
+                //                    {
+                //                        // Communication
+                //                        if (cmbBillType1.Text == "Communication")
+                //                        {
+                //                            query = @"  SELECT *
+                //FROM (
+                //    SELECT   
+                //        bps.AccountNo,
+                //        bps.BillType,
+                //        cb.ServiceNo,
+                //        bps.IssuedDate,
+                //        CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
+                //        bps.BillAmount,
+                //        dt.Dept_Type_Name as Division,
+                //        COALESCE(
+                //            CASE 
+                //                WHEN cb.EndUserType = 'Company' THEN hod.FirstName + ' ' + hod.LastName
+                //                WHEN cb.EndUserType = 'Personal' THEN 
+                //                    (SELECT FirstName +' '+ LastName 
+                //                     FROM Employees 
+                //                     WHERE EmployeeID = 
+                //                        (SELECT DeptHeadID 
+                //                         FROM DEPARTMENTS 
+                //                         WHERE DeptID = (SELECT DeptID 
+                //                                         FROM Employees 
+                //                                         WHERE EmployeeID = e.EmployeeID)))
+                //            END, 'Unknown') AS Approvedby,
+                //        CASE 
+                //            WHEN cb.EndUserType = 'Company' THEN CONCAT(c.ShortCompName, ' / ', dt.Dept_Type_Name)
+                //            WHEN cb.EndUserType = 'Personal' THEN CONCAT(e.FirstName, ' ', e.LastName)
+                //        END AS EndUserName,
+                //        cb.EndUserID AS EndUserID,
+                //        cb.EndUserType, -- Make sure to select this column for the outer query
+                //        -- Use ROW_NUMBER to remove duplicates
+                //        ROW_NUMBER() OVER (PARTITION BY bps.AccountNo, bps.BillAmount ORDER BY bps.IssuedDate) AS RowNum
+                //    FROM 
+                //        BillsPaymentStatus bps
+                //        LEFT JOIN CommunicationsBills cb ON bps.AccountNo = cb.AccountNo AND cb.EndUserID IS NOT NULL
+                //        LEFT JOIN Employees e ON cb.EndUserID = e.EmployeeID
+                //        LEFT JOIN DEPARTMENTS d1 ON cb.EndUserType = 'Company' AND cb.EndUserID = d1.DeptID
+                //        LEFT JOIN DEPARTMENTS d2 ON cb.EndUserType = 'Personal' AND e.DeptID = d2.DeptID
+                //        LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
+                //        LEFT JOIN Companies c ON d1.COMPID = c.COMPID
+                //        LEFT JOIN Employees hod ON cb.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
 
-  where 
+                //  where 
 
-  bps.BillType=@paramBillType
-  AND CONVERT(DATE, bps.DisconnectDate) >= @paramFrom 
-  AND CONVERT(DATE, bps.DisconnectDate) <= @paramTo
-  AND bps.AccountNo= @paramAccount 
-  AND CASE 
-            WHEN cb.EndUserType = 'Company' THEN d1.DeptHeadID
-            WHEN cb.EndUserType = 'Personal' THEN d2.DeptHeadID
-        ELSE d2.DeptHeadID
-      END = @paramEnduserID
-	     AND cb.PaidBy=@paramPaidBy
+                //  bps.BillType=@paramBillType
+                //  AND CONVERT(DATE, bps.DisconnectDate) >= @paramFrom 
+                //  AND CONVERT(DATE, bps.DisconnectDate) <= @paramTo
+                //  AND bps.AccountNo= @paramAccount 
+                //  AND CASE 
+                //            WHEN cb.EndUserType = 'Company' THEN d1.DeptHeadID
+                //            WHEN cb.EndUserType = 'Personal' THEN d2.DeptHeadID
+                //        ELSE d2.DeptHeadID
+                //      END = @paramEnduserID
+                //	     AND cb.PaidBy=@paramPaidBy
 
-) AS TempTable
-WHERE RowNum = 1
-"
-   ;
+                //) AS TempTable
+                //WHERE RowNum = 1
+                //"
+                //   ;
 
-                        }
+                //                        }
 
-                        // Electrcity
-                        if (cmbBillType1.Text == "Electrcity")
-                        {
-                            query = @" SELECT 
-    bps.AccountNo,
-    bps.BillType,
-    bps.IssuedDate,
-	Ml.Meterlocation as Location,
+                //                        // Electrcity
+                //                        if (cmbBillType1.Text == "Electrcity")
+                //                        {
+                //                            query = @" SELECT 
+                //    bps.AccountNo,
+                //    bps.BillType,
+                //    bps.IssuedDate,
+                //	Ml.Meterlocation as Location,
 
-    CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
-    bps.BillAmount,
-    dt.Dept_Type_Name as Divison,
+                //    CONVERT(DATE, bps.DisconnectDate) AS DisconnectDate,
+                //    bps.BillAmount,
+                //    dt.Dept_Type_Name as Divison,
 
-    COALESCE(
-        CASE 
-            WHEN eb.EndUserType  = 'Company' THEN hod.FirstName +''+hod.LastName
-            WHEN eb.EndUserType  = 'Personal' THEN (SELECT FirstName +' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
-        END, 'Unknown') AS Approvedby,
+                //    COALESCE(
+                //        CASE 
+                //            WHEN eb.EndUserType  = 'Company' THEN hod.FirstName +''+hod.LastName
+                //            WHEN eb.EndUserType  = 'Personal' THEN (SELECT FirstName +' '+LastName FROM Employees WHERE EmployeeID = (SELECT DeptHeadID FROM DEPARTMENTS WHERE DeptID = (SELECT DeptID FROM Employees WHERE EmployeeID = e.EmployeeID)))
+                //        END, 'Unknown') AS Approvedby,
 
-   CASE 
-        WHEN eb.EndUserType = 'Company' THEN concat (c.ShortCompName,' / ',dt.Dept_Type_Name)
-        WHEN eb.EndUserType = 'Personal' THEN concat (e.FirstName,' ', e.LastName)
-    END AS EndUserName,
-    eb.EndUserID AS EndUserID
+                //   CASE 
+                //        WHEN eb.EndUserType = 'Company' THEN concat (c.ShortCompName,' / ',dt.Dept_Type_Name)
+                //        WHEN eb.EndUserType = 'Personal' THEN concat (e.FirstName,' ', e.LastName)
+                //    END AS EndUserName,
+                //    eb.EndUserID AS EndUserID
 
-FROM 
-    BillsPaymentStatus bps
- LEFT JOIN ElectrcityBills eb ON bps.AccountNo = eb.AccountNo AND eb.EndUserID IS NOT NULL
-  LEFT JOIN Employees e ON eb.EndUserID = e.EmployeeID
-  LEFT JOIN DEPARTMENTS d1 ON eb.EndUserType = 'Company' AND eb.EndUserID = d1.DeptID
-  LEFT JOIN DEPARTMENTS d2 ON eb.EndUserType = 'Personal' AND e.DeptID = d2.DeptID
-  LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
-  LEFT JOIN Companies c ON d1.COMPID = c.COMPID
-  LEFT JOIN Employees hod ON eb.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
-  LEFT JOIN Meterlocations ML ON eb.MeterLocationID = ML.MeterLocationID
+                //FROM 
+                //    BillsPaymentStatus bps
+                // LEFT JOIN ElectrcityBills eb ON bps.AccountNo = eb.AccountNo AND eb.EndUserID IS NOT NULL
+                //  LEFT JOIN Employees e ON eb.EndUserID = e.EmployeeID
+                //  LEFT JOIN DEPARTMENTS d1 ON eb.EndUserType = 'Company' AND eb.EndUserID = d1.DeptID
+                //  LEFT JOIN DEPARTMENTS d2 ON eb.EndUserType = 'Personal' AND e.DeptID = d2.DeptID
+                //  LEFT JOIN DeptTypes dt ON COALESCE(d1.DeptName, d2.DeptName) = dt.Dept_Type_ID
+                //  LEFT JOIN Companies c ON d1.COMPID = c.COMPID
+                //  LEFT JOIN Employees hod ON eb.EndUserType = 'Company' AND d1.DeptHeadID = hod.EmployeeID
+                //  LEFT JOIN Meterlocations ML ON eb.MeterLocationID = ML.MeterLocationID
 
-  where 
+                //  where 
 
-  bps.BillType=@paramBillType
-  AND CONVERT(DATE, bps.DisconnectDate) >= @paramFrom 
-  AND CONVERT(DATE, bps.DisconnectDate) <= @paramTo
-  AND bps.AccountNo= @paramAccount
-  AND  CASE 
-          WHEN eb.EndUserType = 'Company' THEN d1.DeptHeadID
-        WHEN eb.EndUserType = 'Personal' THEN d2.DeptHeadID
-        ELSE d2.DeptHeadID
-      END = @paramEnduserID
-	  AND eb.PaidBy=@paramPaidBy
-";
+                //  bps.BillType=@paramBillType
+                //  AND CONVERT(DATE, bps.DisconnectDate) >= @paramFrom 
+                //  AND CONVERT(DATE, bps.DisconnectDate) <= @paramTo
+                //  AND bps.AccountNo= @paramAccount
+                //  AND  CASE 
+                //          WHEN eb.EndUserType = 'Company' THEN d1.DeptHeadID
+                //        WHEN eb.EndUserType = 'Personal' THEN d2.DeptHeadID
+                //        ELSE d2.DeptHeadID
+                //      END = @paramEnduserID
+                //	  AND eb.PaidBy=@paramPaidBy
+                //";
 
-                        }
+                //                        }
 
-                    }
-                }
-          
-                
+                //                    }
+                //                }
+
+
                 // Add additional conditions based on selected filters
                 if (cmbenduserrpt.SelectedValue != null)
                 {
-                    query += " AND ((cb.EndUserType = 'Company' AND d1.DeptHeadID = @paramEnduserID) OR (cb.EndUserType = 'Personal' AND d2.DeptHeadID = @paramEnduserID))";
+                    if (cmbBillType1.Text == "Communication")
+                    {
+                        query += " AND ((cb.EndUserType = 'Company' AND d1.DeptHeadID = @paramEnduserID) OR (cb.EndUserType = 'Personal' AND d2.DeptHeadID = @paramEnduserID))";
+                    }
+                    else {
+                        query += " AND ((eb.EndUserType = 'Company' AND d1.DeptHeadID = @paramEnduserID) OR (eb.EndUserType = 'Personal' AND d2.DeptHeadID = @paramEnduserID))";
+
+                    }
                 }
 
                 if (cmbenduserrptbill.Text.ToString() != "Select" && (int)cmbenduserrptbill.SelectedValue != 0)
                 {
                     query += " AND EnduserID= @paramEnduserBillID";
                 }
+
                 if (!string.IsNullOrWhiteSpace(cmbpaidbyrpt.Text))
                 {
-                    query += " AND cb.PaidBy = @paramPaidBy";
+                    if (cmbBillType1.Text == "Communication")
+                    {
+                        query += " AND cb.PaidBy = @paramPaidBy";
+
+                    }
+                    else {
+                        query += " AND eb.PaidBy = @paramPaidBy";
+
+                    }
                 }
 
                 if (cmbendtype.SelectedItem != null && cmbendtype.SelectedItem.ToString() != "All")
@@ -3557,11 +3577,11 @@ FROM
                     query += " AND EndUserType = @paramEnduserType";
                 }
 
+                // Append final ordering and close the main query
                 query += @"
-    ) AS TempTable
-    WHERE RowNum = 1";
+) AS TempTable
+WHERE RowNum = 1";
 
-                // Apply ordering based on radio button selection
                 if (rbTop5Amount.Checked)
                 {
                     query += " ORDER BY bps.BillAmount DESC OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY";
@@ -3603,7 +3623,7 @@ FROM
 
 
 
-                
+
 
 
                     SqlDataAdapter adapter = new SqlDataAdapter(cmd);
@@ -3695,16 +3715,16 @@ FROM
                 report.SetParameterValue("@paramPaidBy", cmbpaidbyrpt.Text);
 
 
-               
+
                 crystalReportViewer1.ReportSource = report;
                 countnumber.Text = dataTable.Rows.Count.ToString();
             }
-        
- 
 
 
-        
-       }
+
+
+
+        }
 
         private void cmbenduserrpt_TextChanged(object sender, EventArgs e)
         {
@@ -3873,7 +3893,7 @@ FROM
                     break;
             }
 
-           
+
 
             SQLCONN.CloseConnection();
         }
@@ -3949,12 +3969,12 @@ FROM
 
         private void cmbcommenduser_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void cmbElecEnduser_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
     }
 }
