@@ -3612,9 +3612,56 @@ FROM
 
                 // Set up the report
                 ReportDocument report = new ReportDocument();
-                string reportName = cmbBillType1.Text == "Communication"
-                                    ? "Delmon_Managment_System.Reports.BillsReport.rpt"
-                                    : "Delmon_Managment_System.Reports.BillsReportElec.rpt";
+                string reportName;
+
+                // Check if the BillType is "Communication" and apply additional conditions
+                if (cmbBillType1.Text == "Communication")
+                {
+                    if (cmbenduserrptbill.Text.ToString() != "Select" && cmbpaidbyrpt.Text == "Personal")
+                    {
+                        // If additional conditions are met, load the specified report (e.g., a customized Communication report)
+                        reportName = "Delmon_Managment_System.Reports.BillsReport2.rpt";
+                    }
+                    else
+                    {
+                        // Load the default Communication report
+                        reportName = "Delmon_Managment_System.Reports.BillsReport.rpt";
+                    }
+                }
+                else
+                {
+                    // For other bill types, load a different report (e.g., Electricity report)
+                    reportName = "Delmon_Managment_System.Reports.BillsReportElec.rpt";
+                }
+
+                // Load the selected report
+                using (Stream rptStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(reportName))
+                {
+                    if (rptStream != null)
+                    {
+                        string tempReportPath = Path.GetTempFileName();
+                        using (FileStream tempFileStream = new FileStream(tempReportPath, FileMode.Create))
+                        {
+                            rptStream.CopyTo(tempFileStream);
+                        }
+
+                        report.Load(tempReportPath);
+                        File.Delete(tempReportPath);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Could not find the embedded report resource.");
+                        return;
+                    }
+                }
+
+                // Set up report parameters as usual
+                report.SetDataSource(dataTable);
+                // (Set other parameters here)
+
+                // Display the report
+                crystalReportViewer1.ReportSource = report;
+                countnumber.Text = dataTable.Rows.Count.ToString();
 
                 using (Stream rptStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(reportName))
                 {
