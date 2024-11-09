@@ -30,7 +30,7 @@
     <MinimumRequiredVersion>1.0.0.9</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>127</ApplicationRevision>
+    <ApplicationRevision>128</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -218,16 +218,16 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Reports\BillsReportElec.cs">
-      <DependentUpon>BillsReportElec.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Reports\BillsReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BillsReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\BillsReportElec1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BillsReportElec.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="SQLCONNECTION.cs" />
@@ -308,13 +308,13 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>BillsReport2.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\BillsReportElec.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>BillsReportElec.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reports\BillsReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>BillsReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\BillsReportElec.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BillsReportElec1.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="VersionFrm.resx">
       <DependentUpon>VersionFrm.cs</DependentUpon>
