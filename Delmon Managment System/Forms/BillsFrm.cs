@@ -635,9 +635,9 @@ WHERE
             paramAccount.Value = txtaccountno.Text;
             SqlParameter paramMetersn = new SqlParameter("@C2", SqlDbType.NVarChar);
             paramMetersn.Value = txtmetersn.Text;
-            SqlParameter paramMeterLocation = new SqlParameter("@C3", SqlDbType.Int);
+            SqlParameter paramMeterLocation = new SqlParameter("@C3", SqlDbType.NVarChar);
             paramMeterLocation.Value = cmbmeterlocation.SelectedValue;
-            SqlParameter paramOwner = new SqlParameter("@C4", SqlDbType.Int);
+            SqlParameter paramOwner = new SqlParameter("@C4", SqlDbType.NVarChar);
             paramOwner.Value = cmbOwner.SelectedValue;
             SqlParameter paramEnduserType = new SqlParameter("@C5", SqlDbType.NVarChar);
             paramEnduserType.Value = cmbbillendusetypeelec.Text;
@@ -653,7 +653,7 @@ WHERE
             SqlParameter paramService = new SqlParameter("@C7", SqlDbType.NVarChar);
             paramService.Value = cmbservice.SelectedValue;
             SqlParameter paramNotes = new SqlParameter("@C8", SqlDbType.NVarChar);
-            paramNotes.Value = txtNotes.Text;
+            paramNotes.Value = RemarksTxt.Text;
             SqlParameter paramPaidBy = new SqlParameter("@C9", SqlDbType.NVarChar);
             paramPaidBy.Value = cmbpaidbyelec.Text;
 
@@ -725,7 +725,7 @@ WHERE
 
             // Close database connection
             SQLCONN.CloseConnection();
-            ClearItems();
+            //ClearItems();
             btnUpdate.Visible = DeleteBtn.Visible = btn.Visible = true;
             AddBtn.Visible = false;
         }
@@ -2064,7 +2064,7 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
 
                 cmbBillType1.Text = "Select";
                 cmbenduserrpt.Text = "Select";
-                cmbendtype.Text = "Select";
+                cmbendtype.Text = "All";
                 cmbenduserrptbill.Text = "Select";
                 cmbpaidbyrpt.Text = "Select";
             }
@@ -3652,19 +3652,18 @@ WHERE RowNum = 1";
 
                     //if (cmbenduserrptbill.Text.ToString() != "Select" && cmbpaidbyrpt.Text == "Personal")
                     //{
-                    //    // If additional conditions are met, load the specified report (e.g., a customized Communication report)
-                    //    //  reportName = "Delmon_Managment_System.Reports.BillsReportElec2.rpt";
-                    //    MessageBox.Show("Soon");
+                    //    If additional conditions are met, load the specified report(e.g., a customized Communication report)
+                    //    reportName = "Delmon_Managment_System.Reports.BillsReportElec2.rpt";
 
                     //}
-                    //else 
+                    //else
                     //{
-                        // For other bill types, load a different report (e.g., Electricity report)
+                        // For other bill types, load a different report(e.g., Electricity report)
                         reportName = "Delmon_Managment_System.Reports.BillsReportElec.rpt";
 
-                   // }
+                    //}
 
-                       
+
                 }
 
                 // Load the selected report
