@@ -1994,9 +1994,9 @@ namespace Delmon_Managment_System.Forms
             this.label27.Location = new System.Drawing.Point(8, 74);
             this.label27.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(51, 17);
+            this.label27.Size = new System.Drawing.Size(141, 17);
             this.label27.TabIndex = 195;
-            this.label27.Text = "From:";
+            this.label27.Text = "Issued Date From:";
             // 
             // label45
             // 
@@ -2005,9 +2005,9 @@ namespace Delmon_Managment_System.Forms
             this.label45.Location = new System.Drawing.Point(8, 130);
             this.label45.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(31, 17);
+            this.label45.Size = new System.Drawing.Size(121, 17);
             this.label45.TabIndex = 197;
-            this.label45.Text = "To:";
+            this.label45.Text = "Issued Date To:";
             // 
             // txtAccountNumbe
             // 
