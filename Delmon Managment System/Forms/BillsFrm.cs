@@ -2436,18 +2436,10 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
                         }
 
                         // Apply ordering based on radio button selection
-                        if (rbTop5Amount.Checked)
-                        {
-                            queryCommuni += " ORDER BY bps.BillAmount DESC OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY";
-                        }
-                        else if (rbTop5DisconnectDate.Checked)
-                        {
-                            queryCommuni += " ORDER BY bps.DisconnectDate DESC OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY";
-                        }
-                        else
-                        {
+                      
+                        
                             queryCommuni += " ORDER BY EndUserFirstName";
-                        }
+                      
 
                         // Execute the query
                         if (!string.IsNullOrWhiteSpace(queryCommuni))
@@ -2541,14 +2533,7 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
                         }
 
                         // Modify query based on the selected filter option for Top 5
-                        if (rbTop5Amount.Checked)
-                        {
-                            queryElectrcity += " ORDER BY bps.BillAmount DESC OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY";
-                        }
-                        else if (rbTop5DisconnectDate.Checked)
-                        {
-                            queryElectrcity += " ORDER BY bps.DisconnectDate DESC OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY";
-                        }
+                 
 
                         // Check if the query is not empty before executing it
                         if (!string.IsNullOrWhiteSpace(queryElectrcity))
@@ -2693,18 +2678,10 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
                             }
 
                             // Apply ordering based on radio button selection
-                            if (rbTop5Amount.Checked)
-                            {
-                                queryCommuni += " ORDER BY bps.BillAmount DESC OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY";
-                            }
-                            else if (rbTop5DisconnectDate.Checked)
-                            {
-                                queryCommuni += " ORDER BY bps.DisconnectDate DESC OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY";
-                            }
-                            else
-                            {
+                           
+                            
                                 queryCommuni += " ORDER BY EndUserFirstName";
-                            }
+                            
 
                             // Execute the query
                             if (!string.IsNullOrWhiteSpace(queryCommuni))
@@ -2798,15 +2775,7 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
                                 queryElectrcity += " AND eb.EndUserID = @paramEnduserBillID"; // Fixed alias reference
                             }
 
-                            // Modify query based on the selected filter option for Top 5
-                            if (rbTop5Amount.Checked)
-                            {
-                                queryElectrcity += " ORDER BY bps.BillAmount DESC OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY";
-                            }
-                            else if (rbTop5DisconnectDate.Checked)
-                            {
-                                queryElectrcity += " ORDER BY bps.DisconnectDate DESC OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY";
-                            }
+                           
 
                             // Check if the query is not empty before executing it
                             if (!string.IsNullOrWhiteSpace(queryElectrcity))
@@ -3160,13 +3129,13 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
             if (cbunpaid.Checked == true)
             {
                 groupBox5.Enabled = false;
-                cmbenduserrpt.Enabled = true;
+             //   cmbenduserrpt.Enabled = true;
 
             }
             else
             {
                 groupBox5.Enabled = true;
-                cmbenduserrpt.Enabled = false;
+              //  cmbenduserrpt.Enabled = false;
 
 
             }
@@ -3674,18 +3643,10 @@ FROM (
 ) AS TempTable
 WHERE RowNum = 1 ";
 
-                if (rbTop5Amount.Checked)
-                {
-                    query += " ORDER BY bps.BillAmount DESC OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY";
-                }
-                else if (rbTop5DisconnectDate.Checked)
-                {
-                    query += " ORDER BY bps.DisconnectDate DESC OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY";
-                }
-                else
-                {
+              
+                
                     query += " ORDER BY EndUserFirstName";
-                }
+                
 
                 // Execute the query and fill DataTable
                 DataTable dataTable = new DataTable();
