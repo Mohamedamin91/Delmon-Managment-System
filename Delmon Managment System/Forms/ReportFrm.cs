@@ -1656,6 +1656,25 @@ namespace Delmon_Managment_System.Forms
             // Execute the appropriate query based on the selected radio button
             if (radioButton1.Checked) // By user
             {
+
+            //    SELECT dt.Dept_Type_Name,pd.ID,lr.Username, SUM(lr.Total) AS Count FROM DelmonGroupDB.dbo.DEPARTMENTS d,
+            //    DelmonGroupDB.dbo.DeptTypes dt,
+            //    DelmonGroupDB.dbo.Employees e,
+            //    DelmonPrintersLog.dbo.LogReport lr,
+            //    DelmonPrintersLog.dbo.PrinterUsernameID pd WHERE
+            //pd.Username = lr.Username
+
+            //and pd.ID = e.EmployeeID
+
+            //and e.DeptID = d.DEPTID
+
+            //and d.DeptName = dt.Dept_Type_ID
+
+            //and CONVERT(DATE, Printdate, 120) BETWEEN '01-01-2024' AND '12-12-2024' AND AssetId = 'PR0001' GROUP BY lr.Username,pd.ID,dt.Dept_Type_Name ORDER BY Count
+
+
+
+
                 dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT Username, SUM(Total) AS Count 
             FROM LogReport WHERE 
             CONVERT(DATE, Printdate, 120) BETWEEN @C1 AND @C2 AND AssetId=@C0 
