@@ -1630,8 +1630,9 @@ namespace Delmon_Managment_System.Forms
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            // Open the database connection
-            SQLCONN4.OpenConection4();
+            // Open the database connections for both databases
+            SQLCONN.OpenConection();  // Open connection for DelmonGroupDB (Department, Employees)
+            SQLCONN4.OpenConection4();    // Open connection for DelmonPrintersLog (LogReport, PrinterUsernameID)
 
             // Create the SQL parameters
             SqlParameter ParamUserPrinter = new SqlParameter("@C0", SqlDbType.NVarChar) { Value = cmbPrinter.SelectedValue };
@@ -1655,13 +1656,30 @@ namespace Delmon_Managment_System.Forms
             // Execute the appropriate query based on the selected radio button
             if (radioButton1.Checked) // By user
             {
-                dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT Username, SUM(Total) AS Count FROM LogReport WHERE 
-            CONVERT(DATE, Printdate, 120) BETWEEN @C1 AND @C2 AND AssetId=@C0 GROUP BY Username ORDER BY Count;", ParamFrom, ParamTo, ParamUserPrinter);
+                dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT Username, SUM(Total) AS Count 
+            FROM LogReport WHERE 
+            CONVERT(DATE, Printdate, 120) BETWEEN @C1 AND @C2 AND AssetId=@C0 
+            GROUP BY Username ORDER BY Count;", ParamFrom, ParamTo, ParamUserPrinter);
             }
             else if (radioButton2.Checked) // By department
             {
-                dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT Department, SUM(Total) AS Count FROM LogReport WHERE 
-            CONVERT(DATE, Printdate, 120) BETWEEN @C1 AND @C2 AND AssetId=@C0 GROUP BY Department ORDER BY Count;", ParamFrom, ParamTo, ParamUserPrinter);
+                // Query with multiple databases: DelmonGroupDB and DelmonPrintersLog
+                dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"
+           SELECT dt.Dept_Type_Name as Department,
+    SUM(lr.Total) AS Count
+ FROM DelmonGroupDB.dbo.DEPARTMENTS d,
+DelmonGroupDB.dbo.DeptTypes dt,
+DelmonGroupDB.dbo.Employees e,
+DelmonPrintersLog.dbo.LogReport lr,
+DelmonPrintersLog.dbo.PrinterUsernameID pd WHERE 
+            pd.Username=lr.Username 
+			and pd.ID = e.EmployeeID
+			and e.DeptID = d.DEPTID
+			and d.DeptName = dt.Dept_Type_ID
+            and CONVERT(DATE, lr.Printdate, 120) BETWEEN @C1 AND @C2
+            AND lr.AssetId = @C0
+            GROUP BY dt.Dept_Type_Name
+            ORDER BY Count;", ParamFrom, ParamTo, ParamUserPrinter);
             }
             else if (radioButton3.Checked) // Full report
             {
@@ -1693,9 +1711,11 @@ namespace Delmon_Managment_System.Forms
             // Adjust DataGridView settings and add total row if applicable
             AdjustDataGridView();
 
-            // Close the database connection
+            // Close the database connections
+            SQLCONN.CloseConnection();
             SQLCONN4.CloseConnection();
         }
+
 
         private void AdjustDataGridView()
         {
