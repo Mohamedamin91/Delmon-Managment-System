@@ -586,10 +586,10 @@ WHERE
                 }
 
                 // Load divisions
-                string divisionQuery = "SELECT [DEPTID], Dept_Type_Name " +
-                                       "FROM [DelmonGroupDB].[dbo].[DEPARTMENTS] " +
-                                       "JOIN DeptTypes ON DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID " +
-                                       "WHERE compid = " + cmbbillenduserelec.SelectedValue;
+                string divisionQuery = " SELECT [DEPTID], Dept_Type_Name " +
+                                       " FROM [DelmonGroupDB].[dbo].[DEPARTMENTS] " +
+                                       " JOIN DeptTypes ON DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID " +
+                                       " WHERE compid = "  + cmbbillenduserelec.SelectedValue ;
                 var divisionData = SQLCONN.ShowDataInGridViewORCombobox(divisionQuery);
 
                 if (divisionData != null && divisionData.Rows.Count > 0)
@@ -2302,7 +2302,7 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
             SqlParameter paramPaidBy = new SqlParameter("@paramPaidBy", SqlDbType.NVarChar);
             paramPaidBy.Value = cmbpaidbyrpt.Text;
 
-
+            
             SqlParameter paramFrom = new SqlParameter("@paramFrom", SqlDbType.Date);
             paramFrom.Value = dtpfromreport.Value.ToString("yyyy-MM-dd");
             SqlParameter paramTo = new SqlParameter("@paramTo", SqlDbType.Date);
@@ -2523,35 +2523,30 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
         AND eb.PaidBy = @paramPaidBy
 ";
 
+
+
+                        // Additional filtering conditions
                         if (cmbendtype.SelectedItem.ToString() != "All")
                         {
-                            queryElectrcity += " AND eb.EndUserType = @paramEnduserType"; // Fixed alias reference
+                            queryElectrcity += " AND EndUserType = @paramEnduserType"; // Fixed alias reference
                         }
+                       
+
                         if (cmbenduserrptbill.Text.ToString() != "Select" && (int)cmbenduserrptbill.SelectedValue != 0)
                         {
-                            queryElectrcity += " AND eb.EndUserID = @paramEnduserBillID"; // Fixed alias reference
+                            queryElectrcity += " AND EndUserID = @paramEnduserBillID"; // Fixed alias reference
                         }
 
-                        // Modify query based on the selected filter option for Top 5
-                 
 
-                        // Check if the query is not empty before executing it
+
+                        // Execute the query
                         if (!string.IsNullOrWhiteSpace(queryElectrcity))
                         {
-                            if (cmbendtype.SelectedItem.ToString() != "All")
-                            {
-                                dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(queryElectrcity, paramBillType, paramPaymentStauts, paramApprovedBy, paramEnduserType, paramEnduserBillID, paramPaidBy);
-                                countnumber.Text = dataGridView5.Rows.Count.ToString();
-
-                            }
-                            else
-                            {
-                                dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(queryElectrcity, paramBillType, paramPaymentStauts, paramApprovedBy, paramPaidBy);
-                                countnumber.Text = dataGridView5.Rows.Count.ToString();
-
-                            }
+                            dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(queryElectrcity, paramBillType, paramPaymentStauts, paramApprovedBy, paramEnduserType, paramEnduserBillID, paramPaidBy);
+                            countnumber.Text = dataGridView5.Rows.Count.ToString();
                         }
 
+                       
 
 
                     }
@@ -2756,44 +2751,38 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
 
                          WHERE 
         bps.BillType = @paramBillType
-		                  AND CONVERT(DATE, bps.DisconnectDate) >= @paramFrom 
-                          AND CONVERT(DATE, bps.DisconnectDate) <= @paramTo
+		                  AND CONVERT(DATE, bps.IssuedDate) >= @paramFrom 
+                          AND CONVERT(DATE, bps.IssuedDate) <= @paramTo
                           AND bps.AccountNo= @paramAccount
               AND CASE 
                 WHEN eb.EndUserType = 'Company' THEN d1.DeptHeadID
                 WHEN eb.EndUserType = 'Personal' THEN d2.DeptHeadID
                 ELSE d2.DeptHeadID
               END = @paramEnduserID
-           AND eb.PaidBy = @paramPaidBy ";
+           AND eb.PaidBy = @paramPaidBy 
+
+
+
+
+";
 
                             if (cmbendtype.SelectedItem.ToString() != "All")
                             {
-                                queryElectrcity += " AND eb.EndUserType = @paramEnduserType"; // Fixed alias reference
+                                queryElectrcity += " AND EndUserType = @paramEnduserType"; // Fixed alias reference
                             }
                             if (cmbenduserrptbill.Text.ToString() != "Select" && (int)cmbenduserrptbill.SelectedValue != 0)
                             {
-                                queryElectrcity += " AND eb.EndUserID = @paramEnduserBillID"; // Fixed alias reference
+                                queryElectrcity += " AND EndUserID = @paramEnduserBillID"; // Fixed alias reference
                             }
 
-                           
 
-                            // Check if the query is not empty before executing it
+
+                            // Execute the query
                             if (!string.IsNullOrWhiteSpace(queryElectrcity))
                             {
-                                if (cmbendtype.SelectedItem.ToString() != "All")
-                                {
-                                    dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(queryElectrcity, paramBillType, paramPaymentStauts, paramApprovedBy, paramEnduserType, paramEnduserBillID, paramPaidBy);
-                                    countnumber.Text = dataGridView5.Rows.Count.ToString();
-
-                                }
-                                else
-                                {
-                                    dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(queryElectrcity, paramBillType, paramFrom, paramTo, paramAccount, paramApprovedBy, paramPaidBy);
-                                    countnumber.Text = dataGridView5.Rows.Count.ToString();
-
-                                }
+                                dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox(queryElectrcity, paramBillType, paramFrom, paramTo, paramAccount, paramApprovedBy, paramEnduserType, paramEnduserBillID, paramPaidBy);
+                                countnumber.Text = dataGridView5.Rows.Count.ToString();
                             }
-
 
 
                         }
@@ -3376,7 +3365,7 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
             LEFT JOIN Companies hodCompany ON hod.COMPID = hodCompany.COMPID  -- Company of the head of department for Company end users
             LEFT JOIN Meterlocations ML ON eb.MeterLocationID = ML.MeterLocationID
 	 
-   
+
         WHERE 
                 bps.BillType = @paramBillType
                 AND bps.PaymentStatus = 0
@@ -3579,9 +3568,6 @@ FROM (
         )
         AND eb.PaidBy = @paramPaidBy
 
- 
-
-
 ";
 
                         }
@@ -3641,7 +3627,7 @@ FROM (
                 // Append final ordering and close the main query
                 query += @"
 ) AS TempTable
-WHERE RowNum = 1 ";
+WHERE RowNum = 1 "; 
 
               
                 
