@@ -31,11 +31,11 @@ namespace Delmon_Managment_System.Forms
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BillsFrm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.cmbpaidbyelec = new System.Windows.Forms.ComboBox();
@@ -357,9 +357,9 @@ namespace Delmon_Managment_System.Forms
             this.label43.ForeColor = System.Drawing.Color.Black;
             this.label43.Location = new System.Drawing.Point(9, 301);
             this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(118, 17);
+            this.label43.Size = new System.Drawing.Size(114, 17);
             this.label43.TabIndex = 232;
-            this.label43.Text = " End User Type";
+            this.label43.Text = " EndUser Type";
             // 
             // pictureBox1
             // 
@@ -498,8 +498,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView1.Location = new System.Drawing.Point(643, 8);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridView1.Size = new System.Drawing.Size(799, 612);
             this.dataGridView1.TabIndex = 187;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
@@ -1014,8 +1014,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView2.Location = new System.Drawing.Point(803, 8);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView2.Name = "dataGridView2";
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView2.Size = new System.Drawing.Size(639, 489);
             this.dataGridView2.TabIndex = 219;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
@@ -1278,8 +1278,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView3.Location = new System.Drawing.Point(623, 20);
             this.dataGridView3.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView3.Name = "dataGridView3";
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridView3.Size = new System.Drawing.Size(760, 410);
             this.dataGridView3.TabIndex = 244;
             this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick);
@@ -1491,8 +1491,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView4.Location = new System.Drawing.Point(620, 12);
             this.dataGridView4.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView4.Name = "dataGridView4";
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView4.RowsDefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView4.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridView4.Size = new System.Drawing.Size(625, 573);
             this.dataGridView4.TabIndex = 245;
             this.dataGridView4.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellClick);
@@ -1864,7 +1864,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.cmbenduserrptbill.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.cmbenduserrptbill.FormattingEnabled = true;
-            this.cmbenduserrptbill.Location = new System.Drawing.Point(11, 207);
+            this.cmbenduserrptbill.Location = new System.Drawing.Point(11, 205);
             this.cmbenduserrptbill.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbenduserrptbill.Name = "cmbenduserrptbill";
             this.cmbenduserrptbill.Size = new System.Drawing.Size(400, 25);
@@ -2155,8 +2155,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView5.Location = new System.Drawing.Point(430, 6);
             this.dataGridView5.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView5.Name = "dataGridView5";
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView5.RowsDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView5.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView5.Size = new System.Drawing.Size(1066, 767);
             this.dataGridView5.TabIndex = 194;
             // 

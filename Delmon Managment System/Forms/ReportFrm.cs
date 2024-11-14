@@ -1675,7 +1675,9 @@ namespace Delmon_Managment_System.Forms
 
 
 
-                dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT Username, SUM(Total) AS Count 
+                dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT Username, SUM(Total) AS Count ,
+    FORMAT(SUM(Total) * 100.0 / (SELECT SUM(Total) FROM LogReport WHERE CONVERT(DATE, Printdate, 120) BETWEEN @C1 AND @C2 AND AssetId = @C0), 'N2') AS Percentage
+
             FROM LogReport WHERE 
             CONVERT(DATE, Printdate, 120) BETWEEN @C1 AND @C2 AND AssetId=@C0 
             GROUP BY Username ORDER BY Count;", ParamFrom, ParamTo, ParamUserPrinter);
@@ -1685,7 +1687,9 @@ namespace Delmon_Managment_System.Forms
                 // Query with multiple databases: DelmonGroupDB and DelmonPrintersLog
                 dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"
            SELECT dt.Dept_Type_Name as Department,
-    SUM(lr.Total) AS Count
+    SUM(lr.Total) AS Count,
+    FORMAT(SUM(Total) * 100.0 / (SELECT SUM(Total) FROM LogReport WHERE CONVERT(DATE, Printdate, 120) BETWEEN @C1 AND @C2 AND AssetId = @C0), 'N2') AS Percentage
+
  FROM DelmonGroupDB.dbo.DEPARTMENTS d,
 DelmonGroupDB.dbo.DeptTypes dt,
 DelmonGroupDB.dbo.Employees e,
@@ -1744,15 +1748,42 @@ DelmonPrintersLog.dbo.PrinterUsernameID pd WHERE
             if (radioButton1.Checked || radioButton2.Checked) // By user or by department
             {
                 int sum = 0;
+                int sum2 = 0;
+
                 foreach (DataGridViewRow row in dataGridView5.Rows)
                 {
                     if (row.Cells[1].Value != null && int.TryParse(row.Cells[1].Value.ToString(), out int quantity))
                     {
                         sum += quantity;
                     }
+                    if (row.Cells[2].Value != null && int.TryParse(row.Cells[2].Value.ToString(), out int quantity2))
+                    {
+                        sum2 += quantity2;
+                    }
                 }
 
+                // Add total row and calculate percentage
                 AddTotalRow(sum, 1);
+                AddTotalRow(sum2, 2);
+
+                // Remove the last row (Total row)
+                if (dataGridView5.Rows.Count > 0)
+                {
+                    dataGridView5.Rows.RemoveAt(dataGridView5.Rows.Count - 1);
+                }
+
+                // Calculate and add percentage column
+                if (sum > 0)
+                {
+                    foreach (DataGridViewRow row in dataGridView5.Rows)
+                    {
+                        if (row.Cells[1].Value != null && int.TryParse(row.Cells[1].Value.ToString(), out int quantity))
+                        {
+                            double percentage = (double)quantity / sum * 100;
+                            row.Cells["Percentage"].Value = percentage.ToString("F2");
+                        }
+                    }
+                }
             }
             else if (radioButton3.Checked) // Full report
             {
@@ -1773,12 +1804,9 @@ DelmonPrintersLog.dbo.PrinterUsernameID pd WHERE
                 dataGridView5.Columns[2].Width = 300;
                 int rowCount = dataGridView5.RowCount;
                 lblSum.Text = rowCount.ToString();
-
             }
-           
-            dataGridView5.Refresh();
-           
 
+            dataGridView5.Refresh();
         }
 
         private void AddTotalRow(int sum, int columnIndex)
@@ -1791,7 +1819,14 @@ DelmonPrintersLog.dbo.PrinterUsernameID pd WHERE
 
             DataGridViewRow totalDataGridViewRow = dataGridView5.Rows[dataTable.Rows.Count - 1];
             totalDataGridViewRow.DefaultCellStyle.BackColor = Color.YellowGreen;
+
+            // Add the percentage if it's available
+            if (columnIndex == 1 || columnIndex == 2) // Percentage is calculated for these columns
+            {
+                totalDataGridViewRow.Cells["Percentage"].Value = "100.00"; // 100% for the total row
+            }
         }
+
 
         private void button5_Click(object sender, EventArgs e)
         {

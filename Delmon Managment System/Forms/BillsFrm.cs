@@ -132,6 +132,7 @@ WHERE
 
         private void BillsFrm_Load(object sender, EventArgs e)
         {
+
             cmbbillendusetypeelec.Text = "Select";
             cmbbillenduserdivisonelec.Text = "Select";
             cmbpaidbyelec.Text = "Select";
@@ -3918,7 +3919,7 @@ WHERE RowNum = 1 ";
             switch (cmbbillendusertypecomm.SelectedItem.ToString())
             {
                 case "Company":
-                    label44.Text = "EndUser- Company";
+                    label50.Text = "EndUser- Company";
                     cmbbillendusercomm.DataSource = null; // Clear the data source
                     cmbbillendusercomm.Enabled = true;
                     cmbbillenduserdevisionecomm.Enabled = true;
