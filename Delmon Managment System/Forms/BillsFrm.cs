@@ -1343,6 +1343,15 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
             SqlParameter paramPaymentstaus = new SqlParameter("@C6", SqlDbType.NVarChar);
             paramPaymentstaus.Value = 0;
 
+
+            SqlParameter paramPSD = new SqlParameter("@C7", SqlDbType.Date);
+            paramPSD.Value = dtppsd.Value;
+
+            SqlParameter paramPND = new SqlParameter("@C8", SqlDbType.Date);
+            paramPND.Value = dtppnd.Value;
+
+
+
             SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
             paramPID.Value = EmployeeID;
 
@@ -1373,8 +1382,11 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
      ,[DisconnectDate] = @C4
      ,[BillAmount] = @C5
       ,[PaymentStatus] = @C6
+      ,[Periodstartdate] = @C7
+      ,[Periodenddate] = @C8
 
-      where AccountNo = @C1 and IssuedDate=@C33 ", paramaccount, paramissuedate2, paramBillType, paramissuedate, paramdisconnectdate, paramBillAmount, paramPaymentstaus);
+
+      where AccountNo = @C1 and IssuedDate=@C33 ", paramaccount, paramissuedate2, paramBillType, paramissuedate, paramdisconnectdate, paramBillAmount, paramPaymentstaus,paramPSD,paramPND);
 
                     SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (logvalue,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('BillsPaymentStatus',@C1,'#','#',@datetime,@pc,@user,'Update')", paramaccount, paramdatetimeLOG, parampc, paramuser);
 
@@ -1385,7 +1397,11 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
       ,[BillType]
       ,[IssuedDate]
       ,[DisconnectDate]
-      ,[BillAmount] FROM [DelmonGroupDB].[dbo].[BillsPaymentStatus] where " +
+      ,[BillAmount] 
+,[PaymentStatus]
+ ,[Periodstartdate] 
+      ,[Periodenddate]
+  FROM [DelmonGroupDB].[dbo].[BillsPaymentStatus] where " +
                     " IssuedDate = @C3 and AccountNo = @C1  ", paramissuedate, paramaccount);
             }
 
@@ -1409,11 +1425,15 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
             SqlParameter paramBillAmount = new SqlParameter("@C5", SqlDbType.NVarChar);
             paramBillAmount.Value = float.Parse(txtBillAmount.Text);
 
-
-
-
             SqlParameter paramPaymentstaus = new SqlParameter("@C6", SqlDbType.NVarChar);
             paramPaymentstaus.Value = 0;
+
+            SqlParameter paramPSD = new SqlParameter("@C7", SqlDbType.Date);
+            paramPSD.Value = dtppsd.Value;
+
+            SqlParameter paramPND = new SqlParameter("@C8", SqlDbType.Date);
+            paramPND.Value = dtppnd.Value;
+
 
             SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
             paramPID.Value = EmployeeID;
@@ -1436,14 +1456,6 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
             else
             {
                 SQLCONN.OpenConection();
-
-
-
-
-
-
-
-
 
 
                 dr = SQLCONN.DataReader(" select BPS.AccountNo from BillsPaymentStatus BPS, CommunicationsBills CB, ElectrcityBills EB " +
@@ -1470,6 +1482,8 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
                         {
                             dr.Dispose();
                             dr.Close();
+                           
+                            
                             SQLCONN.ExecuteQueries("UPDATE BillsPaymentStatus SET PaymentStatus = 1 WHERE AccountNo = @C1 AND PaymentStatus = 0", paramaccount);
 
                             SQLCONN.ExecuteQueries(@"INSERT INTO [dbo].[BillsPaymentStatus]
@@ -1478,10 +1492,14 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
      ,[IssuedDate]
      ,[DisconnectDate]
      ,[BillAmount]
-     ,[PaymentStatus])
+     ,[PaymentStatus]
+     ,[Periodstartdate]
+     ,[Periodenddate]
+
+)
 
      VALUES
-          (@C1,@C2,@C3,@C4,@C5,@C6)", paramaccount, paramBillType, paramissuedate, paramdisconnectdate, paramBillAmount, paramPaymentstaus);
+          (@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8)", paramaccount, paramBillType, paramissuedate, paramdisconnectdate, paramBillAmount, paramPaymentstaus,paramPSD,paramPND);
 
                             SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('BillsPaymentStatus',@C1,'#','#',@datetime,@pc,@user,'Insert')", paramaccount, paramdatetimeLOG, parampc, paramuser);
 
@@ -1495,6 +1513,9 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
       ,[IssuedDate]
       ,[DisconnectDate]
       ,[BillAmount]
+,[PaymentStatus]
+      ,[Periodstartdate] 
+      ,[Periodenddate]
       from BillsPaymentStatus  where " +
                             " IssuedDate=  @C3 and AccountNo=@C1  ", paramissuedate, paramaccount);
 
@@ -1568,7 +1589,7 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
         private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             txtaccount3.Enabled = false;
-            button8.Visible = false;
+            button8.Visible = true;
             button5.Visible = true;
             //    btnnew.Visible = updatebtn.Visible = deletebtn.Visible = true;
 
@@ -1584,6 +1605,25 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
             oldissueddate = dtpissue.Value;
             dtpdisconnect.Value = Convert.ToDateTime(selectedRow.Cells[3].Value.ToString()); // Note: The cell index was changed from 4 to 3
             txtBillAmount.Text = selectedRow.Cells[4].Value.ToString(); // Note: The cell index was changed from 7 to 4
+        
+            
+            if (selectedRow.Cells[6].Value != null && !string.IsNullOrWhiteSpace(selectedRow.Cells[6].Value.ToString()))
+            {
+                dtppsd.Value = Convert.ToDateTime(selectedRow.Cells[6].Value.ToString());
+            }
+            else
+            {
+                dtppsd.Value = DateTime.Now; // Or any default date
+            }
+
+            if (selectedRow.Cells[7].Value != null && !string.IsNullOrWhiteSpace(selectedRow.Cells[7].Value.ToString()))
+            {
+                dtppnd.Value = Convert.ToDateTime(selectedRow.Cells[7].Value.ToString());
+            }
+            else
+            {
+                dtppnd.Value = DateTime.Now; // Or any default date
+            }
 
         }
         private void ClearItems3()
@@ -1639,7 +1679,7 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
 
                     txtaccount.Text = txtserviceNo.Text = txtNotes.Text = string.Empty;
                     cmbservice2.Text = cmbpackage.Text = "Select";
-                    Expiredtp.Value = DateTime.Now;
+                    Expiredtp.Value = dtppsd.Value=dtppnd.Value= dtpissue.Value =dtpdisconnect.Value = DateTime.Now;
 
                     SQLCONN.CloseConnection();
                     ClearItems3();

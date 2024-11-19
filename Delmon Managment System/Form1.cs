@@ -428,7 +428,7 @@ GROUP BY
             //successfully
             // MessageBox.Show("Bills have been added successfully to the log Report  !\n", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //  MessageBox.Show("There is no notifications !\n", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            MessageBox.Show("1-Percentage  for Printer report  has been added successfully  !\n", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("1-Period Start & end dates has been added successfully   !\n", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //  OpenChildForm(new Forms.NotificationFrm(), sender);
 
         }
