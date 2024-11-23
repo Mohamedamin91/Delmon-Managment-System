@@ -407,6 +407,9 @@ WHERE
             SqlParameter paramPaidBy = new SqlParameter("@C9", SqlDbType.NVarChar);
             paramPaidBy.Value = cmbpaidbyelec.Text;
 
+            SqlParameter paramshortdesc = new SqlParameter("@C10", SqlDbType.NVarChar);
+            paramshortdesc.Value = txtshortdescelec.Text;
+
             SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
             paramPID.Value = EmployeeID;
 
@@ -431,8 +434,8 @@ WHERE
 
             // Insert data into ElectrcityBills table
             string query = @"INSERT INTO [dbo].[ElectrcityBills] 
-                     ([AccountNo], [MeterSN], [MeterLocationID],[Ownerid],[EndUserType],[EndUserID], [ServiceStatusD], [Notes], [PaidBy])
-                     VALUES (@C1, @C2, @C3, @C4, @C5, @C6, @C7, @C8,@C9)";
+                     ([AccountNo], [MeterSN], [MeterLocationID],[Ownerid],[EndUserType],[EndUserID], [ServiceStatusD], [Notes], [PaidBy],[ShortDesc])
+                     VALUES (@C1, @C2, @C3, @C4, @C5, @C6, @C7, @C8,@C9,@C10)";
 
             SqlParameter[] parameters = new SqlParameter[]
             {
@@ -444,7 +447,8 @@ WHERE
         paramEndUser,
         paramService,
         paramNotes,
-        paramPaidBy
+        paramPaidBy,
+        paramshortdesc
             };
 
             // Check for missing fields
@@ -492,7 +496,7 @@ WHERE
             MessageBox.Show("Record saved Successfully");
 
             // Refresh data grid view
-            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT [AccountNo], [MeterSN], [MeterLocationID], [Ownerid], [EndUserID], [ServiceStatusD], [Notes],[PaidBy]
+            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT [AccountNo], [MeterSN], [MeterLocationID], [Ownerid], [EndUserID], [ServiceStatusD], [Notes],[PaidBy],[ShortDesc]
         FROM [DelmonGroupDB].[dbo].[ElectrcityBills] WHERE AccountNo = @C1", paramAccount);
 
             // Show button
@@ -529,12 +533,14 @@ WHERE
       ,[ServiceStatusD]
       ,[Notes]
       ,[PaidBy]
+      ,[ShortDesc]
       FROM [DelmonGroupDB].[dbo].[ElectrcityBills]
                     WHERE (AccountNo LIKE '%' + @C0 + '%'
                            OR MeterSN LIKE '%' + @C0 + '%'
                            OR EndUserID LIKE '%' + @C0 + '%'
                            OR ServiceStatusD LIKE '%' + @C0 + '%'
                            OR Notes LIKE '%' + @C0 + '%'
+                           OR ShortDesc LIKE '%' + @C0 + '%'
                            OR PaidBy LIKE '%' + @C0 + '%')";
 
             dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramSearch);
@@ -564,6 +570,8 @@ WHERE
 
             if (endUserType == "Company")
             {
+                label44.Text = "Company";
+
                 cmbbillenduserdivisonelec.Enabled = true;
 
                 // Clear existing data source
@@ -605,6 +613,7 @@ WHERE
             }
             else if (endUserType == "Personal")
             {
+                label44.Text = "Personal";
                 cmbbillenduserelec.DataSource = null;
                 cmbbillenduserdivisonelec.Enabled = false;
                 cmbbillenduserelec.Text = "Select";
@@ -626,6 +635,7 @@ WHERE
             cmbservice.SelectedValue = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString());
             RemarksTxt.Text = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
             cmbpaidbyelec.Text = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
+            txtshortdescelec.Text = dataGridView1.Rows[e.RowIndex].Cells[9].Value.ToString();
 
             SQLCONN.CloseConnection();
         }
@@ -657,6 +667,8 @@ WHERE
             paramNotes.Value = RemarksTxt.Text;
             SqlParameter paramPaidBy = new SqlParameter("@C9", SqlDbType.NVarChar);
             paramPaidBy.Value = cmbpaidbyelec.Text;
+            SqlParameter paramshortdesc = new SqlParameter("@C10", SqlDbType.NVarChar);
+            paramshortdesc.Value = txtshortdescelec.Text;
 
             SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
             paramPID.Value = EmployeeID;
@@ -696,9 +708,10 @@ WHERE
            [EndUserID] = @C6,
            [ServiceStatusD] = @C7,
            [Notes] = @C8,
-           [Paidby] = @C9
+           [Paidby] = @C9,
+           [ShortDesc]=@C10
            WHERE [AccountNo] = @C1";
-            SqlParameter[] parameters = new SqlParameter[] { paramAccount, paramMetersn, paramMeterLocation, paramOwner, paramEnduserType, paramEndUser, paramService, paramNotes, paramPaidBy };
+            SqlParameter[] parameters = new SqlParameter[] { paramAccount, paramMetersn, paramMeterLocation, paramOwner, paramEnduserType, paramEndUser, paramService, paramNotes, paramPaidBy,paramshortdesc };
 
             SQLCONN.ExecuteQueries(query, parameters);
 
@@ -719,6 +732,7 @@ WHERE
       ,[ServiceStatusD]
       ,[Notes]
       ,[Paidby]
+     ,[ShortDesc]
       FROM [DelmonGroupDB].[dbo].[ElectrcityBills] WHERE AccountNo = @C1", paramAccount);
 
             // Show button
@@ -770,13 +784,17 @@ WHERE
                     MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT [AccountNo]
-                           ,[MeterSN]
-                           ,[MeterLocationID]
-                           ,[OwnerId]
-                           ,[EndUserID]
-                           ,[ServiceStatusD]
-                           ,[Notes]
-                    FROM [DelmonGroupDB].[dbo].[ElectrcityBills] WHERE AccountNo = @C1 ", paramccount);
+      ,[MeterSN]
+      ,[MeterLocationID]
+      ,[Ownerid]
+      ,[EnduserType]
+      ,[EndUserID]
+      ,[ServiceStatusD]
+      ,[Notes]
+      ,[Paidby]
+     ,[ShortDesc]
+      FROM [DelmonGroupDB].[dbo].[ElectrcityBills] WHERE AccountNo = @C1 ", paramccount);
+                   
 
                     SQLCONN.CloseConnection();
                     ClearItems();
@@ -819,6 +837,10 @@ WHERE
 
             SqlParameter paramPaidBy = new SqlParameter("@C11", SqlDbType.NVarChar);
             paramPaidBy.Value = cmbpaidbycomm.Text;
+
+            SqlParameter paramshortdesc = new SqlParameter("@C12", SqlDbType.NVarChar);
+            paramshortdesc.Value = txtshortdesccomm.Text;
+
 
 
             SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
@@ -881,9 +903,10 @@ WHERE
         ,[ExpireDate]
         ,[Notes]
         ,[EndUserType]
-        ,[Paidby])
+        ,[Paidby]
+        ,[ShortDesc])
             VALUES
-           (@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8,@C9,@C10,@C11)", paramaccount, paramserviceNo, paramenduser, paramRegisterType, paramRegisterUnder, paramPackage, paramService, paramExpiredate, paramNotes, paramEnduserType, paramPaidBy);
+           (@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8,@C9,@C10,@C11,@C12)", paramaccount, paramserviceNo, paramenduser, paramRegisterType, paramRegisterUnder, paramPackage, paramService, paramExpiredate, paramNotes, paramEnduserType, paramPaidBy,paramshortdesc);
 
                         SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('CommunicationsBills',@C2,'#','#',@datetime,@pc,@user,'Insert')", paramserviceNo, paramdatetimeLOG, parampc, paramuser);
 
@@ -906,7 +929,7 @@ WHERE
             SqlParameter paramSearch = new SqlParameter("@C0", SqlDbType.NVarChar);
             paramSearch.Value = textBox1.Text;
 
-            SQLCONN.OpenConection();
+            SQLCONN.OpenConection0();
             if (lblusertype.Text == "Admin")
             {
                 string query = @"SELECT  [AccountNo]
@@ -920,6 +943,7 @@ WHERE
                            ,[ExpireDate]
                            ,[Notes]
                            ,[Paidby]
+                           ,[ShortDesc]
                         FROM [DelmonGroupDB].[dbo].[CommunicationsBills]
                         WHERE (AccountNo LIKE '%' + REPLACE(@C0,'', '') + '%'
                             OR ServiceNo LIKE '%' + REPLACE(@C0,'', '') + '%'
@@ -930,6 +954,7 @@ WHERE
                             OR PackageID LIKE '%' + REPLACE(@C0,'', '') + '%'
                             OR ServiceStatusID LIKE '%' + REPLACE(@C0,'', '') + '%'
                             OR ExpireDate LIKE '%' + REPLACE(@C0,'', '') + '%'
+                            OR ShortDesc LIKE '%' + REPLACE(@C0,'', '') + '%'
                             OR Notes LIKE '%' + REPLACE(@C0,'', '') + '%')";
 
                 dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramSearch);
@@ -947,6 +972,7 @@ WHERE
                            ,[ExpireDate]
                            ,[Notes]
                            ,[Paidby]
+                           ,[ShortDesc]
                         FROM [DelmonGroupDB].[dbo].[CommunicationsBills]
                         WHERE (AccountNo LIKE '%' + REPLACE(@C0,'', '') + '%'
                             OR ServiceNo LIKE '%' + REPLACE(@C0,'', '') + '%'
@@ -957,6 +983,7 @@ WHERE
                             OR PackageID LIKE '%' + REPLACE(@C0,'', '') + '%'
                             OR ServiceStatusID LIKE '%' + REPLACE(@C0,'', '') + '%'
                             OR ExpireDate LIKE '%' + REPLACE(@C0,'', '') + '%'
+                            OR ShortDesc LIKE '%' + REPLACE(@C0,'', '') + '%'
                             OR Notes LIKE '%' + REPLACE(@C0,'', '') + '%')";
 
 
@@ -1049,6 +1076,7 @@ WHERE
             }
             else if (registertype == "Personal")
             {
+
                 cmbRegisterUnder.DataSource = null;
 
                 // Load personal end user data (employees)
@@ -1065,22 +1093,8 @@ WHERE
             }
 
 
-
-
-
-
-
-
+          
             /**registerunbder**/
-
-
-
-
-
-
-
-
-
 
 
             /*enduser*/
@@ -1091,6 +1105,8 @@ WHERE
 
             if (endUserType == "Company")
             {
+                label50.Text = "Company";
+
                 cmbbillenduserdevisionecomm.Enabled = true;
 
                 // Clear existing data source
@@ -1132,6 +1148,8 @@ WHERE
             }
             else if (endUserType == "Personal")
             {
+                label50.Text = "Personal";
+
                 cmbbillenduserelec.DataSource = null;
                 cmbbillenduserdivisonelec.Enabled = false;
                 cmbbillendusercomm.Text = "Select";
@@ -1152,6 +1170,7 @@ WHERE
             /*enduser**/
             txtNotes.Text = selectedRow.Cells[9].Value.ToString();
             cmbpaidbycomm.Text = selectedRow.Cells[10].Value.ToString();
+            txtshortdesccomm.Text = selectedRow.Cells[11].Value.ToString();
 
             // Check if the register under is company or personal
 
@@ -1194,6 +1213,9 @@ WHERE
 
             SqlParameter paramPaidBy = new SqlParameter("@C11", SqlDbType.NVarChar);
             paramPaidBy.Value = cmbpaidbycomm.Text;
+            SqlParameter paramshortdesc = new SqlParameter("@C12", SqlDbType.NVarChar);
+            paramshortdesc.Value = txtshortdesccomm.Text;
+
 
 
             SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
@@ -1242,8 +1264,9 @@ SET [AccountNo] = @C1,
 [ServiceStatusID] = @C7,
 [ExpireDate] = @C8,
 [Notes] = @C9,
-[Paidby]= @C11
-WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRegisterUnder, paramPackage, paramService, paramExpiredate, paramNotes, paramserviceNo, paramEnduserType, paramPaidBy);
+[Paidby]= @C11,
+[ShortDesc]=@C12
+WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRegisterUnder, paramPackage, paramService, paramExpiredate, paramNotes, paramserviceNo, paramEnduserType, paramPaidBy,paramshortdesc);
 
                     SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('CommunicationsBills',@C2,'#','#',@datetime,@pc,@user,'Update')", paramserviceNo, paramdatetimeLOG, parampc, paramuser);
 

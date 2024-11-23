@@ -1949,6 +1949,10 @@ ORDER BY e.EmployeeID";
                         {
                             paramfilename.Value = fileName;
                             paramFileContent.Value = fileContent;
+                            //// Read the selected file into a byte array
+                            //fileContent = File.ReadAllBytes(fileName);
+                            //fileName = Path.GetFileName(fileName);
+                            //Doctxt.Text = fileName;
                         }
 
                         SQLCONN.OpenConection();
@@ -3403,69 +3407,73 @@ ORDER BY e.EmployeeID";
 
         private void btnshowDoc_Click(object sender, EventArgs e)
         {
-
-            // Check if a row is selected
-
             if (dOCID == 0)
             {
                 MessageBox.Show("Please select a record.");
-
+                return;
             }
-            else
+
+            if (dataGridView3.CurrentRow == null)
             {
-                // Check if a row is selected
-                if (dataGridView3.CurrentRow != null)
+                MessageBox.Show("Please select a document.");
+                return;
+            }
+
+            try
+            {
+                // Get the selected document's ID
+                DataGridViewRow selectedRow = dataGridView3.CurrentRow;
+                int selectedDocId = Convert.ToInt32(selectedRow.Cells["Doc_id"].Value);
+
+                // Fetch document data
+                byte[] documentBinary = null;
+                string fileName = string.Empty;
+
+                using (SqlConnection connection = new SqlConnection(SQLCONN.ConnectionString))
                 {
-                    try
+                    string query = "SELECT name, documentValue FROM Documents WHERE Doc_id = @DocumentID";
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@DocumentID", selectedDocId);
+
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        // Get the selected document's ID (assuming the column contains the ID)
-                        DataGridViewRow selectedRow = dataGridView3.CurrentRow;
-                        int selectedDocId = Convert.ToInt32(selectedRow.Cells["Doc_id"].Value);
-
-                        // Fetch the document data from the database
-                        byte[] documentBinary = null;
-                        string fileName = string.Empty;
-                        using (SqlConnection connection = new SqlConnection(SQLCONN.ConnectionString))
+                        if (reader.Read())
                         {
-                            string query = "SELECT name, documentValue FROM Documents WHERE Doc_id = @DocumentID";
-                            SqlCommand command = new SqlCommand(query, connection);
-                            command.Parameters.AddWithValue("@DocumentID", selectedDocId);
-
-                            connection.Open();
-                            using (SqlDataReader reader = command.ExecuteReader())
-                            {
-                                if (reader.Read())
-                                {
-                                    fileName = reader["name"].ToString();
-                                    documentBinary = (byte[])reader["documentValue"];
-                                }
-                            }
-                        }
-
-                        // Check if document data is fetched
-                        if (documentBinary != null)
-                        {
-                            // Save the binary data to a temporary file
-                            string tempFilePath = Path.Combine(Path.GetTempPath(), fileName);
-                            File.WriteAllBytes(tempFilePath, documentBinary);
-
-                            // Open the file using the default viewer
-                            Process.Start(tempFilePath);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Document not found.");
+                            fileName = reader["name"].ToString();
+                            documentBinary = reader["documentValue"] as byte[];
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("An error occurred: " + ex.Message);
-                    }
                 }
-                else
+
+                if (documentBinary == null)
                 {
-                    MessageBox.Show("Please select a document.");
+                    MessageBox.Show("Document not found or invalid binary data.");
+                    return;
                 }
+
+                // Ensure fileName has a valid extension
+                if (!Path.HasExtension(fileName))
+                {
+                    MessageBox.Show("File name lacks an extension. Adding default '.bin'.");
+                    fileName += ".bin";
+                }
+
+
+                // Save to a temporary file
+                string tempFilePath = Path.Combine(Path.GetTempPath(), fileName);
+                File.WriteAllBytes(tempFilePath, documentBinary);
+
+                // Open the file
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = tempFilePath,
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
             }
         }
         private void btnnewJob_Click_1(object sender, EventArgs e)
