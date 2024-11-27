@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Delmon Managment System\Reports\BillsReport.rpt = Delmon Managment System\Reports\BillsReport.rpt
 		Delmon Managment System\Reports\BillsReport2.rpt = Delmon Managment System\Reports\BillsReport2.rpt
 		Delmon Managment System\Reports\BillsReportElec.rpt = Delmon Managment System\Reports\BillsReportElec.rpt
+		Delmon Managment System\Reports\BillsReportElecYear.rpt = Delmon Managment System\Reports\BillsReportElecYear.rpt
 	EndProjectSection
 EndProject
 Global

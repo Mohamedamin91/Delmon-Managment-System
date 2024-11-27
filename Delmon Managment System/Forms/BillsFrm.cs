@@ -4073,6 +4073,140 @@ WHERE RowNum = 1 ";
 
         }
 
+        private void label58_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //SqlParameter paramYear1 = new SqlParameter("@Year1", SqlDbType.Date);
+        //paramYear1.Value = dtpyearlyfrom.Value.Year;
+        //SqlParameter paramMonth = new SqlParameter("@Month1", SqlDbType.Date);
+        //paramMonth.Value = dtpyearlyfrom.Value.Month;
+        //SqlParameter paramYear2 = new SqlParameter("@Year2", SqlDbType.Date);
+        //paramYear2.Value = dtpyearlyto.Value.Year;
+        //SqlParameter paramMonth2 = new SqlParameter("@Month2", SqlDbType.Date);
+        //paramMonth2.Value = dtpyearlyfrom.Value.Month;
+
+
+        private void button15_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                // Hide DataGridView and show CrystalReportViewer
+                dataGridView5.Visible = false;
+                crystalReportViewer1.Visible = true;
+
+                // Query with parameters for years and months
+                string query = @"
+        SELECT 
+            eb.AccountNo, 
+            eb.ShortDesc AS Label,
+            eb2023.PeriodStartDate AS PeriodStartDate2023,
+            DATEDIFF(DAY, eb2023.PeriodStartDate, eb2023.PeriodEndDate) AS Days2023,
+            eb2023.BillAmount AS BillAmount2023,
+            eb2023.IssueMonth AS IssueMonth2023,
+            eb2023.IssueYear AS IssueYear2023,
+            eb2024.PeriodStartDate AS PeriodStartDate2024,
+            DATEDIFF(DAY, eb2024.PeriodStartDate, eb2024.PeriodEndDate) AS Days2024,
+            eb2024.BillAmount AS BillAmount2024,
+            eb2024.IssueMonth AS IssueMonth2024,
+            eb2024.IssueYear AS IssueYear2024,
+ -- Calculate the difference and round it to 2 decimal places
+    ROUND(ISNULL(eb2024.BillAmount, 0) - ISNULL(eb2023.BillAmount, 0), 2) AS BillAmountDifference
+        FROM 
+            ElectrcityBills eb
+        LEFT JOIN 
+            (SELECT 
+                 AccountNo, 
+                 PeriodStartDate, 
+                 PeriodEndDate, 
+                 BillAmount,
+                 MONTH(IssuedDate) AS IssueMonth,
+                 YEAR(IssuedDate) AS IssueYear
+             FROM BillsPaymentStatus 
+             WHERE YEAR(IssuedDate) = @Year1 AND MONTH(IssuedDate) = @Month1) AS eb2023
+        ON 
+            eb.AccountNo = eb2023.AccountNo
+        LEFT JOIN 
+            (SELECT 
+                 AccountNo, 
+                 PeriodStartDate, 
+                 PeriodEndDate, 
+                 BillAmount,
+                 MONTH(IssuedDate) AS IssueMonth,
+                 YEAR(IssuedDate) AS IssueYear
+             FROM BillsPaymentStatus 
+             WHERE YEAR(IssuedDate) = @Year2 AND MONTH(IssuedDate) = @Month2) AS eb2024
+        ON 
+            eb.AccountNo = eb2024.AccountNo
+        WHERE 
+            eb.AccountNo IN (SELECT AccountNo FROM BillsPaymentStatus)
+      --AND (eb.ShortDesc IS NOT NULL and eb.ShortDesc <> '')
+		AND (eb2023.BillAmount IS NOT NULL AND eb2023.BillAmount <> '')
+        AND (eb2024.BillAmount IS NOT NULL AND eb2024.BillAmount <> ''); ";
+
+                // Fill DataTable with query results
+                DataTable dataTable = new DataTable();
+                using (SqlConnection conn = new SqlConnection(SQLCONN.ConnectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        // Add query parameters from DateTimePickers
+                        cmd.Parameters.AddWithValue("@Year1", dtpyearlyfrom.Value.Year);
+                        cmd.Parameters.AddWithValue("@Month1", dtpyearlyfrom.Value.Month);
+                        cmd.Parameters.AddWithValue("@Year2", dtpyearlyto.Value.Year);
+                        cmd.Parameters.AddWithValue("@Month2", dtpyearlyto.Value.Month);
+
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dataTable);
+                    }
+                }
+
+                // Load Crystal Report
+                ReportDocument report = new ReportDocument();
+                string reportName = "Delmon_Managment_System.Reports.BillsReportElecYear.rpt";
+
+                using (Stream rptStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(reportName))
+                {
+                    if (rptStream != null)
+                    {
+                        string tempReportPath = Path.GetTempFileName();
+                        using (FileStream tempFileStream = new FileStream(tempReportPath, FileMode.Create))
+                        {
+                            rptStream.CopyTo(tempFileStream);
+                        }
+
+                        report.Load(tempReportPath);
+                        File.Delete(tempReportPath);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Could not find the embedded report resource.");
+                        return;
+                    }
+                }
+
+                // Set report data source
+                report.SetDataSource(dataTable);
+
+                // Pass parameters to Crystal Report
+                report.SetParameterValue("@Year1", dtpyearlyfrom.Value.Year);
+                report.SetParameterValue("@Month1", dtpyearlyfrom.Value.Month);
+                report.SetParameterValue("@Year2", dtpyearlyto.Value.Year);
+                report.SetParameterValue("@Month2", dtpyearlyto.Value.Month);
+
+                // Display the report in the viewer
+                crystalReportViewer1.ReportSource = report;
+
+                // Show the number of rows in the report
+                countnumber.Text = dataTable.Rows.Count.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+        }
+
         private void cmbpackage_TextChanged(object sender, EventArgs e)
         {
             // Simple debugging log to see when this event gets triggered

@@ -30,7 +30,7 @@
     <MinimumRequiredVersion>1.0.0.9</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>141</ApplicationRevision>
+    <ApplicationRevision>142</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -212,6 +212,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\BillsReportElecYear.cs">
+      <DependentUpon>BillsReportElecYear.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\PrinterReport-bydept.cs">
       <DependentUpon>PrinterReport-bydept.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -316,6 +322,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Reports\BillsReportElecYear.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BillsReportElecYear.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\PrinterReport-bydept.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PrinterReport-bydept.cs</LastGenOutput>
@@ -344,7 +354,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="VisaReport.rdlc" />
     <EmbeddedResource Include="VisaRequest.rdlc" />
-    <None Include="Delmon Managment System_TemporaryKey.pfx" />
     <None Include="Delmon.xsc">
       <DependentUpon>Delmon.xsd</DependentUpon>
     </None>
