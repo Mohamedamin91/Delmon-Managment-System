@@ -4101,12 +4101,12 @@ WHERE RowNum = 1 ";
         SELECT 
             eb.AccountNo, 
             eb.ShortDesc AS Label,
-            eb2023.PeriodStartDate AS PeriodStartDate2023,
+            CONVERT(DATE, eb2023.PeriodStartDate) AS PeriodStartDate2023,
             DATEDIFF(DAY, eb2023.PeriodStartDate, eb2023.PeriodEndDate) AS Days2023,
             eb2023.BillAmount AS BillAmount2023,
             eb2023.IssueMonth AS IssueMonth2023,
             eb2023.IssueYear AS IssueYear2023,
-            eb2024.PeriodStartDate AS PeriodStartDate2024,
+            CONVERT(DATE, eb2024.PeriodStartDate) AS PeriodStartDate2024,
             DATEDIFF(DAY, eb2024.PeriodStartDate, eb2024.PeriodEndDate) AS Days2024,
             eb2024.BillAmount AS BillAmount2024,
             eb2024.IssueMonth AS IssueMonth2024,
@@ -4161,6 +4161,54 @@ WHERE RowNum = 1 ";
                         adapter.Fill(dataTable);
                     }
                 }
+                // Clone the structure of the original DataTable
+                DataTable formattedTable = dataTable.Clone();
+
+                // Adjust the data types for the date columns to allow string formatting
+                formattedTable.Columns["PeriodStartDate2024"].DataType = typeof(string);
+                formattedTable.Columns["PeriodStartDate2023"].DataType = typeof(string);
+
+                // Iterate over each row in the original DataTable
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    // Create a new row for the formatted table
+                    DataRow newRow = formattedTable.NewRow();
+
+                    // Iterate over each column in the original table
+                    foreach (DataColumn col in dataTable.Columns)
+                    {
+                        // Format the "PeriodStartDate2024" column if it has a value
+                        if (col.ColumnName == "PeriodStartDate2024" && row[col] != DBNull.Value)
+                        {
+                            newRow[col.ColumnName] = Convert.ToDateTime(row[col]).ToString("dd-MMM-yyyy");
+                        }
+                        // Format the "PeriodStartDate2023" column if it has a value
+                        else if (col.ColumnName == "PeriodStartDate2023" && row[col] != DBNull.Value)
+                        {
+                            newRow[col.ColumnName] = Convert.ToDateTime(row[col]).ToString("dd-MMM-yyyy");
+                        }
+                        // Copy other column values as is
+                        else
+                        {
+                            newRow[col.ColumnName] = row[col];
+                        }
+                    }
+
+                    // Add the formatted row to the new table
+                    formattedTable.Rows.Add(newRow);
+                }
+
+                // Replace the original DataTable with the formatted one
+                dataTable = formattedTable;
+
+                // Optional: Debugging output
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    MessageBox.Show($"2024: {row["PeriodStartDate2024"]}, 2023: {row["PeriodStartDate2023"]}");
+                }
+
+
+
 
                 // Load Crystal Report
                 ReportDocument report = new ReportDocument();
@@ -4185,9 +4233,11 @@ WHERE RowNum = 1 ";
                         return;
                     }
                 }
+            
+
 
                 // Set report data source
-                report.SetDataSource(dataTable);
+                report.SetDataSource(formattedTable);
 
                 // Pass parameters to Crystal Report
                 report.SetParameterValue("@Year1", dtpyearlyfrom.Value.Year);

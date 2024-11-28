@@ -1821,7 +1821,6 @@ namespace Delmon_Managment_System.Forms
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button15);
             this.groupBox3.Controls.Add(this.label63);
             this.groupBox3.Controls.Add(this.groupBox4);
             this.groupBox3.Controls.Add(this.countnumber);
@@ -1861,7 +1860,7 @@ namespace Delmon_Managment_System.Forms
             this.button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button15.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.button15.ForeColor = System.Drawing.Color.Firebrick;
-            this.button15.Location = new System.Drawing.Point(186, 581);
+            this.button15.Location = new System.Drawing.Point(181, 89);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(55, 35);
             this.button15.TabIndex = 214;
@@ -1882,6 +1881,7 @@ namespace Delmon_Managment_System.Forms
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.button15);
             this.groupBox4.Controls.Add(this.dtpyearlyto);
             this.groupBox4.Controls.Add(this.dtpyearlyfrom);
             this.groupBox4.Controls.Add(this.label58);
@@ -1896,7 +1896,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.dtpyearlyto.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.dtpyearlyto.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpyearlyto.Location = new System.Drawing.Point(6, 92);
+            this.dtpyearlyto.Location = new System.Drawing.Point(9, 92);
             this.dtpyearlyto.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.dtpyearlyto.Name = "dtpyearlyto";
             this.dtpyearlyto.Size = new System.Drawing.Size(170, 25);
@@ -1906,7 +1906,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.dtpyearlyfrom.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.dtpyearlyfrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpyearlyfrom.Location = new System.Drawing.Point(6, 39);
+            this.dtpyearlyfrom.Location = new System.Drawing.Point(9, 39);
             this.dtpyearlyfrom.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.dtpyearlyfrom.Name = "dtpyearlyfrom";
             this.dtpyearlyfrom.Size = new System.Drawing.Size(170, 25);
@@ -1916,7 +1916,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label58.AutoSize = true;
             this.label58.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label58.Location = new System.Drawing.Point(8, 15);
+            this.label58.Location = new System.Drawing.Point(11, 15);
             this.label58.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label58.Name = "label58";
             this.label58.Size = new System.Drawing.Size(141, 17);
@@ -1928,7 +1928,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label62.AutoSize = true;
             this.label62.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label62.Location = new System.Drawing.Point(8, 68);
+            this.label62.Location = new System.Drawing.Point(11, 68);
             this.label62.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label62.Name = "label62";
             this.label62.Size = new System.Drawing.Size(121, 17);
