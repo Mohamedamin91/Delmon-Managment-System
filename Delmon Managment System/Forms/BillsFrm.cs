@@ -4202,10 +4202,7 @@ WHERE RowNum = 1 ";
                 dataTable = formattedTable;
 
                 // Optional: Debugging output
-                foreach (DataRow row in dataTable.Rows)
-                {
-                    MessageBox.Show($"2024: {row["PeriodStartDate2024"]}, 2023: {row["PeriodStartDate2023"]}");
-                }
+              
 
 
 
