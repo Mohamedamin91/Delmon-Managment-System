@@ -690,232 +690,270 @@ namespace Delmon_Managment_System.Forms
         private void Updatebtn_Click(object sender, EventArgs e)
 
         {
-
-            SqlParameter paramfirstname = new SqlParameter("@C1", SqlDbType.NVarChar);
-            paramfirstname.Value = firstnametxt.Text;
-            SqlParameter paramsecondname = new SqlParameter("@C2", SqlDbType.NVarChar);
-            paramsecondname.Value = secondnametxt.Text;
-            SqlParameter Paramthirdname = new SqlParameter("@C3", SqlDbType.NVarChar);
-            Paramthirdname.Value = thirdnametxt.Text;
-            SqlParameter paramlastname = new SqlParameter("@C4", SqlDbType.NVarChar);
-            paramlastname.Value = lastnametxt.Text;
-            SqlParameter paramGender = new SqlParameter("@C5", SqlDbType.NVarChar);
-            paramGender.Value = cmbGender.SelectedItem;
-            SqlParameter paramMartialStatus = new SqlParameter("@C6", SqlDbType.NVarChar);
-            paramMartialStatus.Value = cmbMartialStatus.SelectedItem;
-
-            SqlParameter paramUserID = new SqlParameter("@C10", SqlDbType.NVarChar);
-            paramUserID.Value = CommonClass.UserID;
-            SqlParameter paramDateTimeLOG = new SqlParameter("@C11", SqlDbType.NVarChar);
-            paramDateTimeLOG.Value = lbldatetime.Text;
-            SqlParameter paramRecordStatus = new SqlParameter("@C12", SqlDbType.NVarChar);
-            paramRecordStatus.Value = "1";
-
-
-            SqlParameter paramStatusHistory = new SqlParameter("@C13", SqlDbType.NVarChar);
-            paramStatusHistory.Value = cmbPersonalStatusStatus.SelectedValue;
-            SqlParameter paramJobHistory = new SqlParameter("@C14", SqlDbType.NVarChar);
-            paramJobHistory.Value = cmbEmployJobHistory.SelectedValue;
-            SqlParameter ParamtDepartmentHistory = new SqlParameter("@C15", SqlDbType.NVarChar);
-            ParamtDepartmentHistory.Value = cmbempdepthistory.SelectedValue;
-            SqlParameter paramstartdate = new SqlParameter("@C16", SqlDbType.Date);
-            paramstartdate.Value = StartDatePicker.Value;
-            SqlParameter paramenddate = new SqlParameter("@C17", SqlDbType.Date);
-            paramenddate.Value = EndDatePicker.Value;
-
-            SqlParameter paramcompany = new SqlParameter("@C18", SqlDbType.NVarChar);
-            paramcompany.Value = cmbCompany.SelectedValue;
-            SqlParameter paramNationality = new SqlParameter("@C19", SqlDbType.NVarChar);
-            paramNationality.Value = cmbnationality.SelectedValue;
-
-            SqlParameter paramDOB = new SqlParameter("@C20", SqlDbType.Date);
-            paramDOB.Value = dtpDOB.Value;
-
-
-
-
-
-            SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
-            paramPID.Value = EMPID;
-            SqlParameter paramEmployeeID = new SqlParameter("@CurrentEmployeeID", SqlDbType.NVarChar);
-
-            /* for log */
-
-            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
-            paramuser.Value = lblusername.Text;
-            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
-            paramdatetimeLOG.Value = lbldatetime.Text;
-            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
-            parampc.Value = lblPC.Text;
-            SqlParameter paramType = new SqlParameter("@type", SqlDbType.NVarChar);
-            paramType.Value = "Update";
-            /* for log */
-
-
-
-            if (EMPID != 0)
+            if (firstnametxt.Text == "")
             {
+                MessageBox.Show("Please insert 'First name ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (lastnametxt.Text == "")
+            {
+                MessageBox.Show("Please insert 'Last Name' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (cmbGender.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Gender' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (cmbMartialStatus.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Martial Status' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            else if ((int)cmbPersonalStatusStatus.SelectedValue == 0 || cmbPersonalStatusStatus.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Employee Status' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbEmployJobHistory.SelectedValue == 0 || cmbEmployJobHistory.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Job' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbempdepthistory.SelectedValue == 0 || cmbempdepthistory.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Department Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbCompany.SelectedValue == 0 || cmbCompany.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Company' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbnationality.SelectedValue == 0 || cmbnationality.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Nationality' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                SqlParameter paramfirstname = new SqlParameter("@C1", SqlDbType.NVarChar);
+                paramfirstname.Value = firstnametxt.Text;
+                SqlParameter paramsecondname = new SqlParameter("@C2", SqlDbType.NVarChar);
+                paramsecondname.Value = secondnametxt.Text;
+                SqlParameter Paramthirdname = new SqlParameter("@C3", SqlDbType.NVarChar);
+                Paramthirdname.Value = thirdnametxt.Text;
+                SqlParameter paramlastname = new SqlParameter("@C4", SqlDbType.NVarChar);
+                paramlastname.Value = lastnametxt.Text;
+                SqlParameter paramGender = new SqlParameter("@C5", SqlDbType.NVarChar);
+                paramGender.Value = cmbGender.SelectedItem;
+                SqlParameter paramMartialStatus = new SqlParameter("@C6", SqlDbType.NVarChar);
+                paramMartialStatus.Value = cmbMartialStatus.SelectedItem;
+
+                SqlParameter paramUserID = new SqlParameter("@C10", SqlDbType.NVarChar);
+                paramUserID.Value = CommonClass.UserID;
+                SqlParameter paramDateTimeLOG = new SqlParameter("@C11", SqlDbType.NVarChar);
+                paramDateTimeLOG.Value = lbldatetime.Text;
+                SqlParameter paramRecordStatus = new SqlParameter("@C12", SqlDbType.NVarChar);
+                paramRecordStatus.Value = "1";
+
+
+                SqlParameter paramStatusHistory = new SqlParameter("@C13", SqlDbType.NVarChar);
+                paramStatusHistory.Value = cmbPersonalStatusStatus.SelectedValue;
+                SqlParameter paramJobHistory = new SqlParameter("@C14", SqlDbType.NVarChar);
+                paramJobHistory.Value = cmbEmployJobHistory.SelectedValue;
+                SqlParameter ParamtDepartmentHistory = new SqlParameter("@C15", SqlDbType.NVarChar);
+                ParamtDepartmentHistory.Value = cmbempdepthistory.SelectedValue;
+                SqlParameter paramstartdate = new SqlParameter("@C16", SqlDbType.Date);
+                paramstartdate.Value = StartDatePicker.Value;
+                SqlParameter paramenddate = new SqlParameter("@C17", SqlDbType.Date);
+                paramenddate.Value = EndDatePicker.Value;
+
+                SqlParameter paramcompany = new SqlParameter("@C18", SqlDbType.NVarChar);
+                paramcompany.Value = cmbCompany.SelectedValue;
+                SqlParameter paramNationality = new SqlParameter("@C19", SqlDbType.NVarChar);
+                paramNationality.Value = cmbnationality.SelectedValue;
+
+                SqlParameter paramDOB = new SqlParameter("@C20", SqlDbType.Date);
+                paramDOB.Value = dtpDOB.Value;
 
 
 
-                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+
+
+                SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
+                paramPID.Value = EMPID;
+                SqlParameter paramEmployeeID = new SqlParameter("@CurrentEmployeeID", SqlDbType.NVarChar);
+
+                /* for log */
+
+                SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+                paramuser.Value = lblusername.Text;
+                SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+                paramdatetimeLOG.Value = lbldatetime.Text;
+                SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+                parampc.Value = lblPC.Text;
+                SqlParameter paramType = new SqlParameter("@type", SqlDbType.NVarChar);
+                paramType.Value = "Update";
+                /* for log */
+
+
+
+                if (EMPID != 0)
                 {
 
-                    if (StartDatePicker.Checked == false)
-                    {
-                        DateTime enter_date = DateTime.Now.Date;
-                        StartDatePicker.Value = enter_date;
 
-                    }
-                    else if (EndDatePicker.Checked == false)
+
+                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     {
 
-                        DateTime enter_date = DateTime.Now.Date;
-                        EndDatePicker.Value = enter_date;
-
-
-                    }
-                    else if (dtpDOB.Checked == false)
-                    {
-
-                        DateTime enter_date = DateTime.Now.Date;
-                        dtpDOB.Value = enter_date;
-
-
-                    }
-                    else if (cmbEmployJobHistory.Text == "Select")
-
-                    {
-                        MessageBox.Show("Please Select a Job !!");
-
-                    }
-                    else if (cmbnationality.Text == "Select")
-
-                    {
-                        MessageBox.Show("Please Select a Nationality !!");
-
-                    }
-                    else if (cmbempdepthistory.Text == "Select")
-                    {
-                        MessageBox.Show("Please Select a department !!");
-                    }
-                    else if (cmbPersonalStatusStatus.Text == "Select")
-
-                    {
-                        MessageBox.Show("Please Select a Employment type !!");
-
-
-                    }
-                    else
-                    {
-                        SQLCONN.OpenConection();
-
-                        // MessageBox.Show(EMPID.ToString());
-
-                        /**logtable */
-                        DataTable originalData = new DataTable();
-                        string connectionString = SQLCONN.ConnectionString;
-                        using (SqlConnection connection = new SqlConnection(connectionString))
+                        if (StartDatePicker.Checked == false)
                         {
-                            connection.Open();
-                            string sql = "SELECT * FROM Employees WHERE EmployeeId = @EmployeeId";
-                            SqlDataAdapter da = new SqlDataAdapter(sql, connection);
-                            da.SelectCommand.Parameters.AddWithValue("@EmployeeId", EMPID);
-                            originalData = new DataTable();
-                            da.Fill(originalData);
+                            DateTime enter_date = DateTime.Now.Date;
+                            StartDatePicker.Value = enter_date;
+
                         }
-
-
-                        paramEmployeeID.Value = CurrentEmployeeIDtxt.Text;
-
-                        if ((int)cmbCompany.SelectedIndex == -1 || (int)cmbempdepthistory.SelectedIndex == -1)
+                        else if (EndDatePicker.Checked == false)
                         {
-                            if ((int)cmbPersonalStatusStatus.SelectedValue == 25 || (int)cmbPersonalStatusStatus.SelectedValue == 26 || (int)cmbPersonalStatusStatus.SelectedValue == 27)
-                            {
-                                SQLCONN.ExecuteQueries("update Employees set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,StartDate=@C16,EndDate=@C17,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc,NationalityID=@C19,DOB=@C20 where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, paramstartdate, paramenddate, paramEmployeeID, paramuser, parampc, paramNationality,paramDOB);
 
-                            }
-
-                            else
-                            {
-                                SQLCONN.ExecuteQueries("update Employees set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,StartDate=@C16,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc,NationalityID=@C19 , DOB=@C20 where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, paramstartdate, paramEmployeeID, paramuser, parampc, paramNationality, paramDOB);
-
-                            }
+                            DateTime enter_date = DateTime.Now.Date;
+                            EndDatePicker.Value = enter_date;
 
 
                         }
+                        else if (dtpDOB.Checked == false)
+                        {
 
+                            DateTime enter_date = DateTime.Now.Date;
+                            dtpDOB.Value = enter_date;
+
+
+                        }
+                        else if (cmbEmployJobHistory.Text == "Select")
+
+                        {
+                            MessageBox.Show("Please Select a Job !!");
+
+                        }
+                        else if (cmbnationality.Text == "Select")
+
+                        {
+                            MessageBox.Show("Please Select a Nationality !!");
+
+                        }
+                        else if (cmbempdepthistory.Text == "Select")
+                        {
+                            MessageBox.Show("Please Select a department !!");
+                        }
+                        else if (cmbPersonalStatusStatus.Text == "Select")
+
+                        {
+                            MessageBox.Show("Please Select a Employment type !!");
+
+
+                        }
                         else
                         {
-                            if ((int)cmbPersonalStatusStatus.SelectedValue == 25 || (int)cmbPersonalStatusStatus.SelectedValue == 26 || (int)cmbPersonalStatusStatus.SelectedValue == 27)
+                            SQLCONN.OpenConection();
+
+                            // MessageBox.Show(EMPID.ToString());
+
+                            /**logtable */
+                            DataTable originalData = new DataTable();
+                            string connectionString = SQLCONN.ConnectionString;
+                            using (SqlConnection connection = new SqlConnection(connectionString))
                             {
-                                SQLCONN.ExecuteQueries("update Employees set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,DeptID=@C15,StartDate=@C16,EndDate=@C17,COMPID=@C18,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc,NationalityID=@C19,DOB=@C20 where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany, paramEmployeeID, paramuser, parampc, paramNationality, paramDOB);
+                                connection.Open();
+                                string sql = "SELECT * FROM Employees WHERE EmployeeId = @EmployeeId";
+                                SqlDataAdapter da = new SqlDataAdapter(sql, connection);
+                                da.SelectCommand.Parameters.AddWithValue("@EmployeeId", EMPID);
+                                originalData = new DataTable();
+                                da.Fill(originalData);
+                            }
+
+
+                            paramEmployeeID.Value = CurrentEmployeeIDtxt.Text;
+
+                            if ((int)cmbCompany.SelectedIndex == -1 || (int)cmbempdepthistory.SelectedIndex == -1)
+                            {
+                                if ((int)cmbPersonalStatusStatus.SelectedValue == 25 || (int)cmbPersonalStatusStatus.SelectedValue == 26 || (int)cmbPersonalStatusStatus.SelectedValue == 27)
+                                {
+                                    SQLCONN.ExecuteQueries("update Employees set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,StartDate=@C16,EndDate=@C17,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc,NationalityID=@C19,DOB=@C20 where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, paramstartdate, paramenddate, paramEmployeeID, paramuser, parampc, paramNationality, paramDOB);
+
+                                }
+
+                                else
+                                {
+                                    SQLCONN.ExecuteQueries("update Employees set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,StartDate=@C16,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc,NationalityID=@C19 , DOB=@C20 where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, paramstartdate, paramEmployeeID, paramuser, parampc, paramNationality, paramDOB);
+
+                                }
+
 
                             }
 
                             else
                             {
-                                SQLCONN.ExecuteQueries("update Employees set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,DeptID=@C15,StartDate=@C16,COMPID=@C18,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc,NationalityID=@C19 , DOB=@C20 where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramcompany, paramEmployeeID, paramuser, parampc, paramNationality, paramDOB);
+                                if ((int)cmbPersonalStatusStatus.SelectedValue == 25 || (int)cmbPersonalStatusStatus.SelectedValue == 26 || (int)cmbPersonalStatusStatus.SelectedValue == 27)
+                                {
+                                    SQLCONN.ExecuteQueries("update Employees set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,DeptID=@C15,StartDate=@C16,EndDate=@C17,COMPID=@C18,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc,NationalityID=@C19,DOB=@C20 where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany, paramEmployeeID, paramuser, parampc, paramNationality, paramDOB);
+
+                                }
+
+                                else
+                                {
+                                    SQLCONN.ExecuteQueries("update Employees set firstname =@C1,secondname=@C2,thirdname=@C3,lastname=@C4,Gender=@C5,MartialStatus=@C6,EmploymentStatusID=@C13,JobID=@C14,DeptID=@C15,StartDate=@C16,COMPID=@C18,CurrentEmpID=@CurrentEmployeeID ,UserID=@user,PCNAME=@pc,NationalityID=@C19 , DOB=@C20 where  EmployeeID= @id  ", paramPID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramcompany, paramEmployeeID, paramuser, parampc, paramNationality, paramDOB);
+
+                                }
 
                             }
 
-                        }
 
 
-
-                        /* Update visa status **/
-                        if ((int)cmbPersonalStatusStatus.SelectedValue == 24)
-                        {
-                            SqlDataReader dr = SQLCONN.DataReader("SELECT FileNumber,VISANumber FROM [DelmonGroupDB].[dbo].[VISAJobList] where StatusID !=6 and EmployeeID=" + EMPID + " ");
-                            if (dr.Read())
+                            /* Update visa status **/
+                            if ((int)cmbPersonalStatusStatus.SelectedValue == 24)
                             {
-                                string Visanumber = dr["VISANumber"].ToString();
-                                string filenumber = dr["FileNumber"].ToString();
-                                if (DialogResult.Yes == MessageBox.Show("Visa:" + Visanumber + " Status will upated Automatically to 'USED', Do You Want to perform this operation?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                                SqlDataReader dr = SQLCONN.DataReader("SELECT FileNumber,VISANumber FROM [DelmonGroupDB].[dbo].[VISAJobList] where StatusID !=6 and EmployeeID=" + EMPID + " ");
+                                if (dr.Read())
                                 {
+                                    string Visanumber = dr["VISANumber"].ToString();
+                                    string filenumber = dr["FileNumber"].ToString();
+                                    if (DialogResult.Yes == MessageBox.Show("Visa:" + Visanumber + " Status will upated Automatically to 'USED', Do You Want to perform this operation?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                                    {
+                                        dr.Dispose();
+                                        dr.Close();
+                                        SQLCONN.ExecuteQueries("update VISAJobList set StatusID =6 where  FileNumber= " + filenumber + " and VISANumber= " + Visanumber + " ");
+
+                                    }
                                     dr.Dispose();
                                     dr.Close();
-                                    SQLCONN.ExecuteQueries("update VISAJobList set StatusID =6 where  FileNumber= " + filenumber + " and VISANumber= " + Visanumber + " ");
 
                                 }
                                 dr.Dispose();
                                 dr.Close();
-
                             }
-                            dr.Dispose();
-                            dr.Close();
-                        }
-                        /* Update visa status **/
+                            /* Update visa status **/
 
 
-                        /* Update visa Candidate status **/
-                        if ((int)cmbPersonalStatusStatus.SelectedValue == 20)
-                        {
-                            SqlDataReader dr = SQLCONN.DataReader("SELECT FileNumber,VISANumber FROM [DelmonGroupDB].[dbo].[VISAJobList] where StatusID !=6 and EmployeeID=" + EMPID + " ");
-                            if (dr.Read())
+                            /* Update visa Candidate status **/
+                            if ((int)cmbPersonalStatusStatus.SelectedValue == 20)
                             {
-                                string Visanumber = dr["VISANumber"].ToString();
-                                string filenumber = dr["FileNumber"].ToString();
-                                if (DialogResult.Yes == MessageBox.Show("File number :" + filenumber + " for a requested candidate will realsed Automatically to 'SELECT/0', Do You Want to perform this operation?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                                SqlDataReader dr = SQLCONN.DataReader("SELECT FileNumber,VISANumber FROM [DelmonGroupDB].[dbo].[VISAJobList] where StatusID !=6 and EmployeeID=" + EMPID + " ");
+                                if (dr.Read())
                                 {
+                                    string Visanumber = dr["VISANumber"].ToString();
+                                    string filenumber = dr["FileNumber"].ToString();
+                                    if (DialogResult.Yes == MessageBox.Show("File number :" + filenumber + " for a requested candidate will realsed Automatically to 'SELECT/0', Do You Want to perform this operation?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                                    {
+                                        dr.Dispose();
+                                        dr.Close();
+                                        SQLCONN.ExecuteQueries("update VISAJobList set [EmployeeID] =0 where  FileNumber= " + filenumber + " and VISANumber= " + Visanumber + " ");
+                                    }
                                     dr.Dispose();
                                     dr.Close();
-                                    SQLCONN.ExecuteQueries("update VISAJobList set [EmployeeID] =0 where  FileNumber= " + filenumber + " and VISANumber= " + Visanumber + " ");
                                 }
                                 dr.Dispose();
                                 dr.Close();
                             }
-                            dr.Dispose();
-                            dr.Close();
-                        }
-                        /* Update visa Candidate status **/
+                            /* Update visa Candidate status **/
 
 
 
-                        MessageBox.Show("Record Updated Successfully");
-                        // dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT id_History,[EmployeeID],NewID,StatusTBL.StatusValue,[JOBS].JobTitleEN, DeptTypes.Dept_Type_Name,[StartDate],[EndDate],[UserID],[DatetimeLog]  FROM[DelmonGroupDB].[dbo].[EmploymentStatus], JOBS, DEPARTMENTS, StatusTBL, DeptTypes  where   StatusTBL.StatusID = EmploymentStatus.EmploymentStatusID and DEPARTMENTS.DeptName = EmploymentStatus.DeptID   and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID  and JOBS.JobID = EmploymentStatus.JobID  and  NEWID = @C14  ", paramNewID);
-                        //  dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Employees where  EmployeeID = '" + EMPID + "'");
-                        string query = @"SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus,
+                            MessageBox.Show("Record Updated Successfully");
+                            // dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox(" SELECT id_History,[EmployeeID],NewID,StatusTBL.StatusValue,[JOBS].JobTitleEN, DeptTypes.Dept_Type_Name,[StartDate],[EndDate],[UserID],[DatetimeLog]  FROM[DelmonGroupDB].[dbo].[EmploymentStatus], JOBS, DEPARTMENTS, StatusTBL, DeptTypes  where   StatusTBL.StatusID = EmploymentStatus.EmploymentStatusID and DEPARTMENTS.DeptName = EmploymentStatus.DeptID   and DEPARTMENTS.DeptName = DeptTypes.Dept_Type_ID  and JOBS.JobID = EmploymentStatus.JobID  and  NEWID = @C14  ", paramNewID);
+                            //  dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Employees where  EmployeeID = '" + EMPID + "'");
+                            string query = @"SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus,
        s.StatusValue, j.JobTitleEN, dt.Dept_Type_Name, c.COMPName_EN, e.startdate, e.enddate,
        cn.NationalityName, v.FileNumber, v.VISANumber,e.DOB
 FROM Employees e
@@ -930,83 +968,84 @@ WHERE e.EmployeeID !=0 and e.EmployeeID= @id
 ORDER BY e.EmployeeID";
 
 
-                        dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramPID);
+                            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramPID);
 
 
 
 
-                        using (SqlConnection connection = new SqlConnection(connectionString))
-                        {
-                            connection.Open();
-                            string sql = "SELECT * FROM Employees WHERE EmployeeId = @EmployeeId";
-                            SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
-                            adapter.SelectCommand.Parameters.AddWithValue("@EmployeeId", EMPID);
-                            DataTable updatedData = new DataTable();
-                            adapter.Fill(updatedData);
-
-                            // Compare the two DataTables and find the changed columns
-                            List<string> changedColumns = new List<string>();
-                            foreach (DataColumn column in originalData.Columns)
+                            using (SqlConnection connection = new SqlConnection(connectionString))
                             {
-                                object originalValue = originalData.Rows[0][column.ColumnName];
-                                object updatedValue = updatedData.Rows[0][column.ColumnName];
-                                if (!Equals(originalValue, updatedValue) && (originalValue != null || updatedData != null))
-                                {
-                                    changedColumns.Add(column.ColumnName);
-                                }
-                            }
+                                connection.Open();
+                                string sql = "SELECT * FROM Employees WHERE EmployeeId = @EmployeeId";
+                                SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
+                                adapter.SelectCommand.Parameters.AddWithValue("@EmployeeId", EMPID);
+                                DataTable updatedData = new DataTable();
+                                adapter.Fill(updatedData);
 
-                            // Insert the changes into the log table
-                            if (changedColumns.Count > 0)
-                            {
-                                using (SqlCommand command = new SqlCommand("INSERT INTO EmployeeLog (Logvalueid, logvalue, OldValue, NewValue,logdatetime,PCNAME,UserId,type) VALUES (@EmployeeId, @ColumnName, @OldValue, @NewValue,@datetime,@pc,@user,@type)", connection))
+                                // Compare the two DataTables and find the changed columns
+                                List<string> changedColumns = new List<string>();
+                                foreach (DataColumn column in originalData.Columns)
                                 {
-                                    command.Parameters.AddWithValue("@EmployeeId", EMPID);
-                                    foreach (string columnName in changedColumns)
+                                    object originalValue = originalData.Rows[0][column.ColumnName];
+                                    object updatedValue = updatedData.Rows[0][column.ColumnName];
+                                    if (!Equals(originalValue, updatedValue) && (originalValue != null || updatedData != null))
                                     {
-                                        object originalValue = originalData.Rows[0][columnName];
-                                        object updatedValue = updatedData.Rows[0][columnName];
-                                        command.Parameters.Clear();
-                                        command.Parameters.AddWithValue("@EmployeeId", EMPID + " - " + "Employee");
-                                        command.Parameters.AddWithValue("@ColumnName", columnName);
-                                        command.Parameters.AddWithValue("@OldValue", originalValue);
-                                        command.Parameters.AddWithValue("@NewValue", updatedValue);
-                                        command.Parameters.AddWithValue("@datetime", lbldatetime.Text);
-                                        command.Parameters.AddWithValue("@pc", lblPC.Text);
-                                        command.Parameters.AddWithValue("@user", lblusername.Text);
-                                        command.Parameters.AddWithValue("@type", "Update");
-                                        command.ExecuteNonQuery();
+                                        changedColumns.Add(column.ColumnName);
+                                    }
+                                }
+
+                                // Insert the changes into the log table
+                                if (changedColumns.Count > 0)
+                                {
+                                    using (SqlCommand command = new SqlCommand("INSERT INTO EmployeeLog (Logvalueid, logvalue, OldValue, NewValue,logdatetime,PCNAME,UserId,type) VALUES (@EmployeeId, @ColumnName, @OldValue, @NewValue,@datetime,@pc,@user,@type)", connection))
+                                    {
+                                        command.Parameters.AddWithValue("@EmployeeId", EMPID);
+                                        foreach (string columnName in changedColumns)
+                                        {
+                                            object originalValue = originalData.Rows[0][columnName];
+                                            object updatedValue = updatedData.Rows[0][columnName];
+                                            command.Parameters.Clear();
+                                            command.Parameters.AddWithValue("@EmployeeId", EMPID + " - " + "Employee");
+                                            command.Parameters.AddWithValue("@ColumnName", columnName);
+                                            command.Parameters.AddWithValue("@OldValue", originalValue);
+                                            command.Parameters.AddWithValue("@NewValue", updatedValue);
+                                            command.Parameters.AddWithValue("@datetime", lbldatetime.Text);
+                                            command.Parameters.AddWithValue("@pc", lblPC.Text);
+                                            command.Parameters.AddWithValue("@user", lblusername.Text);
+                                            command.Parameters.AddWithValue("@type", "Update");
+                                            command.ExecuteNonQuery();
+                                        }
                                     }
                                 }
                             }
+
+
+
+                            /**logtable*/
+
+
+
+
+
+
+
+
+
+                            tabControl1.Enabled = true;
+                            SQLCONN.CloseConnection();
                         }
 
-
-
-                        /**logtable*/
-
-
-
-
-
-
-
-
-
-                        tabControl1.Enabled = true;
-                        SQLCONN.CloseConnection();
+                    }
+                    else
+                    {
                     }
 
                 }
                 else
                 {
+                    MessageBox.Show("Please Select Record to Update");
+                    tabControl1.Enabled = false;
                 }
-
-            }
-            else
-            {
-                MessageBox.Show("Please Select Record to Update");
-                tabControl1.Enabled = false;
             }
         }
 
@@ -1062,138 +1101,166 @@ ORDER BY e.EmployeeID";
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
-            try
+
+            if (firstnametxt.Text == "")
             {
-                SqlParameter paramfirstname = new SqlParameter("@C1", SqlDbType.NVarChar);
-                paramfirstname.Value = firstnametxt.Text.Trim();
-                SqlParameter paramsecondname = new SqlParameter("@C2", SqlDbType.NVarChar);
-                paramsecondname.Value = secondnametxt.Text.Trim();
-                SqlParameter Paramthirdname = new SqlParameter("@C3", SqlDbType.NVarChar);
-                Paramthirdname.Value = thirdnametxt.Text.Trim();
-                SqlParameter paramlastname = new SqlParameter("@C4", SqlDbType.NVarChar);
-                paramlastname.Value = lastnametxt.Text.Trim();
-                SqlParameter paramGender = new SqlParameter("@C5", SqlDbType.NVarChar);
-                paramGender.Value = cmbGender.SelectedItem;
-                SqlParameter paramMartialStatus = new SqlParameter("@C6", SqlDbType.NVarChar);
-                paramMartialStatus.Value = cmbMartialStatus.SelectedItem;
+                MessageBox.Show("Please insert 'First name ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (lastnametxt.Text == "")
+            {
+                MessageBox.Show("Please insert 'Last Name' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (cmbGender.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Gender' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (cmbMartialStatus.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Martial Status' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
-                SqlParameter paramUserID = new SqlParameter("@C10", SqlDbType.NVarChar);
-                paramUserID.Value = CommonClass.UserID;
-                SqlParameter paramDateTimeLOG = new SqlParameter("@C11", SqlDbType.NVarChar);
-                paramDateTimeLOG.Value = lbldatetime.Text;
-                SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
-                parampc.Value = lblPC.Text;
+            else if ((int)cmbPersonalStatusStatus.SelectedValue == 0 || cmbPersonalStatusStatus.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Employee Status' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbEmployJobHistory.SelectedValue == 0 || cmbEmployJobHistory.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Job' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbempdepthistory.SelectedValue == 0 || cmbempdepthistory.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Department Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbCompany.SelectedValue == 0 || cmbCompany.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Company' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbnationality.SelectedValue == 0 || cmbnationality.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Nationality' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
+            else
+            {
 
-                SqlParameter paramStatusHistory = new SqlParameter("@C13", SqlDbType.Int);
-                paramStatusHistory.Value = cmbPersonalStatusStatus.SelectedValue;
-                SqlParameter paramJobHistory = new SqlParameter("@C14", SqlDbType.NVarChar);
-                paramJobHistory.Value = cmbEmployJobHistory.SelectedValue;
-
-                SqlParameter ParamtDepartmentHistory = new SqlParameter("@C15", SqlDbType.Int);
-                ParamtDepartmentHistory.Value = cmbempdepthistory.SelectedValue;
-                SqlParameter paramstartdate = new SqlParameter("@C16", SqlDbType.Date);
-                paramstartdate.Value = StartDatePicker.Value;
-                SqlParameter paramenddate = new SqlParameter("@C17", SqlDbType.Date);
-                paramenddate.Value = EndDatePicker.Value;
-
-                SqlParameter paramcompany = new SqlParameter("@C18", SqlDbType.NVarChar);
-                paramcompany.Value = cmbCompany.SelectedValue;
-
-                SqlParameter paramNationality = new SqlParameter("@C19", SqlDbType.NVarChar);
-                paramNationality.Value = cmbnationality.SelectedValue;
-
-                SqlParameter paramDOB= new SqlParameter("@C20", SqlDbType.Date);
-                paramDOB.Value = dtpDOB.Value;
-
-                SqlParameter paramPID = new SqlParameter("@id", SqlDbType.Int);
-                paramPID.Value = EMPID;
-                SqlParameter paramEmployeeID = new SqlParameter("@EmployeeID", SqlDbType.Int);
-
-                SqlParameter paramCurrentEmployeeID = new SqlParameter("@CurrentEmployeeID", SqlDbType.NVarChar);
-                paramCurrentEmployeeID.Value = CurrentEmployeeIDtxt.Text.Trim();
-
-
-                /*logg*/
-                SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
-                paramuser.Value = lblusername.Text;
-                SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
-                paramdatetimeLOG.Value = lbldatetime.Text;
-
-                /*logg*/
-
-
-
-                if (firstnametxt.Text != "" && cmbPersonalStatusStatus.Text != "Select" && cmbempdepthistory.Text != "Select" && cmbEmployJobHistory.Text != "Select")
+                try
                 {
-                    SQLCONN.OpenConection();
-                    SqlDataReader dr = SQLCONN.DataReader("select  * from Employees where " +
-                         " firstname=  @C1 and   SecondName =  @C2 and thirdname = @C3  and lastname = @C4", paramfirstname, paramsecondname, Paramthirdname, paramlastname);
-                    dr.Read();
+                    SqlParameter paramfirstname = new SqlParameter("@C1", SqlDbType.NVarChar);
+                    paramfirstname.Value = firstnametxt.Text.Trim();
+                    SqlParameter paramsecondname = new SqlParameter("@C2", SqlDbType.NVarChar);
+                    paramsecondname.Value = secondnametxt.Text.Trim();
+                    SqlParameter Paramthirdname = new SqlParameter("@C3", SqlDbType.NVarChar);
+                    Paramthirdname.Value = thirdnametxt.Text.Trim();
+                    SqlParameter paramlastname = new SqlParameter("@C4", SqlDbType.NVarChar);
+                    paramlastname.Value = lastnametxt.Text.Trim();
+                    SqlParameter paramGender = new SqlParameter("@C5", SqlDbType.NVarChar);
+                    paramGender.Value = cmbGender.SelectedItem;
+                    SqlParameter paramMartialStatus = new SqlParameter("@C6", SqlDbType.NVarChar);
+                    paramMartialStatus.Value = cmbMartialStatus.SelectedItem;
+
+                    SqlParameter paramUserID = new SqlParameter("@C10", SqlDbType.NVarChar);
+                    paramUserID.Value = CommonClass.UserID;
+                    SqlParameter paramDateTimeLOG = new SqlParameter("@C11", SqlDbType.NVarChar);
+                    paramDateTimeLOG.Value = lbldatetime.Text;
+                    SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+                    parampc.Value = lblPC.Text;
 
 
-                    if (dr.HasRows)
+                    SqlParameter paramStatusHistory = new SqlParameter("@C13", SqlDbType.Int);
+                    paramStatusHistory.Value = cmbPersonalStatusStatus.SelectedValue;
+                    SqlParameter paramJobHistory = new SqlParameter("@C14", SqlDbType.NVarChar);
+                    paramJobHistory.Value = cmbEmployJobHistory.SelectedValue;
+
+                    SqlParameter ParamtDepartmentHistory = new SqlParameter("@C15", SqlDbType.Int);
+                    ParamtDepartmentHistory.Value = cmbempdepthistory.SelectedValue;
+                    SqlParameter paramstartdate = new SqlParameter("@C16", SqlDbType.Date);
+                    paramstartdate.Value = StartDatePicker.Value;
+                    SqlParameter paramenddate = new SqlParameter("@C17", SqlDbType.Date);
+                    paramenddate.Value = EndDatePicker.Value;
+
+                    SqlParameter paramcompany = new SqlParameter("@C18", SqlDbType.NVarChar);
+                    paramcompany.Value = cmbCompany.SelectedValue;
+
+                    SqlParameter paramNationality = new SqlParameter("@C19", SqlDbType.NVarChar);
+                    paramNationality.Value = cmbnationality.SelectedValue;
+
+                    SqlParameter paramDOB = new SqlParameter("@C20", SqlDbType.Date);
+                    paramDOB.Value = dtpDOB.Value;
+
+                    SqlParameter paramPID = new SqlParameter("@id", SqlDbType.Int);
+                    paramPID.Value = EMPID;
+                    SqlParameter paramEmployeeID = new SqlParameter("@EmployeeID", SqlDbType.Int);
+
+                    SqlParameter paramCurrentEmployeeID = new SqlParameter("@CurrentEmployeeID", SqlDbType.NVarChar);
+                    paramCurrentEmployeeID.Value = CurrentEmployeeIDtxt.Text.Trim();
+
+
+                    /*logg*/
+                    SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+                    paramuser.Value = lblusername.Text;
+                    SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+                    paramdatetimeLOG.Value = lbldatetime.Text;
+
+                    /*logg*/
+
+
+
+                    if (firstnametxt.Text != "" && cmbPersonalStatusStatus.Text != "Select" && cmbempdepthistory.Text != "Select" && cmbEmployJobHistory.Text != "Select")
                     {
-                        MessageBox.Show("This 'Name'  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        SQLCONN.OpenConection();
+                        SqlDataReader dr = SQLCONN.DataReader("select  * from Employees where " +
+                             " firstname=  @C1 and   SecondName =  @C2 and thirdname = @C3  and lastname = @C4", paramfirstname, paramsecondname, Paramthirdname, paramlastname);
+                        dr.Read();
 
-                    }
-                    else
-                    {
-                        if (StartDatePicker.Checked == false)
+
+                        if (dr.HasRows)
                         {
-                            DateTime enter_date = DateTime.Now.Date;
-                            StartDatePicker.Value = enter_date;
-
-                        }
-                        else if (EndDatePicker.Checked == false)
-                        {
-
-                            DateTime enter_date = DateTime.Now.Date;
-                            EndDatePicker.Value = enter_date;
-
-
-                        }
-                        
-                        else if (dtpDOB.Checked==false)
-                            {
-                            DateTime enter_date = DateTime.Now.Date;
-                            dtpDOB.Value = enter_date;
-                        }
-                        else if (cmbEmployJobHistory.Text == "Select")
-
-                        {
-                            MessageBox.Show("Please Select a Job !!");
-
-
-                        }
-                        else if (cmbnationality.Text == "Select")
-
-                        {
-                            MessageBox.Show("Please Select a Nationality !!");
-
-                        }
-                        else if (cmbempdepthistory.Text == "Select")
-                        {
-                            MessageBox.Show("Please Select a department !!");
-                        }
-                        else if (cmbPersonalStatusStatus.Text == "Select")
-
-                        {
-                            MessageBox.Show("Please Select a Employment type !!");
-
+                            MessageBox.Show("This 'Name'  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                         }
                         else
                         {
-                            dr.Dispose();
-                            dr.Close();
-                            dr = SQLCONN.DataReader("   SELECT COALESCE(MAX(EmployeeID), 0) 'ID' FROM Employees  ");
-                            if (dr.Read())
+                            if (StartDatePicker.Checked == false)
+                            {
+                                DateTime enter_date = DateTime.Now.Date;
+                                StartDatePicker.Value = enter_date;
+
+                            }
+                            else if (EndDatePicker.Checked == false)
                             {
 
+                                DateTime enter_date = DateTime.Now.Date;
+                                EndDatePicker.Value = enter_date;
 
-                                EmployeeID = int.Parse(dr["ID"].ToString());
-                                EmployeeID = EmployeeID + 1;
+
+                            }
+
+                            else if (dtpDOB.Checked == false)
+                            {
+                                DateTime enter_date = DateTime.Now.Date;
+                                dtpDOB.Value = enter_date;
+                            }
+                            else if (cmbEmployJobHistory.Text == "Select")
+
+                            {
+                                MessageBox.Show("Please Select a Job !!");
+
+
+                            }
+                            else if (cmbnationality.Text == "Select")
+
+                            {
+                                MessageBox.Show("Please Select a Nationality !!");
+
+                            }
+                            else if (cmbempdepthistory.Text == "Select")
+                            {
+                                MessageBox.Show("Please Select a department !!");
+                            }
+                            else if (cmbPersonalStatusStatus.Text == "Select")
+
+                            {
+                                MessageBox.Show("Please Select a Employment type !!");
 
 
                             }
@@ -1201,42 +1268,56 @@ ORDER BY e.EmployeeID";
                             {
                                 dr.Dispose();
                                 dr.Close();
-                                //  EmployeeID = 0;
-                            }
-                            dr.Dispose();
-                            dr.Close();
-                            paramEmployeeID.Value = EmployeeID;
-                            if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-                            {
-
-                                if ((int)cmbPersonalStatusStatus.SelectedValue == 25 || (int)cmbPersonalStatusStatus.SelectedValue == 26 || (int)cmbPersonalStatusStatus.SelectedValue == 27)
+                                dr = SQLCONN.DataReader("   SELECT COALESCE(MAX(EmployeeID), 0) 'ID' FROM Employees  ");
+                                if (dr.Read())
                                 {
-                                    SQLCONN.ExecuteQueries("insert into Employees (EmployeeID, firstname,secondname,thirdname,lastname,Gender,MartialStatus,[PCNAME], EmploymentStatusID,JobID,DeptID,StartDate,EndDate,COMPID,UserID,CurrentEmpID,NationalityID,DOB)" +
-                              " values (@EmployeeID,@C1,@C2,@C3,@C4,@C5,@C6,@pc,@C13,@C14,@C15,@C16,@C17,@C18,@C10,@CurrentEmployeeID,@C19,@C20)",
-                                                         paramEmployeeID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, parampc, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany, paramUserID, paramCurrentEmployeeID, paramNationality, paramDOB);
+
+
+                                    EmployeeID = int.Parse(dr["ID"].ToString());
+                                    EmployeeID = EmployeeID + 1;
+
 
                                 }
                                 else
                                 {
-                                    SQLCONN.ExecuteQueries("insert into Employees (EmployeeID, firstname,secondname,thirdname,lastname,Gender,MartialStatus,[PCNAME], EmploymentStatusID,JobID,DeptID,StartDate,COMPID,UserID,CurrentEmpID,NationalityID,DOB)" +
-                              " values (@EmployeeID,@C1,@C2,@C3,@C4,@C5,@C6,@pc,@C13,@C14,@C15,@C16,@C18,@C10,@CurrentEmployeeID,@C19,@C20)",
-                                                         paramEmployeeID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, parampc, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramcompany, paramUserID, paramCurrentEmployeeID, paramNationality, paramDOB);
+                                    dr.Dispose();
+                                    dr.Close();
+                                    //  EmployeeID = 0;
+                                }
+                                dr.Dispose();
+                                dr.Close();
+                                paramEmployeeID.Value = EmployeeID;
+                                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                                {
 
+                                    if ((int)cmbPersonalStatusStatus.SelectedValue == 25 || (int)cmbPersonalStatusStatus.SelectedValue == 26 || (int)cmbPersonalStatusStatus.SelectedValue == 27)
+                                    {
+                                        SQLCONN.ExecuteQueries("insert into Employees (EmployeeID, firstname,secondname,thirdname,lastname,Gender,MartialStatus,[PCNAME], EmploymentStatusID,JobID,DeptID,StartDate,EndDate,COMPID,UserID,CurrentEmpID,NationalityID,DOB)" +
+                                  " values (@EmployeeID,@C1,@C2,@C3,@C4,@C5,@C6,@pc,@C13,@C14,@C15,@C16,@C17,@C18,@C10,@CurrentEmployeeID,@C19,@C20)",
+                                                             paramEmployeeID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, parampc, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramenddate, paramcompany, paramUserID, paramCurrentEmployeeID, paramNationality, paramDOB);
+
+                                    }
+                                    else
+                                    {
+                                        SQLCONN.ExecuteQueries("insert into Employees (EmployeeID, firstname,secondname,thirdname,lastname,Gender,MartialStatus,[PCNAME], EmploymentStatusID,JobID,DeptID,StartDate,COMPID,UserID,CurrentEmpID,NationalityID,DOB)" +
+                                  " values (@EmployeeID,@C1,@C2,@C3,@C4,@C5,@C6,@pc,@C13,@C14,@C15,@C16,@C18,@C10,@CurrentEmployeeID,@C19,@C20)",
+                                                             paramEmployeeID, paramfirstname, paramsecondname, Paramthirdname, paramlastname, paramGender, paramMartialStatus, parampc, paramStatusHistory, paramJobHistory, ParamtDepartmentHistory, paramstartdate, paramcompany, paramUserID, paramCurrentEmployeeID, paramNationality, paramDOB);
+
+                                    }
+
+
+                                    MessageBox.Show("Record saved Successfully");
                                 }
 
+                                SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (Logvalueid, logvalue ,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES (@EmployeeID, 'User Info' ,'#','#',@datetime,@pc,@user,'Insert')", paramEmployeeID, paramdatetimeLOG, parampc, paramuser);
 
-                                MessageBox.Show("Record saved Successfully");
-                            }
+                                btnNew.Visible = true;
+                                CurrentEmployeeIDtxt.Text = EmployeeID.ToString();
+                                btnaddhitory.PerformClick();
 
-                            SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (Logvalueid, logvalue ,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES (@EmployeeID, 'User Info' ,'#','#',@datetime,@pc,@user,'Insert')", paramEmployeeID, paramdatetimeLOG, parampc, paramuser);
+                                tabControl1.Enabled = true;
 
-                            btnNew.Visible = true;
-                            CurrentEmployeeIDtxt.Text = EmployeeID.ToString();
-                            btnaddhitory.PerformClick();
-
-                            tabControl1.Enabled = true;
-
-                            string query = @"SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus,
+                                string query = @"SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus,
        s.StatusValue, j.JobTitleEN, dt.Dept_Type_Name, c.COMPName_EN, e.startdate, e.enddate,
        cn.NationalityName, v.FileNumber, v.VISANumber, e.DOB
 FROM Employees e
@@ -1251,7 +1332,7 @@ WHERE e.EmployeeID !=0 and e.EmployeeID= @EmployeeID
 ORDER BY e.EmployeeID";
 
 
-                            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramEmployeeID);
+                                dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramEmployeeID);
 
 
 
@@ -1259,29 +1340,29 @@ ORDER BY e.EmployeeID";
 
 
 
-                            SQLCONN.CloseConnection();
+                                SQLCONN.CloseConnection();
 
 
 
+                            }
                         }
+
+
+
                     }
-
-
-
+                    else
+                    {
+                        MessageBox.Show("Please Fill the missing fields  ");
+                        tabControl1.Enabled = false;
+                    }
+                    SQLCONN.CloseConnection();
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Please Fill the missing fields  ");
-                    tabControl1.Enabled = false;
+
+                    MessageBox.Show(ex.ToString());
                 }
-                SQLCONN.CloseConnection();
             }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.ToString());
-            }
-
         }
 
         private void furstnametxt_KeyDown(object sender, KeyEventArgs e)
@@ -1424,65 +1505,78 @@ ORDER BY e.EmployeeID";
 
         private void UplodeBTN_Click(object sender, EventArgs e)
         {
-            if (EMPID != 0)
+            if (Doctxt.Text == "")
             {
-                if (cmbDocuments.Text == "Select" || cmbDocuments.Text == string.Empty)
-                {
-                    MessageBox.Show("Please select a document type.");
-                }
-                else
-                {
-                    SqlParameter paramFilename = new SqlParameter("@C0", SqlDbType.NVarChar);
-                    SqlParameter paramFileContent = new SqlParameter("@C1", SqlDbType.VarBinary);
-                    SqlParameter paramPID = new SqlParameter("@C2", SqlDbType.Int);
-                    SqlParameter paramDocType = new SqlParameter("@C3", SqlDbType.Int);
-                    SqlParameter paramRefrenceID = new SqlParameter("@C4", SqlDbType.Int);
-                    SqlParameter paramFileNumber = new SqlParameter("@C5", SqlDbType.NVarChar);
-                    SqlParameter paramFileIssuePlace = new SqlParameter("@C6", SqlDbType.NVarChar);
-                    SqlParameter paramFileIssueDate = new SqlParameter("@C7", SqlDbType.Date);
-                    SqlParameter paramFileExpiryDate = new SqlParameter("@C8", SqlDbType.Date);
+                MessageBox.Show("Please insert 'Document Value ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
-                    if (fileName == null || fileContent == null)
+
+            else if ((int)cmbcontact.SelectedValue == 0 || cmbcontact.Text == "Select")
+            {
+                MessageBox.Show("Please Select ' Document type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            else
+            {
+                if (EMPID != 0)
+                {
+                    if (cmbDocuments.Text == "Select" || cmbDocuments.Text == string.Empty)
                     {
-                        paramFilename.Value = "";
-                        paramFileContent.Value = DBNull.Value;
+                        MessageBox.Show("Please select a document type.");
                     }
                     else
                     {
-                        paramFilename.Value = fileName;
-                        paramFileContent.Value = fileContent;
-                    }
+                        SqlParameter paramFilename = new SqlParameter("@C0", SqlDbType.NVarChar);
+                        SqlParameter paramFileContent = new SqlParameter("@C1", SqlDbType.VarBinary);
+                        SqlParameter paramPID = new SqlParameter("@C2", SqlDbType.Int);
+                        SqlParameter paramDocType = new SqlParameter("@C3", SqlDbType.Int);
+                        SqlParameter paramRefrenceID = new SqlParameter("@C4", SqlDbType.Int);
+                        SqlParameter paramFileNumber = new SqlParameter("@C5", SqlDbType.NVarChar);
+                        SqlParameter paramFileIssuePlace = new SqlParameter("@C6", SqlDbType.NVarChar);
+                        SqlParameter paramFileIssueDate = new SqlParameter("@C7", SqlDbType.Date);
+                        SqlParameter paramFileExpiryDate = new SqlParameter("@C8", SqlDbType.Date);
 
-                    paramPID.Value = EmployeeID;
-                    paramDocType.Value = cmbDocuments.SelectedValue;
-                    paramRefrenceID.Value = 2;
-                    paramFileNumber.Value = numbertextbox.Text;
-                    paramFileIssuePlace.Value = issueplacetext.Text;
-                    paramFileIssueDate.Value = docissueplacepicker.Value;
-                    paramFileExpiryDate.Value = docexpirefatepicker.Value;
-
-                    if (DialogResult.Yes == MessageBox.Show("Do you want to perform this operation?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-                    {
-                        if (cmbDocuments.Text == "Select")
+                        if (fileName == null || fileContent == null)
                         {
-                            MessageBox.Show("Please select Document Type.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                        else if (string.IsNullOrEmpty(numbertextbox.Text))
-                        {
-                            MessageBox.Show("Please insert Document Number.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                        else if (string.IsNullOrEmpty(issueplacetext.Text))
-                        {
-                            MessageBox.Show("Please insert Document Issue Place.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            paramFilename.Value = "";
+                            paramFileContent.Value = DBNull.Value;
                         }
                         else
                         {
-                            SQLCONN.OpenConection();
-                            SQLCONN.ExecuteQueries("INSERT INTO Documents" +
-                                " (name, documentValue, CR_ID, DocTypeID, RefrenceID, Number, DocIssueplace, docissuedate, docexpiredate)" +
-                                " VALUES (@C0, @C1, @C2, @C3, @C4, @C5, @C6, @C7, @C8)",
-                                  paramFilename, paramFileContent, paramPID, paramDocType, paramRefrenceID, paramFileNumber, paramFileIssuePlace, paramFileIssueDate, paramFileExpiryDate);
-                            dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT  [Doc_id]
+                            paramFilename.Value = fileName;
+                            paramFileContent.Value = fileContent;
+                        }
+
+                        paramPID.Value = EmployeeID;
+                        paramDocType.Value = cmbDocuments.SelectedValue;
+                        paramRefrenceID.Value = 2;
+                        paramFileNumber.Value = numbertextbox.Text;
+                        paramFileIssuePlace.Value = issueplacetext.Text;
+                        paramFileIssueDate.Value = docissueplacepicker.Value;
+                        paramFileExpiryDate.Value = docexpirefatepicker.Value;
+
+                        if (DialogResult.Yes == MessageBox.Show("Do you want to perform this operation?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                        {
+                            if (cmbDocuments.Text == "Select")
+                            {
+                                MessageBox.Show("Please select Document Type.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                            else if (string.IsNullOrEmpty(numbertextbox.Text))
+                            {
+                                MessageBox.Show("Please insert Document Number.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                            else if (string.IsNullOrEmpty(issueplacetext.Text))
+                            {
+                                MessageBox.Show("Please insert Document Issue Place.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                            else
+                            {
+                                SQLCONN.OpenConection();
+                                SQLCONN.ExecuteQueries("INSERT INTO Documents" +
+                                    " (name, documentValue, CR_ID, DocTypeID, RefrenceID, Number, DocIssueplace, docissuedate, docexpiredate)" +
+                                    " VALUES (@C0, @C1, @C2, @C3, @C4, @C5, @C6, @C7, @C8)",
+                                      paramFilename, paramFileContent, paramPID, paramDocType, paramRefrenceID, paramFileNumber, paramFileIssuePlace, paramFileIssueDate, paramFileExpiryDate);
+                                dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT  [Doc_id]
       ,[CR_ID]
       ,[name]
       ,[documentValue]
@@ -1494,28 +1588,28 @@ ORDER BY e.EmployeeID";
       ,[docexpiredate]
   FROM [DelmonGroupDB].[dbo].[Documents],DocumentType
   where DocumentType.DocType_ID=Documents.DocTypeID AND CR_ID = " + EmployeeID);
-                            dataGridView3.Columns["documentValue"].Visible = false;
-                            dataGridView3.Columns["name"].Visible = false;
+                                dataGridView3.Columns["documentValue"].Visible = false;
+                                dataGridView3.Columns["name"].Visible = false;
 
 
-                            SQLCONN.CloseConnection();
-                            MessageBox.Show("Document Saved.");
-                            cmbDocuments.Text = "Select";
-                            Doctxt.Text = "";
-                            numbertextbox.Text = "";
-                            issueplacetext.Text = "";
-                            docissueplacepicker.Value = DateTime.Now;
-                            docexpirefatepicker.Value = DateTime.Now;
+                                SQLCONN.CloseConnection();
+                                MessageBox.Show("Document Saved.");
+                                cmbDocuments.Text = "Select";
+                                Doctxt.Text = "";
+                                numbertextbox.Text = "";
+                                issueplacetext.Text = "";
+                                docissueplacepicker.Value = DateTime.Now;
+                                docexpirefatepicker.Value = DateTime.Now;
+                            }
                         }
                     }
                 }
-            }
-            else
-            {
-                MessageBox.Show("Please select a record!");
-            }
+                else
+                {
+                    MessageBox.Show("Please select a record!");
+                }
 
-
+            }
 
         }
         private void tabDoc_Click(object sender, EventArgs e)
@@ -1603,81 +1697,95 @@ ORDER BY e.EmployeeID";
 
         private void btnaddcontact_Click(object sender, EventArgs e)
         {
-            SqlParameter paramContactType = new SqlParameter("@C1", SqlDbType.Int);
-            paramContactType.Value = cmbcontact.SelectedValue;
-            SqlParameter paramContact = new SqlParameter("@C2", SqlDbType.NVarChar);
-            paramContact.Value = Contacttxt.Text;
-            SqlParameter paramRefrenceID = new SqlParameter("@C3", SqlDbType.Int);
-            paramRefrenceID.Value = 2;
-            SqlParameter paramPID = new SqlParameter("@C4", SqlDbType.Int);
-            paramPID.Value = EmployeeID;
 
-            if (EMPID != 0)
+            if (Contacttxt.Text == "")
             {
-                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-                {
+                MessageBox.Show("Please insert 'Contact Value ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
-                    SQLCONN.OpenConection();
-                    if ((int)cmbcontact.SelectedValue == 2)
+
+            else if ((int)cmbcontact.SelectedValue == 0 || cmbcontact.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Contact Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            else
+            {
+                SqlParameter paramContactType = new SqlParameter("@C1", SqlDbType.Int);
+                paramContactType.Value = cmbcontact.SelectedValue;
+                SqlParameter paramContact = new SqlParameter("@C2", SqlDbType.NVarChar);
+                paramContact.Value = Contacttxt.Text;
+                SqlParameter paramRefrenceID = new SqlParameter("@C3", SqlDbType.Int);
+                paramRefrenceID.Value = 2;
+                SqlParameter paramPID = new SqlParameter("@C4", SqlDbType.Int);
+                paramPID.Value = EmployeeID;
+
+                if (EMPID != 0)
+                {
+                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     {
-                        if (validate_emailaddress.IsMatch(Contacttxt.Text) != true)
+
+                        SQLCONN.OpenConection();
+                        if ((int)cmbcontact.SelectedValue == 2)
                         {
-                            MessageBox.Show("Invalid Email Address!", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            Contacttxt.Focus();
-                            return;
+                            if (validate_emailaddress.IsMatch(Contacttxt.Text) != true)
+                            {
+                                MessageBox.Show("Invalid Email Address!", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                Contacttxt.Focus();
+                                return;
+                            }
+                            else
+                            {
+                            }
                         }
+                        SqlDataReader dr = SQLCONN.DataReader("select  ContValue from Contacts where  ContValue= @C2  ", paramContact);
+                        dr.Read();
+
+                        if (dr.HasRows)
+                        {
+                            dr.Dispose();
+                            dr.Close();
+                            SQLCONN.ExecuteQueries("insert into Contacts ( ContTypeID,ContValue,RefrenceID,CR_ID) values (@C1,@C2,@C3,@C4)",
+                                                           paramContactType, paramContact, paramRefrenceID, paramPID);
+                            MessageBox.Show("Record saved Successfully");
+
+                            dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID] ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =  " + EmployeeID + " ");
+                            Contacttxt.Text = "";
+                            cmbcontact.Text = "Select";
+                            SQLCONN.CloseConnection();
+                        }
+
                         else
                         {
+                            dr.Dispose();
+                            dr.Close();
+                            SQLCONN.ExecuteQueries("insert into Contacts ( ContTypeID,ContValue,RefrenceID,CR_ID) values (@C1,@C2,@C3,@C4)",
+                                                           paramContactType, paramContact, paramRefrenceID, paramPID);
+                            MessageBox.Show("Record saved Successfully");
+
+                            dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID] ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =  " + EmployeeID + " ");
+                            Contacttxt.Text = "";
+                            cmbcontact.Text = "Select";
+                            SQLCONN.CloseConnection();
+
                         }
                     }
-                    SqlDataReader dr = SQLCONN.DataReader("select  ContValue from Contacts where  ContValue= @C2  ", paramContact);
-                    dr.Read();
-
-                    if (dr.HasRows)
-                    {
-                        dr.Dispose();
-                        dr.Close();
-                        SQLCONN.ExecuteQueries("insert into Contacts ( ContTypeID,ContValue,RefrenceID,CR_ID) values (@C1,@C2,@C3,@C4)",
-                                                       paramContactType, paramContact, paramRefrenceID, paramPID);
-                        MessageBox.Show("Record saved Successfully");
-
-                        dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID] ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =  " + EmployeeID + " ");
-                        Contacttxt.Text = "";
-                        cmbcontact.Text = "Select";
-                        SQLCONN.CloseConnection();
-                    }
-
                     else
                     {
-                        dr.Dispose();
-                        dr.Close();
-                        SQLCONN.ExecuteQueries("insert into Contacts ( ContTypeID,ContValue,RefrenceID,CR_ID) values (@C1,@C2,@C3,@C4)",
-                                                       paramContactType, paramContact, paramRefrenceID, paramPID);
-                        MessageBox.Show("Record saved Successfully");
-
-                        dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID] ,ContactTypes.ContType ,[ContValue] ,[RefrenceID] FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =  " + EmployeeID + " ");
-                        Contacttxt.Text = "";
-                        cmbcontact.Text = "Select";
-                        SQLCONN.CloseConnection();
 
                     }
+
                 }
                 else
                 {
+                    MessageBox.Show("Please Select Record !");
 
                 }
 
-            }
-            else
-            {
-                MessageBox.Show("Please Select Record !");
+                paramPID.Value = EmployeeID;
 
             }
-
-            paramPID.Value = EmployeeID;
-
         }
-
         private void btndeletecontact_Click(object sender, EventArgs e)
         {
             SqlParameter paramPID = new SqlParameter("@ID", SqlDbType.Int);
@@ -1703,10 +1811,7 @@ ORDER BY e.EmployeeID";
 
 
                 }
-                else
-                {
-
-                }
+                
 
             }
             else
@@ -1811,10 +1916,7 @@ ORDER BY e.EmployeeID";
                     dataGridView3.Columns["documentValue"].Visible = false;
                     dataGridView3.Columns["name"].Visible = false;
                 }
-                else
-                {
-                    // Do nothing
-                }
+                
             }
             else
             {
@@ -1826,55 +1928,69 @@ ORDER BY e.EmployeeID";
 
         private void btnupdatecontat_Click(object sender, EventArgs e)
         {
-            SqlParameter paramContactType = new SqlParameter("@C1", SqlDbType.Int);
-            paramContactType.Value = cmbcontact.SelectedValue;
-            SqlParameter paramContact = new SqlParameter("@C2", SqlDbType.NVarChar);
-            paramContact.Value = Contacttxt.Text;
-            SqlParameter paramRefrenceID = new SqlParameter("@C3", SqlDbType.Int);
-            paramRefrenceID.Value = 2;
-            SqlParameter paramPID = new SqlParameter("@C4", SqlDbType.Int);
-            paramPID.Value = EmployeeID;
-
-            string userInput = txtvalue.Text;
-            if (decimal.TryParse(userInput, out decimal inputValue)) // Try to parse input as decimal
+            if (Contacttxt.Text == "")
             {
-                string formattedValue = inputValue.ToString("N2"); // Format decimal as string with 2 decimal places and thousands separator
-                txtvalue.Text = formattedValue; // Set the second text box to the formatted value
+                MessageBox.Show("Please insert 'Contact Value ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
 
-            if (EmployeeID != 0)
+            else if ((int)cmbcontact.SelectedValue == 0 || cmbcontact.Text == "Select")
             {
-                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                MessageBox.Show("Please Select 'Contact Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+
+
+                SqlParameter paramContactType = new SqlParameter("@C1", SqlDbType.Int);
+                paramContactType.Value = cmbcontact.SelectedValue;
+                SqlParameter paramContact = new SqlParameter("@C2", SqlDbType.NVarChar);
+                paramContact.Value = Contacttxt.Text;
+                SqlParameter paramRefrenceID = new SqlParameter("@C3", SqlDbType.Int);
+                paramRefrenceID.Value = 2;
+                SqlParameter paramPID = new SqlParameter("@C4", SqlDbType.Int);
+                paramPID.Value = EmployeeID;
+
+                string userInput = txtvalue.Text;
+                if (decimal.TryParse(userInput, out decimal inputValue)) // Try to parse input as decimal
                 {
+                    string formattedValue = inputValue.ToString("N2"); // Format decimal as string with 2 decimal places and thousands separator
+                    txtvalue.Text = formattedValue; // Set the second text box to the formatted value
+                }
 
-                    SQLCONN.OpenConection();
 
-                    SQLCONN.ExecuteQueries("update  Contacts set ContTypeID=@C1,ContValue=@C2 where Contact_ID=@C4",
-                                                           paramContactType, paramContact, paramPID);
-                    MessageBox.Show("Record Updated Successfully");
+                if (EmployeeID != 0)
+                {
+                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
 
-                    EmployeeID = EMPID;
-                    dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID]  FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =  " + EmployeeID + " ");
-                    // ClearTextBoxes();
-                    Contacttxt.Text = "";
-                    cmbcontact.Text = "Select";
-                    SQLCONN.CloseConnection();
+                        SQLCONN.OpenConection();
+
+                        SQLCONN.ExecuteQueries("update  Contacts set ContTypeID=@C1,ContValue=@C2 where Contact_ID=@C4",
+                                                               paramContactType, paramContact, paramPID);
+                        MessageBox.Show("Record Updated Successfully");
+
+                        EmployeeID = EMPID;
+                        dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  [Contact_ID] ,[CR_ID]  ,ContactTypes.ContType ,[ContValue] ,[RefrenceID]  FROM [DelmonGroupDB].[dbo].[Contacts],[DelmonGroupDB].[dbo].[ContactTypes] where Contacts.ContTypeID = ContactTypes.ContTypeID and CR_ID =  " + EmployeeID + " ");
+                        // ClearTextBoxes();
+                        Contacttxt.Text = "";
+                        cmbcontact.Text = "Select";
+                        SQLCONN.CloseConnection();
+
+                    }
+                    else
+                    {
+
+                    }
+
 
                 }
                 else
                 {
-
+                    MessageBox.Show("Please Select Record to Update");
                 }
-
-
+                paramPID.Value = EmployeeID;
             }
-            else
-            {
-                MessageBox.Show("Please Select Record to Update");
-            }
-            paramPID.Value = EmployeeID;
-
         }
 
         private void tabContact_Click(object sender, EventArgs e)
@@ -1884,85 +2000,96 @@ ORDER BY e.EmployeeID";
 
         private void btnupdatedoc_Click(object sender, EventArgs e)
         {
+            if (Doctxt.Text == "")
+            {
+                MessageBox.Show("Please insert 'Document Value ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
 
-            SqlParameter paramDoc = new SqlParameter("@ID", SqlDbType.Int);
-            paramDoc.Value = dOCID;
-
-            SqlParameter paramfilename = new SqlParameter("@C0", SqlDbType.NVarChar);
-            paramfilename.Value = fileName;
-            //SqlParameter paramnameOFfile = new SqlParameter("@C1", SqlDbType.NVarChar);
-            //paramnameOFfile.Value = destinationFilePath;
-
-            SqlParameter paramFileContent = new SqlParameter("@C1", SqlDbType.VarBinary);
-
-            SqlParameter paramPID = new SqlParameter("@C2", SqlDbType.Int);
-            paramPID.Value = EmployeeID;
-            SqlParameter paramDocType = new SqlParameter("@C3", SqlDbType.Int);
-            paramDocType.Value = cmbDocuments.SelectedValue;
-            SqlParameter paramRefrenceID = new SqlParameter("@C4", SqlDbType.Int);
-            paramRefrenceID.Value = 2;
-
-
-            /**add extra field from visa file */
-            SqlParameter paramfilenumber = new SqlParameter("@C5", SqlDbType.NVarChar);
-            paramfilenumber.Value = numbertextbox.Text;
-            SqlParameter paramnafileissueplace = new SqlParameter("@C6", SqlDbType.NVarChar);
-            paramnafileissueplace.Value = issueplacetext.Text;
-            SqlParameter paramfileissuedate = new SqlParameter("@C7", SqlDbType.Date);
-            paramfileissuedate.Value = docissueplacepicker.Value;
-            SqlParameter paramfileexpiraydate = new SqlParameter("@C8", SqlDbType.Date);
-            paramfileexpiraydate.Value = docexpirefatepicker.Value;
-
-            /**add extra field from visa file */
-
-
-            if (EmployeeID != 0)
+            else if ((int)cmbcontact.SelectedValue == 0 || cmbcontact.Text == "Select")
+            {
+                MessageBox.Show("Please Select ' Document type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
             {
 
-                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                SqlParameter paramDoc = new SqlParameter("@ID", SqlDbType.Int);
+                paramDoc.Value = dOCID;
+
+                SqlParameter paramfilename = new SqlParameter("@C0", SqlDbType.NVarChar);
+                paramfilename.Value = fileName;
+                //SqlParameter paramnameOFfile = new SqlParameter("@C1", SqlDbType.NVarChar);
+                //paramnameOFfile.Value = destinationFilePath;
+
+                SqlParameter paramFileContent = new SqlParameter("@C1", SqlDbType.VarBinary);
+
+                SqlParameter paramPID = new SqlParameter("@C2", SqlDbType.Int);
+                paramPID.Value = EmployeeID;
+                SqlParameter paramDocType = new SqlParameter("@C3", SqlDbType.Int);
+                paramDocType.Value = cmbDocuments.SelectedValue;
+                SqlParameter paramRefrenceID = new SqlParameter("@C4", SqlDbType.Int);
+                paramRefrenceID.Value = 2;
+
+
+                /**add extra field from visa file */
+                SqlParameter paramfilenumber = new SqlParameter("@C5", SqlDbType.NVarChar);
+                paramfilenumber.Value = numbertextbox.Text;
+                SqlParameter paramnafileissueplace = new SqlParameter("@C6", SqlDbType.NVarChar);
+                paramnafileissueplace.Value = issueplacetext.Text;
+                SqlParameter paramfileissuedate = new SqlParameter("@C7", SqlDbType.Date);
+                paramfileissuedate.Value = docissueplacepicker.Value;
+                SqlParameter paramfileexpiraydate = new SqlParameter("@C8", SqlDbType.Date);
+                paramfileexpiraydate.Value = docexpirefatepicker.Value;
+
+                /**add extra field from visa file */
+
+
+                if (EmployeeID != 0)
                 {
-                    if (cmbDocuments.Text == "Select")
-                    {
-                        MessageBox.Show("Please Select Document Type  . !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                    }
-                    if (numbertextbox.Text == "")
+                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     {
-                        MessageBox.Show("Please insert Document  Number. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                    }
-                    if (issueplacetext.Text == "")
-                    {
-                        MessageBox.Show("Please insert Document Issue Place. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                    }
-                    else
-                    {
-
-                        if (fileName == null || fileContent == null)
+                        if (cmbDocuments.Text == "Select")
                         {
-                            paramfilename.Value = "";
-                            paramFileContent.Value = DBNull.Value;
+                            MessageBox.Show("Please Select Document Type  . !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                        }
+                        if (numbertextbox.Text == "")
+                        {
+                            MessageBox.Show("Please insert Document  Number. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                        }
+                        if (issueplacetext.Text == "")
+                        {
+                            MessageBox.Show("Please insert Document Issue Place. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
                         }
                         else
                         {
-                            paramfilename.Value = fileName;
-                            paramFileContent.Value = fileContent;
-                            //// Read the selected file into a byte array
-                            //fileContent = File.ReadAllBytes(fileName);
-                            //fileName = Path.GetFileName(fileName);
-                            //Doctxt.Text = fileName;
-                        }
 
-                        SQLCONN.OpenConection();
-                        SQLCONN.ExecuteQueries("update  Documents set documentValue=@C1,name=@C0,DocTypeID=@C3,Number=@C5,DocIssueplace=@C6,docissuedate=@C7,docexpiredate=@C8,CR_ID=@C2  where Doc_id = @ID ", paramfilename, paramFileContent, paramDocType, paramPID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate, paramDoc);
-                        //  SQLCONN.ExecuteQueries("update  Documents set DocTypeID=@C3,Number=@C5,DocIssueplace=@C6,docissuedate=@C7,docexpiredate=@C8,CR_ID=@C2  where Doc_id = @ID ", paramDocType, paramPID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate, paramDoc);
+                            if (fileName == null || fileContent == null)
+                            {
+                                paramfilename.Value = "";
+                                paramFileContent.Value = DBNull.Value;
+                            }
+                            else
+                            {
+                                paramfilename.Value = fileName;
+                                paramFileContent.Value = fileContent;
+                                //// Read the selected file into a byte array
+                                //fileContent = File.ReadAllBytes(fileName);
+                                //fileName = Path.GetFileName(fileName);
+                                //Doctxt.Text = fileName;
+                            }
+
+                            SQLCONN.OpenConection();
+                            SQLCONN.ExecuteQueries("update  Documents set documentValue=@C1,name=@C0,DocTypeID=@C3,Number=@C5,DocIssueplace=@C6,docissuedate=@C7,docexpiredate=@C8,CR_ID=@C2  where Doc_id = @ID ", paramfilename, paramFileContent, paramDocType, paramPID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate, paramDoc);
+                            //  SQLCONN.ExecuteQueries("update  Documents set DocTypeID=@C3,Number=@C5,DocIssueplace=@C6,docissuedate=@C7,docexpiredate=@C8,CR_ID=@C2  where Doc_id = @ID ", paramDocType, paramPID, paramfilenumber, paramnafileissueplace, paramfileissuedate, paramfileexpiraydate, paramDoc);
 
 
-                        MessageBox.Show("Record Updated Successfully");
-                        EmployeeID = EMPID;
-                        dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT  [Doc_id]
+                            MessageBox.Show("Record Updated Successfully");
+                            EmployeeID = EMPID;
+                            dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT  [Doc_id]
       ,[CR_ID]
       ,[name]
       ,[documentValue]
@@ -1974,34 +2101,35 @@ ORDER BY e.EmployeeID";
       ,[docexpiredate]
   FROM [DelmonGroupDB].[dbo].[Documents],DocumentType
   where DocumentType.DocType_ID=Documents.DocTypeID  and CR_ID =  " + EmployeeID + " ");
-                        dataGridView3.Columns["documentValue"].Visible = false;
-                        dataGridView3.Columns["name"].Visible = false;
+                            dataGridView3.Columns["documentValue"].Visible = false;
+                            dataGridView3.Columns["name"].Visible = false;
 
 
 
-                        //    ClearTextBoxes();
-                        SQLCONN.CloseConnection();
-                        cmbDocuments.Text = "Select";
-                        Doctxt.Text = "";
-                        numbertextbox.Text = "";
-                        issueplacetext.Text = "";
-                        docissueplacepicker.Value = DateTime.Now;
-                        docexpirefatepicker.Value = DateTime.Now;
+                            //    ClearTextBoxes();
+                            SQLCONN.CloseConnection();
+                            cmbDocuments.Text = "Select";
+                            Doctxt.Text = "";
+                            numbertextbox.Text = "";
+                            issueplacetext.Text = "";
+                            docissueplacepicker.Value = DateTime.Now;
+                            docexpirefatepicker.Value = DateTime.Now;
+                        }
                     }
+                    else
+                    {
+
+                    }
+
+
                 }
                 else
                 {
-
+                    MessageBox.Show("Please Select Record to Update");
                 }
-
+                paramPID.Value = EmployeeID;
 
             }
-            else
-            {
-                MessageBox.Show("Please Select Record to Update");
-            }
-            paramPID.Value = EmployeeID;
-
         }
 
         private void firstnametxt_TextChanged(object sender, EventArgs e)
@@ -2528,146 +2656,161 @@ ORDER BY e.EmployeeID";
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (EMPID != 0)
+
+            if (txtvalue.Text == "")
             {
-                SqlParameter paramSalaryType = new SqlParameter("@C1", SqlDbType.Int);
-                paramSalaryType.Value = cmbsalarytype.SelectedValue;
-                SqlParameter paramValue = new SqlParameter("@C2", SqlDbType.NVarChar);
+                MessageBox.Show("Please insert 'Amount/Value ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
 
-                SqlParameter paramemployee = new SqlParameter("@ID", SqlDbType.NVarChar);
-                paramemployee.Value = EmployeeID;
+            else if ((int)cmbsalarytype.SelectedValue == 0 || cmbsalarytype.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Salary Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            else
+            {
 
 
-                /*logg*/
-                SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
-                paramuser.Value = lblusername.Text;
-                SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
-                paramdatetimeLOG.Value = lbldatetime.Text;
-                SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
-                parampc.Value = lblPC.Text;
-
-                /*logg*/
-
-                string userInput = txtvalue.Text;
-                if (decimal.TryParse(userInput, out decimal inputValue)) // Try to parse input as decimal
+                if (EMPID != 0)
                 {
-                    string formattedValue = inputValue.ToString("N2"); // Format decimal as string with 2 decimal places and thousands separator
-                    txtvalue.Text = formattedValue; // Set the second text box to the formatted value
-                }
+                    SqlParameter paramSalaryType = new SqlParameter("@C1", SqlDbType.Int);
+                    paramSalaryType.Value = cmbsalarytype.SelectedValue;
+                    SqlParameter paramValue = new SqlParameter("@C2", SqlDbType.NVarChar);
 
 
-                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-                {
-                    SQLCONN.OpenConection();
+                    SqlParameter paramemployee = new SqlParameter("@ID", SqlDbType.NVarChar);
+                    paramemployee.Value = EmployeeID;
 
-                    SqlDataReader dr = SQLCONN.DataReader("select * from [SalaryDetails] where  EmployeeID= " + EmployeeID + " and SalaryTypeID= " + cmbsalarytype.SelectedValue + " ");
 
-                    dr.Read();
+                    /*logg*/
+                    SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+                    paramuser.Value = lblusername.Text;
+                    SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+                    paramdatetimeLOG.Value = lbldatetime.Text;
+                    SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+                    parampc.Value = lblPC.Text;
 
-                    if (dr.HasRows)
+                    /*logg*/
+
+                    string userInput = txtvalue.Text;
+                    if (decimal.TryParse(userInput, out decimal inputValue)) // Try to parse input as decimal
                     {
-                        MessageBox.Show("This 'Salary Value For This Employee '  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                        string formattedValue = inputValue.ToString("N2"); // Format decimal as string with 2 decimal places and thousands separator
+                        txtvalue.Text = formattedValue; // Set the second text box to the formatted value
                     }
 
+
+                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        SQLCONN.OpenConection();
+
+                        SqlDataReader dr = SQLCONN.DataReader("select * from [SalaryDetails] where  EmployeeID= " + EmployeeID + " and SalaryTypeID= " + cmbsalarytype.SelectedValue + " ");
+
+                        dr.Read();
+
+                        if (dr.HasRows)
+                        {
+                            MessageBox.Show("This 'Salary Value For This Employee '  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                        }
+
+                        else
+                        {
+                            dr.Dispose();
+                            dr.Close();
+                            if ((int)cmbsalarytype.SelectedValue == 3)
+                            { txtvalue.Text = txtvalue.Text + " " + "Houres Per Day "; }
+                            if ((int)cmbsalarytype.SelectedValue == 4)
+                            { txtvalue.Text = txtvalue.Text + " " + "Days Per Week "; }
+                            if ((int)cmbsalarytype.SelectedValue == 5)
+                            { txtvalue.Text = txtvalue.Text + " " + "Months"; }
+                            if ((int)cmbsalarytype.SelectedValue == 6)
+                            { txtvalue.Text = txtvalue.Text + " " + "Months"; }
+                            if ((int)cmbsalarytype.SelectedValue == 8)
+                            {
+                                if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES"))
+                                {
+                                    CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+                                    TextInfo textInfo = cultureInfo.TextInfo;
+                                    txtvalue.Text = textInfo.ToTitleCase(txtvalue.Text);
+                                    txtvalue.Text = "Provided By Company";
+
+                                }
+                            }
+                            if ((int)cmbsalarytype.SelectedValue == 9)
+                            {
+                                if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES") || txtvalue.Text.Contains("Yes") || txtvalue.Text.Contains("YEs"))
+                                {
+                                    CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+                                    TextInfo textInfo = cultureInfo.TextInfo;
+                                    txtvalue.Text = textInfo.ToTitleCase(txtvalue.Text);
+                                    txtvalue.Text = "Provided By Company";
+
+                                }
+                            }
+                            if ((int)cmbsalarytype.SelectedValue == 10)
+                            {
+                                if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES") || txtvalue.Text.Contains("Yes") || txtvalue.Text.Contains("YEs"))
+                                {
+                                    CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+                                    TextInfo textInfo = cultureInfo.TextInfo;
+                                    txtvalue.Text = textInfo.ToTitleCase(txtvalue.Text);
+                                    txtvalue.Text = "Provided By Company";
+
+                                }
+                            }
+                            if ((int)cmbsalarytype.SelectedValue == 11)
+
+                            {
+                                CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+                                TextInfo textInfo = cultureInfo.TextInfo;
+                                txtvalue.Text = textInfo.ToTitleCase(txtvalue.Text);
+                                txtvalue.Text = txtvalue.Text + " " + "Days/Year after finish Contract Period";
+                            }
+                            if ((int)cmbsalarytype.SelectedValue == 12)
+                            {
+                                if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES") || txtvalue.Text.Contains("Yes") || txtvalue.Text.Contains("YEs"))
+                                {
+                                    CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+                                    TextInfo textInfo = cultureInfo.TextInfo;
+                                    txtvalue.Text = textInfo.ToTitleCase(txtvalue.Text);
+                                    txtvalue.Text = "Provided By Company";
+
+                                }
+                            }
+
+
+
+                            paramValue.Value = txtvalue.Text;
+                            SQLCONN.ExecuteQueries("insert into SalaryDetails ( EmployeeID,SalaryTypeID,Value) values (@ID,@C1,@C2)",
+                                                           paramemployee, paramSalaryType, paramValue);
+                            MessageBox.Show("Record saved Successfully");
+                            cmbsalarytype.SelectedValue = 0;
+                            txtvalue.Text = "";
+                            SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (Logvalueid, logvalue ,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES (@C1, ' Salary Info For Employee ID : '  +  @ID  ,'#','#',@datetime,@pc,@user,'Insert')", paramSalaryType, paramemployee, paramdatetimeLOG, parampc, paramuser);
+
+
+                            dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  select SalaryDetID , SalaryTypeName 'Salary Type' ,SalaryDetails.Value from SalaryDetails,SalaryTypes where SalaryDetails.SalaryTypeID = SalaryTypes.SalaryTypeID and SalaryDetails.EmployeeID = @ID ", paramemployee);
+                            this.dataGridView5.Columns["SalaryDetID"].Visible = false;
+                            // ClearTextBoxes();
+                            cmbsalarytype.Text = "Select";
+                            txtvalue.Text = "";
+                            SQLCONN.CloseConnection();
+
+                        }
+                    }
                     else
                     {
-                        dr.Dispose();
-                        dr.Close();
-                        if ((int)cmbsalarytype.SelectedValue == 3)
-                        { txtvalue.Text = txtvalue.Text + " " + "Houres Per Day "; }
-                        if ((int)cmbsalarytype.SelectedValue == 4)
-                        { txtvalue.Text = txtvalue.Text + " " + "Days Per Week "; }
-                        if ((int)cmbsalarytype.SelectedValue == 5)
-                        { txtvalue.Text = txtvalue.Text + " " + "Months"; }
-                        if ((int)cmbsalarytype.SelectedValue == 6)
-                        { txtvalue.Text = txtvalue.Text + " " + "Months"; }
-                        if ((int)cmbsalarytype.SelectedValue == 8)
-                        {
-                            if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES"))
-                            {
-                                CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
-                                TextInfo textInfo = cultureInfo.TextInfo;
-                                txtvalue.Text = textInfo.ToTitleCase(txtvalue.Text);
-                                txtvalue.Text = "Provided By Company";
-
-                            }
-                        }
-                        if ((int)cmbsalarytype.SelectedValue == 9)
-                        {
-                            if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES") || txtvalue.Text.Contains("Yes") || txtvalue.Text.Contains("YEs"))
-                            {
-                                CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
-                                TextInfo textInfo = cultureInfo.TextInfo;
-                                txtvalue.Text = textInfo.ToTitleCase(txtvalue.Text);
-                                txtvalue.Text = "Provided By Company";
-
-                            }
-                        }
-                        if ((int)cmbsalarytype.SelectedValue == 10)
-                        {
-                            if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES") || txtvalue.Text.Contains("Yes") || txtvalue.Text.Contains("YEs"))
-                            {
-                                CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
-                                TextInfo textInfo = cultureInfo.TextInfo;
-                                txtvalue.Text = textInfo.ToTitleCase(txtvalue.Text);
-                                txtvalue.Text = "Provided By Company";
-
-                            }
-                        }
-                        if ((int)cmbsalarytype.SelectedValue == 11)
-
-                        {
-                            CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
-                            TextInfo textInfo = cultureInfo.TextInfo;
-                            txtvalue.Text = textInfo.ToTitleCase(txtvalue.Text);
-                            txtvalue.Text = txtvalue.Text + " " + "Days/Year after finish Contract Period";
-                        }
-                        if ((int)cmbsalarytype.SelectedValue == 12)
-                        {
-                            if (txtvalue.Text.Contains("yes") || txtvalue.Text.Contains("YES") || txtvalue.Text.Contains("Yes") || txtvalue.Text.Contains("YEs"))
-                            {
-                                CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
-                                TextInfo textInfo = cultureInfo.TextInfo;
-                                txtvalue.Text = textInfo.ToTitleCase(txtvalue.Text);
-                                txtvalue.Text = "Provided By Company";
-
-                            }
-                        }
-
-
-
-                        paramValue.Value = txtvalue.Text;
-                        SQLCONN.ExecuteQueries("insert into SalaryDetails ( EmployeeID,SalaryTypeID,Value) values (@ID,@C1,@C2)",
-                                                       paramemployee, paramSalaryType, paramValue);
-                        MessageBox.Show("Record saved Successfully");
-                        cmbsalarytype.SelectedValue = 0;
-                        txtvalue.Text = "";
-                        SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (Logvalueid, logvalue ,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES (@C1, ' Salary Info For Employee ID : '  +  @ID  ,'#','#',@datetime,@pc,@user,'Insert')", paramSalaryType, paramemployee, paramdatetimeLOG, parampc, paramuser);
-
-
-                        dataGridView5.DataSource = SQLCONN.ShowDataInGridViewORCombobox("  select SalaryDetID , SalaryTypeName 'Salary Type' ,SalaryDetails.Value from SalaryDetails,SalaryTypes where SalaryDetails.SalaryTypeID = SalaryTypes.SalaryTypeID and SalaryDetails.EmployeeID = @ID ", paramemployee);
-                        this.dataGridView5.Columns["SalaryDetID"].Visible = false;
-                        // ClearTextBoxes();
-                        cmbsalarytype.Text = "Select";
-                        txtvalue.Text = "";
-                        SQLCONN.CloseConnection();
 
                     }
+                    paramemployee.Value = EmployeeID;
                 }
                 else
                 {
-
+                    MessageBox.Show("Please Select Record !");
                 }
-                paramemployee.Value = EmployeeID;
             }
-            else
-            {
-                MessageBox.Show("Please Select Record !");
-            }
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -2710,10 +2853,7 @@ ORDER BY e.EmployeeID";
 
 
                 }
-                else
-                {
-
-                }
+               
 
             }
             else
@@ -3270,57 +3410,66 @@ ORDER BY e.EmployeeID";
 
         private void button6_Click(object sender, EventArgs e)
         {
-            SqlParameter paramPID = new SqlParameter("@C1", SqlDbType.Int);
-            paramPID.Value = EmployeeID;
-            SqlParameter paramHistoryValue = new SqlParameter("@C2", SqlDbType.NVarChar);
-            paramHistoryValue.Value = richhistoryvalue.Text;
-            SqlParameter paramDateHistory = new SqlParameter("@C3", SqlDbType.Date);
-            paramDateHistory.Value = dtphistorydate.Value;
-
-
-            if (EmployeeID != 0)
+            if (richhistoryvalue.Text == "")
             {
-                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                MessageBox.Show("Please insert 'The Value ' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            else
+            {
+
+                SqlParameter paramPID = new SqlParameter("@C1", SqlDbType.Int);
+                paramPID.Value = EmployeeID;
+                SqlParameter paramHistoryValue = new SqlParameter("@C2", SqlDbType.NVarChar);
+                paramHistoryValue.Value = richhistoryvalue.Text;
+                SqlParameter paramDateHistory = new SqlParameter("@C3", SqlDbType.Date);
+                paramDateHistory.Value = dtphistorydate.Value;
+
+
+                if (EmployeeID != 0)
                 {
-
-                    SQLCONN.OpenConection();
-                    SqlDataReader dr = SQLCONN.DataReader("select  EmployeeID,HistoryValue,HistoryDate from EmployeeHistory where  EmployeeID= @C1 and HistoryValue=@C2 and HistoryDate=@C3  ", paramPID, paramHistoryValue, paramDateHistory);
-                    dr.Read();
-
-
-                    if (dr.HasRows)
+                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     {
-                        MessageBox.Show("The 'Value' For This Employee  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
+                        SQLCONN.OpenConection();
+                        SqlDataReader dr = SQLCONN.DataReader("select  EmployeeID,HistoryValue,HistoryDate from EmployeeHistory where  EmployeeID= @C1 and HistoryValue=@C2 and HistoryDate=@C3  ", paramPID, paramHistoryValue, paramDateHistory);
+                        dr.Read();
+
+
+                        if (dr.HasRows)
+                        {
+                            MessageBox.Show("The 'Value' For This Employee  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                        }
+
+                        else
+                        {
+                            dr.Dispose();
+                            dr.Close();
+                            SQLCONN.ExecuteQueries("insert into EmployeeHistory ( EmployeeID,HistoryValue,HistoryDate) values (@C1,@C2,@C3) ",
+                                                          paramPID, paramHistoryValue, paramDateHistory);
+                            MessageBox.Show("Record saved Successfully");
+                            dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  * FROM [DelmonGroupDB].[dbo].[EmployeeHistory] where EmployeeID =  " + EmployeeID + " ");
+                            SQLCONN.CloseConnection();
+                            richhistoryvalue.Text = "";
+                            dtphistorydate.Value = DateTime.Now;
+
+                        }
                     }
-
                     else
                     {
-                        dr.Dispose();
-                        dr.Close();
-                        SQLCONN.ExecuteQueries("insert into EmployeeHistory ( EmployeeID,HistoryValue,HistoryDate) values (@C1,@C2,@C3) ",
-                                                      paramPID, paramHistoryValue, paramDateHistory);
-                        MessageBox.Show("Record saved Successfully");
-                        dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT  * FROM [DelmonGroupDB].[dbo].[EmployeeHistory] where EmployeeID =  " + EmployeeID + " ");
-                        SQLCONN.CloseConnection();
-                        richhistoryvalue.Text = "";
-                        dtphistorydate.Value = DateTime.Now;
 
                     }
                 }
                 else
                 {
+                    MessageBox.Show("Please Select Record to Update");
 
                 }
-            }
-            else 
-            {
-                MessageBox.Show("Please Select Record to Update");
+                paramPID.Value = EmployeeID;
+
 
             }
-            paramPID.Value = EmployeeID;
-
-
         }
 
         private void button5_Click_1(object sender, EventArgs e)

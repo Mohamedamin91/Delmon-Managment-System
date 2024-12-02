@@ -428,93 +428,129 @@ namespace Delmon_Managment_System.Forms
 
         private void addbtn_Click(object sender, EventArgs e)
         {
-            SqlParameter paramcmbtype = new SqlParameter("@C1", SqlDbType.NVarChar);
-            paramcmbtype.Value = cmbtype.SelectedValue;
-            SqlParameter paramcmbrand = new SqlParameter("@C2", SqlDbType.NVarChar);
-            paramcmbrand.Value = cmbbrand.SelectedValue;
-            SqlParameter paramassetmodel = new SqlParameter("@C3", SqlDbType.NVarChar);
-            paramassetmodel.Value = cmbAssetModel.SelectedValue;
-            SqlParameter paramSAPAssetid = new SqlParameter("@C4", SqlDbType.NVarChar);
-            paramSAPAssetid.Value = txtsapid.Text;
-            SqlParameter paramSN = new SqlParameter("@C5", SqlDbType.NVarChar);
-            paramSN.Value = txtSN.Text;
 
-            /*new update */
-            SqlParameter paramPurchasingdate = new SqlParameter("@C6", SqlDbType.Date);
-            paramPurchasingdate.Value = PurchasingDtp.Value;
-            SqlParameter paramcmbDevice = new SqlParameter("@C7", SqlDbType.NVarChar);
-            paramcmbDevice.Value = cmbDevice.SelectedValue;
-            SqlParameter paramcmbAssetStatus = new SqlParameter("@C8", SqlDbType.NVarChar);
-            paramcmbAssetStatus.Value = cmbAssetStatus.SelectedValue;
-            /*new update */
 
-            /*Asset Assign*/
-            SqlParameter paramcmbAssignto = new SqlParameter("@C9", SqlDbType.NVarChar);
-            paramcmbAssignto.Value = cmbemployee.SelectedValue;
-            SqlParameter paramAssigndate = new SqlParameter("@C10", SqlDbType.Date);
-            paramAssigndate.Value = AssignDtp.Value;
-            /*Asset Assign*/
-
-            /*price*/
-            SqlParameter paramAssestPrice = new SqlParameter("@C11", SqlDbType.NVarChar);
-            paramAssestPrice.Value = string.IsNullOrEmpty(PriceTXT.Text) ? "0" : PriceTXT.Text;
-            /*price*/
-
-            /*username*/
-            SqlParameter paramAssinedBy = new SqlParameter("@C12", SqlDbType.NVarChar);
-            paramAssinedBy.Value = CommonClass.LoginUserName;
-            /*username*/
-
-            int assetTypeID = (int)cmbtype.SelectedValue;
-            int nextID = GetNextIDForAssetType(assetTypeID);
-            string generatedAssetID = GenerateAssetID(assetTypeID, nextID);
-
-            SqlParameter paramgeneratedAssetID = new SqlParameter("@C0", SqlDbType.NVarChar);
-            paramgeneratedAssetID.Value = generatedAssetID;
-
-            SqlDataReader dr;
-
-            if ((int)cmbtype.SelectedValue != 0 && (int)cmbbrand.SelectedValue != 0 && (int)cmbAssetModel.SelectedValue != 0
-                && (int)cmbDevice.SelectedValue != 0 && (int)cmbAssetStatus.SelectedValue != 0 && !string.IsNullOrEmpty(txtSN.Text))
+            if ((int)cmbtype.SelectedValue == 0 || cmbtype.Text == "Select")
             {
-                SQLCONN3.OpenConection3();
-                SQLCONN.OpenConection();
-                dr = SQLCONN3.DataReader("select * from Assets where (brand=@C2 and model=@C3 and sn=@C5) or (sn=@C5)", paramcmbrand, paramassetmodel, paramSN);
+                MessageBox.Show("Please Select 'Asset Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbbrand.SelectedValue == 0 || cmbbrand.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Brand' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbAssetModel.SelectedValue == 0 || cmbAssetModel.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Asset model' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbDevice.SelectedValue == 0 || cmbDevice.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Device Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbAssetStatus.SelectedValue == 0 || cmbAssetStatus.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Asset Status' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbAssetStatus.SelectedValue == 0 || cmbAssetStatus.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Asset Status' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ( txtSN.Text == "Select")
+            {
+                MessageBox.Show("Please insert 'SN' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
 
-                dr.Read();
 
-                if (dr.HasRows)
+
+
+                SqlParameter paramcmbtype = new SqlParameter("@C1", SqlDbType.NVarChar);
+                paramcmbtype.Value = cmbtype.SelectedValue;
+                SqlParameter paramcmbrand = new SqlParameter("@C2", SqlDbType.NVarChar);
+                paramcmbrand.Value = cmbbrand.SelectedValue;
+                SqlParameter paramassetmodel = new SqlParameter("@C3", SqlDbType.NVarChar);
+                paramassetmodel.Value = cmbAssetModel.SelectedValue;
+                SqlParameter paramSAPAssetid = new SqlParameter("@C4", SqlDbType.NVarChar);
+                paramSAPAssetid.Value = txtsapid.Text;
+                SqlParameter paramSN = new SqlParameter("@C5", SqlDbType.NVarChar);
+                paramSN.Value = txtSN.Text;
+
+                /*new update */
+                SqlParameter paramPurchasingdate = new SqlParameter("@C6", SqlDbType.Date);
+                paramPurchasingdate.Value = PurchasingDtp.Value;
+                SqlParameter paramcmbDevice = new SqlParameter("@C7", SqlDbType.NVarChar);
+                paramcmbDevice.Value = cmbDevice.SelectedValue;
+                SqlParameter paramcmbAssetStatus = new SqlParameter("@C8", SqlDbType.NVarChar);
+                paramcmbAssetStatus.Value = cmbAssetStatus.SelectedValue;
+                /*new update */
+
+                /*Asset Assign*/
+                SqlParameter paramcmbAssignto = new SqlParameter("@C9", SqlDbType.NVarChar);
+                paramcmbAssignto.Value = cmbemployee.SelectedValue;
+                SqlParameter paramAssigndate = new SqlParameter("@C10", SqlDbType.Date);
+                paramAssigndate.Value = AssignDtp.Value;
+                /*Asset Assign*/
+
+                /*price*/
+                SqlParameter paramAssestPrice = new SqlParameter("@C11", SqlDbType.NVarChar);
+                paramAssestPrice.Value = string.IsNullOrEmpty(PriceTXT.Text) ? "0" : PriceTXT.Text;
+                /*price*/
+
+                /*username*/
+                SqlParameter paramAssinedBy = new SqlParameter("@C12", SqlDbType.NVarChar);
+                paramAssinedBy.Value = CommonClass.LoginUserName;
+                /*username*/
+
+                int assetTypeID = (int)cmbtype.SelectedValue;
+                int nextID = GetNextIDForAssetType(assetTypeID);
+                string generatedAssetID = GenerateAssetID(assetTypeID, nextID);
+
+                SqlParameter paramgeneratedAssetID = new SqlParameter("@C0", SqlDbType.NVarChar);
+                paramgeneratedAssetID.Value = generatedAssetID;
+
+                SqlDataReader dr;
+
+                if ((int)cmbtype.SelectedValue != 0 && (int)cmbbrand.SelectedValue != 0 && (int)cmbAssetModel.SelectedValue != 0
+                    && (int)cmbDevice.SelectedValue != 0 && (int)cmbAssetStatus.SelectedValue != 0 && !string.IsNullOrEmpty(txtSN.Text))
                 {
-                    MessageBox.Show("This 'Asset / SN '  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                else
-                {
-                    dr.Dispose();
+                    SQLCONN3.OpenConection3();
+                    SQLCONN.OpenConection();
+                    dr = SQLCONN3.DataReader("select * from Assets where (brand=@C2 and model=@C3 and sn=@C5) or (sn=@C5)", paramcmbrand, paramassetmodel, paramSN);
 
-                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    dr.Read();
+
+                    if (dr.HasRows)
+                    {
+                        MessageBox.Show("This 'Asset / SN '  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
                     {
                         dr.Dispose();
-                        dr.Close();
 
-                        // Insert into Assets
-                        SQLCONN3.ExecuteQueries("insert into Assets ([AssetID],[AssetTypeID],[brand],[model],[SapAssetID],[SN],[PurchasingDate],[DeviceTypeID],[AssetStatusID],Price) " +
-                            "values (@C0,@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8,@C11)",
-                            paramgeneratedAssetID, paramcmbtype, paramcmbrand, paramassetmodel,
-                            paramSAPAssetid, paramSN, paramPurchasingdate, paramcmbDevice, paramcmbAssetStatus, paramAssestPrice);
+                        if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                        {
+                            dr.Dispose();
+                            dr.Close();
 
-                        // Insert into AssetAssign
-                        SQLCONN3.ExecuteQueries("insert into AssetAssign ([AssetID],[EmployeeID],[AssginDate],AssignedBy) " +
-                            "values (@C0,@C9,@C10,@C12)",
-                            paramgeneratedAssetID, paramcmbAssignto, paramAssigndate, paramAssinedBy);
+                            // Insert into Assets
+                            SQLCONN3.ExecuteQueries("insert into Assets ([AssetID],[AssetTypeID],[brand],[model],[SapAssetID],[SN],[PurchasingDate],[DeviceTypeID],[AssetStatusID],Price) " +
+                                "values (@C0,@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8,@C11)",
+                                paramgeneratedAssetID, paramcmbtype, paramcmbrand, paramassetmodel,
+                                paramSAPAssetid, paramSN, paramPurchasingdate, paramcmbDevice, paramcmbAssetStatus, paramAssestPrice);
 
-                        MessageBox.Show("Record saved Successfully");
+                            // Insert into AssetAssign
+                            SQLCONN3.ExecuteQueries("insert into AssetAssign ([AssetID],[EmployeeID],[AssginDate],AssignedBy) " +
+                                "values (@C0,@C9,@C10,@C12)",
+                                paramgeneratedAssetID, paramcmbAssignto, paramAssigndate, paramAssinedBy);
 
-                        // Fetch the max AssetID and log the changes
-                        string maxAssetID = GetMaxAssetID();
-                        LogAssetChanges(maxAssetID);
+                            MessageBox.Show("Record saved Successfully");
 
-                        btnnew.Visible = true;
-                        dataGridView1.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(@"
+                            // Fetch the max AssetID and log the changes
+                            string maxAssetID = GetMaxAssetID();
+                            LogAssetChanges(maxAssetID);
+
+                            btnnew.Visible = true;
+                            dataGridView1.DataSource = SQLCONN3.ShowDataInGridViewORCombobox(@"
                     SELECT 
                         Assets.AssetID, Assets.SapAssetId, Assets.sn, AssetType.AssettypeValue, 
                         AssetBrand.AssetBrandValue, Assets.Model, [PurchasingDate],
@@ -533,23 +569,24 @@ namespace Delmon_Managment_System.Forms
                         Assets.Model = @C3 AND 
                         Assets.sn = @C5 AND 
                         Assets.PurchasingDate = @C6", paramcmbtype, paramcmbrand, paramassetmodel, paramSN, paramPurchasingdate);
+                        }
+                        else
+                        {
+                            dr.Dispose();
+                            dr.Close();
+                        }
                     }
-                    else
-                    {
-                        dr.Dispose();
-                        dr.Close();
-                    }
+                    cmbtype.Text = cmbbrand.Text = "Select";
+                    cmbAssetModel.Text = "Select";
                 }
-                cmbtype.Text = cmbbrand.Text = "Select";
-                cmbAssetModel.Text = "Select";
-            }
-            else
-            {
-                MessageBox.Show("Please Fill the missing fields");
-            }
+                else
+                {
+                    MessageBox.Show("Please Fill the missing fields");
+                }
 
-            SQLCONN3.CloseConnection();
-            SQLCONN.CloseConnection();
+                SQLCONN3.CloseConnection();
+                SQLCONN.CloseConnection();
+            }
         }
 
         private string GetMaxAssetID()
@@ -2309,6 +2346,7 @@ ORDER BY
             if (string.IsNullOrEmpty(AssetDetialsInfoID))
             {
                 MessageBox.Show("Please select Asset first!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
             else
             {

@@ -39,7 +39,7 @@ namespace Delmon_Managment_System.Forms
             // txtDepttypeName
             // 
             this.txtDepttypeName.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.txtDepttypeName.Location = new System.Drawing.Point(39, 95);
+            this.txtDepttypeName.Location = new System.Drawing.Point(35, 86);
             this.txtDepttypeName.Multiline = true;
             this.txtDepttypeName.Name = "txtDepttypeName";
             this.txtDepttypeName.Size = new System.Drawing.Size(193, 24);
@@ -74,7 +74,7 @@ namespace Delmon_Managment_System.Forms
             this.addbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addbtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.addbtn.ForeColor = System.Drawing.Color.White;
-            this.addbtn.Location = new System.Drawing.Point(79, 137);
+            this.addbtn.Location = new System.Drawing.Point(71, 125);
             this.addbtn.Name = "addbtn";
             this.addbtn.Size = new System.Drawing.Size(101, 28);
             this.addbtn.TabIndex = 28;

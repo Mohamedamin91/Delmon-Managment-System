@@ -387,58 +387,90 @@ WHERE
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
-            // Create SQL parameters
-            SqlParameter paramAccount = new SqlParameter("@C1", SqlDbType.NVarChar);
-            paramAccount.Value = txtaccountno.Text;
-            SqlParameter paramMetersn = new SqlParameter("@C2", SqlDbType.NVarChar);
-            paramMetersn.Value = txtmetersn.Text;
-            SqlParameter paramMeterLocation = new SqlParameter("@C3", SqlDbType.Int);
-            paramMeterLocation.Value = cmbmeterlocation.SelectedValue;
-            SqlParameter paramOwner = new SqlParameter("@C4", SqlDbType.Int);
-            paramOwner.Value = cmbOwner.SelectedValue;
-            SqlParameter paramEnduserType = new SqlParameter("@C5", SqlDbType.NVarChar);
-            paramEnduserType.Value = cmbbillendusetypeelec.Text;
-            SqlParameter paramEndUser = new SqlParameter("@C6", SqlDbType.NVarChar);
 
-            SqlParameter paramService = new SqlParameter("@C7", SqlDbType.NVarChar);
-            paramService.Value = cmbservice.SelectedValue;
-            SqlParameter paramNotes = new SqlParameter("@C8", SqlDbType.NVarChar);
-            paramNotes.Value = txtNotes.Text;
-            SqlParameter paramPaidBy = new SqlParameter("@C9", SqlDbType.NVarChar);
-            paramPaidBy.Value = cmbpaidbyelec.Text;
-
-            SqlParameter paramshortdesc = new SqlParameter("@C10", SqlDbType.NVarChar);
-            paramshortdesc.Value = txtshortdescelec.Text;
-
-            SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
-            paramPID.Value = EmployeeID;
-
-            SqlParameter paramUser = new SqlParameter("@user", SqlDbType.NVarChar);
-            paramUser.Value = lblusername.Text;
-
-            SqlParameter paramDatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
-            paramDatetimeLOG.Value = lbldatetime.Text;
-
-            SqlParameter paramPC = new SqlParameter("@pc", SqlDbType.NVarChar);
-            paramPC.Value = lblPC.Text;
-
-            // Check EndUserType and assign the correct value for @paramEnduserID
-            if (cmbbillendusetypeelec.SelectedItem.ToString() == "Personal")
+            if (txtaccountno.Text == "")
             {
-                paramEndUser.Value = cmbbillenduserelec.SelectedValue;  // Assign value for Personal EndUser
+                MessageBox.Show("Please insert 'Account number' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if (cmbbillendusetypeelec.SelectedItem.ToString() == "Company")
+            else if (txtmetersn.Text == "")
             {
-                paramEndUser.Value = cmbbillenduserdivisonelec.SelectedValue;  // Assign value for Company EndUser
+                MessageBox.Show("Please insert 'Meter number' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            else if ((int)cmbmeterlocation.SelectedValue == 0 || cmbmeterlocation.Text=="Select")
+            {
+                MessageBox.Show("Please Select 'Meter location' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbOwner.SelectedValue == 0 || cmbOwner.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Owner' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbbillendusetypeelec.SelectedValue == 0 || cmbbillendusetypeelec.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'EndUser Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbservice.SelectedValue == 0 || cmbservice.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Services Status' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (cmbpaidbyelec.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Paidby option' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+             else
+            {
 
-            // Insert data into ElectrcityBills table
-            string query = @"INSERT INTO [dbo].[ElectrcityBills] 
+                // Create SQL parameters
+                SqlParameter paramAccount = new SqlParameter("@C1", SqlDbType.NVarChar);
+                paramAccount.Value = txtaccountno.Text;
+                SqlParameter paramMetersn = new SqlParameter("@C2", SqlDbType.NVarChar);
+                paramMetersn.Value = txtmetersn.Text;
+                SqlParameter paramMeterLocation = new SqlParameter("@C3", SqlDbType.Int);
+                paramMeterLocation.Value = cmbmeterlocation.SelectedValue;
+                SqlParameter paramOwner = new SqlParameter("@C4", SqlDbType.Int);
+                paramOwner.Value = cmbOwner.SelectedValue;
+                SqlParameter paramEnduserType = new SqlParameter("@C5", SqlDbType.NVarChar);
+                paramEnduserType.Value = cmbbillendusetypeelec.Text;
+                SqlParameter paramEndUser = new SqlParameter("@C6", SqlDbType.NVarChar);
+
+                SqlParameter paramService = new SqlParameter("@C7", SqlDbType.NVarChar);
+                paramService.Value = cmbservice.SelectedValue;
+                SqlParameter paramNotes = new SqlParameter("@C8", SqlDbType.NVarChar);
+                paramNotes.Value = txtNotes.Text;
+                SqlParameter paramPaidBy = new SqlParameter("@C9", SqlDbType.NVarChar);
+                paramPaidBy.Value = cmbpaidbyelec.Text;
+
+                SqlParameter paramshortdesc = new SqlParameter("@C10", SqlDbType.NVarChar);
+                paramshortdesc.Value = txtshortdescelec.Text;
+
+                SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
+                paramPID.Value = EmployeeID;
+
+                SqlParameter paramUser = new SqlParameter("@user", SqlDbType.NVarChar);
+                paramUser.Value = lblusername.Text;
+
+                SqlParameter paramDatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+                paramDatetimeLOG.Value = lbldatetime.Text;
+
+                SqlParameter paramPC = new SqlParameter("@pc", SqlDbType.NVarChar);
+                paramPC.Value = lblPC.Text;
+
+                // Check EndUserType and assign the correct value for @paramEnduserID
+                if (cmbbillendusetypeelec.SelectedItem.ToString() == "Personal")
+                {
+                    paramEndUser.Value = cmbbillenduserelec.SelectedValue;  // Assign value for Personal EndUser
+                }
+                else if (cmbbillendusetypeelec.SelectedItem.ToString() == "Company")
+                {
+                    paramEndUser.Value = cmbbillenduserdivisonelec.SelectedValue;  // Assign value for Company EndUser
+                }
+
+                // Insert data into ElectrcityBills table
+                string query = @"INSERT INTO [dbo].[ElectrcityBills] 
                      ([AccountNo], [MeterSN], [MeterLocationID],[Ownerid],[EndUserType],[EndUserID], [ServiceStatusD], [Notes], [PaidBy],[ShortDesc])
                      VALUES (@C1, @C2, @C3, @C4, @C5, @C6, @C7, @C8,@C9,@C10)";
 
-            SqlParameter[] parameters = new SqlParameter[]
-            {
+                SqlParameter[] parameters = new SqlParameter[]
+                {
         paramAccount,
         paramMetersn,
         paramMeterLocation,
@@ -449,64 +481,65 @@ WHERE
         paramNotes,
         paramPaidBy,
         paramshortdesc
-            };
+                };
 
-            // Check for missing fields
-            if ((int)cmbservice.SelectedValue == 0 ||
-                string.IsNullOrEmpty(txtaccountno.Text) || string.IsNullOrEmpty(txtmetersn.Text))
-            {
-                MessageBox.Show("Please Fill the missing fields");
-                return;
-            }
+                // Check for missing fields
+                if ((int)cmbservice.SelectedValue == 0 ||
+                    string.IsNullOrEmpty(txtaccountno.Text) || string.IsNullOrEmpty(txtmetersn.Text))
+                {
+                    MessageBox.Show("Please Fill the missing fields");
+                    return;
+                }
 
-            // Open database connection
-            SQLCONN.OpenConection();
+                // Open database connection
+                SQLCONN.OpenConection();
 
-            // Check if subscription number already exists
-            SqlDataReader dr = SQLCONN.DataReader("SELECT AccountNo FROM ElectrcityBills WHERE AccountNo = @C1", parameters[0]);
-            dr.Read();
+                // Check if subscription number already exists
+                SqlDataReader dr = SQLCONN.DataReader("SELECT AccountNo FROM ElectrcityBills WHERE AccountNo = @C1", parameters[0]);
+                dr.Read();
 
-            if (dr.HasRows)
-            {
-                MessageBox.Show("This 'AccountNo' " + txtaccountno.Text + " Already Exists.!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                if (dr.HasRows)
+                {
+                    MessageBox.Show("This 'AccountNo' " + txtaccountno.Text + " Already Exists.!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-            // Ask for confirmation
-            if (DialogResult.Yes != MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-            {
-                return;
-            }
+                // Ask for confirmation
+                if (DialogResult.Yes != MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    return;
+                }
 
-            // Dispose and close data reader
-            dr.Dispose();
-            dr.Close();
+                // Dispose and close data reader
+                dr.Dispose();
+                dr.Close();
 
-            SQLCONN.ExecuteQueries(query, parameters);
+                SQLCONN.ExecuteQueries(query, parameters);
 
-            // Insert data into EmployeeLog table
-            string logQuery = @"INSERT INTO EmployeeLog 
+                // Insert data into EmployeeLog table
+                string logQuery = @"INSERT INTO EmployeeLog 
        (logvalue, LogValueID, Oldvalue, newvalue, logdatetime, PCNAME, UserId, type) 
        VALUES ('ElectrcityBills', @C1, '#', '#', @datetime, @pc, @user, 'Insert')";
 
-            SqlParameter[] logParameters = new SqlParameter[] { paramAccount, paramDatetimeLOG, paramPC, paramUser };
-            SQLCONN.ExecuteQueries(logQuery, logParameters);
+                SqlParameter[] logParameters = new SqlParameter[] { paramAccount, paramDatetimeLOG, paramPC, paramUser };
+                SQLCONN.ExecuteQueries(logQuery, logParameters);
 
-            // Show success message
-            MessageBox.Show("Record saved Successfully");
+                // Show success message
+                MessageBox.Show("Record saved Successfully");
 
-            // Refresh data grid view
-            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT [AccountNo], [MeterSN], [MeterLocationID], [Ownerid], [EndUserID], [ServiceStatusD], [Notes],[PaidBy],[ShortDesc]
+                // Refresh data grid view
+                dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT [AccountNo], [MeterSN], [MeterLocationID], [Ownerid], [EndUserID], [ServiceStatusD], [Notes],[PaidBy],[ShortDesc]
         FROM [DelmonGroupDB].[dbo].[ElectrcityBills] WHERE AccountNo = @C1", paramAccount);
 
-            // Show button
-            btn.Visible = true;
+                // Show button
+                btn.Visible = true;
 
-            // Close database connection
-            SQLCONN.CloseConnection();
-            ClearItems();
-            btnUpdate.Visible = DeleteBtn.Visible = btn.Visible = true;
-            AddBtn.Visible = false;
+                // Close database connection
+                SQLCONN.CloseConnection();
+                ClearItems();
+                btnUpdate.Visible = DeleteBtn.Visible = btn.Visible = true;
+                AddBtn.Visible = false;
+            }
         }
 
 
@@ -641,66 +674,96 @@ WHERE
         }
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            // Create SQL parameters
-            SqlParameter paramAccount = new SqlParameter("@C1", SqlDbType.NVarChar);
-            paramAccount.Value = txtaccountno.Text;
-            SqlParameter paramMetersn = new SqlParameter("@C2", SqlDbType.NVarChar);
-            paramMetersn.Value = txtmetersn.Text;
-            SqlParameter paramMeterLocation = new SqlParameter("@C3", SqlDbType.NVarChar);
-            paramMeterLocation.Value = cmbmeterlocation.SelectedValue;
-            SqlParameter paramOwner = new SqlParameter("@C4", SqlDbType.NVarChar);
-            paramOwner.Value = cmbOwner.SelectedValue;
-            SqlParameter paramEnduserType = new SqlParameter("@C5", SqlDbType.NVarChar);
-            paramEnduserType.Value = cmbbillendusetypeelec.Text;
-            SqlParameter paramEndUser = new SqlParameter("@C6", SqlDbType.NVarChar);
-            if (cmbbillendusetypeelec.SelectedItem.ToString() == "Personal")
+            if (txtaccountno.Text == "")
             {
-                paramEndUser.Value = cmbbillenduserelec.SelectedValue;
+                MessageBox.Show("Please insert 'Account number' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if (cmbbillendusetypeelec.SelectedItem.ToString() == "Company")
+            else if (txtmetersn.Text == "")
             {
-                paramEndUser.Value = cmbbillenduserdivisonelec.SelectedValue;
+                MessageBox.Show("Please insert 'Meter number' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            SqlParameter paramService = new SqlParameter("@C7", SqlDbType.NVarChar);
-            paramService.Value = cmbservice.SelectedValue;
-            SqlParameter paramNotes = new SqlParameter("@C8", SqlDbType.NVarChar);
-            paramNotes.Value = RemarksTxt.Text;
-            SqlParameter paramPaidBy = new SqlParameter("@C9", SqlDbType.NVarChar);
-            paramPaidBy.Value = cmbpaidbyelec.Text;
-            SqlParameter paramshortdesc = new SqlParameter("@C10", SqlDbType.NVarChar);
-            paramshortdesc.Value = txtshortdescelec.Text;
-
-            SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
-            paramPID.Value = EmployeeID;
-
-            SqlParameter paramUser = new SqlParameter("@user", SqlDbType.NVarChar);
-            paramUser.Value = lblusername.Text;
-
-            SqlParameter paramDatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
-            paramDatetimeLOG.Value = lbldatetime.Text;
-
-            SqlParameter paramPC = new SqlParameter("@pc", SqlDbType.NVarChar);
-            paramPC.Value = lblPC.Text;
-
-            // Check for missing fields
-            if ((int)cmbservice.SelectedValue == 0 ||
-                string.IsNullOrEmpty(txtaccountno.Text) || string.IsNullOrEmpty(txtmetersn.Text))
+            else if ((int)cmbmeterlocation.SelectedValue == 0 || cmbmeterlocation.Text == "Select")
             {
-                MessageBox.Show("Please fill the missing fields");
-                return;
+                MessageBox.Show("Please Select 'Meter location' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
-            // Open database connection
-            SQLCONN.OpenConection();
-
-            // Ask for confirmation
-            if (DialogResult.Yes != MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            else if ((int)cmbOwner.SelectedValue == 0 || cmbOwner.Text == "Select")
             {
-                return;
+                MessageBox.Show("Please Select 'Owner' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            else if ((int)cmbbillendusetypeelec.SelectedValue == 0 || cmbbillendusetypeelec.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'EndUser Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbservice.SelectedValue == 0 || cmbservice.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Services Status' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (cmbpaidbyelec.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Paidby option' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                // Create SQL parameters
+                SqlParameter paramAccount = new SqlParameter("@C1", SqlDbType.NVarChar);
+                paramAccount.Value = txtaccountno.Text;
+                SqlParameter paramMetersn = new SqlParameter("@C2", SqlDbType.NVarChar);
+                paramMetersn.Value = txtmetersn.Text;
+                SqlParameter paramMeterLocation = new SqlParameter("@C3", SqlDbType.NVarChar);
+                paramMeterLocation.Value = cmbmeterlocation.SelectedValue;
+                SqlParameter paramOwner = new SqlParameter("@C4", SqlDbType.NVarChar);
+                paramOwner.Value = cmbOwner.SelectedValue;
+                SqlParameter paramEnduserType = new SqlParameter("@C5", SqlDbType.NVarChar);
+                paramEnduserType.Value = cmbbillendusetypeelec.Text;
+                SqlParameter paramEndUser = new SqlParameter("@C6", SqlDbType.NVarChar);
+                if (cmbbillendusetypeelec.SelectedItem.ToString() == "Personal")
+                {
+                    paramEndUser.Value = cmbbillenduserelec.SelectedValue;
+                }
+                else if (cmbbillendusetypeelec.SelectedItem.ToString() == "Company")
+                {
+                    paramEndUser.Value = cmbbillenduserdivisonelec.SelectedValue;
+                }
+                SqlParameter paramService = new SqlParameter("@C7", SqlDbType.NVarChar);
+                paramService.Value = cmbservice.SelectedValue;
+                SqlParameter paramNotes = new SqlParameter("@C8", SqlDbType.NVarChar);
+                paramNotes.Value = RemarksTxt.Text;
+                SqlParameter paramPaidBy = new SqlParameter("@C9", SqlDbType.NVarChar);
+                paramPaidBy.Value = cmbpaidbyelec.Text;
+                SqlParameter paramshortdesc = new SqlParameter("@C10", SqlDbType.NVarChar);
+                paramshortdesc.Value = txtshortdescelec.Text;
 
-            // Update data in ElectrcityBills table
-            string query = @"UPDATE [dbo].[ElectrcityBills] SET 
+                SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
+                paramPID.Value = EmployeeID;
+
+                SqlParameter paramUser = new SqlParameter("@user", SqlDbType.NVarChar);
+                paramUser.Value = lblusername.Text;
+
+                SqlParameter paramDatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+                paramDatetimeLOG.Value = lbldatetime.Text;
+
+                SqlParameter paramPC = new SqlParameter("@pc", SqlDbType.NVarChar);
+                paramPC.Value = lblPC.Text;
+
+                // Check for missing fields
+                if ((int)cmbservice.SelectedValue == 0 ||
+                    string.IsNullOrEmpty(txtaccountno.Text) || string.IsNullOrEmpty(txtmetersn.Text))
+                {
+                    MessageBox.Show("Please fill the missing fields");
+                    return;
+                }
+
+                // Open database connection
+                SQLCONN.OpenConection();
+
+                // Ask for confirmation
+                if (DialogResult.Yes != MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    return;
+                }
+
+                // Update data in ElectrcityBills table
+                string query = @"UPDATE [dbo].[ElectrcityBills] SET 
            [MeterSN] = @C2,
            [MeterLocationID] = @C3,
            [Ownerid] = @C4,
@@ -711,19 +774,19 @@ WHERE
            [Paidby] = @C9,
            [ShortDesc]=@C10
            WHERE [AccountNo] = @C1";
-            SqlParameter[] parameters = new SqlParameter[] { paramAccount, paramMetersn, paramMeterLocation, paramOwner, paramEnduserType, paramEndUser, paramService, paramNotes, paramPaidBy,paramshortdesc };
+                SqlParameter[] parameters = new SqlParameter[] { paramAccount, paramMetersn, paramMeterLocation, paramOwner, paramEnduserType, paramEndUser, paramService, paramNotes, paramPaidBy, paramshortdesc };
 
-            SQLCONN.ExecuteQueries(query, parameters);
+                SQLCONN.ExecuteQueries(query, parameters);
 
-            // Insert data into EmployeeLog table
-            SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (logvalue, LogValueID, Oldvalue, newvalue, logdatetime, PCNAME, UserId, type) VALUES ('ElectrcityBills', @C1, '#', '#', @datetime, @pc, @user, 'Update')",
-                paramAccount, paramDatetimeLOG, paramPC, paramUser);
+                // Insert data into EmployeeLog table
+                SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (logvalue, LogValueID, Oldvalue, newvalue, logdatetime, PCNAME, UserId, type) VALUES ('ElectrcityBills', @C1, '#', '#', @datetime, @pc, @user, 'Update')",
+                    paramAccount, paramDatetimeLOG, paramPC, paramUser);
 
-            // Show success message
-            MessageBox.Show("Record updated Successfully");
+                // Show success message
+                MessageBox.Show("Record updated Successfully");
 
-            // Refresh data grid view
-            dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT [AccountNo]
+                // Refresh data grid view
+                dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT [AccountNo]
       ,[MeterSN]
       ,[MeterLocationID]
       ,[Ownerid]
@@ -735,55 +798,62 @@ WHERE
      ,[ShortDesc]
       FROM [DelmonGroupDB].[dbo].[ElectrcityBills] WHERE AccountNo = @C1", paramAccount);
 
-            // Show button
-            btn.Visible = true;
+                // Show button
+                btn.Visible = true;
 
-            // Close database connection
-            SQLCONN.CloseConnection();
-            //ClearItems();
-            btnUpdate.Visible = DeleteBtn.Visible = btn.Visible = true;
-            AddBtn.Visible = false;
+                // Close database connection
+                SQLCONN.CloseConnection();
+                //ClearItems();
+                btnUpdate.Visible = DeleteBtn.Visible = btn.Visible = true;
+                AddBtn.Visible = false;
+            }
         }
 
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
-            SqlParameter paramccount = new SqlParameter("@C1", SqlDbType.NVarChar);
-            paramccount.Value = txtaccountno.Text;
-
-            SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
-            paramPID.Value = EmployeeID;
-            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
-            paramuser.Value = lblusername.Text;
-            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
-            paramdatetimeLOG.Value = lbldatetime.Text;
-            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
-            parampc.Value = lblPC.Text;
-
-
-            // Check if subscription number already exists
-            SQLCONN.OpenConection();
-            SqlDataReader dr = SQLCONN.DataReader("select Accountno from ElectrcityBills  where  AccountNo = @C1 ", paramccount);
-            dr.Read();
-
-            if (!dr.HasRows)
+            if (txtaccountno.Text == "")
             {
-                MessageBox.Show("This 'AccountNo' " + txtaccountno.Text + " Not Exists.!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                MessageBox.Show("Please insert 'Account number' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                dr.Dispose();
-                dr.Close();
-                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                SqlParameter paramccount = new SqlParameter("@C1", SqlDbType.NVarChar);
+                paramccount.Value = txtaccountno.Text;
+
+                SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
+                paramPID.Value = EmployeeID;
+                SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+                paramuser.Value = lblusername.Text;
+                SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+                paramdatetimeLOG.Value = lbldatetime.Text;
+                SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+                parampc.Value = lblPC.Text;
+
+
+                // Check if subscription number already exists
+                SQLCONN.OpenConection();
+                SqlDataReader dr = SQLCONN.DataReader("select Accountno from ElectrcityBills  where  AccountNo = @C1 ", paramccount);
+                dr.Read();
+
+                if (!dr.HasRows)
                 {
+                    MessageBox.Show("This 'AccountNo' " + txtaccountno.Text + " Not Exists.!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    dr.Dispose();
+                    dr.Close();
+                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
 
-                    SQLCONN.ExecuteQueries("delete  ElectrcityBills where AccountNo=@C1", paramccount);
+                        SQLCONN.ExecuteQueries("delete  ElectrcityBills where AccountNo=@C1", paramccount);
 
-                    SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (logvalue, LogValueID, Oldvalue, newvalue, logdatetime, PCNAME, UserId, type) VALUES ('ElectrcityBills', @C1, '#', '#', @datetime, @pc, @user, 'Delete')", paramccount, paramdatetimeLOG, parampc, paramuser);
+                        SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (logvalue, LogValueID, Oldvalue, newvalue, logdatetime, PCNAME, UserId, type) VALUES ('ElectrcityBills', @C1, '#', '#', @datetime, @pc, @user, 'Delete')", paramccount, paramdatetimeLOG, parampc, paramuser);
 
-                    MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT [AccountNo]
+                        dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT [AccountNo]
       ,[MeterSN]
       ,[MeterLocationID]
       ,[Ownerid]
@@ -794,105 +864,147 @@ WHERE
       ,[Paidby]
      ,[ShortDesc]
       FROM [DelmonGroupDB].[dbo].[ElectrcityBills] WHERE AccountNo = @C1 ", paramccount);
-                   
 
-                    SQLCONN.CloseConnection();
-                    ClearItems();
-                    cmbbillenduserelec.Text = "Select";
+
+                        SQLCONN.CloseConnection();
+                        ClearItems();
+                        cmbbillenduserelec.Text = "Select";
+                    }
                 }
             }
         }
 
-
         private void button4_Click(object sender, EventArgs e)
         {
-            SqlParameter paramaccount = new SqlParameter("@C1", SqlDbType.NVarChar);
-            paramaccount.Value = txtaccount.Text;
-
-            SqlParameter paramserviceNo = new SqlParameter("@C2", SqlDbType.NVarChar);
-            paramserviceNo.Value = txtserviceNo.Text;
-
-            SqlParameter paramenduser = new SqlParameter("@C3", SqlDbType.NVarChar);
-
-            SqlParameter paramRegisterType = new SqlParameter("@C4", SqlDbType.NVarChar);
-            paramRegisterType.Value = cmbRegisterType.SelectedItem;
-
-            SqlParameter paramRegisterUnder = new SqlParameter("@C5", SqlDbType.NVarChar);
-            paramRegisterUnder.Value = cmbRegisterUnder.SelectedValue;
-
-            SqlParameter paramPackage = new SqlParameter("@C6", SqlDbType.NVarChar);
-            paramPackage.Value = cmbpackage.SelectedValue;
-
-            SqlParameter paramService = new SqlParameter("@C7", SqlDbType.NVarChar);
-            paramService.Value = cmbservice2.SelectedValue;
-
-            SqlParameter paramExpiredate = new SqlParameter("@C8", SqlDbType.Date);
-            paramExpiredate.Value = Expiredtp.Value;
-
-            SqlParameter paramNotes = new SqlParameter("@C9", SqlDbType.NVarChar);
-            paramNotes.Value = txtNotes.Text;
-
-            SqlParameter paramEnduserType = new SqlParameter("@C10", SqlDbType.NVarChar);
-            paramEnduserType.Value = cmbbillendusertypecomm.Text;
-
-            SqlParameter paramPaidBy = new SqlParameter("@C11", SqlDbType.NVarChar);
-            paramPaidBy.Value = cmbpaidbycomm.Text;
-
-            SqlParameter paramshortdesc = new SqlParameter("@C12", SqlDbType.NVarChar);
-            paramshortdesc.Value = txtshortdesccomm.Text;
-
-
-
-            SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
-            paramPID.Value = EmployeeID;
-
-            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
-            paramuser.Value = lblusername.Text;
-
-            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
-            paramdatetimeLOG.Value = lbldatetime.Text;
-
-            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
-            parampc.Value = lblPC.Text;
-
-
-            // Check EndUserType and assign the correct value for @paramEnduserID
-            if (cmbbillendusertypecomm.SelectedItem.ToString() == "Personal")
+            if (txtaccount.Text == "")
             {
-                paramenduser.Value = cmbbillendusercomm.SelectedValue;  // Assign value for Personal EndUser
+                MessageBox.Show("Please insert 'Account number' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if (cmbbillendusertypecomm.SelectedItem.ToString() == "Company")
+            else if (txtserviceNo.Text == "")
             {
-                paramenduser.Value = cmbbillenduserdevisionecomm.SelectedValue;  // Assign value for Company EndUser
+                MessageBox.Show("Please insert 'Service number' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbmeterlocation.SelectedValue == 0 || cmbmeterlocation.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Meter location' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (cmbRegisterType.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Register Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbRegisterUnder.SelectedValue == 0 || cmbRegisterUnder.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Register Under-Owner' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbpackage.SelectedValue == 0 || cmbpackage.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Package' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbservice2.SelectedValue == 0 || cmbservice2.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Services' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (cmbbillendusertypecomm.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Enduser Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (cmbpaidbycomm.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Paidby option' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-            SqlDataReader dr;
 
-            if (cmbpaidbycomm.Text == "Select" || (int)cmbservice2.SelectedValue == 0 || txtaccount.Text == "" || txtserviceNo.Text == "" || (int)cmbpackage.SelectedValue == 0)
-            {
-                MessageBox.Show("Please Fill the missing fields  ");
-                return;
-            }
             else
             {
-                SQLCONN.OpenConection();
-                dr = SQLCONN.DataReader("select  ServiceNo from CommunicationsBills where " +
-                    " ServiceNo =  @C2 ", paramserviceNo);
-                dr.Read();
 
-                if (dr.HasRows)
+
+                SqlParameter paramaccount = new SqlParameter("@C1", SqlDbType.NVarChar);
+                paramaccount.Value = txtaccount.Text;
+
+                SqlParameter paramserviceNo = new SqlParameter("@C2", SqlDbType.NVarChar);
+                paramserviceNo.Value = txtserviceNo.Text;
+
+                SqlParameter paramenduser = new SqlParameter("@C3", SqlDbType.NVarChar);
+
+                SqlParameter paramRegisterType = new SqlParameter("@C4", SqlDbType.NVarChar);
+                paramRegisterType.Value = cmbRegisterType.SelectedItem;
+
+                SqlParameter paramRegisterUnder = new SqlParameter("@C5", SqlDbType.NVarChar);
+                paramRegisterUnder.Value = cmbRegisterUnder.SelectedValue;
+
+                SqlParameter paramPackage = new SqlParameter("@C6", SqlDbType.NVarChar);
+                paramPackage.Value = cmbpackage.SelectedValue;
+
+                SqlParameter paramService = new SqlParameter("@C7", SqlDbType.NVarChar);
+                paramService.Value = cmbservice2.SelectedValue;
+
+                SqlParameter paramExpiredate = new SqlParameter("@C8", SqlDbType.Date);
+                paramExpiredate.Value = Expiredtp.Value;
+
+                SqlParameter paramNotes = new SqlParameter("@C9", SqlDbType.NVarChar);
+                paramNotes.Value = txtNotes.Text;
+
+                SqlParameter paramEnduserType = new SqlParameter("@C10", SqlDbType.NVarChar);
+                paramEnduserType.Value = cmbbillendusertypecomm.Text;
+
+                SqlParameter paramPaidBy = new SqlParameter("@C11", SqlDbType.NVarChar);
+                paramPaidBy.Value = cmbpaidbycomm.Text;
+
+                SqlParameter paramshortdesc = new SqlParameter("@C12", SqlDbType.NVarChar);
+                paramshortdesc.Value = txtshortdesccomm.Text;
+
+
+
+                SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
+                paramPID.Value = EmployeeID;
+
+                SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+                paramuser.Value = lblusername.Text;
+
+                SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+                paramdatetimeLOG.Value = lbldatetime.Text;
+
+                SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+                parampc.Value = lblPC.Text;
+
+
+                // Check EndUserType and assign the correct value for @paramEnduserID
+                if (cmbbillendusertypecomm.SelectedItem.ToString() == "Personal")
                 {
-                    MessageBox.Show("This 'ServiceNo'  Already Exists.!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    paramenduser.Value = cmbbillendusercomm.SelectedValue;  // Assign value for Personal EndUser
+                }
+                else if (cmbbillendusertypecomm.SelectedItem.ToString() == "Company")
+                {
+                    paramenduser.Value = cmbbillenduserdevisionecomm.SelectedValue;  // Assign value for Company EndUser
+                }
 
+                SqlDataReader dr;
+
+                if (cmbpaidbycomm.Text == "Select" || (int)cmbservice2.SelectedValue == 0 || txtaccount.Text == "" || txtserviceNo.Text == "" || (int)cmbpackage.SelectedValue == 0)
+                {
+                    MessageBox.Show("Please Fill the missing fields  ");
+                    return;
                 }
                 else
                 {
-                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-                    {
-                        dr.Dispose();
-                        dr.Close();
+                    SQLCONN.OpenConection();
+                    dr = SQLCONN.DataReader("select  ServiceNo from CommunicationsBills where " +
+                        " ServiceNo =  @C2 ", paramserviceNo);
+                    dr.Read();
 
-                        SQLCONN.ExecuteQueries(@"INSERT INTO [dbo].[CommunicationsBills]
+                    if (dr.HasRows)
+                    {
+                        MessageBox.Show("This 'ServiceNo'  Already Exists.!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
+                    else
+                    {
+                        if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                        {
+                            dr.Dispose();
+                            dr.Close();
+
+                            SQLCONN.ExecuteQueries(@"INSERT INTO [dbo].[CommunicationsBills]
            ([AccountNo]
         ,[ServiceNo]
         ,[EndUserID]
@@ -906,23 +1018,24 @@ WHERE
         ,[Paidby]
         ,[ShortDesc])
             VALUES
-           (@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8,@C9,@C10,@C11,@C12)", paramaccount, paramserviceNo, paramenduser, paramRegisterType, paramRegisterUnder, paramPackage, paramService, paramExpiredate, paramNotes, paramEnduserType, paramPaidBy,paramshortdesc);
+           (@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8,@C9,@C10,@C11,@C12)", paramaccount, paramserviceNo, paramenduser, paramRegisterType, paramRegisterUnder, paramPackage, paramService, paramExpiredate, paramNotes, paramEnduserType, paramPaidBy, paramshortdesc);
 
-                        SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('CommunicationsBills',@C2,'#','#',@datetime,@pc,@user,'Insert')", paramserviceNo, paramdatetimeLOG, parampc, paramuser);
+                            SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('CommunicationsBills',@C2,'#','#',@datetime,@pc,@user,'Insert')", paramserviceNo, paramdatetimeLOG, parampc, paramuser);
 
-                        MessageBox.Show("Record saved Successfully");
-                    }
+                            MessageBox.Show("Record saved Successfully");
+                        }
 
-                    dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT  *
+                        dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT  *
   FROM [DelmonGroupDB].[dbo].[CommunicationsBills]
   where  ServiceNo = @C2 ", paramserviceNo);
 
-                    txtaccount.Text = txtNotes.Text = txtserviceNo.Text = string.Empty;
-                    cmbservice2.Text = cmbpackage.Text /*cmbDepartment.Text*/ = cmbRegisterType.Text = cmbRegisterUnder.Text = "Select";
+                        txtaccount.Text = txtNotes.Text = txtserviceNo.Text = string.Empty;
+                        cmbservice2.Text = cmbpackage.Text /*cmbDepartment.Text*/ = cmbRegisterType.Text = cmbRegisterUnder.Text = "Select";
+                    }
                 }
+                button1.Visible = true;
+                SQLCONN.CloseConnection();
             }
-            button1.Visible = true;
-            SQLCONN.CloseConnection();
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -1182,79 +1295,118 @@ WHERE
 
         private void button2_Click(object sender, EventArgs e)
         {
-            SqlParameter paramaccount = new SqlParameter("@C1", SqlDbType.NVarChar);
-            paramaccount.Value = txtaccount.Text;
-
-            SqlParameter paramserviceNo = new SqlParameter("@C2", SqlDbType.NVarChar);
-            paramserviceNo.Value = txtserviceNo.Text;
-
-            SqlParameter paramenduser = new SqlParameter("@C3", SqlDbType.NVarChar);
-
-            SqlParameter paramRegisterType = new SqlParameter("@C4", SqlDbType.NVarChar);
-            paramRegisterType.Value = cmbRegisterType.SelectedItem;
-
-            SqlParameter paramRegisterUnder = new SqlParameter("@C5", SqlDbType.NVarChar);
-            paramRegisterUnder.Value = cmbRegisterUnder.SelectedValue;
-
-            SqlParameter paramPackage = new SqlParameter("@C6", SqlDbType.NVarChar);
-            paramPackage.Value = cmbpackage.SelectedValue;
-
-            SqlParameter paramService = new SqlParameter("@C7", SqlDbType.NVarChar);
-            paramService.Value = cmbservice2.SelectedValue;
-
-            SqlParameter paramExpiredate = new SqlParameter("@C8", SqlDbType.Date);
-            paramExpiredate.Value = Expiredtp.Value;
-
-            SqlParameter paramNotes = new SqlParameter("@C9", SqlDbType.NVarChar);
-            paramNotes.Value = txtNotes.Text;
-
-            SqlParameter paramEnduserType = new SqlParameter("@C10", SqlDbType.NVarChar);
-            paramEnduserType.Value = cmbbillendusertypecomm.Text;
-
-            SqlParameter paramPaidBy = new SqlParameter("@C11", SqlDbType.NVarChar);
-            paramPaidBy.Value = cmbpaidbycomm.Text;
-            SqlParameter paramshortdesc = new SqlParameter("@C12", SqlDbType.NVarChar);
-            paramshortdesc.Value = txtshortdesccomm.Text;
-
-
-
-            SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
-            paramPID.Value = EmployeeID;
-
-            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
-            paramuser.Value = lblusername.Text;
-
-            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
-            paramdatetimeLOG.Value = lbldatetime.Text;
-
-            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
-            parampc.Value = lblPC.Text;
-
-
-            // Check EndUserType and assign the correct value for @paramEnduserID
-            if (cmbbillendusertypecomm.SelectedItem.ToString() == "Personal")
+            if (txtaccount.Text == "")
             {
-                paramenduser.Value = cmbbillendusercomm.SelectedValue;  // Assign value for Personal EndUser
+                MessageBox.Show("Please insert 'Account number' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if (cmbbillendusertypecomm.SelectedItem.ToString() == "Company")
+            else if (txtserviceNo.Text == "")
             {
-                paramenduser.Value = cmbbillenduserdevisionecomm.SelectedValue;  // Assign value for Company EndUser
+                MessageBox.Show("Please insert 'Service number' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
-
-
-
-            if (cmbpaidbycomm.Text == "Select" || (int)cmbservice2.SelectedValue == 0 || txtaccount.Text == "" || txtserviceNo.Text == "" || (int)cmbpackage.SelectedValue == 0)
+            else if ((int)cmbmeterlocation.SelectedValue == 0 || cmbmeterlocation.Text == "Select")
             {
-                MessageBox.Show("Please Fill the missing fields  ");
+                MessageBox.Show("Please Select 'Meter location' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (cmbRegisterType.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Register Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbRegisterUnder.SelectedValue == 0 || cmbRegisterUnder.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Register Under-Owner' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbpackage.SelectedValue == 0 || cmbpackage.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Package' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbservice2.SelectedValue == 0 || cmbservice2.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Services' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (cmbbillendusertypecomm.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Enduser Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (cmbpaidbycomm.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Paidby option' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                SQLCONN.OpenConection();
 
-                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                SqlParameter paramaccount = new SqlParameter("@C1", SqlDbType.NVarChar);
+                paramaccount.Value = txtaccount.Text;
+
+                SqlParameter paramserviceNo = new SqlParameter("@C2", SqlDbType.NVarChar);
+                paramserviceNo.Value = txtserviceNo.Text;
+
+                SqlParameter paramenduser = new SqlParameter("@C3", SqlDbType.NVarChar);
+
+                SqlParameter paramRegisterType = new SqlParameter("@C4", SqlDbType.NVarChar);
+                paramRegisterType.Value = cmbRegisterType.SelectedItem;
+
+                SqlParameter paramRegisterUnder = new SqlParameter("@C5", SqlDbType.NVarChar);
+                paramRegisterUnder.Value = cmbRegisterUnder.SelectedValue;
+
+                SqlParameter paramPackage = new SqlParameter("@C6", SqlDbType.NVarChar);
+                paramPackage.Value = cmbpackage.SelectedValue;
+
+                SqlParameter paramService = new SqlParameter("@C7", SqlDbType.NVarChar);
+                paramService.Value = cmbservice2.SelectedValue;
+
+                SqlParameter paramExpiredate = new SqlParameter("@C8", SqlDbType.Date);
+                paramExpiredate.Value = Expiredtp.Value;
+
+                SqlParameter paramNotes = new SqlParameter("@C9", SqlDbType.NVarChar);
+                paramNotes.Value = txtNotes.Text;
+
+                SqlParameter paramEnduserType = new SqlParameter("@C10", SqlDbType.NVarChar);
+                paramEnduserType.Value = cmbbillendusertypecomm.Text;
+
+                SqlParameter paramPaidBy = new SqlParameter("@C11", SqlDbType.NVarChar);
+                paramPaidBy.Value = cmbpaidbycomm.Text;
+                SqlParameter paramshortdesc = new SqlParameter("@C12", SqlDbType.NVarChar);
+                paramshortdesc.Value = txtshortdesccomm.Text;
+
+
+
+                SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
+                paramPID.Value = EmployeeID;
+
+                SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+                paramuser.Value = lblusername.Text;
+
+                SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+                paramdatetimeLOG.Value = lbldatetime.Text;
+
+                SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+                parampc.Value = lblPC.Text;
+
+
+                // Check EndUserType and assign the correct value for @paramEnduserID
+                if (cmbbillendusertypecomm.SelectedItem.ToString() == "Personal")
                 {
-                    SQLCONN.ExecuteQueries(@"UPDATE [dbo].[CommunicationsBills]
+                    paramenduser.Value = cmbbillendusercomm.SelectedValue;  // Assign value for Personal EndUser
+                }
+                else if (cmbbillendusertypecomm.SelectedItem.ToString() == "Company")
+                {
+                    paramenduser.Value = cmbbillenduserdevisionecomm.SelectedValue;  // Assign value for Company EndUser
+                }
+
+
+
+
+                if (cmbpaidbycomm.Text == "Select" || (int)cmbservice2.SelectedValue == 0 || txtaccount.Text == "" || txtserviceNo.Text == "" || (int)cmbpackage.SelectedValue == 0)
+                {
+                    MessageBox.Show("Please Fill the missing fields  ");
+                }
+                else
+                {
+                    SQLCONN.OpenConection();
+
+                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        SQLCONN.ExecuteQueries(@"UPDATE [dbo].[CommunicationsBills]
 SET [AccountNo] = @C1,
 [EnduserType] = @C10,
 [EndUserID] = @C3,
@@ -1266,139 +1418,167 @@ SET [AccountNo] = @C1,
 [Notes] = @C9,
 [Paidby]= @C11,
 [ShortDesc]=@C12
-WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRegisterUnder, paramPackage, paramService, paramExpiredate, paramNotes, paramserviceNo, paramEnduserType, paramPaidBy,paramshortdesc);
+WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRegisterUnder, paramPackage, paramService, paramExpiredate, paramNotes, paramserviceNo, paramEnduserType, paramPaidBy, paramshortdesc);
 
-                    SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('CommunicationsBills',@C2,'#','#',@datetime,@pc,@user,'Update')", paramserviceNo, paramdatetimeLOG, parampc, paramuser);
+                        SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('CommunicationsBills',@C2,'#','#',@datetime,@pc,@user,'Update')", paramserviceNo, paramdatetimeLOG, parampc, paramuser);
 
-                    MessageBox.Show("Record updated Successfully");
-                }
-
-                dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT  *
-  FROM [DelmonGroupDB].[dbo].[CommunicationsBills]
-  where  ServiceNo = @C2 ", paramserviceNo);
-            }
-            button1.Visible = true;
-            SQLCONN.CloseConnection();
-        }
-        private void button3_Click(object sender, EventArgs e)
-        {
-            SqlParameter paramserviceNo = new SqlParameter("@C2", SqlDbType.NVarChar);
-            paramserviceNo.Value = txtserviceNo.Text;
-
-            SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
-            paramPID.Value = EmployeeID;
-
-            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
-            paramuser.Value = lblusername.Text;
-
-            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
-            paramdatetimeLOG.Value = lbldatetime.Text;
-
-            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
-            parampc.Value = lblPC.Text;
-
-            if (txtserviceNo.Text == string.Empty)
-            {
-                MessageBox.Show("Please select Record first! " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-            }
-            else
-            {
-                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-                {
-                    SQLCONN.OpenConection();
-                    SQLCONN.ExecuteQueries("delete  CommunicationsBills where ServiceNo=@C2", paramserviceNo);
-
-                    SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (logvalue,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('CommunicationsBills',@C2,'#','#',@datetime,@pc,@user,'Delete')", paramserviceNo, paramdatetimeLOG, parampc, paramuser);
-
-                    MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Record updated Successfully");
+                    }
 
                     dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT  *
   FROM [DelmonGroupDB].[dbo].[CommunicationsBills]
   where  ServiceNo = @C2 ", paramserviceNo);
+                }
+                button1.Visible = true;
+                SQLCONN.CloseConnection();
+            }
+        }
+        private void button3_Click(object sender, EventArgs e)
+        {
 
-                    txtaccount.Text = txtserviceNo.Text = txtNotes.Text = string.Empty;
-                    cmbservice2.Text = cmbRegisterUnder.Text = cmbpackage.Text = "Select";
+            if (txtserviceNo.Text == "")
+            {
+                MessageBox.Show("Please insert 'Service number' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
 
-                    // Clear the text boxes
-                    txtaccount.Text = string.Empty;
-                    txtserviceNo.Text = string.Empty;
-                    txtNotes.Text = string.Empty;
 
-                    // Reset the combo boxes
-                    cmbRegisterType.Text = "Select";
-                    cmbRegisterUnder.Text = "Select";
-                    cmbpackage.SelectedIndex = -1;
-                    cmbservice2.SelectedIndex = -1;
-                    cmbpackage.Text = cmbservice2.Text = cmbbillendusercomm.Text = cmbbillendusertypecomm.Text = cmbbillenduserdevisionecomm.Text = cmbpaidbycomm.Text = "Select";
 
-                    cmbReportType.Text = "Select";
-                    cmbpackage.Text = "Select";
 
-                    // Reset the date
-                    Expiredtp.Value = DateTime.Now;
+                SqlParameter paramserviceNo = new SqlParameter("@C2", SqlDbType.NVarChar);
+                paramserviceNo.Value = txtserviceNo.Text;
 
-                    SQLCONN.CloseConnection();
+                SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
+                paramPID.Value = EmployeeID;
+
+                SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+                paramuser.Value = lblusername.Text;
+
+                SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+                paramdatetimeLOG.Value = lbldatetime.Text;
+
+                SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+                parampc.Value = lblPC.Text;
+
+                if (txtserviceNo.Text == string.Empty)
+                {
+                    MessageBox.Show("Please select Record first! " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
+                else
+                {
+                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        SQLCONN.OpenConection();
+                        SQLCONN.ExecuteQueries("delete  CommunicationsBills where ServiceNo=@C2", paramserviceNo);
+
+                        SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (logvalue,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('CommunicationsBills',@C2,'#','#',@datetime,@pc,@user,'Delete')", paramserviceNo, paramdatetimeLOG, parampc, paramuser);
+
+                        MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT  *
+  FROM [DelmonGroupDB].[dbo].[CommunicationsBills]
+  where  ServiceNo = @C2 ", paramserviceNo);
+
+                        txtaccount.Text = txtserviceNo.Text = txtNotes.Text = string.Empty;
+                        cmbservice2.Text = cmbRegisterUnder.Text = cmbpackage.Text = "Select";
+
+                        // Clear the text boxes
+                        txtaccount.Text = string.Empty;
+                        txtserviceNo.Text = string.Empty;
+                        txtNotes.Text = string.Empty;
+
+                        // Reset the combo boxes
+                        cmbRegisterType.Text = "Select";
+                        cmbRegisterUnder.Text = "Select";
+                        cmbpackage.SelectedIndex = -1;
+                        cmbservice2.SelectedIndex = -1;
+                        cmbpackage.Text = cmbservice2.Text = cmbbillendusercomm.Text = cmbbillendusertypecomm.Text = cmbbillenduserdevisionecomm.Text = cmbpaidbycomm.Text = "Select";
+
+                        cmbReportType.Text = "Select";
+                        cmbpackage.Text = "Select";
+
+                        // Reset the date
+                        Expiredtp.Value = DateTime.Now;
+
+                        SQLCONN.CloseConnection();
+                    }
                 }
             }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            SqlParameter paramaccount = new SqlParameter("@C1", SqlDbType.NVarChar);
-            paramaccount.Value = txtaccount3.Text;
-
-            SqlParameter paramBillType = new SqlParameter("@C2", SqlDbType.NVarChar);
-            paramBillType.Value = cmbBillType.SelectedItem;
-
-            SqlParameter paramissuedate = new SqlParameter("@C3", SqlDbType.Date);
-            paramissuedate.Value = dtpissue.Value;
-
-            SqlParameter paramissuedate2 = new SqlParameter("@C33", SqlDbType.Date);
-            paramissuedate2.Value = oldissueddate;
-
-            SqlParameter paramdisconnectdate = new SqlParameter("@C4", SqlDbType.Date);
-            paramdisconnectdate.Value = dtpdisconnect.Value;
-
-            SqlParameter paramBillAmount = new SqlParameter("@C5", SqlDbType.NVarChar);
-            paramBillAmount.Value = float.Parse(txtBillAmount.Text);
-
-            SqlParameter paramPaymentstaus = new SqlParameter("@C6", SqlDbType.NVarChar);
-            paramPaymentstaus.Value = 0;
-
-
-            SqlParameter paramPSD = new SqlParameter("@C7", SqlDbType.Date);
-            paramPSD.Value = dtppsd.Value;
-
-            SqlParameter paramPND = new SqlParameter("@C8", SqlDbType.Date);
-            paramPND.Value = dtppnd.Value;
-
-
-
-            SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
-            paramPID.Value = EmployeeID;
-
-            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
-            paramuser.Value = lblusername.Text;
-
-            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
-            paramdatetimeLOG.Value = lbldatetime.Text;
-
-            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
-            parampc.Value = lblPC.Text;
-
-            SQLCONN.OpenConection();
-
-            if (txtaccount3.Text == "" || txtBillAmount.Text == "")
+            if (txtaccount3.Text == "")
             {
-                MessageBox.Show("Please Fill the missing fields  ");
+                MessageBox.Show("Please insert 'Account number' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (cmbBillType.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Bill Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            else if (txtBillAmount.Text == "")
+            {
+                MessageBox.Show("Please insert 'Amount' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
+                SqlParameter paramaccount = new SqlParameter("@C1", SqlDbType.NVarChar);
+                paramaccount.Value = txtaccount3.Text;
 
-                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                SqlParameter paramBillType = new SqlParameter("@C2", SqlDbType.NVarChar);
+                paramBillType.Value = cmbBillType.SelectedItem;
+
+                SqlParameter paramissuedate = new SqlParameter("@C3", SqlDbType.Date);
+                paramissuedate.Value = dtpissue.Value;
+
+                SqlParameter paramissuedate2 = new SqlParameter("@C33", SqlDbType.Date);
+                paramissuedate2.Value = oldissueddate;
+
+                SqlParameter paramdisconnectdate = new SqlParameter("@C4", SqlDbType.Date);
+                paramdisconnectdate.Value = dtpdisconnect.Value;
+
+                SqlParameter paramBillAmount = new SqlParameter("@C5", SqlDbType.NVarChar);
+                paramBillAmount.Value = float.Parse(txtBillAmount.Text);
+
+                SqlParameter paramPaymentstaus = new SqlParameter("@C6", SqlDbType.NVarChar);
+                paramPaymentstaus.Value = 0;
+
+
+                SqlParameter paramPSD = new SqlParameter("@C7", SqlDbType.Date);
+                paramPSD.Value = dtppsd.Value;
+
+                SqlParameter paramPND = new SqlParameter("@C8", SqlDbType.Date);
+                paramPND.Value = dtppnd.Value;
+
+
+
+                SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
+                paramPID.Value = EmployeeID;
+
+                SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+                paramuser.Value = lblusername.Text;
+
+                SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+                paramdatetimeLOG.Value = lbldatetime.Text;
+
+                SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+                parampc.Value = lblPC.Text;
+
+                SQLCONN.OpenConection();
+
+                if (txtaccount3.Text == "" || txtBillAmount.Text == "")
                 {
-                    SQLCONN.ExecuteQueries(@"update  [dbo].[BillsPaymentStatus] set
+                    MessageBox.Show("Please Fill the missing fields  ");
+                }
+                else
+                {
+
+                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        SQLCONN.ExecuteQueries(@"update  [dbo].[BillsPaymentStatus] set
        [AccountNo] = @C1
      ,[BillType] = @C2
      ,[IssuedDate] = @C3
@@ -1409,14 +1589,14 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
       ,[Periodenddate] = @C8
 
 
-      where AccountNo = @C1 and IssuedDate=@C33 ", paramaccount, paramissuedate2, paramBillType, paramissuedate, paramdisconnectdate, paramBillAmount, paramPaymentstaus,paramPSD,paramPND);
+      where AccountNo = @C1 and IssuedDate=@C33 ", paramaccount, paramissuedate2, paramBillType, paramissuedate, paramdisconnectdate, paramBillAmount, paramPaymentstaus, paramPSD, paramPND);
 
-                    SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (logvalue,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('BillsPaymentStatus',@C1,'#','#',@datetime,@pc,@user,'Update')", paramaccount, paramdatetimeLOG, parampc, paramuser);
+                        SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (logvalue,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('BillsPaymentStatus',@C1,'#','#',@datetime,@pc,@user,'Update')", paramaccount, paramdatetimeLOG, parampc, paramuser);
 
-                    MessageBox.Show("Record Updated Successfully");
-                }
+                        MessageBox.Show("Record Updated Successfully");
+                    }
 
-                dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"select  [AccountNo]
+                    dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"select  [AccountNo]
       ,[BillType]
       ,[IssuedDate]
       ,[DisconnectDate]
@@ -1425,91 +1605,110 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
  ,[Periodstartdate] 
       ,[Periodenddate]
   FROM [DelmonGroupDB].[dbo].[BillsPaymentStatus] where " +
-                    " IssuedDate = @C3 and AccountNo = @C1  ", paramissuedate, paramaccount);
-            }
+                        " IssuedDate = @C3 and AccountNo = @C1  ", paramissuedate, paramaccount);
+                }
 
-            SQLCONN.CloseConnection();
+                SQLCONN.CloseConnection();
+            }
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            SqlParameter paramaccount = new SqlParameter("@C1", SqlDbType.NVarChar);
-            paramaccount.Value = txtaccount3.Text;
-
-            SqlParameter paramBillType = new SqlParameter("@C2", SqlDbType.NVarChar);
-            paramBillType.Value = cmbBillType.SelectedItem;
-
-            SqlParameter paramissuedate = new SqlParameter("@C3", SqlDbType.Date);
-            paramissuedate.Value = dtpissue.Value;
-
-            SqlParameter paramdisconnectdate = new SqlParameter("@C4", SqlDbType.Date);
-            paramdisconnectdate.Value = dtpdisconnect.Value;
-
-            SqlParameter paramBillAmount = new SqlParameter("@C5", SqlDbType.NVarChar);
-            paramBillAmount.Value = float.Parse(txtBillAmount.Text);
-
-            SqlParameter paramPaymentstaus = new SqlParameter("@C6", SqlDbType.NVarChar);
-            paramPaymentstaus.Value = 0;
-
-            SqlParameter paramPSD = new SqlParameter("@C7", SqlDbType.Date);
-            paramPSD.Value = dtppsd.Value;
-
-            SqlParameter paramPND = new SqlParameter("@C8", SqlDbType.Date);
-            paramPND.Value = dtppnd.Value;
-
-
-            SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
-            paramPID.Value = EmployeeID;
-
-            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
-            paramuser.Value = lblusername.Text;
-
-            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
-            paramdatetimeLOG.Value = lbldatetime.Text;
-
-            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
-            parampc.Value = lblPC.Text;
-
-            SqlDataReader dr, dr2, dr3;
-
-            if (txtaccount3.Text == "" || txtBillAmount.Text == "" || cmbBillType.Text == "Select")
+            if (txtaccount3.Text == "")
             {
-                MessageBox.Show("Please Fill the missing fields  ");
+                MessageBox.Show("Please insert 'Account number' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            else if (cmbBillType.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Bill Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            else if (txtBillAmount.Text == "")
+            {
+                MessageBox.Show("Please insert 'Amount' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
             else
             {
-                SQLCONN.OpenConection();
 
 
-                dr = SQLCONN.DataReader(" select BPS.AccountNo from BillsPaymentStatus BPS, CommunicationsBills CB, ElectrcityBills EB " +
-                             " where  CB.AccountNo=@C1 or EB.AccountNo=@C1", paramaccount);
-                if (dr.HasRows)
+                SqlParameter paramaccount = new SqlParameter("@C1", SqlDbType.NVarChar);
+                paramaccount.Value = txtaccount3.Text;
+
+                SqlParameter paramBillType = new SqlParameter("@C2", SqlDbType.NVarChar);
+                paramBillType.Value = cmbBillType.SelectedItem;
+
+                SqlParameter paramissuedate = new SqlParameter("@C3", SqlDbType.Date);
+                paramissuedate.Value = dtpissue.Value;
+
+                SqlParameter paramdisconnectdate = new SqlParameter("@C4", SqlDbType.Date);
+                paramdisconnectdate.Value = dtpdisconnect.Value;
+
+                SqlParameter paramBillAmount = new SqlParameter("@C5", SqlDbType.NVarChar);
+                paramBillAmount.Value = float.Parse(txtBillAmount.Text);
+
+                SqlParameter paramPaymentstaus = new SqlParameter("@C6", SqlDbType.NVarChar);
+                paramPaymentstaus.Value = 0;
+
+                SqlParameter paramPSD = new SqlParameter("@C7", SqlDbType.Date);
+                paramPSD.Value = dtppsd.Value;
+
+                SqlParameter paramPND = new SqlParameter("@C8", SqlDbType.Date);
+                paramPND.Value = dtppnd.Value;
+
+
+                SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
+                paramPID.Value = EmployeeID;
+
+                SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+                paramuser.Value = lblusername.Text;
+
+                SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+                paramdatetimeLOG.Value = lbldatetime.Text;
+
+                SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+                parampc.Value = lblPC.Text;
+
+                SqlDataReader dr, dr2, dr3;
+
+                if (txtaccount3.Text == "" || txtBillAmount.Text == "" || cmbBillType.Text == "Select")
                 {
+                    MessageBox.Show("Please Fill the missing fields  ");
+                }
+                else
+                {
+                    SQLCONN.OpenConection();
 
-                    dr.Close();
-                    dr.Dispose();
 
-                    dr2 = SQLCONN.DataReader("select  IssuedDate,AccountNo from BillsPaymentStatus  where " +
-                        " IssuedDate=  @C3 and AccountNo=@C1  ", paramissuedate, paramaccount);
-                    dr2.Read();
-
-                    if (dr2.HasRows)
+                    dr = SQLCONN.DataReader(" select BPS.AccountNo from BillsPaymentStatus BPS, CommunicationsBills CB, ElectrcityBills EB " +
+                                 " where  CB.AccountNo=@C1 or EB.AccountNo=@C1", paramaccount);
+                    if (dr.HasRows)
                     {
-                        MessageBox.Show("This 'Bill'  Already Exists.!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                    else
-                    {
-                        dr2.Close();
-                        dr2.Dispose();
-                        if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+
+                        dr.Close();
+                        dr.Dispose();
+
+                        dr2 = SQLCONN.DataReader("select  IssuedDate,AccountNo from BillsPaymentStatus  where " +
+                            " IssuedDate=  @C3 and AccountNo=@C1  ", paramissuedate, paramaccount);
+                        dr2.Read();
+
+                        if (dr2.HasRows)
                         {
-                            dr.Dispose();
-                            dr.Close();
-                           
-                            
-                            SQLCONN.ExecuteQueries("UPDATE BillsPaymentStatus SET PaymentStatus = 1 WHERE AccountNo = @C1 AND PaymentStatus = 0", paramaccount);
+                            MessageBox.Show("This 'Bill'  Already Exists.!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                        else
+                        {
+                            dr2.Close();
+                            dr2.Dispose();
+                            if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                            {
+                                dr.Dispose();
+                                dr.Close();
 
-                            SQLCONN.ExecuteQueries(@"INSERT INTO [dbo].[BillsPaymentStatus]
+
+                                SQLCONN.ExecuteQueries("UPDATE BillsPaymentStatus SET PaymentStatus = 1 WHERE AccountNo = @C1 AND PaymentStatus = 0", paramaccount);
+
+                                SQLCONN.ExecuteQueries(@"INSERT INTO [dbo].[BillsPaymentStatus]
        ([AccountNo]
      ,[BillType]
      ,[IssuedDate]
@@ -1522,16 +1721,16 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
 )
 
      VALUES
-          (@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8)", paramaccount, paramBillType, paramissuedate, paramdisconnectdate, paramBillAmount, paramPaymentstaus,paramPSD,paramPND);
+          (@C1,@C2,@C3,@C4,@C5,@C6,@C7,@C8)", paramaccount, paramBillType, paramissuedate, paramdisconnectdate, paramBillAmount, paramPaymentstaus, paramPSD, paramPND);
 
-                            SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('BillsPaymentStatus',@C1,'#','#',@datetime,@pc,@user,'Insert')", paramaccount, paramdatetimeLOG, parampc, paramuser);
+                                SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('BillsPaymentStatus',@C1,'#','#',@datetime,@pc,@user,'Insert')", paramaccount, paramdatetimeLOG, parampc, paramuser);
 
-                            MessageBox.Show("Record saved Successfully");
+                                MessageBox.Show("Record saved Successfully");
 
-                            ClearItems3();
-                        }
+                                ClearItems3();
+                            }
 
-                        dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"select  [AccountNo]
+                            dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"select  [AccountNo]
       ,[BillType]
       ,[IssuedDate]
       ,[DisconnectDate]
@@ -1540,21 +1739,22 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
       ,[Periodstartdate] 
       ,[Periodenddate]
       from BillsPaymentStatus  where " +
-                            " IssuedDate=  @C3 and AccountNo=@C1  ", paramissuedate, paramaccount);
+                                " IssuedDate=  @C3 and AccountNo=@C1  ", paramissuedate, paramaccount);
 
-                        button5.Visible = true;
-                        SQLCONN.CloseConnection();
+                            button5.Visible = true;
+                            SQLCONN.CloseConnection();
+                        }
                     }
-                }
-                else
-                {
-                    dr.Close();
-                    dr.Dispose();
-                    MessageBox.Show("No records found for AccountNo: " + txtaccount3.Text, "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    else
+                    {
+                        dr.Close();
+                        dr.Dispose();
+                        MessageBox.Show("No records found for AccountNo: " + txtaccount3.Text, "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
 
 
 
+                    }
                 }
             }
         }
@@ -1663,49 +1863,56 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
 
         private void button7_Click(object sender, EventArgs e)
         {
-            SqlParameter paramaccount = new SqlParameter("@C1", SqlDbType.NVarChar);
-            paramaccount.Value = txtaccount3.Text;
-
-            SqlParameter paramissuedate = new SqlParameter("@C2", SqlDbType.Date);
-            paramissuedate.Value = dtpissue.Value;
-
-            SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
-            paramPID.Value = EmployeeID;
-
-            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
-            paramuser.Value = lblusername.Text;
-
-            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
-            paramdatetimeLOG.Value = lbldatetime.Text;
-
-            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
-            parampc.Value = lblPC.Text;
-
-            if (txtaccount3.Text == string.Empty)
+            if (txtaccount3.Text == "")
             {
-                MessageBox.Show("Please select Record first! " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                MessageBox.Show("Please insert 'Account number' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                SqlParameter paramaccount = new SqlParameter("@C1", SqlDbType.NVarChar);
+                paramaccount.Value = txtaccount3.Text;
+
+                SqlParameter paramissuedate = new SqlParameter("@C2", SqlDbType.Date);
+                paramissuedate.Value = dtpissue.Value;
+
+                SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
+                paramPID.Value = EmployeeID;
+
+                SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+                paramuser.Value = lblusername.Text;
+
+                SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+                paramdatetimeLOG.Value = lbldatetime.Text;
+
+                SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+                parampc.Value = lblPC.Text;
+
+                if (txtaccount3.Text == string.Empty)
                 {
-                    SQLCONN.OpenConection();
-                    SQLCONN.ExecuteQueries("delete  BillsPaymentStatus where AccountNo=@C1 and IssuedDate=@C2 ", paramaccount, paramissuedate);
+                    MessageBox.Show("Please select Record first! " + "", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                    SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (logvalue,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('BillsPaymentStatus',@C1,'#','#',@datetime,@pc,@user,'Delete')", paramaccount, paramdatetimeLOG, parampc, paramuser);
+                }
+                else
+                {
+                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        SQLCONN.OpenConection();
+                        SQLCONN.ExecuteQueries("delete  BillsPaymentStatus where AccountNo=@C1 and IssuedDate=@C2 ", paramaccount, paramissuedate);
 
-                    MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (logvalue,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('BillsPaymentStatus',@C1,'#','#',@datetime,@pc,@user,'Delete')", paramaccount, paramdatetimeLOG, parampc, paramuser);
 
-                    dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"select * from BillsPaymentStatus  where " +
-                        " IssuedDate=  @C2 and AccountNo=@C1  ", paramissuedate, paramaccount);
+                        MessageBox.Show("Operation has been done successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    txtaccount.Text = txtserviceNo.Text = txtNotes.Text = string.Empty;
-                    cmbservice2.Text = cmbpackage.Text = "Select";
-                    Expiredtp.Value = dtppsd.Value=dtppnd.Value= dtpissue.Value =dtpdisconnect.Value = DateTime.Now;
+                        dataGridView3.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"select * from BillsPaymentStatus  where " +
+                            " IssuedDate=  @C2 and AccountNo=@C1  ", paramissuedate, paramaccount);
 
-                    SQLCONN.CloseConnection();
-                    ClearItems3();
+                        txtaccount.Text = txtserviceNo.Text = txtNotes.Text = string.Empty;
+                        cmbservice2.Text = cmbpackage.Text = "Select";
+                        Expiredtp.Value = dtppsd.Value = dtppnd.Value = dtpissue.Value = dtpdisconnect.Value = DateTime.Now;
+
+                        SQLCONN.CloseConnection();
+                        ClearItems3();
+                    }
                 }
             }
         }
@@ -1757,59 +1964,90 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
 
         private void button12_Click(object sender, EventArgs e)
         {
-            SqlParameter paramPackageName = new SqlParameter("@C1", SqlDbType.NVarChar);
-            paramPackageName.Value = txtpName.Text;
-            SqlParameter paramMonthlycharge = new SqlParameter("@C2", SqlDbType.NVarChar);
-            paramMonthlycharge.Value = txtMonthCharge.Text;
-            SqlParameter paramConnectionType = new SqlParameter("@C3", SqlDbType.NVarChar);
-            paramConnectionType.Value = cmbConnectiontype.SelectedValue;
-            SqlParameter paramdISP = new SqlParameter("@C4", SqlDbType.NVarChar);
-            paramdISP.Value = cmbIsp.SelectedValue;
-            SqlParameter paramMedia = new SqlParameter("@C5", SqlDbType.NVarChar);
-            paramMedia.Value = cmbMedia.SelectedValue;
 
-
-            SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
-            paramPID.Value = EmployeeID;
-            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
-            paramuser.Value = lblusername.Text;
-            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
-            paramdatetimeLOG.Value = lbldatetime.Text;
-            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
-            parampc.Value = lblPC.Text;
-
-            SqlDataReader dr;
-
-            if ((int)cmbMedia.SelectedValue == 0 || (int)cmbMedia.SelectedValue == 0 || (int)cmbMedia.SelectedValue == 0 || txtpName.Text == "" || txtMonthCharge.Text == "")
+            if (txtpName.Text == "")
             {
-                MessageBox.Show("Please Fill the missing fields  ");
+                MessageBox.Show("Please insert 'Package Name' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else
+            else if (txtMonthCharge.Text == "")
             {
+                MessageBox.Show("Please insert 'Monthly charge' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbConnectiontype.SelectedValue == 0 || cmbConnectiontype.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Connection Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbIsp.SelectedValue == 0 || cmbIsp.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'ISP' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbMedia.SelectedValue == 0 || cmbMedia.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Media Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+         
 
-                SQLCONN.OpenConection();
-                dr = SQLCONN.DataReader("select  PackageName from Packages  where " +
-                    "  PackageName=@C1  ", paramPackageName);
-                dr.Read();
 
-
-                if (dr.HasRows)
-                {
-                    MessageBox.Show("This 'Package'  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                }
-                else
-                {
-                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            else
                     {
 
 
 
 
-                        dr.Dispose();
-                        dr.Close();
 
-                        SQLCONN.ExecuteQueries(@"INSERT INTO [dbo].[Packages]
+                        SqlParameter paramPackageName = new SqlParameter("@C1", SqlDbType.NVarChar);
+                        paramPackageName.Value = txtpName.Text;
+                        SqlParameter paramMonthlycharge = new SqlParameter("@C2", SqlDbType.NVarChar);
+                        paramMonthlycharge.Value = txtMonthCharge.Text;
+                        SqlParameter paramConnectionType = new SqlParameter("@C3", SqlDbType.NVarChar);
+                        paramConnectionType.Value = cmbConnectiontype.SelectedValue;
+                        SqlParameter paramdISP = new SqlParameter("@C4", SqlDbType.NVarChar);
+                        paramdISP.Value = cmbIsp.SelectedValue;
+                        SqlParameter paramMedia = new SqlParameter("@C5", SqlDbType.NVarChar);
+                        paramMedia.Value = cmbMedia.SelectedValue;
+
+
+                        SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
+                        paramPID.Value = EmployeeID;
+                        SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+                        paramuser.Value = lblusername.Text;
+                        SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+                        paramdatetimeLOG.Value = lbldatetime.Text;
+                        SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+                        parampc.Value = lblPC.Text;
+
+                        SqlDataReader dr;
+
+                        if ((int)cmbMedia.SelectedValue == 0 || (int)cmbMedia.SelectedValue == 0 || (int)cmbMedia.SelectedValue == 0 || txtpName.Text == "" || txtMonthCharge.Text == "")
+                        {
+                            MessageBox.Show("Please Fill the missing fields  ");
+                        }
+                        else
+                        {
+
+                            SQLCONN.OpenConection();
+                            dr = SQLCONN.DataReader("select  PackageName from Packages  where " +
+                                "  PackageName=@C1  ", paramPackageName);
+                            dr.Read();
+
+
+                            if (dr.HasRows)
+                            {
+                                MessageBox.Show("This 'Package'  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                            }
+                            else
+                            {
+                                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                                {
+
+
+
+
+                                    dr.Dispose();
+                                    dr.Close();
+
+                                    SQLCONN.ExecuteQueries(@"INSERT INTO [dbo].[Packages]
        ([PackageName]
       ,[MonthlyCharge]
       ,[ConnectionTypeID]
@@ -1818,30 +2056,31 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
      VALUES
           (@C1,@C2,@C3,@C4,@C5)", paramPackageName, paramMonthlycharge, paramConnectionType, paramdISP, paramMedia);
 
-                        SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('PackageBills',@C1 ,'#','#',@datetime,@pc,@user,'Insert')", paramPackageName, paramdatetimeLOG, parampc, paramuser);
+                                    SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('PackageBills',@C1 ,'#','#',@datetime,@pc,@user,'Insert')", paramPackageName, paramdatetimeLOG, parampc, paramuser);
 
-                        //   btnnew.Visible = true;
+                                    //   btnnew.Visible = true;
 
 
-                        MessageBox.Show("Record saved Successfully");
+                                    MessageBox.Show("Record saved Successfully");
+                                }
+
+                                //cmbusertype.Text = cmbemployee.Text = "Select";
+                                //usernametxt.Text = passwordtxt.Text = "";
+                                //isactivecheck.Checked = false;
+
+                                dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"select  * from Packages  where " +
+                                " PackageName=@C1 and ConnectionTypeID=@C3  ", paramPackageName, paramConnectionType);
+
+                                //    txtaccountno.Text = txtsubscription.Text = txtNotes.Text = txtmetersn.Text = string.Empty;
+                                //    cmbservice.Text = cmbemployee.Text = cmbpackage.Text = cmbDepartment.Text = cmbCompany.Text = cmbworkfield.Text = "Select";
+                                //}
+
+
+                            }
+                            button5.Visible = true;
+                            SQLCONN.CloseConnection();
+                        }
                     }
-
-                    //cmbusertype.Text = cmbemployee.Text = "Select";
-                    //usernametxt.Text = passwordtxt.Text = "";
-                    //isactivecheck.Checked = false;
-
-                    dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"select  * from Packages  where " +
-                    " PackageName=@C1 and ConnectionTypeID=@C3  ", paramPackageName, paramConnectionType);
-
-                    //    txtaccountno.Text = txtsubscription.Text = txtNotes.Text = txtmetersn.Text = string.Empty;
-                    //    cmbservice.Text = cmbemployee.Text = cmbpackage.Text = cmbDepartment.Text = cmbCompany.Text = cmbworkfield.Text = "Select";
-                    //}
-
-
-                }
-                button5.Visible = true;
-                SQLCONN.CloseConnection();
-            }
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -1941,77 +2180,104 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
 
         private void button10_Click(object sender, EventArgs e)
         {
-            SqlParameter paramPackageID = new SqlParameter("@C0", SqlDbType.NVarChar);
-            paramPackageID.Value = PackageID;
 
-
-
-            SqlParameter paramPackageName = new SqlParameter("@C1", SqlDbType.NVarChar);
-            paramPackageName.Value = txtpName.Text;
-            SqlParameter paramMonthlycharge = new SqlParameter("@C2", SqlDbType.NVarChar);
-            paramMonthlycharge.Value = txtMonthCharge.Text;
-            SqlParameter paramConnectionType = new SqlParameter("@C3", SqlDbType.NVarChar);
-            paramConnectionType.Value = cmbConnectiontype.SelectedValue;
-            SqlParameter paramdISP = new SqlParameter("@C4", SqlDbType.NVarChar);
-            paramdISP.Value = cmbIsp.SelectedValue;
-            SqlParameter paramMedia = new SqlParameter("@C5", SqlDbType.NVarChar);
-            paramMedia.Value = cmbMedia.SelectedValue;
-
-
-            SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
-            paramPID.Value = EmployeeID;
-            SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
-            paramuser.Value = lblusername.Text;
-            SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
-            paramdatetimeLOG.Value = lbldatetime.Text;
-            SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
-            parampc.Value = lblPC.Text;
-
-
-            SQLCONN.OpenConection();
-
-            if (PackageID <= 0)
+            if (txtpName.Text == "")
             {
-                MessageBox.Show("Please Select Record First ");
+                MessageBox.Show("Please insert 'Package Name' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            else if (txtMonthCharge.Text == "")
+            {
+                MessageBox.Show("Please insert 'Monthly charge' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbConnectiontype.SelectedValue == 0 || cmbConnectiontype.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Connection Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbIsp.SelectedValue == 0 || cmbIsp.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'ISP' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if ((int)cmbMedia.SelectedValue == 0 || cmbMedia.Text == "Select")
+            {
+                MessageBox.Show("Please Select 'Media Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+
+
             else
             {
+                SqlParameter paramPackageID = new SqlParameter("@C0", SqlDbType.NVarChar);
+                paramPackageID.Value = PackageID;
 
-                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+
+
+                SqlParameter paramPackageName = new SqlParameter("@C1", SqlDbType.NVarChar);
+                paramPackageName.Value = txtpName.Text;
+                SqlParameter paramMonthlycharge = new SqlParameter("@C2", SqlDbType.NVarChar);
+                paramMonthlycharge.Value = txtMonthCharge.Text;
+                SqlParameter paramConnectionType = new SqlParameter("@C3", SqlDbType.NVarChar);
+                paramConnectionType.Value = cmbConnectiontype.SelectedValue;
+                SqlParameter paramdISP = new SqlParameter("@C4", SqlDbType.NVarChar);
+                paramdISP.Value = cmbIsp.SelectedValue;
+                SqlParameter paramMedia = new SqlParameter("@C5", SqlDbType.NVarChar);
+                paramMedia.Value = cmbMedia.SelectedValue;
+
+
+                SqlParameter paramPID = new SqlParameter("@id", SqlDbType.NVarChar);
+                paramPID.Value = EmployeeID;
+                SqlParameter paramuser = new SqlParameter("@user", SqlDbType.NVarChar);
+                paramuser.Value = lblusername.Text;
+                SqlParameter paramdatetimeLOG = new SqlParameter("@datetime", SqlDbType.NVarChar);
+                paramdatetimeLOG.Value = lbldatetime.Text;
+                SqlParameter parampc = new SqlParameter("@pc", SqlDbType.NVarChar);
+                parampc.Value = lblPC.Text;
+
+
+                SQLCONN.OpenConection();
+
+                if (PackageID <= 0)
+                {
+                    MessageBox.Show("Please Select Record First ");
+                }
+                else
                 {
 
+                    if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
 
 
 
 
 
-                    SQLCONN.ExecuteQueries(@"update  [dbo].[Packages]  set
+
+                        SQLCONN.ExecuteQueries(@"update  [dbo].[Packages]  set
        [PackageName] =@C1
       ,[MonthlyCharge]=@C2
       ,[ConnectionTypeID]=@C3
       ,[ISPTypeID]=@C4
       ,[MediaTypeID]=@C5 where PackageID=@C0 ", paramPackageID, paramPackageName, paramMonthlycharge, paramConnectionType, paramdISP, paramMedia);
 
-                    //   SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('ElectrcityBills',@C2 ,'#','#',@datetime,@pc,@user,'Insert')", paramsubscrip, paramdatetimeLOG, parampc, paramuser);
+                        //   SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('ElectrcityBills',@C2 ,'#','#',@datetime,@pc,@user,'Insert')", paramsubscrip, paramdatetimeLOG, parampc, paramuser);
 
-                    //   btnnew.Visible = true;
+                        //   btnnew.Visible = true;
 
 
-                    MessageBox.Show("Record Updated Successfully");
+                        MessageBox.Show("Record Updated Successfully");
+                    }
+
+                    //cmbusertype.Text = cmbemployee.Text = "Select";
+                    //usernametxt.Text = passwordtxt.Text = "";
+                    //isactivecheck.Checked = false;
+
+                    dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"select  * from Packages  where " +
+                    " PackageName=@C1 and ConnectionTypeID=@C3  ", paramPackageName, paramConnectionType);
+
+
+
                 }
 
-                //cmbusertype.Text = cmbemployee.Text = "Select";
-                //usernametxt.Text = passwordtxt.Text = "";
-                //isactivecheck.Checked = false;
-
-                dataGridView4.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"select  * from Packages  where " +
-                " PackageName=@C1 and ConnectionTypeID=@C3  ", paramPackageName, paramConnectionType);
-
-
-
+                SQLCONN.CloseConnection();
             }
-
-            SQLCONN.CloseConnection();
         }
 
         private void Packages_Click(object sender, EventArgs e)
