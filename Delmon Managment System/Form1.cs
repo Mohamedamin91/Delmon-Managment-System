@@ -140,9 +140,9 @@ GROUP BY
                 ShowNotification();
             }
             sqlconn.CloseConnection();
-            panelTitleBar.BackColor = Color.Firebrick;
+            //panelTitleBar.BackColor = Color.Firebrick;
           //  panelTitleBar.BackColor = Color.FromArgb(235, 45, 46);
-            lblTitle.BackColor = Color.Firebrick;
+         //   lblTitle.BackColor = Color.Firebrick;
             lblusername.Text = CommonClass.LoginUserName;
             lblusertype.Text = CommonClass.Usertype;
             lblemail.Text = CommonClass.Email;
@@ -428,7 +428,7 @@ GROUP BY
             //successfully
             // MessageBox.Show("Bills have been added successfully to the log Report  !\n", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //  MessageBox.Show("There is no notifications !\n", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            MessageBox.Show("1-Validation (Error ) for all modules has been completed successfully   !\n", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("1-Printer custome report has been fixed successfully ", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //  OpenChildForm(new Forms.NotificationFrm(), sender);
 
         }
@@ -445,5 +445,7 @@ GROUP BY
             Application.Restart();
 
         }
+
+       
     }
 }

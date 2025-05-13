@@ -30,13 +30,33 @@ namespace Delmon_Managment_System.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AssetFrm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.labl = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cmbVersion = new System.Windows.Forms.ComboBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.dataGridView5 = new System.Windows.Forms.DataGridView();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.cmbdeviceatt = new System.Windows.Forms.ComboBox();
+            this.txtvalue = new System.Windows.Forms.TextBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label25 = new System.Windows.Forms.Label();
+            this.button7 = new System.Windows.Forms.Button();
+            this.employeeSearchText = new System.Windows.Forms.TextBox();
+            this.dgvEmp = new System.Windows.Forms.DataGridView();
+            this.label26 = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.btnDownload2 = new System.Windows.Forms.Button();
+            this.btnuplode2 = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
             this.PriceTXT = new System.Windows.Forms.TextBox();
             this.txtvisa = new System.Windows.Forms.Label();
@@ -46,7 +66,6 @@ namespace Delmon_Managment_System.Forms
             this.button6 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.seratchassettxt = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.addbtn = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.btnDownload = new System.Windows.Forms.Button();
@@ -75,22 +94,6 @@ namespace Delmon_Managment_System.Forms
             this.label5 = new System.Windows.Forms.Label();
             this.cmbDevice = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.labl = new System.Windows.Forms.TabPage();
-            this.btnDownload2 = new System.Windows.Forms.Button();
-            this.btnuplode2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.cmbVersion = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.dataGridView5 = new System.Windows.Forms.DataGridView();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.cmbdeviceatt = new System.Windows.Forms.ComboBox();
-            this.txtvalue = new System.Windows.Forms.TextBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label17 = new System.Windows.Forms.Label();
             this.btnreset = new System.Windows.Forms.Button();
@@ -118,23 +121,21 @@ namespace Delmon_Managment_System.Forms
             this.lbldatetime = new System.Windows.Forms.Label();
             this.lblPC = new System.Windows.Forms.Label();
             this.lblFullname = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picVisa)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl2.SuspendLayout();
             this.labl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEmp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picVisa)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -145,30 +146,232 @@ namespace Delmon_Managment_System.Forms
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1423, 901);
+            this.tabControl1.Size = new System.Drawing.Size(1557, 823);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
-            this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.tabControl2);
+            this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.tabPage1.Location = new System.Drawing.Point(4, 26);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage1.Size = new System.Drawing.Size(1415, 871);
+            this.tabPage1.Size = new System.Drawing.Size(1549, 793);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Asset";
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
+            // tabControl2
+            // 
+            this.tabControl2.Controls.Add(this.labl);
+            this.tabControl2.Controls.Add(this.tabPage3);
+            this.tabControl2.Enabled = false;
+            this.tabControl2.Location = new System.Drawing.Point(7, 510);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(1518, 354);
+            this.tabControl2.TabIndex = 146;
+            this.tabControl2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl2_MouseClick);
+            // 
+            // labl
+            // 
+            this.labl.BackColor = System.Drawing.Color.White;
+            this.labl.Controls.Add(this.button1);
+            this.labl.Controls.Add(this.label11);
+            this.labl.Controls.Add(this.cmbVersion);
+            this.labl.Controls.Add(this.button2);
+            this.labl.Controls.Add(this.button3);
+            this.labl.Controls.Add(this.dataGridView5);
+            this.labl.Controls.Add(this.label21);
+            this.labl.Controls.Add(this.label22);
+            this.labl.Controls.Add(this.cmbdeviceatt);
+            this.labl.Controls.Add(this.txtvalue);
+            this.labl.Location = new System.Drawing.Point(4, 26);
+            this.labl.Name = "labl";
+            this.labl.Padding = new System.Windows.Forms.Padding(3);
+            this.labl.Size = new System.Drawing.Size(1510, 324);
+            this.labl.TabIndex = 0;
+            this.labl.Text = "Device Details";
+            this.labl.Click += new System.EventHandler(this.tabPage3_Click);
+            // 
+            // button1
+            // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.Enabled = false;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(783, 36);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(43, 35);
+            this.button1.TabIndex = 156;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label11.Location = new System.Drawing.Point(6, 85);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(64, 17);
+            this.label11.TabIndex = 155;
+            this.label11.Text = "Version";
+            // 
+            // cmbVersion
+            // 
+            this.cmbVersion.Enabled = false;
+            this.cmbVersion.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.cmbVersion.FormattingEnabled = true;
+            this.cmbVersion.Items.AddRange(new object[] {
+            "Male",
+            "Female"});
+            this.cmbVersion.Location = new System.Drawing.Point(140, 81);
+            this.cmbVersion.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbVersion.Name = "cmbVersion";
+            this.cmbVersion.Size = new System.Drawing.Size(383, 25);
+            this.cmbVersion.TabIndex = 154;
+            // 
+            // button2
+            // 
+            this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button2.BackColor = System.Drawing.Color.White;
+            this.button2.Enabled = false;
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button2.ForeColor = System.Drawing.Color.Firebrick;
+            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
+            this.button2.Location = new System.Drawing.Point(683, 35);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(41, 35);
+            this.button2.TabIndex = 151;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button3.BackColor = System.Drawing.Color.White;
+            this.button3.Enabled = false;
+            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.button3.ForeColor = System.Drawing.Color.Firebrick;
+            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
+            this.button3.Location = new System.Drawing.Point(732, 35);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(43, 35);
+            this.button3.TabIndex = 152;
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // dataGridView5
+            // 
+            this.dataGridView5.AllowUserToAddRows = false;
+            this.dataGridView5.AllowUserToDeleteRows = false;
+            this.dataGridView5.AllowUserToOrderColumns = true;
+            this.dataGridView5.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView5.Location = new System.Drawing.Point(9, 114);
+            this.dataGridView5.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView5.Name = "dataGridView5";
+            this.dataGridView5.Size = new System.Drawing.Size(693, 139);
+            this.dataGridView5.TabIndex = 150;
+            this.dataGridView5.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView5_CellClick);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label21.Location = new System.Drawing.Point(4, 46);
+            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(117, 17);
+            this.label21.TabIndex = 149;
+            this.label21.Text = "Amount / Value";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.label22.Location = new System.Drawing.Point(4, 8);
+            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(126, 17);
+            this.label22.TabIndex = 147;
+            this.label22.Text = "Device Attribute";
+            // 
+            // cmbdeviceatt
+            // 
+            this.cmbdeviceatt.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.cmbdeviceatt.FormattingEnabled = true;
+            this.cmbdeviceatt.Items.AddRange(new object[] {
+            "Male",
+            "Female"});
+            this.cmbdeviceatt.Location = new System.Drawing.Point(140, 9);
+            this.cmbdeviceatt.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbdeviceatt.Name = "cmbdeviceatt";
+            this.cmbdeviceatt.Size = new System.Drawing.Size(383, 25);
+            this.cmbdeviceatt.TabIndex = 146;
+            this.cmbdeviceatt.SelectionChangeCommitted += new System.EventHandler(this.cmbdeviceatt_SelectionChangeCommitted);
+            // 
+            // txtvalue
+            // 
+            this.txtvalue.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.txtvalue.Location = new System.Drawing.Point(140, 42);
+            this.txtvalue.Margin = new System.Windows.Forms.Padding(4);
+            this.txtvalue.Name = "txtvalue";
+            this.txtvalue.Size = new System.Drawing.Size(383, 25);
+            this.txtvalue.TabIndex = 148;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.dataGridView2);
+            this.tabPage3.Location = new System.Drawing.Point(4, 26);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1510, 324);
+            this.tabPage3.TabIndex = 1;
+            this.tabPage3.Text = "Assign History ";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.AllowUserToOrderColumns = true;
+            this.dataGridView2.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(15, 17);
+            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(948, 240);
+            this.dataGridView2.TabIndex = 151;
+            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button7);
+            this.groupBox1.Controls.Add(this.employeeSearchText);
+            this.groupBox1.Controls.Add(this.dgvEmp);
             this.groupBox1.Controls.Add(this.label26);
             this.groupBox1.Controls.Add(this.pictureBox2);
-            this.groupBox1.Controls.Add(this.label25);
+            this.groupBox1.Controls.Add(this.btnDownload2);
+            this.groupBox1.Controls.Add(this.btnuplode2);
             this.groupBox1.Controls.Add(this.label18);
             this.groupBox1.Controls.Add(this.PriceTXT);
             this.groupBox1.Controls.Add(this.txtvisa);
@@ -178,7 +381,6 @@ namespace Delmon_Managment_System.Forms
             this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Controls.Add(this.dataGridView1);
             this.groupBox1.Controls.Add(this.seratchassettxt);
-            this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.addbtn);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.btnDownload);
@@ -210,21 +412,100 @@ namespace Delmon_Managment_System.Forms
             this.groupBox1.Enabled = false;
             this.groupBox1.Location = new System.Drawing.Point(7, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1382, 501);
+            this.groupBox1.Size = new System.Drawing.Size(1518, 501);
             this.groupBox1.TabIndex = 181;
             this.groupBox1.TabStop = false;
             // 
-            // label25
+            // button7
             // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Arial Rounded MT Bold", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.label25.Location = new System.Drawing.Point(431, 436);
-            this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(175, 12);
-            this.label25.TabIndex = 186;
-            this.label25.Text = "* Please update time manually ";
+            this.button7.FlatAppearance.BorderSize = 0;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
+            this.button7.Location = new System.Drawing.Point(342, 462);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(31, 29);
+            this.button7.TabIndex = 191;
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // employeeSearchText
+            // 
+            this.employeeSearchText.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.employeeSearchText.Location = new System.Drawing.Point(136, 393);
+            this.employeeSearchText.Name = "employeeSearchText";
+            this.employeeSearchText.Size = new System.Drawing.Size(291, 25);
+            this.employeeSearchText.TabIndex = 190;
+            this.employeeSearchText.TextChanged += new System.EventHandler(this.employeeSearchText_TextChanged);
+            // 
+            // dgvEmp
+            // 
+            this.dgvEmp.AllowUserToAddRows = false;
+            this.dgvEmp.BackgroundColor = System.Drawing.Color.White;
+            this.dgvEmp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEmp.Location = new System.Drawing.Point(532, 367);
+            this.dgvEmp.Name = "dgvEmp";
+            this.dgvEmp.Size = new System.Drawing.Size(980, 125);
+            this.dgvEmp.TabIndex = 189;
+            this.dgvEmp.Visible = false;
+            this.dgvEmp.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEmp_CellContentClick);
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.label26.Location = new System.Drawing.Point(454, 265);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(35, 15);
+            this.label26.TabIndex = 188;
+            this.label26.Text = "Text";
+            this.label26.Visible = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(433, 264);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(18, 18);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox2.TabIndex = 187;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
+            // btnDownload2
+            // 
+            this.btnDownload2.BackColor = System.Drawing.Color.White;
+            this.btnDownload2.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.btnDownload2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDownload2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.btnDownload2.ForeColor = System.Drawing.Color.Firebrick;
+            this.btnDownload2.Location = new System.Drawing.Point(1312, 453);
+            this.btnDownload2.Name = "btnDownload2";
+            this.btnDownload2.Size = new System.Drawing.Size(185, 34);
+            this.btnDownload2.TabIndex = 180;
+            this.btnDownload2.Text = "Details Template";
+            this.btnDownload2.UseVisualStyleBackColor = false;
+            this.btnDownload2.Visible = false;
+            this.btnDownload2.Click += new System.EventHandler(this.btnDownload2_Click);
+            // 
+            // btnuplode2
+            // 
+            this.btnuplode2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnuplode2.BackColor = System.Drawing.Color.White;
+            this.btnuplode2.Enabled = false;
+            this.btnuplode2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.btnuplode2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnuplode2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.btnuplode2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.btnuplode2.Location = new System.Drawing.Point(1312, 453);
+            this.btnuplode2.Margin = new System.Windows.Forms.Padding(4);
+            this.btnuplode2.Name = "btnuplode2";
+            this.btnuplode2.Size = new System.Drawing.Size(178, 31);
+            this.btnuplode2.TabIndex = 157;
+            this.btnuplode2.Text = "Asset Details - Import";
+            this.btnuplode2.UseVisualStyleBackColor = false;
+            this.btnuplode2.Visible = false;
+            this.btnuplode2.Click += new System.EventHandler(this.btnuplode2_Click);
             // 
             // label18
             // 
@@ -275,14 +556,15 @@ namespace Delmon_Managment_System.Forms
             this.btnDelete.BackColor = System.Drawing.Color.White;
             this.btnDelete.Enabled = false;
             this.btnDelete.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.btnDelete.FlatAppearance.BorderSize = 0;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.btnDelete.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnDelete.Location = new System.Drawing.Point(274, 462);
+            this.btnDelete.ForeColor = System.Drawing.Color.White;
+            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
+            this.btnDelete.Location = new System.Drawing.Point(299, 463);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(70, 26);
+            this.btnDelete.Size = new System.Drawing.Size(32, 31);
             this.btnDelete.TabIndex = 181;
-            this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Visible = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -291,15 +573,16 @@ namespace Delmon_Managment_System.Forms
             // 
             this.updatebtn.BackColor = System.Drawing.Color.White;
             this.updatebtn.Enabled = false;
-            this.updatebtn.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.updatebtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.updatebtn.FlatAppearance.BorderSize = 0;
             this.updatebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.updatebtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.updatebtn.ForeColor = System.Drawing.Color.Firebrick;
-            this.updatebtn.Location = new System.Drawing.Point(186, 462);
+            this.updatebtn.ForeColor = System.Drawing.Color.White;
+            this.updatebtn.Image = ((System.Drawing.Image)(resources.GetObject("updatebtn.Image")));
+            this.updatebtn.Location = new System.Drawing.Point(239, 466);
             this.updatebtn.Name = "updatebtn";
             this.updatebtn.Size = new System.Drawing.Size(70, 26);
             this.updatebtn.TabIndex = 154;
-            this.updatebtn.Text = "Update";
             this.updatebtn.UseVisualStyleBackColor = false;
             this.updatebtn.Visible = false;
             this.updatebtn.Click += new System.EventHandler(this.updatebtn_Click);
@@ -308,16 +591,17 @@ namespace Delmon_Managment_System.Forms
             // 
             this.button6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button6.BackColor = System.Drawing.Color.White;
-            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button6.FlatAppearance.BorderSize = 0;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.button6.ForeColor = System.Drawing.Color.Firebrick;
-            this.button6.Location = new System.Drawing.Point(433, 393);
+            this.button6.ForeColor = System.Drawing.Color.White;
+            this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
+            this.button6.Location = new System.Drawing.Point(430, 393);
             this.button6.Margin = new System.Windows.Forms.Padding(4);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(93, 27);
+            this.button6.Size = new System.Drawing.Size(21, 28);
             this.button6.TabIndex = 180;
-            this.button6.Text = "More Info";
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -326,45 +610,35 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(532, 59);
+            this.dataGridView1.Location = new System.Drawing.Point(532, 57);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(835, 304);
+            this.dataGridView1.Size = new System.Drawing.Size(980, 304);
             this.dataGridView1.TabIndex = 58;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // seratchassettxt
             // 
             this.seratchassettxt.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.seratchassettxt.Location = new System.Drawing.Point(630, 24);
+            this.seratchassettxt.Location = new System.Drawing.Point(613, 19);
             this.seratchassettxt.Name = "seratchassettxt";
             this.seratchassettxt.Size = new System.Drawing.Size(498, 25);
             this.seratchassettxt.TabIndex = 143;
             this.seratchassettxt.TextChanged += new System.EventHandler(this.seratchassettxt_TextChanged);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(532, 32);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(20, 17);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 145;
-            this.pictureBox1.TabStop = false;
-            // 
             // addbtn
             // 
             this.addbtn.BackColor = System.Drawing.Color.White;
             this.addbtn.Enabled = false;
-            this.addbtn.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.addbtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.addbtn.FlatAppearance.BorderSize = 0;
             this.addbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addbtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.addbtn.ForeColor = System.Drawing.Color.Firebrick;
-            this.addbtn.Location = new System.Drawing.Point(97, 462);
+            this.addbtn.ForeColor = System.Drawing.Color.White;
+            this.addbtn.Image = ((System.Drawing.Image)(resources.GetObject("addbtn.Image")));
+            this.addbtn.Location = new System.Drawing.Point(189, 466);
             this.addbtn.Name = "addbtn";
             this.addbtn.Size = new System.Drawing.Size(70, 26);
             this.addbtn.TabIndex = 139;
-            this.addbtn.Text = "Add";
             this.addbtn.UseVisualStyleBackColor = false;
             this.addbtn.Visible = false;
             this.addbtn.Click += new System.EventHandler(this.addbtn_Click);
@@ -373,7 +647,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label10.Location = new System.Drawing.Point(560, 32);
+            this.label10.Location = new System.Drawing.Point(529, 27);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(61, 17);
@@ -388,7 +662,7 @@ namespace Delmon_Managment_System.Forms
             this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDownload.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnDownload.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnDownload.Location = new System.Drawing.Point(521, 462);
+            this.btnDownload.Location = new System.Drawing.Point(1312, 462);
             this.btnDownload.Name = "btnDownload";
             this.btnDownload.Size = new System.Drawing.Size(185, 26);
             this.btnDownload.TabIndex = 179;
@@ -401,15 +675,16 @@ namespace Delmon_Managment_System.Forms
             // 
             this.btnnew.BackColor = System.Drawing.Color.White;
             this.btnnew.Enabled = false;
-            this.btnnew.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.btnnew.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnnew.FlatAppearance.BorderSize = 0;
             this.btnnew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnnew.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.btnnew.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnnew.Location = new System.Drawing.Point(9, 462);
+            this.btnnew.ForeColor = System.Drawing.Color.White;
+            this.btnnew.Image = ((System.Drawing.Image)(resources.GetObject("btnnew.Image")));
+            this.btnnew.Location = new System.Drawing.Point(135, 466);
             this.btnnew.Name = "btnnew";
             this.btnnew.Size = new System.Drawing.Size(70, 26);
             this.btnnew.TabIndex = 142;
-            this.btnnew.Text = "New";
             this.btnnew.UseVisualStyleBackColor = false;
             this.btnnew.Click += new System.EventHandler(this.btnnew_Click);
             // 
@@ -421,7 +696,7 @@ namespace Delmon_Managment_System.Forms
             this.btnuplode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnuplode.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnuplode.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.btnuplode.Location = new System.Drawing.Point(370, 462);
+            this.btnuplode.Location = new System.Drawing.Point(1343, 462);
             this.btnuplode.Name = "btnuplode";
             this.btnuplode.Size = new System.Drawing.Size(122, 26);
             this.btnuplode.TabIndex = 178;
@@ -487,16 +762,14 @@ namespace Delmon_Managment_System.Forms
             this.cmbbrand.Size = new System.Drawing.Size(289, 25);
             this.cmbbrand.TabIndex = 150;
             this.cmbbrand.SelectionChangeCommitted += new System.EventHandler(this.cmbbrand_SelectionChangeCommitted);
-            this.cmbbrand.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbbrand_KeyDown);
             this.cmbbrand.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbbrand_KeyPress);
             // 
             // cmbemployee
             // 
-            this.cmbemployee.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbemployee.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.cmbemployee.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.cmbemployee.FormattingEnabled = true;
-            this.cmbemployee.Location = new System.Drawing.Point(134, 395);
+            this.cmbemployee.Location = new System.Drawing.Point(137, 393);
             this.cmbemployee.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbemployee.Name = "cmbemployee";
             this.cmbemployee.Size = new System.Drawing.Size(291, 25);
@@ -565,16 +838,17 @@ namespace Delmon_Managment_System.Forms
             // 
             this.btnnewmodel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnnewmodel.BackColor = System.Drawing.Color.White;
-            this.btnnewmodel.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.btnnewmodel.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnnewmodel.FlatAppearance.BorderSize = 0;
             this.btnnewmodel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnnewmodel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.btnnewmodel.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnnewmodel.Location = new System.Drawing.Point(433, 215);
+            this.btnnewmodel.ForeColor = System.Drawing.Color.White;
+            this.btnnewmodel.Image = ((System.Drawing.Image)(resources.GetObject("btnnewmodel.Image")));
+            this.btnnewmodel.Location = new System.Drawing.Point(430, 219);
             this.btnnewmodel.Margin = new System.Windows.Forms.Padding(4);
             this.btnnewmodel.Name = "btnnewmodel";
-            this.btnnewmodel.Size = new System.Drawing.Size(52, 30);
+            this.btnnewmodel.Size = new System.Drawing.Size(33, 27);
             this.btnnewmodel.TabIndex = 172;
-            this.btnnewmodel.Text = "New";
             this.btnnewmodel.UseVisualStyleBackColor = false;
             this.btnnewmodel.Click += new System.EventHandler(this.btnnewJob_Click);
             // 
@@ -695,236 +969,6 @@ namespace Delmon_Managment_System.Forms
             this.label6.TabIndex = 166;
             this.label6.Text = "Purchasing Date";
             // 
-            // tabControl2
-            // 
-            this.tabControl2.Controls.Add(this.labl);
-            this.tabControl2.Controls.Add(this.tabPage3);
-            this.tabControl2.Enabled = false;
-            this.tabControl2.Location = new System.Drawing.Point(3, 510);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(1399, 392);
-            this.tabControl2.TabIndex = 146;
-            this.tabControl2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl2_MouseClick);
-            // 
-            // labl
-            // 
-            this.labl.BackColor = System.Drawing.Color.White;
-            this.labl.Controls.Add(this.btnDownload2);
-            this.labl.Controls.Add(this.btnuplode2);
-            this.labl.Controls.Add(this.button1);
-            this.labl.Controls.Add(this.label11);
-            this.labl.Controls.Add(this.cmbVersion);
-            this.labl.Controls.Add(this.button2);
-            this.labl.Controls.Add(this.button3);
-            this.labl.Controls.Add(this.dataGridView5);
-            this.labl.Controls.Add(this.label21);
-            this.labl.Controls.Add(this.label22);
-            this.labl.Controls.Add(this.cmbdeviceatt);
-            this.labl.Controls.Add(this.txtvalue);
-            this.labl.Location = new System.Drawing.Point(4, 26);
-            this.labl.Name = "labl";
-            this.labl.Padding = new System.Windows.Forms.Padding(3);
-            this.labl.Size = new System.Drawing.Size(1391, 362);
-            this.labl.TabIndex = 0;
-            this.labl.Text = "Device Details";
-            this.labl.Click += new System.EventHandler(this.tabPage3_Click);
-            // 
-            // btnDownload2
-            // 
-            this.btnDownload2.BackColor = System.Drawing.Color.White;
-            this.btnDownload2.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.btnDownload2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDownload2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.btnDownload2.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnDownload2.Location = new System.Drawing.Point(1165, 43);
-            this.btnDownload2.Name = "btnDownload2";
-            this.btnDownload2.Size = new System.Drawing.Size(178, 38);
-            this.btnDownload2.TabIndex = 180;
-            this.btnDownload2.Text = "Details Template";
-            this.btnDownload2.UseVisualStyleBackColor = false;
-            this.btnDownload2.Click += new System.EventHandler(this.btnDownload2_Click);
-            // 
-            // btnuplode2
-            // 
-            this.btnuplode2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnuplode2.BackColor = System.Drawing.Color.White;
-            this.btnuplode2.Enabled = false;
-            this.btnuplode2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.btnuplode2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnuplode2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.btnuplode2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.btnuplode2.Location = new System.Drawing.Point(980, 46);
-            this.btnuplode2.Margin = new System.Windows.Forms.Padding(4);
-            this.btnuplode2.Name = "btnuplode2";
-            this.btnuplode2.Size = new System.Drawing.Size(178, 35);
-            this.btnuplode2.TabIndex = 157;
-            this.btnuplode2.Text = "Asset Details - Import";
-            this.btnuplode2.UseVisualStyleBackColor = false;
-            this.btnuplode2.Click += new System.EventHandler(this.btnuplode2_Click);
-            // 
-            // button1
-            // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.Enabled = false;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.button1.ForeColor = System.Drawing.Color.Firebrick;
-            this.button1.Location = new System.Drawing.Point(840, 46);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(111, 35);
-            this.button1.TabIndex = 156;
-            this.button1.Text = "Delete";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label11.Location = new System.Drawing.Point(6, 103);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(64, 17);
-            this.label11.TabIndex = 155;
-            this.label11.Text = "Version";
-            // 
-            // cmbVersion
-            // 
-            this.cmbVersion.Enabled = false;
-            this.cmbVersion.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.cmbVersion.FormattingEnabled = true;
-            this.cmbVersion.Items.AddRange(new object[] {
-            "Male",
-            "Female"});
-            this.cmbVersion.Location = new System.Drawing.Point(140, 99);
-            this.cmbVersion.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbVersion.Name = "cmbVersion";
-            this.cmbVersion.Size = new System.Drawing.Size(383, 25);
-            this.cmbVersion.TabIndex = 154;
-            // 
-            // button2
-            // 
-            this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.Enabled = false;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.button2.ForeColor = System.Drawing.Color.Firebrick;
-            this.button2.Location = new System.Drawing.Point(565, 46);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(111, 35);
-            this.button2.TabIndex = 151;
-            this.button2.Text = "Add";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button3
-            // 
-            this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button3.BackColor = System.Drawing.Color.White;
-            this.button3.Enabled = false;
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.button3.ForeColor = System.Drawing.Color.Firebrick;
-            this.button3.Location = new System.Drawing.Point(706, 46);
-            this.button3.Margin = new System.Windows.Forms.Padding(4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(111, 35);
-            this.button3.TabIndex = 152;
-            this.button3.Text = "Update";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // dataGridView5
-            // 
-            this.dataGridView5.AllowUserToAddRows = false;
-            this.dataGridView5.AllowUserToDeleteRows = false;
-            this.dataGridView5.AllowUserToOrderColumns = true;
-            this.dataGridView5.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView5.Location = new System.Drawing.Point(11, 136);
-            this.dataGridView5.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView5.Name = "dataGridView5";
-            this.dataGridView5.Size = new System.Drawing.Size(705, 175);
-            this.dataGridView5.TabIndex = 150;
-            this.dataGridView5.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView5_CellClick);
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label21.Location = new System.Drawing.Point(4, 64);
-            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(117, 17);
-            this.label21.TabIndex = 149;
-            this.label21.Text = "Amount / Value";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.label22.Location = new System.Drawing.Point(4, 26);
-            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(126, 17);
-            this.label22.TabIndex = 147;
-            this.label22.Text = "Device Attribute";
-            // 
-            // cmbdeviceatt
-            // 
-            this.cmbdeviceatt.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.cmbdeviceatt.FormattingEnabled = true;
-            this.cmbdeviceatt.Items.AddRange(new object[] {
-            "Male",
-            "Female"});
-            this.cmbdeviceatt.Location = new System.Drawing.Point(140, 27);
-            this.cmbdeviceatt.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbdeviceatt.Name = "cmbdeviceatt";
-            this.cmbdeviceatt.Size = new System.Drawing.Size(383, 25);
-            this.cmbdeviceatt.TabIndex = 146;
-            this.cmbdeviceatt.SelectionChangeCommitted += new System.EventHandler(this.cmbdeviceatt_SelectionChangeCommitted);
-            // 
-            // txtvalue
-            // 
-            this.txtvalue.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.txtvalue.Location = new System.Drawing.Point(140, 60);
-            this.txtvalue.Margin = new System.Windows.Forms.Padding(4);
-            this.txtvalue.Name = "txtvalue";
-            this.txtvalue.Size = new System.Drawing.Size(383, 25);
-            this.txtvalue.TabIndex = 148;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.dataGridView2);
-            this.tabPage3.Location = new System.Drawing.Point(4, 26);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1391, 362);
-            this.tabPage3.TabIndex = 1;
-            this.tabPage3.Text = "Assign History ";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.AllowUserToOrderColumns = true;
-            this.dataGridView2.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(15, 17);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(948, 240);
-            this.dataGridView2.TabIndex = 151;
-            // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
@@ -953,7 +997,7 @@ namespace Delmon_Managment_System.Forms
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(1415, 871);
+            this.tabPage2.Size = new System.Drawing.Size(1549, 793);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Report";
             // 
@@ -1132,8 +1176,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView4.Location = new System.Drawing.Point(66, 667);
             this.dataGridView4.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView4.Name = "dataGridView4";
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView4.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView4.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView4.Size = new System.Drawing.Size(1249, 276);
             this.dataGridView4.TabIndex = 161;
             this.dataGridView4.Visible = false;
@@ -1147,8 +1191,8 @@ namespace Delmon_Managment_System.Forms
             this.dataGridView3.Location = new System.Drawing.Point(66, 334);
             this.dataGridView3.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView3.Name = "dataGridView3";
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
+            this.dataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView3.Size = new System.Drawing.Size(1249, 310);
             this.dataGridView3.TabIndex = 160;
             // 
@@ -1206,7 +1250,7 @@ namespace Delmon_Managment_System.Forms
             this.lblemail.AutoSize = true;
             this.lblemail.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.lblemail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblemail.Location = new System.Drawing.Point(1449, 194);
+            this.lblemail.Location = new System.Drawing.Point(668, 952);
             this.lblemail.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblemail.Name = "lblemail";
             this.lblemail.Size = new System.Drawing.Size(48, 17);
@@ -1218,7 +1262,7 @@ namespace Delmon_Managment_System.Forms
             this.lblusername.AutoSize = true;
             this.lblusername.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.lblusername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblusername.Location = new System.Drawing.Point(1449, 101);
+            this.lblusername.Location = new System.Drawing.Point(366, 952);
             this.lblusername.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblusername.Name = "lblusername";
             this.lblusername.Size = new System.Drawing.Size(85, 17);
@@ -1230,7 +1274,7 @@ namespace Delmon_Managment_System.Forms
             this.lbldatetime.AutoSize = true;
             this.lbldatetime.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.lbldatetime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lbldatetime.Location = new System.Drawing.Point(1449, 165);
+            this.lbldatetime.Location = new System.Drawing.Point(823, 952);
             this.lbldatetime.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lbldatetime.Name = "lbldatetime";
             this.lbldatetime.Size = new System.Drawing.Size(77, 17);
@@ -1242,7 +1286,7 @@ namespace Delmon_Managment_System.Forms
             this.lblPC.AutoSize = true;
             this.lblPC.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.lblPC.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblPC.Location = new System.Drawing.Point(1449, 221);
+            this.lblPC.Location = new System.Drawing.Point(741, 952);
             this.lblPC.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblPC.Name = "lblPC";
             this.lblPC.Size = new System.Drawing.Size(27, 17);
@@ -1254,35 +1298,12 @@ namespace Delmon_Managment_System.Forms
             this.lblFullname.AutoSize = true;
             this.lblFullname.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.lblFullname.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.lblFullname.Location = new System.Drawing.Point(1449, 131);
+            this.lblFullname.Location = new System.Drawing.Point(482, 952);
             this.lblFullname.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFullname.Name = "lblFullname";
             this.lblFullname.Size = new System.Drawing.Size(80, 17);
             this.lblFullname.TabIndex = 160;
             this.lblFullname.Text = "Full Name";
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
-            this.label26.Location = new System.Drawing.Point(454, 265);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(35, 15);
-            this.label26.TabIndex = 188;
-            this.label26.Text = "Text";
-            this.label26.Visible = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(433, 264);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(18, 18);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox2.TabIndex = 187;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // AssetFrm
             // 
@@ -1290,13 +1311,13 @@ namespace Delmon_Managment_System.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1574, 853);
+            this.ClientSize = new System.Drawing.Size(1574, 902);
             this.Controls.Add(this.lblFullname);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.lblPC);
-            this.Controls.Add(this.lbldatetime);
-            this.Controls.Add(this.lblusername);
             this.Controls.Add(this.lblemail);
+            this.Controls.Add(this.lblusername);
+            this.Controls.Add(this.lbldatetime);
+            this.Controls.Add(this.lblPC);
             this.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -1305,22 +1326,22 @@ namespace Delmon_Managment_System.Forms
             this.Load += new System.EventHandler(this.AssetFrm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picVisa)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabControl2.ResumeLayout(false);
             this.labl.ResumeLayout(false);
             this.labl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEmp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picVisa)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1358,7 +1379,6 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.ComboBox cmbdeviceatt;
         private System.Windows.Forms.TextBox txtvalue;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox seratchassettxt;
         private System.Windows.Forms.Button btnnew;
@@ -1407,7 +1427,6 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.Button btnDownload2;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox PriceTXT;
-        private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label lblemail;
         private System.Windows.Forms.Label lblusername;
         private System.Windows.Forms.Label lbldatetime;
@@ -1415,5 +1434,8 @@ namespace Delmon_Managment_System.Forms
         public System.Windows.Forms.Label lblFullname;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.DataGridView dgvEmp;
+        private System.Windows.Forms.TextBox employeeSearchText;
+        private System.Windows.Forms.Button button7;
     }
 }

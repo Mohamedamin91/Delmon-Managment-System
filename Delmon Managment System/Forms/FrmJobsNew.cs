@@ -133,33 +133,48 @@ namespace Delmon_Managment_System.Forms
 
         private void addbtn_Click(object sender, EventArgs e)
         {
-            SqlParameter paramjobtitleEN = new SqlParameter("@C1", SqlDbType.NVarChar);
-            paramjobtitleEN.Value = JobTitleENtxt.Text;
-            SqlParameter paramjobtitleAR = new SqlParameter("@C2", SqlDbType.NVarChar);
-            paramjobtitleAR.Value = jobtitleartxt.Text;
-            SqlParameter ParamDescription = new SqlParameter("@C3", SqlDbType.NVarChar);
-            ParamDescription.Value = Descriptiontxt.Text;
-            //SqlParameter paramWorkField = new SqlParameter("@C4", SqlDbType.NVarChar);
-            //paramWorkField.Value = cmbworkfield.SelectedValue;
-            //SqlParameter paramJobGrade = new SqlParameter("@C5", SqlDbType.NVarChar);
-            //paramJobGrade.Value = cmbjobgrade.SelectedValue;
-            SqlParameter paramminsalary = new SqlParameter("@C6", SqlDbType.NVarChar);
-            paramminsalary.Value = mintxt.Text;
-            SqlParameter parammaxsalary = new SqlParameter("@C7", SqlDbType.NVarChar);
-            parammaxsalary.Value = maxtxt.Text;
 
-
-
-
-
-
-            if (jobtitleartxt.Text != "" && JobTitleENtxt.Text != "" && Descriptiontxt.Text !="")
+            if (JobTitleENtxt.Text == "")
             {
+                MessageBox.Show("Please insert 'JobTitleEN' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (jobtitleartxt.Text == "")
+            {
+                MessageBox.Show("Please insert 'JobTitleAR' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (Descriptiontxt.Text == "")
+            {
+                MessageBox.Show("Please insert 'Description' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (mintxt.Text == "")
+            {
+                MessageBox.Show("Please insert 'Min Salary' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (maxtxt.Text == "")
+            {
+                MessageBox.Show("Please insert 'Max Salary' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            else
+            {
+                SqlParameter paramjobtitleEN = new SqlParameter("@C1", SqlDbType.NVarChar);
+                paramjobtitleEN.Value = JobTitleENtxt.Text;
+                SqlParameter paramjobtitleAR = new SqlParameter("@C2", SqlDbType.NVarChar);
+                paramjobtitleAR.Value = jobtitleartxt.Text;
+                SqlParameter ParamDescription = new SqlParameter("@C3", SqlDbType.NVarChar);
+                ParamDescription.Value = Descriptiontxt.Text;
+
+                SqlParameter paramminsalary = new SqlParameter("@C6", SqlDbType.NVarChar);
+                paramminsalary.Value = mintxt.Text;
+                SqlParameter parammaxsalary = new SqlParameter("@C7", SqlDbType.NVarChar);
+                parammaxsalary.Value = maxtxt.Text;
+
+
+
                 SQLCONN.OpenConection();
                 SqlDataReader dr = SQLCONN.DataReader("select  * from jobs where " +
                      " JobTitleEN=  @C1 and    JobTitleAR =  @C2 ", paramjobtitleEN, paramjobtitleAR);
                 dr.Read();
-
 
                 if (dr.HasRows)
                 {
@@ -167,11 +182,8 @@ namespace Delmon_Managment_System.Forms
 
                 }
 
-
                 else if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
-
-
                     dr.Dispose();
                     dr.Close();
                     SQLCONN.ExecuteQueries("insert into jobs (  [JobTitleEN] ,[JobTitleAR],[JobDescription],[MinSalary],[MaxSalary]) values (@C1,@C2,@C3,@C6,@C7)",
@@ -183,22 +195,14 @@ namespace Delmon_Managment_System.Forms
                     dr.Dispose();
                     dr.Close();
                     ClearTextBoxes();
-
-
-
                 }
                 else
                 {
+                    MessageBox.Show("Please Fill the missing fields  ");
 
                 }
-
+                SQLCONN.CloseConnection();
             }
-            else
-            {
-                MessageBox.Show("Please Fill the missing fields  ");
-
-            }
-            SQLCONN.CloseConnection();
         }
 
         private void label1_Click(object sender, EventArgs e)

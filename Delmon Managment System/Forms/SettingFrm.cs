@@ -29,6 +29,7 @@ namespace Delmon_Managment_System.Forms
         int CounslateID;
         double num1, num2;
         int userpermissionID;
+        int employenduserID, employenduserID2;
 
         bool hasViewcountr = false;
         bool hasEditcountr = false;
@@ -616,7 +617,7 @@ order by EmployeeID  ");
             {
                 MessageBox.Show("Please insert 'Password' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if ((int)cmbemployee.SelectedValue == 0 || cmbemployee.Text == "Select")
+            else if (employeeSearchText.Text == "Select")
             {
                 MessageBox.Show("Please Select 'Employee' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -628,7 +629,7 @@ order by EmployeeID  ");
             {
 
                 SqlParameter paramemployee = new SqlParameter("@C1", SqlDbType.NVarChar);
-                paramemployee.Value = cmbemployee.SelectedValue;
+                paramemployee.Value = employenduserID;
                 SqlParameter paramusername = new SqlParameter("@C2", SqlDbType.NVarChar);
                 paramusername.Value = usernametxt.Text;
                 SqlParameter parampassword = new SqlParameter("@C3", SqlDbType.NVarChar);
@@ -659,7 +660,7 @@ order by EmployeeID  ");
 
 
 
-                if ((int)cmbemployee.SelectedValue != 0 && usernametxt.Text != "" && passwordtxt.Text != "")
+                if (usernametxt.Text != "" && passwordtxt.Text != "")
                 {
                     SQLCONN.OpenConection();
                     dr = SQLCONN.DataReader("select  * from tblUser  where " +
@@ -791,9 +792,11 @@ order by EmployeeID  ");
                     else
                     {
 
-                        EmployeeID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        EmployeeID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
+                        employenduserID = EmployeeID;
                         CommonClass.UserPermissionID = EmployeeID;
                         cmbemployee.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+                        employeeSearchText.Text = cmbemployee.Text;
                         cmbusertype.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
                         usernametxt.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
                         passwordtxt.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
@@ -858,7 +861,7 @@ order by EmployeeID  ");
             {
                 MessageBox.Show("Please insert 'Password' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if ((int)cmbemployee.SelectedValue == 0 || cmbemployee.Text == "Select")
+            else if (employeeSearchText.Text == "Select" || employeeSearchText.Text==string.Empty)
             {
                 MessageBox.Show("Please Select 'Employee' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -870,7 +873,7 @@ order by EmployeeID  ");
             {
 
                 SqlParameter paramemployee = new SqlParameter("@C1", SqlDbType.NVarChar);
-                paramemployee.Value = cmbemployee.SelectedValue;
+                paramemployee.Value = employenduserID;
                 SqlParameter paramusername = new SqlParameter("@C2", SqlDbType.NVarChar);
                 paramusername.Value = usernametxt.Text;
                 SqlParameter parampassword = new SqlParameter("@C3", SqlDbType.NVarChar);
@@ -901,14 +904,14 @@ order by EmployeeID  ");
                     if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     {
 
-                        if (cmbemployee.Text == "Select")
+                        if (employeeSearchText.Text == "Select" || employeeSearchText.Text == string.Empty)
 
                         {
                             MessageBox.Show("Please Select a Job !!");
 
 
                         }
-                        else if (cmbemployee.Text == "Select")
+                        else if (cmbusertype.Text == "Select")
                         {
                             MessageBox.Show("Please Select User Type !!");
                         }
@@ -1159,14 +1162,7 @@ order by EmployeeID  ");
             }
 
 
-            else if ((int)cmbcontact.SelectedValue == 0 || cmbcontact.Text == "Select")
-            {
-                MessageBox.Show("Please Select 'Contact' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else if (Contacttxt.Text == "Select")
-            {
-                MessageBox.Show("Please Select 'Contact Value' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            
 
             else
             {
@@ -1195,6 +1191,8 @@ order by EmployeeID  ");
                 paramContact.Value = Contacttxt.Text;
                 SqlParameter paramRefrenceID = new SqlParameter("@C7", SqlDbType.Int);
                 paramRefrenceID.Value = 3;
+                
+                
                 SQLCONN.OpenConection();
 
 
@@ -1203,11 +1201,10 @@ order by EmployeeID  ");
                 if (checkContact.Checked == true)
                 {
 
-                    if (AgencyNametxt.Text != "" && AgencyNametxt.Text != "" && LicenseNumbertxt.Text != "" && Contacttxt.Text != "")
-                    {
+                    
                         SQLCONN.OpenConection();
                         SqlDataReader dr = SQLCONN.DataReader("select  * from Agencies  where " +
-                             " AgenceName=  @C1 and    LicenseNumber =  @C2 ", paramagencyname, paramlicensenumber);
+                             " AgenceName=  @C1 and   LicenseNumber =  @C2 ", paramagencyname, paramlicensenumber);
                         dr.Read();
 
 
@@ -1232,10 +1229,8 @@ order by EmployeeID  ");
                                 Contacttxt.Focus();
                                 return;
                             }
-                            else
-                            {
-                            }
-                        }
+                          
+                        
                         else
                         {
                             if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
@@ -1250,7 +1245,7 @@ order by EmployeeID  ");
                                 SQLCONN.ExecuteQueries("insert into Agencies (  [AgenceName] ,[LicenseNumber],[CountryID],[CityID]) values (@C1,@C2,@C3,@C4)",
                                                                paramagencyname, paramlicensenumber, paramcountry, paramcity);
 
-                                SqlDataReader dr2 = SQLCONN.DataReader("Select max (AgencID) 'ID' from Agencies ");
+                                SqlDataReader dr2 = SQLCONN.DataReader(" Select max (AgencID) 'ID' from Agencies ");
                                 if (dr2.Read())
                                 {
                                     agaencyid = int.Parse(dr2["ID"].ToString());
@@ -1270,8 +1265,8 @@ order by EmployeeID  ");
                                 MessageBox.Show("Record saved Successfully");
                                 BtnnewAgaency.Visible = true;
 
-                                SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Agency Info',@id ,'#','#',@datetime,@pc,@user,'Insert')", paramAgencyid, paramdatetimeLOG, parampc, paramuser);
-                                SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog ( logvalue ,LogValueID,Oldvalue,newvalue,logdatetime,PCNAME,UserId,type) VALUES ('Contact Agency Info , @id ,'#','#',@datetime,@pc,@user,'Insert')", paramContactType, paramAgencyid, paramdatetimeLOG, parampc, paramuser);
+                                SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (logvalue, LogValueID, Oldvalue, newvalue, logdatetime, PCNAME, UserId, type) VALUES ('Agency Info', @id, '#', '#', @datetime, @pc, @user, 'Insert')", paramAgencyid, paramdatetimeLOG, parampc, paramuser);
+                                SQLCONN.ExecuteQueries("INSERT INTO EmployeeLog (logvalue, LogValueID, Oldvalue, newvalue, logdatetime, PCNAME, UserId, type) VALUES ('Contact Agency Info', @id, '#', '#', @datetime, @pc, @user, 'Insert')", paramContactType, paramAgencyid, paramdatetimeLOG, parampc, paramuser);
 
 
                                 dr2.Dispose();
@@ -2344,7 +2339,8 @@ order by EmployeeID  ");
             addbtn.Visible = true;
             ClearTextBoxes();
             usernametxt.Text = passwordtxt.Text = "";
-            cmbusertype.Text = cmbemployee.Text = "Select ";
+            //cmbusertype.Text =
+                cmbemployee.Text = "Select ";
 
 
         }
@@ -3401,7 +3397,7 @@ WHERE (COMPName_EN LIKE '%' + @C1 + '%')
             {
                 MessageBox.Show("Please Select 'Department' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if ((int)cmbemployee1.SelectedValue == 0 || cmbemployee1.Text == "Select")
+            else if  (cmbemployee1.Text == "Select")
             {
                 MessageBox.Show("Please Select 'Head of department' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -3427,7 +3423,7 @@ WHERE (COMPName_EN LIKE '%' + @C1 + '%')
                     SqlParameter paramWorkLocation = new SqlParameter("@C2", SqlDbType.NVarChar);
                     paramWorkLocation.Value = cmbworkfield.SelectedValue;
                     SqlParameter paramDeptHead = new SqlParameter("@C3", SqlDbType.NVarChar);
-                    paramDeptHead.Value = cmbemployee1.SelectedValue;
+                    paramDeptHead.Value = employenduserID2;
 
                     SqlParameter paramCompid = new SqlParameter("@id", SqlDbType.NVarChar);
                     paramCompid.Value = CompID;
@@ -3555,7 +3551,7 @@ WHERE (COMPName_EN LIKE '%' + @C1 + '%')
                 SqlParameter paramWorkLocation = new SqlParameter("@C2", SqlDbType.NVarChar);
                 paramWorkLocation.Value = cmbworkfield.SelectedValue;
                 SqlParameter paramDeptHead = new SqlParameter("@C3", SqlDbType.NVarChar);
-                paramDeptHead.Value = cmbemployee1.SelectedValue;
+                paramDeptHead.Value = employenduserID2;
 
                 SqlParameter paramCompid = new SqlParameter("@id2", SqlDbType.NVarChar);
                 paramCompid.Value = CompID;
@@ -3713,6 +3709,8 @@ WHERE (COMPName_EN LIKE '%' + @C1 + '%')
                     cmbDepartment.SelectedValue = row.Cells[1].Value?.ToString();
                     cmbworkfield.SelectedValue = row.Cells[2].Value?.ToString();
                     cmbemployee1.SelectedValue = row.Cells[3].Value?.ToString();
+                    employenduserID2= (int)cmbemployee1.SelectedValue;
+                    employeeSearchText2.Text = cmbemployee1.Text;
 
 
                 }
@@ -5250,6 +5248,106 @@ ORDER BY
                 cmbcont.ValueMember = "CountryId";
                 cmbcont.DisplayMember = "CountryName";
             }
+        }
+
+        private void employeeSearchText_TextChanged(object sender, EventArgs e)
+        {
+            DGVsearch.Visible = true;
+            string searchText = employeeSearchText.Text.Trim();
+
+
+
+            SqlParameter paramEmployeenameSearch = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramEmployeenameSearch.Value = searchText;
+
+
+            SQLCONN.OpenConection();
+
+            // if employess belong to IT showes all employee else show for the certian department 
+
+            string query = @" SELECT EmployeeID, 
+                 CONCAT(e.FirstName, ' ', e.SecondName, ' ', e.ThirdName, ' ', e.LastName) AS FullName
+    FROM Employees e
+   
+    WHERE ((LEN(@C1) = 1 AND (e.EmployeeID LIKE @C1 OR e.CurrentEmpID LIKE @C1))
+           OR (LEN(@C1) > 1 AND (
+               e.EmployeeID LIKE '%' + REPLACE(@C1, ' ', '') + '%'
+               OR REPLACE(e.FirstName, ' ', '') + REPLACE(e.SecondName, ' ', '') + REPLACE(e.ThirdName, ' ', '') + REPLACE(e.LastName, ' ', '') LIKE '%' + REPLACE(@C1, ' ', '') + '%'
+               OR e.FirstName LIKE '%' + @C1 + '%'
+               OR e.SecondName LIKE '%' + @C1 + '%'
+               OR e.ThirdName LIKE '%' + @C1 + '%'
+               OR e.LastName LIKE '%' + @C1 + '%'
+           )))
+    ORDER BY e.EmployeeID";
+
+
+            DGVsearch.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramEmployeenameSearch);
+            DGVsearch.Columns["FullName"].Width = 500;
+        }
+
+        private void DGVsearch_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1) return;
+
+           
+
+            DataGridViewRow selectedRow = DGVsearch.Rows[e.RowIndex];
+
+            // Populate fields
+            employenduserID = selectedRow.Cells[0].Value != null ? Convert.ToInt32(selectedRow.Cells[0].Value) : 0;
+            employeeSearchText.Text = selectedRow.Cells[1].Value?.ToString() ?? string.Empty; ;
+            DGVsearch.Visible = false;
+
+
+        }
+
+        private void employeeSearchText2_TextChanged(object sender, EventArgs e)
+        {
+            DGVsearch2.Visible = true;
+            string searchText = employeeSearchText2.Text.Trim();
+
+
+
+            SqlParameter paramEmployeenameSearch = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramEmployeenameSearch.Value = searchText;
+
+
+            SQLCONN.OpenConection();
+
+            // if employess belong to IT showes all employee else show for the certian department 
+
+            string query = @" SELECT EmployeeID, 
+                 CONCAT(e.FirstName, ' ', e.SecondName, ' ', e.ThirdName, ' ', e.LastName) AS FullName
+    FROM Employees e
+   
+    WHERE ((LEN(@C1) = 1 AND (e.EmployeeID LIKE @C1 OR e.CurrentEmpID LIKE @C1))
+           OR (LEN(@C1) > 1 AND (
+               e.EmployeeID LIKE '%' + REPLACE(@C1, ' ', '') + '%'
+               OR REPLACE(e.FirstName, ' ', '') + REPLACE(e.SecondName, ' ', '') + REPLACE(e.ThirdName, ' ', '') + REPLACE(e.LastName, ' ', '') LIKE '%' + REPLACE(@C1, ' ', '') + '%'
+               OR e.FirstName LIKE '%' + @C1 + '%'
+               OR e.SecondName LIKE '%' + @C1 + '%'
+               OR e.ThirdName LIKE '%' + @C1 + '%'
+               OR e.LastName LIKE '%' + @C1 + '%'
+           )))
+    ORDER BY e.EmployeeID";
+
+
+            DGVsearch2.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramEmployeenameSearch);
+            DGVsearch2.Columns["FullName"].Width = 500;
+        }
+
+        private void DGVsearch2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1) return;
+
+
+
+            DataGridViewRow selectedRow = DGVsearch2.Rows[e.RowIndex];
+
+            // Populate fields
+            employenduserID2 = selectedRow.Cells[0].Value != null ? Convert.ToInt32(selectedRow.Cells[0].Value) : 0;
+            employeeSearchText2.Text = selectedRow.Cells[1].Value?.ToString() ?? string.Empty; ;
+            DGVsearch2.Visible = false;
         }
 
         private void cmbworkfield_TextChanged(object sender, EventArgs e)

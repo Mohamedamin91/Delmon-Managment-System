@@ -14,8 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ExcelDataReader; // You need to install ExcelDataReader package via NuGet
 using System.Runtime.InteropServices;
-
-
+using OfficeOpenXml;
 
 namespace Delmon_Managment_System.Forms
 {
@@ -26,6 +25,7 @@ namespace Delmon_Managment_System.Forms
         SQLCONNECTION SQLCONN = new SQLCONNECTION();
         SQLCONNECTION SQLCONN3 = new SQLCONNECTION();
         string AssetID;
+        int employenduserID;
         string AssetDetialsInfoID;
         int LoggedEmployeeID;
         string encryptionKey = "0pqnU2X00mf+i8mDTzyPVw==", iv = "0pqnU2X00mf+i8mDTzyPVw==";
@@ -76,7 +76,7 @@ namespace Delmon_Managment_System.Forms
 
         public async void AssetFrm_Load(object sender, EventArgs e)
         {
-          
+
 
             await Task.Run(() =>
             {
@@ -84,14 +84,20 @@ namespace Delmon_Managment_System.Forms
                 LoadUserPermissions();
 
                 // Load combo box data asynchronously with the appropriate connection string
-                var employeeTask = Task.Run(() => GetDataTable("SELECT EmployeeID, CONCAT(FirstName, ' ', SecondName, ' ', ThirdName, ' ', LastName) 'FullName' FROM Employees ORDER BY EmployeeID", SQLCONN.ConnectionString));
-                var assetTypeTask = Task.Run(() => GetDataTable("SELECT AssetTypeID,AssettypeValue FROM AssetType", SQLCONN3.ConnectionString3));
-                var deviceDetailsTask = Task.Run(() => GetDataTable("SELECT DeviceDetilasID ,DeviceDetialsValue FROM DeviceDetials", SQLCONN3.ConnectionString3));
-                var deviceTypesTask = Task.Run(() => GetDataTable("SELECT DeviceTypeID , DeviceType FROM DeviceTypes", SQLCONN3.ConnectionString3));
-                var assetStatusTask = Task.Run(() => GetDataTable("SELECT AssetStatusID ,AssetStatus FROM AssetsStatus", SQLCONN3.ConnectionString3));
-                var assetModelTask = Task.Run(() => GetDataTable("SELECT AssetModeID ,AssetModel FROM AssetsModel", SQLCONN3.ConnectionString3));
-                var osVersionTask = Task.Run(() => GetDataTable("SELECT OSVersionID ,OSVerisonValue FROM OSVerisons", SQLCONN3.ConnectionString3));
-                var assetBrandTask = Task.Run(() => GetDataTable("SELECT AssetBrandID ,AssetBrandValue FROM AssetBrand", SQLCONN3.ConnectionString3));
+                var employeeTask = Task.Run(() =>
+                    GetDataTable(@"SELECT EmployeeID, 
+                 CONCAT(e.FirstName, ' ', e.SecondName, ' ', e.ThirdName, ' ', e.LastName) AS FullName
+          FROM Employees e  WHERE e.FirstName LIKE '%' + " +cmbemployee.SelectedItem+" + '%'  OR e.SecondName LIKE '%' + " + cmbemployee.SelectedItem + " + '%'   OR e.ThirdName LIKE '%' + " +cmbemployee.SelectedItem + " + '%' OR e.LastName LIKE '%' + " + cmbemployee.SelectedItem + " +  '%' order by e.employeeid ",
+                                   SQLCONN.ConnectionString)
+                );
+
+                var assetTypeTask = Task.Run(() => GetDataTable("SELECT AssetTypeID, AssettypeValue FROM AssetType", SQLCONN3.ConnectionString3));
+                var deviceDetailsTask = Task.Run(() => GetDataTable("SELECT DeviceDetilasID, DeviceDetialsValue FROM DeviceDetials", SQLCONN3.ConnectionString3));
+                var deviceTypesTask = Task.Run(() => GetDataTable("SELECT DeviceTypeID, DeviceType FROM DeviceTypes", SQLCONN3.ConnectionString3));
+                var assetStatusTask = Task.Run(() => GetDataTable("SELECT AssetStatusID, AssetStatus FROM AssetsStatus", SQLCONN3.ConnectionString3));
+                var assetModelTask = Task.Run(() => GetDataTable("SELECT AssetModeID, AssetModel FROM AssetsModel", SQLCONN3.ConnectionString3));
+                var osVersionTask = Task.Run(() => GetDataTable("SELECT OSVersionID, OSVerisonValue FROM OSVerisons", SQLCONN3.ConnectionString3));
+                var assetBrandTask = Task.Run(() => GetDataTable("SELECT AssetBrandID, AssetBrandValue FROM AssetBrand", SQLCONN3.ConnectionString3));
 
                 // Wait for all tasks to complete
                 Task.WaitAll(employeeTask, assetTypeTask, deviceDetailsTask, deviceTypesTask, assetStatusTask, assetModelTask, osVersionTask, assetBrandTask);
@@ -294,7 +300,7 @@ namespace Delmon_Managment_System.Forms
                 cmbbrand.Text = "Select";
                 cmbAssetModel.Text = "Select";
             }
-            if ((int)cmbtype.SelectedValue == 1 || (int)cmbtype.SelectedValue == 2 || (int)cmbtype.SelectedValue == 4 || (int)cmbtype.SelectedValue == 9  || (int)cmbtype.SelectedValue == 10)
+            if ((int)cmbtype.SelectedValue == 1 || (int)cmbtype.SelectedValue == 2 || (int)cmbtype.SelectedValue == 3 || (int)cmbtype.SelectedValue == 4 || (int)cmbtype.SelectedValue == 9  || (int)cmbtype.SelectedValue == 10)
             {
                 SQLCONN3.OpenConection3();
                 string query2 = @"SELECT DeviceTypeID ,DeviceType FROM DeviceTypes where AssetTypeID= @C11";
@@ -461,9 +467,6 @@ namespace Delmon_Managment_System.Forms
             else
             {
 
-
-
-
                 SqlParameter paramcmbtype = new SqlParameter("@C1", SqlDbType.NVarChar);
                 paramcmbtype.Value = cmbtype.SelectedValue;
                 SqlParameter paramcmbrand = new SqlParameter("@C2", SqlDbType.NVarChar);
@@ -486,7 +489,7 @@ namespace Delmon_Managment_System.Forms
 
                 /*Asset Assign*/
                 SqlParameter paramcmbAssignto = new SqlParameter("@C9", SqlDbType.NVarChar);
-                paramcmbAssignto.Value = cmbemployee.SelectedValue;
+                paramcmbAssignto.Value = employenduserID;
                 SqlParameter paramAssigndate = new SqlParameter("@C10", SqlDbType.Date);
                 paramAssigndate.Value = AssignDtp.Value;
                 /*Asset Assign*/
@@ -521,7 +524,7 @@ namespace Delmon_Managment_System.Forms
 
                     if (dr.HasRows)
                     {
-                        MessageBox.Show("This 'Asset / SN '  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("This 'Asset / SN'  Already Exists. !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     else
                     {
@@ -676,14 +679,15 @@ SELECT
     A.sn, 
     AT.AssettypeValue, 
     AB.AssetBrandValue, 
-    A.Model,
+    AM.AssetModel,
     A.PurchasingDate,
     DT.DeviceType,
     A.AssetStatusID,
     CONCAT(E.FirstName, ' ', E.SecondName, ' ', E.ThirdName, ' ', E.LastName) AS FullName,
     LA.EmployeeID AS LastEmployeeID,
     LA.AssginDate AS LastAssignDate,
-    A.Price
+    A.Price,
+    E.EmployeeID
 
 FROM
     Assets A
@@ -693,6 +697,8 @@ INNER JOIN
     AssetBrand AB ON A.Brand = AB.AssetBrandID
 INNER JOIN 
     AssetType AT ON A.AssetTypeID = AT.AssetTypeID
+INNER JOIN 
+    AssetsModel AM ON A.Model = AM.AssetModeID
 LEFT JOIN 
     LastAssignments LA ON A.AssetID = LA.AssetID AND LA.RowNum = 1
 LEFT JOIN
@@ -700,7 +706,7 @@ LEFT JOIN
 WHERE 
     A.sn LIKE '%' + @C1 + '%' OR
     DT.DeviceType LIKE '%' + @C1 + '%' OR
-    A.Model LIKE '%' + @C1 + '%' OR 
+    AM.AssetModel LIKE '%' + @C1 + '%' OR 
     A.AssetID LIKE '%' + @C1 + '%' OR
     AT.AssettypeValue LIKE '%' + @C1 + '%' OR
     AB.AssetBrandValue LIKE '%' + @C1 + '%' OR
@@ -727,6 +733,7 @@ ORDER BY
 
         private async void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            dataGridView1.Visible = true;
             if (e.RowIndex == -1) return;
 
             addbtn.Visible = false;
@@ -743,7 +750,8 @@ ORDER BY
             txtSN.Text = selectedRow.Cells[2].Value?.ToString() ?? string.Empty;
             cmbtype.Text = selectedRow.Cells[3].Value?.ToString() ?? string.Empty;
             cmbbrand.Text = selectedRow.Cells[4].Value?.ToString() ?? string.Empty;
-            cmbAssetModel.SelectedValue = selectedRow.Cells[5].Value?.ToString() ?? string.Empty;
+            cmbAssetModel.Text = selectedRow.Cells[5].Value?.ToString() ?? string.Empty;
+            //cmbAssetModel.SelectedValue = selectedRow.Cells[5].Value?.ToString() ?? string.Empty;
 
             DateTime.TryParse(selectedRow.Cells[6].Value?.ToString(), out DateTime purchasingDate);
             PurchasingDtp.Value = purchasingDate == DateTime.MinValue ? DateTime.Now : purchasingDate;
@@ -754,17 +762,23 @@ ORDER BY
             if (selectedRow.Cells[9].Value != null && !string.IsNullOrEmpty(selectedRow.Cells[9].Value.ToString()))
             {
                 cmbemployee.Text = selectedRow.Cells[9].Value.ToString();
+                employeeSearchText.Text = selectedRow.Cells[9].Value.ToString();
             }
             else
             {
                 cmbemployee.SelectedValue = 0; // or any default value you want to assign
+                employeeSearchText.Text = "Select";
+
             }
 
             DateTime.TryParse(selectedRow.Cells[11].Value?.ToString(), out DateTime assignDate);
             AssignDtp.Value = assignDate == DateTime.MinValue ? DateTime.Now : assignDate;
             PriceTXT.Text = string.IsNullOrEmpty(selectedRow.Cells[12].Value?.ToString()) ? "0" : selectedRow.Cells[12].Value.ToString();
+            employenduserID = selectedRow.Cells[13].Value != null ? Convert.ToInt32(selectedRow.Cells[13].Value) : 0;
 
-           
+
+            dgvEmp.Visible = false;
+
         }
 
         private async Task LoadComboBoxDataAsync()
@@ -843,7 +857,7 @@ ORDER BY
             new SqlParameter("@C6", SqlDbType.DateTime) { Value = PurchasingDtp.Value },
             new SqlParameter("@C7", SqlDbType.NVarChar) { Value = cmbDevice.SelectedValue },
             new SqlParameter("@C8", SqlDbType.NVarChar) { Value = cmbAssetStatus.SelectedValue },
-            new SqlParameter("@C9", SqlDbType.NVarChar) { Value = cmbemployee.SelectedValue },
+            new SqlParameter("@C9", SqlDbType.NVarChar) { Value = CommonClass.employenduserSEArch },
             new SqlParameter("@C10", SqlDbType.DateTime) { Value = AssignDtp.Value },
             new SqlParameter("@C11", SqlDbType.Decimal) { Value = decimal.Parse(PriceTXT.Text) },
             new SqlParameter("@id", SqlDbType.NVarChar) { Value = CommonClass.EmployeeID },
@@ -883,8 +897,8 @@ ORDER BY
                     string currentEmployeeID = dr["EmployeeID"].ToString();
                     DateTime currentAssignDate = DateTime.Parse(dr["AssginDate"].ToString());
 
-                    valuesChanged = currentEmployeeID != cmbemployee.SelectedValue.ToString() ||
-                                    currentAssignDate != AssignDtp.Value;
+                    valuesChanged = currentEmployeeID != CommonClass.employenduserSEArch.ToString()
+                     ||   currentAssignDate != AssignDtp.Value;
                 }
                 dr.Close();
 
@@ -981,7 +995,8 @@ SELECT
     CONCAT(E.FirstName, ' ', E.SecondName, ' ', E.ThirdName, ' ', E.LastName) AS FullName,
     LA.EmployeeID AS LastEmployeeID,
     LA.AssginDate AS LastAssignDate,
-    A.Price
+    A.Price,
+    E.EmployeeID
 
 FROM
     Assets A
@@ -1715,6 +1730,8 @@ ORDER BY
 
         private void AssetIDTXT_TextChanged(object sender, EventArgs e)
         {
+            dataGridView1.Visible = true;
+            dgvEmp.Visible = false;
             SqlDataReader dr;
 
             SQLCONN3.OpenConection3();
@@ -2343,7 +2360,7 @@ ORDER BY
             SqlParameter paramcmbOS = new SqlParameter("@C3", SqlDbType.Int);
             paramcmbOS.Value = cmbVersion.SelectedValue;
 
-            if (string.IsNullOrEmpty(AssetDetialsInfoID))
+            if (string.IsNullOrEmpty(AssetID))
             {
                 MessageBox.Show("Please select Asset first!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -2449,8 +2466,8 @@ ORDER BY
             if (AssetIDTXT.Text != string.Empty)
             {
                 Clipboard.SetText(AssetIDTXT.Text);
-                AssetIDTXT.Visible = true;
-                AssetIDTXT.Text = "Copied !";
+                txtvisa.Visible = true;
+                txtvisa.Text = "Copied !";
             }
             else
             {
@@ -2499,14 +2516,106 @@ ORDER BY
             }
         }
 
-        private void cmbbrand_KeyDown(object sender, KeyEventArgs e)
+        private void employeeSearchText_TextChanged(object sender, EventArgs e)
+        {
+                dgvEmp.Visible = true;
+                string searchText = employeeSearchText.Text.Trim();
+
+               
+
+                SqlParameter paramEmployeenameSearch = new SqlParameter("@C1", SqlDbType.NVarChar);
+                paramEmployeenameSearch.Value = searchText;
+
+
+                SQLCONN.OpenConection();
+
+                // if employess belong to IT showes all employee else show for the certian department 
+
+                string query = @" SELECT EmployeeID, 
+                 CONCAT(e.FirstName, ' ', e.SecondName, ' ', e.ThirdName, ' ', e.LastName) AS FullName
+    FROM Employees e
+   
+    WHERE ((LEN(@C1) = 1 AND (e.EmployeeID LIKE @C1 OR e.CurrentEmpID LIKE @C1))
+           OR (LEN(@C1) > 1 AND (
+               e.EmployeeID LIKE '%' + REPLACE(@C1, ' ', '') + '%'
+               OR REPLACE(e.FirstName, ' ', '') + REPLACE(e.SecondName, ' ', '') + REPLACE(e.ThirdName, ' ', '') + REPLACE(e.LastName, ' ', '') LIKE '%' + REPLACE(@C1, ' ', '') + '%'
+               OR e.FirstName LIKE '%' + @C1 + '%'
+               OR e.SecondName LIKE '%' + @C1 + '%'
+               OR e.ThirdName LIKE '%' + @C1 + '%'
+               OR e.LastName LIKE '%' + @C1 + '%'
+           )))
+    ORDER BY e.EmployeeID";
+
+
+                dgvEmp.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramEmployeenameSearch);
+            dgvEmp.Columns["FullName"].Width = 500;
+
+            SQLCONN.CloseConnection();
+
+            }
+
+        private void label25_Click(object sender, EventArgs e)
         {
 
         }
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+            using (var package = new ExcelPackage())
+            {
+                ExcelWorksheet worksheet1 = package.Workbook.Worksheets.Add("General");
+
+                ExportDataGridViewToExcel(dataGridView1, worksheet1);
+
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Excel Files|*.xlsx";
+                saveFileDialog.Title = "Save as Excel File";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    package.SaveAs(new System.IO.FileInfo(saveFileDialog.FileName));
+                }
+            }
+        }
+        private void ExportDataGridViewToExcel(DataGridView dataGridView, ExcelWorksheet worksheet)
+        {
+            for (int i = 1; i <= dataGridView.ColumnCount; i++)
+            {
+                worksheet.Cells[1, i].Value = dataGridView.Columns[i - 1].HeaderText;
+            }
+
+            for (int i = 0; i < dataGridView.RowCount; i++)
+            {
+                for (int j = 0; j < dataGridView.ColumnCount; j++)
+                {
+                    worksheet.Cells[i + 2, j + 1].Value = dataGridView.Rows[i].Cells[j].Value;
+                }
+            }
+        }
+
+
+        private void dgvEmp_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1) return;
+
+           
+
+            DataGridViewRow selectedRow = dgvEmp.Rows[e.RowIndex];
+
+            // Populate fields
+            employenduserID = selectedRow.Cells[0].Value != null ? Convert.ToInt32(selectedRow.Cells[0].Value) : 0;
+            CommonClass.employenduserSEArch = employenduserID;
+            employeeSearchText.Text = selectedRow.Cells[1].Value?.ToString() ?? string.Empty; ;
+            dgvEmp.Visible = false;
+
+
+
+        }
+    }
+
+
 
     }
-}
 
 
 

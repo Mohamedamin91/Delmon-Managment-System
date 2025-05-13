@@ -1472,6 +1472,7 @@ namespace Delmon_Managment_System.Forms
                     {
 
                         FileNumberID = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        VisaFileNumberID.Text = FileNumberID.ToString();
                         cmbConsulate.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[2].Value.ToString());
                         cmbJob.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[3].Value.ToString());
                         cmbStatus.SelectedValue = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells[4].Value.ToString());
@@ -1842,29 +1843,39 @@ namespace Delmon_Managment_System.Forms
             SqlParameter paramAgency = new SqlParameter("@C3", SqlDbType.NVarChar);
             paramAgency.Value = cmbAgency.SelectedValue;
 
-
-
-
-            if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            if ((int)cmbcandidates.SelectedValue == 0 || FileNumberID == 0)
             {
-                SQLCONN.OpenConection();
-                SQLCONN.ExecuteQueries("update  VISAJobList set EmployeeID=@C1,AgencyID=@C3 where FileNumber=@C2",
-                                              paramPID, paramFilenumber, paramAgency);
-                MessageBox.Show("File Number / Agency Has been Assigned Successfully   ");
-                VisaFileNumberID.Text = "";
-                //cmbcandidates.Text = "Select";
-                //cmbAgency.Text = "Select";
+                MessageBox.Show(" Candidate / Filenumber were not been selected , kindly check ", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
 
-                dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber=" + VisaNumberID + " ");
-                // ClearTextBoxes();
-                SQLCONN.CloseConnection();
+
+            else {
+                if (DialogResult.Yes == MessageBox.Show("Do You Want to perform this operation", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    SQLCONN.OpenConection();
+
+
+                    SQLCONN.ExecuteQueries("update  VISAJobList set EmployeeID=@C1,AgencyID=@C3 where FileNumber=@C2",
+                                                  paramPID, paramFilenumber, paramAgency);
+                    MessageBox.Show("File Number / Agency Has been Assigned Successfully   ");
+                    VisaFileNumberID.Text = "";
+                    //cmbcandidates.Text = "Select";
+                    //cmbAgency.Text = "Select";
+
+
+                    dataGridView2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("Select * From VISAJobList where visanumber=" + VisaNumberID + " ");
+                    // ClearTextBoxes();
+                    SQLCONN.CloseConnection();
+                }
+                else {
+                    return;
+                }
 
             }
-            else
-            {
-
-            }
+      
+           
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -2497,6 +2508,7 @@ GROUP BY
         private void SetFieldValues(DataGridViewRow selectedRow)
         {
             // Cell values
+            object cell0Value = selectedRow.Cells[0].Value;
             object cell1Value = selectedRow.Cells[1].Value;
             object cell2Value = selectedRow.Cells[2].Value;
             object cell3Value = selectedRow.Cells[3].Value;
@@ -2534,10 +2546,17 @@ GROUP BY
 
 
             }
+            //if (cell0Value != null && !string.IsNullOrEmpty(cell0Value.ToString()))
+            //{
+            //    expairENDATEtxt.Text = cell6Value.ToString();
+
+
+            //}
 
             if (int.TryParse(selectedRow.Cells[0].Value?.ToString(), out int parsedVisaNumberID))
             {
                 VisaNumberID = parsedVisaNumberID;
+                Visanumtxt.Text = parsedVisaNumberID.ToString();
             }
 
             if (cell1Value != null && !string.IsNullOrEmpty(cell1Value.ToString()))

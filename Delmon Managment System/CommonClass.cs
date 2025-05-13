@@ -28,6 +28,11 @@ namespace Delmon_Managment_System
         public static int EmployeeIDRPT { get; set; }
 
 
+        // new update to update enduser or employe by search 
+        public static int employenduserSEArch { get; set; }
+        
+
+
 
     }
 }

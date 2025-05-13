@@ -28,7 +28,10 @@ namespace Delmon_Managment_System.Forms
         SQLCONNECTION SQLCONN2 = new SQLCONNECTION();
         int EmployeeID;
         int EnduuserID;
+        int EnduuserID2;
         int CompanyID;
+        string cmbbillvalueelec;
+        int EnduserIDDatagridvew;
         int LoggedEmployeeID;
         int PackageID;
         bool hasView = false;
@@ -46,6 +49,8 @@ namespace Delmon_Managment_System.Forms
             cmbpackage.TextChanged += new EventHandler(cmbpackage_TextChanged);
             cmbenduserrpt.TextChanged += new EventHandler(cmbenduserrpt_TextChanged);
             cmbenduserrptbill.TextChanged += new EventHandler(cmbenduserrptbill_TextChanged);
+            dataGridView3.CellFormatting += dataGridView3_CellFormatting;
+
 
             LoadComboBoxDataPack();
             LoadComboBoxDataEndrpt();
@@ -113,8 +118,6 @@ WHERE
         }
 
 
-
-
         private void LoadComboBoxDataPack()
         {
 
@@ -162,15 +165,7 @@ WHERE
 
 
 
-
-
-
-
-
             cmbenduserrpt.Text = "Select";
-
-
-
 
 
 
@@ -220,8 +215,8 @@ WHERE
             cmbMedia.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             // string query2 = "SELECT OwnerID, OwnerName FROM Owners";
-            string query2 = "SELECT CONVERT(VARCHAR, OwnerID) AS OwnerID, OwnerName FROM Owners";
-            cmbOwner.ValueMember = "OwnerID";
+            string query2 = "SELECT  ID, OwnerName FROM Owners";
+            cmbOwner.ValueMember = "ID";
             cmbOwner.DisplayMember = "OwnerName";
             cmbOwner.DataSource = SQLCONN2.ShowDataInGridViewORCombobox(query2);
             cmbOwner.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -400,11 +395,11 @@ WHERE
             {
                 MessageBox.Show("Please Select 'Meter location' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if ((int)cmbOwner.SelectedValue == 0 || cmbOwner.Text == "Select")
+            else if (cmbOwner.Text == "Select")
             {
                 MessageBox.Show("Please Select 'Owner' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if ((int)cmbbillendusetypeelec.SelectedValue == 0 || cmbbillendusetypeelec.Text == "Select")
+            else if (cmbbillendusetypeelec.Text == string.Empty|| cmbbillendusetypeelec.Text=="Select")
             {
                 MessageBox.Show("Please Select 'EndUser Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -457,7 +452,7 @@ WHERE
                 // Check EndUserType and assign the correct value for @paramEnduserID
                 if (cmbbillendusetypeelec.SelectedItem.ToString() == "Personal")
                 {
-                    paramEndUser.Value = cmbbillenduserelec.SelectedValue;  // Assign value for Personal EndUser
+                    paramEndUser.Value = EnduuserID;  // Assign value for Personal EndUser
                 }
                 else if (cmbbillendusetypeelec.SelectedItem.ToString() == "Company")
                 {
@@ -528,7 +523,7 @@ WHERE
                 MessageBox.Show("Record saved Successfully");
 
                 // Refresh data grid view
-                dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT [AccountNo], [MeterSN], [MeterLocationID], [Ownerid], [EndUserID], [ServiceStatusD], [Notes],[PaidBy],[ShortDesc]
+               dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox(@"SELECT [AccountNo], [MeterSN], [MeterLocationID], [Ownerid], [EndUserID], [ServiceStatusD], [Notes],[PaidBy],[ShortDesc]
         FROM [DelmonGroupDB].[dbo].[ElectrcityBills] WHERE AccountNo = @C1", paramAccount);
 
                 // Show button
@@ -598,14 +593,14 @@ WHERE
             cmbOwner.SelectedValue = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
             string endUserType = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
             cmbbillendusetypeelec.Text = endUserType;
-            int EnduserID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString());
+             EnduserIDDatagridvew = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString());
 
 
             if (endUserType == "Company")
             {
                 label44.Text = "Company";
 
-                cmbbillenduserdivisonelec.Enabled = true;
+                txtendusersearchelec.Text = "Select";
 
                 // Clear existing data source
                 cmbbillenduserelec.DataSource = null;
@@ -614,7 +609,7 @@ WHERE
                 string query12 = "SELECT c.COMPID, c.COMPName_EN " +
                                  "FROM Companies c " +
                                  "JOIN DEPARTMENTS d ON c.compid = d.compid " +
-                                 "WHERE d.DEPTID = " + EnduserID;
+                                 "WHERE d.DEPTID = " + EnduserIDDatagridvew;
                 var companyData = SQLCONN.ShowDataInGridViewORCombobox(query12);
 
                 if (companyData != null && companyData.Rows.Count > 0)
@@ -641,15 +636,19 @@ WHERE
                     cmbbillenduserdivisonelec.DataSource = divisionData;
                     cmbbillenduserdivisonelec.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                     cmbbillenduserdivisonelec.AutoCompleteSource = AutoCompleteSource.ListItems;
-                    cmbbillenduserdivisonelec.SelectedValue = EnduserID;
+                    cmbbillenduserdivisonelec.SelectedValue = EnduserIDDatagridvew;
+
+
                 }
             }
             else if (endUserType == "Personal")
             {
-                label44.Text = "Personal";
-                cmbbillenduserelec.DataSource = null;
-                cmbbillenduserdivisonelec.Enabled = false;
+                label44.Text = "Company";
+
                 cmbbillenduserelec.Text = "Select";
+                //label44.Text = "Personal";
+                cmbbillenduserelec2.DataSource = null;
+                cmbbillenduserelec2.Text = "Select";
 
                 // Load personal end user data (employees)
                 string employeeQuery = "SELECT EmployeeID, CONCAT(FirstName, ' ', SecondName, ' ', ThirdName, ' ', LastName) AS FullName FROM Employees";
@@ -657,10 +656,13 @@ WHERE
 
                 if (employeeData != null && employeeData.Rows.Count > 0)
                 {
-                    cmbbillenduserelec.ValueMember = "EmployeeID";
-                    cmbbillenduserelec.DisplayMember = "FullName";
-                    cmbbillenduserelec.DataSource = employeeData;
-                    cmbbillenduserelec.SelectedValue = EnduserID;
+                    cmbbillenduserelec2.ValueMember = "EmployeeID";
+                    cmbbillenduserelec2.DisplayMember = "FullName";
+                    cmbbillenduserelec2.DataSource = employeeData;
+                    cmbbillenduserelec2.SelectedValue = EnduserIDDatagridvew;
+                    EnduuserID = EnduserIDDatagridvew;
+                    txtendusersearchelec.Text = cmbbillenduserelec2.Text;
+
                 }
             }
 
@@ -669,6 +671,7 @@ WHERE
             RemarksTxt.Text = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
             cmbpaidbyelec.Text = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
             txtshortdescelec.Text = dataGridView1.Rows[e.RowIndex].Cells[9].Value.ToString();
+            DGVSearch.Visible = false;
 
             SQLCONN.CloseConnection();
         }
@@ -686,11 +689,11 @@ WHERE
             {
                 MessageBox.Show("Please Select 'Meter location' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if ((int)cmbOwner.SelectedValue == 0 || cmbOwner.Text == "Select")
+            else if (cmbOwner.Text == "Select")
             {
                 MessageBox.Show("Please Select 'Owner' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if ((int)cmbbillendusetypeelec.SelectedValue == 0 || cmbbillendusetypeelec.Text == "Select")
+            else if (txtendusersearchelec.Text == string.Empty)
             {
                 MessageBox.Show("Please Select 'EndUser Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -718,7 +721,7 @@ WHERE
                 SqlParameter paramEndUser = new SqlParameter("@C6", SqlDbType.NVarChar);
                 if (cmbbillendusetypeelec.SelectedItem.ToString() == "Personal")
                 {
-                    paramEndUser.Value = cmbbillenduserelec.SelectedValue;
+                    paramEndUser.Value = EnduuserID;
                 }
                 else if (cmbbillendusetypeelec.SelectedItem.ToString() == "Company")
                 {
@@ -884,18 +887,19 @@ WHERE
             {
                 MessageBox.Show("Please insert 'Service number' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if ((int)cmbmeterlocation.SelectedValue == 0 || cmbmeterlocation.Text == "Select")
-            {
-                MessageBox.Show("Please Select 'Meter location' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+           
             else if (cmbRegisterType.Text == "Select")
             {
                 MessageBox.Show("Please Select 'Register Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if ((int)cmbRegisterUnder.SelectedValue == 0 || cmbRegisterUnder.Text == "Select")
+            else if (cmbRegisterUnder.Text == "Select")
             {
                 MessageBox.Show("Please Select 'Register Under-Owner' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            
+       
+
+
             else if ((int)cmbpackage.SelectedValue == 0 || cmbpackage.Text == "Select")
             {
                 MessageBox.Show("Please Select 'Package' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -904,10 +908,7 @@ WHERE
             {
                 MessageBox.Show("Please Select 'Services' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if (cmbbillendusertypecomm.Text == "Select")
-            {
-                MessageBox.Show("Please Select 'Enduser Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            
             else if (cmbpaidbycomm.Text == "Select")
             {
                 MessageBox.Show("Please Select 'Paidby option' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -971,7 +972,7 @@ WHERE
                 // Check EndUserType and assign the correct value for @paramEnduserID
                 if (cmbbillendusertypecomm.SelectedItem.ToString() == "Personal")
                 {
-                    paramenduser.Value = cmbbillendusercomm.SelectedValue;  // Assign value for Personal EndUser
+                    paramenduser.Value = EnduuserID2;  // Assign value for Personal EndUser
                 }
                 else if (cmbbillendusertypecomm.SelectedItem.ToString() == "Company")
                 {
@@ -1042,7 +1043,7 @@ WHERE
             SqlParameter paramSearch = new SqlParameter("@C0", SqlDbType.NVarChar);
             paramSearch.Value = textBox1.Text;
 
-            SQLCONN.OpenConection0();
+            SQLCONN.OpenConection();
             if (lblusertype.Text == "Admin")
             {
                 string query = @"SELECT  [AccountNo]
@@ -1202,11 +1203,13 @@ WHERE
                     cmbRegisterUnder.DisplayMember = "FullName";
                     cmbRegisterUnder.DataSource = employeeData;
                     cmbRegisterUnder.SelectedValue = EnduserID1;
+                   // EnduuserID2 = EnduserID1;
                 }
             }
 
+           
 
-          
+
             /**registerunbder**/
 
 
@@ -1261,11 +1264,11 @@ WHERE
             }
             else if (endUserType == "Personal")
             {
-                label50.Text = "Personal";
+               // label50.Text = "Personal";
 
-                cmbbillenduserelec.DataSource = null;
+                cmbbillenduserelec2.DataSource = null;
                 cmbbillenduserdivisonelec.Enabled = false;
-                cmbbillendusercomm.Text = "Select";
+                cmbbillendusercomm2.Text = "Select";
 
                 // Load personal end user data (employees)
                 string employeeQuery = "SELECT EmployeeID, CONCAT(FirstName, ' ', SecondName, ' ', ThirdName, ' ', LastName) AS FullName FROM Employees";
@@ -1273,10 +1276,12 @@ WHERE
 
                 if (employeeData != null && employeeData.Rows.Count > 0)
                 {
-                    cmbbillendusercomm.ValueMember = "EmployeeID";
-                    cmbbillendusercomm.DisplayMember = "FullName";
-                    cmbbillendusercomm.DataSource = employeeData;
-                    cmbbillendusercomm.SelectedValue = EnduserID;
+                    cmbbillendusercomm2.ValueMember = "EmployeeID";
+                    cmbbillendusercomm2.DisplayMember = "FullName";
+                    cmbbillendusercomm2.DataSource = employeeData;
+                    cmbbillendusercomm2.SelectedValue = EnduserID;
+                    txtendusersearchComm.Text = cmbbillendusercomm2.Text;
+                    EnduuserID2 = EnduserID;
                 }
             }
 
@@ -1286,6 +1291,7 @@ WHERE
             txtshortdesccomm.Text = selectedRow.Cells[11].Value.ToString();
 
             // Check if the register under is company or personal
+            DGVSearch2.Visible = false;
 
 
         }
@@ -1303,10 +1309,7 @@ WHERE
             {
                 MessageBox.Show("Please insert 'Service number' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if ((int)cmbmeterlocation.SelectedValue == 0 || cmbmeterlocation.Text == "Select")
-            {
-                MessageBox.Show("Please Select 'Meter location' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+          
             else if (cmbRegisterType.Text == "Select")
             {
                 MessageBox.Show("Please Select 'Register Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1386,11 +1389,13 @@ WHERE
                 // Check EndUserType and assign the correct value for @paramEnduserID
                 if (cmbbillendusertypecomm.SelectedItem.ToString() == "Personal")
                 {
-                    paramenduser.Value = cmbbillendusercomm.SelectedValue;  // Assign value for Personal EndUser
+                   
+                    paramenduser.Value = EnduuserID2;  // Assign value for Personal EndUser
                 }
                 else if (cmbbillendusertypecomm.SelectedItem.ToString() == "Company")
                 {
                     paramenduser.Value = cmbbillenduserdevisionecomm.SelectedValue;  // Assign value for Company EndUser
+
                 }
 
 
@@ -1784,7 +1789,7 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
             paramSearch.Value = textBox2.Text;
 
             SQLCONN.OpenConection();
-            if (lblusertype.Text == "Admin")
+            if (lblusertype.Text == "Admin" || lblusertype.Text == "User" )
             {
                 string query = @"SELECT  * 
                FROM [DelmonGroupDB].[dbo].[BillsPaymentStatus] where  AccountNo LIKE '%' + @C0 + '%' ";
@@ -2109,7 +2114,7 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
             paramSearch.Value = textBox3.Text;
 
             SQLCONN.OpenConection();
-            if (lblusertype.Text == "Admin")
+            if (lblusertype.Text == "Admin" || lblusertype.Text == "User")
             {
                 string query = @"SELECT  * 
                FROM [DelmonGroupDB].[dbo].[Packages] where  PackageName LIKE '%' + @C0 + '%' ";
@@ -3189,7 +3194,7 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
         {
             if (cmbOwner.SelectedValue != null)
             {
-                cmbOwner.SelectedValue = Convert.ToInt64(cmbOwner.SelectedValue);
+               // cmbOwner.SelectedValue = Convert.ToInt64(cmbOwner.SelectedValue);
             }
         }
 
@@ -3615,7 +3620,9 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
                     (cb.EndUserType = 'Company' AND d1.DeptHeadID = @paramEnduserID) OR
                     (cb.EndUserType = 'Personal' AND d2.DeptHeadID = @paramEnduserID)
                 )
-                AND cb.PaidBy = @paramPaidBy 
+                AND cb.PaidBy = @paramPaidBy
+               and ServiceStatusID !=3 
+               
 ";
 
                     }
@@ -3704,6 +3711,8 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
                     (eb.EndUserType = 'Personal' AND d2.DeptHeadID = @paramEnduserID)
                 )
                 AND eb.PaidBy = @paramPaidBy
+                and ServiceStatusD !=3
+
 
 
 ";
@@ -3807,6 +3816,8 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
                 (cb.EndUserType = 'Personal' AND d2.DeptHeadID = @paramEnduserID)
             )
             AND cb.PaidBy = @paramPaidBy
+                and ServiceStatusID !=3
+
    ";
                         }
 
@@ -3814,10 +3825,7 @@ WHERE [ServiceNo] = @C2", paramaccount, paramenduser, paramRegisterType, paramRe
 
                         else
                         {
-
-
-
-                            query = @"  	SELECT *
+           query = @"  	SELECT *
 FROM (
     SELECT 
         bps.AccountNo,
@@ -3889,19 +3897,22 @@ FROM (
         LEFT JOIN Companies hodCompany ON hod.COMPID = hodCompany.COMPID
         LEFT JOIN Meterlocations ML ON eb.MeterLocationID = ML.MeterLocationID
 	 
-    WHERE 
+ WHERE
         bps.BillType = @paramBillType
-        AND bps.PaymentStatus = 0
-        AND (
-            (eb.EndUserType = 'Company' AND d1.DeptHeadID = @paramEnduserID) OR
-            (eb.EndUserType = 'Personal' AND d2.DeptHeadID = @paramEnduserID)
-        )
-        AND eb.PaidBy = @paramPaidBy
 
-";
+                          AND CONVERT(DATE, bps.IssuedDate) >= @paramFrom
+                          AND CONVERT(DATE, bps.IssuedDate) <= @paramTo
+                          AND bps.AccountNo = @paramAccount
+              AND CASE
+                WHEN eb.EndUserType = 'Company' THEN d1.DeptHeadID
+                WHEN eb.EndUserType = 'Personal' THEN d2.DeptHeadID
+                ELSE d2.DeptHeadID
+              END = @paramEnduserID
+           AND eb.PaidBy = @paramPaidBy
+                and ServiceStatusD !=3 
 
-                        }
 
+";                 }
 
                     }
                 }
@@ -3957,12 +3968,13 @@ FROM (
                 // Append final ordering and close the main query
                 query += @"
 ) AS TempTable
-WHERE RowNum = 1 "; 
+WHERE RowNum = 1 ";
 
-              
-                
-                    query += " ORDER BY EndUserFirstName";
-                
+
+
+              //  query += " ORDER BY EndUserFirstName";
+                query += " ORDER BY IssuedDate";
+
 
                 // Execute the query and fill DataTable
                 DataTable dataTable = new DataTable();
@@ -4024,21 +4036,20 @@ WHERE RowNum = 1 ";
                 else
                 {
 
-                    //if (cmbenduserrptbill.Text.ToString() != "Select" && cmbpaidbyrpt.Text == "Personal")
-                    //{
-                    //    If additional conditions are met, load the specified report(e.g., a customized Communication report)
-                    //    reportName = "Delmon_Managment_System.Reports.BillsReportElec2.rpt";
-
-                    //}
-                    //else
-                    //{
-                        // For other bill types, load a different report(e.g., Electricity report)
-                        reportName = "Delmon_Managment_System.Reports.BillsReportElec.rpt";
+                      reportName = "Delmon_Managment_System.Reports.BillsReportElec.rpt";
 
                     //}
 
 
                 }
+
+                // Dispose of the previous report instance before loading a new one
+                if (crystalReportViewer1.ReportSource != null)
+                {
+                    ((ReportDocument)crystalReportViewer1.ReportSource).Close();
+                    ((ReportDocument)crystalReportViewer1.ReportSource).Dispose();
+                }
+
 
                 // Load the selected report
                 using (Stream rptStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(reportName))
@@ -4046,13 +4057,16 @@ WHERE RowNum = 1 ";
                     if (rptStream != null)
                     {
                         string tempReportPath = Path.GetTempFileName();
+
                         using (FileStream tempFileStream = new FileStream(tempReportPath, FileMode.Create))
                         {
                             rptStream.CopyTo(tempFileStream);
                         }
 
                         report.Load(tempReportPath);
-                        File.Delete(tempReportPath);
+
+                        // **DO NOT** delete the temp file before the report is fully loaded
+                        // File.Delete(tempReportPath);
                     }
                     else
                     {
@@ -4063,34 +4077,8 @@ WHERE RowNum = 1 ";
 
                 // Set up report parameters as usual
                 report.SetDataSource(dataTable);
-                // (Set other parameters here)
 
-                // Display the report
-                crystalReportViewer1.ReportSource = report;
-                countnumber.Text = dataTable.Rows.Count.ToString();
-
-                using (Stream rptStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(reportName))
-                {
-                    if (rptStream != null)
-                    {
-                        string tempReportPath = Path.GetTempFileName();
-                        using (FileStream tempFileStream = new FileStream(tempReportPath, FileMode.Create))
-                        {
-                            rptStream.CopyTo(tempFileStream);
-                        }
-
-                        report.Load(tempReportPath);
-                        File.Delete(tempReportPath);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Could not find the embedded report resource.");
-                        return;
-                    }
-                }
-
-                report.SetDataSource(dataTable);
-
+                // Check and set parameters only if they exist in the query
                 if (query.Contains("@paramEnduserType"))
                 {
                     report.SetParameterValue("@paramEnduserType", cmbendtype.SelectedItem.ToString());
@@ -4100,9 +4088,10 @@ WHERE RowNum = 1 ";
                 report.SetParameterValue("@paramEnduserBillID", cmbenduserrptbill.SelectedValue);
                 report.SetParameterValue("@paramPaidBy", cmbpaidbyrpt.Text);
 
-
-
+                // Display the report
                 crystalReportViewer1.ReportSource = report;
+                crystalReportViewer1.Refresh();
+
                 countnumber.Text = dataTable.Rows.Count.ToString();
             }
 
@@ -4158,9 +4147,11 @@ WHERE RowNum = 1 ";
             switch (cmbbillendusetypeelec.SelectedItem.ToString())
             {
                 case "Company":
+                    DGVSearch.Visible = false;
                     label44.Text = "EndUser- Company";
                     cmbbillenduserelec.DataSource = null; // Clear the data source
                     cmbbillenduserelec.Enabled = true;
+                    txtendusersearchelec.Enabled = false;
                     cmbbillenduserdivisonelec.Enabled = true;
 
                     cmbbillenduserelec.ValueMember = "COMPID";
@@ -4171,17 +4162,22 @@ WHERE RowNum = 1 ";
                     break;
 
                 case "Personal":
-                    label44.Text = "EndUser- Employee";
-                    cmbbillenduserelec.Enabled = true;
+                    DGVSearch.Visible = true;
+
+                    //label44.Text = "EndUser- Employee";
+                    cmbbillenduserelec.Enabled = false;
+                    txtendusersearchelec.Enabled = true;
                     cmbbillenduserdivisonelec.Enabled = false;
-                    cmbbillenduserelec.DataSource = null; // Clear the data source
+                    cmbbillenduserelec2.DataSource = null; // Clear the data source
 
 
-                    cmbbillenduserelec.ValueMember = "EmployeeID";
-                    cmbbillenduserelec.DisplayMember = "FullName";
-                    cmbbillenduserelec.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT EmployeeID, CONCAT(FirstName,' ', SecondName,' ', ThirdName,' ', LastName) AS 'FullName' FROM Employees ORDER BY EmployeeID");
-                    cmbbillenduserelec.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                    cmbbillenduserelec.AutoCompleteSource = AutoCompleteSource.ListItems;
+                    cmbbillenduserelec2.ValueMember = "EmployeeID";
+                    cmbbillenduserelec2.DisplayMember = "FullName";
+                    cmbbillenduserelec2.DataSource = SQLCONN.ShowDataInGridViewORCombobox("SELECT EmployeeID, CONCAT(FirstName,' ', SecondName,' ', ThirdName,' ', LastName) AS 'FullName' FROM Employees ORDER BY EmployeeID");
+                    cmbbillenduserelec2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                    cmbbillenduserelec2.AutoCompleteSource = AutoCompleteSource.ListItems;
+                    txtendusersearchelec.Text = cmbbillenduserelec2.Text;
+                    cmbbillenduserelec.Text = "Select";
                     break;
 
                 default:
@@ -4289,7 +4285,6 @@ WHERE RowNum = 1 ";
             cmbbillenduserdevisionecomm.Enabled = true;
             DataRow dr;
             SqlConnection conn = new SqlConnection(@"Data Source=192.168.1.8;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@");
-            // SqlConnection conn = new SqlConnection(@"Data Source=AMIN-PC;Initial Catalog=DelmonGroupDB;User ID=sa;password=Ram72763@");
 
 
             conn.Open();
@@ -4368,12 +4363,12 @@ WHERE RowNum = 1 ";
             eb.AccountNo, 
             eb.ShortDesc AS Label,
             CONVERT(DATE, eb2023.PeriodStartDate) AS PeriodStartDate2023,
-            DATEDIFF(DAY, eb2023.PeriodStartDate, eb2023.PeriodEndDate) AS Days2023,
+            DATEDIFF(DAY, eb2023.PeriodStartDate, eb2023.PeriodEndDate)+1 AS Days2023,
             eb2023.BillAmount AS BillAmount2023,
             eb2023.IssueMonth AS IssueMonth2023,
             eb2023.IssueYear AS IssueYear2023,
             CONVERT(DATE, eb2024.PeriodStartDate) AS PeriodStartDate2024,
-            DATEDIFF(DAY, eb2024.PeriodStartDate, eb2024.PeriodEndDate) AS Days2024,
+            DATEDIFF(DAY, eb2024.PeriodStartDate, eb2024.PeriodEndDate)+1 AS Days2024,
             eb2024.BillAmount AS BillAmount2024,
             eb2024.IssueMonth AS IssueMonth2024,
             eb2024.IssueYear AS IssueYear2024,
@@ -4517,6 +4512,266 @@ WHERE RowNum = 1 ";
             catch (Exception ex)
             {
                 MessageBox.Show("An error occurred: " + ex.Message);
+            }
+        }
+
+        private void dataGridView3_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Check if the current column is "PaymentStatus"
+            if (dataGridView3.Columns[e.ColumnIndex].Name == "PaymentStatus" && e.Value != null)
+            {
+                int paymentStatus;
+                if (int.TryParse(e.Value.ToString(), out paymentStatus))
+                {
+                    if (paymentStatus == 0)
+                    {
+                        // Set the background color to red if PaymentStatus is 0
+                        dataGridView3.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.Firebrick;
+                    }
+                    else
+                    {
+                        // Set the background color to green otherwise
+                        dataGridView3.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.Green;
+                    }
+                }
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
+            {
+                groupBox4.Enabled = false;
+                //   cmbenduserrpt.Enabled = true;
+
+            }
+            else
+            {
+                groupBox4.Enabled = true;
+                //  cmbenduserrpt.Enabled = false;
+
+
+            }
+        }
+
+        private void txtendusersearch_TextChanged(object sender, EventArgs e)
+        {
+            DGVSearch.Visible = true;
+            string searchText = txtendusersearchelec.Text.Trim();
+            SqlParameter paramEmployeenameSearch = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramEmployeenameSearch.Value = searchText;
+            SQLCONN.OpenConection();
+
+            string query = "";
+
+            switch (cmbbillendusetypeelec.SelectedItem.ToString())
+            {
+             
+                case "Personal":
+                    DGVSearch.Visible = true;
+
+
+
+                    
+
+
+
+                    // if employess belong to IT showes all employee else show for the certian department 
+
+                     query = @" SELECT EmployeeID, 
+                 CONCAT(e.FirstName, ' ', e.SecondName, ' ', e.ThirdName, ' ', e.LastName) AS FullName
+    FROM Employees e
+   
+    WHERE ((LEN(@C1) = 1 AND (e.EmployeeID LIKE @C1 OR e.CurrentEmpID LIKE @C1))
+           OR (LEN(@C1) > 1 AND (
+               e.EmployeeID LIKE '%' + REPLACE(@C1, ' ', '') + '%'
+               OR REPLACE(e.FirstName, ' ', '') + REPLACE(e.SecondName, ' ', '') + REPLACE(e.ThirdName, ' ', '') + REPLACE(e.LastName, ' ', '') LIKE '%' + REPLACE(@C1, ' ', '') + '%'
+               OR e.FirstName LIKE '%' + @C1 + '%'
+               OR e.SecondName LIKE '%' + @C1 + '%'
+               OR e.ThirdName LIKE '%' + @C1 + '%'
+               OR e.LastName LIKE '%' + @C1 + '%'
+           )))
+    ORDER BY e.EmployeeID";
+
+
+                    DGVSearch.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramEmployeenameSearch);
+                    DGVSearch.Columns["FullName"].Width = 500;
+                    break;
+
+                default:
+                    label44.Text = "Type";
+                    break;
+            }
+
+            SQLCONN.CloseConnection();
+
+
+            
+
+        }
+
+        private void txtendusersearchdiv_TextChanged(object sender, EventArgs e)
+        {
+            DGVSearch.Visible = true;
+            string searchText = txtendusersearchelec.Text.Trim();
+            SqlParameter paramEmployeenameSearch = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramEmployeenameSearch.Value = searchText;
+            SQLCONN.OpenConection();
+
+            string query = "";
+
+            switch (cmbbillendusetypeelec.SelectedItem.ToString())
+            {
+                case "Company":
+
+                    query = @"   SELECT COMPID, COMPName_EN,COMPName_AR FROM Companies 
+   
+    WHERE 
+                COMPName_EN LIKE '%' + @C1 + '%'
+               OR COMPName_AR LIKE '%' + @C1 + '%'
+            
+              
+           
+    ORDER BY COMPID";
+                    DGVSearch.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramEmployeenameSearch);
+                    DGVSearch.Columns["COMPName_EN"].Width = 500;
+
+                    break;
+
+                case "Personal":
+                    DGVSearch.Visible = true;
+
+
+
+
+
+
+
+                    // if employess belong to IT showes all employee else show for the certian department 
+
+                    query = @" SELECT EmployeeID, 
+                 CONCAT(e.FirstName, ' ', e.SecondName, ' ', e.ThirdName, ' ', e.LastName) AS FullName
+    FROM Employees e
+   
+    WHERE ((LEN(@C1) = 1 AND (e.EmployeeID LIKE @C1 OR e.CurrentEmpID LIKE @C1))
+           OR (LEN(@C1) > 1 AND (
+               e.EmployeeID LIKE '%' + REPLACE(@C1, ' ', '') + '%'
+               OR REPLACE(e.FirstName, ' ', '') + REPLACE(e.SecondName, ' ', '') + REPLACE(e.ThirdName, ' ', '') + REPLACE(e.LastName, ' ', '') LIKE '%' + REPLACE(@C1, ' ', '') + '%'
+               OR e.FirstName LIKE '%' + @C1 + '%'
+               OR e.SecondName LIKE '%' + @C1 + '%'
+               OR e.ThirdName LIKE '%' + @C1 + '%'
+               OR e.LastName LIKE '%' + @C1 + '%'
+           )))
+    ORDER BY e.EmployeeID";
+
+
+                    DGVSearch.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramEmployeenameSearch);
+                    DGVSearch.Columns["FullName"].Width = 500;
+                    break;
+
+                default:
+                    label44.Text = "Type";
+                    break;
+            }
+
+            SQLCONN.CloseConnection();
+        }
+
+        private void DGVSearch_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1) return;
+
+       
+
+            DataGridViewRow selectedRow = DGVSearch.Rows[e.RowIndex];
+
+            // Populate fields
+            EnduuserID = selectedRow.Cells[0].Value != null ? Convert.ToInt32(selectedRow.Cells[0].Value) : 0;
+            txtendusersearchelec.Text = selectedRow.Cells[1].Value?.ToString() ?? string.Empty;
+
+            if (EnduuserID != 0)
+            {
+                cmbbillendusetypeelec.Text = "Personal";
+            }
+            else 
+            {
+                cmbbillendusetypeelec.Text = "Company";
+            }
+        }
+
+        private void txtendusersearchComm_TextChanged(object sender, EventArgs e)
+        {
+            DGVSearch2.Visible = true;
+            string searchText = txtendusersearchComm.Text.Trim();
+            SqlParameter paramEmployeenameSearch = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramEmployeenameSearch.Value = searchText;
+            SQLCONN.OpenConection();
+
+            string query = "";
+
+            switch (cmbbillendusertypecomm.SelectedItem.ToString())
+            {
+
+                case "Personal":
+                    DGVSearch2.Visible = true;
+
+
+
+
+
+
+
+                    // if employess belong to IT showes all employee else show for the certian department 
+
+                    query = @" SELECT EmployeeID, 
+                 CONCAT(e.FirstName, ' ', e.SecondName, ' ', e.ThirdName, ' ', e.LastName) AS FullName
+    FROM Employees e
+   
+    WHERE ((LEN(@C1) = 1 AND (e.EmployeeID LIKE @C1 OR e.CurrentEmpID LIKE @C1))
+           OR (LEN(@C1) > 1 AND (
+               e.EmployeeID LIKE '%' + REPLACE(@C1, ' ', '') + '%'
+               OR REPLACE(e.FirstName, ' ', '') + REPLACE(e.SecondName, ' ', '') + REPLACE(e.ThirdName, ' ', '') + REPLACE(e.LastName, ' ', '') LIKE '%' + REPLACE(@C1, ' ', '') + '%'
+               OR e.FirstName LIKE '%' + @C1 + '%'
+               OR e.SecondName LIKE '%' + @C1 + '%'
+               OR e.ThirdName LIKE '%' + @C1 + '%'
+               OR e.LastName LIKE '%' + @C1 + '%'
+           )))
+    ORDER BY e.EmployeeID";
+
+
+                    DGVSearch2.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramEmployeenameSearch);
+                    DGVSearch2.Columns["FullName"].Width = 500;
+                    break;
+
+                default:
+                    label50.Text = "Type";
+                    break;
+            }
+
+            SQLCONN.CloseConnection();
+
+
+        }
+
+        private void DGVSearch2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1) return;
+
+
+
+            DataGridViewRow selectedRow = DGVSearch2.Rows[e.RowIndex];
+
+            // Populate fields
+            EnduuserID2 = selectedRow.Cells[0].Value != null ? Convert.ToInt32(selectedRow.Cells[0].Value) : 0;
+            txtendusersearchComm.Text = selectedRow.Cells[1].Value?.ToString() ?? string.Empty;
+
+            if (EnduuserID2 != 0)
+            {
+                cmbbillendusertypecomm.Text = "Personal";
+            }
+            else
+            {
+                cmbbillendusertypecomm.Text = "Company";
             }
         }
 

@@ -121,13 +121,16 @@ namespace Delmon_Managment_System.Forms
                 groupBox3.Enabled = false;
                 groupBox4.Enabled = false;
                 picvisascreen.Enabled = false;
+                label11.Enabled = false;
+
                 groupBox5.Enabled = groupBox6.Enabled = false;
 
 
             }
             else
             {
-                picvisascreen.Enabled = false;
+                picvisascreen.Enabled = true;
+                label11.Enabled = true;
                 button1.Enabled = true;
                 button3.Enabled = true;
                 groupBox3.Enabled = true;
@@ -1054,13 +1057,17 @@ namespace Delmon_Managment_System.Forms
                     TRIM(COALESCE(CONCAT(E.FirstName, ' '), '') + COALESCE(CONCAT(E.SecondName, ' '), '') +
                     COALESCE(CONCAT(E.ThirdName, ' '), '') + COALESCE(E.Lastname, '')) AS [FullName],
                     J.Visanumber, 
-                    V_COMP.COMPName_EN AS [Sponsor], 
-                    CO_COMP.COMPName_EN AS [ReservedTO],
+                    V_COMP.ID_Number AS [Sponsor ID], 
+                    V_COMP.COMPName_EN AS [Sponsor Name], 
+                    CO_COMP.ID_Number AS [ReservedTO ID],
+                    CO_COMP.COMPName_EN AS [ReservedTO Name],
                     CON.ConsulateCity AS [Consulate], 
                     Jo.[JobTitleEN], 
                     Jo.[JobTitleAR], 
                     S.Status AS [Status],
-                    CONVERT(NVARCHAR(10), V.IssueDateEN, 103) AS [Date]
+                    CONVERT(NVARCHAR(10), V.IssueDateEN, 103) AS [Issue Date],
+                    CONVERT(NVARCHAR(10), E.StartDate, 103) AS [Arrival Date]
+
                 FROM 
                     VISAJobList J
                 LEFT JOIN 
@@ -1095,9 +1102,47 @@ namespace Delmon_Managment_System.Forms
                     {
                         queryTotal += " AND J.ConsulateID = @param10";
                     }
-                   
+
+                    if (cbSelect.Checked == false)
+                    {
+
+                       
+                        if (cbRefunded.Checked)
+                        {
+                            queryTotal += " AND S.Status = 'Refunded' ";
+                        }
+                        if (cbExpired.Checked)
+                        {
+                            queryTotal += " AND S.Status = 'Expired' ";
+                        }
+                        if (cbNotused.Checked)
+                        {
+                            queryTotal += " AND S.Status = 'Notused' ";
+                        }
+                        if (cbReserved.Checked)
+                        {
+                            queryTotal += " AND S.Status = 'Reserved' ";
+                        }
+                        if (cbVISAExpiredAfterStamped.Checked)
+                        {
+                            queryTotal += " AND S.Status = 'VISA Expired After Stamped' ";
+                        }
+                       
+                        if (cbUsed.Checked)
+                        {
+                            queryTotal += " AND S.Status = 'Used' ";
+                        }
+                        if (cbVISAStamped.Checked)
+                        {
+                            queryTotal += " AND S.Status = 'VISA Stamped' ";
+                        }
+                        if (cbUnderProcess.Checked)
+                        {
+                            queryTotal += " AND S.Status = 'Under Process' ";
+                        }
 
 
+                    }
 
 
                     using (SqlCommand command = new SqlCommand(queryTotal, connection))
@@ -1127,7 +1172,7 @@ namespace Delmon_Managment_System.Forms
                 }
 
                 dataGridView4.DataSource = VisaReport;
-                dataGridView4.Columns[3].Width = 300; // Adjust column width if needed
+                dataGridView4.Columns[4].Width = 300; // Adjust column width if needed
             }
             else // Specific row
             {
@@ -1151,7 +1196,10 @@ namespace Delmon_Managment_System.Forms
                     COALESCE(CONCAT(E.ThirdName, ' '), '') + COALESCE(E.Lastname, '')) AS [FullName],
                     CON.ConsulateCity AS [Consulate],
                     S.Status AS [Status],
-                    CONVERT(NVARCHAR(10), V.IssueDateEN, 103) AS [Date]
+                    CONVERT(NVARCHAR(10), V.IssueDateEN, 103) AS [Issue Date],
+                    CONVERT(NVARCHAR(10), E.StartDate, 103) AS [Arrival Date]
+
+
                 FROM 
                     VISAJobList J
                 LEFT JOIN 
@@ -1675,12 +1723,122 @@ namespace Delmon_Managment_System.Forms
 
 
 
-                dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"SELECT Username, SUM(Total) AS Count ,
-    FORMAT(SUM(Total) * 100.0 / (SELECT SUM(Total) FROM LogReport WHERE CONVERT(DATE, Printdate, 120) BETWEEN @C1 AND @C2 AND AssetId = @C0), 'N2') AS Percentage
-
-            FROM LogReport WHERE 
-            CONVERT(DATE, Printdate, 120) BETWEEN @C1 AND @C2 AND AssetId=@C0 
-            GROUP BY Username ORDER BY Count;", ParamFrom, ParamTo, ParamUserPrinter);
+                dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"
+SELECT 
+    CASE 
+        WHEN Username LIKE '%DELMONGROUP\nasser%' THEN 'Nasser'
+        WHEN Username LIKE '%IT_Akram%' THEN 'Akram'
+        WHEN Username LIKE '%Custom_Zamzam%' THEN 'Zamzam'
+        WHEN Username LIKE '%Cutsom_Zamzam%' THEN 'Zamzam'
+        WHEN Username LIKE '%Custom_Islam%' THEN 'Islam'
+        WHEN Username LIKE '%Custom_Anshif%' THEN 'Anshif'
+        WHEN Username LIKE '%Salt_Ravindra Yadav%' THEN 'Ravindra Yadav'
+        WHEN Username LIKE '%Travels_Monir%' THEN 'Monir'
+        WHEN Username LIKE '%Salt_Aafaque%' THEN 'Aafaque'
+        WHEN Username LIKE '%Salt_Shakil%' THEN 'Shakil'
+        WHEN Username LIKE '%Salt-Nabil%' THEN 'Nabil'
+        WHEN Username LIKE '%AGB_Abdou%' THEN 'Abdou'
+        WHEN Username LIKE '%Transportation_Naadi%' THEN 'Naadi'
+        WHEN Username LIKE '%Admin_Khorshed%' THEN 'Khorshed'
+        WHEN Username LIKE '%Accounts_Safthar%' THEN 'Safthar'
+        WHEN Username LIKE '%IT Wesam%' THEN 'Wesam'
+        WHEN Username LIKE '%Accounts_Akeel%' THEN 'Akeel'
+        WHEN Username LIKE '%IT Abdullah%' THEN 'Abdullah'
+        WHEN Username LIKE '%Account-Nasser%' THEN 'Nasser'
+        WHEN Username LIKE '%NS_Diea%' THEN 'Deia_nabhan'
+        WHEN Username LIKE '%Diea%' THEN 'Deia_nabhan'
+        WHEN Username LIKE '%Silica_Ayat%' THEN 'Ayat'
+        WHEN Username LIKE '%Silica_Rajesh%' THEN 'Rajesh'
+        WHEN Username LIKE '%Silica_Krishna%' THEN 'Krishna'
+        WHEN Username LIKE '%Silica_Ivan%' THEN 'Ivan'
+        WHEN Username LIKE '%FM_Sarasdeen%' THEN 'Sarasdeen'
+        WHEN Username LIKE '%MB_Shareek%' THEN 'Shareek'
+        WHEN Username LIKE '%Travels_Shajeer%' THEN 'Shajeer'
+        WHEN Username LIKE '%Lukoil_Manibhakta%' THEN 'Manibhakta'
+        WHEN Username LIKE '%Admin_Khorshed%' THEN 'Khorshed'
+        WHEN Username LIKE '%OP4_Ivan%' THEN 'Ivan'
+        WHEN Username LIKE '%OP4_Reynaldo%' THEN 'Reynaldo'
+        WHEN Username LIKE '%DFT_Fawzy%' THEN 'Fawzy'
+        WHEN Username LIKE '%Salt_Mohammed Qasim%' THEN 'Mohammed Qasim'
+        WHEN Username LIKE '%SAP_Balaji%' THEN 'Balaji'
+        WHEN Username LIKE '%Lukoil_Mazen%' THEN 'Mazen'
+        WHEN Username LIKE '%OP4_Hussain%' THEN 'Hussain'
+        WHEN Username LIKE '%Lukoil_Nawaz%' THEN 'Nawaz'
+        WHEN Username LIKE '%Mohammed Nawaz%' THEN 'Nawaz'
+        WHEN Username LIKE '%SAP_Varaprasad%' THEN 'Varaprasad'
+        WHEN Username LIKE '%Lukoil_Hamad%' THEN 'Hamad'
+        WHEN Username LIKE '%Abdul Rahman Alghuna%' THEN 'Abdul Rahman'
+        WHEN Username LIKE '%SAP_Syed Gesudaraz%' THEN 'Syed Gesudaraz'
+        WHEN Username LIKE '%OP4_Sebastian%' THEN 'Sebastian'
+        WHEN Username LIKE '%IT_Usama%' THEN 'Usama'
+        WHEN Username LIKE '%DELMONGROUP\PC0092$%' THEN 'Akram'
+        WHEN Username LIKE '%AzureAD\ShaheedAmeen%' THEN 'ShaheedAmeen'
+        WHEN Username LIKE '%WORKGROUP\PC0250$%' THEN 'ShaheedAmeen'
+        WHEN Username LIKE '%Custom_Moneam%' THEN 'Moneam'
+        ELSE Username 
+    END AS UnifiedUsername,
+    SUM(Total) AS Count,
+    FORMAT(SUM(Total) * 100.0 / (SELECT SUM(Total) FROM LogReport WHERE 
+        CONVERT(DATE, Printdate, 120) BETWEEN @C1 AND @C2 AND AssetId = @C0), 'N2') AS Percentage
+FROM LogReport
+WHERE 
+    CONVERT(DATE, Printdate, 120) BETWEEN @C1 AND @C2 AND AssetId=@C0
+GROUP BY 
+    CASE 
+        WHEN Username LIKE '%DELMONGROUP\nasser%' THEN 'Nasser'
+        WHEN Username LIKE '%IT_Akram%' THEN 'Akram'
+        WHEN Username LIKE '%Custom_Zamzam%' THEN 'Zamzam'
+        WHEN Username LIKE '%Cutsom_Zamzam%' THEN 'Zamzam'
+        WHEN Username LIKE '%Custom_Islam%' THEN 'Islam'
+        WHEN Username LIKE '%Custom_Anshif%' THEN 'Anshif'
+        WHEN Username LIKE '%Salt_Ravindra Yadav%' THEN 'Ravindra Yadav'
+        WHEN Username LIKE '%Travels_Monir%' THEN 'Monir'
+        WHEN Username LIKE '%Salt_Aafaque%' THEN 'Aafaque'
+        WHEN Username LIKE '%Salt_Shakil%' THEN 'Shakil'
+        WHEN Username LIKE '%Salt-Nabil%' THEN 'Nabil'
+        WHEN Username LIKE '%AGB_Abdou%' THEN 'Abdou'
+        WHEN Username LIKE '%Transportation_Naadi%' THEN 'Naadi'
+        WHEN Username LIKE '%Admin_Khorshed%' THEN 'Khorshed'
+        WHEN Username LIKE '%Accounts_Safthar%' THEN 'Safthar'
+        WHEN Username LIKE '%IT Wesam%' THEN 'Wesam'
+        WHEN Username LIKE '%Accounts_Akeel%' THEN 'Akeel'
+        WHEN Username LIKE '%IT Abdullah%' THEN 'Abdullah'
+        WHEN Username LIKE '%Account-Nasser%' THEN 'Nasser'
+        WHEN Username LIKE '%NS_Diea%' THEN 'Deia_nabhan'
+        WHEN Username LIKE '%Diea%' THEN 'Deia_nabhan'
+        WHEN Username LIKE '%Silica_Ayat%' THEN 'Ayat'
+        WHEN Username LIKE '%Silica_Rajesh%' THEN 'Rajesh'
+        WHEN Username LIKE '%Silica_Krishna%' THEN 'Krishna'
+        WHEN Username LIKE '%Silica_Ivan%' THEN 'Ivan'
+        WHEN Username LIKE '%FM_Sarasdeen%' THEN 'Sarasdeen'
+        WHEN Username LIKE '%MB_Shareek%' THEN 'Shareek'
+        WHEN Username LIKE '%Travels_Shajeer%' THEN 'Shajeer'
+        WHEN Username LIKE '%Lukoil_Manibhakta%' THEN 'Manibhakta'
+        WHEN Username LIKE '%Admin_Khorshed%' THEN 'Khorshed'
+        WHEN Username LIKE '%OP4_Ivan%' THEN 'Ivan'
+        WHEN Username LIKE '%OP4_Reynaldo%' THEN 'Reynaldo'
+        WHEN Username LIKE '%DFT_Fawzy%' THEN 'Fawzy'
+        WHEN Username LIKE '%Salt_Mohammed Qasim%' THEN 'Mohammed Qasim'
+        WHEN Username LIKE '%SAP_Balaji%' THEN 'Balaji'
+        WHEN Username LIKE '%Lukoil_Mazen%' THEN 'Mazen'
+        WHEN Username LIKE '%OP4_Hussain%' THEN 'Hussain'
+        WHEN Username LIKE '%Lukoil_Nawaz%' THEN 'Nawaz'
+        WHEN Username LIKE '%Mohammed Nawaz%' THEN 'Nawaz'
+        WHEN Username LIKE '%SAP_Varaprasad%' THEN 'Varaprasad'
+        WHEN Username LIKE '%Lukoil_Hamad%' THEN 'Hamad'
+        WHEN Username LIKE '%Abdul Rahman Alghuna%' THEN 'Abdul Rahman'
+        WHEN Username LIKE '%SAP_Syed Gesudaraz%' THEN 'Syed Gesudaraz'
+        WHEN Username LIKE '%OP4_Sebastian%' THEN 'Sebastian'
+        WHEN Username LIKE '%IT_Usama%' THEN 'Usama'
+        WHEN Username LIKE '%DELMONGROUP\PC0092$%' THEN 'Akram'
+        WHEN Username LIKE '%AzureAD\ShaheedAmeen%' THEN 'ShaheedAmeen'
+        WHEN Username LIKE '%WORKGROUP\PC0250$%' THEN 'ShaheedAmeen'
+        WHEN Username LIKE '%Custom_Moneam%' THEN 'Moneam'
+ 
+        ELSE Username 
+    END
+ORDER BY Count DESC;
+", ParamFrom, ParamTo, ParamUserPrinter);
             }
             else if (radioButton2.Checked) // By department
             {
@@ -1694,7 +1852,8 @@ namespace Delmon_Managment_System.Forms
 DelmonGroupDB.dbo.DeptTypes dt,
 DelmonGroupDB.dbo.Employees e,
 DelmonPrintersLog.dbo.LogReport lr,
-DelmonPrintersLog.dbo.PrinterUsernameID pd WHERE 
+DelmonPrintersLog.dbo.PrinterUsernameID pd 
+WHERE 
             pd.Username=lr.Username 
 			and pd.ID = e.EmployeeID
 			and e.DeptID = d.DEPTID
@@ -1867,6 +2026,11 @@ DelmonPrintersLog.dbo.PrinterUsernameID pd WHERE
                 cmbcandidates2.ValueMember = "EmployeeID";
                 cmbcandidates2.DisplayMember = "Name";
             }
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -152,7 +152,7 @@ namespace Delmon_Managment_System
             // 
             // panelTitleBar
             // 
-            this.panelTitleBar.BackColor = System.Drawing.Color.Firebrick;
+            this.panelTitleBar.BackColor = System.Drawing.Color.White;
             this.panelTitleBar.Controls.Add(this.btnMinum);
             this.panelTitleBar.Controls.Add(this.button1);
             this.panelTitleBar.Controls.Add(this.BTNcLOSE);
@@ -161,7 +161,7 @@ namespace Delmon_Managment_System
             this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitleBar.Location = new System.Drawing.Point(0, 0);
             this.panelTitleBar.Name = "panelTitleBar";
-            this.panelTitleBar.Size = new System.Drawing.Size(1161, 49);
+            this.panelTitleBar.Size = new System.Drawing.Size(1161, 31);
             this.panelTitleBar.TabIndex = 1;
             // 
             // btnMinum
@@ -170,8 +170,8 @@ namespace Delmon_Managment_System
             this.btnMinum.FlatAppearance.BorderSize = 0;
             this.btnMinum.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMinum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMinum.ForeColor = System.Drawing.Color.White;
-            this.btnMinum.Location = new System.Drawing.Point(1085, 1);
+            this.btnMinum.ForeColor = System.Drawing.Color.Firebrick;
+            this.btnMinum.Location = new System.Drawing.Point(1085, -4);
             this.btnMinum.Name = "btnMinum";
             this.btnMinum.Size = new System.Drawing.Size(28, 40);
             this.btnMinum.TabIndex = 3;
@@ -185,8 +185,8 @@ namespace Delmon_Managment_System
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(1036, 9);
+            this.button1.ForeColor = System.Drawing.Color.Firebrick;
+            this.button1.Location = new System.Drawing.Point(1036, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(43, 24);
             this.button1.TabIndex = 2;
@@ -200,8 +200,8 @@ namespace Delmon_Managment_System
             this.BTNcLOSE.FlatAppearance.BorderSize = 0;
             this.BTNcLOSE.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNcLOSE.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTNcLOSE.ForeColor = System.Drawing.Color.White;
-            this.BTNcLOSE.Location = new System.Drawing.Point(1119, 9);
+            this.BTNcLOSE.ForeColor = System.Drawing.Color.Firebrick;
+            this.BTNcLOSE.Location = new System.Drawing.Point(1119, 4);
             this.BTNcLOSE.Name = "BTNcLOSE";
             this.BTNcLOSE.Size = new System.Drawing.Size(43, 24);
             this.BTNcLOSE.TabIndex = 1;
@@ -225,10 +225,10 @@ namespace Delmon_Managment_System
             // 
             this.lblTitle.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblTitle.AutoSize = true;
-            this.lblTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.lblTitle.BackColor = System.Drawing.Color.White;
             this.lblTitle.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(406, 10);
+            this.lblTitle.ForeColor = System.Drawing.Color.Firebrick;
+            this.lblTitle.Location = new System.Drawing.Point(489, 8);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(53, 17);
             this.lblTitle.TabIndex = 0;
@@ -241,9 +241,9 @@ namespace Delmon_Managment_System
             this.panelDesktopPanel.Controls.Add(this.groupBox1);
             this.panelDesktopPanel.Controls.Add(this.menuStrip1);
             this.panelDesktopPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelDesktopPanel.Location = new System.Drawing.Point(0, 49);
+            this.panelDesktopPanel.Location = new System.Drawing.Point(0, 31);
             this.panelDesktopPanel.Name = "panelDesktopPanel";
-            this.panelDesktopPanel.Size = new System.Drawing.Size(1161, 967);
+            this.panelDesktopPanel.Size = new System.Drawing.Size(1161, 985);
             this.panelDesktopPanel.TabIndex = 2;
             this.panelDesktopPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panelDesktopPanel_Paint);
             // 
@@ -259,6 +259,7 @@ namespace Delmon_Managment_System
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.Firebrick;
             this.menuStrip1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.visaToolStripMenuItem,
@@ -277,7 +278,7 @@ namespace Delmon_Managment_System
             // 
             // visaToolStripMenuItem
             // 
-            this.visaToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
+            this.visaToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.visaToolStripMenuItem.Name = "visaToolStripMenuItem";
             this.visaToolStripMenuItem.Size = new System.Drawing.Size(51, 21);
             this.visaToolStripMenuItem.Text = "Visa";
@@ -285,7 +286,7 @@ namespace Delmon_Managment_System
             // 
             // personalInformationToolStripMenuItem
             // 
-            this.personalInformationToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
+            this.personalInformationToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.personalInformationToolStripMenuItem.Name = "personalInformationToolStripMenuItem";
             this.personalInformationToolStripMenuItem.Size = new System.Drawing.Size(173, 21);
             this.personalInformationToolStripMenuItem.Text = "Personal Information";
@@ -293,7 +294,7 @@ namespace Delmon_Managment_System
             // 
             // reportsToolStripMenuItem
             // 
-            this.reportsToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
+            this.reportsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             this.reportsToolStripMenuItem.Size = new System.Drawing.Size(78, 21);
             this.reportsToolStripMenuItem.Text = "Reports";
@@ -301,7 +302,7 @@ namespace Delmon_Managment_System
             // 
             // billsToolStripMenuItem
             // 
-            this.billsToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
+            this.billsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.billsToolStripMenuItem.Name = "billsToolStripMenuItem";
             this.billsToolStripMenuItem.Size = new System.Drawing.Size(51, 21);
             this.billsToolStripMenuItem.Text = "Bills";
@@ -309,7 +310,7 @@ namespace Delmon_Managment_System
             // 
             // assetsToolStripMenuItem
             // 
-            this.assetsToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
+            this.assetsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.assetsToolStripMenuItem.Name = "assetsToolStripMenuItem";
             this.assetsToolStripMenuItem.Size = new System.Drawing.Size(69, 21);
             this.assetsToolStripMenuItem.Text = "Assets";
@@ -317,7 +318,7 @@ namespace Delmon_Managment_System
             // 
             // tipsNewsToolStripMenuItem
             // 
-            this.tipsNewsToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
+            this.tipsNewsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.tipsNewsToolStripMenuItem.Name = "tipsNewsToolStripMenuItem";
             this.tipsNewsToolStripMenuItem.Size = new System.Drawing.Size(102, 21);
             this.tipsNewsToolStripMenuItem.Text = "Tips / News";
@@ -325,7 +326,7 @@ namespace Delmon_Managment_System
             // 
             // settingToolStripMenuItem
             // 
-            this.settingToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
+            this.settingToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
             this.settingToolStripMenuItem.Size = new System.Drawing.Size(71, 21);
             this.settingToolStripMenuItem.Text = "Setting";
@@ -333,7 +334,7 @@ namespace Delmon_Managment_System
             // 
             // logoutToolStripMenuItem
             // 
-            this.logoutToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
+            this.logoutToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
             this.logoutToolStripMenuItem.Size = new System.Drawing.Size(70, 21);
             this.logoutToolStripMenuItem.Text = "Logout";

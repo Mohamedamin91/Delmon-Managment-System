@@ -161,16 +161,17 @@ namespace Delmon_Managment_System.Forms
             this.AddBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.AddBtn.BackColor = System.Drawing.Color.White;
             this.AddBtn.Enabled = false;
-            this.AddBtn.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.AddBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.AddBtn.FlatAppearance.BorderSize = 0;
             this.AddBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AddBtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.AddBtn.ForeColor = System.Drawing.Color.Firebrick;
+            this.AddBtn.Image = ((System.Drawing.Image)(resources.GetObject("AddBtn.Image")));
             this.AddBtn.Location = new System.Drawing.Point(550, 680);
             this.AddBtn.Margin = new System.Windows.Forms.Padding(4);
             this.AddBtn.Name = "AddBtn";
             this.AddBtn.Size = new System.Drawing.Size(63, 28);
             this.AddBtn.TabIndex = 6;
-            this.AddBtn.Text = "Add";
             this.AddBtn.UseVisualStyleBackColor = false;
             this.AddBtn.Visible = false;
             this.AddBtn.Click += new System.EventHandler(this.AddBtn_Click);
@@ -313,16 +314,17 @@ namespace Delmon_Managment_System.Forms
             this.btnFinish.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnFinish.BackColor = System.Drawing.Color.White;
             this.btnFinish.Enabled = false;
-            this.btnFinish.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.btnFinish.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnFinish.FlatAppearance.BorderSize = 0;
             this.btnFinish.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFinish.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnFinish.ForeColor = System.Drawing.Color.Firebrick;
+            this.btnFinish.Image = ((System.Drawing.Image)(resources.GetObject("btnFinish.Image")));
             this.btnFinish.Location = new System.Drawing.Point(647, 680);
             this.btnFinish.Margin = new System.Windows.Forms.Padding(4);
             this.btnFinish.Name = "btnFinish";
             this.btnFinish.Size = new System.Drawing.Size(63, 28);
             this.btnFinish.TabIndex = 41;
-            this.btnFinish.Text = "Finish";
             this.btnFinish.UseVisualStyleBackColor = false;
             this.btnFinish.Visible = false;
             this.btnFinish.Click += new System.EventHandler(this.btnFinish_Click);
@@ -355,16 +357,17 @@ namespace Delmon_Managment_System.Forms
             // 
             this.btnNew.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnNew.BackColor = System.Drawing.Color.White;
-            this.btnNew.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.btnNew.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnNew.FlatAppearance.BorderSize = 0;
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnNew.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnNew.Location = new System.Drawing.Point(422, 48);
+            this.btnNew.Image = ((System.Drawing.Image)(resources.GetObject("btnNew.Image")));
+            this.btnNew.Location = new System.Drawing.Point(414, 53);
             this.btnNew.Margin = new System.Windows.Forms.Padding(4);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(55, 27);
             this.btnNew.TabIndex = 82;
-            this.btnNew.Text = "New";
             this.btnNew.UseVisualStyleBackColor = false;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
@@ -373,16 +376,17 @@ namespace Delmon_Managment_System.Forms
             this.DeleteBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.DeleteBtn.BackColor = System.Drawing.Color.White;
             this.DeleteBtn.Enabled = false;
-            this.DeleteBtn.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.DeleteBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.DeleteBtn.FlatAppearance.BorderSize = 0;
             this.DeleteBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DeleteBtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.DeleteBtn.ForeColor = System.Drawing.Color.Firebrick;
+            this.DeleteBtn.ForeColor = System.Drawing.Color.White;
+            this.DeleteBtn.Image = ((System.Drawing.Image)(resources.GetObject("DeleteBtn.Image")));
             this.DeleteBtn.Location = new System.Drawing.Point(833, 680);
             this.DeleteBtn.Margin = new System.Windows.Forms.Padding(4);
             this.DeleteBtn.Name = "DeleteBtn";
             this.DeleteBtn.Size = new System.Drawing.Size(67, 28);
             this.DeleteBtn.TabIndex = 84;
-            this.DeleteBtn.Text = "Delete";
             this.DeleteBtn.UseVisualStyleBackColor = false;
             this.DeleteBtn.Visible = false;
             this.DeleteBtn.Click += new System.EventHandler(this.DeleteBtn_Click);
@@ -448,7 +452,7 @@ namespace Delmon_Managment_System.Forms
             this.Findbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Findbtn.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.Findbtn.ForeColor = System.Drawing.Color.Firebrick;
-            this.Findbtn.Location = new System.Drawing.Point(504, 48);
+            this.Findbtn.Location = new System.Drawing.Point(1292, 678);
             this.Findbtn.Margin = new System.Windows.Forms.Padding(4);
             this.Findbtn.Name = "Findbtn";
             this.Findbtn.Size = new System.Drawing.Size(54, 27);
@@ -476,7 +480,6 @@ namespace Delmon_Managment_System.Forms
             this.groupbox.Controls.Add(this.RemarksTxt);
             this.groupbox.Controls.Add(this.label1);
             this.groupbox.Controls.Add(this.label10);
-            this.groupbox.Controls.Add(this.Findbtn);
             this.groupbox.Controls.Add(this.label25);
             this.groupbox.Controls.Add(this.Visanumtxt);
             this.groupbox.Controls.Add(this.TotalVisastxt);
@@ -606,16 +609,17 @@ namespace Delmon_Managment_System.Forms
             // 
             this.btnwexpire.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnwexpire.BackColor = System.Drawing.Color.White;
-            this.btnwexpire.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.btnwexpire.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnwexpire.FlatAppearance.BorderSize = 0;
             this.btnwexpire.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnwexpire.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnwexpire.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnwexpire.Location = new System.Drawing.Point(485, 48);
+            this.btnwexpire.Image = ((System.Drawing.Image)(resources.GetObject("btnwexpire.Image")));
+            this.btnwexpire.Location = new System.Drawing.Point(342, 23);
             this.btnwexpire.Margin = new System.Windows.Forms.Padding(4);
             this.btnwexpire.Name = "btnwexpire";
-            this.btnwexpire.Size = new System.Drawing.Size(126, 27);
+            this.btnwexpire.Size = new System.Drawing.Size(30, 29);
             this.btnwexpire.TabIndex = 104;
-            this.btnwexpire.Text = "Expired soon";
             this.btnwexpire.UseVisualStyleBackColor = false;
             this.btnwexpire.Click += new System.EventHandler(this.btnwexpire_Click);
             // 
@@ -668,16 +672,17 @@ namespace Delmon_Managment_System.Forms
             this.btnUpdate.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnUpdate.BackColor = System.Drawing.Color.White;
             this.btnUpdate.Enabled = false;
-            this.btnUpdate.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.btnUpdate.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnUpdate.FlatAppearance.BorderSize = 0;
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdate.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnUpdate.ForeColor = System.Drawing.Color.Firebrick;
+            this.btnUpdate.Image = ((System.Drawing.Image)(resources.GetObject("btnUpdate.Image")));
             this.btnUpdate.Location = new System.Drawing.Point(737, 680);
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 28);
             this.btnUpdate.TabIndex = 91;
-            this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = false;
             this.btnUpdate.Visible = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
@@ -708,7 +713,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.lbldatetime.AutoSize = true;
             this.lbldatetime.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
-            this.lbldatetime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(52)))), ((int)(((byte)(141)))));
+            this.lbldatetime.ForeColor = System.Drawing.Color.Firebrick;
             this.lbldatetime.Location = new System.Drawing.Point(1127, 769);
             this.lbldatetime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbldatetime.Name = "lbldatetime";
@@ -789,7 +794,6 @@ namespace Delmon_Managment_System.Forms
             this.cmbcandidates.Size = new System.Drawing.Size(277, 25);
             this.cmbcandidates.TabIndex = 44;
             this.cmbcandidates.DropDown += new System.EventHandler(this.cmbcandidates_DropDown);
-           // this.cmbcandidates.TextChanged += new System.EventHandler(this.cmbcandidates_TextChanged);
             this.cmbcandidates.Click += new System.EventHandler(this.cmbcandidates_Click);
             // 
             // label4
@@ -843,7 +847,6 @@ namespace Delmon_Managment_System.Forms
             this.cmbJob.Name = "cmbJob";
             this.cmbJob.Size = new System.Drawing.Size(278, 25);
             this.cmbJob.TabIndex = 38;
-          //  this.cmbJob.TextChanged += new System.EventHandler(this.cmbJob_TextChanged);
             // 
             // cmbStatus
             // 
@@ -865,16 +868,17 @@ namespace Delmon_Managment_System.Forms
             this.btnAssign.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnAssign.BackColor = System.Drawing.Color.White;
             this.btnAssign.Enabled = false;
-            this.btnAssign.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.btnAssign.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnAssign.FlatAppearance.BorderSize = 0;
             this.btnAssign.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAssign.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnAssign.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnAssign.Location = new System.Drawing.Point(469, 233);
+            this.btnAssign.Image = ((System.Drawing.Image)(resources.GetObject("btnAssign.Image")));
+            this.btnAssign.Location = new System.Drawing.Point(465, 233);
             this.btnAssign.Margin = new System.Windows.Forms.Padding(4);
             this.btnAssign.Name = "btnAssign";
-            this.btnAssign.Size = new System.Drawing.Size(67, 27);
+            this.btnAssign.Size = new System.Drawing.Size(43, 25);
             this.btnAssign.TabIndex = 83;
-            this.btnAssign.Text = "Assign";
             this.btnAssign.UseVisualStyleBackColor = false;
             this.btnAssign.Visible = false;
             this.btnAssign.Click += new System.EventHandler(this.btnAssign_Click);
@@ -884,16 +888,17 @@ namespace Delmon_Managment_System.Forms
             this.btnnewJob.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnnewJob.BackColor = System.Drawing.Color.White;
             this.btnnewJob.Enabled = false;
-            this.btnnewJob.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.btnnewJob.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnnewJob.FlatAppearance.BorderSize = 0;
             this.btnnewJob.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnnewJob.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.btnnewJob.ForeColor = System.Drawing.Color.Firebrick;
-            this.btnnewJob.Location = new System.Drawing.Point(470, 127);
+            this.btnnewJob.Image = ((System.Drawing.Image)(resources.GetObject("btnnewJob.Image")));
+            this.btnnewJob.Location = new System.Drawing.Point(459, 127);
             this.btnnewJob.Margin = new System.Windows.Forms.Padding(4);
             this.btnnewJob.Name = "btnnewJob";
             this.btnnewJob.Size = new System.Drawing.Size(51, 32);
             this.btnnewJob.TabIndex = 84;
-            this.btnnewJob.Text = "New";
             this.btnnewJob.UseVisualStyleBackColor = false;
             this.btnnewJob.Click += new System.EventHandler(this.btnnewJob_Click);
             // 
@@ -909,7 +914,6 @@ namespace Delmon_Managment_System.Forms
             this.cmbAgency.Name = "cmbAgency";
             this.cmbAgency.Size = new System.Drawing.Size(277, 25);
             this.cmbAgency.TabIndex = 85;
-           // this.cmbAgency.TextChanged += new System.EventHandler(this.cmbAgency_TextChanged_1);
             // 
             // label14
             // 
@@ -927,16 +931,17 @@ namespace Delmon_Managment_System.Forms
             this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button2.BackColor = System.Drawing.Color.White;
             this.button2.Enabled = false;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F);
             this.button2.ForeColor = System.Drawing.Color.Firebrick;
-            this.button2.Location = new System.Drawing.Point(469, 196);
+            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
+            this.button2.Location = new System.Drawing.Point(459, 196);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(52, 29);
             this.button2.TabIndex = 87;
-            this.button2.Text = "New";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -1039,6 +1044,7 @@ namespace Delmon_Managment_System.Forms
             this.Controls.Add(this.DeleteBtn);
             this.Controls.Add(this.btnFinish);
             this.Controls.Add(this.AddBtn);
+            this.Controls.Add(this.Findbtn);
             this.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);

@@ -37,6 +37,7 @@ namespace Delmon_Managment_System.Forms
         //  int ID = 0;
         int loggedEmpolyeeID;
         int dOCID;
+        int JobemplyeeID;
   
         string fileName;
         DataTable originalData;
@@ -573,6 +574,7 @@ namespace Delmon_Managment_System.Forms
         private void Employeetxt_TextChanged(object sender, EventArgs e)
         {
             dataGridView1.Visible = true;
+            DGVsearch.Visible = false;
 
             try
             {
@@ -594,7 +596,8 @@ namespace Delmon_Managment_System.Forms
                 // if employess belong to IT showes all employee else show for the certian department 
                 if (CommonClass.DeptID == 10103)
                 {
-                    string query = @"SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus, s.StatusValue, j.JobTitleEN, dt.Dept_Type_Name, c.COMPName_EN, e.startdate, e.enddate, cn.NationalityName, v.FileNumber, v.VISANumber,e.DOB
+                    string query = @"SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus, s.StatusValue, j.JobTitleEN, dt.Dept_Type_Name, c.COMPName_EN, e.startdate, e.enddate, cn.NationalityName, 
+v.FileNumber, v.VISANumber,e.DOB,j.jobid
     FROM Employees e
     INNER JOIN StatusTBL s ON e.EmploymentStatusID = s.StatusID
     INNER JOIN JOBS j ON e.JobID = j.JobID
@@ -619,7 +622,8 @@ namespace Delmon_Managment_System.Forms
                 }
                 else
                 {
-                    string query = "SELECT Employees.EmployeeID, Employees.CurrentEmpID, FirstName, SecondName, ThirdName, LastName, Gender, MartialStatus, StatusTBL.StatusValue, jobs.JobTitleEN, DeptTypes.Dept_Type_Name, Companies.COMPName_EN, startdate, enddate, NationalityName " +
+                    string query = "SELECT Employees.EmployeeID, Employees.CurrentEmpID, FirstName, SecondName, ThirdName, " +
+                        "LastName, Gender, MartialStatus, StatusTBL.StatusValue, jobs.JobTitleEN, DeptTypes.Dept_Type_Name, Companies.COMPName_EN, startdate, enddate, NationalityName ,jobs.jobid" +
                         "FROM Countries, Employees " +
                         "INNER JOIN StatusTBL ON Employees.EmploymentStatusID = StatusTBL.StatusID " +
                         "INNER JOIN JOBS ON Employees.JobID = JOBS.JobID " +
@@ -711,11 +715,8 @@ namespace Delmon_Managment_System.Forms
             {
                 MessageBox.Show("Please Select 'Employee Status' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if ((int)cmbEmployJobHistory.SelectedValue == 0 || cmbEmployJobHistory.Text == "Select")
-            {
-                MessageBox.Show("Please Select 'Job' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else if ((int)cmbempdepthistory.SelectedValue == 0 || cmbempdepthistory.Text == "Select")
+           
+            else if (cmbempdepthistory.Text == "Select")
             {
                 MessageBox.Show("Please Select 'Department Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -753,7 +754,7 @@ namespace Delmon_Managment_System.Forms
                 SqlParameter paramStatusHistory = new SqlParameter("@C13", SqlDbType.NVarChar);
                 paramStatusHistory.Value = cmbPersonalStatusStatus.SelectedValue;
                 SqlParameter paramJobHistory = new SqlParameter("@C14", SqlDbType.NVarChar);
-                paramJobHistory.Value = cmbEmployJobHistory.SelectedValue;
+                paramJobHistory.Value = JobemplyeeID;
                 SqlParameter ParamtDepartmentHistory = new SqlParameter("@C15", SqlDbType.NVarChar);
                 ParamtDepartmentHistory.Value = cmbempdepthistory.SelectedValue;
                 SqlParameter paramstartdate = new SqlParameter("@C16", SqlDbType.Date);
@@ -955,7 +956,7 @@ namespace Delmon_Managment_System.Forms
                             //  dataGridView1.DataSource = SQLCONN.ShowDataInGridViewORCombobox("select * from Employees where  EmployeeID = '" + EMPID + "'");
                             string query = @"SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus,
        s.StatusValue, j.JobTitleEN, dt.Dept_Type_Name, c.COMPName_EN, e.startdate, e.enddate,
-       cn.NationalityName, v.FileNumber, v.VISANumber,e.DOB
+       cn.NationalityName, v.FileNumber, v.VISANumber,e.DOB,j.jobid
 FROM Employees e
 INNER JOIN StatusTBL s ON e.EmploymentStatusID = s.StatusID
 INNER JOIN JOBS j ON e.JobID = j.JobID
@@ -1123,11 +1124,11 @@ ORDER BY e.EmployeeID";
             {
                 MessageBox.Show("Please Select 'Employee Status' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if ((int)cmbEmployJobHistory.SelectedValue == 0 || cmbEmployJobHistory.Text == "Select")
+            else if (jobemployeesearchtxt.Text == string.Empty )
             {
                 MessageBox.Show("Please Select 'Job' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if ((int)cmbempdepthistory.SelectedValue == 0 || cmbempdepthistory.Text == "Select")
+            else if ( cmbempdepthistory.Text == "Select")
             {
                 MessageBox.Show("Please Select 'Department Type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -1169,7 +1170,7 @@ ORDER BY e.EmployeeID";
                     SqlParameter paramStatusHistory = new SqlParameter("@C13", SqlDbType.Int);
                     paramStatusHistory.Value = cmbPersonalStatusStatus.SelectedValue;
                     SqlParameter paramJobHistory = new SqlParameter("@C14", SqlDbType.NVarChar);
-                    paramJobHistory.Value = cmbEmployJobHistory.SelectedValue;
+                    paramJobHistory.Value = JobemplyeeID;
 
                     SqlParameter ParamtDepartmentHistory = new SqlParameter("@C15", SqlDbType.Int);
                     ParamtDepartmentHistory.Value = cmbempdepthistory.SelectedValue;
@@ -1205,7 +1206,7 @@ ORDER BY e.EmployeeID";
 
 
 
-                    if (firstnametxt.Text != "" && cmbPersonalStatusStatus.Text != "Select" && cmbempdepthistory.Text != "Select" && cmbEmployJobHistory.Text != "Select")
+                    if (firstnametxt.Text != "" && cmbPersonalStatusStatus.Text != "Select"  )
                     {
                         SQLCONN.OpenConection();
                         SqlDataReader dr = SQLCONN.DataReader("select  * from Employees where " +
@@ -1240,30 +1241,7 @@ ORDER BY e.EmployeeID";
                                 DateTime enter_date = DateTime.Now.Date;
                                 dtpDOB.Value = enter_date;
                             }
-                            else if (cmbEmployJobHistory.Text == "Select")
-
-                            {
-                                MessageBox.Show("Please Select a Job !!");
-
-
-                            }
-                            else if (cmbnationality.Text == "Select")
-
-                            {
-                                MessageBox.Show("Please Select a Nationality !!");
-
-                            }
-                            else if (cmbempdepthistory.Text == "Select")
-                            {
-                                MessageBox.Show("Please Select a department !!");
-                            }
-                            else if (cmbPersonalStatusStatus.Text == "Select")
-
-                            {
-                                MessageBox.Show("Please Select a Employment type !!");
-
-
-                            }
+                           
                             else
                             {
                                 dr.Dispose();
@@ -1319,7 +1297,7 @@ ORDER BY e.EmployeeID";
 
                                 string query = @"SELECT e.EmployeeID, e.CurrentEmpID, e.FirstName, e.SecondName, e.ThirdName, e.LastName, e.Gender, e.MartialStatus,
        s.StatusValue, j.JobTitleEN, dt.Dept_Type_Name, c.COMPName_EN, e.startdate, e.enddate,
-       cn.NationalityName, v.FileNumber, v.VISANumber, e.DOB
+       cn.NationalityName, v.FileNumber, v.VISANumber, e.DOB,j.jobid
 FROM Employees e
 INNER JOIN StatusTBL s ON e.EmploymentStatusID = s.StatusID
 INNER JOIN JOBS j ON e.JobID = j.JobID
@@ -1511,7 +1489,7 @@ ORDER BY e.EmployeeID";
             }
 
 
-            else if ((int)cmbcontact.SelectedValue == 0 || cmbcontact.Text == "Select")
+            else if (cmbDocuments.Text == "Select" || cmbDocuments.Text == string.Empty)
             {
                 MessageBox.Show("Please Select ' Document type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -1520,12 +1498,7 @@ ORDER BY e.EmployeeID";
             {
                 if (EMPID != 0)
                 {
-                    if (cmbDocuments.Text == "Select" || cmbDocuments.Text == string.Empty)
-                    {
-                        MessageBox.Show("Please select a document type.");
-                    }
-                    else
-                    {
+                    
                         SqlParameter paramFilename = new SqlParameter("@C0", SqlDbType.NVarChar);
                         SqlParameter paramFileContent = new SqlParameter("@C1", SqlDbType.VarBinary);
                         SqlParameter paramPID = new SqlParameter("@C2", SqlDbType.Int);
@@ -1603,7 +1576,7 @@ ORDER BY e.EmployeeID";
                             }
                         }
                     }
-                }
+                
                 else
                 {
                     MessageBox.Show("Please select a record!");
@@ -2006,7 +1979,7 @@ ORDER BY e.EmployeeID";
             }
 
 
-            else if ((int)cmbcontact.SelectedValue == 0 || cmbcontact.Text == "Select")
+            else if ((int)cmbDocuments.SelectedValue == 0 || cmbDocuments.Text == "Select")
             {
                 MessageBox.Show("Please Select ' Document type' !", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -2264,8 +2237,11 @@ ORDER BY e.EmployeeID";
                 cmbMartialStatus.Text = row.Cells["MartialStatus"].Value?.ToString() ?? string.Empty;
                 cmbPersonalStatusStatus.Text = row.Cells["StatusValue"].Value?.ToString() ?? string.Empty;
                 cmbEmployJobHistory.Text = row.Cells["JobTitleEN"].Value?.ToString() ?? string.Empty;
+                jobemployeesearchtxt.Text = row.Cells["JobTitleEN"].Value?.ToString() ?? string.Empty;
                 cmbempdepthistory.Text = row.Cells["Dept_Type_Name"].Value?.ToString() ?? string.Empty;
                 cmbCompany.Text = row.Cells["COMPName_EN"].Value?.ToString() ?? string.Empty;
+                JobemplyeeID = row.Cells["jobid"].Value != null ? Convert.ToInt32(row.Cells["jobid"].Value) : 0;
+
 
                 if (row.Cells["enddate"].Value == DBNull.Value)
                 {
@@ -2341,6 +2317,7 @@ ORDER BY e.EmployeeID";
             {
                 isUpdating = false;  // Reset the flag
             }
+            DGVsearch.Visible = false;
         }
 
         private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -3744,6 +3721,56 @@ ORDER BY e.EmployeeID";
         private void groupBox2_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void jobemployeesearchtxt_TextChanged(object sender, EventArgs e)
+        {
+            DGVsearch.Visible = true;
+            string searchText = jobemployeesearchtxt.Text.Trim();
+
+
+
+            SqlParameter paramEmployeenameSearch = new SqlParameter("@C1", SqlDbType.NVarChar);
+            paramEmployeenameSearch.Value = searchText;
+
+
+            SQLCONN.OpenConection();
+
+            // if employess belong to IT showes all employee else show for the certian department 
+
+            string query = @" SELECT JobID, JobTitleEN,JobTitleAR FROM JOBS 
+   
+    WHERE 
+                JobTitleEN LIKE '%' + @C1 + '%'
+               OR JobTitleAR LIKE '%' + @C1 + '%'
+               
+          
+    ORDER BY JobTitleEN";
+
+
+            DGVsearch.DataSource = SQLCONN.ShowDataInGridViewORCombobox(query, paramEmployeenameSearch);
+            DGVsearch.Columns["JobTitleEN"].Width = 350;
+            DGVsearch.Columns["JobTitleAR"].Width = 250;
+
+            SQLCONN.CloseConnection();
+        }
+
+        private void DGVsearch_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1) return;
+
+          
+            DataGridViewRow selectedRow = DGVsearch.Rows[e.RowIndex];
+
+            // Populate fields
+            JobemplyeeID = selectedRow.Cells[0].Value != null ? Convert.ToInt32(selectedRow.Cells[0].Value) : 0;
+            jobemployeesearchtxt.Text = selectedRow.Cells[1].Value?.ToString() ?? string.Empty; ;
+            DGVsearch.Visible = false;
         }
 
         private void cmbEmployJobHistory_TextChanged(object sender, EventArgs e)

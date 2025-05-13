@@ -30,7 +30,7 @@
     <MinimumRequiredVersion>1.0.0.9</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>148</ApplicationRevision>
+    <ApplicationRevision>195</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -434,6 +434,21 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Icons\icons8-batch-assign-24.png" />
+    <Content Include="Icons\icons8-cancel-24.png" />
+    <Content Include="Icons\icons8-delete-24.png" />
+    <Content Include="Icons\icons8-doc-24.png" />
+    <Content Include="Icons\icons8-expired-24.png" />
+    <Content Include="Icons\icons8-finish-24.png" />
+    <Content Include="Icons\icons8-job-offer-24.png" />
+    <Content Include="Icons\icons8-more-info-24.png" />
+    <Content Include="Icons\icons8-new-24.png" />
+    <Content Include="Icons\icons8-add-24.png" />
+    <Content Include="Icons\icons8-next-24.png" />
+    <Content Include="Icons\icons8-previous-24.png" />
+    <Content Include="Icons\icons8-travel-visa-24.png" />
+    <Content Include="Icons\icons8-update-24.png" />
+    <Content Include="Icons\icons8-upload-24.png" />
     <Content Include="logo.ico" />
     <None Include="Resources\Delmonlogo2.jpg" />
     <None Include="Resources\Delmonlogo3.jpg" />
