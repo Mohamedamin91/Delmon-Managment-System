@@ -1575,7 +1575,7 @@ namespace Delmon_Managment_System.Forms
             this.btnupdatehistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnupdatehistory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnupdatehistory.ForeColor = System.Drawing.Color.Black;
-            this.btnupdatehistory.Location = new System.Drawing.Point(6118, -132);
+            this.btnupdatehistory.Location = new System.Drawing.Point(6368, -141);
             this.btnupdatehistory.Margin = new System.Windows.Forms.Padding(4);
             this.btnupdatehistory.Name = "btnupdatehistory";
             this.btnupdatehistory.Size = new System.Drawing.Size(17, 10);
@@ -1592,7 +1592,7 @@ namespace Delmon_Managment_System.Forms
             this.btndeletehistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btndeletehistory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btndeletehistory.ForeColor = System.Drawing.Color.Black;
-            this.btndeletehistory.Location = new System.Drawing.Point(6118, -115);
+            this.btndeletehistory.Location = new System.Drawing.Point(6368, -124);
             this.btndeletehistory.Margin = new System.Windows.Forms.Padding(4);
             this.btndeletehistory.Name = "btndeletehistory";
             this.btndeletehistory.Size = new System.Drawing.Size(17, 10);
@@ -1609,7 +1609,7 @@ namespace Delmon_Managment_System.Forms
             this.btnnewhistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnnewhistory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnnewhistory.ForeColor = System.Drawing.Color.Black;
-            this.btnnewhistory.Location = new System.Drawing.Point(6098, -115);
+            this.btnnewhistory.Location = new System.Drawing.Point(6348, -124);
             this.btnnewhistory.Margin = new System.Windows.Forms.Padding(4);
             this.btnnewhistory.Name = "btnnewhistory";
             this.btnnewhistory.Size = new System.Drawing.Size(17, 10);
@@ -1625,7 +1625,7 @@ namespace Delmon_Managment_System.Forms
             this.btnaddhitory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnaddhitory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnaddhitory.ForeColor = System.Drawing.Color.Black;
-            this.btnaddhitory.Location = new System.Drawing.Point(6098, -123);
+            this.btnaddhitory.Location = new System.Drawing.Point(6348, -132);
             this.btnaddhitory.Margin = new System.Windows.Forms.Padding(4);
             this.btnaddhitory.Name = "btnaddhitory";
             this.btnaddhitory.Size = new System.Drawing.Size(17, 10);

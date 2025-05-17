@@ -215,8 +215,8 @@ WHERE
             cmbMedia.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             // string query2 = "SELECT OwnerID, OwnerName FROM Owners";
-            string query2 = "SELECT  ID, OwnerName FROM Owners";
-            cmbOwner.ValueMember = "ID";
+            string query2 = "SELECT  OwnerID, OwnerName FROM Owners";
+            cmbOwner.ValueMember = "OwnerID";
             cmbOwner.DisplayMember = "OwnerName";
             cmbOwner.DataSource = SQLCONN2.ShowDataInGridViewORCombobox(query2);
             cmbOwner.AutoCompleteMode = AutoCompleteMode.SuggestAppend;

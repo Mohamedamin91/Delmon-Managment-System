@@ -241,21 +241,21 @@ namespace Delmon_Managment_System.Forms
             SQLCONN4.CloseConnection();
 
         }
-        private void LoadTheme()
-        {
-            foreach (Control btns in this.Controls)
-            {
-                if (btns.GetType() == typeof(Button))
-                {
-                    Button btn = (Button)btns;
-                    btn.BackColor = ThemeColor.PrimaryColor;
-                    btn.ForeColor = Color.White;
-                    btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
-                }
-            }
-            //  label4.ForeColor = ThemeColor.SecondaryColor;
-            //  label5.ForeColor = ThemeColor.PrimaryColor;
-        }
+        //private void LoadTheme()
+        //{
+        //    foreach (Control btns in this.Controls)
+        //    {
+        //        if (btns.GetType() == typeof(Button))
+        //        {
+        //            Button btn = (Button)btns;
+        //            btn.BackColor = ThemeColor.PrimaryColor;
+        //            btn.ForeColor = Color.White;
+        //            btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
+        //        }
+        //    }
+        //    //  label4.ForeColor = ThemeColor.SecondaryColor;
+        //    //  label5.ForeColor = ThemeColor.PrimaryColor;
+        //}
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -544,9 +544,10 @@ namespace Delmon_Managment_System.Forms
 
                 // Build the query based on the user's selected options
                 string query = @"
-        SELECT  Companies.COMPID,StatusTBL.StatusID,Companies.ShortCompName 'Company',
-                StatusTBL.StatusValue 'Status',      
-                COUNT(*) AS Total
+        SELECT 
+            Companies.COMPID,StatusTBL.StatusID,Companies.ShortCompName 'Company',
+            StatusTBL.StatusValue 'Status',      
+            COUNT(*) AS Total
         FROM Employees
         JOIN Companies ON Employees.COMPID = Companies.COMPID
         JOIN StatusTBL ON Employees.EmploymentStatusID = StatusTBL.StatusID
@@ -992,35 +993,35 @@ namespace Delmon_Managment_System.Forms
         }
 
 
-        private void CalculateAndDisplayTotal()
-        {
-            int sum = 0;
+        //private void CalculateAndDisplayTotal()
+        //{
+        //    int sum = 0;
 
-            // Calculate the sum of the column
-            foreach (DataGridViewRow row in dataGridView3.Rows)
-            {
-                if (row.Cells[4].Value != null)
-                {
-                    int quantity;
-                    if (int.TryParse(row.Cells[4].Value.ToString(), out quantity))
-                    {
-                        sum += quantity;
-                    }
-                }
-            }
+        //    // Calculate the sum of the column
+        //    foreach (DataGridViewRow row in dataGridView3.Rows)
+        //    {
+        //        if (row.Cells[4].Value != null)
+        //        {
+        //            int quantity;
+        //            if (int.TryParse(row.Cells[4].Value.ToString(), out quantity))
+        //            {
+        //                sum += quantity;
+        //            }
+        //        }
+        //    }
 
-            // Add a new row at the end
-            int newRowId = dataGridView3.Rows.Add();
+        //    // Add a new row at the end
+        //    int newRowId = dataGridView3.Rows.Add();
 
-            // Set the values for each cell in the new row
-            dataGridView3.Rows[newRowId].Cells[2].Value = "Total";
-            dataGridView3.Rows[newRowId].Cells[4].Value = sum;
+        //    // Set the values for each cell in the new row
+        //    dataGridView3.Rows[newRowId].Cells[2].Value = "Total";
+        //    dataGridView3.Rows[newRowId].Cells[4].Value = sum;
 
-            // Set the cell style for the new row
-            dataGridView3.Rows[newRowId].DefaultCellStyle.BackColor = Color.LightGray;
-        }
+        //    // Set the cell style for the new row
+        //    dataGridView3.Rows[newRowId].DefaultCellStyle.BackColor = Color.LightGray;
+        //}
 
-        // Call the CalculateAndDisplayTotal method whenever you want to update the total row
+        //// Call the CalculateAndDisplayTotal method whenever you want to update the total row
 
 
 
@@ -1390,7 +1391,7 @@ namespace Delmon_Managment_System.Forms
                 {
                     MessageBox.Show("Sorry, You are not allowed to view this Module/Screen , kindly contact the administrator !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     button2.Enabled= button5.Enabled = btnuplode.Enabled = false;
-                    radioButton1.Enabled = radioButton2.Enabled = radioButton3.Enabled =radioButton4.Enabled= false;
+                    radioButton1.Enabled = radioButton2.Enabled = radioButton3.Enabled =radioButton4.Enabled= radioButton5.Enabled=false;
                     dateTimePicker1.Enabled = dateTimePicker2.Enabled = false;
                     groupBox5.Enabled = groupBox6.Enabled = false;
 
@@ -1402,7 +1403,7 @@ namespace Delmon_Managment_System.Forms
                     dateTimePicker1.Enabled = dateTimePicker2.Enabled = true;
                           btnuplode.Enabled = true;
                          button2.Enabled = button5.Enabled = true;
-                    radioButton1.Enabled = radioButton2.Enabled = radioButton3.Enabled = radioButton4.Enabled = true;
+                    radioButton1.Enabled = radioButton2.Enabled = radioButton3.Enabled = radioButton4.Enabled =radioButton5.Enabled = true;
 
                 }
 
@@ -1688,14 +1689,14 @@ namespace Delmon_Managment_System.Forms
             SqlParameter ParamTo = new SqlParameter("@C2", SqlDbType.Date) { Value = dateTimePicker2.Value };
 
             // Ensure a radio button is selected
-            if (!radioButton1.Checked && !radioButton2.Checked && !radioButton3.Checked && !radioButton4.Checked)
+            if (!radioButton1.Checked && !radioButton2.Checked && !radioButton3.Checked && !radioButton4.Checked&&!radioButton5.Checked)
             {
                 MessageBox.Show("Kindly select one of the Radio buttons! / Printer", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             // Ensure a printer is selected if needed
-            if ((radioButton1.Checked || radioButton2.Checked || radioButton3.Checked || radioButton4.Checked) && cmbPrinter.Text == "Select")
+            if ((radioButton1.Checked || radioButton2.Checked || radioButton3.Checked || radioButton4.Checked || radioButton5.Checked) && cmbPrinter.Text == "Select")
             {
                 MessageBox.Show("Kindly select one of the Printers", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -1705,23 +1706,7 @@ namespace Delmon_Managment_System.Forms
             if (radioButton1.Checked) // By user
             {
 
-            //    SELECT dt.Dept_Type_Name,pd.ID,lr.Username, SUM(lr.Total) AS Count FROM DelmonGroupDB.dbo.DEPARTMENTS d,
-            //    DelmonGroupDB.dbo.DeptTypes dt,
-            //    DelmonGroupDB.dbo.Employees e,
-            //    DelmonPrintersLog.dbo.LogReport lr,
-            //    DelmonPrintersLog.dbo.PrinterUsernameID pd WHERE
-            //pd.Username = lr.Username
-
-            //and pd.ID = e.EmployeeID
-
-            //and e.DeptID = d.DEPTID
-
-            //and d.DeptName = dt.Dept_Type_ID
-
-            //and CONVERT(DATE, Printdate, 120) BETWEEN '01-01-2024' AND '12-12-2024' AND AssetId = 'PR0001' GROUP BY lr.Username,pd.ID,dt.Dept_Type_Name ORDER BY Count
-
-
-
+            
 
                 dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"
 SELECT 
@@ -1889,6 +1874,34 @@ WHERE
                 CONVERT(DATE, Printdate, 120) BETWEEN @C1 AND @C2 AND AssetId=@C0;", ParamFrom, ParamTo, ParamUserPrinter);
                 }
             }
+            else if (radioButton5.Checked) // Combined user and department report
+            {
+                dataGridView5.DataSource = SQLCONN4.ShowDataInGridViewORCombobox(@"
+               SELECT 
+    e.FirstName + ' ' + e.SecondName + ' ' + e.ThirdName + ' ' + e.LastName AS [User Name],
+    dt.Dept_Type_Name as Department,
+    SUM(lr.Total) AS [Print Count],
+    FORMAT(SUM(lr.Total) * 100.0 / 
+           (SELECT SUM(Total) 
+            FROM DelmonPrintersLog.dbo.LogReport 
+            WHERE CONVERT(DATE, Printdate, 120) BETWEEN @C1 AND @C2 
+              AND AssetId = @C0), 'N2') AS [Percentage]
+FROM DelmonPrintersLog.dbo.LogReport lr
+LEFT JOIN DelmonPrintersLog.dbo.PrinterUsernameID pd ON pd.Username = lr.Username
+LEFT JOIN DelmonGroupDB.dbo.Employees e ON pd.ID = e.EmployeeID
+LEFT JOIN DelmonGroupDB.dbo.DEPARTMENTS d ON e.DeptID = d.DEPTID
+LEFT JOIN DelmonGroupDB.dbo.DeptTypes dt ON d.DeptName = dt.Dept_Type_ID
+WHERE CONVERT(DATE, lr.Printdate, 120) BETWEEN @C1 AND @C2 
+  AND lr.AssetId = @C0
+GROUP BY 
+    e.FirstName + ' ' + e.SecondName + ' ' + e.ThirdName + ' ' + e.LastName,
+    dt.Dept_Type_Name
+ORDER BY [Print Count] DESC;
+", ParamFrom, ParamTo, ParamUserPrinter);
+            }
+
+
+
 
             // Adjust DataGridView settings and add total row if applicable
             AdjustDataGridView();
@@ -1959,6 +1972,12 @@ WHERE
                 lblSum.Text = sum.ToString();
             }
             else if (radioButton4.Checked) // Duplicate log
+            {
+                dataGridView5.Columns[2].Width = 300;
+                int rowCount = dataGridView5.RowCount;
+                lblSum.Text = rowCount.ToString();
+            }
+            else if (radioButton5.Checked) // Combined user and department report
             {
                 dataGridView5.Columns[2].Width = 300;
                 int rowCount = dataGridView5.RowCount;

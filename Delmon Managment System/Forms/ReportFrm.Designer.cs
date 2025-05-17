@@ -111,6 +111,7 @@ namespace Delmon_Managment_System.Forms
             this.lblusername = new System.Windows.Forms.Label();
             this.lblusertype = new System.Windows.Forms.Label();
             this.delmon = new Delmon_Managment_System.Delmon();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.VisaReq.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -521,7 +522,7 @@ namespace Delmon_Managment_System.Forms
             this.Emp.Location = new System.Drawing.Point(4, 26);
             this.Emp.Name = "Emp";
             this.Emp.Padding = new System.Windows.Forms.Padding(3);
-            this.Emp.Size = new System.Drawing.Size(1309, 960);
+            this.Emp.Size = new System.Drawing.Size(1309, 938);
             this.Emp.TabIndex = 1;
             this.Emp.Text = "Candidates";
             // 
@@ -724,12 +725,13 @@ namespace Delmon_Managment_System.Forms
             this.Asset.Controls.Add(this.dataGridView5);
             this.Asset.Location = new System.Drawing.Point(4, 26);
             this.Asset.Name = "Asset";
-            this.Asset.Size = new System.Drawing.Size(1309, 960);
+            this.Asset.Size = new System.Drawing.Size(1309, 938);
             this.Asset.TabIndex = 2;
             this.Asset.Text = "Printing Usage";
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.radioButton5);
             this.groupBox6.Controls.Add(this.button7);
             this.groupBox6.Controls.Add(this.button5);
             this.groupBox6.Controls.Add(this.label14);
@@ -842,7 +844,7 @@ namespace Delmon_Managment_System.Forms
             // 
             this.radioButton4.AutoSize = true;
             this.radioButton4.Enabled = false;
-            this.radioButton4.Location = new System.Drawing.Point(373, 28);
+            this.radioButton4.Location = new System.Drawing.Point(537, 28);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(99, 21);
             this.radioButton4.TabIndex = 190;
@@ -1069,6 +1071,18 @@ namespace Delmon_Managment_System.Forms
             this.delmon.DataSetName = "Delmon";
             this.delmon.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
+            // radioButton5
+            // 
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Enabled = false;
+            this.radioButton5.Location = new System.Drawing.Point(374, 28);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(159, 21);
+            this.radioButton5.TabIndex = 194;
+            this.radioButton5.TabStop = true;
+            this.radioButton5.Text = "User / Department";
+            this.radioButton5.UseVisualStyleBackColor = true;
+            // 
             // ReportFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -1191,5 +1205,6 @@ namespace Delmon_Managment_System.Forms
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.RadioButton radioButton5;
     }
 }
